@@ -9,7 +9,13 @@ export type MeasurePoint = SurfacePoint & { target: Selection | null };
 type MeasureState = {
   active: boolean;
   points: MeasurePoint[];
+  /** where the mouse points right now (live preview before clicking) */
+  hover: MeasurePoint | null;
+  /** "snap to outside" of furniture (Shift-click does it for one click) */
+  snapOuter: boolean;
   toggle: () => void;
+  setHover: (p: MeasurePoint | null) => void;
+  toggleSnap: () => void;
   stop: () => void;
   add: (p: MeasurePoint) => void;
   reset: () => void;
@@ -18,8 +24,12 @@ type MeasureState = {
 export const useMeasure = create<MeasureState>((set, get) => ({
   active: false,
   points: [],
-  toggle: () => set({ active: !get().active, points: [] }),
-  stop: () => set({ active: false, points: [] }),
+  hover: null,
+  snapOuter: false,
+  toggle: () => set({ active: !get().active, points: [], hover: null }),
+  setHover: (hover) => set({ hover }),
+  toggleSnap: () => set({ snapOuter: !get().snapOuter }),
+  stop: () => set({ active: false, points: [], hover: null }),
   // a third click starts a new measurement
   add: (p) => set({ points: get().points.length >= 2 ? [p] : [...get().points, p] }),
   reset: () => set({ points: [] }),

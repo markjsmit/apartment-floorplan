@@ -40,7 +40,7 @@ describe('measureBetween with furniture boxes', () => {
   it('ceiling then closet side: snaps to the top of the closet', () => {
     const m = measureBetween(
       { point: [300, 270, 300], normal: [0, -1, 0], roomSurface: true },
-      { point: [90, 150, 160], normal: [0, 0, 1], box: closet },
+      { point: [90, 150, 160], normal: [0, 0, 1], box: closet, snapOuter: true },
     );
     expect(m.axis).toBe('y');
     expect(m.distance).toBeCloseTo(69);
@@ -51,7 +51,7 @@ describe('measureBetween with furniture boxes', () => {
 
   it('closet first, then ceiling: the room surface decides the axis', () => {
     const m = measureBetween(
-      { point: [90, 150, 160], normal: [0, 0, 1], box: closet },
+      { point: [90, 150, 160], normal: [0, 0, 1], box: closet, snapOuter: true },
       { point: [300, 270, 300], normal: [0, -1, 0], roomSurface: true },
     );
     expect(m.axis).toBe('y');
@@ -61,9 +61,44 @@ describe('measureBetween with furniture boxes', () => {
   it('wall then closet front: snaps to the closet side facing the wall', () => {
     const m = measureBetween(
       { point: [0, 100, 130], normal: [1, 0, 0], roomSurface: true },
-      { point: [90, 100, 160], normal: [0, 0, 1], box: closet },
+      { point: [90, 100, 160], normal: [0, 0, 1], box: closet, snapOuter: true },
     );
     expect(m.axis).toBe('x');
     expect(m.distance).toBeCloseTo(40);
+  });
+});
+
+describe('measureBetween: exact spot vs snapping', () => {
+  const kallax = { min: [0, 0, 0] as [number, number, number], max: [147, 147, 39] as [number, number, number] };
+
+  it('floor to a shelf inside the kallax uses the shelf you clicked', () => {
+    // second hole from the top: its bottom shelf top surface at y = 75.5
+    const m = measureBetween(
+      { point: [200, 0, 100], normal: [0, 1, 0], roomSurface: true },
+      { point: [60, 75.5, 20], normal: [0, 1, 0], box: kallax },
+    );
+    expect(m.distance).toBeCloseTo(75.5);
+    expect(m.snapped).toEqual([false, false]);
+  });
+
+  it('says which end got snapped', () => {
+    const m = measureBetween(
+      { point: [200, 270, 100], normal: [0, -1, 0], roomSurface: true },
+      { point: [60, 100, 39], normal: [0, 0, 1], box: kallax, snapOuter: true },
+    );
+    expect(m.distance).toBeCloseTo(123);
+    expect(m.snapped).toEqual([false, true]);
+  });
+});
+
+describe('measureBetween: exact by default', () => {
+  const kallax = { min: [0, 0, 0] as [number, number, number], max: [147, 147, 39] as [number, number, number] };
+  it('a click on the side of a divider inside the kallax is exact unless snapping is on', () => {
+    const m = measureBetween(
+      { point: [200, 0, 100], normal: [0, 1, 0], roomSurface: true },
+      { point: [36, 120, 20], normal: [1, 0, 0], box: kallax },
+    );
+    expect(m.distance).toBeCloseTo(120);
+    expect(m.snapped).toEqual([false, false]);
   });
 });
