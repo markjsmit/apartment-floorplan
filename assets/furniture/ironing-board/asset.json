@@ -1,0 +1,15 @@
+{
+  "id": "ironing-board",
+  "name": "Ironing board (folded, standing)",
+  "tags": ["ironing board", "laundry", "flat storage"],
+  "description": "Folded ironing board standing on its end, ~125 x 38 x 8 cm (typical; IKEA and most store boards fold to 7-9 cm). Item space: x = width, z = folded thickness, y = height.",
+  "source": { "kind": "parts", "license": "self-made", "notes": "Generic size; check the real board's folded thickness against the 9.5 cm slot." },
+  "parts": [
+    { "id": "board", "tags": ["board"], "geometry": { "type": "box", "size": [36, 122, 2.5] }, "position": [0, 64, 1.5], "color": "#c8d3dc" },
+    { "id": "nose", "tags": ["board"], "geometry": { "type": "cylinder", "radius": 18, "height": 2.5, "segments": 24 }, "position": [0, 124, 1.5], "rotation": [90, 0, 0], "color": "#c8d3dc" },
+    { "id": "leg-a", "tags": ["leg", "frame"], "geometry": { "type": "box", "size": [2, 110, 2] }, "position": [-10, 58, 4.5], "rotation": [0, 0, 8], "material": "metal-black" },
+    { "id": "leg-b", "tags": ["leg", "frame"], "geometry": { "type": "box", "size": [2, 110, 2] }, "position": [10, 58, 4.5], "rotation": [0, 0, -8], "material": "metal-black" },
+    { "id": "foot", "tags": ["leg", "frame"], "geometry": { "type": "box", "size": [34, 2, 3] }, "position": [0, 1, 6], "material": "metal-black" },
+    { "id": "iron-rest", "tags": ["frame"], "geometry": { "type": "box", "size": [20, 1, 4] }, "position": [0, 3, 6.5], "material": "metal-black" }
+  ]
+}
