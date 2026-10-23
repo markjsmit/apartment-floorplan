@@ -47,7 +47,7 @@ so the repo must teach a fresh Claude session how to work it (see §10).
 ## 5. Decided by Mark
 
 - Tech choice delegated to Claude; Mark suggested TypeScript, Three.js, React.
-- Controls (desktop): **↑/↓ = walk forward/back, ←/→ or A/D = turn, E = look up, C = look down.**
+- Controls (desktop): **arrows = old style (↑/↓ walk, ←/→ turn); W/A/S/D = modern (W/S walk, A/D step sideways); E = look up, C = look down.**
   Also **two-finger trackpad swipe = look around** (horizontal = turn, vertical = look up/down).
 - **Selection by click (desktop) or tap (touch).** Selecting any part of a "whole-object" item selects the whole item and gives it a **bright green outline**.
 - **Double-click (double-tap) on an item's interactive part cycles its states.**
@@ -226,8 +226,9 @@ Plain colours ("white-paint") are textures with only `fallbackColor` + roughness
 
 | Input | Desktop | Touch |
 |---|---|---|
-| Walk fwd/back | ↑ / ↓ | on-screen buttons |
-| Turn | ← / → or A / D, or two-finger trackpad swipe left/right | swipe horizontally (+ optional buttons) |
+| Walk fwd/back | ↑ / ↓ or W / S | on-screen buttons |
+| Step sideways | A / D | — |
+| Turn | ← / →, or two-finger trackpad swipe left/right | swipe horizontally (+ optional buttons) |
 | Look up/down | E / C, or two-finger trackpad swipe up/down | swipe vertically |
 | Select | click | tap |
 | Cycle states | double-click interactive part | double-tap |

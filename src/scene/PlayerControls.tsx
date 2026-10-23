@@ -18,10 +18,11 @@ const MAX_PITCH = 80;
 const KEYS: Record<string, MoveKey> = {
   ArrowUp: 'forward', ArrowDown: 'back', ArrowLeft: 'left', ArrowRight: 'right',
   w: 'forward', W: 'forward', s: 'back', S: 'back',
-  a: 'left', A: 'left', d: 'right', D: 'right', e: 'up', E: 'up', c: 'down', C: 'down',
+  a: 'strafeLeft', A: 'strafeLeft', d: 'strafeRight', D: 'strafeRight', e: 'up', E: 'up', c: 'down', C: 'down',
 };
 
-/** Doom-style walking: arrows or W/S/A/D move/turn, E/C pitch, trackpad and touch drags look around. Always mounted;
+/** Arrows walk and turn (old style); W/S walk, A/D step sideways (modern, look with the trackpad); E/C pitch;
+ *  trackpad and touch drags look around. Always mounted;
  *  drives the camera only in first-person view. */
 export function PlayerControls({ room, driveCamera }: { room: Room; driveCamera: boolean }) {
   const { camera, gl } = useThree();
@@ -178,10 +179,17 @@ export function PlayerControls({ room, driveCamera }: { room: Room; driveCamera:
     let x = p.x;
     let z = p.z;
     const forward = (held.has('forward') ? 1 : 0) - (held.has('back') ? 1 : 0);
-    if (forward) {
-      const fx = -Math.sin(yaw * DEG);
-      const fz = -Math.cos(yaw * DEG);
-      [x, z] = moveWithCollision([x, z], [fx * WALK * dt * forward, fz * WALK * dt * forward], RADIUS, colliders);
+    const side = (held.has('strafeRight') ? 1 : 0) - (held.has('strafeLeft') ? 1 : 0);
+    if (forward || side) {
+      const s = Math.sin(yaw * DEG);
+      const c = Math.cos(yaw * DEG);
+      // forward is (-sin, -cos), right is (cos, -sin); diagonal isn't faster than straight
+      let dx = -s * forward + c * side;
+      let dz = -c * forward - s * side;
+      const len = Math.hypot(dx, dz);
+      dx = (dx / len) * WALK * dt;
+      dz = (dz / len) * WALK * dt;
+      [x, z] = moveWithCollision([x, z], [dx, dz], RADIUS, colliders);
     }
     pose.current = { x, z, yaw, pitch };
 
