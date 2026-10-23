@@ -6,6 +6,7 @@ import type { Vec3 } from '../model/schema';
 import { oppositeFace } from '../model/measure';
 import { currentMeasurement, formatCm, useMeasure, type MeasurePoint } from '../app/measureStore';
 import { selectableFromHit } from './selectable';
+import { ignoresKeys } from './input';
 
 const CLICK_SLOP = 6;
 const DOUBLE_CLICK_MS = 350;
@@ -26,9 +27,8 @@ export function Measure() {
   // M toggles, Esc leaves
   useEffect(() => {
     const key = (e: KeyboardEvent) => {
-      const t = e.target as HTMLElement;
-      if (t.tagName === 'INPUT' || t.tagName === 'TEXTAREA' || e.metaKey || e.ctrlKey) return;
-      if (e.key === 'm' || e.key === 'M') useMeasure.getState().toggle();
+      if (ignoresKeys(e.target as HTMLInputElement) || e.metaKey || e.ctrlKey) return;
+      if (e.code === 'KeyM') useMeasure.getState().toggle();
       if (e.key === 'Escape') useMeasure.getState().stop();
     };
     window.addEventListener('keydown', key);

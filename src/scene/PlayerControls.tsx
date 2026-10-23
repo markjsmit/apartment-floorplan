@@ -9,7 +9,7 @@ import { buildHouseColliders, resolveHousePosition, roomAt } from '../model/hous
 import { toWorld, type Layout } from '../model/layout';
 import { findById } from '../model/lookup';
 import { EYE_HEIGHT, useStore } from '../app/store';
-import { held, lookDelta, type MoveKey } from './input';
+import { held, ignoresKeys, lookDelta, moveKeyFor } from './input';
 import { selectableFromHit } from './selectable';
 
 const CENTER = new Vector2(0, 0);
@@ -21,11 +21,6 @@ const PITCH = 70; // deg/s
 const RADIUS = 20; // cm
 const MAX_PITCH = 80;
 
-const KEYS: Record<string, MoveKey> = {
-  ArrowUp: 'forward', ArrowDown: 'back', ArrowLeft: 'left', ArrowRight: 'right',
-  w: 'forward', W: 'forward', s: 'back', S: 'back',
-  a: 'strafeLeft', A: 'strafeLeft', d: 'strafeRight', D: 'strafeRight', e: 'up', E: 'up', c: 'down', C: 'down',
-};
 
 /** Arrows walk and turn (old style); W/S walk, A/D step sideways (modern, look with the trackpad); E/C pitch;
  *  trackpad and touch drags look around. Walks through the whole house (house coordinates): open doorways
@@ -119,16 +114,16 @@ export function PlayerControls({ house, layout, driveCamera }: { house: House; l
   // keyboard
   useEffect(() => {
     const down = (e: KeyboardEvent) => {
-      const t = e.target as HTMLElement;
-      if (t.tagName === 'INPUT' || t.tagName === 'TEXTAREA') return;
+      if (ignoresKeys(e.target as HTMLInputElement)) return;
       if (e.key === 'Escape') useStore.getState().select(null);
-      const k = KEYS[e.key];
+      const k = moveKeyFor(e);
       if (!k || e.metaKey || e.ctrlKey) return;
       held.add(k);
+      // stops arrows from also moving a focused slider
       e.preventDefault();
     };
     const up = (e: KeyboardEvent) => {
-      const k = KEYS[e.key];
+      const k = moveKeyFor(e);
       if (k) held.delete(k);
     };
     const blur = () => held.clear();
