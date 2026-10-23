@@ -75,27 +75,32 @@
           "assumptions": [{ "path": "params", "note": "self-built: 18 mm plywood, 4 bays of ~64 cm, 7 levels ~30 cm apart, 4 mm back; from just past the door swing to the window wall (covers ~5 cm of the window's left edge); freestanding, tied in at the top" }]
         },
         {
-          "id": "storage.top-tie", "asset": "box", "params": { "width": 82.5, "height": 1.8, "depth": 55, "material": "white-paint" },
+          "id": "storage.top-tie", "asset": "box", "params": { "width": 82.5, "height": 1.8, "depth": 60, "material": "white-paint" },
           "name": "High shelf across the passage (shelving ↔ middle tower)", "tags": ["top tie", "high shelf", "bracing", "passage tie"],
           "position": [61.25, 224, 153],
-          "assumptions": [{ "path": "params", "note": "18 mm plywood painted white at 224, 55 deep (fits a suitcase), screwed into the shelving top and the middle tower top" }]
+          "assumptions": [{ "path": "params", "note": "18 mm plywood painted white at 224, 60 deep = suitcase slot (large 52, XL ~55), opens to the room, screwed into the shelving top and the middle tower top" }]
         },
         {
-          "id": "storage.aisle-tie", "asset": "box", "params": { "width": 79.5, "height": 1.8, "depth": 55, "material": "white-paint" },
+          "id": "storage.aisle-tie", "asset": "box", "params": { "width": 79.5, "height": 1.8, "depth": 60, "material": "white-paint" },
           "name": "High shelf across the aisle (Kallax ↔ Kallax)", "tags": ["aisle tie", "high shelf", "bracing"],
           "position": [221.25, 224, 153],
-          "assumptions": [{ "path": "params", "note": "18 mm plywood painted white at 224, 55 deep (fits a suitcase), screwed into both tower tops" }]
+          "assumptions": [{ "path": "params", "note": "18 mm plywood painted white at 224, 60 deep = suitcase slot (large 52, XL ~55), opens to the room, screwed into both tower tops" }]
         },
         {
-          "id": "storage.fascia-front", "asset": "box", "params": { "width": 280, "height": 9.2, "depth": 1.8, "material": "white-paint" },
-          "name": "Little wall to the ceiling (front of the high storage)", "tags": ["fascia", "little wall", "bulkhead"],
-          "position": [160, 260.8, 151.2],
-          "assumptions": [{ "path": "params", "note": "closes the gap above a ~35 cm suitcase opening (224 + 1.8 board + 35) up to the 270 ceiling; along the towers' front line" }]
+          "id": "storage.fascia-mid", "asset": "box", "params": { "width": 79, "height": 46, "depth": 1.8, "material": "white-paint" },
+          "name": "Panel to the ceiling (over the middle tower)", "tags": ["fascia", "little wall", "bulkhead"],
+          "position": [142, 224, 151.2],
+          "assumptions": [{ "path": "params", "note": "closes the top of the middle tower from 224 to the 270 ceiling; the suitcase slots either side stay open" }]
         },
         {
-          "id": "storage.fascia-left", "asset": "box", "params": { "width": 153, "height": 9.2, "depth": 1.8, "material": "white-paint" },
-          "name": "Little wall to the ceiling (over the left shelving)", "tags": ["fascia", "little wall", "bulkhead"],
-          "position": [20, 260.8, 76.5], "rotation": 90
+          "id": "storage.fascia-wall", "asset": "box", "params": { "width": 39, "height": 46, "depth": 1.8, "material": "white-paint" },
+          "name": "Panel to the ceiling (over the wall tower)", "tags": ["fascia", "little wall", "bulkhead"],
+          "position": [280.5, 224, 151.2]
+        },
+        {
+          "id": "storage.fascia-left", "asset": "box", "params": { "width": 153, "height": 46, "depth": 1.8, "material": "white-paint" },
+          "name": "Panel to the ceiling (over the left shelving)", "tags": ["fascia", "little wall", "bulkhead"],
+          "position": [20, 224, 76.5], "rotation": 90
         },
         {
           "id": "storage.top-deck", "asset": "box", "params": { "width": 300, "height": 1.8, "depth": 73, "material": "white-paint" },
@@ -105,13 +110,13 @@
         },
         {
           "id": "storage.suitcase-1", "asset": "suitcase", "params": { "color": "#2f4a6d" },
-          "name": "Large suitcase (above the aisle)", "tags": ["suitcase", "demo"],
-          "position": [221, 225.8, 246]
+          "name": "Large suitcase (aisle slot)", "tags": ["suitcase", "demo"],
+          "position": [221.25, 225.8, 207], "rotation": 180
         },
         {
           "id": "storage.suitcase-2", "asset": "suitcase", "params": { "color": "#4a4d52" },
-          "name": "Large suitcase (above the passage)", "tags": ["suitcase", "demo"],
-          "position": [62, 225.8, 246]
+          "name": "Large suitcase (passage slot)", "tags": ["suitcase", "demo"],
+          "position": [61.25, 225.8, 207], "rotation": 180
         }
       ],
       "assumptions": [
