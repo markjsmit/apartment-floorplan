@@ -1,0 +1,16 @@
+{
+  "id": "kitchen-counter",
+  "name": "Kitchen counter",
+  "tags": ["kitchen", "counter", "worktop", "base cabinets", "built-in"],
+  "description": "Built-in base run: plinth, cabinets with white gloss fronts and bar handles, 2 cm quartz worktop, optional inset double sink with pull-down tap. Standard 90 cm high, 62 cm deep.",
+  "source": { "kind": "procedural", "generator": "kitchen-counter", "license": "self-made" },
+  "params": {
+    "length": { "default": 240 },
+    "depth": { "default": 62 },
+    "height": { "default": 90, "description": "worktop surface" },
+    "modules": { "default": [], "description": "fronts left→right: [{w, kind}] kind = door | doors | sink | drawers | drawers2..4 | dishwasher | panel | open" },
+    "sinkCenter": { "default": null, "description": "cm from the left end; null = no sink" },
+    "sinkWidth": { "default": 80 },
+    "worktop": { "default": "quartz-cream", "description": "texture id" }
+  }
+}

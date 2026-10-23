@@ -1,0 +1,11 @@
+{
+  "id": "plaster-grey",
+  "name": "Grey plaster (concrete look)",
+  "tags": ["plaster", "concrete", "grey", "wall", "micro-cement"],
+  "maps": { "color": "color.jpg", "normal": "normal.jpg", "roughness": "roughness.jpg" },
+  "tileSize": [110, 55],
+  "fallbackColor": "#a39e9a",
+  "roughness": 0.9,
+  "source": "ambientCG Concrete034 (https://ambientcg.com/a/Concrete034), recoloured to the grey wall in the apartment photos",
+  "license": "CC0"
+}

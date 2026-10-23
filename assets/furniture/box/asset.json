@@ -1,0 +1,14 @@
+{
+  "id": "box",
+  "name": "Box",
+  "tags": ["box", "pillar", "column", "soffit", "panel"],
+  "description": "Plain box for built-in things: pillars, soffits (dropped ceilings), wall finish bands, AC grilles.",
+  "source": { "kind": "procedural", "generator": "box", "license": "self-made" },
+  "params": {
+    "width": { "default": 100, "description": "x (cm)" },
+    "height": { "default": 100, "description": "y (cm)" },
+    "depth": { "default": 100, "description": "z (cm), from the back" },
+    "material": { "default": "white-paint", "description": "texture id" },
+    "color": { "default": "", "description": "plain #hex instead of a material" }
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "id": "white-gloss",
+  "name": "White high-gloss lacquer",
+  "tags": ["white", "gloss", "lacquer", "kitchen", "cabinet"],
+  "fallbackColor": "#f5f4f0",
+  "roughness": 0.18,
+  "source": "self-made (plain colour)",
+  "license": "CC0"
+}

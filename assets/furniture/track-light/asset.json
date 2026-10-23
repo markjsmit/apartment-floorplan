@@ -1,0 +1,12 @@
+{
+  "id": "track-light",
+  "name": "Ceiling track light",
+  "tags": ["light", "track light", "spots", "ceiling"],
+  "description": "Ceiling track with spots, 22 cm tall: place it with position y = ceiling height - 22.",
+  "source": { "kind": "procedural", "generator": "track-light", "license": "self-made" },
+  "params": {
+    "length": { "default": 200 },
+    "spots": { "default": 3 },
+    "color": { "default": "#f4f4f2" }
+  }
+}

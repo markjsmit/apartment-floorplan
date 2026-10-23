@@ -1,0 +1,11 @@
+{
+  "id": "tiles-porcelain-60",
+  "name": "Grey porcelain floor tiles 60x60",
+  "tags": ["tiles", "porcelain", "grey", "floor", "60x60", "living room", "kitchen"],
+  "maps": { "color": "color.jpg", "normal": "normal.jpg", "roughness": "roughness.jpg" },
+  "tileSize": [120, 120],
+  "fallbackColor": "#aaa39c",
+  "roughness": 0.45,
+  "source": "self-made: 2x2 tiles of 60 cm with 3 mm grout, surface from ambientCG Concrete034 (https://ambientcg.com/a/Concrete034), colour from the apartment photos",
+  "license": "CC0"
+}

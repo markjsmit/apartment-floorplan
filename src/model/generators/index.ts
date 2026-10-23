@@ -2,6 +2,7 @@ import type { AssetState, FurnitureAsset, Part } from '../schema';
 import { kallax, kallaxDesk, kallaxInsert, kallaxUnderframe, lackShelf, swivelChair } from './kallax';
 import { group } from './group';
 import { door, windowParts } from './openings';
+import { kitchenCounter, kitchenIsland, kitchenTall, kitchenWallCabinet, plainBox, slidingDoor, trackLight } from './builtins';
 
 // Procedural furniture referenced from asset.json as { "source": { "kind": "procedural", "generator": "<name>" } }.
 // Furniture generators follow the item convention: origin back-centre on the floor, +z out of the front.
@@ -20,4 +21,11 @@ export const generators: Record<string, Generator> = {
   group: (params) => group(params, generators),
   door,
   window: windowParts,
+  'sliding-door': slidingDoor,
+  box: plainBox,
+  'kitchen-counter': kitchenCounter,
+  'kitchen-island': kitchenIsland,
+  'kitchen-tall': kitchenTall,
+  'kitchen-wall-cabinet': kitchenWallCabinet,
+  'track-light': trackLight,
 };

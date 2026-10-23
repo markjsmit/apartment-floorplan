@@ -1,0 +1,10 @@
+{
+  "id": "sliding-door",
+  "name": "Sliding balcony door",
+  "tags": ["door", "sliding door", "balcony door", "glass door"],
+  "description": "Two-panel aluminium sliding door sized to its opening; the right panel slides (double-click it).",
+  "source": { "kind": "procedural", "generator": "sliding-door", "license": "self-made" },
+  "params": {
+    "frameMaterial": { "default": "aluminium-grey", "description": "texture id for the frame" }
+  }
+}

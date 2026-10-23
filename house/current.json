@@ -37,6 +37,101 @@
         { "path": "openings[storage.door].width", "note": "standard 83 cm door, 10 cm from the west corner" },
         { "path": "openings[storage.window]", "note": "size guessed (a bit wider than the door), opposite the door; style (grey aluminium, no sill board) from the main bedroom photo" }
       ]
+    },
+    {
+      "id": "living",
+      "name": "Living room + kitchen",
+      "tags": ["living room", "salon", "kitchen", "dining", "open space", "living"],
+      "footprint": [[0, 0], [575, 0], [575, 780], [-330, 780], [-330, 370], [0, 370]],
+      "ceilingHeight": 270,
+      "northAngle": 0,
+      "floor": { "material": "tiles-porcelain-60" },
+      "ceiling": { "material": "white-paint" },
+      "wallMaterial": "white-paint",
+      "walls": [
+        { "id": "living.wall-0", "edge": 0, "tags": ["kitchen wall", "entrance wall", "grey wall"], "material": "plaster-grey" },
+        { "id": "living.wall-1", "edge": 1, "tags": ["dining wall", "TV wall", "bookshelf wall"] },
+        { "id": "living.wall-2", "edge": 2, "tags": ["balcony wall"] },
+        { "id": "living.wall-3", "edge": 3, "tags": ["window wall"] },
+        { "id": "living.wall-4", "edge": 4, "tags": ["sofa wall"] },
+        { "id": "living.wall-5", "edge": 5, "tags": ["fridge wall", "tall units wall"] }
+      ],
+      "openings": [
+        { "id": "living.front-door", "type": "door", "wall": "living.wall-0", "offset": 335, "width": 100, "height": 213, "asset": "door-basic", "name": "Front door", "tags": ["front door", "entrance", "the door"] },
+        { "id": "living.east-window", "type": "window", "wall": "living.wall-1", "offset": 695, "width": 70, "height": 210, "sill": 30, "asset": "window-basic", "params": { "frameMaterial": "aluminium-grey", "sillBoard": false }, "name": "Tall window", "tags": ["tall window", "narrow window"] },
+        { "id": "living.balcony-door", "type": "door", "wall": "living.wall-2", "offset": 50, "width": 300, "height": 240, "asset": "sliding-door", "name": "Balcony door", "tags": ["balcony door", "sliding door", "balcony"] },
+        { "id": "living.west-window", "type": "window", "wall": "living.wall-3", "offset": 260, "width": 100, "height": 115, "sill": 125, "asset": "window-basic", "params": { "frameMaterial": "aluminium-grey", "sillBoard": false }, "name": "Window by the sofa", "tags": ["sofa window", "view window"] },
+        { "id": "living.hall-opening", "type": "opening", "wall": "living.wall-4", "offset": 230, "width": 100, "height": 235, "name": "Passage to the hall", "tags": ["hall", "to the bedrooms", "passage"] },
+        { "id": "living.kitchen-hall-opening", "type": "opening", "wall": "living.wall-5", "offset": 0, "width": 90, "height": 235, "name": "Passage kitchen → hall", "tags": ["hall", "passage"] }
+      ],
+      "items": [
+        {
+          "id": "living.tall-units", "asset": "kitchen-tall", "name": "Tall kitchen units", "tags": ["tall units", "pantry", "oven", "fridge niche"],
+          "against": { "wall": "living.wall-5", "offset": 90 },
+          "params": { "height": 235, "depth": 59.5, "columns": [
+            { "w": 60, "kind": "pantry", "handle": "right" }, { "w": 100, "kind": "fridge" }, { "w": 60, "kind": "oven", "handle": "left" }, { "w": 60, "kind": "pantry", "handle": "left" }
+          ] }
+        },
+        {
+          "id": "living.counter", "asset": "kitchen-counter", "name": "Kitchen counter", "tags": ["counter", "sink", "worktop"],
+          "against": { "wall": "living.wall-0", "offset": 62 },
+          "params": { "length": 243, "sinkCenter": 130, "modules": [
+            { "w": 60, "kind": "drawers" }, { "w": 30, "kind": "door", "handle": "right" }, { "w": 80, "kind": "sink" }, { "w": 60, "kind": "dishwasher" }, { "w": 13, "kind": "panel" }
+          ] }
+        },
+        {
+          "id": "living.wall-cabinet", "asset": "kitchen-wall-cabinet", "name": "Wall cabinet", "tags": ["upper cabinet", "wall cabinet"],
+          "against": { "wall": "living.wall-0", "offset": 62, "elevation": 152 }, "params": { "width": 60, "height": 75 }
+        },
+        {
+          "id": "living.island", "asset": "kitchen-island", "name": "Kitchen island", "tags": ["island", "hob", "stove"],
+          "position": [254, 0, 272], "rotation": 180,
+          "params": { "length": 170, "depth": 100, "hobCenter": 125, "modules": [{ "w": 81, "kind": "drawers" }, { "w": 81, "kind": "drawers" }] }
+        },
+        {
+          "id": "living.pillar", "asset": "box", "name": "Pillar", "tags": ["pillar", "column", "map pillar"],
+          "position": [55, 0, 370], "params": { "width": 110, "depth": 45, "height": 235, "material": "plaster-grey" }
+        },
+        {
+          "id": "living.soffit-kitchen", "asset": "box", "name": "Kitchen soffit (AC)", "tags": ["soffit", "dropped ceiling", "AC"],
+          "position": [75, 235, 0], "params": { "width": 150, "depth": 415, "height": 35, "material": "white-paint" }
+        },
+        {
+          "id": "living.soffit-sofa", "asset": "box", "name": "Soffit over the hall passage", "tags": ["soffit", "dropped ceiling", "AC"],
+          "position": [-50, 235, 370], "params": { "width": 100, "depth": 45, "height": 35, "material": "white-paint" }
+        },
+        {
+          "id": "living.ac-vent-kitchen", "asset": "box", "name": "AC vent (kitchen)", "tags": ["AC", "vent", "air conditioning"],
+          "position": [150.6, 245, 40], "params": { "width": 1.2, "depth": 230, "height": 14, "color": "#9c9c98" }
+        },
+        {
+          "id": "living.ac-vent-living", "asset": "box", "name": "AC vent (living room)", "tags": ["AC", "vent", "air conditioning"],
+          "position": [25, 245, 415], "params": { "width": 230, "depth": 1.2, "height": 14, "color": "#9c9c98" }
+        },
+        {
+          "id": "living.wall-band", "asset": "box", "name": "White band above the grey wall", "tags": ["band"],
+          "position": [362.5, 213, 0], "params": { "width": 425, "depth": 1, "height": 57, "material": "white-paint" }
+        },
+        {
+          "id": "living.track-light", "asset": "track-light", "name": "Track light", "tags": ["light", "track light", "spots"],
+          "position": [345, 248, 240], "rotation": 90, "params": { "length": 220, "spots": 3 }
+        }
+      ],
+      "assumptions": [
+        { "path": "footprint", "note": "estimated from 5 photos (sources/new house/kitchen:livingroom), 60x60 floor tiles + 100 cm front door as rulers. Kitchen/dining part ~5.75 m wide, living part ~9 m wide incl. the bay west of the pillar, ~7.8 m long. The bay width (sofa wall 3.3 m) and the total length are the shakiest — please measure" },
+        { "path": "ceilingHeight", "note": "photos say 265-290 (door as ruler); the bedroom photo said ~250 — please measure" },
+        { "path": "northAngle", "note": "unknown; north drawn towards the kitchen wall" },
+        { "path": "openings[living.front-door]", "note": "assumed the front door (steel: the magnets stick). ~100 x 213, from photo 3" },
+        { "path": "openings[living.balcony-door]", "note": "width ~3 m guessed: only part of it is in photo 4" },
+        { "path": "openings[living.east-window]", "note": "tall narrow window next to the balcony corner, size from photo 4 (half hidden by a TV)" },
+        { "path": "openings[living.west-window]", "note": "tilt window next to the sofa, size from photo 5" },
+        { "path": "openings[living.hall-opening]", "note": "the hall/corridor to the bedrooms is behind the pillar; its exact shape is unclear from the photos" },
+        { "path": "items[living.tall-units]", "note": "column widths from photo 1: pantry 60, fridge niche 100 (their side-by-side fridge leaves with them), oven + microwave 60, pantry 60" },
+        { "path": "items[living.counter]", "note": "~243 long from photo 3; sink position from photos 2/3" },
+        { "path": "items[living.island]", "note": "~170 x 100 from photo 3; walkway to the counter ~110 (two tiles in photo 1)" },
+        { "path": "items[living.pillar]", "note": "~110 x 45; map on its south face, octopus print on its east face" },
+        { "path": "items[living.soffit-kitchen]", "note": "dropped ceiling with the AC vent over the tall units, bottom ~235" }
+      ]
     }
   ]
 }

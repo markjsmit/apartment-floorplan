@@ -1,0 +1,16 @@
+{
+  "id": "stainless",
+  "name": "Brushed stainless steel",
+  "tags": [
+    "metal",
+    "steel",
+    "stainless",
+    "sink",
+    "appliance"
+  ],
+  "fallbackColor": "#d2d4d6",
+  "roughness": 0.3,
+  "metalness": 0.3,
+  "source": "self-made (plain colour)",
+  "license": "CC0"
+}

@@ -1,0 +1,10 @@
+{
+  "id": "glass-black",
+  "name": "Black glass",
+  "tags": ["glass", "black", "hob", "oven", "appliance"],
+  "fallbackColor": "#141416",
+  "roughness": 0.08,
+  "metalness": 0.3,
+  "source": "self-made (plain colour)",
+  "license": "CC0"
+}

@@ -1,0 +1,9 @@
+{
+  "id": "quartz-cream",
+  "name": "Cream quartz worktop",
+  "tags": ["quartz", "stone", "worktop", "countertop", "cream", "kitchen"],
+  "fallbackColor": "#e8e3da",
+  "roughness": 0.25,
+  "source": "self-made (plain colour)",
+  "license": "CC0"
+}

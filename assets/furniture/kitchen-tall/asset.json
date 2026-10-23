@@ -1,0 +1,14 @@
+{
+  "id": "kitchen-tall",
+  "name": "Kitchen tall units",
+  "tags": ["kitchen", "tall units", "pantry", "oven", "fridge niche", "built-in"],
+  "description": "Floor-to-soffit tall units, columns left→right: pantry (tall door + top door), oven (2 drawers, built-in oven, microwave, open shelf, top door) or fridge (empty niche for a freestanding fridge + bridge cabinet).",
+  "source": { "kind": "procedural", "generator": "kitchen-tall", "license": "self-made" },
+  "params": {
+    "height": { "default": 235 },
+    "depth": { "default": 62 },
+    "columns": { "default": [], "description": "[{w, kind: pantry | oven | fridge, handle: left | right}]" },
+    "fridgeNiche": { "default": 190, "description": "niche height under the bridge cabinet" },
+    "topDoors": { "default": 185, "description": "height where the row of top doors starts" }
+  }
+}
