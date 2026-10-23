@@ -69,19 +69,36 @@
         },
         {
           "id": "storage.left-shelving", "asset": "diy-plywood-shelving",
-          "params": { "width": 265, "height": 224, "depth": 20, "sections": 4, "shelves": 6 },
+          "params": { "width": 265, "height": 224, "depth": 20, "sections": 4, "shelves": 6, "material": "white-paint" },
           "name": "Plywood shelving (left wall, DIY)", "tags": ["left shelving", "left wall shelves", "diy shelves", "plywood shelves"],
           "against": { "wall": "storage.wall-3", "offset": 35 },
           "assumptions": [{ "path": "params", "note": "self-built: 18 mm plywood, 4 bays of ~64 cm, 7 levels ~30 cm apart, 4 mm back; from just past the door swing to the window wall (covers ~5 cm of the window's left edge); freestanding, tied in at the top" }]
         },
         {
-          "id": "storage.top-tie", "asset": "box", "params": { "width": 82.5, "height": 1.8, "depth": 15, "material": "birch-ply" },
-          "name": "Top tie across the passage (shelving ↔ middle tower)", "tags": ["top tie", "bracing", "passage tie"],
+          "id": "storage.top-tie", "asset": "box", "params": { "width": 82.5, "height": 1.8, "depth": 55, "material": "white-paint" },
+          "name": "High shelf across the passage (shelving ↔ middle tower)", "tags": ["top tie", "high shelf", "bracing", "passage tie"],
           "position": [61.25, 224, 153],
-          "assumptions": [{ "path": "params", "note": "15 cm plywood strip at 224 over the passage, screwed into the shelving top and the middle tower top" }]
+          "assumptions": [{ "path": "params", "note": "18 mm plywood painted white at 224, 55 deep (fits a suitcase), screwed into the shelving top and the middle tower top" }]
         },
         {
-          "id": "storage.top-deck", "asset": "box", "params": { "width": 300, "height": 1.8, "depth": 73, "material": "birch-ply" },
+          "id": "storage.aisle-tie", "asset": "box", "params": { "width": 79.5, "height": 1.8, "depth": 55, "material": "white-paint" },
+          "name": "High shelf across the aisle (Kallax ↔ Kallax)", "tags": ["aisle tie", "high shelf", "bracing"],
+          "position": [221.25, 224, 153],
+          "assumptions": [{ "path": "params", "note": "18 mm plywood painted white at 224, 55 deep (fits a suitcase), screwed into both tower tops" }]
+        },
+        {
+          "id": "storage.fascia-front", "asset": "box", "params": { "width": 280, "height": 9.2, "depth": 1.8, "material": "white-paint" },
+          "name": "Little wall to the ceiling (front of the high storage)", "tags": ["fascia", "little wall", "bulkhead"],
+          "position": [160, 260.8, 151.2],
+          "assumptions": [{ "path": "params", "note": "closes the gap above a ~35 cm suitcase opening (224 + 1.8 board + 35) up to the 270 ceiling; along the towers' front line" }]
+        },
+        {
+          "id": "storage.fascia-left", "asset": "box", "params": { "width": 153, "height": 9.2, "depth": 1.8, "material": "white-paint" },
+          "name": "Little wall to the ceiling (over the left shelving)", "tags": ["fascia", "little wall", "bulkhead"],
+          "position": [20, 260.8, 76.5], "rotation": 90
+        },
+        {
+          "id": "storage.top-deck", "asset": "box", "params": { "width": 300, "height": 1.8, "depth": 73, "material": "white-paint" },
           "name": "Suitcase board (entry wall, wall to wall, 2 cubes deep)", "tags": ["top deck", "suitcase shelf", "wall to wall board", "bracing"],
           "position": [150, 224, 227],
           "assumptions": [{ "path": "params", "note": "18 mm plywood on top of everything along the entry wall: 2 Kallax cubes deep (73), wall to wall, ties the left storage + both towers together; 44 cm free above for suitcases lying flat; 300 cm > a 244 sheet, so 2 pieces joined over a tower" }]
@@ -207,8 +224,7 @@
           "id": "living.wall-5",
           "edge": 5,
           "tags": [
-            "hallway end",
-            "master bedroom wall"
+            "hallway end"
           ]
         },
         {
@@ -312,20 +328,6 @@
           "tags": [
             "second bedroom door",
             "storage room door"
-          ]
-        },
-        {
-          "id": "living.master-door",
-          "type": "door",
-          "wall": "living.wall-5",
-          "offset": 5,
-          "width": 80,
-          "height": 211,
-          "asset": "door-basic",
-          "name": "Door to the master bedroom",
-          "tags": [
-            "master bedroom door",
-            "main bedroom door"
           ]
         }
       ],
@@ -652,10 +654,6 @@
         {
           "path": "openings[living.bedroom2-door]",
           "note": "1st door on the left in the hallway, right after the pillar (Mark); exact spot guessed. Walk into it to go to the storage room"
-        },
-        {
-          "path": "openings[living.master-door]",
-          "note": "at the end of the hallway (Mark); the master bedroom isn't modelled yet"
         }
       ]
     }
