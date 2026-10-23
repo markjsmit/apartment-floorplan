@@ -71,7 +71,19 @@
           "id": "storage.besta-wall", "asset": "ikea-besta-60x22x64", "params": { "cols": 4, "rows": [64, 64, 64] },
           "name": "BESTÅ wall (left wall, 4 x 3 shallow cabinets)", "tags": ["besta wall", "left wall cabinets", "shallow cabinets"],
           "against": { "wall": "storage.wall-3", "offset": 37, "elevation": 32 },
-          "assumptions": [{ "path": "against.elevation", "note": "hung 32 cm above the floor so the top (224) lines up with the Kallax towers; floor below stays free" }]
+          "assumptions": [{ "path": "against.elevation", "note": "stands on a 32 cm plinth (no wall fixing) so its top (224) touches the deck like the Kallax towers" }]
+        },
+        {
+          "id": "storage.besta-plinth", "asset": "box", "params": { "width": 240, "height": 32, "depth": 20, "material": "white-laminate" },
+          "name": "Plinth under the BESTÅ wall", "tags": ["plinth", "besta base"],
+          "against": { "wall": "storage.wall-3", "offset": 37 },
+          "assumptions": [{ "path": "params", "note": "self-built base (e.g. 18 mm board frame), 240 x 20 x 32" }]
+        },
+        {
+          "id": "storage.top-deck", "asset": "box", "params": { "width": 300, "height": 1.8, "depth": 73, "material": "birch-ply" },
+          "name": "Suitcase board (entry wall, wall to wall, 2 cubes deep)", "tags": ["top deck", "suitcase shelf", "wall to wall board", "bracing"],
+          "position": [150, 224, 227],
+          "assumptions": [{ "path": "params", "note": "18 mm plywood on top of everything along the entry wall: 2 Kallax cubes deep (73), wall to wall, ties the left storage + both towers together; 44 cm free above for suitcases lying flat; 300 cm > a 244 sheet, so 2 pieces joined over a tower" }]
         }
       ],
       "assumptions": [
