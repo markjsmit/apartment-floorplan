@@ -1,0 +1,17 @@
+{
+  "id": "diy-plywood-shelving",
+  "name": "DIY plywood shelving",
+  "tags": ["shelving", "plywood", "diy", "custom", "shelves", "bookcase", "low profile"],
+  "description": "Self-built open shelving from 18 mm plywood: side panels + inner uprights (bays), evenly spaced shelves, 4 mm hardboard back for rigidity. Freestanding, wood-to-wood screws only. Keep bays ≤ ~80 cm so 18 mm shelves don't sag.",
+  "source": { "kind": "procedural", "generator": "plywood-shelving", "license": "self-made", "notes": "Sheet sizes in Israel: 122 x 244 cm (plywood 18 mm, hardboard/MDF 3-4 mm)." },
+  "params": {
+    "width": { "default": 120, "description": "cm along the wall" },
+    "height": { "default": 200, "description": "cm" },
+    "depth": { "default": 20, "description": "cm incl. back panel" },
+    "sections": { "default": 2, "description": "bays side by side" },
+    "shelves": { "default": 4, "description": "inner shelves per bay (evenly spaced)" },
+    "board": { "default": 1.8, "description": "board thickness cm" },
+    "back": { "default": true, "description": "hardboard back panel" },
+    "material": { "default": "birch-ply", "description": "texture id" }
+  }
+}

@@ -1,0 +1,47 @@
+import type { Part, Vec3 } from '../schema';
+
+// Self-built plywood shelving: side panels + inner uprights, evenly spaced shelves, thin back panel.
+// Item convention: origin back-centre on the floor, +z out of the front.
+
+const num = (v: unknown, d: number) => (v === undefined || v === null || v === '' || Number.isNaN(Number(v)) ? d : Number(v));
+
+/**
+ * Params: width (x), height, depth, sections (bays side by side), shelves (inner shelves per bay, evenly spaced),
+ * board (thickness, 1.8 = 18 mm plywood), back (hardboard back panel, default true), material.
+ */
+export function plywoodShelving(params: Record<string, unknown>): Part[] {
+  const W = num(params.width, 120);
+  const H = num(params.height, 200);
+  const D = num(params.depth, 20);
+  const sections = Math.max(1, Math.round(num(params.sections, 2)));
+  const shelves = Math.max(0, Math.round(num(params.shelves, 4)));
+  const t = num(params.board, 1.8);
+  const back = params.back !== false;
+  const backT = back ? 0.4 : 0;
+  const material = String(params.material ?? 'birch-ply');
+  const box = (id: string, tags: string[], size: Vec3, position: Vec3): Part => ({
+    id, tags, geometry: { type: 'box', size }, position, rotation: [0, 0, 0], material, castShadow: true, glass: false,
+  });
+
+  const d = D - backT; // boards sit in front of the back panel
+  const zc = backT + d / 2;
+  const bay = (W - (sections + 1) * t) / sections;
+  const parts: Part[] = [];
+  for (let i = 0; i <= sections; i++) {
+    const x = -W / 2 + t / 2 + i * (bay + t);
+    parts.push(box(i === 0 || i === sections ? `side-${i}` : `upright-${i}`, ['upright'], [t, H, d], [x, H / 2, zc]));
+  }
+  const inner = H - 2 * t;
+  const step = (inner - shelves * t) / (shelves + 1);
+  for (let s = 0; s < sections; s++) {
+    const x = -W / 2 + t + s * (bay + t) + bay / 2;
+    parts.push(box(`bottom-${s + 1}`, ['shelf', 'bottom'], [bay, t, d], [x, t / 2, zc]));
+    parts.push(box(`top-${s + 1}`, ['shelf', 'top'], [bay, t, d], [x, H - t / 2, zc]));
+    for (let k = 1; k <= shelves; k++) {
+      const y = t + k * step + (k - 1) * t + t / 2;
+      parts.push(box(`shelf-${s + 1}-${k}`, ['shelf'], [bay, t, d], [x, y, zc]));
+    }
+  }
+  if (back) parts.push({ ...box('back', ['back panel'], [W, H, backT], [0, H / 2, backT / 2]), material: 'white-laminate' });
+  return parts;
+}

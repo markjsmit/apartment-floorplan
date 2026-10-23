@@ -68,16 +68,17 @@
           "position": [141.5, 112, 226.5], "rotation": -90
         },
         {
-          "id": "storage.besta-wall", "asset": "ikea-besta-60x22x64", "params": { "cols": 4, "rows": [64, 64, 64] },
-          "name": "BESTÅ wall (left wall, 4 x 3 shallow cabinets)", "tags": ["besta wall", "left wall cabinets", "shallow cabinets"],
-          "against": { "wall": "storage.wall-3", "offset": 37, "elevation": 32 },
-          "assumptions": [{ "path": "against.elevation", "note": "stands on a 32 cm plinth (no wall fixing) so its top (224) touches the deck like the Kallax towers" }]
+          "id": "storage.left-shelving", "asset": "diy-plywood-shelving",
+          "params": { "width": 265, "height": 224, "depth": 20, "sections": 4, "shelves": 6 },
+          "name": "Plywood shelving (left wall, DIY)", "tags": ["left shelving", "left wall shelves", "diy shelves", "plywood shelves"],
+          "against": { "wall": "storage.wall-3", "offset": 35 },
+          "assumptions": [{ "path": "params", "note": "self-built: 18 mm plywood, 4 bays of ~64 cm, 7 levels ~30 cm apart, 4 mm back; from just past the door swing to the window wall (covers ~5 cm of the window's left edge); freestanding, tied in at the top" }]
         },
         {
-          "id": "storage.besta-plinth", "asset": "box", "params": { "width": 240, "height": 32, "depth": 20, "material": "white-laminate" },
-          "name": "Plinth under the BESTÅ wall", "tags": ["plinth", "besta base"],
-          "against": { "wall": "storage.wall-3", "offset": 37 },
-          "assumptions": [{ "path": "params", "note": "self-built base (e.g. 18 mm board frame), 240 x 20 x 32" }]
+          "id": "storage.top-tie", "asset": "box", "params": { "width": 82.5, "height": 1.8, "depth": 15, "material": "birch-ply" },
+          "name": "Top tie across the passage (shelving ↔ middle tower)", "tags": ["top tie", "bracing", "passage tie"],
+          "position": [61.25, 224, 153],
+          "assumptions": [{ "path": "params", "note": "15 cm plywood strip at 224 over the passage, screwed into the shelving top and the middle tower top" }]
         },
         {
           "id": "storage.top-deck", "asset": "box", "params": { "width": 300, "height": 1.8, "depth": 73, "material": "birch-ply" },
