@@ -203,8 +203,8 @@
         0,
         0
       ],
-      "material": "fabric-grey",
-      "color": "#5d8fd0",
+      "material": "linen-white",
+      "color": "#3f6fb0",
       "castShadow": true,
       "glass": false
     },
@@ -232,8 +232,8 @@
         0,
         0
       ],
-      "material": "fabric-grey",
-      "color": "#c9d6d4",
+      "material": "linen-white",
+      "color": "#c3d1cf",
       "castShadow": true,
       "glass": false
     }

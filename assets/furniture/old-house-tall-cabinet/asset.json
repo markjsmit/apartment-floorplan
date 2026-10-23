@@ -63,7 +63,7 @@
         0,
         0
       ],
-      "color": "#756c63",
+      "material": "wood-grey-laminate",
       "castShadow": true,
       "glass": false
     },
@@ -88,7 +88,7 @@
         0,
         0
       ],
-      "color": "#756c63",
+      "material": "wood-grey-laminate",
       "castShadow": true,
       "glass": false
     },
@@ -115,7 +115,7 @@
         0,
         0
       ],
-      "color": "#756c63",
+      "material": "wood-grey-laminate",
       "castShadow": true,
       "glass": false
     },
@@ -140,7 +140,7 @@
         0,
         0
       ],
-      "color": "#756c63",
+      "material": "wood-grey-laminate",
       "castShadow": true,
       "glass": false
     },
@@ -225,7 +225,7 @@
         129,
         42
       ],
-      "color": "#756c63",
+      "material": "wood-grey-laminate",
       "castShadow": true,
       "glass": false
     },
@@ -285,7 +285,7 @@
         0,
         0
       ],
-      "color": "#756c63",
+      "material": "wood-grey-laminate",
       "castShadow": true,
       "glass": false
     },
@@ -368,7 +368,7 @@
         0,
         0
       ],
-      "color": "#756c63",
+      "material": "wood-grey-laminate",
       "castShadow": true,
       "glass": false
     },
@@ -451,7 +451,7 @@
         0,
         0
       ],
-      "color": "#756c63",
+      "material": "wood-grey-laminate",
       "castShadow": true,
       "glass": false
     },

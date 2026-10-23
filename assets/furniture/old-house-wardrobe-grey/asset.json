@@ -65,7 +65,7 @@
         0,
         0
       ],
-      "color": "#756c63",
+      "material": "wood-grey-laminate",
       "castShadow": true,
       "glass": false
     },
@@ -148,7 +148,7 @@
         100,
         57
       ],
-      "color": "#756c63",
+      "material": "wood-grey-laminate",
       "castShadow": true,
       "glass": false
     },
@@ -181,7 +181,7 @@
         100,
         57
       ],
-      "color": "#756c63",
+      "material": "wood-grey-laminate",
       "castShadow": true,
       "glass": false
     },

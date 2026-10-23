@@ -1,0 +1,11 @@
+{
+  "id": "wood-oak-light",
+  "name": "Light oak veneer",
+  "tags": ["wood", "oak", "light", "veneer", "furniture"],
+  "maps": { "color": "color.jpg", "normal": "normal.jpg", "roughness": "roughness.jpg" },
+  "tileSize": [120, 60],
+  "fallbackColor": "#c49c68",
+  "roughness": 0.55,
+  "source": "ambientCG Wood095 (https://ambientcg.com/a/Wood095), grain along x, toned to honey oak",
+  "license": "CC0"
+}

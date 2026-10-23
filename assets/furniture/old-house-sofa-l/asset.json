@@ -42,7 +42,7 @@
         0
       ],
       "material": "fabric-grey",
-      "color": "#9ba1a8",
+      "color": "#becadc",
       "castShadow": true,
       "glass": false
     },
@@ -71,7 +71,7 @@
         0
       ],
       "material": "fabric-grey",
-      "color": "#9ba1a8",
+      "color": "#becadc",
       "castShadow": true,
       "glass": false
     },
@@ -100,7 +100,7 @@
         0
       ],
       "material": "fabric-grey",
-      "color": "#9ba1a8",
+      "color": "#becadc",
       "castShadow": true,
       "glass": false
     },
@@ -129,7 +129,7 @@
         0
       ],
       "material": "fabric-grey",
-      "color": "#9ba1a8",
+      "color": "#becadc",
       "castShadow": true,
       "glass": false
     },
@@ -159,7 +159,7 @@
         0
       ],
       "material": "fabric-grey",
-      "color": "#9ba1a8",
+      "color": "#becadc",
       "castShadow": true,
       "glass": false
     },
@@ -189,7 +189,7 @@
         0
       ],
       "material": "fabric-grey",
-      "color": "#9ba1a8",
+      "color": "#becadc",
       "castShadow": true,
       "glass": false
     },
@@ -219,7 +219,7 @@
         0
       ],
       "material": "fabric-grey",
-      "color": "#9ba1a8",
+      "color": "#becadc",
       "castShadow": true,
       "glass": false
     },
@@ -248,7 +248,7 @@
         0
       ],
       "material": "fabric-grey",
-      "color": "#9ba1a8",
+      "color": "#becadc",
       "castShadow": true,
       "glass": false
     },
@@ -277,7 +277,7 @@
         0
       ],
       "material": "fabric-grey",
-      "color": "#9ba1a8",
+      "color": "#becadc",
       "castShadow": true,
       "glass": false
     },
@@ -306,7 +306,7 @@
         0
       ],
       "material": "fabric-grey",
-      "color": "#9ba1a8",
+      "color": "#becadc",
       "castShadow": true,
       "glass": false
     },
@@ -333,8 +333,8 @@
         0,
         0
       ],
-      "material": "fabric-grey",
-      "color": "#e3ddd0",
+      "material": "linen-white",
+      "color": "#e2dccf",
       "castShadow": true,
       "glass": false
     },
@@ -361,8 +361,8 @@
         0,
         0
       ],
-      "material": "fabric-grey",
-      "color": "#b9c9bc",
+      "material": "linen-white",
+      "color": "#a9b8a8",
       "castShadow": true,
       "glass": false
     },
@@ -389,8 +389,8 @@
         0,
         0
       ],
-      "material": "fabric-grey",
-      "color": "#e3ddd0",
+      "material": "linen-white",
+      "color": "#e2dccf",
       "castShadow": true,
       "glass": false
     },

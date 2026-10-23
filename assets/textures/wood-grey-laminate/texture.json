@@ -1,0 +1,11 @@
+{
+  "id": "wood-grey-laminate",
+  "name": "Grey wood-look laminate (vertical grain)",
+  "tags": ["wood", "laminate", "grey", "driftwood", "furniture", "wardrobe"],
+  "maps": { "color": "color.jpg", "normal": "normal.jpg", "roughness": "roughness.jpg" },
+  "tileSize": [60, 120],
+  "fallbackColor": "#7a7169",
+  "roughness": 0.6,
+  "source": "ambientCG Wood095 (https://ambientcg.com/a/Wood095), rotated 90° for vertical grain on doors, desaturated and toned to the grey wardrobe/cabinet in Mark's old-house photos",
+  "license": "CC0"
+}

@@ -40,7 +40,8 @@
         0,
         0
       ],
-      "material": "steel-brushed",
+      "material": "stainless",
+      "color": "#a7aaae",
       "castShadow": true,
       "glass": false
     },
@@ -123,7 +124,8 @@
         124,
         72
       ],
-      "material": "steel-brushed",
+      "material": "stainless",
+      "color": "#a7aaae",
       "castShadow": true,
       "glass": false
     },
@@ -156,7 +158,8 @@
         124,
         72
       ],
-      "material": "steel-brushed",
+      "material": "stainless",
+      "color": "#a7aaae",
       "castShadow": true,
       "glass": false
     },
@@ -189,7 +192,8 @@
         36,
         72
       ],
-      "material": "steel-brushed",
+      "material": "stainless",
+      "color": "#a7aaae",
       "castShadow": true,
       "glass": false
     },
@@ -222,7 +226,8 @@
         36,
         72
       ],
-      "material": "steel-brushed",
+      "material": "stainless",
+      "color": "#a7aaae",
       "castShadow": true,
       "glass": false
     }

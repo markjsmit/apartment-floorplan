@@ -1,0 +1,11 @@
+{
+  "id": "wood-grey-oak-rustic",
+  "name": "Rustic grey oak",
+  "tags": ["wood", "oak", "grey", "rustic", "furniture"],
+  "maps": { "color": "color.jpg", "normal": "normal.jpg", "roughness": "roughness.jpg" },
+  "tileSize": [120, 120],
+  "fallbackColor": "#9a8c79",
+  "roughness": 0.7,
+  "source": "ambientCG Wood096 (https://ambientcg.com/a/Wood096), rotated 90° so the grain runs along x, desaturated and toned to the grey-oak coffee table in Mark's old-house photos",
+  "license": "CC0"
+}
