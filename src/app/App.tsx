@@ -60,7 +60,8 @@ export function App() {
       {mobile && <PersonSwitch />}
       {!mobile && <Toolbar />}
       {!mobile && <Hud />}
-      <InfoPanel compact={mobile} />
+      {/* info panels are a desktop thing; on a phone a tap just opens/closes */}
+      {!mobile && <InfoPanel compact={false} />}
       {!mobile && <MeasurePanel />}
       <Banner />
       {touch && <TouchControls />}

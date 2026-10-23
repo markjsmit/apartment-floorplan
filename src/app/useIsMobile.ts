@@ -1,6 +1,6 @@
+import { PHONE_QUERY as QUERY } from '../scene/clickAction';
 import { useEffect, useState } from 'react';
 
-const QUERY = '(pointer: coarse) and (max-width: 900px)';
 
 /** Phones get the stripped-down UI: room tabs, info panel and touch controls only. */
 export function useIsMobile(): boolean {

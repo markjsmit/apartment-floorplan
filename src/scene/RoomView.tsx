@@ -11,6 +11,7 @@ import { boxWithCmUV, footprintGeometry } from './cmGeometry';
 import { getMaterial } from './materials';
 import { registerObject } from './registry';
 import { PartsView } from './PartsView';
+import { clickAction, isPhone } from './clickAction';
 
 const CLICK_SLOP = 6;
 
@@ -32,7 +33,7 @@ export function RoomView({ room, placement, hiddenAssets, showCeiling }: {
   const pick = (sel: Selection) => (e: ThreeEvent<MouseEvent>) => {
     e.stopPropagation();
     if (e.delta > CLICK_SLOP) return;
-    select(sel);
+    if (clickAction({ phone: isPhone(), interactive: false }) === 'select') select(sel);
   };
 
   return (

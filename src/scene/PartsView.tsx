@@ -9,6 +9,7 @@ import type { SelectionKind } from '../model/lookup';
 import { partGeometry } from './cmGeometry';
 import { getMaterial } from './materials';
 import { registerObject } from './registry';
+import { clickAction, isPhone } from './clickAction';
 import labelFont from '../../assets/fonts/inter-latin-600-normal.woff?url';
 import { RectAreaLightUniformsLib } from 'three/examples/jsm/lights/RectAreaLightUniformsLib.js';
 import { useLightsOn } from './useLightsOn';
@@ -39,11 +40,14 @@ export function PartsView({ id, kind, asset, parts, stateId, position, rotationD
   const onClick = (part: string) => (e: ThreeEvent<MouseEvent>) => {
     e.stopPropagation();
     if (e.delta > CLICK_SLOP) return;
-    select({ kind, id, part });
+    const action = clickAction({ phone: isPhone(), interactive: interactivePart(asset, part) });
+    if (action === 'select') select({ kind, id, part });
+    if (action === 'cycle') cycleState(id);
   };
   const onDoubleClick = (part: string) => (e: ThreeEvent<MouseEvent>) => {
     e.stopPropagation();
-    if (interactivePart(asset, part)) cycleState(id);
+    // phones already changed state on the first tap
+    if (!isPhone() && interactivePart(asset, part)) cycleState(id);
   };
 
   return (
