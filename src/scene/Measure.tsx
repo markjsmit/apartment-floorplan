@@ -1,39 +1,24 @@
 import { useEffect } from 'react';
 import { useThree } from '@react-three/fiber';
 import { Html, Line } from '@react-three/drei';
-import { Raycaster, Vector2, type Material, type Mesh } from 'three';
+import { Box3, Raycaster, Vector2, type Material, type Mesh } from 'three';
 import type { Vec3 } from '../model/schema';
+import { oppositeFace } from '../model/measure';
 import { currentMeasurement, formatCm, useMeasure, type MeasurePoint } from '../app/measureStore';
 import { selectableFromHit } from './selectable';
-import { currentRoom, useStore } from '../app/store';
-import { resolveWalls } from '../model/geometry';
-import { footprintCorners, placeRoomItems } from '../model/placement';
-import type { Box } from '../model/measure';
 
 const CLICK_SLOP = 6;
+const DOUBLE_CLICK_MS = 350;
 
-/** Measuring mode: clicks pick surface points (and don't select or toggle furniture); draws the result. */
+/**
+ * Measuring mode: click a surface, click another → distance along one axis. Double-clicking a surface moves
+ * that point to the other side of the board (e.g. from the underside of a shelf top to its top, to measure
+ * up to the ceiling). Clicks here never select or toggle furniture.
+ */
 export function Measure() {
   const { camera, scene, gl } = useThree();
   const active = useMeasure((s) => s.active);
   const points = useMeasure((s) => s.points);
-  const hover = useMeasure((s) => s.hover);
-
-  // furniture bounds in room space, so a click anywhere on a closet can measure from its top
-  const itemBox = (id: string): Box | undefined => {
-    const s = useStore.getState();
-    const room = currentRoom(s);
-    if (!room || !s.bundle) return undefined;
-    const p = placeRoomItems(room, s.bundle.furniture, resolveWalls(room), s.itemStates).find((x) => x.item.id === id);
-    if (!p) return undefined;
-    const corners = footprintCorners(p);
-    const xs = corners.map((c) => c[0]);
-    const zs = corners.map((c) => c[1]);
-    return {
-      min: [Math.min(...xs), p.position[1] + p.size.min[1], Math.min(...zs)],
-      max: [Math.max(...xs), p.position[1] + p.size.max[1], Math.max(...zs)],
-    };
-  };
 
   // points belong to one room (this component is keyed by room)
   useEffect(() => useMeasure.getState().reset(), []);
@@ -56,7 +41,7 @@ export function Measure() {
     const host = gl.domElement.closest('.viewer') as HTMLElement | null;
     if (!host) return;
     const raycaster = new Raycaster();
-    const pick = (clientX: number, clientY: number, shift: boolean): MeasurePoint | null => {
+    const pick = (clientX: number, clientY: number): MeasurePoint | null => {
       const rect = gl.domElement.getBoundingClientRect();
       const ndc = new Vector2(((clientX - rect.left) / rect.width) * 2 - 1, -((clientY - rect.top) / rect.height) * 2 + 1);
       raycaster.setFromCamera(ndc, camera);
@@ -67,17 +52,17 @@ export function Measure() {
       if (!hit?.face) return null;
       const n = hit.face.normal.clone().transformDirection(hit.object.matrixWorld);
       const target = selectableFromHit(hit.object);
+      const surface = { point: [hit.point.x, hit.point.y, hit.point.z] as Vec3, normal: [n.x, n.y, n.z] as Vec3 };
+      const b = new Box3().setFromObject(hit.object);
       return {
-        point: [hit.point.x, hit.point.y, hit.point.z],
-        normal: [n.x, n.y, n.z],
+        ...surface,
         target,
-        box: target?.kind === 'item' ? itemBox(target.id) : undefined,
-        snapOuter: useMeasure.getState().snapOuter || shift,
         roomSurface: target?.kind === 'wall' || target?.kind === 'floor' || target?.kind === 'ceiling',
+        other: oppositeFace(surface, { min: [b.min.x, b.min.y, b.min.z], max: [b.max.x, b.max.y, b.max.z] }),
       };
     };
     let down: { x: number; y: number } | null = null;
-    let frame = 0;
+    let lastClick = { t: 0, x: 0, y: 0 };
     const swallow = (e: Event) => e.stopPropagation();
     const pdown = (e: PointerEvent) => {
       down = { x: e.clientX, y: e.clientY };
@@ -86,59 +71,45 @@ export function Measure() {
     const pup = (e: PointerEvent) => {
       e.stopPropagation();
       if (!down || Math.hypot(e.clientX - down.x, e.clientY - down.y) > CLICK_SLOP) return;
-      const p = pick(e.clientX, e.clientY, e.shiftKey);
+      const now = performance.now();
+      const isDouble = now - lastClick.t < DOUBLE_CLICK_MS && Math.hypot(e.clientX - lastClick.x, e.clientY - lastClick.y) < CLICK_SLOP;
+      lastClick = { t: isDouble ? 0 : now, x: e.clientX, y: e.clientY };
+      // the first click of a double-click already placed the point: the second one flips it
+      if (isDouble) return useMeasure.getState().flipLast();
+      const p = pick(e.clientX, e.clientY);
       if (p) useMeasure.getState().add(p);
     };
-    const move = (e: PointerEvent) => {
-      if (e.pointerType === 'touch') return;
-      cancelAnimationFrame(frame);
-      frame = requestAnimationFrame(() => useMeasure.getState().setHover(pick(e.clientX, e.clientY, e.shiftKey)));
-    };
-    const leave = () => useMeasure.getState().setHover(null);
     host.addEventListener('pointerdown', pdown, true);
     host.addEventListener('pointerup', pup, true);
-    host.addEventListener('pointermove', move, true);
-    host.addEventListener('pointerleave', leave, true);
     host.addEventListener('click', swallow, true);
     host.addEventListener('dblclick', swallow, true);
     document.body.style.cursor = 'crosshair';
     return () => {
-      cancelAnimationFrame(frame);
       host.removeEventListener('pointerdown', pdown, true);
       host.removeEventListener('pointerup', pup, true);
-      host.removeEventListener('pointermove', move, true);
-      host.removeEventListener('pointerleave', leave, true);
       host.removeEventListener('click', swallow, true);
       host.removeEventListener('dblclick', swallow, true);
       document.body.style.cursor = '';
     };
   }, [active, camera, scene, gl]);
 
-  if (!active) return null;
-  // finished measurement, or a live preview from the first point to where the mouse is
-  const preview = points.length === 1 && hover ? [points[0], hover] : null;
-  const m = currentMeasurement(points) ?? (preview ? currentMeasurement(preview) : null);
-  const ends: Vec3[] = m ? [m.from, m.to] : points.length ? [points[0].point] : [];
+  if (!active || points.length === 0) return null;
+  const m = currentMeasurement(points);
+  // the line runs along one axis: from the first point to the second surface's level
+  const ends: Vec3[] = m ? [m.from, m.to] : [points[0].point];
   const mid: Vec3 | null = m ? [(m.from[0] + m.to[0]) / 2, (m.from[1] + m.to[1]) / 2, (m.from[2] + m.to[2]) / 2] : null;
-  const color = preview ? '#ffe86b' : '#ffd400';
   return (
     <group>
-      {hover && points.length !== 1 && (
-        <mesh position={hover.point} renderOrder={999}>
-          <sphereGeometry args={[2, 12, 8]} />
-          <meshBasicMaterial color="#ffe86b" depthTest={false} transparent opacity={0.8} />
-        </mesh>
-      )}
       {ends.map((p, i) => (
         <mesh key={i} position={p} renderOrder={999}>
           <sphereGeometry args={[2.5, 16, 12]} />
-          <meshBasicMaterial color={color} depthTest={false} />
+          <meshBasicMaterial color="#ffd400" depthTest={false} />
         </mesh>
       ))}
-      {m && <Line points={[m.from, m.to]} color={color} lineWidth={preview ? 2 : 3} dashed={!!preview} dashSize={4} gapSize={3} depthTest={false} renderOrder={998} />}
+      {m && <Line points={[m.from, m.to]} color="#ffd400" lineWidth={3} depthTest={false} renderOrder={998} />}
       {m && mid && (
         <Html position={mid} center zIndexRange={[20, 10]}>
-          <div className={preview ? 'measure-label preview' : 'measure-label'}>{formatCm(m.distance)}</div>
+          <div className="measure-label">{formatCm(m.distance)}</div>
         </Html>
       )}
     </group>

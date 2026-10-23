@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { measureBetween } from '../src/model/measure';
+import { measureBetween, oppositeFace } from '../src/model/measure';
 
 describe('measureBetween (snapped to one axis)', () => {
   it('measures straight out from the first surface, along its axis', () => {
@@ -26,79 +26,35 @@ describe('measureBetween (snapped to one axis)', () => {
     expect(m.distance).toBeCloseTo(80);
   });
 
-  it('still measures along the first axis when the second surface faces another way', () => {
-    const m = measureBetween({ point: [0, 100, 0], normal: [-1, 0, 0] }, { point: [-150, 0, 20], normal: [0, 1, 0] });
-    expect(m.axis).toBe('x');
-    expect(m.distance).toBeCloseTo(150);
-    expect(m.to).toEqual([-150, 100, 0]);
-  });
-});
-
-describe('measureBetween with furniture boxes', () => {
-  const closet = { min: [40, 0, 100] as [number, number, number], max: [140, 201, 160] as [number, number, number] };
-
-  it('ceiling then closet side: snaps to the top of the closet', () => {
+  it('uses exactly the clicked spots (a shelf inside a kallax)', () => {
     const m = measureBetween(
-      { point: [300, 270, 300], normal: [0, -1, 0], roomSurface: true },
-      { point: [90, 150, 160], normal: [0, 0, 1], box: closet, snapOuter: true },
+      { point: [200, 0, 100], normal: [0, 1, 0], roomSurface: true },
+      { point: [36, 151.25, 20], normal: [0, 1, 0] },
     );
-    expect(m.axis).toBe('y');
-    expect(m.distance).toBeCloseTo(69);
-    // the line stands on the closet top, going up to the ceiling
-    expect(m.from).toEqual([90, 201, 160]);
-    expect(m.to).toEqual([90, 270, 160]);
+    expect(m.distance).toBeCloseTo(151.25);
   });
 
-  it('closet first, then ceiling: the room surface decides the axis', () => {
+  it('lets a wall/floor/ceiling decide the axis whichever order you click', () => {
     const m = measureBetween(
-      { point: [90, 150, 160], normal: [0, 0, 1], box: closet, snapOuter: true },
+      { point: [90, 150, 160], normal: [0, 0, 1] },
       { point: [300, 270, 300], normal: [0, -1, 0], roomSurface: true },
     );
     expect(m.axis).toBe('y');
-    expect(m.distance).toBeCloseTo(69);
-  });
-
-  it('wall then closet front: snaps to the closet side facing the wall', () => {
-    const m = measureBetween(
-      { point: [0, 100, 130], normal: [1, 0, 0], roomSurface: true },
-      { point: [90, 100, 160], normal: [0, 0, 1], box: closet, snapOuter: true },
-    );
-    expect(m.axis).toBe('x');
-    expect(m.distance).toBeCloseTo(40);
-  });
-});
-
-describe('measureBetween: exact spot vs snapping', () => {
-  const kallax = { min: [0, 0, 0] as [number, number, number], max: [147, 147, 39] as [number, number, number] };
-
-  it('floor to a shelf inside the kallax uses the shelf you clicked', () => {
-    // second hole from the top: its bottom shelf top surface at y = 75.5
-    const m = measureBetween(
-      { point: [200, 0, 100], normal: [0, 1, 0], roomSurface: true },
-      { point: [60, 75.5, 20], normal: [0, 1, 0], box: kallax },
-    );
-    expect(m.distance).toBeCloseTo(75.5);
-    expect(m.snapped).toEqual([false, false]);
-  });
-
-  it('says which end got snapped', () => {
-    const m = measureBetween(
-      { point: [200, 270, 100], normal: [0, -1, 0], roomSurface: true },
-      { point: [60, 100, 39], normal: [0, 0, 1], box: kallax, snapOuter: true },
-    );
-    expect(m.distance).toBeCloseTo(123);
-    expect(m.snapped).toEqual([false, true]);
-  });
-});
-
-describe('measureBetween: exact by default', () => {
-  const kallax = { min: [0, 0, 0] as [number, number, number], max: [147, 147, 39] as [number, number, number] };
-  it('a click on the side of a divider inside the kallax is exact unless snapping is on', () => {
-    const m = measureBetween(
-      { point: [200, 0, 100], normal: [0, 1, 0], roomSurface: true },
-      { point: [36, 120, 20], normal: [1, 0, 0], box: kallax },
-    );
     expect(m.distance).toBeCloseTo(120);
-    expect(m.snapped).toEqual([false, false]);
+  });
+});
+
+describe('oppositeFace', () => {
+  it('moves a point on the underside of a board to its top side', () => {
+    // top board of a kallax: 1.5 cm... here 4.25 cm thick, y from 219.75 to 224
+    const board = { min: [0, 219.75, 0] as [number, number, number], max: [147, 224, 39] as [number, number, number] };
+    const flipped = oppositeFace({ point: [60, 219.75, 20], normal: [0, -1, 0] }, board);
+    expect(flipped.point).toEqual([60, 224, 20]);
+    expect(flipped.normal).toEqual([0, 1, 0]);
+  });
+
+  it('works sideways too (front of a door leaf to its back)', () => {
+    const leaf = { min: [0, 0, -4] as [number, number, number], max: [80, 210, 0] as [number, number, number] };
+    expect(oppositeFace({ point: [40, 100, 0], normal: [0, 0, 1] }, leaf).point).toEqual([40, 100, -4]);
   });
 });
