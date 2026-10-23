@@ -6,3 +6,6 @@ dist
 .DS_Store
 .idea
 *.log
+
+# private photos (people in them did not consent) — keep local only
+sources/
