@@ -3,7 +3,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { makeSuggestion, promote, slugify, versionIdFromPath, versionPath, type RawHouse } from '../src/model/versions';
+import { makeSuggestion, promote, savedId, versionIdFromPath, versionPath, type RawHouse } from '../src/model/versions';
 
 const root = fileURLToPath(new URL('..', import.meta.url));
 const abs = (rel: string) => path.join(root, rel);
@@ -55,7 +55,13 @@ switch (cmd) {
     break;
   }
   case 'promote': {
-    const res = promote(read('current'), read('suggestion'), { force: has('force') });
+    let res;
+    try {
+      res = promote(read('current'), read('suggestion'), { force: has('force') });
+    } catch (e) {
+      console.error((e as Error).message);
+      process.exit(1);
+    }
     write('current', res.house);
     console.log(`changed rooms: ${res.changed.join(', ') || '(none)'}`);
     if (res.conflicts.length && !has('force')) {
@@ -74,7 +80,7 @@ switch (cmd) {
     }
     const from = flag('from') ?? 'current';
     const h = structuredClone(read(from));
-    const id = `saved/${slugify(arg)}`;
+    const id = savedId(arg, exists);
     h.meta = { ...h.meta, name: arg, kind: 'saved', createdAt: new Date().toISOString() };
     delete h.meta.baseRoomHashes;
     write(id, h);

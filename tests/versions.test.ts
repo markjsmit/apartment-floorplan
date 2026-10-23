@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { makeSuggestion, promote, roomHash, slugify, versionIdFromPath, versionPath, type RawHouse } from '../src/model/versions';
+import { makeSuggestion, promote, roomHash, savedId, slugify, versionIdFromPath, versionPath, type RawHouse } from '../src/model/versions';
 
 const room = (id: string, ceilingHeight = 260) => ({
   id, name: id, footprint: [[0, 0], [300, 0], [300, 300], [0, 300]], ceilingHeight,
@@ -68,5 +68,23 @@ describe('promote', () => {
     const res = promote(current(), s);
     expect(res.changed.sort()).toEqual(['b', 'c']);
     expect(res.house.rooms.map((r) => r.id)).toEqual(['a', 'c']);
+  });
+});
+
+describe('savedId', () => {
+  it('slugifies and refuses to overwrite', () => {
+    expect(savedId('Bed left', () => false)).toBe('saved/bed-left');
+    expect(savedId('bed-left', (id) => id === 'saved/bed-left')).toBe('saved/bed-left-2');
+  });
+  it('falls back to a dated slug for names without latin letters', () => {
+    expect(savedId('מיטה שמאל', () => false, new Date('2026-10-23T09:05:00Z'))).toMatch(/^saved\/v-20261023-\d{4}$/);
+  });
+});
+
+describe('promote validation', () => {
+  it('refuses a suggestion whose changed room is invalid', () => {
+    const s = makeSuggestion(current());
+    s.rooms[0] = { id: 'a', name: 'half edited' };
+    expect(() => promote(current(), s)).toThrow(/a/);
   });
 });

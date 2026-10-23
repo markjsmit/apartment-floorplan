@@ -4,11 +4,14 @@ import { sanityCheck } from '../src/model/sanity';
 
 const bundle = loadBundleFromDisk();
 for (const e of bundle.errors) console.log(`ERROR ${e.file}: ${e.message}`);
-const issues = bundle.errors.length ? [] : sanityCheck(bundle);
-for (const i of issues) console.log(`WARN  ${i}`);
+// sanity checks run on whatever loaded fine, even if another file is broken
+const issues = sanityCheck(bundle);
+for (const i of issues) console.log(`${i.level === 'error' ? 'ERROR' : 'WARN '} ${i.message}`);
+const errors = bundle.errors.length + issues.filter((i) => i.level === 'error').length;
+const warnings = issues.length - issues.filter((i) => i.level === 'error').length;
 const counts = `${bundle.versionOrder.length} versions, ${Object.keys(bundle.furniture).length} furniture, ${Object.keys(bundle.textures).length} textures`;
-if (bundle.errors.length || issues.length) {
-  console.log(`\n✗ ${bundle.errors.length} errors, ${issues.length} warnings (${counts})`);
+if (errors) {
+  console.log(`\n✗ ${errors} errors, ${warnings} warnings (${counts})`);
   process.exit(1);
 }
-console.log(`✓ all good (${counts})`);
+console.log(warnings ? `✓ no errors, ${warnings} warnings to look at (${counts})` : `✓ all good (${counts})`);

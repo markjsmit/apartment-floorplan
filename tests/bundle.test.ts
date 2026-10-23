@@ -51,41 +51,52 @@ describe('mergeBundle', () => {
 });
 
 describe('sanityCheck', () => {
-  const check = (rooms: object[]) => sanityCheck(buildBundle(files(rooms), { publicUrl: '' }));
+  const issues = (rooms: object[]) => sanityCheck(buildBundle(files(rooms), { publicUrl: '' }));
+  const check = (rooms: object[]) => issues(rooms).map((i) => i.message);
 
   it('passes a clean room', () => {
     expect(check([room({ items: [{ id: 'r.box', asset: 'box', position: [150, 0, 150] }] })])).toEqual([]);
   });
 
   it('flags an opening outside its wall', () => {
-    const issues = check([room({ openings: [{ id: 'r.door', type: 'door', wall: 'r.wall-0', offset: 250, width: 80, height: 210 }] })]);
-    expect(issues.join('\n')).toMatch(/r\.door.*wider than|r\.door.*outside/);
+    const msgs = check([room({ openings: [{ id: 'r.door', type: 'door', wall: 'r.wall-0', offset: 250, width: 80, height: 210 }] })]);
+    expect(msgs.join('\n')).toMatch(/r\.door.*wider than|r\.door.*outside/);
   });
 
   it('flags duplicate ids', () => {
-    const issues = check([room({ items: [
+    const msgs = check([room({ items: [
       { id: 'r.box', asset: 'box', position: [80, 0, 80] },
       { id: 'r.box', asset: 'box', position: [220, 0, 220] },
     ] })]);
-    expect(issues.join('\n')).toMatch(/duplicate id "r\.box"/);
+    expect(msgs.join('\n')).toMatch(/duplicate id "r\.box"/);
   });
 
   it('flags unknown assets and materials', () => {
-    const issues = check([room({ floor: { material: 'marble' }, items: [{ id: 'r.x', asset: 'sofa', position: [150, 0, 150] }] })]);
-    expect(issues.join('\n')).toMatch(/marble/);
-    expect(issues.join('\n')).toMatch(/sofa/);
+    const msgs = check([room({ floor: { material: 'marble' }, items: [{ id: 'r.x', asset: 'sofa', position: [150, 0, 150] }] })]);
+    expect(msgs.join('\n')).toMatch(/marble/);
+    expect(msgs.join('\n')).toMatch(/sofa/);
   });
 
   it('flags an item sticking out of the room', () => {
-    const issues = check([room({ items: [{ id: 'r.box', asset: 'box', position: [10, 0, 150] }] })]);
-    expect(issues.join('\n')).toMatch(/r\.box.*outside the room/);
+    const msgs = check([room({ items: [{ id: 'r.box', asset: 'box', position: [10, 0, 150] }] })]);
+    expect(msgs.join('\n')).toMatch(/r\.box.*outside the room/);
   });
 
   it('flags overlapping items', () => {
-    const issues = check([room({ items: [
+    const msgs = check([room({ items: [
       { id: 'r.a', asset: 'box', position: [150, 0, 100] },
       { id: 'r.b', asset: 'box', position: [170, 0, 110] },
     ] })]);
-    expect(issues.join('\n')).toMatch(/r\.a.*overlaps.*r\.b/);
+    expect(msgs.join('\n')).toMatch(/r\.a.*overlaps.*r\.b/);
+  });
+
+  it('treats overlaps as warnings (chairs under tables are fine) but bad refs as errors', () => {
+    const found = issues([room({ items: [
+      { id: 'r.a', asset: 'box', position: [150, 0, 100] },
+      { id: 'r.b', asset: 'box', position: [170, 0, 110] },
+      { id: 'r.x', asset: 'sofa', position: [150, 0, 250] },
+    ] })]);
+    expect(found.find((i) => i.message.includes('overlaps'))?.level).toBe('warning');
+    expect(found.find((i) => i.message.includes('sofa'))?.level).toBe('error');
   });
 });

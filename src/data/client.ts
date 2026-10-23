@@ -40,10 +40,13 @@ function post(url: string, body: unknown) {
 }
 
 let uiTimer: ReturnType<typeof setTimeout> | undefined;
-export function reportUiState(state: unknown) {
+/** Debounced; `stillActive` is checked again when the timer fires (background tabs fire late). */
+export function reportUiState(state: unknown, stillActive: () => boolean = () => true) {
   if (!DEV_LINK) return;
   clearTimeout(uiTimer);
-  uiTimer = setTimeout(() => post('/api/ui-state', state), 300);
+  uiTimer = setTimeout(() => {
+    if (stillActive()) post('/api/ui-state', state);
+  }, 300);
 }
 
 export function reportEvent(event: Record<string, unknown>) {

@@ -143,3 +143,11 @@ export function findFreeSpawn(room: Room, colliders: Collider[], radius: number)
   }
   return best ?? centre;
 }
+
+/** Where the player should be: unchanged if inside the room and free, else the nearest free spot, else a fresh spawn. */
+export function resolvePlayerPosition(p: Vec2, room: Room, colliders: Collider[], radius: number): Vec2 {
+  if (pointInPolygon(p, room.footprint) && isFree(p, radius, colliders)) return p;
+  const q = nearestFree(p, radius, colliders, room.footprint);
+  if (pointInPolygon(q, room.footprint) && isFree(q, radius, colliders)) return q;
+  return findFreeSpawn(room, colliders, radius);
+}

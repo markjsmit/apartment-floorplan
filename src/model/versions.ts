@@ -17,6 +17,16 @@ export function slugify(name: string): string {
   return name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
 }
 
+/** Id for a new saved version: never overwrites an existing one; names without latin letters get a dated slug. */
+export function savedId(name: string, exists: (id: string) => boolean, now = new Date()): string {
+  const pad = (n: number) => String(n).padStart(2, '0');
+  const dated = `v-${now.getUTCFullYear()}${pad(now.getUTCMonth() + 1)}${pad(now.getUTCDate())}-${pad(now.getUTCHours())}${pad(now.getUTCMinutes())}`;
+  const base = `saved/${slugify(name) || dated}`;
+  let id = base;
+  for (let n = 2; exists(id); n++) id = `${base}-${n}`;
+  return id;
+}
+
 function stableStringify(v: unknown): string {
   if (Array.isArray(v)) return `[${v.map(stableStringify).join(',')}]`;
   if (v && typeof v === 'object') {
@@ -82,6 +92,8 @@ export function promote(current: RawHouse, suggestion: RawHouse, opts: { force?:
   }
 
   const apply = new Set(changed.filter((id) => opts.force || !conflicts.includes(id)));
+  const invalid = [...apply].filter((id) => sugById.has(id) && !RoomSchema.safeParse(sugById.get(id)).success);
+  if (invalid.length) throw new Error(`suggestion rooms are not valid yet (run npm run check): ${invalid.join(', ')}`);
   const rooms: RawRoom[] = [];
   for (const r of current.rooms) {
     if (!apply.has(r.id)) rooms.push(r);

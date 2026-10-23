@@ -26,6 +26,8 @@ function SelectionOutline() {
   const selection = useStore((s) => s.selection);
   const versionId = useStore((s) => s.versionId);
   const itemStates = useStore((s) => s.itemStates);
+  // live reloads remount meshes (e.g. a Kallax going 2x2 -> 2x4), so re-collect them
+  const bundle = useStore((s) => s.bundle);
   const [objs, setObjs] = useState<{ strong: Mesh[]; soft: Mesh[] }>({ strong: [], soft: [] });
   useEffect(() => {
     // wait a frame so freshly mounted objects have registered
@@ -38,7 +40,7 @@ function SelectionOutline() {
       setObjs(strong ? { strong: meshes, soft: [] } : { strong: [], soft: meshes });
     });
     return () => cancelAnimationFrame(t);
-  }, [selection, versionId, itemStates]);
+  }, [selection, versionId, itemStates, bundle]);
   return (
     <>
       <Outline selection={objs.strong} selectionLayer={10} visibleEdgeColor={0x39ff14} hiddenEdgeColor={0x1f8f0b} edgeStrength={10} blur={false} xRay />

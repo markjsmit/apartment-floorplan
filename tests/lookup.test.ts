@@ -67,3 +67,12 @@ describe('describeSelection', () => {
     expect(d.rows).toEqual(expect.arrayContaining([['Size (W×H)', '80 × 210 cm']]));
   });
 });
+
+describe('describeSelection with odd but valid data', () => {
+  it('does not crash on an empty-string wall tag', () => {
+    const odd = structuredClone(house);
+    odd.rooms[0].walls = [{ id: 'r.back', edge: 0, tags: [''], thickness: 10 }];
+    const d = describeSelection(bundle, odd, { kind: 'wall', id: 'r.back', part: null }, {});
+    expect(d?.title).toBeTruthy();
+  });
+});

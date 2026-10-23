@@ -33,8 +33,8 @@ type State = {
 type Actions = {
   setBundle: (b: Bundle) => void;
   setLoadError: (e: string | null) => void;
-  setRoom: (id: string) => void;
-  setVersion: (id: string) => void;
+  setRoom: (id: string) => boolean;
+  setVersion: (id: string) => boolean;
   select: (s: Selection | null) => void;
   selectById: (id: string) => boolean;
   cycleState: (id: string) => void;
@@ -69,7 +69,8 @@ export const useStore = create<State & Actions>((set, get) => ({
   spawnTick: 0,
   lookAtTarget: null,
   toasts: [],
-  noreport: false,
+  // read straight away so a snapshot browser never reports, not even before the first load
+  noreport: typeof location !== 'undefined' && new URLSearchParams(location.search).get('noreport') === '1',
 
   setBundle: (bundle) => {
     const { versionId, roomId } = get();
@@ -82,12 +83,13 @@ export const useStore = create<State & Actions>((set, get) => ({
   },
   setLoadError: (loadError) => set({ loadError }),
   setRoom: (id) => {
-    if (id === get().roomId) return;
-    set({ roomId: id, selection: null, spawnTick: get().spawnTick + 1 });
+    if (!currentHouse(get())?.rooms.some((r) => r.id === id)) return false;
+    if (id !== get().roomId) set({ roomId: id, selection: null, spawnTick: get().spawnTick + 1 });
+    return true;
   },
   setVersion: (id) => {
     const house = get().bundle?.versions[id];
-    if (!house) return;
+    if (!house) return false;
     const sameRoom = house.rooms.some((r) => r.id === get().roomId);
     const sel = get().selection;
     set({
@@ -96,6 +98,7 @@ export const useStore = create<State & Actions>((set, get) => ({
       selection: sel && findById(house, sel.id) ? sel : null,
       spawnTick: sameRoom ? get().spawnTick : get().spawnTick + 1,
     });
+    return true;
   },
   select: (selection) => set({ selection }),
   selectById: (id) => {

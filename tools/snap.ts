@@ -36,6 +36,20 @@ if (!(await reachable(`${base}api/bundle`))) {
   base = 'http://localhost:5181/';
 }
 
+// fail loudly on a typo instead of silently photographing another room
+const bundle = (await (await fetch(`${base}api/bundle`)).json()) as { versions: Record<string, { rooms: { id: string }[] }> };
+const house = bundle.versions[version];
+const problem = !house
+  ? `unknown version "${version}" (have: ${Object.keys(bundle.versions).join(', ')})`
+  : !house.rooms.some((r) => r.id === room)
+    ? `unknown room "${room}" in ${version} (have: ${house.rooms.map((r) => r.id).join(', ')})`
+    : null;
+if (problem) {
+  console.error(problem);
+  await server?.close();
+  process.exit(1);
+}
+
 const q = new URLSearchParams({ room, version, noreport: '1' });
 if (flag('cam')) q.set('cam', flag('cam')!);
 if (args.includes('--top')) q.set('view', 'top');

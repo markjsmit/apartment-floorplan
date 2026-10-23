@@ -3,7 +3,7 @@ import { useFrame, useThree } from '@react-three/fiber';
 import type { Room, Vec2 } from '../model/schema';
 import { resolveWalls } from '../model/geometry';
 import { placeRoomItems } from '../model/placement';
-import { buildColliders, findFreeSpawn, isFree, moveWithCollision, nearestFree } from '../model/collision';
+import { buildColliders, findFreeSpawn, isFree, moveWithCollision, resolvePlayerPosition } from '../model/collision';
 import { findById } from '../model/lookup';
 import { currentHouse, EYE_HEIGHT, useStore } from '../app/store';
 import { held, lookDelta, type MoveKey } from './input';
@@ -56,15 +56,13 @@ export function PlayerControls({ room, driveCamera }: { room: Room; driveCamera:
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [spawnTick]);
 
-  // when furniture changes state (bed folds down on you) step out of it
+  // furniture changed state (bed folds down on you) or the room changed shape: step back to a valid spot
   useEffect(() => {
     const p = pose.current;
-    if (!isFree([p.x, p.z], RADIUS, colliders)) {
-      const [x, z] = nearestFree([p.x, p.z], RADIUS, colliders, room.footprint);
-      pose.current = { ...p, x, z };
-    }
+    const [x, z] = resolvePlayerPosition([p.x, p.z], room, colliders, RADIUS);
+    if (x !== p.x || z !== p.z) pose.current = { ...p, x, z };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [colliders]);
+  }, [colliders, room.footprint]);
 
   // Claude's "look-at": turn towards the item's centre
   useEffect(() => {

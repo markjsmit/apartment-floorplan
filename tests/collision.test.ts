@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { RoomSchema } from '../src/model/schema';
 import { resolveWalls } from '../src/model/geometry';
-import { buildColliders, findFreeSpawn, isFree, moveWithCollision, nearestFree } from '../src/model/collision';
+import { buildColliders, findFreeSpawn, isFree, moveWithCollision, nearestFree, resolvePlayerPosition } from '../src/model/collision';
 
 const room = RoomSchema.parse({
   id: 'r', name: 'R', footprint: [[0, 0], [300, 0], [300, 300], [0, 300]],
@@ -74,5 +74,28 @@ describe('squeezed between furniture and a wall', () => {
     const p = nearestFree([40, 285], 20, colliders, room.footprint);
     expect(isFree(p, 20, colliders)).toBe(true);
     expect(p[1]).toBeLessThanOrEqual(280);
+  });
+});
+
+describe('resolvePlayerPosition', () => {
+  it('pulls the player back in when the room shrinks around them', () => {
+    // stood at (280, 250) in a 350 wide room; it is now 250 wide
+    const small = RoomSchema.parse({ ...room, footprint: [[0, 0], [250, 0], [250, 300], [0, 300]] });
+    const colliders = buildColliders(resolveWalls(small), []);
+    expect(isFree([280, 250], 20, colliders)).toBe(true); // the old bug: "free", but outside
+    const p = resolvePlayerPosition([280, 250], small, colliders, 20);
+    expect(p[0]).toBeLessThanOrEqual(230);
+    expect(isFree(p, 20, colliders)).toBe(true);
+  });
+
+  it('respawns when far outside', () => {
+    const colliders = buildColliders(walls, []);
+    const p = resolvePlayerPosition([2000, 2000], room, colliders, 20);
+    expect(p[0]).toBeGreaterThan(0);
+    expect(p[0]).toBeLessThan(300);
+  });
+
+  it('leaves a valid position alone', () => {
+    expect(resolvePlayerPosition([100, 100], room, buildColliders(walls, []), 20)).toEqual([100, 100]);
   });
 });
