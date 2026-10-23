@@ -100,6 +100,8 @@ export function bridgeShelf(params: Record<string, unknown>): Part[] {
  * States: desk (bed up, desk out — default), folded (bed up, desk locked up against the bed), bed (bed down, desk underneath).
  * Params: bedWidth (140), bedLength (190), body (board + frame thickness, 12), mattress (18), baseHeight (35), baseDepth (50),
  * hinge (z of the bed hinge, default = baseDepth; body + mattress = everything folds within the base depth),
+ * housing (true → closet around the bed: full-height back + sides and a top board), housingHeight (224), topDepth (top board depth,
+ * default = baseDepth; deeper = shelf over the desk),
  * deskWidth (120), deskDepth (60), deskHeight (75), deskOffset (x of the desk centre along the wall, 0 = middle),
  * material (wood), mattressColor.
  */
@@ -112,6 +114,9 @@ export function wallBedDesk(params: Record<string, unknown>): Generated {
   const bd = num(params.baseDepth, 50);
   // hinge line (z) of the bed: at the base front by default; further back lets the folded-up stack stay within the base depth
   const h = num(params.hinge, bd);
+  const housing = params.housing === true;
+  const hh = num(params.housingHeight, 224);
+  const topD = num(params.topDepth, bd);
   const dw = num(params.deskWidth, 120);
   const dd = num(params.deskDepth, 60);
   const dh = num(params.deskHeight, 75);
@@ -133,10 +138,22 @@ export function wallBedDesk(params: Record<string, unknown>): Generated {
   parts.push(
     part('base-top', ['base'], [BW, t, bd], [0, bh - t / 2, bd / 2]),
     part('base-bottom', ['base'], [BW, t, bd], [0, t / 2, bd / 2]),
-    part('base-left', ['base'], [t, bh - 2 * t, bd], [-BW / 2 + t / 2, bh / 2, bd / 2]),
-    part('base-right', ['base'], [t, bh - 2 * t, bd], [BW / 2 - t / 2, bh / 2, bd / 2]),
-    part('base-back', ['base'], [BW - 2 * t, bh - 2 * t, 0.4], [0, bh / 2, 0.2], { material: 'white-laminate' }),
   );
+  if (housing) {
+    // closet around the bed: the bed folds up between full-height sides, in front of a back panel, under a top board
+    parts.push(
+      part('side-left', ['housing', 'side'], [t, hh, bd], [-BW / 2 + t / 2, hh / 2, bd / 2]),
+      part('side-right', ['housing', 'side'], [t, hh, bd], [BW / 2 - t / 2, hh / 2, bd / 2]),
+      part('back', ['housing', 'back'], [BW - 2 * t, hh, t], [0, hh / 2, t / 2]),
+      part('top', ['housing', 'top', 'shelf'], [BW, t, topD], [0, hh + t / 2, topD / 2]),
+    );
+  } else {
+    parts.push(
+      part('base-left', ['base'], [t, bh - 2 * t, bd], [-BW / 2 + t / 2, bh / 2, bd / 2]),
+      part('base-right', ['base'], [t, bh - 2 * t, bd], [BW / 2 - t / 2, bh / 2, bd / 2]),
+      part('base-back', ['base'], [BW - 2 * t, bh - 2 * t, 0.4], [0, bh / 2, 0.2], { material: 'white-laminate' }),
+    );
+  }
   const cub = (BW - 4 * t) / 3;
   for (let i = 1; i <= 2; i++) parts.push(part(`base-divider-${i}`, ['base'], [t, bh - 2 * t, bd - 1], [-BW / 2 + t + i * (cub + t) - t / 2, bh / 2, (bd - 1) / 2]));
   for (let i = 0; i < 3; i++) {

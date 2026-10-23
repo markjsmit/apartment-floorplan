@@ -120,3 +120,19 @@ describe('wall bed + desk, Kallax-deep', () => {
     expect(size('bed').max[2]).toBeCloseTo(30 + 190, 0);
   });
 });
+
+describe('wall bed in its closet', () => {
+  const p = { baseDepth: 39, baseHeight: 30, hinge: 31.8, housing: true, housingHeight: 224, topDepth: 60, deskWidth: 90, deskOffset: -20 };
+  const out = generators['wall-bed-desk'](p) as { parts: Part[]; states: { id: string; name: string; parts: Record<string, unknown> }[] };
+  const size = (state: string) => assetSize(out.parts, out.states.find((s) => s.id === state) as never);
+  it('swings under the top board (farthest mattress corner stays below 224)', () => {
+    const back = 1.8; // mattress back face sits on the back panel
+    const radius = Math.hypot(p.hinge - back, 190);
+    expect(p.baseHeight + radius).toBeLessThan(p.housingHeight);
+  });
+  it('keeps everything folded within the 39 cm sides, except the top shelf', () => {
+    const folded = assetSize(out.parts.filter((x) => x.id !== 'top'), out.states.find((s) => s.id === 'folded') as never);
+    expect(folded.max[2]).toBeLessThanOrEqual(39);
+    expect(size('folded').max[2]).toBeCloseTo(60, 0);
+  });
+});
