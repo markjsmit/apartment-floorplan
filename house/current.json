@@ -128,19 +128,19 @@
           730
         ],
         [
-          -110,
+          -100,
           730
         ],
         [
-          -110,
-          0
+          -100,
+          370
         ],
         [
-          -10,
-          0
+          -410,
+          370
         ],
         [
-          -10,
+          -410,
           280
         ],
         [
@@ -190,23 +190,24 @@
           "tags": [
             "sofa wall",
             "storage room wall",
-            "second bedroom wall",
-            "hallway"
+            "second bedroom wall"
           ]
         },
         {
           "id": "living.wall-4",
           "edge": 4,
           "tags": [
-            "hallway end"
+            "hallway",
+            "storage room wall",
+            "second bedroom wall"
           ]
         },
         {
           "id": "living.wall-5",
           "edge": 5,
           "tags": [
-            "hallway",
-            "back of the tall units"
+            "hallway end",
+            "master bedroom wall"
           ]
         },
         {
@@ -279,7 +280,7 @@
           "id": "living.west-window",
           "type": "window",
           "wall": "living.wall-2",
-          "offset": 535,
+          "offset": 525,
           "width": 100,
           "height": 115,
           "sill": 125,
@@ -297,8 +298,8 @@
         {
           "id": "living.bedroom2-door",
           "type": "door",
-          "wall": "living.wall-3",
-          "offset": 317,
+          "wall": "living.wall-4",
+          "offset": 10,
           "width": 83,
           "height": 211,
           "asset": "door-basic",
@@ -310,6 +311,20 @@
           "tags": [
             "second bedroom door",
             "storage room door"
+          ]
+        },
+        {
+          "id": "living.master-door",
+          "type": "door",
+          "wall": "living.wall-5",
+          "offset": 5,
+          "width": 80,
+          "height": 211,
+          "asset": "door-basic",
+          "name": "Door to the master bedroom",
+          "tags": [
+            "master bedroom door",
+            "main bedroom door"
           ]
         }
       ],
@@ -489,18 +504,18 @@
         {
           "id": "living.hall-header",
           "asset": "box",
-          "name": "Header over the hallway entrance",
+          "name": "Header over the sofa-side hallway opening",
           "tags": [
             "header",
             "hallway entrance"
           ],
           "position": [
-            -55,
+            -50,
             235,
-            400
+            370
           ],
           "params": {
-            "width": 110,
+            "width": 100,
             "depth": 20,
             "height": 35,
             "material": "white-paint"
@@ -591,7 +606,7 @@
       "assumptions": [
         {
           "path": "footprint",
-          "note": "estimated from 5 photos (sources/new house/kitchen:livingroom), using 60x60 tiles and furniture as rulers (toy sofa ~70, rocking chair ~85, coffee table ~110, L-sofa ~2.7 m) + Mark: the sofa stands against the storage room wall. Room ~6.85 x 7.3 m: the sofa wall runs from the balcony to the pillar (~3.1 m) and continues as the hallway wall behind the kitchen tall units. Hallway 1 m wide, its far end is faked. Please measure"
+          "note": "estimated from 5 photos (sources/new house/kitchen:livingroom) with 60x60 tiles + furniture as rulers, and Mark: the sofa wall (straight) is the storage room wall; the hallway starts at the kitchen passage past the pillar and goes straight on: 1st door left = second bedroom, door at the end = master bedroom; the gap between sofa wall and pillar also opens onto it. Room ~6.75 x 7.3 m, hallway ~0.9 x 4.1 m. Please measure"
         },
         {
           "path": "ceilingHeight",
@@ -635,7 +650,11 @@
         },
         {
           "path": "openings[living.bedroom2-door]",
-          "note": "faked position: storage room door off the hallway, just past the sofa wall (pink doorway in photo 1?). Walk into it to go to the storage room"
+          "note": "1st door on the left in the hallway, right after the pillar (Mark); exact spot guessed. Walk into it to go to the storage room"
+        },
+        {
+          "path": "openings[living.master-door]",
+          "note": "at the end of the hallway (Mark); the master bedroom isn't modelled yet"
         }
       ]
     }
