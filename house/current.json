@@ -18,10 +18,10 @@
       "ceiling": { "material": "white-paint" },
       "wallMaterial": "white-paint",
       "walls": [
-        { "id": "storage.wall-0", "edge": 0, "tags": ["window wall"] },
-        { "id": "storage.wall-1", "edge": 1, "tags": [] },
-        { "id": "storage.wall-2", "edge": 2, "tags": ["door wall"] },
-        { "id": "storage.wall-3", "edge": 3, "tags": [] }
+        { "id": "storage.wall-0", "edge": 0, "tags": ["back wall", "window wall"] },
+        { "id": "storage.wall-1", "edge": 1, "tags": ["right wall"] },
+        { "id": "storage.wall-2", "edge": 2, "tags": ["door wall", "entry wall"] },
+        { "id": "storage.wall-3", "edge": 3, "tags": ["left wall"] }
       ],
       "openings": [
         { "id": "storage.door", "type": "door", "wall": "storage.wall-2", "offset": 207, "width": 83, "height": 211, "asset": "door-basic", "tags": ["the door"] },
