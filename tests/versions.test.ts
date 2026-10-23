@@ -20,7 +20,8 @@ describe('version ids', () => {
 describe('roomHash', () => {
   it('ignores key order and explicit defaults', () => {
     const r = room('a');
-    const reordered = { ceilingHeight: 260, ...r, walls: [] };
+    const { ceilingHeight, ...rest } = r;
+    const reordered = { walls: [], ...rest, ceilingHeight };
     expect(roomHash(reordered)).toBe(roomHash(r));
     expect(roomHash(room('a', 250))).not.toBe(roomHash(r));
   });
@@ -33,7 +34,7 @@ describe('promote', () => {
     const res = promote(current(), s);
     expect(res.changed).toEqual(['a']);
     expect(res.conflicts).toEqual([]);
-    expect((res.house.rooms[0] as { ceilingHeight: number }).ceilingHeight).toBe(240);
+    expect(res.house.rooms[0].ceilingHeight).toBe(240);
     expect(res.house.meta.kind).toBe('current');
   });
 
@@ -45,8 +46,8 @@ describe('promote', () => {
     cur.rooms[1] = room('b', 230);
     const res = promote(cur, s);
     expect(res.conflicts).toEqual([]);
-    expect((res.house.rooms[0] as { ceilingHeight: number }).ceilingHeight).toBe(240);
-    expect((res.house.rooms[1] as { ceilingHeight: number }).ceilingHeight).toBe(230);
+    expect(res.house.rooms[0].ceilingHeight).toBe(240);
+    expect(res.house.rooms[1].ceilingHeight).toBe(230);
   });
 
   it('reports a conflict and keeps Current when both changed the same room', () => {
@@ -56,9 +57,9 @@ describe('promote', () => {
     cur.rooms[0] = room('a', 220);
     const res = promote(cur, s);
     expect(res.conflicts).toEqual(['a']);
-    expect((res.house.rooms[0] as { ceilingHeight: number }).ceilingHeight).toBe(220);
+    expect(res.house.rooms[0].ceilingHeight).toBe(220);
     const forced = promote(cur, s, { force: true });
-    expect((forced.house.rooms[0] as { ceilingHeight: number }).ceilingHeight).toBe(240);
+    expect(forced.house.rooms[0].ceilingHeight).toBe(240);
   });
 
   it('adds new rooms and removes deleted ones', () => {
