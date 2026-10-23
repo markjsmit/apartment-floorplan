@@ -103,30 +103,22 @@
         ],
         [
           575,
-          810
+          730
         ],
         [
-          -400,
-          810
+          -110,
+          730
         ],
         [
-          -400,
-          400
+          -110,
+          0
         ],
         [
-          -100,
-          400
+          -10,
+          0
         ],
         [
-          -100,
-          390
-        ],
-        [
-          -400,
-          390
-        ],
-        [
-          -400,
+          -10,
           280
         ],
         [
@@ -174,49 +166,37 @@
           "id": "living.wall-3",
           "edge": 3,
           "tags": [
-            "window wall"
+            "sofa wall",
+            "storage room wall",
+            "second bedroom wall",
+            "hallway"
           ]
         },
         {
           "id": "living.wall-4",
           "edge": 4,
           "tags": [
-            "sofa wall"
+            "hallway end"
           ]
         },
         {
           "id": "living.wall-5",
           "edge": 5,
           "tags": [
-            "hallway entrance"
+            "hallway",
+            "back of the tall units"
           ]
         },
         {
           "id": "living.wall-6",
           "edge": 6,
           "tags": [
-            "hallway",
-            "back of the sofa wall"
+            "hallway"
           ]
         },
         {
           "id": "living.wall-7",
           "edge": 7,
-          "tags": [
-            "hallway end",
-            "second bedroom wall"
-          ]
-        },
-        {
-          "id": "living.wall-8",
-          "edge": 8,
-          "tags": [
-            "hallway"
-          ]
-        },
-        {
-          "id": "living.wall-9",
-          "edge": 9,
           "tags": [
             "fridge wall",
             "tall units wall"
@@ -243,7 +223,7 @@
           "id": "living.east-window",
           "type": "window",
           "wall": "living.wall-1",
-          "offset": 725,
+          "offset": 645,
           "width": 70,
           "height": 210,
           "sill": 30,
@@ -276,8 +256,8 @@
         {
           "id": "living.west-window",
           "type": "window",
-          "wall": "living.wall-3",
-          "offset": 260,
+          "wall": "living.wall-2",
+          "offset": 535,
           "width": 100,
           "height": 115,
           "sill": 125,
@@ -286,7 +266,7 @@
             "frameMaterial": "aluminium-grey",
             "sillBoard": false
           },
-          "name": "Window by the sofa",
+          "name": "Window next to the sofa",
           "tags": [
             "sofa window",
             "view window"
@@ -295,8 +275,8 @@
         {
           "id": "living.bedroom2-door",
           "type": "door",
-          "wall": "living.wall-7",
-          "offset": 13,
+          "wall": "living.wall-3",
+          "offset": 317,
           "width": 83,
           "height": 211,
           "asset": "door-basic",
@@ -323,7 +303,7 @@
             "fridge niche"
           ],
           "against": {
-            "wall": "living.wall-9",
+            "wall": "living.wall-7",
             "offset": 0
           },
           "params": {
@@ -452,13 +432,13 @@
             "map pillar"
           ],
           "position": [
-            55,
+            27.5,
             0,
-            400
+            370
           ],
           "params": {
-            "width": 110,
-            "depth": 60,
+            "width": 55,
+            "depth": 50,
             "height": 235,
             "material": "plaster-grey"
           }
@@ -479,7 +459,7 @@
           ],
           "params": {
             "width": 150,
-            "depth": 460,
+            "depth": 420,
             "height": 35,
             "material": "white-paint"
           }
@@ -493,12 +473,12 @@
             "hallway entrance"
           ],
           "position": [
-            -50,
+            -55,
             235,
-            385
+            400
           ],
           "params": {
-            "width": 100,
+            "width": 110,
             "depth": 20,
             "height": 35,
             "material": "white-paint"
@@ -535,12 +515,12 @@
             "air conditioning"
           ],
           "position": [
-            25,
+            75,
             245,
-            460
+            420
           ],
           "params": {
-            "width": 230,
+            "width": 150,
             "depth": 1.2,
             "height": 14,
             "color": "#9c9c98"
@@ -589,7 +569,7 @@
       "assumptions": [
         {
           "path": "footprint",
-          "note": "estimated from 5 photos (sources/new house/kitchen:livingroom), 60x60 floor tiles and the front door as rulers. Kitchen/dining ~5.75 m wide, living part ~9.75 m wide incl. the sofa bay, ~8.1 m long. Sofa wall ~60 cm behind the pillar face (photo 3: the books on the chaise end sit right under the map), ~4.1 m from the balcony — please measure (or count tiles: 60 cm each). The hallway behind the sofa wall (1.1 m wide, 4 m long) is faked: only its entrances are in the photos"
+          "note": "estimated from 5 photos (sources/new house/kitchen:livingroom), using 60x60 tiles and furniture as rulers (toy sofa ~70, rocking chair ~85, coffee table ~110, L-sofa ~2.7 m) + Mark: the sofa stands against the storage room wall. Room ~6.85 x 7.3 m: the sofa wall runs from the balcony to the pillar (~3.1 m) and continues as the hallway wall behind the kitchen tall units. Hallway 1 m wide, its far end is faked. Please measure"
         },
         {
           "path": "ceilingHeight",
@@ -609,7 +589,7 @@
         },
         {
           "path": "openings[living.west-window]",
-          "note": "tilt window next to the sofa, size from photo 5"
+          "note": "tilt window on the balcony wall, right next to the sofa corner (photo 5); size from the photo"
         },
         {
           "path": "items[living.tall-units]",
@@ -625,7 +605,7 @@
         },
         {
           "path": "items[living.pillar]",
-          "note": "~110 wide, ~60 deep; map faces the balcony, octopus print faces the dining area"
+          "note": "thin wall end (~55 x 50, thinner than the rocking chair): map faces the balcony, octopus print faces the dining area; the hallway passes behind it"
         },
         {
           "path": "items[living.soffit-kitchen]",
@@ -633,7 +613,7 @@
         },
         {
           "path": "openings[living.bedroom2-door]",
-          "note": "faked: the real position of the second bedroom off the hallway is unknown. Walk into it to go to the storage room"
+          "note": "faked position: storage room door off the hallway, just past the sofa wall (pink doorway in photo 1?). Walk into it to go to the storage room"
         }
       ]
     }
