@@ -1,4 +1,5 @@
 import type { Part, Vec3 } from '../schema';
+import { placeStuff, stuffKind, stuffParts } from './stuff';
 
 // Self-built plywood shelving: side panels + inner uprights, evenly spaced shelves, thin back panel.
 // Item convention: origin back-centre on the floor, +z out of the front.
@@ -7,7 +8,8 @@ const num = (v: unknown, d: number) => (v === undefined || v === null || v === '
 
 /**
  * Params: width (x), height, depth, sections (bays side by side), shelves (inner shelves per bay, evenly spaced),
- * board (thickness, 1.8 = 18 mm plywood), back (hardboard back panel, default true), material.
+ * board (thickness, 1.8 = 18 mm plywood), back (hardboard back panel, default true), material,
+ * contents: random stuff on every level (books | boxes | bins | stuff | random | ""), seed.
  */
 export function plywoodShelving(params: Record<string, unknown>): Part[] {
   const W = num(params.width, 120);
@@ -41,6 +43,14 @@ export function plywoodShelving(params: Record<string, unknown>): Part[] {
       const y = t + k * step + (k - 1) * t + t / 2;
       parts.push(box(`shelf-${s + 1}-${k}`, ['shelf'], [bay, t, d], [x, y, zc]));
     }
+    const kind = stuffKind(params.contents);
+    if (kind) {
+      for (let k = 0; k <= shelves; k++) {
+        const y = t + k * (step + t);
+        const inside = stuffParts(kind, `bay-${s + 1}-${k}-${String(params.seed ?? '')}`, bay - 0.4, d, step);
+        parts.push(...placeStuff(inside, 0, [x, y, backT]));
+      }
+    }
   }
   if (back) parts.push({ ...box('back', ['back panel'], [W, H, backT], [0, H / 2, backT / 2]), material: 'white-laminate' });
   return parts;
@@ -50,7 +60,9 @@ export function plywoodShelving(params: Record<string, unknown>): Part[] {
  * T-shaped bridge shelf across an aisle between two KALLAX units: a board over the aisle plus a tongue on each side
  * that slides all the way into a cube (lying flat on the cube floor). Origin: back-centre of the aisle board
  * (back = against the wall). Params: aisle (width), depth, tongueLength (39 = KALLAX depth), tongueWidth (33.2,
- * fits the 33.5 cube), tongueOffset (from the back to the tongue's edge; 4.4 = KALLAX outer board + play), board, material.
+ * fits the 33.5 cube), tongueOffset (from the back to the tongue's edge; 4.4 = KALLAX outer board + play), board, material,
+ * contents (random stuff on the board and in both cubes: books | boxes | bins | stuff | random), clearance (free height
+ * above the board), cubeHeight (inside height of the cubes, 33.5), seed.
  */
 export function bridgeShelf(params: Record<string, unknown>): Part[] {
   const W = num(params.aisle, 80);
@@ -63,9 +75,20 @@ export function bridgeShelf(params: Record<string, unknown>): Part[] {
   const box = (id: string, size: Vec3, position: Vec3): Part => ({
     id, tags: ['shelf'], geometry: { type: 'box', size }, position, rotation: [0, 0, 0], material, castShadow: true, glass: false,
   });
-  return [
+  const parts = [
     box('aisle', [W, t, D], [0, t / 2, D / 2]),
     box('tongue-left', [L, t, T], [-W / 2 - L / 2, t / 2, off + T / 2]),
     box('tongue-right', [L, t, T], [W / 2 + L / 2, t / 2, off + T / 2]),
   ];
+  const kind = stuffKind(params.contents);
+  if (kind) {
+    const seed = String(params.seed ?? '');
+    // on the aisle board, fronts facing out of the wall (+z)
+    parts.push(...placeStuff(stuffParts(kind, `aisle-${seed}`, W - 1, D - 1, num(params.clearance, 33)), 0, [0, t, 0]));
+    // inside each cube on the tongues, facing the aisle: the cube's back is the tongue's far end
+    const cubeH = num(params.cubeHeight, 33.5) - t;
+    parts.push(...placeStuff(stuffParts(kind, `right-${seed}`, T - 0.6, L - 1.5, cubeH), 3, [W / 2 + L, t, off + T / 2]));
+    parts.push(...placeStuff(stuffParts(kind, `left-${seed}`, T - 0.6, L - 1.5, cubeH), 1, [-W / 2 - L, t, off + T / 2]));
+  }
+  return parts;
 }

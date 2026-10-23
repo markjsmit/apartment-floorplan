@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { generators } from '../src/model/generators';
 import { assetSize, openingParams } from '../src/model/assets';
-import { FurnitureAssetSchema } from '../src/model/schema';
+import { FurnitureAssetSchema, type Part } from '../src/model/schema';
 import { door, windowParts } from '../src/model/generators/openings';
 
 describe('door generator', () => {
@@ -68,5 +68,22 @@ describe('besta generator', () => {
   });
   it('can be open frames', () => {
     expect(Array.isArray(generators.besta({ doors: false }))).toBe(true);
+  });
+});
+
+describe('stuff on shelves', () => {
+  it('puts stuff inside both bridge-shelf cubes, within the tongue footprint', () => {
+    const parts = generators['bridge-shelf']({ aisle: 80, depth: 38, contents: 'books', seed: 't' }) as Part[];
+    const right = parts.filter((p) => p.id.startsWith('right-'));
+    const left = parts.filter((p) => p.id.startsWith('left-'));
+    expect(right.length).toBeGreaterThan(3);
+    expect(left.length).toBeGreaterThan(3);
+    for (const p of right) expect(p.position[0]).toBeGreaterThan(40);
+    for (const p of left) expect(p.position[0]).toBeLessThan(-40);
+  });
+  it('fills every compartment of the plywood shelving', () => {
+    const parts = generators['plywood-shelving']({ width: 130, height: 100, depth: 20, sections: 2, shelves: 1, contents: 'boxes' }) as Part[];
+    const bays = new Set(parts.filter((p) => p.tags.includes('contents')).map((p) => p.id.split('-').slice(0, 3).join('-')));
+    expect(bays.size).toBe(4);
   });
 });

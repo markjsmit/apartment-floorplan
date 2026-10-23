@@ -1,0 +1,14 @@
+{
+  "id": "stuff",
+  "name": "Stuff (books, boxes, bins)",
+  "tags": ["stuff", "books", "boxes", "bins", "demo", "contents"],
+  "description": "Random things to show a shelf in use: books, cardboard boxes, plastic bins, odds and ends. Fills width x depth up to height; long spaces get several kinds. Same seed = same stuff.",
+  "source": { "kind": "procedural", "generator": "stuff", "license": "self-made" },
+  "params": {
+    "width": { "default": 60, "description": "cm" },
+    "depth": { "default": 30, "description": "cm" },
+    "height": { "default": 35, "description": "free height cm" },
+    "kind": { "default": "random", "description": "books | boxes | bins | stuff | random" },
+    "seed": { "default": "", "description": "any text, changes the mix" }
+  }
+}

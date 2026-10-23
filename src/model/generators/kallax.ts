@@ -1,5 +1,6 @@
 import type { AssetState, Part, PartOverride, Vec3 } from '../schema';
 import type { Generated } from './index';
+import { placeStuff, stuffKind, stuffParts } from './stuff';
 
 // IKEA KALLAX: 1x1 is 42 x 42 cm, each extra cell adds 35 cm; depth 39 cm.
 // Outer boards 4.25 cm thick, inner dividers 1.5 cm, cells 33.5 cm inside.
@@ -41,66 +42,27 @@ function labelGrid(labels: unknown, r: number, c: number): string[] {
   return typeof cell === 'string' ? cell.split('/').map((x) => x.trim()) : [];
 }
 
-export type ContentKind = 'books' | 'boxes' | 'bins' | 'stuff';
-const CONTENT_KINDS: ContentKind[] = ['books', 'boxes', 'bins', 'stuff'];
-
 /** `contents` param → what stands in open cells (rows top → bottom): books | boxes | bins | stuff | random | "". */
-function contentGrid(contents: unknown, cols: number, rows: number): (string | null)[][] {
+function contentGrid(contents: unknown, cols: number, rows: number): ReturnType<typeof stuffKind>[][] {
   return Array.from({ length: rows }, (_, r) => {
     const row = typeof contents === 'string' ? contents : Array.isArray(contents) ? contents[r] : undefined;
     const cells = Array.isArray(row) ? row : typeof row === 'string' ? (typeof contents === 'string' ? Array(cols).fill(row) : row.split(/\s+/)) : [];
     return Array.from({ length: cols }, (_, c) => {
-      const v = String(cells[c] ?? '').trim().toLowerCase();
-      if (v === '' || v === '-' || v === 'none') return null;
-      if (v !== 'random' && !CONTENT_KINDS.includes(v as ContentKind)) throw new Error(`kallax: unknown contents "${v}" (use books, boxes, bins, stuff, random or "")`);
-      return v;
+      try {
+        return stuffKind(cells[c]);
+      } catch (e) {
+        throw new Error(`kallax: ${(e as Error).message}`);
+      }
     });
   });
 }
 
-/** Small deterministic random generator so the same cell always gets the same stuff. */
-function rng(seed: string) {
-  let h = 2166136261;
-  for (const ch of seed) h = Math.imul(h ^ ch.charCodeAt(0), 16777619);
-  return () => {
-    h = Math.imul(h ^ (h >>> 15), 2246822507);
-    h = Math.imul(h ^ (h >>> 13), 3266489909);
-    return ((h ^= h >>> 16) >>> 0) / 4294967296;
-  };
-}
-
-const BOOK_COLORS = ['#7a2e2e', '#2e4a7a', '#3d6b4a', '#c9a227', '#ece6d6', '#3a3a3a', '#8a5a9e', '#d06a3a', '#5a8fa8'];
-
-/** Things standing in an open cell whose inside starts at (x0, y0) with its front at z = front. */
-function contentParts(kind: string, prefix: string, x0: number, y0: number, front: number): Part[] {
-  const rand = rng(prefix);
-  const k = (kind === 'random' ? CONTENT_KINDS[Math.floor(rand() * CONTENT_KINDS.length)] : kind) as ContentKind;
-  const out: Part[] = [];
-  const add = (id: string, size: Vec3, position: Vec3, extra: Partial<Part>) =>
-    out.push({ id: `${prefix}-${id}`, tags: ['contents', k], geometry: { type: 'box', size }, position, rotation: [0, 0, 0], castShadow: true, glass: false, ...extra });
-  if (k === 'books') {
-    let x = x0 + 1;
-    for (let i = 0; x < x0 + CELL - 6; i++) {
-      const t = 2.2 + rand() * 2.6, h = 19 + rand() * 11, d = 14 + rand() * 9;
-      add(`book-${i}`, [t, h, d], [x + t / 2, y0 + h / 2, front - 2 - d / 2], { color: BOOK_COLORS[Math.floor(rand() * BOOK_COLORS.length)] });
-      x += t + 0.15;
-    }
-  } else if (k === 'boxes') {
-    const h1 = 10 + rand() * 6, h2 = 8 + rand() * 6;
-    add('box-1', [30, h1, 30], [x0 + CELL / 2, y0 + h1 / 2, front - 3 - 15], { color: '#b48a5a', label: { text: 'Misc', size: 2, offset: [0, 0], color: '#2b2b2b' } });
-    add('box-2', [27, h2, 27], [x0 + CELL / 2 + (rand() - 0.5) * 3, y0 + h1 + h2 / 2, front - 4 - 13.5], { color: '#c49a68' });
-  } else if (k === 'bins') {
-    add('bin', [31, 24, 34], [x0 + CELL / 2, y0 + 12, front - 2 - 17], { color: '#d9dcde' });
-  } else {
-    add('crate', [18, 12, 22], [x0 + 10, y0 + 6, front - 3 - 11], { color: '#8aa1b1' });
-    out.push({
-      id: `${prefix}-jar`, tags: ['contents', 'stuff'], geometry: { type: 'cylinder', radius: 4, height: 14, segments: 16 },
-      position: [x0 + CELL - 7, y0 + 7, front - 10], rotation: [0, 0, 0], color: '#e0c48a', castShadow: true, glass: false,
-    });
-    const h = 3 + rand() * 2;
-    add('stack', [22, h, 16], [x0 + CELL / 2, y0 + 12 + h / 2, front - 3 - 8], { color: BOOK_COLORS[Math.floor(rand() * BOOK_COLORS.length)] });
-  }
-  return out;
+/** `boxColors` param → DRÖNA colour per cell (rows top → bottom): white | black | #hex | "" (= boxColor). */
+function boxColorAt(boxColors: unknown, r: number, c: number, fallback: string): string {
+  const row = Array.isArray(boxColors) ? boxColors[r] : undefined;
+  const cells = Array.isArray(row) ? row : typeof row === 'string' ? row.split(/\s+/) : [];
+  const v = String(cells[c] ?? '').trim();
+  return v ? (BOX_COLORS[v] ?? v) : fallback;
 }
 
 export type InsertKind = 'door-left' | 'door-right' | 'drawers' | 'shelf' | 'divider' | 'box';
@@ -146,6 +108,7 @@ type Built = { parts: Part[]; closed: Record<string, PartOverride>; open: Record
  */
 export function insertParts(
   kind: InsertKind, prefix: string, x0: number, y0: number, front: number, color: string, boxColor = FABRIC, labels: string[] = [],
+  knob = false,
 ): Built {
   const box = boxMaker(color);
   const out: Built = { parts: [], closed: {}, open: {}, handles: [] };
@@ -192,9 +155,15 @@ export function insertParts(
       const bz = front - FRONT - bodyD / 2;
       const iw = CELL - 2 * PANEL - 1;
       const drawer: Part[] = [
-        box(`${id}-front`, ['drawer', 'front'], [CELL - 2 * GAP, fh, FRONT], [xc, fy, front - FRONT / 2], labelOf(labels[i], [0, -2.2])),
-        // finger slot along the top of the front
-        box(`${id}-grip`, ['drawer', 'handle'], [12, 1.4, 0.2], [xc, fy + fh / 2 - 2.2, front + 0.05], { color: SHADOW, castShadow: false }),
+        box(`${id}-front`, ['drawer', 'front'], [CELL - 2 * GAP, fh, FRONT], [xc, fy, front - FRONT / 2], labelOf(labels[i], [0, knob ? -1.8 : -2.2])),
+        knob
+          ? // small round knob ("dot") near the top of the front
+            {
+              id: `${id}-grip`, tags: ['drawer', 'handle', 'knob'], geometry: { type: 'cylinder', radius: 1.1, height: 1.6, segments: 16 },
+              position: [xc, fy + fh / 2 - 4, front + 0.8], rotation: [90, 0, 0], color, castShadow: true, glass: false,
+            }
+          : // finger slot along the top of the front
+            box(`${id}-grip`, ['drawer', 'handle'], [12, 1.4, 0.2], [xc, fy + fh / 2 - 2.2, front + 0.05], { color: SHADOW, castShadow: false }),
         box(`${id}-side-l`, ['drawer'], [1, bodyH, bodyD], [x0 + PANEL + 0.5 + 0.5, by, bz]),
         box(`${id}-side-r`, ['drawer'], [1, bodyH, bodyD], [x0 + CELL - PANEL - 1, by, bz]),
         box(`${id}-bottom`, ['drawer'], [iw, 0.6, bodyD], [xc, by - bodyH / 2 + 0.3, bz]),
@@ -269,6 +238,7 @@ const colorOf = (v: unknown) => COLORS[String(v ?? 'white')] ?? String(v);
  * - inserts: per cell, rows top → bottom (see insertGrid): door-left | door-right | drawers | shelf | divider | box
  * - labels: text tags per cell, rows top → bottom, [["Tools", ...], ...]; a drawers cell takes "Top / Bottom"
  * - contents: random stuff in open cells, like inserts: books | boxes | bins | stuff | random | "" (seed varies it)
+ * - boxColors: DRÖNA colour per cell (rows top → bottom): white | black | #hex; handles: "knob" → drawers get a small round knob
  * - boxColor: DRÖNA box colour (white | black | #hex)
  * - underframe: true → stands on a KALLAX underframe 1 cm narrower than the unit (76 under 77, 146 under 147)
  * - topRow: inside height of the top row in cm (default 33.5; the KALLAX TV bench uses 16.1)
@@ -280,6 +250,7 @@ export function kallax(params: Record<string, unknown>): Generated {
   const rows = Math.max(1, Math.round(num(params.rows, 2)));
   const color = colorOf(params.color);
   const boxColor = BOX_COLORS[String(params.boxColor ?? 'white')] ?? String(params.boxColor);
+  const knob = params.handles === 'knob';
   const frame = params.underframe === true || params.underframe === 'true';
   const topRow = num(params.topRow, CELL);
   const e = frame ? UNDERFRAME_H : 0;
@@ -316,7 +287,8 @@ export function kallax(params: Record<string, unknown>): Generated {
     row.forEach((kind, c) => {
       if (!kind || (r === 0 && Math.abs(topRow - CELL) > 0.01)) return;
       const x0 = -W / 2 + OUTER + c * (CELL + INNER);
-      built.push(insertParts(kind, `cell-${r + 1}-${c + 1}`, x0, rowY0(r), DEPTH, color, boxColor, labelGrid(params.labels, r, c)));
+      const cellBox = boxColorAt(params.boxColors, r, c, boxColor);
+      built.push(insertParts(kind, `cell-${r + 1}-${c + 1}`, x0, rowY0(r), DEPTH, color, cellBox, labelGrid(params.labels, r, c), knob));
     }),
   );
   for (const b of built) parts.push(...b.parts);
@@ -325,7 +297,9 @@ export function kallax(params: Record<string, unknown>): Generated {
   contentGrid(params.contents, cols, rows).forEach((row, r) =>
     row.forEach((kind, c) => {
       if (!kind || grid[r][c]) return;
-      parts.push(...contentParts(kind, `cell-${r + 1}-${c + 1}-${String(params.seed ?? '')}`, -W / 2 + OUTER + c * (CELL + INNER), rowY0(r), DEPTH));
+      const x0 = -W / 2 + OUTER + c * (CELL + INNER);
+      const inside = stuffParts(kind, `cell-${r + 1}-${c + 1}-${String(params.seed ?? '')}`, CELL, DEPTH - 2, CELL);
+      parts.push(...placeStuff(inside, 0, [x0 + CELL / 2, rowY0(r), 0]));
     }),
   );
 

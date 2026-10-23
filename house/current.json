@@ -118,7 +118,7 @@
         {
           "id": "storage.kallax-low",
           "asset": "ikea-kallax-112x147",
-          "params": {"cols": 4, "rows": 3, "inserts": [["drawers", "drawers", "drawers", ""], ["box", "box", "box", "box"], ["box", "box", "box", "box"]], "labels": [["Screwdrivers / Bits", "Screws / Nails", "Wall plugs / Hooks", ""], ["Power tools", "Drill", "Sanding", "Glue & tape"], ["Paint", "Plumbing", "Electrical", "Spare parts"]]},
+          "params": {"cols": 4, "rows": 3, "inserts": [["drawers", "drawers", "drawers", ""], ["box", "box", "box", "box"], ["box", "box", "box", "box"]], "labels": [["Screwdrivers / Bits", "Screws / Nails", "Wall plugs / Hooks", ""], ["Power tools", "Drill", "Sanding", "Glue & tape"], ["Paint", "Plumbing", "Electrical", "Spare parts"]], "handles": "knob", "boxColors": [[], ["black", "white", "black", "white"], ["white", "black", "white", "black"]]},
           "name": "Kallax 3x4 (lying, bottom)",
           "tags": [
             "kallax tower",
@@ -132,7 +132,7 @@
         {
           "id": "storage.kallax-high",
           "asset": "ikea-kallax-112x147",
-          "params": {"cols": 4, "rows": 3, "inserts": [["", "", "", ""], ["", "", "", ""], ["drawers", "drawers", "drawers", ""]], "contents": [["random", "random", "random", ""], ["random", "random", "random", ""], ["", "", "", ""]], "labels": [[], [], ["Pliers / Wrenches", "Hex keys / Measuring", "Cable ties / Velcro", ""]], "seed": "wall"},
+          "params": {"cols": 4, "rows": 3, "inserts": [["", "", "", ""], ["", "", "", ""], ["drawers", "drawers", "drawers", ""]], "contents": [["random", "random", "random", ""], ["random", "random", "random", ""], ["", "", "", ""]], "labels": [[], [], ["Pliers / Wrenches", "Hex keys / Measuring", "Cable ties / Velcro", ""]], "seed": "wall", "handles": "knob"},
           "name": "Kallax 3x4 (lying, top)",
           "tags": [
             "kallax tower",
@@ -147,7 +147,7 @@
         {
           "id": "storage.kallax-mid-east-low",
           "asset": "ikea-kallax-112x147",
-          "params": {"cols": 4, "rows": 3, "inserts": [["", "drawers", "drawers", "drawers"], ["box", "box", "box", "box"], ["box", "box", "box", "box"]], "labels": [["", "Power banks / Chargers", "USB-C / USB-A", "HDMI / Adapters"], ["Networking", "Extension cords", "Lamps & bulbs", "Speakers"], ["Old laptops", "Consoles", "Device boxes", "Cables (big)"]]},
+          "params": {"cols": 4, "rows": 3, "inserts": [["", "drawers", "drawers", "drawers"], ["box", "box", "box", "box"], ["box", "box", "box", "box"]], "labels": [["", "Power banks / Chargers", "USB-C / USB-A", "HDMI / Adapters"], ["Networking", "Extension cords", "Lamps & bulbs", "Speakers"], ["Old laptops", "Consoles", "Device boxes", "Cables (big)"]], "handles": "knob", "boxColors": [[], ["black", "white", "black", "white"], ["white", "black", "white", "black"]]},
           "name": "Kallax 3x4 (middle, faces the wall tower, bottom)",
           "tags": [
             "middle kallax",
@@ -164,7 +164,7 @@
         {
           "id": "storage.kallax-mid-east-high",
           "asset": "ikea-kallax-112x147",
-          "params": {"cols": 4, "rows": 3, "inserts": [["", "", "", ""], ["", "", "", ""], ["", "drawers", "drawers", "drawers"]], "contents": [["", "random", "random", "random"], ["", "random", "random", "random"], ["", "", "", ""]], "labels": [[], [], ["", "Batteries AA / AAA", "Batteries other / Remotes", "SD cards / USB sticks"]], "seed": "east"},
+          "params": {"cols": 4, "rows": 3, "inserts": [["", "", "", ""], ["", "", "", ""], ["", "drawers", "drawers", "drawers"]], "contents": [["", "random", "random", "random"], ["", "random", "random", "random"], ["", "", "", ""]], "labels": [[], [], ["", "Batteries AA / AAA", "Batteries other / Remotes", "SD cards / USB sticks"]], "seed": "east", "handles": "knob"},
           "name": "Kallax 3x4 (middle, faces the wall tower, top)",
           "tags": [
             "middle kallax",
@@ -209,7 +209,7 @@
         {
           "id": "storage.kallax-mid-west-low",
           "asset": "ikea-kallax-112x147",
-          "params": {"cols": 4, "rows": 3, "inserts": [["drawers", "drawers", "drawers", "drawers"], ["box", "box", "box", "box"], ["box", "box", "box", "box"]], "labels": [["Medicine / First aid", "Stationery / Tape", "Candles / Lighters", "Sewing / Repairs"], ["Towels", "Bedding", "Winter", "Bags"], ["Shoes", "Cleaning", "Sports", "Travel"]]},
+          "params": {"cols": 4, "rows": 3, "inserts": [["drawers", "drawers", "drawers", "drawers"], ["box", "box", "box", "box"], ["box", "box", "box", "box"]], "labels": [["Medicine / First aid", "Stationery / Tape", "Candles / Lighters", "Sewing / Repairs"], ["Towels", "Bedding", "Winter", "Bags"], ["Shoes", "Cleaning", "Sports", "Travel"]], "handles": "knob", "boxColors": [[], ["black", "white", "black", "white"], ["white", "black", "white", "black"]]},
           "name": "Kallax 3x4 (middle, faces the passage, bottom)",
           "tags": [
             "middle kallax",
@@ -226,7 +226,7 @@
         {
           "id": "storage.kallax-mid-west-high",
           "asset": "ikea-kallax-112x147",
-          "params": {"cols": 4, "rows": 3, "inserts": [["", "", "", ""], ["", "", "", ""], ["drawers", "drawers", "drawers", "drawers"]], "contents": [["random", "random", "random", "random"], ["random", "random", "random", "random"], ["", "", "", ""]], "labels": [[], [], ["Documents / Manuals", "Gift wrap / Cards", "Keys / Spare keys", "Travel kit / Toiletries"]], "seed": "west"},
+          "params": {"cols": 4, "rows": 3, "inserts": [["", "", "", ""], ["", "", "", ""], ["drawers", "drawers", "drawers", "drawers"]], "contents": [["random", "random", "random", "random"], ["random", "random", "random", "random"], ["", "", "", ""]], "labels": [[], [], ["Documents / Manuals", "Gift wrap / Cards", "Keys / Spare keys", "Travel kit / Toiletries"]], "seed": "west", "handles": "knob"},
           "name": "Kallax 3x4 (middle, faces the passage, top)",
           "tags": [
             "middle kallax",
@@ -243,14 +243,7 @@
         {
           "id": "storage.left-shelving",
           "asset": "diy-plywood-shelving",
-          "params": {
-            "width": 265,
-            "height": 224,
-            "depth": 20,
-            "sections": 4,
-            "shelves": 6,
-            "material": "wood-oak-light"
-          },
+          "params": {"width": 265, "height": 224, "depth": 20, "sections": 4, "shelves": 6, "material": "wood-oak-light", "contents": "random", "seed": "left"},
           "name": "Plywood shelving (left wall, DIY)",
           "tags": [
             "left shelving",
@@ -272,7 +265,7 @@
         {
           "id": "storage.bridge-high-1",
           "asset": "diy-bridge-shelf",
-          "params": { "aisle": 80, "depth": 38, "material": "wood-oak-light" },
+          "params": {"aisle": 80, "depth": 38, "material": "wood-oak-light", "contents": "random", "clearance": 36, "seed": "high-1"},
           "name": "Bridge shelf across the aisle (high, 1 cube deep)",
           "tags": [
             "bridge shelf",
@@ -291,7 +284,7 @@
         {
           "id": "storage.bridge-high-2",
           "asset": "diy-bridge-shelf",
-          "params": { "aisle": 80, "depth": 38, "material": "wood-oak-light" },
+          "params": {"aisle": 80, "depth": 38, "material": "wood-oak-light", "contents": "random", "clearance": 33, "seed": "high-2"},
           "name": "Bridge shelf across the aisle (high, 1 cube deep)",
           "tags": [
             "bridge shelf",
@@ -310,7 +303,7 @@
         {
           "id": "storage.bridge-low-1",
           "asset": "diy-bridge-shelf",
-          "params": { "aisle": 80, "depth": 38, "material": "wood-oak-light" },
+          "params": {"aisle": 80, "depth": 38, "material": "wood-oak-light", "contents": "random", "clearance": 40, "seed": "low-1"},
           "name": "Bridge shelf across the aisle (lowest: 74 cm tall space below for big items)",
           "tags": [
             "bridge shelf",
@@ -329,7 +322,7 @@
         {
           "id": "storage.bridge-mid",
           "asset": "diy-bridge-shelf",
-          "params": { "aisle": 80, "depth": 38, "material": "wood-oak-light" },
+          "params": {"aisle": 80, "depth": 38, "material": "wood-oak-light", "contents": "random", "clearance": 33, "seed": "mid"},
           "name": "Bridge shelf across the aisle (arm height, 1 cube deep)",
           "tags": [
             "bridge shelf",
@@ -401,6 +394,21 @@
               "note": "18 mm plywood light wood (unpainted plywood, oak-veneer look for now) from the high shelf to the 270 ceiling; stops suitcases sliding into the aisle and stiffens the structure"
             }
           ]
+        },
+        {
+          "id": "storage.stuff-mid-top", "asset": "stuff", "params": { "width": 78, "depth": 56, "height": 42, "seed": "mid-top" },
+          "name": "Stuff on the high shelf (over the middle tower)", "tags": ["stuff", "demo"],
+          "position": [142, 225.8, 211.2], "rotation": 180
+        },
+        {
+          "id": "storage.stuff-wall-top", "asset": "stuff", "params": { "width": 38, "depth": 56, "height": 42, "seed": "wall-top" },
+          "name": "Stuff on the high shelf (over the wall tower)", "tags": ["stuff", "demo"],
+          "position": [280.5, 225.8, 211.2], "rotation": 180
+        },
+        {
+          "id": "storage.stuff-entry-shelf", "asset": "stuff", "params": { "width": 298, "depth": 38, "height": 42, "seed": "entry" },
+          "name": "Stuff on the entry-wall shelf", "tags": ["stuff", "demo"],
+          "position": [150, 225.8, 300], "rotation": 180
         },
         {
           "id": "storage.top-deck",

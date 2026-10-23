@@ -4,6 +4,7 @@ import { besta } from './besta';
 import { bridgeShelf, plywoodShelving } from './diy';
 import { group } from './group';
 import { suitcase } from './suitcase';
+import { stuff } from './stuff';
 import { door, windowParts } from './openings';
 import { kitchenCounter, kitchenIsland, kitchenTall, kitchenWallCabinet, plainBox, slidingDoor, trackLight } from './builtins';
 
@@ -25,6 +26,7 @@ export const generators: Record<string, Generator> = {
   'plywood-shelving': plywoodShelving,
   'bridge-shelf': bridgeShelf,
   suitcase,
+  stuff,
   group: (params) => group(params, generators),
   door,
   window: windowParts,
