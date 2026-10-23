@@ -1,8 +1,9 @@
 import fs from 'node:fs';
 import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 import { buildBundle, type Bundle, type RawFile, type SiteConfig } from '../src/model/bundle';
 
-export const ROOT = path.resolve(import.meta.dirname, '..');
+export const ROOT = fileURLToPath(new URL('..', import.meta.url));
 
 function walk(dir: string): string[] {
   if (!fs.existsSync(dir)) return [];

@@ -2,9 +2,10 @@
 //                    | save "<name>" [--from <id>] | drop-suggestion
 import fs from 'node:fs';
 import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 import { makeSuggestion, promote, slugify, versionIdFromPath, versionPath, type RawHouse } from '../src/model/versions';
 
-const root = path.resolve(import.meta.dirname, '..');
+const root = fileURLToPath(new URL('..', import.meta.url));
 const abs = (rel: string) => path.join(root, rel);
 const read = (id: string): RawHouse => JSON.parse(fs.readFileSync(abs(versionPath(id)), 'utf8'));
 const write = (id: string, h: RawHouse) => {
