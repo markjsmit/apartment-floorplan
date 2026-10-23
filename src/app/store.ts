@@ -9,6 +9,7 @@ import type { CameraPose, Person, View } from './url';
 export const EYE_HEIGHT: Record<Person, number> = { mark: 188, heli: 151 };
 
 export type Toast = { id: number; text: string };
+export type LookingAt = Selection & { point: [number, number, number]; distance: number };
 
 type State = {
   bundle: Bundle | null;
@@ -23,6 +24,8 @@ type State = {
   timeOfDay: number;
   dayOfYear: number;
   camera: CameraPose;
+  /** What's under the crosshair in first-person view (point in room cm, distance in cm). */
+  lookingAt: LookingAt | null;
   /** Bumped to ask the controls to (re)spawn the player in the current room. */
   spawnTick: number;
   lookAtTarget: { id: string; tick: number } | null;
@@ -43,6 +46,7 @@ type Actions = {
   setTime: (h: number) => void;
   setDay: (d: number) => void;
   setCamera: (c: CameraPose) => void;
+  setLookingAt: (l: LookingAt | null) => void;
   lookAt: (id: string) => void;
   toast: (text: string) => void;
 };
@@ -66,6 +70,7 @@ export const useStore = create<State & Actions>((set, get) => ({
   timeOfDay: 14,
   dayOfYear: todayOfYear(),
   camera: { x: 0, z: 0, yaw: 0, pitch: 0 },
+  lookingAt: null,
   spawnTick: 0,
   lookAtTarget: null,
   toasts: [],
@@ -129,6 +134,7 @@ export const useStore = create<State & Actions>((set, get) => ({
   setTime: (timeOfDay) => set({ timeOfDay }),
   setDay: (dayOfYear) => set({ dayOfYear }),
   setCamera: (camera) => set({ camera }),
+  setLookingAt: (lookingAt) => set({ lookingAt }),
   lookAt: (id) => {
     if (get().selectById(id)) set({ lookAtTarget: { id, tick: Date.now() } });
   },

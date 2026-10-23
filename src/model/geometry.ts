@@ -151,3 +151,15 @@ export function polygonCentroid(poly: Vec2[]): Vec2 {
   }
   return [cx / (6 * a), cz / (6 * a)];
 }
+
+const WINDS = ['north', 'north-east', 'east', 'south-east', 'south', 'south-west', 'west', 'north-west'];
+
+/** Compass bearing (0 = north, clockwise) and 8-wind name for a camera yaw (0 looks towards -z, positive turns left). */
+export function facing(yawDeg: number, northAngle: number): { bearing: number; compass: string } {
+  const f: Vec2 = [-Math.sin(yawDeg * DEG), -Math.cos(yawDeg * DEG)];
+  const a = northAngle * DEG;
+  const n = f[0] * Math.sin(a) + f[1] * -Math.cos(a);
+  const e = f[0] * Math.cos(a) + f[1] * Math.sin(a);
+  const bearing = (Math.round(Math.atan2(e, n) / DEG) + 360) % 360;
+  return { bearing, compass: WINDS[Math.round(bearing / 45) % 8] };
+}

@@ -1,33 +1,33 @@
 import { useEffect } from 'react';
 import { fetchBundle, reportEvent, reportUiState, subscribe, type Command } from '../data/client';
 import { mergeBundle } from '../model/bundle';
-import { findById } from '../model/lookup';
-import { currentHouse, EYE_HEIGHT, useStore } from './store';
+import { currentHouse, currentRoom, EYE_HEIGHT, useStore } from './store';
+import { facing } from '../model/geometry';
+import { labelOf } from './labels';
 import { claimActiveTab, createReporter, isActiveTab } from './uiState';
 
 type StoreState = ReturnType<typeof useStore.getState>;
 
 /** What Claude reads from .ui-state/ui-state.json. */
 function buildUiState(s: StoreState) {
-  const house = currentHouse(s);
   const sel = s.selection;
-  let selection = null;
-  if (sel && house) {
-    const f = findById(house, sel.id);
-    const tags = f?.kind === 'item' ? f.item.tags : f?.kind === 'opening' ? f.opening.tags : f?.kind === 'wall' ? f.wall.tags : [];
-    const name = f?.kind === 'item' ? (f.item.name ?? f.item.asset) : f?.kind === 'opening' ? (f.opening.name ?? f.opening.type) : sel.kind;
-    selection = { ...sel, name, tags, ...(f?.kind === 'item' ? { asset: f.item.asset } : {}) };
-  }
+  const selection = sel ? { ...sel, ...labelOf(s, sel) } : null;
+  const look = s.lookingAt;
+  const lookingAt = look ? { ...look, ...labelOf(s, look) } : null;
+  const room = currentRoom(s);
   return {
     room: s.roomId,
     version: s.versionId,
     selection,
     camera: {
+      // room-local cm; yaw 0 looks towards -z, positive turns left
       position: [Math.round(s.camera.x), EYE_HEIGHT[s.person], Math.round(s.camera.z)],
       yaw: Math.round(s.camera.yaw),
       pitch: Math.round(s.camera.pitch),
+      facing: room ? facing(s.camera.yaw, room.northAngle) : null,
       view: s.view,
     },
+    lookingAt,
     person: s.person,
     timeOfDay: s.timeOfDay,
     dayOfYear: s.dayOfYear,

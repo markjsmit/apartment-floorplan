@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { fetchBundle } from '../data/client';
 import { Viewer } from '../scene/Viewer';
 import { Banner } from './Banner';
+import { Hud } from './Hud';
 import { InfoPanel } from './InfoPanel';
 import { Tabs } from './Tabs';
 import { Toolbar } from './Toolbar';
@@ -53,6 +54,7 @@ export function App() {
       <Viewer />
       <Tabs showVersions={!mobile} />
       {!mobile && <Toolbar />}
+      {!mobile && <Hud />}
       <InfoPanel compact={mobile} />
       <Banner />
       {touch && <TouchControls />}

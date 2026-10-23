@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { RoomSchema, ItemSchema, OpeningSchema } from '../src/model/schema';
 import {
-  compassOf, pointInPolygon, resolveItemTransform, resolveWalls, roomBounds, wallSegments,
+  compassOf, facing, pointInPolygon, resolveItemTransform, resolveWalls, roomBounds, wallSegments,
 } from '../src/model/geometry';
 
 const square = (northAngle = 0) =>
@@ -106,5 +106,17 @@ describe('room helpers', () => {
     expect(roomBounds(square())).toEqual({ minX: 0, maxX: 300, minZ: 0, maxZ: 300 });
     expect(pointInPolygon([150, 150], square().footprint)).toBe(true);
     expect(pointInPolygon([350, 150], square().footprint)).toBe(false);
+  });
+});
+
+describe('facing', () => {
+  it('turns a yaw into a compass bearing using the room northAngle', () => {
+    // yaw 0 looks towards -z, which is north when northAngle = 0
+    expect(facing(0, 0)).toEqual({ bearing: 0, compass: 'north' });
+    // positive yaw turns left: from north that is west
+    expect(facing(90, 0)).toEqual({ bearing: 270, compass: 'west' });
+    expect(facing(-45, 0)).toEqual({ bearing: 45, compass: 'north-east' });
+    // north points to +x: looking down -z is then west
+    expect(facing(0, 90).compass).toBe('west');
   });
 });

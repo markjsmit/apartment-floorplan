@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useRef } from 'react';
 import { useFrame, useThree } from '@react-three/fiber';
+import { Raycaster, Vector2 } from 'three';
 import type { Room, Vec2 } from '../model/schema';
 import { resolveWalls } from '../model/geometry';
 import { placeRoomItems } from '../model/placement';
@@ -7,6 +8,9 @@ import { buildColliders, findFreeSpawn, isFree, moveWithCollision, resolvePlayer
 import { findById } from '../model/lookup';
 import { currentHouse, EYE_HEIGHT, useStore } from '../app/store';
 import { held, lookDelta, type MoveKey } from './input';
+import { selectableFromHit } from './selectable';
+
+const CENTER = new Vector2(0, 0);
 
 const DEG = Math.PI / 180;
 const WALK = 140; // cm/s
@@ -25,7 +29,7 @@ const KEYS: Record<string, MoveKey> = {
  *  trackpad and touch drags look around. Always mounted;
  *  drives the camera only in first-person view. */
 export function PlayerControls({ room, driveCamera }: { room: Room; driveCamera: boolean }) {
-  const { camera, gl } = useThree();
+  const { camera, gl, scene } = useThree();
   const bundle = useStore((s) => s.bundle);
   const itemStates = useStore((s) => s.itemStates);
   const person = useStore((s) => s.person);
@@ -163,6 +167,26 @@ export function PlayerControls({ room, driveCamera }: { room: Room; driveCamera:
     };
   }, [gl]);
 
+  // what's under the crosshair (screen centre), so Mark can say "this" without clicking
+  const raycaster = useMemo(() => new Raycaster(), []);
+  const updateLookingAt = () => {
+    const store = useStore.getState();
+    if (!driveCamera) {
+      if (store.lookingAt) store.setLookingAt(null);
+      return;
+    }
+    raycaster.setFromCamera(CENTER, camera);
+    const hit = raycaster.intersectObjects(scene.children, true).find((h) => h.object.visible && selectableFromHit(h.object));
+    const sel = hit ? selectableFromHit(hit.object) : null;
+    const next = hit && sel
+      ? { ...sel, point: [Math.round(hit.point.x), Math.round(hit.point.y), Math.round(hit.point.z)] as [number, number, number], distance: Math.round(hit.distance) }
+      : null;
+    const prev = store.lookingAt;
+    const moved = !prev || !next || prev.id !== next.id || prev.part !== next.part
+      || Math.hypot(prev.point[0] - next.point[0], prev.point[1] - next.point[1], prev.point[2] - next.point[2]) > 5;
+    if (moved) store.setLookingAt(next);
+  };
+
   useFrame((state, rawDt) => {
     const dt = Math.min(rawDt, 0.1);
     const p = pose.current;
@@ -203,6 +227,7 @@ export function PlayerControls({ room, driveCamera }: { room: Room; driveCamera:
       if (Math.abs(c.x - x) > 1 || Math.abs(c.z - z) > 1 || Math.abs(c.yaw - yaw) > 1 || Math.abs(c.pitch - pitch) > 1) {
         useStore.getState().setCamera({ x, z, yaw, pitch });
       }
+      updateLookingAt();
     }
   });
 

@@ -46,6 +46,7 @@ export function PartsView({ id, kind, asset, parts, stateId, position, rotationD
         <PartMesh
           key={p.id}
           ownerId={id}
+          kind={kind}
           part={p}
           pose={partTransform(p, state?.parts[p.id])}
           interactive={interactivePart(asset, p.id)}
@@ -58,8 +59,9 @@ export function PartsView({ id, kind, asset, parts, stateId, position, rotationD
   );
 }
 
-function PartMesh({ ownerId, part, pose, interactive, registerAsPart, onClick, onDoubleClick }: {
+function PartMesh({ ownerId, kind, part, pose, interactive, registerAsPart, onClick, onDoubleClick }: {
   ownerId: string;
+  kind: SelectionKind;
   part: Part;
   pose: ReturnType<typeof partTransform>;
   interactive: boolean;
@@ -106,7 +108,7 @@ function PartMesh({ ownerId, part, pose, interactive, registerAsPart, onClick, o
       onDoubleClick={onDoubleClick}
       onPointerOver={interactive ? (e) => { e.stopPropagation(); document.body.style.cursor = 'pointer'; } : undefined}
       onPointerOut={interactive ? () => { document.body.style.cursor = ''; } : undefined}
-      userData={{ selectable: ownerId }}
+      userData={{ selectable: { kind, id: ownerId, part: part.id } }}
     />
   );
 }

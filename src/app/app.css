@@ -79,3 +79,9 @@ button { font: inherit; color: inherit; }
 .touchpad .right { grid-column: 3; grid-row: 2; }
 
 .app.mobile .tab { padding: 8px 12px; }
+
+/* Crosshair + position readout */
+.crosshair { position: absolute; left: 50%; top: 50%; width: 10px; height: 10px; margin: -5px 0 0 -5px; border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, 0.9); box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.35); pointer-events: none; }
+.hud { position: absolute; bottom: 92px; left: 50%; transform: translateX(-50%); font-size: 12.5px; background: var(--panel);
+  border: 1px solid var(--line); border-radius: 999px; padding: 4px 12px; white-space: nowrap; pointer-events: none; }

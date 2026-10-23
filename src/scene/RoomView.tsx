@@ -36,6 +36,7 @@ export function RoomView({ room, showCeiling }: { room: Room; showCeiling: boole
         rotation={[-Math.PI / 2, 0, 0]}
         material={getMaterial(bundle, room.floor.material)}
         receiveShadow
+        userData={{ selectable: { kind: 'floor', id: `${room.id}.floor`, part: null } }}
         onClick={pick({ kind: 'floor', id: `${room.id}.floor`, part: null })}
       />
       <mesh
@@ -47,6 +48,7 @@ export function RoomView({ room, showCeiling }: { room: Room; showCeiling: boole
         visible={showCeiling}
         castShadow
         receiveShadow
+        userData={{ selectable: { kind: 'ceiling', id: `${room.id}.ceiling`, part: null } }}
         onClick={showCeiling ? pick({ kind: 'ceiling', id: `${room.id}.ceiling`, part: null }) : undefined}
       />
 
@@ -62,7 +64,7 @@ export function RoomView({ room, showCeiling }: { room: Room; showCeiling: boole
         const t = w.thickness;
         const yaw = Math.atan2(-w.dir[1], w.dir[0]);
         return (
-          <group key={w.id} ref={registerObject(w.id)} onClick={pick({ kind: 'wall', id: w.id, part: null })}>
+          <group key={w.id} ref={registerObject(w.id)} userData={{ selectable: { kind: 'wall', id: w.id, part: null } }} onClick={pick({ kind: 'wall', id: w.id, part: null })}>
             {wallSegments(w, room.openings, room.ceilingHeight).map((r0) => {
               // run the end pieces past the corners so neighbouring walls overlap (no light leaks)
               const r = {
