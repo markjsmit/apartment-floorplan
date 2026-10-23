@@ -84,6 +84,16 @@
           "name": "Suitcase board (entry wall, wall to wall, 2 cubes deep)", "tags": ["top deck", "suitcase shelf", "wall to wall board", "bracing"],
           "position": [150, 224, 227],
           "assumptions": [{ "path": "params", "note": "18 mm plywood on top of everything along the entry wall: 2 Kallax cubes deep (73), wall to wall, ties the left storage + both towers together; 44 cm free above for suitcases lying flat; 300 cm > a 244 sheet, so 2 pieces joined over a tower" }]
+        },
+        {
+          "id": "storage.suitcase-1", "asset": "suitcase", "params": { "color": "#2f4a6d" },
+          "name": "Large suitcase (above the aisle)", "tags": ["suitcase", "demo"],
+          "position": [221, 225.8, 246]
+        },
+        {
+          "id": "storage.suitcase-2", "asset": "suitcase", "params": { "color": "#4a4d52" },
+          "name": "Large suitcase (above the passage)", "tags": ["suitcase", "demo"],
+          "position": [62, 225.8, 246]
         }
       ],
       "assumptions": [

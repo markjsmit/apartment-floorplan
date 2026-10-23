@@ -1,0 +1,13 @@
+{
+  "id": "suitcase",
+  "name": "Suitcase (lying flat)",
+  "tags": ["suitcase", "luggage", "trolley"],
+  "description": "Hard-shell trolley suitcase lying flat, for planning storage. Large check-in ≈ 78 x 52 x 31, medium ≈ 68 x 46 x 28, cabin ≈ 55 x 40 x 20 (typical sizes, e.g. Samsonite).",
+  "source": { "kind": "procedural", "generator": "suitcase", "license": "self-made", "notes": "Generic sizes; replace with Mark's own suitcases when measured." },
+  "params": {
+    "length": { "default": 78, "description": "cm, wheels at the +x end" },
+    "width": { "default": 52, "description": "cm (z)" },
+    "thickness": { "default": 31, "description": "cm (lying height)" },
+    "color": { "default": "#2f4a6d", "description": "#hex" }
+  }
+}
