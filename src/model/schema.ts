@@ -55,6 +55,8 @@ export const ItemSchema = z
       .optional(),
     state: z.string().optional(),
     selectWhole: z.boolean().default(true),
+    // ids of items this one is meant to sit inside / interlock with (no overlap warning), e.g. a shelf tongue in a KALLAX cube
+    allowOverlap: z.array(z.string()).default([]),
     assumptions,
   })
   .refine((i) => (i.position === undefined) !== (i.against === undefined), {

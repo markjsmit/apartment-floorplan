@@ -103,6 +103,7 @@ export function sanityCheck(bundle: Bundle): Issue[] {
           const ay = [a.position[1] + a.size.min[1], a.position[1] + a.size.max[1]];
           const by = [b.position[1] + b.size.min[1], b.position[1] + b.size.max[1]];
           if (ay[1] <= by[0] + TOLERANCE || by[1] <= ay[0] + TOLERANCE) continue;
+          if (a.item.allowOverlap.includes(b.item.id) || b.item.allowOverlap.includes(a.item.id)) continue;
           if (quadsOverlap(footprintCorners(a, TOLERANCE), footprintCorners(b, TOLERANCE))) {
             warn(`${where(a.item.id)}: overlaps ${b.item.id}`);
           }

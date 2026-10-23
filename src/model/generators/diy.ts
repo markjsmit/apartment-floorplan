@@ -45,3 +45,27 @@ export function plywoodShelving(params: Record<string, unknown>): Part[] {
   if (back) parts.push({ ...box('back', ['back panel'], [W, H, backT], [0, H / 2, backT / 2]), material: 'white-laminate' });
   return parts;
 }
+
+/**
+ * T-shaped bridge shelf across an aisle between two KALLAX units: a board over the aisle plus a tongue on each side
+ * that slides all the way into a cube (lying flat on the cube floor). Origin: back-centre of the aisle board
+ * (back = against the wall). Params: aisle (width), depth, tongueLength (39 = KALLAX depth), tongueWidth (33.2,
+ * fits the 33.5 cube), tongueOffset (from the back to the tongue's edge; 4.4 = KALLAX outer board + play), board, material.
+ */
+export function bridgeShelf(params: Record<string, unknown>): Part[] {
+  const W = num(params.aisle, 80);
+  const D = num(params.depth, 38);
+  const L = num(params.tongueLength, 39);
+  const T = num(params.tongueWidth, 33.2);
+  const off = num(params.tongueOffset, 4.4);
+  const t = num(params.board, 1.8);
+  const material = String(params.material ?? 'birch-ply');
+  const box = (id: string, size: Vec3, position: Vec3): Part => ({
+    id, tags: ['shelf'], geometry: { type: 'box', size }, position, rotation: [0, 0, 0], material, castShadow: true, glass: false,
+  });
+  return [
+    box('aisle', [W, t, D], [0, t / 2, D / 2]),
+    box('tongue-left', [L, t, T], [-W / 2 - L / 2, t / 2, off + T / 2]),
+    box('tongue-right', [L, t, T], [W / 2 + L / 2, t / 2, off + T / 2]),
+  ];
+}

@@ -90,6 +90,14 @@ describe('sanityCheck', () => {
     expect(msgs.join('\n')).toMatch(/r\.a.*overlaps.*r\.b/);
   });
 
+  it('skips overlaps an item allows (a shelf tongue inside a cube)', () => {
+    const msgs = check([room({ items: [
+      { id: 'r.a', asset: 'box', position: [150, 0, 100], allowOverlap: ['r.b'] },
+      { id: 'r.b', asset: 'box', position: [170, 0, 110] },
+    ] })]);
+    expect(msgs.join('\n')).not.toMatch(/overlaps/);
+  });
+
   it('treats overlaps as warnings (chairs under tables are fine) but bad refs as errors', () => {
     const found = issues([room({ items: [
       { id: 'r.a', asset: 'box', position: [150, 0, 100] },

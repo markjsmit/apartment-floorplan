@@ -289,105 +289,77 @@
         },
         {
           "id": "storage.bridge-high-1",
-          "asset": "box",
-          "params": {
-            "width": 80,
-            "height": 1.8,
-            "depth": 38,
-            "material": "wood-oak-light"
-          },
+          "asset": "diy-bridge-shelf",
+          "params": { "aisle": 80, "depth": 38, "material": "wood-oak-light" },
           "name": "Bridge shelf across the aisle (high, 1 cube deep)",
           "tags": [
             "bridge shelf",
             "aisle shelf"
           ],
-          "position": [
-            221,
-            186.25,
-            262
-          ],
+          "position": [221, 186.25, 300],
+          "rotation": 180,
+          "allowOverlap": ["storage.kallax-high", "storage.kallax-mid-east-high"],
           "assumptions": [
             {
               "path": "params",
-              "note": "18 mm plywood light wood (unpainted plywood, oak-veneer look for now), T-shaped: tongues slide into the Kallax cubes on both sides (screwed from inside), 38 cm from the entry wall"
+              "note": "18 mm plywood light wood (unpainted plywood, oak-veneer look for now), T-shaped: tongues go all the way into the Kallax cubes on both sides, flat on the cube floor (screwed from inside), 38 cm from the entry wall"
             }
           ]
         },
         {
           "id": "storage.bridge-high-2",
-          "asset": "box",
-          "params": {
-            "width": 80,
-            "height": 1.8,
-            "depth": 38,
-            "material": "wood-oak-light"
-          },
+          "asset": "diy-bridge-shelf",
+          "params": { "aisle": 80, "depth": 38, "material": "wood-oak-light" },
           "name": "Bridge shelf across the aisle (high, 1 cube deep)",
           "tags": [
             "bridge shelf",
             "aisle shelf"
           ],
-          "position": [
-            221,
-            151.25,
-            262
-          ],
+          "position": [221, 151.25, 300],
+          "rotation": 180,
+          "allowOverlap": ["storage.kallax-high", "storage.kallax-mid-east-high"],
           "assumptions": [
             {
               "path": "params",
-              "note": "18 mm plywood light wood (unpainted plywood, oak-veneer look for now), T-shaped: tongues slide into the Kallax cubes on both sides (screwed from inside), 38 cm from the entry wall"
+              "note": "18 mm plywood light wood (unpainted plywood, oak-veneer look for now), T-shaped: tongues go all the way into the Kallax cubes on both sides, flat on the cube floor (screwed from inside), 38 cm from the entry wall"
             }
           ]
         },
         {
           "id": "storage.bridge-low-1",
-          "asset": "box",
-          "params": {
-            "width": 80,
-            "height": 1.8,
-            "depth": 38,
-            "material": "wood-oak-light"
-          },
+          "asset": "diy-bridge-shelf",
+          "params": { "aisle": 80, "depth": 38, "material": "wood-oak-light" },
           "name": "Bridge shelf across the aisle (lowest: 74 cm tall space below for big items)",
           "tags": [
             "bridge shelf",
             "aisle shelf"
           ],
-          "position": [
-            221,
-            74.25,
-            262
-          ],
+          "position": [221, 74.25, 300],
+          "rotation": 180,
+          "allowOverlap": ["storage.kallax-low", "storage.kallax-mid-east-low"],
           "assumptions": [
             {
               "path": "params",
-              "note": "18 mm plywood light wood (unpainted plywood, oak-veneer look for now), T-shaped: tongues slide into the Kallax cubes on both sides (screwed from inside), 38 cm from the entry wall"
+              "note": "18 mm plywood light wood (unpainted plywood, oak-veneer look for now), T-shaped: tongues go all the way into the Kallax cubes on both sides, flat on the cube floor (screwed from inside), 38 cm from the entry wall"
             }
           ]
         },
         {
           "id": "storage.bridge-mid",
-          "asset": "box",
-          "params": {
-            "width": 80,
-            "height": 1.8,
-            "depth": 38,
-            "material": "wood-oak-light"
-          },
+          "asset": "diy-bridge-shelf",
+          "params": { "aisle": 80, "depth": 38, "material": "wood-oak-light" },
           "name": "Bridge shelf across the aisle (arm height, 1 cube deep)",
           "tags": [
             "bridge shelf",
             "aisle shelf"
           ],
-          "position": [
-            221,
-            116.25,
-            262
-          ],
+          "position": [221, 116.25, 300],
+          "rotation": 180,
+          "allowOverlap": ["storage.kallax-high", "storage.kallax-mid-east-high"],
           "assumptions": [
             {
               "path": "params",
-              "note": "18 mm plywood light wood (unpainted plywood, oak-veneer look for now), T-shaped: tongues slide into the Kallax cubes on both sides (screwed from inside), 38 cm from the entry wall"
+              "note": "18 mm plywood light wood (unpainted plywood, oak-veneer look for now), T-shaped: tongues go all the way into the Kallax cubes on both sides, flat on the cube floor (screwed from inside), 38 cm from the entry wall"
             }
           ]
         },

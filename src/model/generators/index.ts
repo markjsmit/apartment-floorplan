@@ -1,7 +1,7 @@
 import type { AssetState, FurnitureAsset, Part } from '../schema';
 import { kallax, kallaxDesk, kallaxInsert, kallaxUnderframe, lackShelf, swivelChair } from './kallax';
 import { besta } from './besta';
-import { plywoodShelving } from './diy';
+import { bridgeShelf, plywoodShelving } from './diy';
 import { group } from './group';
 import { suitcase } from './suitcase';
 import { door, windowParts } from './openings';
@@ -23,6 +23,7 @@ export const generators: Record<string, Generator> = {
   'swivel-chair': swivelChair,
   besta,
   'plywood-shelving': plywoodShelving,
+  'bridge-shelf': bridgeShelf,
   suitcase,
   group: (params) => group(params, generators),
   door,

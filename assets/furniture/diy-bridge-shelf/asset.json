@@ -1,0 +1,16 @@
+{
+  "id": "diy-bridge-shelf",
+  "name": "DIY bridge shelf (T-shaped, across a KALLAX aisle)",
+  "tags": ["bridge shelf", "shelf", "plywood", "diy", "kallax"],
+  "description": "One plywood board over the aisle plus a tongue on each side that slides all the way into a KALLAX cube and lies flat on its floor (screwed from inside), so the cube stays fully usable. Origin: back-centre of the aisle board, back against the wall.",
+  "source": { "kind": "procedural", "generator": "bridge-shelf", "license": "self-made", "notes": "KALLAX cube inside 33.5 x 33.5, depth 39; tongue 33.2 wide." },
+  "params": {
+    "aisle": { "default": 80, "description": "cm between the two KALLAX fronts" },
+    "depth": { "default": 38, "description": "cm from the wall (aisle board)" },
+    "tongueLength": { "default": 39, "description": "cm into each cube" },
+    "tongueWidth": { "default": 33.2, "description": "cm" },
+    "tongueOffset": { "default": 4.4, "description": "cm from the back to the tongue edge" },
+    "board": { "default": 1.8, "description": "thickness cm" },
+    "material": { "default": "birch-ply", "description": "texture id" }
+  }
+}
