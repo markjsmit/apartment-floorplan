@@ -33,3 +33,37 @@ describe('measureBetween (snapped to one axis)', () => {
     expect(m.to).toEqual([-150, 100, 0]);
   });
 });
+
+describe('measureBetween with furniture boxes', () => {
+  const closet = { min: [40, 0, 100] as [number, number, number], max: [140, 201, 160] as [number, number, number] };
+
+  it('ceiling then closet side: snaps to the top of the closet', () => {
+    const m = measureBetween(
+      { point: [300, 270, 300], normal: [0, -1, 0], roomSurface: true },
+      { point: [90, 150, 160], normal: [0, 0, 1], box: closet },
+    );
+    expect(m.axis).toBe('y');
+    expect(m.distance).toBeCloseTo(69);
+    // the line stands on the closet top, going up to the ceiling
+    expect(m.from).toEqual([90, 201, 160]);
+    expect(m.to).toEqual([90, 270, 160]);
+  });
+
+  it('closet first, then ceiling: the room surface decides the axis', () => {
+    const m = measureBetween(
+      { point: [90, 150, 160], normal: [0, 0, 1], box: closet },
+      { point: [300, 270, 300], normal: [0, -1, 0], roomSurface: true },
+    );
+    expect(m.axis).toBe('y');
+    expect(m.distance).toBeCloseTo(69);
+  });
+
+  it('wall then closet front: snaps to the closet side facing the wall', () => {
+    const m = measureBetween(
+      { point: [0, 100, 130], normal: [1, 0, 0], roomSurface: true },
+      { point: [90, 100, 160], normal: [0, 0, 1], box: closet },
+    );
+    expect(m.axis).toBe('x');
+    expect(m.distance).toBeCloseTo(40);
+  });
+});

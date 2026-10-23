@@ -5,6 +5,10 @@ import { Raycaster, Vector2, type Material, type Mesh } from 'three';
 import type { Vec3 } from '../model/schema';
 import { currentMeasurement, formatCm, useMeasure } from '../app/measureStore';
 import { selectableFromHit } from './selectable';
+import { currentRoom, useStore } from '../app/store';
+import { resolveWalls } from '../model/geometry';
+import { footprintCorners, placeRoomItems } from '../model/placement';
+import type { Box } from '../model/measure';
 
 const CLICK_SLOP = 6;
 
@@ -13,6 +17,22 @@ export function Measure() {
   const { camera, scene, gl } = useThree();
   const active = useMeasure((s) => s.active);
   const points = useMeasure((s) => s.points);
+
+  // furniture bounds in room space, so a click anywhere on a closet can measure from its top
+  const itemBox = (id: string): Box | undefined => {
+    const s = useStore.getState();
+    const room = currentRoom(s);
+    if (!room || !s.bundle) return undefined;
+    const p = placeRoomItems(room, s.bundle.furniture, resolveWalls(room), s.itemStates).find((x) => x.item.id === id);
+    if (!p) return undefined;
+    const corners = footprintCorners(p);
+    const xs = corners.map((c) => c[0]);
+    const zs = corners.map((c) => c[1]);
+    return {
+      min: [Math.min(...xs), p.position[1] + p.size.min[1], Math.min(...zs)],
+      max: [Math.max(...xs), p.position[1] + p.size.max[1], Math.max(...zs)],
+    };
+  };
 
   // points belong to one room (this component is keyed by room)
   useEffect(() => useMeasure.getState().reset(), []);
@@ -53,10 +73,13 @@ export function Measure() {
       });
       if (!hit?.face) return;
       const n = hit.face.normal.clone().transformDirection(hit.object.matrixWorld);
+      const target = selectableFromHit(hit.object);
       useMeasure.getState().add({
         point: [hit.point.x, hit.point.y, hit.point.z],
         normal: [n.x, n.y, n.z],
-        target: selectableFromHit(hit.object),
+        target,
+        box: target?.kind === 'item' ? itemBox(target.id) : undefined,
+        roomSurface: target?.kind === 'wall' || target?.kind === 'floor' || target?.kind === 'ceiling',
       });
     };
     host.addEventListener('pointerdown', pdown, true);
