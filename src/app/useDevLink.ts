@@ -4,9 +4,19 @@ import { mergeBundle } from '../model/bundle';
 import { currentHouse, currentRoom, EYE_HEIGHT, useStore } from './store';
 import { facing } from '../model/geometry';
 import { labelOf } from './labels';
+import { currentMeasurement, useMeasure } from './measureStore';
 import { claimActiveTab, createReporter, isActiveTab } from './uiState';
 
 type StoreState = ReturnType<typeof useStore.getState>;
+
+/** The measuring tool's last result: along one room axis, from the first clicked surface. */
+function measurementState(s: StoreState) {
+  const { active, points } = useMeasure.getState();
+  const m = currentMeasurement(points);
+  if (!active || !m) return null;
+  const end = (i: number) => ({ ...(points[i].target ? { id: points[i].target!.id, ...labelOf(s, points[i].target!) } : {}), point: points[i].point.map(Math.round) });
+  return { axis: m.axis, distanceCm: Math.round(m.distance), from: end(0), to: end(1), line: [m.from.map(Math.round), m.to.map(Math.round)] };
+}
 
 /** What Claude reads from .ui-state/ui-state.json. */
 function buildUiState(s: StoreState) {
@@ -28,6 +38,7 @@ function buildUiState(s: StoreState) {
       view: s.view,
     },
     lookingAt,
+    measurement: measurementState(s),
     person: s.person,
     timeOfDay: s.timeOfDay,
     dayOfYear: s.dayOfYear,
@@ -95,8 +106,10 @@ export function useDevLink() {
     window.addEventListener('focus', activate);
     window.addEventListener('pointerdown', activate);
     const unsub = useStore.subscribe(update);
+    const unsubMeasure = useMeasure.subscribe(() => update(useStore.getState()));
     return () => {
       unsub();
+      unsubMeasure();
       window.removeEventListener('focus', activate);
       window.removeEventListener('pointerdown', activate);
     };

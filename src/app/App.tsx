@@ -4,6 +4,7 @@ import { Viewer } from '../scene/Viewer';
 import { Banner } from './Banner';
 import { Hud } from './Hud';
 import { InfoPanel } from './InfoPanel';
+import { MeasurePanel } from './MeasurePanel';
 import { Tabs } from './Tabs';
 import { Toolbar } from './Toolbar';
 import { TouchControls } from './TouchControls';
@@ -56,10 +57,11 @@ export function App() {
       {!mobile && <Toolbar />}
       {!mobile && <Hud />}
       <InfoPanel compact={mobile} />
+      {!mobile && <MeasurePanel />}
       <Banner />
       {touch && <TouchControls />}
       {!mobile && !touch && (
-        <div className="help">↑↓ walk · ←→ turn · W A S D walk + step sideways · two-finger swipe / E C look · click select · double-click change state · Esc deselect</div>
+        <div className="help">↑↓ walk · ←→ turn · W A S D walk + step sideways · two-finger swipe / E C look · click select · double-click change state · M measure · Esc deselect</div>
       )}
       {!bundle && <div className="loading">Loading…</div>}
     </div>

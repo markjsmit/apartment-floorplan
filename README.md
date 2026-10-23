@@ -15,6 +15,8 @@ A small 3D walk-through of our new apartment, designed room by room by talking t
 | Select | click | tap |
 | Change state (fold bed, open door) | double-click the moving part | double-tap |
 
+📏 Measure (or M): click two surfaces to get the straight distance between them.
+
 Tabs on top switch rooms (and, on desktop, versions). Mark / Heli switches eye height. 🗺 shows the plan from above.
 
 ## Working on it

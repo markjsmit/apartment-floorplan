@@ -8,6 +8,7 @@ import { RoomView } from './RoomView';
 import { Lighting } from './Lighting';
 import { PlayerControls } from './PlayerControls';
 import { TopDownCamera } from './TopDownCamera';
+import { Measure } from './Measure';
 import { sceneObjects } from './registry';
 
 declare global {
@@ -93,6 +94,7 @@ export function Viewer() {
             <RoomView key={room.id} room={room} showCeiling={view === 'first-person'} />
             <Lighting room={room} mobile={mobile} />
             <PlayerControls room={room} driveCamera={view === 'first-person'} />
+            <Measure key={`measure-${room.id}`} />
             {view === 'top-down' && <TopDownCamera room={room} />}
           </>
         )}

@@ -14,7 +14,9 @@ Spec: `docs/superpowers/specs/2026-10-23-apartment-designer-design.md`.
    "it", "here". It has the open room + version, the selection (id, kind, part, name, tags), camera (position cm,
    yaw/pitch, `facing` compass), **`lookingAt`** (what's under the crosshair: id, kind, part, name, hit `point`,
    `distance` cm), person, time of day and the view-only furniture states. "What I'm looking at" = `lookingAt`;
-   "this" = `selection` if set, else `lookingAt`. `.ui-state/events.log` has recent clicks/tab switches.
+   "this" = `selection` if set, else `lookingAt`. **`measurement`** (when Mark uses 📏 Measure): `from`/`to` surfaces
+   (id, name), `axis` (x, y = height, z) and `distanceCm`, measured straight out from the first surface along one
+   axis. `.ui-state/events.log` has recent clicks/tab switches.
 3. **Edit the version Mark has open** (`version` in ui-state → file in `house/`). Never edit Current while he's
    looking at the AI suggestion, or the other way round.
 4. If `house/current.json` still has the placeholder `meta.location` (assumed), ask Mark which city — it drives sun angles.
