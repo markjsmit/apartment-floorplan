@@ -9,7 +9,7 @@ import { buildHouseColliders, resolveHousePosition, roomAt } from '../model/hous
 import { toWorld, type Layout } from '../model/layout';
 import { findById } from '../model/lookup';
 import { EYE_HEIGHT, useStore } from '../app/store';
-import { held, ignoresKeys, lookDelta, moveKeyFor } from './input';
+import { held, ignoresKeys, lookDelta, moveKeyFor, touchLook } from './input';
 import { selectableFromHit } from './selectable';
 
 const CENTER = new Vector2(0, 0);
@@ -153,8 +153,9 @@ export function PlayerControls({ house, layout, driveCamera }: { house: House; l
     };
     const pmove = (e: PointerEvent) => {
       if (!last || e.pointerId !== last.id) return;
-      lookDelta.yaw += (e.clientX - last.x) * 0.25;
-      lookDelta.pitch += (e.clientY - last.y) * 0.25;
+      const look = touchLook(e.clientX - last.x, e.clientY - last.y);
+      lookDelta.yaw += look.yaw;
+      lookDelta.pitch += look.pitch;
       last = { x: e.clientX, y: e.clientY, id: e.pointerId };
     };
     const pup = (e: PointerEvent) => {

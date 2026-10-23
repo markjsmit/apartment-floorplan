@@ -21,3 +21,11 @@ export function ignoresKeys(el: { tagName: string; type?: string } | null): bool
   if (el.tagName === 'TEXTAREA') return true;
   return el.tagName === 'INPUT' && el.type !== 'range' && el.type !== 'checkbox' && el.type !== 'button';
 }
+
+// degrees per pixel of finger movement
+const TOUCH_SPEED = 0.25;
+
+/** Look change for a touch drag: the view turns the way the finger moves (swipe right = turn right, up = look up). */
+export function touchLook(dx: number, dy: number): { yaw: number; pitch: number } {
+  return { yaw: -dx * TOUCH_SPEED, pitch: -dy * TOUCH_SPEED };
+}

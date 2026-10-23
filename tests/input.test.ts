@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { moveKeyFor, ignoresKeys } from '../src/scene/input';
+import { moveKeyFor, ignoresKeys, touchLook } from '../src/scene/input';
 
 describe('moveKeyFor', () => {
   it('uses the physical key, so WASD works on a Hebrew keyboard layout too', () => {
@@ -27,5 +27,14 @@ describe('ignoresKeys', () => {
     expect(ignoresKeys({ tagName: 'INPUT', type: 'text' })).toBe(true);
     expect(ignoresKeys({ tagName: 'INPUT', type: 'range' })).toBe(false);
     expect(ignoresKeys({ tagName: 'BUTTON' })).toBe(false);
+  });
+});
+
+describe('touchLook', () => {
+  it('turns the way the finger moves, like phone games', () => {
+    const right = touchLook(100, 0);
+    expect(right.yaw).toBeLessThan(0); // negative yaw = turn right
+    const up = touchLook(0, -100); // screen y goes down, so up is negative
+    expect(up.pitch).toBeGreaterThan(0); // look up
   });
 });
