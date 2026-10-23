@@ -103,11 +103,11 @@
         ],
         [
           575,
-          950
+          810
         ],
         [
           -400,
-          950
+          810
         ],
         [
           -400,
@@ -243,7 +243,7 @@
           "id": "living.east-window",
           "type": "window",
           "wall": "living.wall-1",
-          "offset": 865,
+          "offset": 725,
           "width": 70,
           "height": 210,
           "sill": 30,
@@ -277,7 +277,7 @@
           "id": "living.west-window",
           "type": "window",
           "wall": "living.wall-3",
-          "offset": 400,
+          "offset": 260,
           "width": 100,
           "height": 115,
           "sill": 125,
@@ -458,7 +458,7 @@
           ],
           "params": {
             "width": 110,
-            "depth": 120,
+            "depth": 60,
             "height": 235,
             "material": "plaster-grey"
           }
@@ -479,7 +479,7 @@
           ],
           "params": {
             "width": 150,
-            "depth": 520,
+            "depth": 460,
             "height": 35,
             "material": "white-paint"
           }
@@ -537,7 +537,7 @@
           "position": [
             25,
             245,
-            520
+            460
           ],
           "params": {
             "width": 230,
@@ -589,7 +589,7 @@
       "assumptions": [
         {
           "path": "footprint",
-          "note": "estimated from 5 photos (sources/new house/kitchen:livingroom), 60x60 floor tiles, front door and sneakers as rulers. Kitchen/dining ~5.75 m wide, living part ~9.75 m wide incl. the sofa bay, ~9.5 m long; sofa wall ~1.2 m behind the pillar face and ~5.5 m from the balcony. The hallway behind the sofa wall (1.1 m wide, 4 m long) is faked: only its entrances are in the photos. Please measure"
+          "note": "estimated from 5 photos (sources/new house/kitchen:livingroom), 60x60 floor tiles and the front door as rulers. Kitchen/dining ~5.75 m wide, living part ~9.75 m wide incl. the sofa bay, ~8.1 m long. Sofa wall ~60 cm behind the pillar face (photo 3: the books on the chaise end sit right under the map), ~4.1 m from the balcony — please measure (or count tiles: 60 cm each). The hallway behind the sofa wall (1.1 m wide, 4 m long) is faked: only its entrances are in the photos"
         },
         {
           "path": "ceilingHeight",
@@ -625,7 +625,7 @@
         },
         {
           "path": "items[living.pillar]",
-          "note": "~110 wide, ~120 deep (from the sofa wall line to the map face); map faces the balcony, octopus print faces the dining area"
+          "note": "~110 wide, ~60 deep; map faces the balcony, octopus print faces the dining area"
         },
         {
           "path": "items[living.soffit-kitchen]",
