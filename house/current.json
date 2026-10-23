@@ -12,7 +12,7 @@
       "name": "Storage room",
       "tags": ["storage room", "second bedroom", "guest room", "office"],
       "footprint": [[0, 0], [300, 0], [300, 300], [0, 300]],
-      "ceilingHeight": 250,
+      "ceilingHeight": 270,
       "northAngle": 0,
       "floor": { "material": "laminate-oak" },
       "ceiling": { "material": "white-paint" },
@@ -44,7 +44,7 @@
       ],
       "assumptions": [
         { "path": "footprint", "note": "assumed 3 x 3 m (on the safe side: the main bedroom photo measures ~3.05 x ~4.1 m and this room is smaller)" },
-        { "path": "ceilingHeight", "note": "~250 cm, estimated from the main bedroom photo" },
+        { "path": "ceilingHeight", "note": "270 assumed for the whole apartment (living-room photos say 2.70-2.85; the bedroom photo said ~2.50) — please measure" },
         { "path": "openings[storage.door].width", "note": "standard 83 cm door, 10 cm from the west corner" },
         { "path": "openings[storage.window]", "note": "size guessed (a bit wider than the door), opposite the door; style (grey aluminium, no sill board) from the main bedroom photo" }
       ]
@@ -130,7 +130,7 @@
       ],
       "assumptions": [
         { "path": "footprint", "note": "estimated from 5 photos (sources/new house/kitchen:livingroom), 60x60 floor tiles + 100 cm front door as rulers. Kitchen/dining part ~5.75 m wide, living part ~9 m wide incl. the bay west of the pillar, ~7.8 m long. The bay width (sofa wall 3.3 m) and the total length are the shakiest — please measure" },
-        { "path": "ceilingHeight", "note": "photos say 265-290 (door as ruler); the bedroom photo said ~250 — please measure" },
+        { "path": "ceilingHeight", "note": "270 assumed for the whole apartment: photos say 2.70-2.85 (counter and front door as rulers) — please measure" },
         { "path": "openings[living.front-door]", "note": "assumed the front door (steel: the magnets stick). ~100 x 213, from photo 3" },
         { "path": "openings[living.balcony-door]", "note": "width ~3 m guessed: only part of it is in photo 4" },
         { "path": "openings[living.east-window]", "note": "tall narrow window next to the balcony corner, size from photo 4 (half hidden by a TV)" },
