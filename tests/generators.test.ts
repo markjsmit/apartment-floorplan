@@ -87,3 +87,23 @@ describe('stuff on shelves', () => {
     expect(bays.size).toBe(4);
   });
 });
+
+describe('wall bed + desk', () => {
+  const out = generators['wall-bed-desk']({}) as { parts: Part[]; states: { id: string; name: string; parts: Record<string, unknown> }[] };
+  const size = (state: string) => assetSize(out.parts, out.states.find((s) => s.id === state) as never);
+  it('stands up against the wall with the desk out by default', () => {
+    expect(out.states[0].id).toBe('desk');
+    const s = size('desk');
+    expect(s.max[1]).toBeGreaterThan(35 + 190 - 1); // bed standing
+    expect(s.max[2]).toBeCloseTo(50 + 60, 0); // desk sticks out 60 past the base
+  });
+  it('lies down at base height with the mattress on top', () => {
+    const s = size('bed');
+    expect(s.max[2]).toBeCloseTo(50 + 190, 0);
+    expect(s.max[1]).toBeLessThan(35 + 12 + 18 + 1);
+    expect(s.min[1]).toBeGreaterThanOrEqual(-0.01);
+  });
+  it('folds the desk flat against the bed', () => {
+    expect(size('folded').max[2]).toBeLessThan(50 + 10);
+  });
+});

@@ -1,0 +1,20 @@
+{
+  "id": "diy-wall-bed-desk",
+  "name": "DIY wall bed + fold-down desk on a storage base",
+  "tags": ["wall bed", "murphy bed", "guest bed", "desk", "fold-down desk", "diy", "bed"],
+  "description": "Self-built: low storage base (pillows, bedding), a board with an existing bed frame top + mattress that stands up against the wall and swings down onto gravity fold-out legs, and a desk hinged on the bed's underside with its own legs. Double-click the bed or desk: desk out → desk folded → guest bed. Both need a lock (bed up, desk folded) so nothing can fall.",
+  "source": { "kind": "procedural", "generator": "wall-bed-desk", "license": "self-made", "notes": "Mark's design; bed frame 140 x 190 (his existing frame top). Hinges, locks and legs are placeholders for real hardware." },
+  "params": {
+    "bedWidth": { "default": 140, "description": "cm (along the wall)" },
+    "bedLength": { "default": 190, "description": "cm" },
+    "body": { "default": 12, "description": "board + bed frame thickness cm" },
+    "mattress": { "default": 18, "description": "cm" },
+    "baseHeight": { "default": 35, "description": "storage base height = bed height when down" },
+    "baseDepth": { "default": 50, "description": "cm from the wall" },
+    "deskWidth": { "default": 120, "description": "cm" },
+    "deskDepth": { "default": 60, "description": "cm" },
+    "deskHeight": { "default": 75, "description": "cm (top surface)" },
+    "material": { "default": "wood-oak-light", "description": "texture id" },
+    "mattressColor": { "default": "#e8e6e1", "description": "#hex" }
+  }
+}

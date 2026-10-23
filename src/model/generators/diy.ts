@@ -1,4 +1,5 @@
-import type { Part, Vec3 } from '../schema';
+import type { Part, PartOverride, Vec3 } from '../schema';
+import type { Generated } from './index';
 import { placeStuff, stuffKind, stuffParts } from './stuff';
 
 // Self-built plywood shelving: side panels + inner uprights, evenly spaced shelves, thin back panel.
@@ -91,4 +92,100 @@ export function bridgeShelf(params: Record<string, unknown>): Part[] {
     parts.push(...placeStuff(stuffParts(kind, `left-${seed}`, T - 0.6, L - 1.5, cubeH), 1, [-W / 2 - L, t, off + T / 2]));
   }
   return parts;
+}
+
+/**
+ * Wall bed (Murphy style) on a low storage base, with a fold-down desk hinged on the bed's underside.
+ * Origin: back-centre on the floor at the wall; local x along the wall, +z into the room.
+ * States: desk (bed up, desk out — default), folded (bed up, desk locked up against the bed), bed (bed down, desk underneath).
+ * Params: bedWidth (140), bedLength (190), body (board + frame thickness, 12), mattress (18), baseHeight (35), baseDepth (50),
+ * deskWidth (120), deskDepth (60), deskHeight (75), material (wood), mattressColor.
+ */
+export function wallBedDesk(params: Record<string, unknown>): Generated {
+  const W = num(params.bedWidth, 140);
+  const L = num(params.bedLength, 190);
+  const Tb = num(params.body, 12);
+  const M = num(params.mattress, 18);
+  const bh = num(params.baseHeight, 35);
+  const bd = num(params.baseDepth, 50);
+  const dw = num(params.deskWidth, 120);
+  const dd = num(params.deskDepth, 60);
+  const dh = num(params.deskHeight, 75);
+  const dt = 2.5;
+  const t = 1.8;
+  const material = String(params.material ?? 'wood-oak-light');
+  const mattressColor = String(params.mattressColor ?? '#e8e6e1');
+  const part = (id: string, tags: string[], size: Vec3, position: Vec3, extra: Partial<Part> = {}): Part => ({
+    id, tags, geometry: { type: 'box', size }, position, rotation: [0, 0, 0], material, castShadow: true, glass: false, ...extra,
+  });
+  const BW = W + 2 * t; // base outer width
+  const parts: Part[] = [];
+  const desk: Record<string, PartOverride> = {};
+  const folded: Record<string, PartOverride> = {};
+  const bed: Record<string, PartOverride> = {};
+
+  // base: open cubbies for pillows and bedding, facing the room
+  parts.push(
+    part('base-top', ['base'], [BW, t, bd], [0, bh - t / 2, bd / 2]),
+    part('base-bottom', ['base'], [BW, t, bd], [0, t / 2, bd / 2]),
+    part('base-left', ['base'], [t, bh - 2 * t, bd], [-BW / 2 + t / 2, bh / 2, bd / 2]),
+    part('base-right', ['base'], [t, bh - 2 * t, bd], [BW / 2 - t / 2, bh / 2, bd / 2]),
+    part('base-back', ['base'], [BW - 2 * t, bh - 2 * t, 0.4], [0, bh / 2, 0.2], { material: 'white-laminate' }),
+  );
+  const cub = (BW - 4 * t) / 3;
+  for (let i = 1; i <= 2; i++) parts.push(part(`base-divider-${i}`, ['base'], [t, bh - 2 * t, bd - 1], [-BW / 2 + t + i * (cub + t) - t / 2, bh / 2, (bd - 1) / 2]));
+  for (let i = 0; i < 3; i++) {
+    const x = -BW / 2 + t + cub / 2 + i * (cub + t);
+    parts.push(part(`pillow-${i + 1}`, ['pillow', 'bedding'], [cub - 4, bh - 2 * t - 6, bd - 8], [x, t + (bh - 2 * t - 6) / 2, (bd - 8) / 2 + 2], {
+      material: undefined, color: ['#f4f2ec', '#dfe6ee', '#ece4d6'][i],
+    }));
+  }
+
+  // bed (up pose = part pose): hinge along the base's front top edge; "bed" turns it +90° about x into the room
+  const pivot: Vec3 = [0, bh, bd];
+  parts.push(
+    part('bed-board', ['bed', 'board'], [W, Tb, L], [0, bh + L / 2, bd - Tb / 2], { pivot, rotation: [-90, 0, 0] }),
+    part('mattress', ['bed', 'mattress'], [W - 2, M, L - 2], [0, bh + L / 2, bd - Tb - M / 2], { pivot, rotation: [-90, 0, 0], material: undefined, color: mattressColor }),
+    part('bed-lock', ['bed', 'lock'], [6, 6, 3], [W / 2 - 6, bh + L - 8, bd + 1.5], { pivot, rotation: [-90, 0, 0], material: undefined, color: '#3a3a3a' }),
+  );
+  // boxes are sized lying down (width, thickness, length); -90° about x stands them up, "bed" turns them back flat
+  for (const id of ['bed-board', 'mattress', 'bed-lock']) bed[id] = { rotation: [0, 0, 0] };
+  // bed legs (fold down by gravity): down = vertical on the floor; up = folded flat against the board
+  const legAt = [L - 6, L / 2];
+  legAt.forEach((zl, i) => {
+    for (const side of [-1, 1]) {
+      const id = `bed-leg-${i + 1}${side < 0 ? 'l' : 'r'}`;
+      const x = side * (W / 2 - 6);
+      parts.push(part(id, ['bed', 'leg'], [4, bh, 4], [x, bh + zl - bh / 2, bd + 2]));
+      bed[id] = { position: [x, bh / 2, bd + zl] };
+    }
+  });
+
+  // desk (out = part pose), hinged on the bed's underside at desk height
+  parts.push(part('desk-top', ['desk', 'desktop'], [dw, dt, dd], [0, dh - dt / 2, bd + dd / 2]));
+  const deskFoldedCentre: Vec3 = [0, dh + dd / 2, bd + dt / 2];
+  folded['desk-top'] = { position: deskFoldedCentre, rotation: [-90, 0, 0] };
+  // bed: folded desk turned with the bed about the bed hinge
+  const turn = ([x, y, z]: Vec3): Vec3 => [x, bh - (z - bd), bd + (y - bh)];
+  bed['desk-top'] = { position: turn(deskFoldedCentre), rotation: [0, 0, 0] };
+  const legH = dh - dt;
+  for (const side of [-1, 1]) {
+    const id = `desk-leg-${side < 0 ? 'l' : 'r'}`;
+    const x = side * (dw / 2 - 4);
+    parts.push(part(id, ['desk', 'leg'], [4, legH, 4], [x, legH / 2, bd + dd - 4]));
+    const foldedLeg: Vec3 = [x, dh + dd - 4 - legH / 2, bd + dt + 2.5];
+    folded[id] = { position: foldedLeg };
+    bed[id] = { position: turn(foldedLeg), rotation: [90, 0, 0] };
+  }
+
+  const interactions = ['bed-board', 'mattress', 'desk-top'].map((p) => ({ part: p, action: 'cycleStates' as const }));
+  return {
+    parts,
+    states: [
+      { id: 'desk', name: 'Desk out (bed up)', parts: desk },
+      { id: 'folded', name: 'Desk folded (bed up)', parts: folded },
+      { id: 'bed', name: 'Guest bed (down)', parts: bed },
+    ],
+    interactions,
+  };
 }
