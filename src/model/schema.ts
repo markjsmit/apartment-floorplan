@@ -140,6 +140,10 @@ export const PartSchema = z.object({
   color: z.string().optional(),
   castShadow: z.boolean().default(true),
   glass: z.boolean().default(false),
+  // text tag on the part's front (+z) face, e.g. a label on a box or drawer; offset = [x, y] from the face centre (cm)
+  label: z
+    .object({ text: z.string(), size: z.number().default(2.4), offset: Vec2Schema.default([0, 0]), color: z.string().default('#2b2b2b') })
+    .optional(),
 });
 export type Part = z.infer<typeof PartSchema>;
 

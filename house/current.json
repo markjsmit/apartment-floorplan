@@ -118,10 +118,7 @@
         {
           "id": "storage.kallax-low",
           "asset": "ikea-kallax-112x147",
-          "params": {
-            "cols": 4,
-            "rows": 3
-          },
+          "params": {"cols": 4, "rows": 3, "inserts": [["drawers", "drawers", "drawers", ""], ["box", "box", "box", "box"], ["box", "box", "box", "box"]], "labels": [["Screwdrivers / Bits", "Screws / Nails", "Wall plugs / Hooks", ""], ["Power tools", "Drill", "Sanding", "Glue & tape"], ["Paint", "Plumbing", "Electrical", "Spare parts"]]},
           "name": "Kallax 3x4 (lying, bottom)",
           "tags": [
             "kallax tower",
@@ -135,10 +132,7 @@
         {
           "id": "storage.kallax-high",
           "asset": "ikea-kallax-112x147",
-          "params": {
-            "cols": 4,
-            "rows": 3
-          },
+          "params": {"cols": 4, "rows": 3, "inserts": [["", "", "", ""], ["", "", "", ""], ["drawers", "drawers", "drawers", ""]], "contents": [["random", "random", "random", ""], ["random", "random", "random", ""], ["", "", "", ""]], "labels": [[], [], ["Pliers / Wrenches", "Hex keys / Measuring", "Cable ties / Velcro", ""]], "seed": "wall"},
           "name": "Kallax 3x4 (lying, top)",
           "tags": [
             "kallax tower",
@@ -153,10 +147,7 @@
         {
           "id": "storage.kallax-mid-east-low",
           "asset": "ikea-kallax-112x147",
-          "params": {
-            "cols": 4,
-            "rows": 3
-          },
+          "params": {"cols": 4, "rows": 3, "inserts": [["", "drawers", "drawers", "drawers"], ["box", "box", "box", "box"], ["box", "box", "box", "box"]], "labels": [["", "Power banks / Chargers", "USB-C / USB-A", "HDMI / Adapters"], ["Networking", "Extension cords", "Lamps & bulbs", "Speakers"], ["Old laptops", "Consoles", "Device boxes", "Cables (big)"]]},
           "name": "Kallax 3x4 (middle, faces the wall tower, bottom)",
           "tags": [
             "middle kallax",
@@ -173,10 +164,7 @@
         {
           "id": "storage.kallax-mid-east-high",
           "asset": "ikea-kallax-112x147",
-          "params": {
-            "cols": 4,
-            "rows": 3
-          },
+          "params": {"cols": 4, "rows": 3, "inserts": [["", "", "", ""], ["", "", "", ""], ["", "drawers", "drawers", "drawers"]], "contents": [["", "random", "random", "random"], ["", "random", "random", "random"], ["", "", "", ""]], "labels": [[], [], ["", "Batteries AA / AAA", "Batteries other / Remotes", "SD cards / USB sticks"]], "seed": "east"},
           "name": "Kallax 3x4 (middle, faces the wall tower, top)",
           "tags": [
             "middle kallax",
@@ -221,10 +209,7 @@
         {
           "id": "storage.kallax-mid-west-low",
           "asset": "ikea-kallax-112x147",
-          "params": {
-            "cols": 4,
-            "rows": 3
-          },
+          "params": {"cols": 4, "rows": 3, "inserts": [["drawers", "drawers", "drawers", "drawers"], ["box", "box", "box", "box"], ["box", "box", "box", "box"]], "labels": [["Medicine / First aid", "Stationery / Tape", "Candles / Lighters", "Sewing / Repairs"], ["Towels", "Bedding", "Winter", "Bags"], ["Shoes", "Cleaning", "Sports", "Travel"]]},
           "name": "Kallax 3x4 (middle, faces the passage, bottom)",
           "tags": [
             "middle kallax",
@@ -241,10 +226,7 @@
         {
           "id": "storage.kallax-mid-west-high",
           "asset": "ikea-kallax-112x147",
-          "params": {
-            "cols": 4,
-            "rows": 3
-          },
+          "params": {"cols": 4, "rows": 3, "inserts": [["", "", "", ""], ["", "", "", ""], ["drawers", "drawers", "drawers", "drawers"]], "contents": [["random", "random", "random", "random"], ["random", "random", "random", "random"], ["", "", "", ""]], "labels": [[], [], ["Documents / Manuals", "Gift wrap / Cards", "Keys / Spare keys", "Travel kit / Toiletries"]], "seed": "west"},
           "name": "Kallax 3x4 (middle, faces the passage, top)",
           "tags": [
             "middle kallax",

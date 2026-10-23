@@ -3,7 +3,7 @@ import { FurnitureAssetSchema, ItemSchema, type AssetState, type FurnitureAsset 
 import {
   assetSize, findState, generatorError, initialState, interactivePart, nextState, resolveAsset, resolveParams,
 } from '../src/model/assets';
-import { insertGrid } from '../src/model/generators/kallax';
+import { insertGrid, kallax } from '../src/model/generators/kallax';
 import { placeItem } from '../src/model/placement';
 import { resolveWalls } from '../src/model/geometry';
 import { sanityCheck } from '../src/model/sanity';
@@ -218,5 +218,27 @@ describe('IKEA Israel KALLAX presets on disk', () => {
     const a = bundle.furniture['ikea-kallax'];
     const s = size(resolveAsset(a, resolveParams(a, { params: { cols: 2, rows: 4 } })));
     expect([Math.round(s.w), Math.round(s.h), Math.round(s.d)]).toEqual([77, 147, 39]);
+  });
+});
+
+describe('kallax labels and contents', () => {
+  const g = (p: Record<string, unknown>) => {
+    const out = kallax({ cols: 2, rows: 2, ...p });
+    return Array.isArray(out) ? out : out.parts;
+  };
+  it('puts labels on box fronts and on each drawer', () => {
+    const parts = g({ inserts: [['drawers', 'box'], ['', '']], labels: [['Screws / Bits', 'Camping']] });
+    expect(parts.find((p) => p.id === 'cell-1-1-drawer-1-front')?.label?.text).toBe('Screws');
+    expect(parts.find((p) => p.id === 'cell-1-1-drawer-2-front')?.label?.text).toBe('Bits');
+    expect(parts.find((p) => p.id === 'cell-1-2-box')?.label?.text).toBe('Camping');
+  });
+  it('fills only open cells with contents, the same way every time', () => {
+    const parts = g({ inserts: [['drawers', ''], ['', '']], contents: 'books' });
+    expect(parts.some((p) => p.id.startsWith('cell-1-1-') && p.tags.includes('contents'))).toBe(false);
+    expect(parts.filter((p) => p.id.startsWith('cell-1-2-') && p.tags.includes('books')).length).toBeGreaterThan(5);
+    expect(g({ contents: 'random' }).map((p) => p.id)).toEqual(g({ contents: 'random' }).map((p) => p.id));
+  });
+  it('rejects unknown contents', () => {
+    expect(() => g({ contents: 'cats' })).toThrow(/unknown contents/);
   });
 });

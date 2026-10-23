@@ -1,5 +1,6 @@
 import { useRef } from 'react';
 import { useFrame, type ThreeEvent } from '@react-three/fiber';
+import { Text } from '@react-three/drei';
 import { Euler, Quaternion, Vector3, type Mesh } from 'three';
 import type { FurnitureAsset, Part, Vec3 } from '../model/schema';
 import { findState, interactivePart, partTransform } from '../model/assets';
@@ -8,6 +9,7 @@ import type { SelectionKind } from '../model/lookup';
 import { partGeometry } from './cmGeometry';
 import { getMaterial } from './materials';
 import { registerObject } from './registry';
+import labelFont from '../../assets/fonts/inter-latin-600-normal.woff?url';
 
 const DEG = Math.PI / 180;
 // Pointer moves bigger than this (px) between down and up are drags (looking around), not clicks.
@@ -109,6 +111,32 @@ function PartMesh({ ownerId, kind, part, pose, interactive, registerAsPart, onCl
       onPointerOver={interactive ? (e) => { e.stopPropagation(); document.body.style.cursor = 'pointer'; } : undefined}
       onPointerOut={interactive ? () => { document.body.style.cursor = ''; } : undefined}
       userData={{ selectable: { kind, id: ownerId, part: part.id } }}
-    />
+    >
+      {part.label && <Label label={part.label} faceZ={faceDepth(part) / 2} />}
+    </mesh>
+  );
+}
+
+const noRaycast = () => null;
+
+function faceDepth(part: Part): number {
+  const g = part.geometry;
+  return g?.type === 'box' ? g.size[2] : g?.type === 'cylinder' ? g.radius * 2 : 0;
+}
+
+/** Paper tag with text on the part's front face; a child of the part, so it moves with drawers and doors. */
+function Label({ label, faceZ }: { label: NonNullable<Part['label']>; faceZ: number }) {
+  const { text, size, offset, color } = label;
+  const w = Math.max(size * 3, text.length * size * 0.58 + size);
+  return (
+    <group position={[offset[0], offset[1], faceZ]}>
+      <mesh position={[0, 0, 0.03]} raycast={noRaycast}>
+        <planeGeometry args={[w, size * 1.7]} />
+        <meshStandardMaterial color="#f7f4ea" roughness={0.9} />
+      </mesh>
+      <Text position={[0, 0, 0.06]} fontSize={size} font={labelFont} color={color} anchorX="center" anchorY="middle" raycast={noRaycast}>
+        {text}
+      </Text>
+    </group>
   );
 }
