@@ -14,14 +14,14 @@ function HoldButton({ k, className, label }: { k: MoveKey; className: string; la
   );
 }
 
-/** On-screen walk buttons for phones/tablets; swiping on the view looks around. */
+/** On-screen buttons for phones/tablets: ▲▼ walk, ◀▶ step sideways; swiping on the view turns and looks around. */
 export function TouchControls() {
   return (
     <div className="touchpad">
       <HoldButton k="forward" className="up" label="▲" />
-      <HoldButton k="left" className="left" label="◀" />
+      <HoldButton k="strafeLeft" className="left" label="◀" />
       <HoldButton k="back" className="down" label="▼" />
-      <HoldButton k="right" className="right" label="▶" />
+      <HoldButton k="strafeRight" className="right" label="▶" />
     </div>
   );
 }

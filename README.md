@@ -9,8 +9,8 @@ A small 3D walk-through of our new apartment, designed room by room by talking t
 | | Desktop | Phone |
 |---|---|---|
 | Walk | ↑ / ↓ or W / S | ▲ / ▼ buttons |
-| Turn | ← / →, two-finger swipe | swipe, ◀ / ▶ |
-| Step sideways | A / D | |
+| Turn | ← / →, two-finger swipe | swipe |
+| Step sideways | A / D | ◀ / ▶ |
 | Look up / down | E / C, two-finger swipe | swipe |
 | Select | click | tap |
 | Change state (fold bed, open door) | double-click the moving part | double-tap |

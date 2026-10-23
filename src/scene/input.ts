@@ -25,7 +25,7 @@ export function ignoresKeys(el: { tagName: string; type?: string } | null): bool
 // degrees per pixel of finger movement
 const TOUCH_SPEED = 0.25;
 
-/** Look change for a touch drag: the view turns the way the finger moves (swipe right = turn right, up = look up). */
+/** Look change for a touch drag: you drag the world (swipe right = view turns left), like a photo viewer. */
 export function touchLook(dx: number, dy: number): { yaw: number; pitch: number } {
-  return { yaw: -dx * TOUCH_SPEED, pitch: -dy * TOUCH_SPEED };
+  return { yaw: dx * TOUCH_SPEED, pitch: dy * TOUCH_SPEED };
 }

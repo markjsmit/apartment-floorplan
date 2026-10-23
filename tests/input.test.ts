@@ -31,10 +31,8 @@ describe('ignoresKeys', () => {
 });
 
 describe('touchLook', () => {
-  it('turns the way the finger moves, like phone games', () => {
-    const right = touchLook(100, 0);
-    expect(right.yaw).toBeLessThan(0); // negative yaw = turn right
-    const up = touchLook(0, -100); // screen y goes down, so up is negative
-    expect(up.pitch).toBeGreaterThan(0); // look up
+  it('drags the world: swipe right turns the view left, swipe down looks up', () => {
+    expect(touchLook(100, 0).yaw).toBeGreaterThan(0); // positive yaw = turn left
+    expect(touchLook(0, 100).pitch).toBeGreaterThan(0); // look up
   });
 });
