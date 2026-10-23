@@ -1,0 +1,10 @@
+{
+  "id": "aluminium-grey",
+  "name": "Grey aluminium",
+  "tags": ["metal", "aluminium", "window frame", "grey"],
+  "fallbackColor": "#8a8c8f",
+  "roughness": 0.45,
+  "metalness": 0.15,
+  "source": "self-made (plain colour, sampled from Mark's photo of the apartment's windows)",
+  "license": "CC0"
+}

@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest';
-import { assetSize } from '../src/model/assets';
+import { assetSize, openingParams } from '../src/model/assets';
+import { FurnitureAssetSchema } from '../src/model/schema';
 import { door, windowParts } from '../src/model/generators/openings';
 
 describe('door generator', () => {
@@ -33,5 +34,21 @@ describe('window generator', () => {
     const s = assetSize(parts, undefined);
     expect(s.w).toBeCloseTo(130, 0);
     expect(s.h).toBeLessThanOrEqual(140 + 3);
+  });
+});
+
+describe('window params', () => {
+  it('takes a frame material and can leave out the sill board', () => {
+    const parts = windowParts({ width: 100, height: 125, wallThickness: 10, frameMaterial: 'aluminium-grey', sillBoard: false });
+    expect(parts.find((p) => p.id === 'frame-left')!.material).toBe('aluminium-grey');
+    expect(parts.some((p) => p.id === 'sill')).toBe(false);
+  });
+  it('openingParams merges asset defaults, opening params and the opening size', () => {
+    const asset = FurnitureAssetSchema.parse({
+      id: 'w', name: 'W', source: { kind: 'procedural', generator: 'window' },
+      params: { frameMaterial: { default: 'white-laminate' }, sillBoard: { default: true } },
+    });
+    const p = openingParams(asset, { width: 100, height: 125, params: { sillBoard: false } }, 12);
+    expect(p).toEqual({ frameMaterial: 'white-laminate', sillBoard: false, width: 100, height: 125, wallThickness: 12 });
   });
 });

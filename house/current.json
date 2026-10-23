@@ -12,9 +12,9 @@
       "name": "Storage room",
       "tags": ["storage room", "second bedroom", "guest room", "office"],
       "footprint": [[0, 0], [300, 0], [300, 300], [0, 300]],
-      "ceilingHeight": 260,
+      "ceilingHeight": 250,
       "northAngle": 0,
-      "floor": { "material": "tiles-white" },
+      "floor": { "material": "laminate-oak" },
       "ceiling": { "material": "white-paint" },
       "wallMaterial": "white-paint",
       "walls": [
@@ -25,15 +25,17 @@
       ],
       "openings": [
         { "id": "storage.door", "type": "door", "wall": "storage.wall-2", "offset": 207, "width": 83, "height": 211, "asset": "door-basic", "tags": ["the door"] },
-        { "id": "storage.window", "type": "window", "wall": "storage.wall-0", "offset": 10, "width": 100, "height": 140, "sill": 90, "asset": "window-basic", "tags": ["the window"] }
+        {
+          "id": "storage.window", "type": "window", "wall": "storage.wall-0", "offset": 15, "width": 100, "height": 125, "sill": 80,
+          "asset": "window-basic", "params": { "frameMaterial": "aluminium-grey", "sillBoard": false }, "tags": ["the window"]
+        }
       ],
       "items": [],
       "assumptions": [
-        { "path": "footprint", "note": "assumed 3 x 3 m" },
-        { "path": "ceilingHeight", "note": "assumed 260 cm" },
-        { "path": "floor.material", "note": "assumed light tiles" },
+        { "path": "footprint", "note": "assumed 3 x 3 m (on the safe side: the main bedroom photo measures ~3.05 x ~4.1 m and this room is smaller)" },
+        { "path": "ceilingHeight", "note": "~250 cm, estimated from the main bedroom photo" },
         { "path": "openings[storage.door].width", "note": "standard 83 cm door, 10 cm from the west corner" },
-        { "path": "openings[storage.window]", "note": "width unknown (a bit wider than the door); placed opposite the door, sill 90 / height 140 made up" }
+        { "path": "openings[storage.window]", "note": "size guessed (a bit wider than the door), opposite the door; style (grey aluminium, no sill board) from the main bedroom photo" }
       ]
     }
   ]

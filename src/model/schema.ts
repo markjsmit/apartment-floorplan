@@ -31,6 +31,8 @@ export const OpeningSchema = z.object({
   height: z.number().positive(),
   sill: z.number().nonnegative().default(0),
   asset: z.string().optional(),
+  // extra generator params (e.g. window frameMaterial); width/height/wallThickness always come from the opening
+  params: z.record(z.unknown()).default({}),
   state: z.string().optional(),
   name: z.string().optional(),
   tags,

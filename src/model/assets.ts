@@ -1,5 +1,5 @@
 import { Euler, Matrix4, Vector3 } from 'three';
-import type { AssetState, FurnitureAsset, Item, Part, PartOverride, Vec3 } from './schema';
+import type { AssetState, FurnitureAsset, Item, Opening, Part, PartOverride, Vec3 } from './schema';
 import { generators } from './generators';
 
 const DEG = Math.PI / 180;
@@ -7,6 +7,15 @@ const DEG = Math.PI / 180;
 export function resolveParams(asset: FurnitureAsset, item: Pick<Item, 'params'>): Record<string, unknown> {
   const defaults = Object.fromEntries(Object.entries(asset.params).map(([k, v]) => [k, v.default]));
   return { ...defaults, ...item.params };
+}
+
+/** Generator params for a door/window: asset defaults + the opening's params, sized to the opening. */
+export function openingParams(
+  asset: FurnitureAsset,
+  opening: Pick<Opening, 'params' | 'width' | 'height'>,
+  wallThickness?: number,
+): Record<string, unknown> {
+  return { ...resolveParams(asset, opening), width: opening.width, height: opening.height, wallThickness };
 }
 
 /**

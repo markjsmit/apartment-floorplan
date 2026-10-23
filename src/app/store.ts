@@ -3,7 +3,7 @@ import type { Bundle } from '../model/bundle';
 import type { House } from '../model/schema';
 import type { Selection } from '../model/lookup';
 import { findById } from '../model/lookup';
-import { initialState, nextState, resolveAsset, resolveParams } from '../model/assets';
+import { initialState, nextState, openingParams, resolveAsset, resolveParams } from '../model/assets';
 import type { CameraPose, Person, View } from './url';
 
 export const EYE_HEIGHT: Record<Person, number> = { mark: 188, heli: 151 };
@@ -116,11 +116,11 @@ export const useStore = create<State & Actions>((set, get) => ({
     if (!bundle || !house) return;
     const found = findById(house, id);
     const ref = found?.kind === 'item' ? found.item : found?.kind === 'opening' ? found.opening : null;
-    const assetId = ref ? ('asset' in ref ? ref.asset : undefined) : undefined;
-    const raw = assetId ? bundle.furniture[assetId] : undefined;
-    if (!raw || !ref) return;
+    const raw = ref?.asset ? bundle.furniture[ref.asset] : undefined;
+    if (!raw || !ref || !found) return;
     // states can depend on params (generated), so cycle through the resolved asset's states
-    const asset = resolveAsset(raw, 'params' in ref ? resolveParams(raw, ref) : { width: ref.width, height: ref.height });
+    const params = found.kind === 'item' ? resolveParams(raw, found.item) : found.kind === 'opening' ? openingParams(raw, found.opening) : {};
+    const asset = resolveAsset(raw, params);
     const current = initialState(asset, ref, itemStates[id]);
     set({ itemStates: { ...itemStates, [id]: nextState(asset, current) } });
   },

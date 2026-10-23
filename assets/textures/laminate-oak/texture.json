@@ -1,0 +1,11 @@
+{
+  "id": "laminate-oak",
+  "name": "Oak laminate (wide planks)",
+  "tags": ["wood", "floor", "laminate", "oak", "planks"],
+  "maps": { "color": "color.jpg", "normal": "normal.jpg", "roughness": "roughness.jpg" },
+  "tileSize": [310, 310],
+  "fallbackColor": "#846344",
+  "roughness": 0.55,
+  "source": "ambientCG WoodFloor064 (https://ambientcg.com/a/WoodFloor064), rotated 90° so planks run along z (north-south at northAngle 0), desaturated and toned to the floor in Mark's photo (sources/new house). ~19.5 cm planks.",
+  "license": "CC0"
+}
