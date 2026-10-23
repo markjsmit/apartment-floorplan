@@ -3,111 +3,533 @@
     "name": "Current",
     "kind": "current",
     "note": "Mark's new apartment, Tel Aviv, 27th floor.",
-    "location": { "lat": 32.0853, "lon": 34.7818, "label": "Tel Aviv" }
+    "location": {
+      "lat": 32.0853,
+      "lon": 34.7818,
+      "label": "Tel Aviv"
+    }
   },
   "assumptions": [],
   "rooms": [
     {
       "id": "storage",
       "name": "Storage room",
-      "tags": ["storage room", "second bedroom", "guest room", "office"],
-      "footprint": [[0, 0], [300, 0], [300, 300], [0, 300]],
+      "tags": [
+        "storage room",
+        "second bedroom",
+        "guest room",
+        "office"
+      ],
+      "footprint": [
+        [
+          0,
+          0
+        ],
+        [
+          300,
+          0
+        ],
+        [
+          300,
+          300
+        ],
+        [
+          0,
+          300
+        ]
+      ],
       "ceilingHeight": 270,
       "northAngle": 0,
-      "floor": { "material": "laminate-oak" },
-      "ceiling": { "material": "white-paint" },
+      "floor": {
+        "material": "laminate-oak"
+      },
+      "ceiling": {
+        "material": "white-paint"
+      },
       "wallMaterial": "white-paint",
       "walls": [
-        { "id": "storage.wall-0", "edge": 0, "tags": ["back wall", "window wall"] },
-        { "id": "storage.wall-1", "edge": 1, "tags": ["right wall"] },
-        { "id": "storage.wall-2", "edge": 2, "tags": ["door wall", "entry wall"] },
-        { "id": "storage.wall-3", "edge": 3, "tags": ["left wall"] }
+        {
+          "id": "storage.wall-0",
+          "edge": 0,
+          "tags": [
+            "back wall",
+            "window wall"
+          ]
+        },
+        {
+          "id": "storage.wall-1",
+          "edge": 1,
+          "tags": [
+            "right wall"
+          ]
+        },
+        {
+          "id": "storage.wall-2",
+          "edge": 2,
+          "tags": [
+            "door wall",
+            "entry wall"
+          ]
+        },
+        {
+          "id": "storage.wall-3",
+          "edge": 3,
+          "tags": [
+            "left wall"
+          ]
+        }
       ],
       "openings": [
-        { "id": "storage.door", "leadsTo": { "room": "living", "opening": "living.bedroom2-door" }, "type": "door", "wall": "storage.wall-2", "offset": 207, "width": 83, "height": 211, "asset": "door-basic", "tags": ["the door"] },
         {
-          "id": "storage.window", "type": "window", "wall": "storage.wall-0", "offset": 15, "width": 100, "height": 125, "sill": 80,
-          "asset": "window-basic", "params": { "frameMaterial": "aluminium-grey", "sillBoard": false }, "tags": ["the window"]
+          "id": "storage.door",
+          "leadsTo": {
+            "room": "living",
+            "opening": "living.bedroom2-door"
+          },
+          "type": "door",
+          "wall": "storage.wall-2",
+          "offset": 207,
+          "width": 83,
+          "height": 211,
+          "asset": "door-basic",
+          "tags": [
+            "the door"
+          ]
+        },
+        {
+          "id": "storage.window",
+          "type": "window",
+          "wall": "storage.wall-0",
+          "offset": 15,
+          "width": 100,
+          "height": 125,
+          "sill": 80,
+          "asset": "window-basic",
+          "params": {
+            "frameMaterial": "aluminium-grey",
+            "sillBoard": false
+          },
+          "tags": [
+            "the window"
+          ]
         }
       ],
       "items": [
         {
-          "id": "storage.kallax-low", "asset": "ikea-kallax-112x147", "params": { "cols": 4, "rows": 3 },
-          "name": "Kallax 3x4 (lying, bottom)", "tags": ["kallax tower", "bottom kallax"],
-          "against": { "wall": "storage.wall-1", "offset": 153 }
+          "id": "storage.kallax-low",
+          "asset": "ikea-kallax-112x147",
+          "params": {
+            "cols": 4,
+            "rows": 3
+          },
+          "name": "Kallax 3x4 (lying, bottom)",
+          "tags": [
+            "kallax tower",
+            "bottom kallax"
+          ],
+          "against": {
+            "wall": "storage.wall-1",
+            "offset": 153
+          }
         },
         {
-          "id": "storage.kallax-high", "asset": "ikea-kallax-112x147", "params": { "cols": 4, "rows": 3 },
-          "name": "Kallax 3x4 (lying, top)", "tags": ["kallax tower", "top kallax"],
-          "against": { "wall": "storage.wall-1", "offset": 153, "elevation": 112 }
+          "id": "storage.kallax-high",
+          "asset": "ikea-kallax-112x147",
+          "params": {
+            "cols": 4,
+            "rows": 3
+          },
+          "name": "Kallax 3x4 (lying, top)",
+          "tags": [
+            "kallax tower",
+            "top kallax"
+          ],
+          "against": {
+            "wall": "storage.wall-1",
+            "offset": 153,
+            "elevation": 112
+          }
         },
         {
-          "id": "storage.kallax-mid-east-low", "asset": "ikea-kallax-112x147", "params": { "cols": 4, "rows": 3 },
-          "name": "Kallax 3x4 (middle, faces the wall tower, bottom)", "tags": ["middle kallax", "back-to-back kallax", "aisle side"],
-          "position": [142, 0, 226.5], "rotation": 90
+          "id": "storage.kallax-mid-east-low",
+          "asset": "ikea-kallax-112x147",
+          "params": {
+            "cols": 4,
+            "rows": 3
+          },
+          "name": "Kallax 3x4 (middle, faces the wall tower, bottom)",
+          "tags": [
+            "middle kallax",
+            "back-to-back kallax",
+            "aisle side"
+          ],
+          "position": [
+            142,
+            0,
+            226.5
+          ],
+          "rotation": 90
         },
         {
-          "id": "storage.kallax-mid-east-high", "asset": "ikea-kallax-112x147", "params": { "cols": 4, "rows": 3 },
-          "name": "Kallax 3x4 (middle, faces the wall tower, top)", "tags": ["middle kallax", "back-to-back kallax", "aisle side"],
-          "position": [142, 112, 226.5], "rotation": 90
+          "id": "storage.kallax-mid-east-high",
+          "asset": "ikea-kallax-112x147",
+          "params": {
+            "cols": 4,
+            "rows": 3
+          },
+          "name": "Kallax 3x4 (middle, faces the wall tower, top)",
+          "tags": [
+            "middle kallax",
+            "back-to-back kallax",
+            "aisle side"
+          ],
+          "position": [
+            142,
+            112,
+            226.5
+          ],
+          "rotation": 90
         },
         {
-          "id": "storage.kallax-divider", "asset": "box", "params": { "width": 147, "height": 224, "depth": 0.5, "material": "white-laminate" },
-          "name": "Divider board between the back-to-back Kallax", "tags": ["divider", "back panel", "hardboard"],
-          "position": [141.5, 0, 226.5], "rotation": 90,
-          "assumptions": [{ "path": "params", "note": "thin white hardboard/MDF ~5 mm, 147 x 224 (standard sheets are 122 x 244, so two pieces or a cut-down larger sheet)" }]
+          "id": "storage.kallax-divider",
+          "asset": "box",
+          "params": {
+            "width": 147,
+            "height": 224,
+            "depth": 0.5,
+            "material": "white-laminate"
+          },
+          "name": "Divider board between the back-to-back Kallax",
+          "tags": [
+            "divider",
+            "back panel",
+            "hardboard"
+          ],
+          "position": [
+            141.5,
+            0,
+            226.5
+          ],
+          "rotation": 90,
+          "assumptions": [
+            {
+              "path": "params",
+              "note": "thin white hardboard/MDF ~5 mm, 147 x 224 (standard sheets are 122 x 244, so two pieces or a cut-down larger sheet)"
+            }
+          ]
         },
         {
-          "id": "storage.kallax-mid-west-low", "asset": "ikea-kallax-112x147", "params": { "cols": 4, "rows": 3 },
-          "name": "Kallax 3x4 (middle, faces the passage, bottom)", "tags": ["middle kallax", "back-to-back kallax", "passage side"],
-          "position": [141.5, 0, 226.5], "rotation": -90
+          "id": "storage.kallax-mid-west-low",
+          "asset": "ikea-kallax-112x147",
+          "params": {
+            "cols": 4,
+            "rows": 3
+          },
+          "name": "Kallax 3x4 (middle, faces the passage, bottom)",
+          "tags": [
+            "middle kallax",
+            "back-to-back kallax",
+            "passage side"
+          ],
+          "position": [
+            141.5,
+            0,
+            226.5
+          ],
+          "rotation": -90
         },
         {
-          "id": "storage.kallax-mid-west-high", "asset": "ikea-kallax-112x147", "params": { "cols": 4, "rows": 3 },
-          "name": "Kallax 3x4 (middle, faces the passage, top)", "tags": ["middle kallax", "back-to-back kallax", "passage side"],
-          "position": [141.5, 112, 226.5], "rotation": -90
+          "id": "storage.kallax-mid-west-high",
+          "asset": "ikea-kallax-112x147",
+          "params": {
+            "cols": 4,
+            "rows": 3
+          },
+          "name": "Kallax 3x4 (middle, faces the passage, top)",
+          "tags": [
+            "middle kallax",
+            "back-to-back kallax",
+            "passage side"
+          ],
+          "position": [
+            141.5,
+            112,
+            226.5
+          ],
+          "rotation": -90
         },
         {
-          "id": "storage.left-shelving", "asset": "diy-plywood-shelving",
-          "params": { "width": 265, "height": 224, "depth": 20, "sections": 4, "shelves": 6, "material": "white-paint" },
-          "name": "Plywood shelving (left wall, DIY)", "tags": ["left shelving", "left wall shelves", "diy shelves", "plywood shelves"],
-          "against": { "wall": "storage.wall-3", "offset": 35 },
-          "assumptions": [{ "path": "params", "note": "self-built: 18 mm plywood, 4 bays of ~64 cm, 7 levels ~30 cm apart, 4 mm back; from just past the door swing to the window wall (covers ~5 cm of the window's left edge); freestanding, tied in at the top" }]
+          "id": "storage.left-shelving",
+          "asset": "diy-plywood-shelving",
+          "params": {
+            "width": 265,
+            "height": 224,
+            "depth": 20,
+            "sections": 4,
+            "shelves": 6,
+            "material": "wood-oak-light"
+          },
+          "name": "Plywood shelving (left wall, DIY)",
+          "tags": [
+            "left shelving",
+            "left wall shelves",
+            "diy shelves",
+            "plywood shelves"
+          ],
+          "against": {
+            "wall": "storage.wall-3",
+            "offset": 35
+          },
+          "assumptions": [
+            {
+              "path": "params",
+              "note": "self-built: 18 mm plywood, 4 bays of ~64 cm, 7 levels ~30 cm apart, 4 mm back; from just past the door swing to the window wall (covers ~5 cm of the window's left edge); freestanding, tied in at the top"
+            }
+          ]
         },
         {
-          "id": "storage.high-shelf", "asset": "box", "params": { "width": 300, "height": 1.8, "depth": 60, "material": "white-paint" },
-          "name": "High shelf (wall to wall, suitcase slots over passage and aisle)", "tags": ["high shelf", "suitcase shelf", "top tie", "bracing", "wall to wall board"],
-          "position": [150, 224, 153],
-          "assumptions": [{ "path": "params", "note": "18 mm plywood painted white at 224, 60 deep, one piece-line wall to wall over the left shelving, passage, middle tower, aisle and wall tower (2 sheets joined over a tower); suitcase slots (large 52, XL ~55) open to the room" }]
+          "id": "storage.bridge-high-1",
+          "asset": "box",
+          "params": {
+            "width": 80,
+            "height": 1.8,
+            "depth": 38,
+            "material": "wood-oak-light"
+          },
+          "name": "Bridge shelf across the aisle (high, 1 cube deep)",
+          "tags": [
+            "bridge shelf",
+            "aisle shelf"
+          ],
+          "position": [
+            221,
+            186.25,
+            262
+          ],
+          "assumptions": [
+            {
+              "path": "params",
+              "note": "18 mm plywood light wood (unpainted plywood, oak-veneer look for now), T-shaped: tongues slide into the Kallax cubes on both sides (screwed from inside), 38 cm from the entry wall"
+            }
+          ]
         },
         {
-          "id": "storage.high-shelf-back", "asset": "box", "params": { "width": 300, "height": 44.2, "depth": 1.8, "material": "white-paint" },
-          "name": "Back wall of the high shelf (wall to wall, to the ceiling)", "tags": ["little wall", "back wall", "suitcase stop", "bracing"],
-          "position": [150, 225.8, 211.2],
-          "assumptions": [{ "path": "params", "note": "18 mm plywood painted white from the high shelf to the 270 ceiling; stops suitcases sliding into the aisle and stiffens the structure" }]
+          "id": "storage.bridge-high-2",
+          "asset": "box",
+          "params": {
+            "width": 80,
+            "height": 1.8,
+            "depth": 38,
+            "material": "wood-oak-light"
+          },
+          "name": "Bridge shelf across the aisle (high, 1 cube deep)",
+          "tags": [
+            "bridge shelf",
+            "aisle shelf"
+          ],
+          "position": [
+            221,
+            151.25,
+            262
+          ],
+          "assumptions": [
+            {
+              "path": "params",
+              "note": "18 mm plywood light wood (unpainted plywood, oak-veneer look for now), T-shaped: tongues slide into the Kallax cubes on both sides (screwed from inside), 38 cm from the entry wall"
+            }
+          ]
         },
         {
-          "id": "storage.top-deck", "asset": "box", "params": { "width": 300, "height": 1.8, "depth": 40, "material": "white-paint" },
-          "name": "High shelf along the entry wall (wall to wall, 40 deep)", "tags": ["top deck", "suitcase shelf", "wall to wall board", "bracing"],
-          "position": [150, 224, 260],
-          "assumptions": [{ "path": "params", "note": "18 mm plywood painted white on top of everything along the entry wall, wall to wall (ties the left shelving + both towers together); 40 deep so it is easy to reach from the aisle/passage below through the 47 cm gap behind the suitcase slots; 300 cm > a 244 sheet, so 2 pieces joined over a tower" }]
+          "id": "storage.bridge-low-1",
+          "asset": "box",
+          "params": {
+            "width": 80,
+            "height": 1.8,
+            "depth": 38,
+            "material": "wood-oak-light"
+          },
+          "name": "Bridge shelf across the aisle (lowest: 74 cm tall space below for big items)",
+          "tags": [
+            "bridge shelf",
+            "aisle shelf"
+          ],
+          "position": [
+            221,
+            74.25,
+            262
+          ],
+          "assumptions": [
+            {
+              "path": "params",
+              "note": "18 mm plywood light wood (unpainted plywood, oak-veneer look for now), T-shaped: tongues slide into the Kallax cubes on both sides (screwed from inside), 38 cm from the entry wall"
+            }
+          ]
         },
         {
-          "id": "storage.suitcase-1", "asset": "suitcase", "params": { "color": "#2f4a6d" },
-          "name": "Large suitcase (aisle slot)", "tags": ["suitcase", "demo"],
-          "position": [221.25, 225.8, 207], "rotation": 180
+          "id": "storage.bridge-mid",
+          "asset": "box",
+          "params": {
+            "width": 80,
+            "height": 1.8,
+            "depth": 38,
+            "material": "wood-oak-light"
+          },
+          "name": "Bridge shelf across the aisle (arm height, 1 cube deep)",
+          "tags": [
+            "bridge shelf",
+            "aisle shelf"
+          ],
+          "position": [
+            221,
+            116.25,
+            262
+          ],
+          "assumptions": [
+            {
+              "path": "params",
+              "note": "18 mm plywood light wood (unpainted plywood, oak-veneer look for now), T-shaped: tongues slide into the Kallax cubes on both sides (screwed from inside), 38 cm from the entry wall"
+            }
+          ]
         },
         {
-          "id": "storage.suitcase-2", "asset": "suitcase", "params": { "color": "#4a4d52" },
-          "name": "Large suitcase (passage slot)", "tags": ["suitcase", "demo"],
-          "position": [61.25, 225.8, 207], "rotation": 180
+          "id": "storage.high-shelf",
+          "asset": "box",
+          "params": {
+            "width": 300,
+            "height": 1.8,
+            "depth": 60,
+            "material": "wood-oak-light"
+          },
+          "name": "High shelf (wall to wall, suitcase slots over passage and aisle)",
+          "tags": [
+            "high shelf",
+            "suitcase shelf",
+            "top tie",
+            "bracing",
+            "wall to wall board"
+          ],
+          "position": [
+            150,
+            224,
+            153
+          ],
+          "assumptions": [
+            {
+              "path": "params",
+              "note": "18 mm plywood light wood (unpainted plywood, oak-veneer look for now) at 224, 60 deep, one piece-line wall to wall over the left shelving, passage, middle tower, aisle and wall tower (2 sheets joined over a tower); suitcase slots (large 52, XL ~55) open to the room"
+            }
+          ]
+        },
+        {
+          "id": "storage.high-shelf-back",
+          "asset": "box",
+          "params": {
+            "width": 300,
+            "height": 44.2,
+            "depth": 1.8,
+            "material": "wood-oak-light"
+          },
+          "name": "Back wall of the high shelf (wall to wall, to the ceiling)",
+          "tags": [
+            "little wall",
+            "back wall",
+            "suitcase stop",
+            "bracing"
+          ],
+          "position": [
+            150,
+            225.8,
+            211.2
+          ],
+          "assumptions": [
+            {
+              "path": "params",
+              "note": "18 mm plywood light wood (unpainted plywood, oak-veneer look for now) from the high shelf to the 270 ceiling; stops suitcases sliding into the aisle and stiffens the structure"
+            }
+          ]
+        },
+        {
+          "id": "storage.top-deck",
+          "asset": "box",
+          "params": {
+            "width": 300,
+            "height": 1.8,
+            "depth": 40,
+            "material": "wood-oak-light"
+          },
+          "name": "High shelf along the entry wall (wall to wall, 40 deep)",
+          "tags": [
+            "top deck",
+            "suitcase shelf",
+            "wall to wall board",
+            "bracing"
+          ],
+          "position": [
+            150,
+            224,
+            260
+          ],
+          "assumptions": [
+            {
+              "path": "params",
+              "note": "18 mm plywood light wood (unpainted plywood, oak-veneer look for now) on top of everything along the entry wall, wall to wall (ties the left shelving + both towers together); 40 deep so it is easy to reach from the aisle/passage below through the 47 cm gap behind the suitcase slots; 300 cm > a 244 sheet, so 2 pieces joined over a tower"
+            }
+          ]
+        },
+        {
+          "id": "storage.suitcase-1",
+          "asset": "suitcase",
+          "params": {
+            "color": "#2f4a6d"
+          },
+          "name": "Large suitcase (aisle slot)",
+          "tags": [
+            "suitcase",
+            "demo"
+          ],
+          "position": [
+            221.25,
+            225.8,
+            207
+          ],
+          "rotation": 180
+        },
+        {
+          "id": "storage.suitcase-2",
+          "asset": "suitcase",
+          "params": {
+            "color": "#4a4d52"
+          },
+          "name": "Large suitcase (passage slot)",
+          "tags": [
+            "suitcase",
+            "demo"
+          ],
+          "position": [
+            61.25,
+            225.8,
+            207
+          ],
+          "rotation": 180
         }
       ],
       "assumptions": [
-        { "path": "footprint", "note": "assumed 3 x 3 m (on the safe side: the main bedroom photo measures ~3.05 x ~4.1 m and this room is smaller)" },
-        { "path": "ceilingHeight", "note": "270 assumed for the whole apartment (living-room photos say 2.70-2.85; the bedroom photo said ~2.50) — please measure" },
-        { "path": "openings[storage.door].width", "note": "standard 83 cm door, 10 cm from the west corner" },
-        { "path": "openings[storage.window]", "note": "size guessed (a bit wider than the door), opposite the door; style (grey aluminium, no sill board) from the main bedroom photo" }
+        {
+          "path": "footprint",
+          "note": "assumed 3 x 3 m (on the safe side: the main bedroom photo measures ~3.05 x ~4.1 m and this room is smaller)"
+        },
+        {
+          "path": "ceilingHeight",
+          "note": "270 assumed for the whole apartment (living-room photos say 2.70-2.85; the bedroom photo said ~2.50) — please measure"
+        },
+        {
+          "path": "openings[storage.door].width",
+          "note": "standard 83 cm door, 10 cm from the west corner"
+        },
+        {
+          "path": "openings[storage.window]",
+          "note": "size guessed (a bit wider than the door), opposite the door; style (grey aluminium, no sill board) from the main bedroom photo"
+        }
       ]
     },
     {
