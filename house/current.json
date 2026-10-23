@@ -30,7 +30,18 @@
           "asset": "window-basic", "params": { "frameMaterial": "aluminium-grey", "sillBoard": false }, "tags": ["the window"]
         }
       ],
-      "items": [],
+      "items": [
+        {
+          "id": "storage.kallax-low", "asset": "ikea-kallax-112x147", "params": { "cols": 4, "rows": 3 },
+          "name": "Kallax 3x4 (lying, bottom)", "tags": ["kallax tower", "bottom kallax"],
+          "against": { "wall": "storage.wall-1", "offset": 153 }
+        },
+        {
+          "id": "storage.kallax-high", "asset": "ikea-kallax-112x147", "params": { "cols": 4, "rows": 3 },
+          "name": "Kallax 3x4 (lying, top)", "tags": ["kallax tower", "top kallax"],
+          "against": { "wall": "storage.wall-1", "offset": 153, "elevation": 112 }
+        }
+      ],
       "assumptions": [
         { "path": "footprint", "note": "assumed 3 x 3 m (on the safe side: the main bedroom photo measures ~3.05 x ~4.1 m and this room is smaller)" },
         { "path": "ceilingHeight", "note": "~250 cm, estimated from the main bedroom photo" },
