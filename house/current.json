@@ -3,9 +3,9 @@
     "name": "Current",
     "kind": "current",
     "note": "Mark's new apartment.",
-    "location": { "lat": 50, "lon": 10, "label": "placeholder — ask Mark for the city" }
+    "location": { "lat": 32.0853, "lon": 34.7818, "label": "Tel Aviv" }
   },
-  "assumptions": [{ "path": "meta.location", "note": "placeholder until Mark gives the city" }],
+  "assumptions": [],
   "rooms": [
     {
       "id": "storage",
