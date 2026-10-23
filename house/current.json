@@ -2,39 +2,38 @@
   "meta": {
     "name": "Current",
     "kind": "current",
-    "note": "Example room to start from. Replace with the real rooms.",
+    "note": "Mark's new apartment.",
     "location": { "lat": 50, "lon": 10, "label": "placeholder — ask Mark for the city" }
   },
   "assumptions": [{ "path": "meta.location", "note": "placeholder until Mark gives the city" }],
   "rooms": [
     {
-      "id": "bedroom",
-      "name": "Example bedroom",
-      "tags": ["example", "bedroom"],
-      "footprint": [[0, 0], [350, 0], [350, 300], [0, 300]],
+      "id": "storage",
+      "name": "Storage room",
+      "tags": ["storage room", "second bedroom", "guest room", "office"],
+      "footprint": [[0, 0], [300, 0], [300, 300], [0, 300]],
       "ceilingHeight": 260,
       "northAngle": 0,
-      "floor": { "material": "oak-planks" },
+      "floor": { "material": "tiles-white" },
       "ceiling": { "material": "white-paint" },
       "wallMaterial": "white-paint",
       "walls": [
-        { "id": "bedroom.wall-0", "edge": 0, "tags": ["window wall"] },
-        { "id": "bedroom.wall-1", "edge": 1, "tags": ["bed wall"] },
-        { "id": "bedroom.wall-2", "edge": 2, "tags": ["door wall"] },
-        { "id": "bedroom.wall-3", "edge": 3, "tags": [] }
+        { "id": "storage.wall-0", "edge": 0, "tags": ["window wall"] },
+        { "id": "storage.wall-1", "edge": 1, "tags": [] },
+        { "id": "storage.wall-2", "edge": 2, "tags": ["door wall"] },
+        { "id": "storage.wall-3", "edge": 3, "tags": [] }
       ],
       "openings": [
-        { "id": "bedroom.window", "type": "window", "wall": "bedroom.wall-0", "offset": 110, "width": 130, "height": 140, "sill": 90, "asset": "window-basic", "tags": ["the window"] },
-        { "id": "bedroom.door", "type": "door", "wall": "bedroom.wall-2", "offset": 30, "width": 83, "height": 211, "asset": "door-basic", "tags": ["the door"] }
+        { "id": "storage.door", "type": "door", "wall": "storage.wall-2", "offset": 207, "width": 83, "height": 211, "asset": "door-basic", "tags": ["the door"] },
+        { "id": "storage.window", "type": "window", "wall": "storage.wall-0", "offset": 10, "width": 100, "height": 140, "sill": 90, "asset": "window-basic", "tags": ["the window"] }
       ],
-      "items": [
-        { "id": "bedroom.wall-bed", "asset": "wall-bed", "name": "Wall bed", "tags": ["the bed"], "against": { "wall": "bedroom.wall-1", "offset": 40 } },
-        { "id": "bedroom.kallax", "asset": "ikea-kallax", "params": { "cols": 2, "rows": 2 }, "name": "Kallax 2x2", "against": { "wall": "bedroom.wall-3", "offset": 30 } },
-        { "id": "bedroom.wardrobe", "asset": "wardrobe", "name": "Wardrobe", "against": { "wall": "bedroom.wall-3", "offset": 150 } }
-      ],
+      "items": [],
       "assumptions": [
-        { "path": "openings[bedroom.door].width", "note": "standard 83 cm door" },
-        { "path": "openings[bedroom.window]", "note": "made-up window size" }
+        { "path": "footprint", "note": "assumed 3 x 3 m" },
+        { "path": "ceilingHeight", "note": "assumed 260 cm" },
+        { "path": "floor.material", "note": "assumed light tiles" },
+        { "path": "openings[storage.door].width", "note": "standard 83 cm door, 10 cm from the west corner" },
+        { "path": "openings[storage.window]", "note": "width unknown (a bit wider than the door); placed opposite the door, sill 90 / height 140 made up" }
       ]
     }
   ]
