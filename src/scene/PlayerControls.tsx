@@ -6,6 +6,7 @@ import { resolveWalls } from '../model/geometry';
 import { placeRoomItems } from '../model/placement';
 import { buildColliders, findFreeSpawn, isFree, moveWithCollision, resolvePlayerPosition } from '../model/collision';
 import { findById } from '../model/lookup';
+import { portalAt } from '../model/portals';
 import { currentHouse, EYE_HEIGHT, useStore } from '../app/store';
 import { held, lookDelta, type MoveKey } from './input';
 import { selectableFromHit } from './selectable';
@@ -47,7 +48,9 @@ export function PlayerControls({ room, driveCamera }: { room: Room; driveCamera:
   // spawn: just inside the door looking in, else the room centre
   useEffect(() => {
     if (spawnTick === 0) return;
-    const door = room.openings.find((o) => o.type === 'door');
+    // walked in through a door from another room: start at that door, else at the first door
+    const at = useStore.getState().spawnAt;
+    const door = (at ? room.openings.find((o) => o.id === at) : undefined) ?? room.openings.find((o) => o.type === 'door');
     const w = door && walls.find((x) => x.id === door.wall);
     let p: Vec2 | null = null;
     let yaw = 0;
@@ -214,6 +217,10 @@ export function PlayerControls({ room, driveCamera }: { room: Room; driveCamera:
       dx = (dx / len) * WALK * dt;
       dz = (dz / len) * WALK * dt;
       [x, z] = moveWithCollision([x, z], [dx, dz], RADIUS, colliders);
+      const portal = portalAt([x, z], [dx, dz], room, walls, RADIUS);
+      const store = useStore.getState();
+      const to = portal?.leadsTo && currentHouse(store)?.rooms.find((r) => r.id === portal.leadsTo!.room);
+      if (to && store.setRoom(to.id, portal!.leadsTo!.opening)) store.toast(`→ ${to.name}`);
     }
     pose.current = { x, z, yaw, pitch };
 

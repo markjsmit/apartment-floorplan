@@ -35,6 +35,8 @@ export const OpeningSchema = z.object({
   params: z.record(z.unknown()).default({}),
   state: z.string().optional(),
   name: z.string().optional(),
+  // walking into this door takes you to another room (rooms aren't placed on a floorplan yet)
+  leadsTo: z.object({ room: z.string(), opening: z.string().optional() }).optional(),
   tags,
 });
 export type Opening = z.infer<typeof OpeningSchema>;

@@ -28,6 +28,8 @@ type State = {
   lookingAt: LookingAt | null;
   /** Bumped to ask the controls to (re)spawn the player in the current room. */
   spawnTick: number;
+  /** Opening id to spawn at on the next spawn (walked through a door into another room). */
+  spawnAt: string | null;
   lookAtTarget: { id: string; tick: number } | null;
   toasts: Toast[];
   noreport: boolean;
@@ -36,7 +38,7 @@ type State = {
 type Actions = {
   setBundle: (b: Bundle) => void;
   setLoadError: (e: string | null) => void;
-  setRoom: (id: string) => boolean;
+  setRoom: (id: string, spawnAt?: string) => boolean;
   setVersion: (id: string) => boolean;
   select: (s: Selection | null) => void;
   selectById: (id: string) => boolean;
@@ -72,6 +74,7 @@ export const useStore = create<State & Actions>((set, get) => ({
   camera: { x: 0, z: 0, yaw: 0, pitch: 0 },
   lookingAt: null,
   spawnTick: 0,
+  spawnAt: null,
   lookAtTarget: null,
   toasts: [],
   // read straight away so a snapshot browser never reports, not even before the first load
@@ -87,9 +90,9 @@ export const useStore = create<State & Actions>((set, get) => ({
     set({ bundle, versionId: vid, roomId: rid, selection: stillThere ? selection : null, spawnTick: rid !== roomId ? get().spawnTick + 1 : get().spawnTick });
   },
   setLoadError: (loadError) => set({ loadError }),
-  setRoom: (id) => {
+  setRoom: (id, spawnAt) => {
     if (!currentHouse(get())?.rooms.some((r) => r.id === id)) return false;
-    if (id !== get().roomId) set({ roomId: id, selection: null, spawnTick: get().spawnTick + 1 });
+    if (id !== get().roomId) set({ roomId: id, selection: null, spawnTick: get().spawnTick + 1, spawnAt: spawnAt ?? null });
     return true;
   },
   setVersion: (id) => {

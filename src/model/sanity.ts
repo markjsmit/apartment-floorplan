@@ -66,6 +66,13 @@ export function sanityCheck(bundle: Bundle): Issue[] {
           error(`${where(o.id)}: top (${o.sill + o.height}) is above the ceiling (${room.ceilingHeight})`);
         }
         if (o.asset && !bundle.furniture[o.asset]) error(`${where(o.id)}: unknown asset "${o.asset}"`);
+        if (o.leadsTo) {
+          const to = house.rooms.find((r) => r.id === o.leadsTo!.room);
+          if (!to) error(`${where(o.id)}: leads to unknown room "${o.leadsTo.room}"`);
+          else if (o.leadsTo.opening && !to.openings.some((x) => x.id === o.leadsTo!.opening)) {
+            error(`${where(o.id)}: leads to unknown opening "${o.leadsTo.opening}" in ${to.id}`);
+          }
+        }
       }
 
       for (const item of room.items) {
