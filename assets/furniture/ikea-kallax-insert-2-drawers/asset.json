@@ -1,0 +1,34 @@
+{
+  "id": "ikea-kallax-insert-2-drawers",
+  "name": "KALLAX insert with 2 drawers 33x33, white",
+  "tags": [
+    "kallax",
+    "ikea",
+    "insert",
+    "drawers",
+    "702.866.45"
+  ],
+  "description": "33 x 37 x 33 cm, two equal drawers (~16 cm fronts). Inside a unit use `inserts`: \"drawers\".",
+  "product": {
+    "vendor": "IKEA Israel",
+    "itemNo": "702.866.45",
+    "name": "KALLAX זוג מגירות פנימיות 33x33 ס\"מ",
+    "price": 95.0,
+    "currency": "ILS",
+    "url": "https://www.ikea.com/il/he/p/kallax-insert-with-2-drawers-white-70286645/"
+  },
+  "source": {
+    "kind": "procedural",
+    "generator": "kallax-insert",
+    "notes": "Dimensions: IKEA product pages (IL + US) for the same item numbers; KALLAX frame 1x1 = 42, +35 per cube, 39 deep, cells 33.5 inside; inserts 33x37x33; DRÖNA 33x38x33; underframe 18 high (combos list unit+17, modelled 17.5).",
+    "license": "self-made"
+  },
+  "params": {
+    "insert": {
+      "default": "drawers"
+    },
+    "color": {
+      "default": "white"
+    }
+  }
+}

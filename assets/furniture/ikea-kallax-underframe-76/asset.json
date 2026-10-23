@@ -1,0 +1,35 @@
+{
+  "id": "ikea-kallax-underframe-76",
+  "name": "KALLAX underframe 76x39x18, white",
+  "tags": [
+    "kallax",
+    "ikea",
+    "underframe",
+    "legs",
+    "base",
+    "904.955.96"
+  ],
+  "description": "76 x 39 x 18 cm steel frame with adjustable feet, for KALLAX 77 wide. Modelled 17.5 high, 4 legs (leg count/section inferred). Or use `underframe: true` on a KALLAX asset.",
+  "product": {
+    "vendor": "IKEA Israel",
+    "itemNo": "904.955.96",
+    "name": "KALLAX בסיס למסגרת 76x39x18 ס\"מ",
+    "price": 100.0,
+    "currency": "ILS",
+    "url": "https://www.ikea.com/il/he/p/kallax-underframe-white-90495596/"
+  },
+  "source": {
+    "kind": "procedural",
+    "generator": "kallax-underframe",
+    "notes": "Dimensions: IKEA product pages (IL + US) for the same item numbers; KALLAX frame 1x1 = 42, +35 per cube, 39 deep, cells 33.5 inside; inserts 33x37x33; DRÖNA 33x38x33; underframe 18 high (combos list unit+17, modelled 17.5).",
+    "license": "self-made"
+  },
+  "params": {
+    "width": {
+      "default": 76
+    },
+    "color": {
+      "default": "white"
+    }
+  }
+}

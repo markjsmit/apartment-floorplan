@@ -1,0 +1,35 @@
+{
+  "id": "ikea-kallax-insert-4-shelves",
+  "name": "KALLAX insert with 4 shelves 33x33, white",
+  "tags": [
+    "kallax",
+    "ikea",
+    "insert",
+    "shelf insert",
+    "divider",
+    "404.237.19"
+  ],
+  "description": "IKEA: \"conjure up 4 extra shelves or divide vertically\", 33 x 36 x 33, 6.2 kg fibreboard. Most likely 4 shelf boards (unverified); one board shown. Inside a unit use `inserts`: \"shelf\" / \"divider\" per cube.",
+  "product": {
+    "vendor": "IKEA Israel",
+    "itemNo": "404.237.19",
+    "name": "KALLAX תא אחסון עם 4 מדפים 33x33 ס\"מ",
+    "price": 110.0,
+    "currency": "ILS",
+    "url": "https://www.ikea.com/il/he/p/kallax-insert-with-4-shelves-white-40423719/"
+  },
+  "source": {
+    "kind": "procedural",
+    "generator": "kallax-insert",
+    "notes": "Dimensions: IKEA product pages (IL + US) for the same item numbers; KALLAX frame 1x1 = 42, +35 per cube, 39 deep, cells 33.5 inside; inserts 33x37x33; DRÖNA 33x38x33; underframe 18 high (combos list unit+17, modelled 17.5).",
+    "license": "self-made"
+  },
+  "params": {
+    "insert": {
+      "default": "shelf"
+    },
+    "color": {
+      "default": "white"
+    }
+  }
+}

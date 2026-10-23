@@ -9,12 +9,46 @@ export function resolveParams(asset: FurnitureAsset, item: Pick<Item, 'params'>)
   return { ...defaults, ...item.params };
 }
 
+/**
+ * The asset as it is for these params: generated parts first, then the JSON parts. A generator may also return
+ * states and interactions (their part ids depend on params, e.g. a Kallax with doors in some cells); generated
+ * states replace the JSON ones, generated interactions are added. The result has no generator any more, so
+ * resolving it again is a no-op. Use the resolved asset for everything state-related (findState, nextState...).
+ */
+export function resolveAsset(asset: FurnitureAsset, params: Record<string, unknown>): FurnitureAsset {
+  const gen = asset.source.kind === 'procedural' && asset.source.generator ? generators[asset.source.generator] : undefined;
+  if (!gen) return asset;
+  let out: ReturnType<typeof gen>;
+  try {
+    out = gen(params);
+  } catch {
+    // bad params (e.g. a typo in kallax inserts): render nothing generated; `npm run check` reports it (generatorError)
+    out = [];
+  }
+  const g = Array.isArray(out) ? { parts: out } : out;
+  return {
+    ...asset,
+    source: { ...asset.source, generator: undefined },
+    parts: [...g.parts, ...asset.parts],
+    states: g.states?.length ? g.states : asset.states,
+    interactions: [...asset.interactions, ...(g.interactions ?? [])],
+  };
+}
+
+/** The generator's complaint about these params, if any. */
+export function generatorError(asset: FurnitureAsset, params: Record<string, unknown>): string | undefined {
+  const gen = asset.source.kind === 'procedural' && asset.source.generator ? generators[asset.source.generator] : undefined;
+  if (asset.source.kind === 'procedural' && asset.source.generator && !gen) return `unknown generator "${asset.source.generator}"`;
+  try {
+    gen?.(params);
+  } catch (e) {
+    return (e as Error).message;
+  }
+  return undefined;
+}
+
 export function resolveParts(asset: FurnitureAsset, params: Record<string, unknown>): Part[] {
-  const generated =
-    asset.source.kind === 'procedural' && asset.source.generator && generators[asset.source.generator]
-      ? generators[asset.source.generator](params)
-      : [];
-  return [...generated, ...asset.parts];
+  return resolveAsset(asset, params).parts;
 }
 
 export type PartPose = { position: Vec3; rotationDeg: Vec3; visible: boolean; material?: string };

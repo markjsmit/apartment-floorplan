@@ -1,9 +1,10 @@
 import type { FurnitureAsset, Item, Part, Room, Vec2, Vec3 } from './schema';
-import { assetSize, findState, initialState, resolveParams, resolveParts, type AssetSize } from './assets';
+import { assetSize, findState, initialState, resolveAsset, resolveParams, type AssetSize } from './assets';
 import { resolveItemTransform, type WallInfo } from './geometry';
 
 export type PlacedItem = {
   item: Item;
+  /** Resolved for the item's params (generated parts, states and interactions included). */
   asset: FurnitureAsset;
   parts: Part[];
   stateId: string;
@@ -15,8 +16,9 @@ export type PlacedItem = {
 
 const DEG = Math.PI / 180;
 
-export function placeItem(item: Item, asset: FurnitureAsset, walls: WallInfo[], uiState?: string): PlacedItem {
-  const parts = resolveParts(asset, resolveParams(asset, item));
+export function placeItem(item: Item, rawAsset: FurnitureAsset, walls: WallInfo[], uiState?: string): PlacedItem {
+  const asset = resolveAsset(rawAsset, resolveParams(rawAsset, item));
+  const parts = asset.parts;
   const stateId = initialState(asset, item, uiState);
   const size = assetSize(parts, findState(asset, stateId));
   // `against` placement uses the item's default-state width so toggling states doesn't slide it along the wall

@@ -1,0 +1,70 @@
+{
+  "id": "ikea-kallax-tv-storage-147x60",
+  "name": "KALLAX TV storage combination 147x60, white",
+  "tags": [
+    "kallax",
+    "ikea",
+    "shelf",
+    "shelving unit",
+    "cube shelf",
+    "bookcase",
+    "tv bench",
+    "tv",
+    "media",
+    "doors",
+    "drawers",
+    "sideboard",
+    "low",
+    "s295.606.75"
+  ],
+  "description": "147 x 39 x 59.6 cm (W x D x H), 4 cubes + low top row. Lower row: 4 KALLAX cubes that take inserts/boxes; top row: 4 low open compartments (layout of the top row inferred, IKEA only lists the outer size and \"large/small shelves\"). Open back. With 2x insert with door + 2x insert with 2 drawers. IKEA does not say which cells hold the inserts: positions are assumed, change the `inserts` param to match yours.",
+  "product": {
+    "vendor": "IKEA Israel",
+    "itemNo": "s295.606.75",
+    "name": "KALLAX מערכת אחסון טלוויזיה 147x39x60 ס\"מ",
+    "price": 778.0,
+    "currency": "ILS",
+    "url": "https://www.ikea.com/il/he/p/kallax-tv-storage-combination-white-s29560675/"
+  },
+  "source": {
+    "kind": "procedural",
+    "generator": "kallax",
+    "notes": "Dimensions: IKEA product pages (IL + US) for the same item numbers; KALLAX frame 1x1 = 42, +35 per cube, 39 deep, cells 33.5 inside; inserts 33x37x33; DRÖNA 33x38x33; underframe 18 high (combos list unit+17, modelled 17.5).",
+    "license": "self-made"
+  },
+  "params": {
+    "cols": {
+      "default": 4,
+      "description": "cubes wide"
+    },
+    "rows": {
+      "default": 2,
+      "description": "cubes high"
+    },
+    "color": {
+      "default": "white",
+      "description": "white | black-brown | white-oak | oak | #hex"
+    },
+    "inserts": {
+      "default": [
+        [
+          "",
+          "",
+          "",
+          ""
+        ],
+        [
+          "door-left",
+          "drawers",
+          "drawers",
+          "door-right"
+        ]
+      ],
+      "description": "per cell, rows top→bottom: door-left | door-right | drawers | shelf | divider | box | \"\" (see kallax.ts)"
+    },
+    "topRow": {
+      "default": 16.1,
+      "description": "inside height of the top row (33.5; TV bench 16.1)"
+    }
+  }
+}

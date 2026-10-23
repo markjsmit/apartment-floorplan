@@ -52,10 +52,15 @@ export function describeSelection(
     if (!asset) return { title: item.name ?? item.id, kind: 'item', tags: item.tags, rows: [...rows, ['Asset', `missing: ${item.asset}`]], assumptions: [] };
     const placed = placeItem(item, asset, resolveWalls(room), itemStates[item.id]);
     rows.push(['Asset', asset.name]);
+    const pr = asset.product;
+    if (pr) {
+      const price = pr.price !== undefined ? ` · ${pr.currency === 'ILS' ? '₪' : (pr.currency ?? '') + ' '}${pr.price}` : '';
+      rows.push(['Product', `${pr.vendor}${pr.itemNo ? ` ${pr.itemNo}` : ''}${price}`]);
+    }
     rows.push(['Size (W×D×H)', `${cm(placed.size.w)} × ${cm(placed.size.d)} × ${cm(placed.size.h)} cm`]);
-    if (asset.states.length > 1) rows.push(['State', findState(asset, placed.stateId)?.name ?? placed.stateId]);
+    if (placed.asset.states.length > 1) rows.push(['State', findState(placed.asset, placed.stateId)?.name ?? placed.stateId]);
     if (sel.part) {
-      const interactive = asset.interactions.some((x) => x.part === sel.part);
+      const interactive = placed.asset.interactions.some((x) => x.part === sel.part);
       rows.push(['Part', interactive ? `${sel.part} (double-click to change state)` : sel.part]);
     }
     const params = Object.entries(item.params);

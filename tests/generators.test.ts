@@ -1,9 +1,9 @@
 import { describe, expect, it } from 'vitest';
 import { assetSize } from '../src/model/assets';
-import { generators } from '../src/model/generators';
+import { door, windowParts } from '../src/model/generators/openings';
 
 describe('door generator', () => {
-  const parts = generators.door({ width: 83, height: 211, wallThickness: 10 });
+  const parts = door({ width: 83, height: 211, wallThickness: 10 });
   it('fills the opening exactly and sits inside the wall', () => {
     const s = assetSize(parts.filter((p) => !p.tags.includes('casing')), undefined);
     expect(s.w).toBeCloseTo(83);
@@ -27,7 +27,7 @@ describe('door generator', () => {
 });
 
 describe('window generator', () => {
-  const parts = generators.window({ width: 130, height: 140, wallThickness: 10 });
+  const parts = windowParts({ width: 130, height: 140, wallThickness: 10 });
   it('has a glass pane and fits the opening', () => {
     expect(parts.some((p) => p.glass)).toBe(true);
     const s = assetSize(parts, undefined);

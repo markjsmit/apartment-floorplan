@@ -1,0 +1,41 @@
+{
+  "id": "ikea-kallax-desk-111x39",
+  "name": "KALLAX desk 111x39, white",
+  "tags": [
+    "kallax",
+    "ikea",
+    "desk",
+    "table",
+    "office",
+    "workspace",
+    "305.824.45"
+  ],
+  "description": "111 x 39 x 77 cm, 72 cm free under the top. A column of two KALLAX cubes at one end (side: left | right; takes KALLAX inserts via `inserts`, e.g. [[\"door-left\"], [\"drawers\"]]); the other end is modelled as a panel leg with a cable rail at the back (construction inferred from the parts list).",
+  "product": {
+    "vendor": "IKEA Israel",
+    "itemNo": "305.824.45",
+    "name": "KALLAX שולחן כתיבה 111x39 ס\"מ",
+    "price": 395.0,
+    "currency": "ILS",
+    "url": "https://www.ikea.com/il/he/p/kallax-desk-white-30582445/"
+  },
+  "source": {
+    "kind": "procedural",
+    "generator": "kallax-desk",
+    "notes": "Dimensions: IKEA product pages (IL + US) for the same item numbers; KALLAX frame 1x1 = 42, +35 per cube, 39 deep, cells 33.5 inside; inserts 33x37x33; DRÖNA 33x38x33; underframe 18 high (combos list unit+17, modelled 17.5).",
+    "license": "self-made"
+  },
+  "params": {
+    "side": {
+      "default": "right",
+      "description": "shelf column on the left or right"
+    },
+    "color": {
+      "default": "white"
+    },
+    "inserts": {
+      "default": [],
+      "description": "shelf column cells, top→bottom, e.g. [[\"drawers\"], [\"door-left\"]]"
+    }
+  }
+}

@@ -2,11 +2,14 @@
   "id": "ikea-kallax",
   "name": "IKEA Kallax shelf",
   "tags": ["kallax", "ikea", "shelf", "shelving unit", "bookcase", "cube shelf"],
-  "description": "Cube shelf. 1x1 = 42x42, each extra cube +35 cm, depth 39 cm. Works lying or standing (swap cols/rows).",
-  "source": { "kind": "procedural", "generator": "kallax", "notes": "Dimensions from IKEA product sheets.", "license": "self-made" },
+  "description": "Any-size KALLAX cube shelf. 1x1 = 42x42, each extra cube +35 cm, depth 39 cm. Works lying or standing (swap cols/rows). The ikea-kallax-* assets are the exact products IKEA Israel sells (with price + item no.).",
+  "source": { "kind": "procedural", "generator": "kallax", "notes": "Dimensions from IKEA product sheets. Inserts 33x37x33, DRÖNA box 33x38x33, underframe modelled 17.5 high.", "license": "self-made" },
   "params": {
     "cols": { "default": 2, "description": "cubes wide (1-5)" },
     "rows": { "default": 2, "description": "cubes high (1-5)" },
-    "color": { "default": "white", "description": "white | black-brown | white-oak | oak | any #hex" }
+    "color": { "default": "white", "description": "white | black-brown | white-oak | oak | any #hex" },
+    "inserts": { "default": [], "description": "per cube, rows top→bottom, e.g. [[\"door-left\", \"\"], [\"drawers\", \"box\"]]: door-left | door-right | drawers | shelf | divider | box (DRÖNA) | \"\"" },
+    "boxColor": { "default": "white", "description": "DRÖNA box colour: white | black | #hex" },
+    "underframe": { "default": false, "description": "true = stands on a KALLAX underframe (+17.5 cm)" }
   }
 }

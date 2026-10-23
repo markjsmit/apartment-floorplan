@@ -1,0 +1,69 @@
+{
+  "id": "ikea-kallax-147x94-underframe-2-doors-4-drawers",
+  "name": "KALLAX shelving unit 147x77 with underframe, 2 doors and 4 drawers, white",
+  "tags": [
+    "kallax",
+    "ikea",
+    "shelf",
+    "shelving unit",
+    "cube shelf",
+    "bookcase",
+    "4x2",
+    "underframe",
+    "legs",
+    "doors",
+    "drawers",
+    "sideboard",
+    "s795.529.13"
+  ],
+  "description": "147 x 39 x 94.5 cm (W x D x H), 4x2 cubes. KALLAX 77x147 lying on underframe 146 + 2x insert with door + 2x insert with 2 drawers. IKEA does not say which cells hold the inserts: positions are assumed, change the `inserts` param to match yours.",
+  "product": {
+    "vendor": "IKEA Israel",
+    "itemNo": "s795.529.13",
+    "name": "KALLAX יחידת מדפים עם מסגרת תחתונה 147x94 ס\"מ",
+    "price": 953.0,
+    "currency": "ILS",
+    "url": "https://www.ikea.com/il/he/p/kallax-shelving-unit-with-underframe-with-2-doors-4-drawers-white-s79552913/"
+  },
+  "source": {
+    "kind": "procedural",
+    "generator": "kallax",
+    "notes": "Dimensions: IKEA product pages (IL + US) for the same item numbers; KALLAX frame 1x1 = 42, +35 per cube, 39 deep, cells 33.5 inside; inserts 33x37x33; DRÖNA 33x38x33; underframe 18 high (combos list unit+17, modelled 17.5).",
+    "license": "self-made"
+  },
+  "params": {
+    "cols": {
+      "default": 4,
+      "description": "cubes wide"
+    },
+    "rows": {
+      "default": 2,
+      "description": "cubes high"
+    },
+    "color": {
+      "default": "white",
+      "description": "white | black-brown | white-oak | oak | #hex"
+    },
+    "inserts": {
+      "default": [
+        [
+          "",
+          "",
+          "",
+          ""
+        ],
+        [
+          "door-left",
+          "drawers",
+          "drawers",
+          "door-right"
+        ]
+      ],
+      "description": "per cell, rows top→bottom: door-left | door-right | drawers | shelf | divider | box | \"\" (see kallax.ts)"
+    },
+    "underframe": {
+      "default": true,
+      "description": "true = stands on a KALLAX underframe (+17.5 cm)"
+    }
+  }
+}

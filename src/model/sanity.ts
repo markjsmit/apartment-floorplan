@@ -1,5 +1,5 @@
 import type { Bundle } from './bundle';
-import { resolveParams, resolveParts } from './assets';
+import { generatorError, resolveAsset, resolveParams } from './assets';
 import { pointInPolygon, resolveWalls } from './geometry';
 import { footprintCorners, placeRoomItems, quadsOverlap } from './placement';
 
@@ -18,8 +18,12 @@ export function sanityCheck(bundle: Bundle): Issue[] {
   const warn = (message: string) => issues.push({ level: 'warning', message });
   const hasTexture = (id: string | undefined) => !id || id in bundle.textures;
 
-  for (const asset of Object.values(bundle.furniture)) {
-    const parts = resolveParts(asset, resolveParams(asset, { params: {} }));
+  for (const raw of Object.values(bundle.furniture)) {
+    // checked with default params (generated states/interactions included)
+    const genErr = generatorError(raw, resolveParams(raw, { params: {} }));
+    if (genErr) error(`asset ${raw.id}: ${genErr}`);
+    const asset = resolveAsset(raw, resolveParams(raw, { params: {} }));
+    const parts = asset.parts;
     const partIds = new Set(parts.map((p) => p.id));
     for (const p of parts) if (!hasTexture(p.material)) error(`asset ${asset.id}: part "${p.id}" uses unknown material "${p.material}"`);
     for (const x of asset.interactions) if (!partIds.has(x.part)) error(`asset ${asset.id}: interaction part "${x.part}" does not exist`);
@@ -66,7 +70,10 @@ export function sanityCheck(bundle: Bundle): Issue[] {
 
       for (const item of room.items) {
         unique(item.id);
-        if (!bundle.furniture[item.asset]) error(`${where(item.id)}: unknown asset "${item.asset}"`);
+        const raw = bundle.furniture[item.asset];
+        if (!raw) error(`${where(item.id)}: unknown asset "${item.asset}"`);
+        const genErr = raw && generatorError(raw, resolveParams(raw, item));
+        if (genErr) error(`${where(item.id)}: ${genErr}`);
         if (item.against && !walls.some((w) => w.id === item.against!.wall)) {
           error(`${where(item.id)}: unknown wall "${item.against.wall}"`);
         }

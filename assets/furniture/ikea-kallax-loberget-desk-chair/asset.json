@@ -1,0 +1,62 @@
+{
+  "id": "ikea-kallax-loberget-desk-chair",
+  "name": "KALLAX desk + LOBERGET / MALSKÄR swivel chair, white",
+  "tags": [
+    "kallax",
+    "ikea",
+    "desk",
+    "chair",
+    "office",
+    "workspace",
+    "loberget",
+    "malskar",
+    "s495.550.03"
+  ],
+  "description": "KALLAX desk 111x39x77 + LOBERGET seat on MALSKÄR swivel base, pushed in at the desk. Chair is approximate (seat ~47 high, ~48x44 seat, base ⌀60; IKEA page gives no chair size). For a separate chair use the desk asset and move the chair yourself.",
+  "product": {
+    "vendor": "IKEA Israel",
+    "itemNo": "s495.550.03",
+    "name": "KALLAX / LOBERGET שולחן כתיבה וכיסא",
+    "price": 640.0,
+    "currency": "ILS",
+    "url": "https://www.ikea.com/il/he/p/kallax-loberget-desk-and-chair-white-s49555003/"
+  },
+  "source": {
+    "kind": "procedural",
+    "generator": "group",
+    "notes": "Dimensions: IKEA product pages (IL + US) for the same item numbers; KALLAX frame 1x1 = 42, +35 per cube, 39 deep, cells 33.5 inside; inserts 33x37x33; DRÖNA 33x38x33; underframe 18 high (combos list unit+17, modelled 17.5).",
+    "license": "self-made"
+  },
+  "params": {
+    "members": {
+      "default": [
+        {
+          "prefix": "desk",
+          "generator": "kallax-desk",
+          "offset": [
+            0,
+            0,
+            0
+          ],
+          "params": {
+            "side": "right",
+            "color": "white"
+          }
+        },
+        {
+          "prefix": "chair",
+          "generator": "swivel-chair",
+          "offset": [
+            -19,
+            0,
+            22
+          ],
+          "params": {
+            "facing": "back",
+            "color": "white"
+          }
+        }
+      ]
+    }
+  }
+}

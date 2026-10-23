@@ -4,8 +4,7 @@ import type { ThreeEvent } from '@react-three/fiber';
 import type { Room } from '../model/schema';
 import { resolveWalls, roomBounds, wallSegments } from '../model/geometry';
 import { placeRoomItems } from '../model/placement';
-import { resolveParts } from '../model/assets';
-import { initialState } from '../model/assets';
+import { initialState, resolveAsset } from '../model/assets';
 import { useStore } from '../app/store';
 import type { Selection } from '../model/lookup';
 import { boxWithCmUV, footprintGeometry } from './cmGeometry';
@@ -93,11 +92,12 @@ export function RoomView({ room, showCeiling }: { room: Room; showCeiling: boole
       })}
 
       {bundle && room.openings.map((o) => {
-        const asset = o.asset ? bundle.furniture[o.asset] : undefined;
+        const raw = o.asset ? bundle.furniture[o.asset] : undefined;
         const w = walls.find((x) => x.id === o.wall);
-        if (!asset || !w) return null;
+        if (!raw || !w) return null;
         const u = o.offset + o.width / 2;
-        const parts = resolveParts(asset, { width: o.width, height: o.height, wallThickness: w.thickness });
+        const asset = resolveAsset(raw, { width: o.width, height: o.height, wallThickness: w.thickness });
+        const parts = asset.parts;
         return (
           <PartsView
             key={o.id}

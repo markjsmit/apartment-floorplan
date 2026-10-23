@@ -1,0 +1,55 @@
+{
+  "id": "ikea-kallax-lagkapten-desk-77x179",
+  "name": "KALLAX / LAGKAPTEN desk combination 77x179x147, white",
+  "tags": [
+    "kallax",
+    "ikea",
+    "desk",
+    "table",
+    "office",
+    "workspace",
+    "shelf",
+    "lagkapten",
+    "2x4",
+    "s094.816.84"
+  ],
+  "description": "77 x 179 x 147 cm overall: KALLAX 77x147 standing + LAGKAPTEN tabletop 140x60 (thickness 4) sticking out of its front on 2 OLOV legs, joined with INLÄGG. Desk height adjustable 60-90 (modelled 75); tabletop centred on the unit (assumed). `table.offset` moves it sideways.",
+  "product": {
+    "vendor": "IKEA Israel",
+    "itemNo": "s094.816.84",
+    "name": "KALLAX / LAGKAPTEN קומבינצית שולחן כתיבה 77x179x147 ס\"מ",
+    "price": 835.0,
+    "currency": "ILS",
+    "url": "https://www.ikea.com/il/he/p/kallax-lagkapten-desk-combination-white-s09481684/"
+  },
+  "source": {
+    "kind": "procedural",
+    "generator": "kallax",
+    "notes": "Dimensions: IKEA product pages (IL + US) for the same item numbers; KALLAX frame 1x1 = 42, +35 per cube, 39 deep, cells 33.5 inside; inserts 33x37x33; DRÖNA 33x38x33; underframe 18 high (combos list unit+17, modelled 17.5).",
+    "license": "self-made"
+  },
+  "params": {
+    "cols": {
+      "default": 2,
+      "description": "cubes wide"
+    },
+    "rows": {
+      "default": 4,
+      "description": "cubes high"
+    },
+    "color": {
+      "default": "white",
+      "description": "white | black-brown | white-oak | oak | #hex"
+    },
+    "table": {
+      "default": {
+        "length": 140,
+        "width": 60,
+        "thickness": 4,
+        "height": 75,
+        "offset": 0
+      },
+      "description": "desk combos: {length, width, thickness, height, offset}"
+    }
+  }
+}

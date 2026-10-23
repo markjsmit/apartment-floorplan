@@ -1,0 +1,34 @@
+{
+  "id": "ikea-kallax-insert-door",
+  "name": "KALLAX insert with door 33x33, white",
+  "tags": [
+    "kallax",
+    "ikea",
+    "insert",
+    "door",
+    "202.781.67"
+  ],
+  "description": "33 x 37 x 33 cm, fits one KALLAX cube. On its own as sold; inside a unit use the `inserts` param of a KALLAX asset (\"door-left\" / \"door-right\" = hinge side). Knob modelled (not confirmed).",
+  "product": {
+    "vendor": "IKEA Israel",
+    "itemNo": "202.781.67",
+    "name": "KALLAX תא אחסון עם דלת 33x33 ס\"מ",
+    "price": 69.0,
+    "currency": "ILS",
+    "url": "https://www.ikea.com/il/he/p/kallax-insert-with-door-white-20278167/"
+  },
+  "source": {
+    "kind": "procedural",
+    "generator": "kallax-insert",
+    "notes": "Dimensions: IKEA product pages (IL + US) for the same item numbers; KALLAX frame 1x1 = 42, +35 per cube, 39 deep, cells 33.5 inside; inserts 33x37x33; DRÖNA 33x38x33; underframe 18 high (combos list unit+17, modelled 17.5).",
+    "license": "self-made"
+  },
+  "params": {
+    "insert": {
+      "default": "door-left"
+    },
+    "color": {
+      "default": "white"
+    }
+  }
+}

@@ -1,0 +1,61 @@
+{
+  "id": "ikea-kallax-147x77-2-shelf-inserts",
+  "name": "KALLAX shelving unit 147x77 with 2 shelf inserts, white",
+  "tags": [
+    "kallax",
+    "ikea",
+    "shelf",
+    "shelving unit",
+    "cube shelf",
+    "bookcase",
+    "4x2",
+    "shelf inserts",
+    "s395.529.05"
+  ],
+  "description": "147 x 39 x 77 cm (W x D x H), 4x2 cubes. 2x insert with 1 shelf (horizontal here; it can also stand as a vertical divider: \"divider\"). IKEA does not say which cells hold the inserts: positions are assumed, change the `inserts` param to match yours.",
+  "product": {
+    "vendor": "IKEA Israel",
+    "itemNo": "s395.529.05",
+    "name": "KALLAX יחידת מדפים 147x77 ס\"מ",
+    "price": 593.0,
+    "currency": "ILS",
+    "url": "https://www.ikea.com/il/he/p/kallax-shelving-unit-with-2-shelf-inserts-white-s39552905/"
+  },
+  "source": {
+    "kind": "procedural",
+    "generator": "kallax",
+    "notes": "Dimensions: IKEA product pages (IL + US) for the same item numbers; KALLAX frame 1x1 = 42, +35 per cube, 39 deep, cells 33.5 inside; inserts 33x37x33; DRÖNA 33x38x33; underframe 18 high (combos list unit+17, modelled 17.5).",
+    "license": "self-made"
+  },
+  "params": {
+    "cols": {
+      "default": 4,
+      "description": "cubes wide"
+    },
+    "rows": {
+      "default": 2,
+      "description": "cubes high"
+    },
+    "color": {
+      "default": "white",
+      "description": "white | black-brown | white-oak | oak | #hex"
+    },
+    "inserts": {
+      "default": [
+        [
+          "",
+          "shelf",
+          "shelf",
+          ""
+        ],
+        [
+          "",
+          "",
+          "",
+          ""
+        ]
+      ],
+      "description": "per cell, rows top→bottom: door-left | door-right | drawers | shelf | divider | box | \"\" (see kallax.ts)"
+    }
+  }
+}

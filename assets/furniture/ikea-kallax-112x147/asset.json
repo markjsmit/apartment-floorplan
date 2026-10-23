@@ -1,0 +1,43 @@
+{
+  "id": "ikea-kallax-112x147",
+  "name": "KALLAX shelving unit 112x147, white",
+  "tags": [
+    "kallax",
+    "ikea",
+    "shelf",
+    "shelving unit",
+    "cube shelf",
+    "bookcase",
+    "3x4",
+    "104.099.32"
+  ],
+  "description": "112 x 39 x 147 cm (W x D x H), 3x4 cubes. Can also lie down: swap cols and rows (and the inserts). Lying it is 147x112.",
+  "product": {
+    "vendor": "IKEA Israel",
+    "itemNo": "104.099.32",
+    "name": "KALLAX יחידת מדפים 112x147 ס\"מ",
+    "price": 650.0,
+    "currency": "ILS",
+    "url": "https://www.ikea.com/il/he/p/kallax-shelving-unit-white-10409932/"
+  },
+  "source": {
+    "kind": "procedural",
+    "generator": "kallax",
+    "notes": "Dimensions: IKEA product pages (IL + US) for the same item numbers; KALLAX frame 1x1 = 42, +35 per cube, 39 deep, cells 33.5 inside; inserts 33x37x33; DRÖNA 33x38x33; underframe 18 high (combos list unit+17, modelled 17.5).",
+    "license": "self-made"
+  },
+  "params": {
+    "cols": {
+      "default": 3,
+      "description": "cubes wide"
+    },
+    "rows": {
+      "default": 4,
+      "description": "cubes high"
+    },
+    "color": {
+      "default": "white",
+      "description": "white | black-brown | white-oak | oak | #hex"
+    }
+  }
+}

@@ -155,6 +155,17 @@ export const FurnitureAssetSchema = z.object({
     license: z.string().optional(),
   }),
   params: z.record(z.object({ default: z.unknown(), description: z.string().optional() })).default({}),
+  // The real product this models (shown in the info panel).
+  product: z
+    .object({
+      vendor: z.string(),
+      itemNo: z.string().optional(),
+      name: z.string().optional(),
+      price: z.number().optional(),
+      currency: z.string().optional(),
+      url: z.string().optional(),
+    })
+    .optional(),
   parts: z.array(PartSchema).default([]),
   states: z.array(AssetStateSchema).min(1).default([{ id: 'default', name: 'Default', parts: {} }]),
   defaultState: z.string().optional(),

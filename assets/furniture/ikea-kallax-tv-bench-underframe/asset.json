@@ -1,0 +1,55 @@
+{
+  "id": "ikea-kallax-tv-bench-underframe",
+  "name": "KALLAX TV bench 147x60 with underframe, white",
+  "tags": [
+    "kallax",
+    "ikea",
+    "shelf",
+    "shelving unit",
+    "cube shelf",
+    "bookcase",
+    "tv bench",
+    "tv",
+    "media",
+    "underframe",
+    "legs",
+    "s995.521.77"
+  ],
+  "description": "147 x 39 x 77.1 cm (W x D x H), 4 cubes + low top row. Lower row: 4 KALLAX cubes that take inserts/boxes; top row: 4 low open compartments (layout of the top row inferred, IKEA only lists the outer size and \"large/small shelves\"). Open back. On underframe 146x39x18 (IKEA lists 78 high).",
+  "product": {
+    "vendor": "IKEA Israel",
+    "itemNo": "s995.521.77",
+    "name": "KALLAX מעמד טלוויזיה עם מסגרת תחתונה 147x39x78 ס\"מ",
+    "price": 600.0,
+    "currency": "ILS",
+    "url": "https://www.ikea.com/il/he/p/kallax-tv-bench-with-underframe-white-s99552177/"
+  },
+  "source": {
+    "kind": "procedural",
+    "generator": "kallax",
+    "notes": "Dimensions: IKEA product pages (IL + US) for the same item numbers; KALLAX frame 1x1 = 42, +35 per cube, 39 deep, cells 33.5 inside; inserts 33x37x33; DRÖNA 33x38x33; underframe 18 high (combos list unit+17, modelled 17.5).",
+    "license": "self-made"
+  },
+  "params": {
+    "cols": {
+      "default": 4,
+      "description": "cubes wide"
+    },
+    "rows": {
+      "default": 2,
+      "description": "cubes high"
+    },
+    "color": {
+      "default": "white",
+      "description": "white | black-brown | white-oak | oak | #hex"
+    },
+    "underframe": {
+      "default": true,
+      "description": "true = stands on a KALLAX underframe (+17.5 cm)"
+    },
+    "topRow": {
+      "default": 16.1,
+      "description": "inside height of the top row (33.5; TV bench 16.1)"
+    }
+  }
+}

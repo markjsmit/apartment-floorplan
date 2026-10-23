@@ -1,0 +1,50 @@
+{
+  "id": "ikea-kallax-147x59-underframe",
+  "name": "KALLAX shelving unit 147x42 with underframe, white",
+  "tags": [
+    "kallax",
+    "ikea",
+    "shelf",
+    "shelving unit",
+    "cube shelf",
+    "bookcase",
+    "4x1",
+    "underframe",
+    "legs",
+    "bench",
+    "s594.426.66"
+  ],
+  "description": "147 x 39 x 59.5 cm (W x D x H), 4x1 cubes. KALLAX 42x147 lying on underframe 146x39x18.",
+  "product": {
+    "vendor": "IKEA Israel",
+    "itemNo": "s594.426.66",
+    "name": "KALLAX יחידת מדפים עם מסגרת תחתונה 147x59 ס\"מ",
+    "price": 495.0,
+    "currency": "ILS",
+    "url": "https://www.ikea.com/il/he/p/kallax-shelving-unit-with-underframe-white-white-s59442666/"
+  },
+  "source": {
+    "kind": "procedural",
+    "generator": "kallax",
+    "notes": "Dimensions: IKEA product pages (IL + US) for the same item numbers; KALLAX frame 1x1 = 42, +35 per cube, 39 deep, cells 33.5 inside; inserts 33x37x33; DRÖNA 33x38x33; underframe 18 high (combos list unit+17, modelled 17.5).",
+    "license": "self-made"
+  },
+  "params": {
+    "cols": {
+      "default": 4,
+      "description": "cubes wide"
+    },
+    "rows": {
+      "default": 1,
+      "description": "cubes high"
+    },
+    "color": {
+      "default": "white",
+      "description": "white | black-brown | white-oak | oak | #hex"
+    },
+    "underframe": {
+      "default": true,
+      "description": "true = stands on a KALLAX underframe (+17.5 cm)"
+    }
+  }
+}

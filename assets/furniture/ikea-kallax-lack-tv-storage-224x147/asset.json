@@ -1,0 +1,115 @@
+{
+  "id": "ikea-kallax-lack-tv-storage-224x147",
+  "name": "KALLAX / LACK TV storage combination 224x147, white",
+  "tags": [
+    "kallax",
+    "ikea",
+    "tv",
+    "tv bench",
+    "media",
+    "tv storage",
+    "lack",
+    "wall shelf",
+    "doors",
+    "drawers",
+    "s095.521.72"
+  ],
+  "description": "224 x 39 x 147 cm overall: KALLAX TV bench 147x60 + KALLAX 77x147 standing beside it + LACK wall shelf 110x26 (wall-mounted above the bench, modelled at 110 cm) + 2x door, 2x 2-drawer and 2x 1-shelf inserts. Arrangement and insert positions assumed (IKEA lists only the contents). To move pieces separately, use ikea-kallax-tv-storage-147x60 + ikea-kallax-77x147 instead.",
+  "product": {
+    "vendor": "IKEA Israel",
+    "itemNo": "s095.521.72",
+    "name": "KALLAX / LACK מערכת אחסון טלוויזיה 224x39x147 ס\"מ",
+    "price": 1466.0,
+    "currency": "ILS",
+    "url": "https://www.ikea.com/il/he/p/kallax-lack-tv-storage-combination-white-s09552172/"
+  },
+  "source": {
+    "kind": "procedural",
+    "generator": "group",
+    "notes": "Dimensions: IKEA product pages (IL + US) for the same item numbers; KALLAX frame 1x1 = 42, +35 per cube, 39 deep, cells 33.5 inside; inserts 33x37x33; DRÖNA 33x38x33; underframe 18 high (combos list unit+17, modelled 17.5).",
+    "license": "self-made"
+  },
+  "params": {
+    "members": {
+      "default": [
+        {
+          "prefix": "bench",
+          "generator": "kallax",
+          "offset": [
+            -38.5,
+            0,
+            0
+          ],
+          "params": {
+            "cols": 4,
+            "rows": 2,
+            "topRow": 16.1,
+            "color": "white",
+            "inserts": [
+              [
+                "",
+                "",
+                "",
+                ""
+              ],
+              [
+                "door-left",
+                "drawers",
+                "drawers",
+                "door-right"
+              ]
+            ]
+          }
+        },
+        {
+          "prefix": "unit",
+          "generator": "kallax",
+          "offset": [
+            73.5,
+            0,
+            0
+          ],
+          "params": {
+            "cols": 2,
+            "rows": 4,
+            "color": "white",
+            "inserts": [
+              [
+                "shelf",
+                "shelf"
+              ],
+              [
+                "",
+                ""
+              ],
+              [
+                "",
+                ""
+              ],
+              [
+                "",
+                ""
+              ]
+            ]
+          }
+        },
+        {
+          "prefix": "lack",
+          "generator": "lack-shelf",
+          "offset": [
+            -38.5,
+            0,
+            0
+          ],
+          "params": {
+            "width": 110,
+            "depth": 26,
+            "thickness": 5,
+            "elevation": 110,
+            "color": "white"
+          }
+        }
+      ]
+    }
+  }
+}

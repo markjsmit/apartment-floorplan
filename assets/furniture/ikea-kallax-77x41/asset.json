@@ -1,0 +1,43 @@
+{
+  "id": "ikea-kallax-77x41",
+  "name": "KALLAX shelving unit 77x41, white",
+  "tags": [
+    "kallax",
+    "ikea",
+    "shelf",
+    "shelving unit",
+    "cube shelf",
+    "bookcase",
+    "2x1",
+    "903.015.55"
+  ],
+  "description": "77 x 39 x 42 cm (W x D x H), 2x1 cubes. IKEA lists it as 77x41; modelled with the standard KALLAX frame (42 high). Can stand: cols 1, rows 2.",
+  "product": {
+    "vendor": "IKEA Israel",
+    "itemNo": "903.015.55",
+    "name": "KALLAX יחידת מדפים 77x41 ס\"מ",
+    "price": 195.0,
+    "currency": "ILS",
+    "url": "https://www.ikea.com/il/he/p/kallax-shelving-unit-white-90301555/"
+  },
+  "source": {
+    "kind": "procedural",
+    "generator": "kallax",
+    "notes": "Dimensions: IKEA product pages (IL + US) for the same item numbers; KALLAX frame 1x1 = 42, +35 per cube, 39 deep, cells 33.5 inside; inserts 33x37x33; DRÖNA 33x38x33; underframe 18 high (combos list unit+17, modelled 17.5).",
+    "license": "self-made"
+  },
+  "params": {
+    "cols": {
+      "default": 2,
+      "description": "cubes wide"
+    },
+    "rows": {
+      "default": 1,
+      "description": "cubes high"
+    },
+    "color": {
+      "default": "white",
+      "description": "white | black-brown | white-oak | oak | #hex"
+    }
+  }
+}

@@ -1,0 +1,55 @@
+{
+  "id": "ikea-kallax-linnmon-desk-77x139",
+  "name": "KALLAX / LINNMON desk combination 77x139x147, white",
+  "tags": [
+    "kallax",
+    "ikea",
+    "desk",
+    "table",
+    "office",
+    "workspace",
+    "shelf",
+    "linnmon",
+    "2x4",
+    "s294.817.01"
+  ],
+  "description": "77 x 139 x 147 cm overall: KALLAX 77x147 standing + LINNMON tabletop 100x60 (thickness 3.4) sticking out of its front on 2 OLOV legs, joined with INLÄGG. Desk height adjustable 60-90 (modelled 75); tabletop centred on the unit (assumed). `table.offset` moves it sideways.",
+  "product": {
+    "vendor": "IKEA Israel",
+    "itemNo": "s294.817.01",
+    "name": "KALLAX / LINNMON קומבינצית שולחן כתיבה 77x139x147 ס\"מ",
+    "price": 735.0,
+    "currency": "ILS",
+    "url": "https://www.ikea.com/il/he/p/kallax-linnmon-desk-combination-white-s29481701/"
+  },
+  "source": {
+    "kind": "procedural",
+    "generator": "kallax",
+    "notes": "Dimensions: IKEA product pages (IL + US) for the same item numbers; KALLAX frame 1x1 = 42, +35 per cube, 39 deep, cells 33.5 inside; inserts 33x37x33; DRÖNA 33x38x33; underframe 18 high (combos list unit+17, modelled 17.5).",
+    "license": "self-made"
+  },
+  "params": {
+    "cols": {
+      "default": 2,
+      "description": "cubes wide"
+    },
+    "rows": {
+      "default": 4,
+      "description": "cubes high"
+    },
+    "color": {
+      "default": "white",
+      "description": "white | black-brown | white-oak | oak | #hex"
+    },
+    "table": {
+      "default": {
+        "length": 100,
+        "width": 60,
+        "thickness": 3.4,
+        "height": 75,
+        "offset": 0
+      },
+      "description": "desk combos: {length, width, thickness, height, offset}"
+    }
+  }
+}
