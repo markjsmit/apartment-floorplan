@@ -101,7 +101,8 @@ export function bridgeShelf(params: Record<string, unknown>): Part[] {
  * Params: bedWidth (140), bedLength (190), body (board + frame thickness, 12), mattress (18), baseHeight (35), baseDepth (50),
  * hinge (z of the bed hinge, default = baseDepth; body + mattress = everything folds within the base depth),
  * housing (true → closet around the bed: full-height back + sides and a top board), housingHeight (224), topDepth (top board depth,
- * default = baseDepth; deeper = shelf over the desk),
+ * default = baseDepth; deeper = shelf over the desk), topExtend (extra top board on the +x side, e.g. to butt against a neighbouring
+ * shelf; joined on top with two metal mending plates),
  * deskWidth (120), deskDepth (60), deskHeight (75), deskOffset (x of the desk centre along the wall, 0 = middle),
  * material (wood), mattressColor.
  */
@@ -117,6 +118,7 @@ export function wallBedDesk(params: Record<string, unknown>): Generated {
   const housing = params.housing === true;
   const hh = num(params.housingHeight, 224);
   const topD = num(params.topDepth, bd);
+  const ext = num(params.topExtend, 0);
   const dw = num(params.deskWidth, 120);
   const dd = num(params.deskDepth, 60);
   const dh = num(params.deskHeight, 75);
@@ -145,8 +147,14 @@ export function wallBedDesk(params: Record<string, unknown>): Generated {
       part('side-left', ['housing', 'side'], [t, hh, bd], [-BW / 2 + t / 2, hh / 2, bd / 2]),
       part('side-right', ['housing', 'side'], [t, hh, bd], [BW / 2 - t / 2, hh / 2, bd / 2]),
       part('back', ['housing', 'back'], [BW - 2 * t, hh, t], [0, hh / 2, t / 2]),
-      part('top', ['housing', 'top', 'shelf'], [BW, t, topD], [0, hh + t / 2, topD / 2]),
+      part('top', ['housing', 'top', 'shelf'], [BW + ext, t, topD], [ext / 2, hh + t / 2, topD / 2]),
     );
+    if (ext > 0) {
+      // flat steel mending plates screwed on top across the joint with the neighbouring shelf
+      for (const [i, z] of [topD * 0.25, topD * 0.75].entries()) {
+        parts.push(part(`join-plate-${i + 1}`, ['housing', 'metal', 'plate'], [12, 0.3, 4], [BW / 2 + ext, hh + t + 0.15, z], { material: 'metal-black' }));
+      }
+    }
   } else {
     parts.push(
       part('base-left', ['base'], [t, bh - 2 * t, bd], [-BW / 2 + t / 2, bh / 2, bd / 2]),
