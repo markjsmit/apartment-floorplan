@@ -1,7 +1,7 @@
 import { useMemo } from 'react';
 import { DoubleSide } from 'three';
 import type { ThreeEvent } from '@react-three/fiber';
-import type { Room } from '../model/schema';
+import type { Placement, Room } from '../model/schema';
 import { resolveWalls, roomBounds, wallSegments } from '../model/geometry';
 import { placeRoomItems } from '../model/placement';
 import { initialState, openingParams, resolveAsset } from '../model/assets';
@@ -14,7 +14,14 @@ import { PartsView } from './PartsView';
 
 const CLICK_SLOP = 6;
 
-export function RoomView({ room, showCeiling }: { room: Room; showCeiling: boolean }) {
+/** One room, drawn in its own coordinates and moved into house space by its placement. */
+export function RoomView({ room, placement, hiddenAssets, showCeiling }: {
+  room: Room;
+  placement: Placement;
+  /** openings whose door leaf the room on the other side of the doorway draws */
+  hiddenAssets: Set<string>;
+  showCeiling: boolean;
+}) {
   const bundle = useStore((s) => s.bundle);
   const itemStates = useStore((s) => s.itemStates);
   const select = useStore((s) => s.select);
@@ -29,7 +36,7 @@ export function RoomView({ room, showCeiling }: { room: Room; showCeiling: boole
   };
 
   return (
-    <group>
+    <group position={[placement.x, 0, placement.z]} rotation={[0, (placement.rotationDeg * Math.PI) / 180, 0]}>
       <mesh
         ref={registerObject(`${room.id}.floor`)}
         geometry={footprintGeometry(room.footprint, true)}
@@ -56,7 +63,7 @@ export function RoomView({ room, showCeiling }: { room: Room; showCeiling: boole
       <mesh position={[(bounds.minX + bounds.maxX) / 2, room.ceilingHeight + 13.5, (bounds.minZ + bounds.maxZ) / 2]} castShadow>
         {/* starts 3 cm below the ceiling so the wall/ceiling joint is inside it; casts from both sides
             because three.js renders back faces into shadow maps, which would leave the joint lit */}
-        <boxGeometry args={[bounds.maxX - bounds.minX + 80, 33, bounds.maxZ - bounds.minZ + 80]} />
+        <boxGeometry args={[bounds.maxX - bounds.minX + 40, 33, bounds.maxZ - bounds.minZ + 40]} />
         <meshBasicMaterial colorWrite={false} depthWrite={false} shadowSide={DoubleSide} />
       </mesh>
 
@@ -74,13 +81,15 @@ export function RoomView({ room, showCeiling }: { room: Room; showCeiling: boole
                 y0: r0.y0 <= 0 ? -5 : r0.y0,
                 y1: r0.y1 >= room.ceilingHeight - 0.01 ? room.ceilingHeight + 20 : r0.y1,
               };
+              // 5 mm short on the outside: where two rooms share a wall, each room's own face wins on its side
+              const tb = t - 0.5;
               const u = (r.u0 + r.u1) / 2;
-              const x = w.start[0] + w.dir[0] * u - w.inward[0] * (t / 2);
-              const z = w.start[1] + w.dir[1] * u - w.inward[1] * (t / 2);
+              const x = w.start[0] + w.dir[0] * u - w.inward[0] * (tb / 2);
+              const z = w.start[1] + w.dir[1] * u - w.inward[1] * (tb / 2);
               return (
                 <mesh
                   key={`${r.u0}-${r.y0}`}
-                  geometry={boxWithCmUV(r.u1 - r.u0, r.y1 - r.y0, t, [r.u0, r.y0])}
+                  geometry={boxWithCmUV(r.u1 - r.u0, r.y1 - r.y0, tb, [r.u0, r.y0])}
                   material={getMaterial(bundle, w.material)}
                   position={[x, (r.y0 + r.y1) / 2, z]}
                   rotation={[0, yaw, 0]}
@@ -96,7 +105,7 @@ export function RoomView({ room, showCeiling }: { room: Room; showCeiling: boole
       {bundle && room.openings.map((o) => {
         const raw = o.asset ? bundle.furniture[o.asset] : undefined;
         const w = walls.find((x) => x.id === o.wall);
-        if (!raw || !w) return null;
+        if (!raw || !w || hiddenAssets.has(o.id)) return null;
         const u = o.offset + o.width / 2;
         const asset = resolveAsset(raw, openingParams(raw, o, w.thickness));
         const parts = asset.parts;

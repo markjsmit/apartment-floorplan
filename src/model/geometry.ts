@@ -121,7 +121,7 @@ export function resolveItemTransform(
   return { position: [x, elevation, z], rotationDeg };
 }
 
-export function roomBounds(room: Room) {
+export function roomBounds(room: Pick<Room, 'footprint'>) {
   const xs = room.footprint.map((p) => p[0]);
   const zs = room.footprint.map((p) => p[1]);
   return { minX: Math.min(...xs), maxX: Math.max(...xs), minZ: Math.min(...zs), maxZ: Math.max(...zs) };

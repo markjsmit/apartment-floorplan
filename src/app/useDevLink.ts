@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { fetchBundle, reportEvent, reportUiState, subscribe, type Command } from '../data/client';
 import { mergeBundle } from '../model/bundle';
-import { currentHouse, currentRoom, EYE_HEIGHT, useStore } from './store';
+import { currentLayout, currentRoom, EYE_HEIGHT, poseInRoom, toRoomLocal, useStore } from './store';
 import { facing } from '../model/geometry';
 import { labelOf } from './labels';
 import { currentMeasurement, useMeasure } from './measureStore';
@@ -14,8 +14,13 @@ function measurementState(s: StoreState) {
   const { active, points } = useMeasure.getState();
   const m = currentMeasurement(points);
   if (!active || !m) return null;
-  const end = (i: number) => ({ ...(points[i].target ? { id: points[i].target!.id, ...labelOf(s, points[i].target!) } : {}), point: points[i].point.map(Math.round) });
-  return { axis: m.axis, distanceCm: Math.round(m.distance), from: end(0), to: end(1), line: [m.from.map(Math.round), m.to.map(Math.round)] };
+  const end = (i: number) => ({ ...(points[i].target ? { id: points[i].target!.id, ...labelOf(s, points[i].target!) } : {}), point: localPoint(s, points[i].point) });
+  return { axis: m.axis, distanceCm: Math.round(m.distance), from: end(0), to: end(1), line: [localPoint(s, m.from), localPoint(s, m.to)] };
+}
+
+function localPoint(s: StoreState, p: [number, number, number]): [number, number, number] {
+  const [x, z] = toRoomLocal(s, [p[0], p[2]]);
+  return [Math.round(x), p[1], Math.round(z)];
 }
 
 /** What Claude reads from .ui-state/ui-state.json. */
@@ -23,18 +28,20 @@ function buildUiState(s: StoreState) {
   const sel = s.selection;
   const selection = sel ? { ...sel, ...labelOf(s, sel) } : null;
   const look = s.lookingAt;
-  const lookingAt = look ? { ...look, ...labelOf(s, look) } : null;
+  const lookingAt = look ? { ...look, ...labelOf(s, look), point: localPoint(s, look.point) } : null;
   const room = currentRoom(s);
+  // everything Claude reads is in the active room's own coordinates, like the house files
+  const pose = poseInRoom(s);
   return {
     room: s.roomId,
     version: s.versionId,
     selection,
     camera: {
       // room-local cm; yaw 0 looks towards -z, positive turns left
-      position: [Math.round(s.camera.x), EYE_HEIGHT[s.person], Math.round(s.camera.z)],
-      yaw: Math.round(s.camera.yaw),
+      position: [Math.round(pose.x), EYE_HEIGHT[s.person], Math.round(pose.z)],
+      yaw: Math.round(pose.yaw),
       pitch: Math.round(s.camera.pitch),
-      facing: room ? facing(s.camera.yaw, room.northAngle) : null,
+      facing: room ? facing(s.camera.yaw, currentLayout(s)?.northAngle ?? room.northAngle) : null,
       view: s.view,
     },
     lookingAt,

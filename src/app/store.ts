@@ -1,6 +1,7 @@
 import { create } from 'zustand';
 import type { Bundle } from '../model/bundle';
-import type { House } from '../model/schema';
+import type { House, Vec2 } from '../model/schema';
+import { computeLayout, toLocal, toWorld, type Layout } from '../model/layout';
 import type { Selection } from '../model/lookup';
 import { findById } from '../model/lookup';
 import { initialState, nextState, openingParams, resolveAsset, resolveParams } from '../model/assets';
@@ -38,7 +39,10 @@ type State = {
 type Actions = {
   setBundle: (b: Bundle) => void;
   setLoadError: (e: string | null) => void;
+  /** jump to a room (tab click): respawns the player there */
   setRoom: (id: string, spawnAt?: string) => boolean;
+  /** the player walked into a room: just update which room is active */
+  enterRoom: (id: string) => void;
   setVersion: (id: string) => boolean;
   select: (s: Selection | null) => void;
   selectById: (id: string) => boolean;
@@ -95,6 +99,9 @@ export const useStore = create<State & Actions>((set, get) => ({
     if (id !== get().roomId) set({ roomId: id, selection: null, spawnTick: get().spawnTick + 1, spawnAt: spawnAt ?? null });
     return true;
   },
+  enterRoom: (id) => {
+    if (id !== get().roomId) set({ roomId: id });
+  },
   setVersion: (id) => {
     const house = get().bundle?.versions[id];
     if (!house) return false;
@@ -114,7 +121,7 @@ export const useStore = create<State & Actions>((set, get) => ({
     if (!house) return false;
     const found = findById(house, id);
     if (!found) return false;
-    if (found.roomId !== get().roomId) get().setRoom(found.roomId);
+    // one house: no teleport, the outline shows through walls
     set({ selection: { kind: found.kind, id, part: null } });
     return true;
   },
@@ -154,4 +161,39 @@ export function currentHouse(s: Pick<State, 'bundle' | 'versionId'>): House | nu
 
 export function currentRoom(s: Pick<State, 'bundle' | 'versionId' | 'roomId'>) {
   return currentHouse(s)?.rooms.find((r) => r.id === s.roomId) ?? null;
+}
+
+const layoutCache = new WeakMap<House, Layout>();
+/** Where every room of the open version sits in house space (cached per house object). */
+export function currentLayout(s: Pick<State, 'bundle' | 'versionId'>): Layout | null {
+  const house = currentHouse(s);
+  if (!house) return null;
+  let l = layoutCache.get(house);
+  if (!l) {
+    l = computeLayout(house);
+    layoutCache.set(house, l);
+  }
+  return l;
+}
+
+/** House-space point -> coordinates of the active room (what the JSON uses). */
+export function toRoomLocal(s: Pick<State, 'bundle' | 'versionId' | 'roomId'>, p: Vec2): Vec2 {
+  const pl = s.roomId ? currentLayout(s)?.placements[s.roomId] : undefined;
+  return pl ? toLocal(p, pl) : p;
+}
+
+/** The player's pose in the active room's own coordinates (yaw too: rooms can be turned in the house). */
+export function poseInRoom(s: Pick<State, 'bundle' | 'versionId' | 'roomId' | 'camera'>): CameraPose {
+  const pl = s.roomId ? currentLayout(s)?.placements[s.roomId] : undefined;
+  if (!pl) return s.camera;
+  const [x, z] = toLocal([s.camera.x, s.camera.z], pl);
+  return { x, z, yaw: s.camera.yaw - pl.rotationDeg, pitch: s.camera.pitch };
+}
+
+/** A pose given in a room's own coordinates (e.g. a `cam=` link) -> house space. */
+export function poseFromRoom(s: Pick<State, 'bundle' | 'versionId'>, roomId: string | null, pose: CameraPose): CameraPose {
+  const pl = roomId ? currentLayout(s)?.placements[roomId] : undefined;
+  if (!pl) return pose;
+  const [x, z] = toWorld([pose.x, pose.z], pl);
+  return { x, z, yaw: pose.yaw + pl.rotationDeg, pitch: pose.pitch };
 }

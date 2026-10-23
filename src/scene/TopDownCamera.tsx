@@ -7,8 +7,8 @@ import { useStore } from '../app/store';
 
 const DEG = Math.PI / 180;
 
-/** Plan view from above, north (-z) up, with a marker for where you're standing. */
-export function TopDownCamera({ room }: { room: Room }) {
+/** Plan view from above (of the whole house: `room` is its frame), -z up, with a marker for where you're standing. */
+export function TopDownCamera({ room }: { room: Pick<Room, 'footprint'> }) {
   const size = useThree((s) => s.size);
   const camera = useThree((s) => s.camera);
   const cam = useStore((s) => s.camera);

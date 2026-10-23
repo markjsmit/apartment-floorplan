@@ -36,7 +36,8 @@ Ids: items/openings by id, walls `<room>.wall-<n>` (or their stored id), `<room>
 
 `npm run -s snap -- <room> [version] [--cam x,z,yaw,pitch] [--top] [--person heli] [--time 9.5]` → prints a PNG
 path; read it. Use it to check your own edits and to brainstorm ("from the door it looks like…").
-yaw 0 looks towards -z (north when northAngle = 0); positive yaw turns left. Doesn't touch Mark's ui-state.
+`--cam` is in that room's own coordinates (like ui-state): yaw 0 looks towards the room's -z, positive yaw turns
+left. Doesn't touch Mark's ui-state.
 
 ## After every edit
 
@@ -67,7 +68,16 @@ are `[[0,0],[W,0],[W,D],[0,D]]`), `ceilingHeight`, `northAngle` (direction of no
 0 → edge 0 of a rectangle is the north wall), `floor.material`, `ceiling.material`, `wallMaterial`,
 `walls[]` (optional per edge: `{id, edge, tags, material, thickness}`), `openings[]`, `items[]`, `assumptions[]`.
 Walls are auto-derived from the footprint: wall n runs from footprint[n] to footprint[n+1]; compass tags
-("north wall") are added automatically. Rooms are independent for now (`layout` reserved for a future floorplan).
+("north wall") are added automatically.
+
+**One house** (`src/model/layout.ts`): every room keeps its own coordinates; the viewer places all rooms in one
+3D space by their **connected doors** — an opening with `leadsTo: {room, opening}` (set it on both sides) puts the
+other room so its door sits in this one, through this wall (the wall thickness is the gap between the rooms).
+The first room (or `layout.anchor`) stays put. `layout.placements: {roomId: {x, z, rotationDeg}}` pins a room by
+hand (only for rooms without a door connection). Unconnected rooms appear off to the side. A connected doorway is
+walkable when it's a plain `opening` or its door is open (double-click); one door leaf is drawn per doorway.
+`npm run check` warns when doors don't line up, rooms disagree on north, or two rooms leave less than the wall
+thickness between them — that usually means a measurement is off: tell Mark which one.
 
 **Opening**: `{id, type: door|window|opening, wall, offset (cm from the wall's start corner to the near edge),
 width, height, sill, asset?: door-basic|window-basic, state?, tags}`. Door/window frames are generated to fit.

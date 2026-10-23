@@ -10,7 +10,7 @@ import { Toolbar } from './Toolbar';
 import { TouchControls } from './TouchControls';
 import { useDevLink } from './useDevLink';
 import { useIsMobile, useIsTouch } from './useIsMobile';
-import { useStore } from './store';
+import { poseFromRoom, useStore } from './store';
 import { parseUrlState, serializeUrlState } from './url';
 
 export function App() {
@@ -32,7 +32,8 @@ export function App() {
           ...(u.view ? { view: u.view } : {}),
           ...(u.person ? { person: u.person } : {}),
           ...(u.time !== undefined ? { timeOfDay: u.time } : {}),
-          ...(u.camera ? { camera: u.camera } : {}),
+          // cam= in a link is in the room's own coordinates
+          ...(u.camera ? { camera: poseFromRoom({ bundle: b, versionId: u.versionId }, u.roomId, u.camera) } : {}),
         });
         useStore.getState().setBundle(b);
         if (!u.camera) useStore.setState((s) => ({ spawnTick: s.spawnTick + 1 }));

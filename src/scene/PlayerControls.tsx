@@ -1,13 +1,14 @@
 import { useEffect, useMemo, useRef } from 'react';
 import { useFrame, useThree } from '@react-three/fiber';
 import { Raycaster, Vector2 } from 'three';
-import type { Room, Vec2 } from '../model/schema';
-import { resolveWalls } from '../model/geometry';
+import type { House, Vec2 } from '../model/schema';
+import { polygonCentroid, resolveWalls } from '../model/geometry';
 import { placeRoomItems } from '../model/placement';
-import { buildColliders, findFreeSpawn, isFree, moveWithCollision, resolvePlayerPosition } from '../model/collision';
+import { isFree, moveWithCollision, nearestFree } from '../model/collision';
+import { buildHouseColliders, resolveHousePosition, roomAt } from '../model/houseCollision';
+import { toWorld, type Layout } from '../model/layout';
 import { findById } from '../model/lookup';
-import { portalAt } from '../model/portals';
-import { currentHouse, EYE_HEIGHT, useStore } from '../app/store';
+import { EYE_HEIGHT, useStore } from '../app/store';
 import { held, lookDelta, type MoveKey } from './input';
 import { selectableFromHit } from './selectable';
 
@@ -27,9 +28,10 @@ const KEYS: Record<string, MoveKey> = {
 };
 
 /** Arrows walk and turn (old style); W/S walk, A/D step sideways (modern, look with the trackpad); E/C pitch;
- *  trackpad and touch drags look around. Always mounted;
- *  drives the camera only in first-person view. */
-export function PlayerControls({ room, driveCamera }: { room: Room; driveCamera: boolean }) {
+ *  trackpad and touch drags look around. Walks through the whole house (house coordinates): open doorways
+ *  let you through, and the active room follows where you are. Always mounted; drives the camera only in
+ *  first-person view. */
+export function PlayerControls({ house, layout, driveCamera }: { house: House; layout: Layout; driveCamera: boolean }) {
   const { camera, gl, scene } = useThree();
   const bundle = useStore((s) => s.bundle);
   const itemStates = useStore((s) => s.itemStates);
@@ -39,70 +41,77 @@ export function PlayerControls({ room, driveCamera }: { room: Room; driveCamera:
   const pose = useRef({ ...useStore.getState().camera });
   const lastReport = useRef(0);
 
-  const walls = useMemo(() => resolveWalls(room), [room]);
-  const colliders = useMemo(() => {
-    const placed = bundle ? placeRoomItems(room, bundle.furniture, walls, itemStates) : [];
-    return buildColliders(walls, placed.map((p) => ({ position: p.position, rotationDeg: p.rotationDeg, min: p.size.min, max: p.size.max })));
-  }, [room, bundle, walls, itemStates]);
+  const colliders = useMemo(
+    () => buildHouseColliders(house, layout, bundle?.furniture ?? {}, itemStates),
+    [house, layout, bundle, itemStates],
+  );
 
-  // spawn: just inside the door looking in, else the room centre
+  // spawn (tab click / first load): just inside the room's door looking in, else the room centre
   useEffect(() => {
     if (spawnTick === 0) return;
-    // walked in through a door from another room: start at that door, else at the first door
-    const at = useStore.getState().spawnAt;
-    const door = (at ? room.openings.find((o) => o.id === at) : undefined) ?? room.openings.find((o) => o.type === 'door');
+    const store = useStore.getState();
+    const room = house.rooms.find((r) => r.id === store.roomId);
+    if (!room) return;
+    const pl = layout.placements[room.id];
+    const footprint = room.footprint.map((q) => toWorld(q, pl));
+    const walls = resolveWalls(room);
+    const door = (store.spawnAt ? room.openings.find((o) => o.id === store.spawnAt) : undefined) ?? room.openings.find((o) => o.type === 'door');
     const w = door && walls.find((x) => x.id === door.wall);
     let p: Vec2 | null = null;
     let yaw = 0;
     if (door && w) {
       const u = door.offset + door.width / 2;
-      p = [w.start[0] + w.dir[0] * u + w.inward[0] * 70, w.start[1] + w.dir[1] * u + w.inward[1] * 70];
-      yaw = Math.atan2(-w.inward[0], -w.inward[1]) / DEG;
+      p = toWorld([w.start[0] + w.dir[0] * u + w.inward[0] * 70, w.start[1] + w.dir[1] * u + w.inward[1] * 70], pl);
+      const into = toWorld([w.start[0] + w.dir[0] * u + w.inward[0] * 170, w.start[1] + w.dir[1] * u + w.inward[1] * 170], pl);
+      yaw = Math.atan2(-(into[0] - p[0]), -(into[1] - p[1])) / DEG;
       if (!isFree(p, RADIUS, colliders)) p = null;
     }
-    if (!p) p = findFreeSpawn(room, colliders, RADIUS);
+    if (!p) p = nearestFree(toWorld(polygonCentroid(room.footprint), pl), RADIUS, colliders, footprint);
     pose.current = { x: p[0], z: p[1], yaw, pitch: -8 };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [spawnTick]);
 
-  // furniture changed state (bed folds down on you) or the room changed shape: step back to a valid spot
+  // a door closed on you, furniture changed state, or a room changed shape: step back to a valid spot
   useEffect(() => {
     const p = pose.current;
-    const [x, z] = resolvePlayerPosition([p.x, p.z], room, colliders, RADIUS);
+    const [x, z] = resolveHousePosition([p.x, p.z], house, layout, colliders, RADIUS, useStore.getState().roomId);
     if (x !== p.x || z !== p.z) pose.current = { ...p, x, z };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [colliders, room.footprint]);
+  }, [colliders]);
 
-  // Claude's "look-at": turn towards the item's centre
+  // Claude's "look-at": turn towards the thing's centre
   useEffect(() => {
     if (!lookAtTarget || !bundle) return;
-    const house = currentHouse(useStore.getState());
-    const f = house && findById(house, lookAtTarget.id);
-    if (!f || f.roomId !== room.id) return;
-    let target: [number, number, number] | null = null;
+    const f = findById(house, lookAtTarget.id);
+    if (!f) return;
+    const room = f.room;
+    const pl = layout.placements[room.id];
+    const walls = resolveWalls(room);
+    let local: [number, number, number] | null = null;
     if (f.kind === 'item') {
       const placed = placeRoomItems(room, bundle.furniture, walls, itemStates).find((x) => x.item.id === f.item.id);
       if (placed) {
         const lx = (placed.size.min[0] + placed.size.max[0]) / 2;
         const lz = (placed.size.min[2] + placed.size.max[2]) / 2;
         const r = placed.rotationDeg * DEG;
-        target = [placed.position[0] + lx * Math.cos(r) + lz * Math.sin(r), placed.position[1] + (placed.size.min[1] + placed.size.max[1]) / 2, placed.position[2] - lx * Math.sin(r) + lz * Math.cos(r)];
+        local = [placed.position[0] + lx * Math.cos(r) + lz * Math.sin(r), placed.position[1] + (placed.size.min[1] + placed.size.max[1]) / 2, placed.position[2] - lx * Math.sin(r) + lz * Math.cos(r)];
       }
     } else if (f.kind === 'opening') {
       const w = walls.find((x) => x.id === f.opening.wall);
       if (w) {
         const u = f.opening.offset + f.opening.width / 2;
-        target = [w.start[0] + w.dir[0] * u, f.opening.sill + f.opening.height / 2, w.start[1] + w.dir[1] * u];
+        local = [w.start[0] + w.dir[0] * u, f.opening.sill + f.opening.height / 2, w.start[1] + w.dir[1] * u];
       }
     } else if (f.kind === 'wall') {
       const w = f.wall;
-      target = [(w.start[0] + w.end[0]) / 2, room.ceilingHeight / 2, (w.start[1] + w.end[1]) / 2];
+      local = [(w.start[0] + w.end[0]) / 2, room.ceilingHeight / 2, (w.start[1] + w.end[1]) / 2];
     }
-    if (!target) return;
+    if (!local || !pl) return;
+    const [tx, tz] = toWorld([local[0], local[2]], pl);
     const p = pose.current;
-    const dx = target[0] - p.x;
-    const dz = target[2] - p.z;
-    const dy = target[1] - EYE_HEIGHT[useStore.getState().person];
+    const dx = tx - p.x;
+    const dz = tz - p.z;
+    const dy = local[1] - EYE_HEIGHT[useStore.getState().person];
     pose.current = { ...p, yaw: Math.atan2(-dx, -dz) / DEG, pitch: Math.atan2(dy, Math.hypot(dx, dz)) / DEG };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [lookAtTarget]);
@@ -217,10 +226,9 @@ export function PlayerControls({ room, driveCamera }: { room: Room; driveCamera:
       dx = (dx / len) * WALK * dt;
       dz = (dz / len) * WALK * dt;
       [x, z] = moveWithCollision([x, z], [dx, dz], RADIUS, colliders);
-      const portal = portalAt([x, z], [dx, dz], room, walls, RADIUS);
-      const store = useStore.getState();
-      const to = portal?.leadsTo && currentHouse(store)?.rooms.find((r) => r.id === portal.leadsTo!.room);
-      if (to && store.setRoom(to.id, portal!.leadsTo!.opening)) store.toast(`→ ${to.name}`);
+      // walked into another room: it becomes the active one (tab, reports to Claude)
+      const inside = roomAt([x, z], house, layout);
+      if (inside) useStore.getState().enterRoom(inside);
     }
     pose.current = { x, z, yaw, pitch };
 

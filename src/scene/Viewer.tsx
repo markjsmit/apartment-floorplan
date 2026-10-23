@@ -1,8 +1,9 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { Canvas, useThree } from '@react-three/fiber';
 import { EffectComposer, N8AO, Outline } from '@react-three/postprocessing';
 import { PCFSoftShadowMap, PerspectiveCamera, type Mesh, type Object3D } from 'three';
-import { currentRoom, useStore } from '../app/store';
+import { currentHouse, currentLayout, useStore } from '../app/store';
+import { houseFrame } from '../model/layout';
 import { useIsMobile } from '../app/useIsMobile';
 import { RoomView } from './RoomView';
 import { Lighting } from './Lighting';
@@ -65,18 +66,21 @@ function FovFit() {
 }
 
 export function Viewer() {
-  const room = useStore(currentRoom);
+  const house = useStore(currentHouse);
+  const layout = useStore(currentLayout);
+  const frame = useMemo(() => (house && layout ? houseFrame(house, layout) : null), [house, layout]);
+  const versionId = useStore((s) => s.versionId);
   const view = useStore((s) => s.view);
   const mobile = useIsMobile();
   const select = useStore((s) => s.select);
   const ao = !mobile && new URLSearchParams(location.search).get('ao') !== '0';
 
   useEffect(() => {
-    if (!room) return;
+    if (!house) return;
     window.__sceneReady = false;
     const t = setTimeout(() => (window.__sceneReady = true), 1500);
     return () => clearTimeout(t);
-  }, [room, view]);
+  }, [house, view]);
 
   return (
     <div className="viewer">
@@ -89,13 +93,16 @@ export function Viewer() {
         onPointerMissed={(e) => e.type === 'click' && select(null)}
       >
         <FovFit />
-        {room && (
+        {house && layout && frame && (
           <>
-            <RoomView key={room.id} room={room} showCeiling={view === 'first-person'} />
-            <Lighting room={room} mobile={mobile} />
-            <PlayerControls room={room} driveCamera={view === 'first-person'} />
-            <Measure key={`measure-${room.id}`} />
-            {view === 'top-down' && <TopDownCamera room={room} />}
+            {/* the whole house in one space: every room at its placement */}
+            {house.rooms.map((r) => (
+              <RoomView key={r.id} room={r} placement={layout.placements[r.id]} hiddenAssets={layout.hiddenAssets} showCeiling={view === 'first-person'} />
+            ))}
+            <Lighting room={frame} mobile={mobile} />
+            <PlayerControls house={house} layout={layout} driveCamera={view === 'first-person'} />
+            <Measure key={`measure-${versionId}`} />
+            {view === 'top-down' && <TopDownCamera room={frame} />}
           </>
         )}
         <EffectComposer multisampling={mobile ? 0 : 4} autoClear={false}>

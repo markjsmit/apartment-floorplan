@@ -2,6 +2,7 @@ import type { Bundle } from './bundle';
 import { generatorError, resolveAsset, resolveParams } from './assets';
 import { pointInPolygon, resolveWalls } from './geometry';
 import { footprintCorners, placeRoomItems, quadsOverlap } from './placement';
+import { computeLayout } from './layout';
 
 // Overlap/outside checks ignore this much (cm), so things touching each other or a wall are fine.
 const TOLERANCE = 1;
@@ -37,6 +38,8 @@ export function sanityCheck(bundle: Bundle): Issue[] {
 
   for (const vid of bundle.versionOrder) {
     const house = bundle.versions[vid];
+    // how the rooms fit together as one house (doors lining up, north, walls between rooms)
+    for (const issue of computeLayout(house).issues) warn(`[${vid}] ${issue}`);
     const where = (id: string) => `[${vid}] ${id}`;
     const seen = new Set<string>();
     const unique = (id: string) => {

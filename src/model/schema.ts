@@ -91,11 +91,21 @@ export const HouseMetaSchema = z.object({
 });
 export type HouseMeta = z.infer<typeof HouseMetaSchema>;
 
+export const PlacementSchema = z.object({ x: z.number(), z: z.number(), rotationDeg: z.number().default(0) });
+export type Placement = z.infer<typeof PlacementSchema>;
+
+// How rooms sit together in one house. Normally empty: rooms are placed automatically by their connected doors
+// (openings with `leadsTo`), starting from `anchor` (default: the first room). `placements` pins a room by hand
+// (house cm; room-local point p ends up at rotate(p, rotationDeg) + [x, z]).
+export const LayoutSchema = z.object({
+  anchor: z.string().optional(),
+  placements: z.record(PlacementSchema).default({}),
+});
+
 export const HouseSchema = z.object({
   meta: HouseMetaSchema,
   rooms: z.array(RoomSchema),
-  // Future floorplan: room placement in house coordinates and connections. Ignored by the UI for now.
-  layout: z.unknown().nullable().default(null),
+  layout: LayoutSchema.nullable().default(null),
   assumptions,
 });
 export type House = z.infer<typeof HouseSchema>;
