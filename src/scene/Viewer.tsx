@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
-import { Canvas } from '@react-three/fiber';
+import { Canvas, useThree } from '@react-three/fiber';
 import { EffectComposer, N8AO, Outline } from '@react-three/postprocessing';
-import { PCFSoftShadowMap, type Mesh, type Object3D } from 'three';
+import { PCFSoftShadowMap, PerspectiveCamera, type Mesh, type Object3D } from 'three';
 import { currentRoom, useStore } from '../app/store';
 import { useIsMobile } from '../app/useIsMobile';
 import { RoomView } from './RoomView';
@@ -47,6 +47,20 @@ function SelectionOutline() {
   );
 }
 
+/** Keep at least ~75° horizontal view on portrait phones (a fixed vertical fov feels like a keyhole there). */
+function FovFit() {
+  const camera = useThree((s) => s.camera);
+  const aspect = useThree((s) => s.size.width / s.size.height);
+  useEffect(() => {
+    if (!(camera instanceof PerspectiveCamera)) return;
+    const minHorizontal = 75 * (Math.PI / 180);
+    const vertical = (2 * Math.atan(Math.tan(minHorizontal / 2) / aspect) * 180) / Math.PI;
+    camera.fov = Math.min(110, Math.max(70, vertical));
+    camera.updateProjectionMatrix();
+  }, [camera, aspect]);
+  return null;
+}
+
 export function Viewer() {
   const room = useStore(currentRoom);
   const view = useStore((s) => s.view);
@@ -71,6 +85,7 @@ export function Viewer() {
         onCreated={({ gl }) => { gl.toneMappingExposure = 1.15; }}
         onPointerMissed={(e) => e.type === 'click' && select(null)}
       >
+        <FovFit />
         {room && (
           <>
             <RoomView key={room.id} room={room} showCeiling={view === 'first-person'} />
