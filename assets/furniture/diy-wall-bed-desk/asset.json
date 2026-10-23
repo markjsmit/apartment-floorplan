@@ -14,6 +14,7 @@
     "deskWidth": { "default": 120, "description": "cm" },
     "deskDepth": { "default": 60, "description": "cm" },
     "deskHeight": { "default": 75, "description": "cm (top surface)" },
+    "deskOffset": { "default": 0, "description": "cm, desk centre along the wall (negative = towards the wall's start corner)" },
     "material": { "default": "wood-oak-light", "description": "texture id" },
     "mattressColor": { "default": "#e8e6e1", "description": "#hex" }
   }

@@ -742,10 +742,10 @@
           ]
         },
         {
-          "id": "storage.wall-bed", "asset": "diy-wall-bed-desk", "params": { "bedWidth": 140, "bedLength": 190 },
+          "id": "storage.wall-bed", "asset": "diy-wall-bed-desk", "params": { "bedWidth": 140, "bedLength": 190, "deskWidth": 90, "deskOffset": -23 },
           "name": "Wall bed + fold-down desk (guest bed, DIY)", "tags": ["wall bed", "guest bed", "desk", "murphy bed"],
           "against": { "wall": "storage.wall-1", "offset": 2 },
-          "assumptions": [{ "path": "params", "note": "Mark's existing 140 x 190 bed frame top on a board; base 35 high x 50 deep (pillows, bedding); desk 120 x 60 at 75; hinges, locks and legs not chosen yet" }]
+          "assumptions": [{ "path": "params", "note": "Mark's existing 140 x 190 bed frame top on a board; base 35 high x 50 deep (pillows, bedding); desk 90 x 60 at 75 at the window end (keeps ~57 cm free in front of the aisle); hinges, locks and legs not chosen yet" }]
         },
         {
           "id": "storage.high-shelf",

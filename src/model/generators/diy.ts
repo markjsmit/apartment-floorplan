@@ -99,7 +99,8 @@ export function bridgeShelf(params: Record<string, unknown>): Part[] {
  * Origin: back-centre on the floor at the wall; local x along the wall, +z into the room.
  * States: desk (bed up, desk out — default), folded (bed up, desk locked up against the bed), bed (bed down, desk underneath).
  * Params: bedWidth (140), bedLength (190), body (board + frame thickness, 12), mattress (18), baseHeight (35), baseDepth (50),
- * deskWidth (120), deskDepth (60), deskHeight (75), material (wood), mattressColor.
+ * deskWidth (120), deskDepth (60), deskHeight (75), deskOffset (x of the desk centre along the wall, 0 = middle),
+ * material (wood), mattressColor.
  */
 export function wallBedDesk(params: Record<string, unknown>): Generated {
   const W = num(params.bedWidth, 140);
@@ -111,6 +112,7 @@ export function wallBedDesk(params: Record<string, unknown>): Generated {
   const dw = num(params.deskWidth, 120);
   const dd = num(params.deskDepth, 60);
   const dh = num(params.deskHeight, 75);
+  const dx = num(params.deskOffset, 0);
   const dt = 2.5;
   const t = 1.8;
   const material = String(params.material ?? 'wood-oak-light');
@@ -162,8 +164,8 @@ export function wallBedDesk(params: Record<string, unknown>): Generated {
   });
 
   // desk (out = part pose), hinged on the bed's underside at desk height
-  parts.push(part('desk-top', ['desk', 'desktop'], [dw, dt, dd], [0, dh - dt / 2, bd + dd / 2]));
-  const deskFoldedCentre: Vec3 = [0, dh + dd / 2, bd + dt / 2];
+  parts.push(part('desk-top', ['desk', 'desktop'], [dw, dt, dd], [dx, dh - dt / 2, bd + dd / 2]));
+  const deskFoldedCentre: Vec3 = [dx, dh + dd / 2, bd + dt / 2];
   folded['desk-top'] = { position: deskFoldedCentre, rotation: [-90, 0, 0] };
   // bed: folded desk turned with the bed about the bed hinge
   const turn = ([x, y, z]: Vec3): Vec3 => [x, bh - (z - bd), bd + (y - bh)];
@@ -171,7 +173,7 @@ export function wallBedDesk(params: Record<string, unknown>): Generated {
   const legH = dh - dt;
   for (const side of [-1, 1]) {
     const id = `desk-leg-${side < 0 ? 'l' : 'r'}`;
-    const x = side * (dw / 2 - 4);
+    const x = dx + side * (dw / 2 - 4);
     parts.push(part(id, ['desk', 'leg'], [4, legH, 4], [x, legH / 2, bd + dd - 4]));
     const foldedLeg: Vec3 = [x, dh + dd - 4 - legH / 2, bd + dt + 2.5];
     folded[id] = { position: foldedLeg };
