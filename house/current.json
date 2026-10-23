@@ -305,7 +305,7 @@
           "id": "living.bedroom2-door",
           "type": "door",
           "wall": "living.wall-4",
-          "offset": 10,
+          "offset": 20,
           "width": 83,
           "height": 211,
           "asset": "door-basic",
