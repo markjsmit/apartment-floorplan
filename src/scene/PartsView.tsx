@@ -1,7 +1,7 @@
 import { useRef } from 'react';
 import { useFrame, type ThreeEvent } from '@react-three/fiber';
 import { Text } from '@react-three/drei';
-import { Euler, Quaternion, Vector3, type Mesh } from 'three';
+import { Color, Euler, Quaternion, Vector3, type Material, type Mesh, type MeshStandardMaterial } from 'three';
 import type { FurnitureAsset, Part, Vec3 } from '../model/schema';
 import { findState, interactivePart, partTransform } from '../model/assets';
 import { useStore } from '../app/store';
@@ -10,6 +10,10 @@ import { partGeometry } from './cmGeometry';
 import { getMaterial } from './materials';
 import { registerObject } from './registry';
 import labelFont from '../../assets/fonts/inter-latin-600-normal.woff?url';
+import { RectAreaLightUniformsLib } from 'three/examples/jsm/lights/RectAreaLightUniformsLib.js';
+import { useLightsOn } from './useLightsOn';
+
+RectAreaLightUniformsLib.init();
 
 const DEG = Math.PI / 180;
 // Pointer moves bigger than this (px) between down and up are drags (looking around), not clicks.
@@ -72,6 +76,7 @@ function PartMesh({ ownerId, kind, part, pose, interactive, registerAsPart, onCl
   onDoubleClick: (e: ThreeEvent<MouseEvent>) => void;
 }) {
   const bundle = useStore((s) => s.bundle);
+  const lightsOn = useLightsOn();
   const ref = useRef<Mesh | null>(null);
   const target = useRef({ pos: new Vector3(), quat: new Quaternion() });
   target.current.pos.set(...pose.position);
@@ -94,7 +99,8 @@ function PartMesh({ ownerId, kind, part, pose, interactive, registerAsPart, onCl
   });
 
   if (!part.geometry) return null;
-  const material = getMaterial(bundle, part.material ?? (part.glass ? 'glass' : undefined), part.color, part.glass);
+  const base = getMaterial(bundle, part.material ?? (part.glass ? 'glass' : undefined), part.color, part.glass);
+  const material = part.emit ? emissive(base, part.emit.color, lightsOn) : base;
   return (
     <mesh
       ref={(m) => {
@@ -113,11 +119,35 @@ function PartMesh({ ownerId, kind, part, pose, interactive, registerAsPart, onCl
       userData={{ selectable: { kind, id: ownerId, part: part.id } }}
     >
       {part.label && <Label label={part.label} faceZ={faceDepth(part) / 2} />}
+      {part.emit && lightsOn && part.geometry.type === 'box' && (
+        // soft light out of the bottom face (a rect area light shines along its -z; -90° about x points that down)
+        <rectAreaLight
+          args={[part.emit.color, part.emit.intensity, part.geometry.size[0], part.geometry.size[2]]}
+          position={[0, -part.geometry.size[1] / 2 - 0.05, 0]}
+          rotation={[-Math.PI / 2, 0, 0]}
+        />
+      )}
     </mesh>
   );
 }
 
 const noRaycast = () => null;
+
+const emissiveCache = new Map<string, Material>();
+
+/** Same material, glowing in `color` while the lights are on. */
+function emissive(base: Material, color: string, on: boolean): Material {
+  const key = `${base.uuid}|${color}|${on}`;
+  let m = emissiveCache.get(key);
+  if (!m) {
+    const glow = (base as MeshStandardMaterial).clone();
+    glow.emissive = new Color(on ? color : '#000000');
+    glow.emissiveIntensity = on ? 2.2 : 0;
+    m = glow;
+    emissiveCache.set(key, m);
+  }
+  return m;
+}
 
 function faceDepth(part: Part): number {
   const g = part.geometry;

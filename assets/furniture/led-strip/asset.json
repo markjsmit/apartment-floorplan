@@ -1,0 +1,13 @@
+{
+  "id": "led-strip",
+  "name": "LED strip in aluminium channel",
+  "tags": ["led", "led strip", "light", "lighting", "under-shelf light"],
+  "description": "Slim LED strip (~1.8 x 1.1 cm aluminium channel with a milky diffuser) for under shelves. Origin = top-back-centre, so position y = the shelf's underside. Glows and lights downwards when the room light is on (evening).",
+  "source": { "kind": "procedural", "generator": "led-strip", "license": "self-made", "notes": "Typical surface-mount LED profile (e.g. 17 x 7 mm). Power from the room's ceiling light point via a junction box, so the wall switch turns it on." },
+  "params": {
+    "length": { "default": 60, "description": "cm" },
+    "axis": { "default": "x", "description": "x | z — direction the strip runs (item space)" },
+    "color": { "default": "#fff1dc", "description": "light colour (warm white)" },
+    "intensity": { "default": 6, "description": "area light strength" }
+  }
+}

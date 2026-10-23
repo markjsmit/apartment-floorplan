@@ -136,3 +136,15 @@ describe('wall bed in its closet', () => {
     expect(size('folded').max[2]).toBeCloseTo(60, 0);
   });
 });
+
+describe('led strip', () => {
+  it('has a glowing diffuser hanging under its origin, along the chosen axis', () => {
+    const parts = generators['led-strip']({ length: 56, axis: 'z' }) as Part[];
+    const diffuser = parts.find((p) => p.id === 'diffuser')!;
+    expect(diffuser.emit).toBeDefined();
+    const s = assetSize(parts, undefined);
+    expect(s.d).toBeCloseTo(56, 0);
+    expect(s.max[1]).toBeCloseTo(0, 5);
+    expect(s.min[1]).toBeLessThan(0);
+  });
+});

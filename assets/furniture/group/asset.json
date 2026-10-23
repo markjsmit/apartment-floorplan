@@ -1,0 +1,8 @@
+{
+  "id": "group",
+  "name": "Group (several pieces as one item)",
+  "tags": ["group", "assembly"],
+  "description": "Several generated pieces placed together as one item, e.g. wiring: cable channels + junction box + LED strips. params.members: [{ generator, params, offset: [x, y, z], prefix }].",
+  "source": { "kind": "procedural", "generator": "group", "license": "self-made" },
+  "params": { "members": { "default": [], "description": "[{ generator, params, offset, prefix }]" } }
+}

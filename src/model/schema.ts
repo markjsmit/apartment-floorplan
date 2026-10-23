@@ -144,6 +144,8 @@ export const PartSchema = z.object({
   label: z
     .object({ text: z.string(), size: z.number().default(2.4), offset: Vec2Schema.default([0, 0]), color: z.string().default('#2b2b2b') })
     .optional(),
+  // glowing part (LED diffuser): emissive when the room light is on, plus a soft area light out of its bottom (-y) face
+  emit: z.object({ color: z.string().default('#fff1dc'), intensity: z.number().default(6) }).optional(),
 });
 export type Part = z.infer<typeof PartSchema>;
 
