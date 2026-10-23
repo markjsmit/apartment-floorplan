@@ -17,10 +17,11 @@ const MAX_PITCH = 80;
 
 const KEYS: Record<string, MoveKey> = {
   ArrowUp: 'forward', ArrowDown: 'back', ArrowLeft: 'left', ArrowRight: 'right',
+  w: 'forward', W: 'forward', s: 'back', S: 'back',
   a: 'left', A: 'left', d: 'right', D: 'right', e: 'up', E: 'up', c: 'down', C: 'down',
 };
 
-/** Doom-style walking: keys move/turn, E/C pitch, trackpad and touch drags look around. Always mounted;
+/** Doom-style walking: arrows or W/S/A/D move/turn, E/C pitch, trackpad and touch drags look around. Always mounted;
  *  drives the camera only in first-person view. */
 export function PlayerControls({ room, driveCamera }: { room: Room; driveCamera: boolean }) {
   const { camera, gl } = useThree();

@@ -8,7 +8,7 @@ A small 3D walk-through of our new apartment, designed room by room by talking t
 
 | | Desktop | Phone |
 |---|---|---|
-| Walk | ↑ / ↓ | ▲ / ▼ buttons |
+| Walk | ↑ / ↓ or W / S | ▲ / ▼ buttons |
 | Turn | ← / → or A / D, two-finger swipe | swipe, ◀ / ▶ |
 | Look up / down | E / C, two-finger swipe | swipe |
 | Select | click | tap |
