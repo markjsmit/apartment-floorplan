@@ -11,6 +11,7 @@
     "mattress": { "default": 18, "description": "cm" },
     "baseHeight": { "default": 35, "description": "storage base height = bed height when down" },
     "baseDepth": { "default": 50, "description": "cm from the wall" },
+    "hinge": { "default": 50, "description": "cm from the wall to the bed hinge (= body + mattress → stands right against the wall)" },
     "deskWidth": { "default": 120, "description": "cm" },
     "deskDepth": { "default": 60, "description": "cm" },
     "deskHeight": { "default": 75, "description": "cm (top surface)" },

@@ -99,6 +99,7 @@ export function bridgeShelf(params: Record<string, unknown>): Part[] {
  * Origin: back-centre on the floor at the wall; local x along the wall, +z into the room.
  * States: desk (bed up, desk out — default), folded (bed up, desk locked up against the bed), bed (bed down, desk underneath).
  * Params: bedWidth (140), bedLength (190), body (board + frame thickness, 12), mattress (18), baseHeight (35), baseDepth (50),
+ * hinge (z of the bed hinge, default = baseDepth; body + mattress = everything folds within the base depth),
  * deskWidth (120), deskDepth (60), deskHeight (75), deskOffset (x of the desk centre along the wall, 0 = middle),
  * material (wood), mattressColor.
  */
@@ -109,6 +110,8 @@ export function wallBedDesk(params: Record<string, unknown>): Generated {
   const M = num(params.mattress, 18);
   const bh = num(params.baseHeight, 35);
   const bd = num(params.baseDepth, 50);
+  // hinge line (z) of the bed: at the base front by default; further back lets the folded-up stack stay within the base depth
+  const h = num(params.hinge, bd);
   const dw = num(params.deskWidth, 120);
   const dd = num(params.deskDepth, 60);
   const dh = num(params.deskHeight, 75);
@@ -144,11 +147,11 @@ export function wallBedDesk(params: Record<string, unknown>): Generated {
   }
 
   // bed (up pose = part pose): hinge along the base's front top edge; "bed" turns it +90° about x into the room
-  const pivot: Vec3 = [0, bh, bd];
+  const pivot: Vec3 = [0, bh, h];
   parts.push(
-    part('bed-board', ['bed', 'board'], [W, Tb, L], [0, bh + L / 2, bd - Tb / 2], { pivot, rotation: [-90, 0, 0] }),
-    part('mattress', ['bed', 'mattress'], [W - 2, M, L - 2], [0, bh + L / 2, bd - Tb - M / 2], { pivot, rotation: [-90, 0, 0], material: undefined, color: mattressColor }),
-    part('bed-lock', ['bed', 'lock'], [6, 6, 3], [W / 2 - 6, bh + L - 8, bd + 1.5], { pivot, rotation: [-90, 0, 0], material: undefined, color: '#3a3a3a' }),
+    part('bed-board', ['bed', 'board'], [W, Tb, L], [0, bh + L / 2, h - Tb / 2], { pivot, rotation: [-90, 0, 0] }),
+    part('mattress', ['bed', 'mattress'], [W - 2, M, L - 2], [0, bh + L / 2, h - Tb - M / 2], { pivot, rotation: [-90, 0, 0], material: undefined, color: mattressColor }),
+    part('bed-lock', ['bed', 'lock'], [6, 6, 3], [W / 2 - 6, bh + L - 8, h + 1.5], { pivot, rotation: [-90, 0, 0], material: undefined, color: '#3a3a3a' }),
   );
   // boxes are sized lying down (width, thickness, length); -90° about x stands them up, "bed" turns them back flat
   for (const id of ['bed-board', 'mattress', 'bed-lock']) bed[id] = { rotation: [0, 0, 0] };
@@ -157,25 +160,25 @@ export function wallBedDesk(params: Record<string, unknown>): Generated {
   legAt.forEach((zl, i) => {
     for (const side of [-1, 1]) {
       const id = `bed-leg-${i + 1}${side < 0 ? 'l' : 'r'}`;
-      const x = side * (W / 2 - 6);
-      parts.push(part(id, ['bed', 'leg'], [4, bh, 4], [x, bh + zl - bh / 2, bd + 2]));
-      bed[id] = { position: [x, bh / 2, bd + zl] };
+      const x = side * (W / 2 - 2);
+      parts.push(part(id, ['bed', 'leg'], [4, bh, 4], [x, bh + zl - bh / 2, h + 2]));
+      bed[id] = { position: [x, bh / 2, h + zl] };
     }
   });
 
   // desk (out = part pose), hinged on the bed's underside at desk height
-  parts.push(part('desk-top', ['desk', 'desktop'], [dw, dt, dd], [dx, dh - dt / 2, bd + dd / 2]));
-  const deskFoldedCentre: Vec3 = [dx, dh + dd / 2, bd + dt / 2];
+  parts.push(part('desk-top', ['desk', 'desktop'], [dw, dt, dd], [dx, dh - dt / 2, h + dd / 2]));
+  const deskFoldedCentre: Vec3 = [dx, dh + dd / 2, h + dt / 2];
   folded['desk-top'] = { position: deskFoldedCentre, rotation: [-90, 0, 0] };
   // bed: folded desk turned with the bed about the bed hinge
-  const turn = ([x, y, z]: Vec3): Vec3 => [x, bh - (z - bd), bd + (y - bh)];
+  const turn = ([x, y, z]: Vec3): Vec3 => [x, bh - (z - h), h + (y - bh)];
   bed['desk-top'] = { position: turn(deskFoldedCentre), rotation: [0, 0, 0] };
   const legH = dh - dt;
   for (const side of [-1, 1]) {
     const id = `desk-leg-${side < 0 ? 'l' : 'r'}`;
     const x = dx + side * (dw / 2 - 4);
-    parts.push(part(id, ['desk', 'leg'], [4, legH, 4], [x, legH / 2, bd + dd - 4]));
-    const foldedLeg: Vec3 = [x, dh + dd - 4 - legH / 2, bd + dt + 2.5];
+    parts.push(part(id, ['desk', 'leg'], [4, legH, 4], [x, legH / 2, h + dd - 4]));
+    const foldedLeg: Vec3 = [x, dh + dd - 4 - legH / 2, h + dt + 2.5];
     folded[id] = { position: foldedLeg };
     bed[id] = { position: turn(foldedLeg), rotation: [90, 0, 0] };
   }

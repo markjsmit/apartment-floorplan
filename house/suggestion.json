@@ -744,14 +744,14 @@
         {
           "id": "storage.ironing-board", "asset": "ironing-board",
           "name": "Ironing board (in the slot between bed and Kallax)", "tags": ["ironing board", "slot"],
-          "position": [275, 0, 144.5],
+          "position": [280.5, 0, 144.5],
           "assumptions": [{ "path": "asset", "note": "generic board ~125 x 38, folded ~8 cm thick; the slot is ~9.5 cm" }]
         },
         {
-          "id": "storage.wall-bed", "asset": "diy-wall-bed-desk", "params": { "bedWidth": 140, "bedLength": 190, "deskWidth": 90, "deskOffset": -23 },
+          "id": "storage.wall-bed", "asset": "diy-wall-bed-desk", "params": { "bedWidth": 140, "bedLength": 190, "baseDepth": 39, "hinge": 30, "deskWidth": 90, "deskOffset": -20 },
           "name": "Wall bed + fold-down desk (guest bed, DIY)", "tags": ["wall bed", "guest bed", "desk", "murphy bed"],
           "against": { "wall": "storage.wall-1", "offset": 0 },
-          "assumptions": [{ "path": "params", "note": "Mark's existing 140 x 190 bed frame top on a board; base 35 high x 50 deep (pillows, bedding); desk 90 x 60 at 75 at the window end (keeps ~57 cm free in front of the aisle); hinges, locks and legs not chosen yet" }]
+          "assumptions": [{ "path": "params", "note": "Mark's existing 140 x 190 bed frame top on a board; base 35 high x 39 deep like the Kallax (pillows, bedding); hinge 30 from the wall so everything folded stays within 39; desk 90 x 60 at 75 at the window end (keeps ~57 cm free in front of the aisle); hinges, locks and legs not chosen yet" }]
         },
         {
           "id": "storage.high-shelf",

@@ -107,3 +107,16 @@ describe('wall bed + desk', () => {
     expect(size('folded').max[2]).toBeLessThan(50 + 10);
   });
 });
+
+describe('wall bed + desk, Kallax-deep', () => {
+  const out = generators['wall-bed-desk']({ baseDepth: 39, hinge: 30, deskWidth: 90, deskOffset: -20 }) as {
+    parts: Part[]; states: { id: string; name: string; parts: Record<string, unknown> }[];
+  };
+  const size = (state: string) => assetSize(out.parts, out.states.find((s) => s.id === state) as never);
+  it('folds up within the 39 cm KALLAX depth', () => {
+    expect(size('folded').max[2]).toBeLessThanOrEqual(39);
+  });
+  it('lies down from the hinge at 30 cm', () => {
+    expect(size('bed').max[2]).toBeCloseTo(30 + 190, 0);
+  });
+});
