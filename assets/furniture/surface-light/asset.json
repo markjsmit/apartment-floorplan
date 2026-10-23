@@ -1,0 +1,13 @@
+{
+  "id": "surface-light",
+  "name": "Round LED surface light (flush mount)",
+  "tags": ["lamp", "light", "ceiling light", "flush mount", "surface light", "lighting"],
+  "description": "Round surface-mounted LED light, Ø30 x 6 cm, ~24 W / 2000+ lm (common in Israeli stores as צמוד תקרה). Origin = top-centre, so position y = the underside it is screwed to. On when the room light is on (evening).",
+  "source": { "kind": "procedural", "generator": "surface-light", "license": "self-made", "notes": "Generic fixture size; pick a real one (e.g. 4000 K neutral white for a storage room)." },
+  "params": {
+    "diameter": { "default": 30, "description": "cm" },
+    "height": { "default": 6, "description": "cm" },
+    "color": { "default": "#fff6e8", "description": "light colour" },
+    "intensity": { "default": 14000, "description": "point light strength (ceiling lamp ≈ 30000)" }
+  }
+}

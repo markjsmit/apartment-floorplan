@@ -144,8 +144,11 @@ export const PartSchema = z.object({
   label: z
     .object({ text: z.string(), size: z.number().default(2.4), offset: Vec2Schema.default([0, 0]), color: z.string().default('#2b2b2b') })
     .optional(),
-  // glowing part (LED diffuser): emissive when the room light is on, plus a soft area light out of its bottom (-y) face
-  emit: z.object({ color: z.string().default('#fff1dc'), intensity: z.number().default(6) }).optional(),
+  // glowing part (lamp diffuser, LED strip): emissive when the room light is on, plus a light out of its bottom (-y) face:
+  // area = soft rect light the size of the face (strips), point = a lamp (intensity like the ceiling lamp's ~30000)
+  emit: z
+    .object({ color: z.string().default('#fff1dc'), intensity: z.number().default(6), kind: z.enum(['area', 'point']).default('area') })
+    .optional(),
 });
 export type Part = z.infer<typeof PartSchema>;
 

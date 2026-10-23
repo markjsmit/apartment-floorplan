@@ -119,7 +119,10 @@ function PartMesh({ ownerId, kind, part, pose, interactive, registerAsPart, onCl
       userData={{ selectable: { kind, id: ownerId, part: part.id } }}
     >
       {part.label && <Label label={part.label} faceZ={faceDepth(part) / 2} />}
-      {part.emit && lightsOn && part.geometry.type === 'box' && (
+      {part.emit && lightsOn && part.emit.kind === 'point' && (
+        <pointLight position={[0, -faceHeight(part) / 2 - 2, 0]} intensity={part.emit.intensity} distance={0} decay={2} color={part.emit.color} />
+      )}
+      {part.emit && lightsOn && part.emit.kind === 'area' && part.geometry.type === 'box' && (
         // soft light out of the bottom face (a rect area light shines along its -z; -90° about x points that down)
         <rectAreaLight
           args={[part.emit.color, part.emit.intensity, part.geometry.size[0], part.geometry.size[2]]}
@@ -147,6 +150,11 @@ function emissive(base: Material, color: string, on: boolean): Material {
     emissiveCache.set(key, m);
   }
   return m;
+}
+
+function faceHeight(part: Part): number {
+  const g = part.geometry;
+  return g?.type === 'box' ? g.size[1] : g?.type === 'cylinder' ? g.height : 0;
 }
 
 function faceDepth(part: Part): number {

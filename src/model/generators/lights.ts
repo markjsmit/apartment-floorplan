@@ -17,7 +17,24 @@ export function ledStrip(params: Record<string, unknown>): Part[] {
     { id: 'channel', tags: ['led', 'channel'], geometry: { type: 'box', size: size(L, 0.8, 1.8) }, position: pos(-0.4, 0.9), rotation: [0, 0, 0], material: 'aluminium-grey', castShadow: false, glass: false },
     {
       id: 'diffuser', tags: ['led', 'light'], geometry: { type: 'box', size: size(L - 0.4, 0.3, 1.2) }, position: pos(-0.95, 0.9), rotation: [0, 0, 0],
-      color: '#f4f4f2', castShadow: false, glass: false, emit: { color, intensity: num(params.intensity, 6) },
+      color: '#f4f4f2', castShadow: false, glass: false, emit: { color, intensity: num(params.intensity, 6), kind: 'area' },
+    },
+  ];
+}
+
+/**
+ * Round surface-mounted LED ceiling light ("flush mount"), e.g. Ø30 cm / 24 W / ~2000+ lm. Origin = top-centre, so
+ * position y = the ceiling or shelf underside it is screwed to. Params: diameter, height, color, intensity.
+ */
+export function surfaceLight(params: Record<string, unknown>): Part[] {
+  const d = num(params.diameter, 30);
+  const h = num(params.height, 6);
+  const color = String(params.color ?? '#fff6e8');
+  return [
+    { id: 'housing', tags: ['lamp', 'housing'], geometry: { type: 'cylinder', radius: d / 2, height: h - 1, segments: 32 }, position: [0, -(h - 1) / 2, 0], rotation: [0, 0, 0], color: '#f4f4f2', castShadow: false, glass: false },
+    {
+      id: 'diffuser', tags: ['lamp', 'light'], geometry: { type: 'cylinder', radius: d / 2 - 1, height: 1, segments: 32 }, position: [0, -h + 0.5, 0], rotation: [0, 0, 0],
+      color: '#fbfbf8', castShadow: false, glass: false, emit: { color, intensity: num(params.intensity, 14000), kind: 'point' },
     },
   ];
 }

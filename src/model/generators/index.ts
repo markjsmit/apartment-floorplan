@@ -5,7 +5,7 @@ import { bridgeShelf, plywoodShelving, wallBedDesk } from './diy';
 import { group } from './group';
 import { suitcase } from './suitcase';
 import { stuff } from './stuff';
-import { ledStrip } from './lights';
+import { ledStrip, surfaceLight } from './lights';
 import { door, windowParts } from './openings';
 import { kitchenCounter, kitchenIsland, kitchenTall, kitchenWallCabinet, plainBox, slidingDoor, trackLight } from './builtins';
 
@@ -30,6 +30,7 @@ export const generators: Record<string, Generator> = {
   suitcase,
   stuff,
   'led-strip': ledStrip,
+  'surface-light': surfaceLight,
   group: (params) => group(params, generators),
   door,
   window: windowParts,
