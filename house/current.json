@@ -2,7 +2,7 @@
   "meta": {
     "name": "Current",
     "kind": "current",
-    "note": "Mark's new apartment.",
+    "note": "Mark's new apartment, Tel Aviv, 27th floor.",
     "location": { "lat": 32.0853, "lon": 34.7818, "label": "Tel Aviv" }
   },
   "assumptions": [],
@@ -44,7 +44,7 @@
       "tags": ["living room", "salon", "kitchen", "dining", "open space", "living"],
       "footprint": [[0, 0], [575, 0], [575, 780], [-330, 780], [-330, 370], [0, 370]],
       "ceilingHeight": 270,
-      "northAngle": 0,
+      "northAngle": 180,
       "floor": { "material": "tiles-porcelain-60" },
       "ceiling": { "material": "white-paint" },
       "wallMaterial": "white-paint",
@@ -120,7 +120,6 @@
       "assumptions": [
         { "path": "footprint", "note": "estimated from 5 photos (sources/new house/kitchen:livingroom), 60x60 floor tiles + 100 cm front door as rulers. Kitchen/dining part ~5.75 m wide, living part ~9 m wide incl. the bay west of the pillar, ~7.8 m long. The bay width (sofa wall 3.3 m) and the total length are the shakiest — please measure" },
         { "path": "ceilingHeight", "note": "photos say 265-290 (door as ruler); the bedroom photo said ~250 — please measure" },
-        { "path": "northAngle", "note": "unknown; north drawn towards the kitchen wall" },
         { "path": "openings[living.front-door]", "note": "assumed the front door (steel: the magnets stick). ~100 x 213, from photo 3" },
         { "path": "openings[living.balcony-door]", "note": "width ~3 m guessed: only part of it is in photo 4" },
         { "path": "openings[living.east-window]", "note": "tall narrow window next to the balcony corner, size from photo 4 (half hidden by a TV)" },
