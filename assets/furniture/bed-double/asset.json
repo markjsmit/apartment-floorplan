@@ -1,0 +1,19 @@
+{
+  "id": "bed-double",
+  "name": "Double bed 160x200",
+  "tags": ["bed", "double bed", "160x200", "upholstered bed"],
+  "description": "Generic upholstered bed for a 160x200 mattress, headboard 100 cm high.",
+  "source": { "kind": "parts", "license": "self-made" },
+  "parts": [
+    { "id": "headboard", "tags": ["headboard"], "geometry": { "type": "box", "size": [168, 100, 8] }, "position": [0, 50, 4], "material": "fabric-grey" },
+    { "id": "base", "tags": ["bed frame", "base"], "geometry": { "type": "box", "size": [168, 25, 206] }, "position": [0, 22.5, 111], "material": "fabric-grey" },
+    { "id": "mattress", "tags": ["mattress"], "geometry": { "type": "box", "size": [160, 20, 200] }, "position": [0, 45, 111], "material": "linen-white" },
+    { "id": "duvet", "tags": ["duvet", "blanket"], "geometry": { "type": "box", "size": [164, 5, 140] }, "position": [0, 57.5, 144], "material": "linen-white", "color": "#dfe3e8" },
+    { "id": "pillow-left", "tags": ["pillow"], "geometry": { "type": "box", "size": [60, 12, 40] }, "position": [-38, 61, 34], "material": "linen-white" },
+    { "id": "pillow-right", "tags": ["pillow"], "geometry": { "type": "box", "size": [60, 12, 40] }, "position": [38, 61, 34], "material": "linen-white" },
+    { "id": "leg-1", "tags": ["leg"], "geometry": { "type": "cylinder", "radius": 2.5, "height": 10 }, "position": [-78, 5, 16], "material": "wood-dark" },
+    { "id": "leg-2", "tags": ["leg"], "geometry": { "type": "cylinder", "radius": 2.5, "height": 10 }, "position": [78, 5, 16], "material": "wood-dark" },
+    { "id": "leg-3", "tags": ["leg"], "geometry": { "type": "cylinder", "radius": 2.5, "height": 10 }, "position": [-78, 5, 208], "material": "wood-dark" },
+    { "id": "leg-4", "tags": ["leg"], "geometry": { "type": "cylinder", "radius": 2.5, "height": 10 }, "position": [78, 5, 208], "material": "wood-dark" }
+  ]
+}

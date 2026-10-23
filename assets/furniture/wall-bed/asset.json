@@ -1,0 +1,24 @@
+{
+  "id": "wall-bed",
+  "name": "Wall bed 160x200 (hinged, self-build)",
+  "tags": ["bed", "wall bed", "murphy bed", "folding bed", "hinged bed", "custom"],
+  "description": "Cabinet 169 x 232 x 47. Bed folds up into the cabinet about a hinge at the bottom front edge. Down it reaches ~252 cm from the wall.",
+  "source": { "kind": "parts", "license": "self-made" },
+  "parts": [
+    { "id": "side-left", "tags": ["frame", "cabinet"], "geometry": { "type": "box", "size": [3, 232, 47] }, "position": [-83, 116, 23.5], "material": "birch-ply" },
+    { "id": "side-right", "tags": ["frame", "cabinet"], "geometry": { "type": "box", "size": [3, 232, 47] }, "position": [83, 116, 23.5], "material": "birch-ply" },
+    { "id": "top", "tags": ["frame", "cabinet"], "geometry": { "type": "box", "size": [169, 3, 47] }, "position": [0, 230.5, 23.5], "material": "birch-ply" },
+    { "id": "back", "tags": ["frame", "cabinet"], "geometry": { "type": "box", "size": [163, 229, 2] }, "position": [0, 114.5, 1], "material": "birch-ply" },
+    { "id": "platform", "tags": ["bed", "platform"], "geometry": { "type": "box", "size": [160, 22, 205] }, "position": [0, 31, 149.5], "pivot": [0, 20, 47], "material": "birch-ply" },
+    { "id": "mattress", "tags": ["bed", "mattress"], "geometry": { "type": "box", "size": [156, 20, 200] }, "position": [0, 52, 149.5], "pivot": [0, 20, 47], "material": "linen-white" }
+  ],
+  "states": [
+    { "id": "up", "name": "Folded up", "parts": { "platform": { "rotation": [-90, 0, 0] }, "mattress": { "rotation": [-90, 0, 0] } } },
+    { "id": "down", "name": "Down (sleeping)", "parts": {} }
+  ],
+  "defaultState": "up",
+  "interactions": [
+    { "part": "platform", "action": "cycleStates" },
+    { "part": "mattress", "action": "cycleStates" }
+  ]
+}

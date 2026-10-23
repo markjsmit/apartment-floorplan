@@ -1,0 +1,24 @@
+{
+  "id": "fabric-grey",
+  "name": "Grey woven fabric",
+  "tags": [
+    "fabric",
+    "grey",
+    "textile",
+    "upholstery"
+  ],
+  "maps": {
+    "color": "color.jpg",
+    "normal": "normal.jpg",
+    "roughness": "roughness.jpg",
+    "ao": "ao.jpg"
+  },
+  "tileSize": [
+    40,
+    40
+  ],
+  "fallbackColor": "#8a8a88",
+  "roughness": 0.95,
+  "source": "ambientCG Fabric061 (https://ambientcg.com/a/Fabric061)",
+  "license": "CC0"
+}

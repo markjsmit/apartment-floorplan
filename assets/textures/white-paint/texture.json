@@ -1,0 +1,14 @@
+{
+  "id": "white-paint",
+  "name": "White matte paint",
+  "tags": [
+    "paint",
+    "white",
+    "wall",
+    "ceiling"
+  ],
+  "fallbackColor": "#f3f1ec",
+  "roughness": 0.92,
+  "source": "self-made (plain colour)",
+  "license": "CC0"
+}

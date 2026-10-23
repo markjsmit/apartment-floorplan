@@ -1,0 +1,14 @@
+{
+  "id": "metal-black",
+  "name": "Black metal",
+  "tags": [
+    "metal",
+    "black",
+    "handle"
+  ],
+  "fallbackColor": "#1d1d1f",
+  "roughness": 0.4,
+  "source": "self-made (plain colour)",
+  "license": "CC0",
+  "metalness": 0.6
+}

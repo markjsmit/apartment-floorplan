@@ -1,0 +1,24 @@
+{
+  "id": "tiles-white",
+  "name": "White square tiles 10 cm",
+  "tags": [
+    "tiles",
+    "white",
+    "bathroom",
+    "kitchen"
+  ],
+  "maps": {
+    "color": "color.jpg",
+    "normal": "normal.jpg",
+    "roughness": "roughness.jpg",
+    "ao": "ao.jpg"
+  },
+  "tileSize": [
+    100,
+    100
+  ],
+  "fallbackColor": "#f0f0ee",
+  "roughness": 0.35,
+  "source": "ambientCG Tiles107 (https://ambientcg.com/a/Tiles107)",
+  "license": "CC0"
+}

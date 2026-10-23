@@ -1,0 +1,22 @@
+{
+  "id": "wood-dark",
+  "name": "Dark walnut-ish wood",
+  "tags": [
+    "wood",
+    "dark",
+    "walnut"
+  ],
+  "maps": {
+    "color": "color.jpg",
+    "normal": "normal.jpg",
+    "roughness": "roughness.jpg"
+  },
+  "tileSize": [
+    80,
+    80
+  ],
+  "fallbackColor": "#6b4a33",
+  "roughness": 0.6,
+  "source": "ambientCG Wood049 (https://ambientcg.com/a/Wood049)",
+  "license": "CC0"
+}

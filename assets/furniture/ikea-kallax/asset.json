@@ -1,0 +1,12 @@
+{
+  "id": "ikea-kallax",
+  "name": "IKEA Kallax shelf",
+  "tags": ["kallax", "ikea", "shelf", "shelving unit", "bookcase", "cube shelf"],
+  "description": "Cube shelf. 1x1 = 42x42, each extra cube +35 cm, depth 39 cm. Works lying or standing (swap cols/rows).",
+  "source": { "kind": "procedural", "generator": "kallax", "notes": "Dimensions from IKEA product sheets.", "license": "self-made" },
+  "params": {
+    "cols": { "default": 2, "description": "cubes wide (1-5)" },
+    "rows": { "default": 2, "description": "cubes high (1-5)" },
+    "color": { "default": "white", "description": "white | black-brown | white-oak | oak | any #hex" }
+  }
+}

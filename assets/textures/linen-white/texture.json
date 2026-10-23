@@ -1,0 +1,14 @@
+{
+  "id": "linen-white",
+  "name": "White linen",
+  "tags": [
+    "fabric",
+    "bedding",
+    "white",
+    "linen"
+  ],
+  "fallbackColor": "#ece9e2",
+  "roughness": 0.95,
+  "source": "self-made (plain colour)",
+  "license": "CC0"
+}

@@ -1,0 +1,7 @@
+{
+  "id": "window-basic",
+  "name": "Window",
+  "tags": ["window"],
+  "description": "Frame, single glass pane and an inside window sill, sized to its opening.",
+  "source": { "kind": "procedural", "generator": "window", "license": "self-made" }
+}

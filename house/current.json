@@ -1,0 +1,41 @@
+{
+  "meta": {
+    "name": "Current",
+    "kind": "current",
+    "note": "Example room to start from. Replace with the real rooms.",
+    "location": { "lat": 50, "lon": 10, "label": "placeholder — ask Mark for the city" }
+  },
+  "assumptions": [{ "path": "meta.location", "note": "placeholder until Mark gives the city" }],
+  "rooms": [
+    {
+      "id": "bedroom",
+      "name": "Example bedroom",
+      "tags": ["example", "bedroom"],
+      "footprint": [[0, 0], [350, 0], [350, 300], [0, 300]],
+      "ceilingHeight": 260,
+      "northAngle": 0,
+      "floor": { "material": "oak-planks" },
+      "ceiling": { "material": "white-paint" },
+      "wallMaterial": "white-paint",
+      "walls": [
+        { "id": "bedroom.wall-0", "edge": 0, "tags": ["window wall"] },
+        { "id": "bedroom.wall-1", "edge": 1, "tags": ["bed wall"] },
+        { "id": "bedroom.wall-2", "edge": 2, "tags": ["door wall"] },
+        { "id": "bedroom.wall-3", "edge": 3, "tags": [] }
+      ],
+      "openings": [
+        { "id": "bedroom.window", "type": "window", "wall": "bedroom.wall-0", "offset": 110, "width": 130, "height": 140, "sill": 90, "asset": "window-basic", "tags": ["the window"] },
+        { "id": "bedroom.door", "type": "door", "wall": "bedroom.wall-2", "offset": 30, "width": 83, "height": 211, "asset": "door-basic", "tags": ["the door"] }
+      ],
+      "items": [
+        { "id": "bedroom.wall-bed", "asset": "wall-bed", "name": "Wall bed", "tags": ["the bed"], "against": { "wall": "bedroom.wall-1", "offset": 40 } },
+        { "id": "bedroom.kallax", "asset": "ikea-kallax", "params": { "cols": 2, "rows": 2 }, "name": "Kallax 2x2", "against": { "wall": "bedroom.wall-3", "offset": 30 } },
+        { "id": "bedroom.wardrobe", "asset": "wardrobe", "name": "Wardrobe", "against": { "wall": "bedroom.wall-3", "offset": 150 } }
+      ],
+      "assumptions": [
+        { "path": "openings[bedroom.door].width", "note": "standard 83 cm door" },
+        { "path": "openings[bedroom.window]", "note": "made-up window size" }
+      ]
+    }
+  ]
+}

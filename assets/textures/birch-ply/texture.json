@@ -1,0 +1,14 @@
+{
+  "id": "birch-ply",
+  "name": "Birch plywood",
+  "tags": [
+    "wood",
+    "plywood",
+    "birch",
+    "light"
+  ],
+  "fallbackColor": "#dcc6a0",
+  "roughness": 0.6,
+  "source": "self-made (plain colour)",
+  "license": "CC0"
+}

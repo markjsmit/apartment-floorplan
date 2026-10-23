@@ -1,0 +1,24 @@
+{
+  "id": "oak-planks",
+  "name": "Oak planks",
+  "tags": [
+    "wood",
+    "floor",
+    "oak",
+    "parquet"
+  ],
+  "maps": {
+    "color": "color.jpg",
+    "normal": "normal.jpg",
+    "roughness": "roughness.jpg",
+    "ao": "ao.jpg"
+  },
+  "tileSize": [
+    180,
+    180
+  ],
+  "fallbackColor": "#a57f58",
+  "roughness": 0.7,
+  "source": "ambientCG WoodFloor051 (https://ambientcg.com/a/WoodFloor051)",
+  "license": "CC0"
+}

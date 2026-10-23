@@ -1,0 +1,13 @@
+{
+  "id": "white-laminate",
+  "name": "White laminate",
+  "tags": [
+    "white",
+    "laminate",
+    "furniture"
+  ],
+  "fallbackColor": "#f2f1ec",
+  "roughness": 0.5,
+  "source": "self-made (plain colour)",
+  "license": "CC0"
+}

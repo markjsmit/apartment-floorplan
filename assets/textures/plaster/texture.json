@@ -1,0 +1,22 @@
+{
+  "id": "plaster",
+  "name": "White plaster",
+  "tags": [
+    "plaster",
+    "wall",
+    "white"
+  ],
+  "maps": {
+    "color": "color.jpg",
+    "normal": "normal.jpg",
+    "roughness": "roughness.jpg"
+  },
+  "tileSize": [
+    200,
+    200
+  ],
+  "fallbackColor": "#e8e6e1",
+  "roughness": 0.95,
+  "source": "ambientCG Plaster001 (https://ambientcg.com/a/Plaster001)",
+  "license": "CC0"
+}

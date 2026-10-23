@@ -1,0 +1,12 @@
+{
+  "id": "glass",
+  "name": "Clear glass",
+  "tags": [
+    "glass",
+    "window"
+  ],
+  "fallbackColor": "#d8ecf2",
+  "roughness": 0.05,
+  "source": "self-made (plain colour)",
+  "license": "CC0"
+}
