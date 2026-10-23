@@ -94,7 +94,25 @@ export function moveWithCollision(pos: Vec2, delta: Vec2, radius: number, collid
   const steps = Math.max(1, Math.ceil(Math.hypot(delta[0], delta[1]) / (radius / 2)));
   let p: Vec2 = [...pos];
   for (let i = 0; i < steps; i++) {
-    p = pushOut([p[0] + delta[0] / steps, p[1] + delta[1] / steps], radius, colliders);
+    const next = pushOut([p[0] + delta[0] / steps, p[1] + delta[1] / steps], radius, colliders);
+    // squeezed into a gap narrower than the player: stay where we were
+    if (!isFree(next, radius, colliders)) break;
+    p = next;
+  }
+  return p;
+}
+
+/** Closest free spot to p inside the footprint (rings of 5 cm out to 3 m), for getting unstuck after furniture changes. */
+export function nearestFree(p: Vec2, radius: number, colliders: Collider[], footprint?: Vec2[]): Vec2 {
+  const inside = (q: Vec2) => !footprint || pointInPolygon(q, footprint);
+  if (isFree(p, radius, colliders) && inside(p)) return p;
+  for (let r = 5; r <= 300; r += 5) {
+    const n = Math.max(8, Math.round((2 * Math.PI * r) / 5));
+    for (let i = 0; i < n; i++) {
+      const a = (i / n) * 2 * Math.PI;
+      const q: Vec2 = [p[0] + Math.cos(a) * r, p[1] + Math.sin(a) * r];
+      if (inside(q) && isFree(q, radius, colliders)) return q;
+    }
   }
   return p;
 }

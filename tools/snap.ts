@@ -1,0 +1,66 @@
+// npm run snap -- <room> [version] [--cam x,z,yaw,pitch] [--top] [--person heli] [--time 9.5] [--size 1280x800] [--out file.png]
+// Renders the viewer headless and saves a PNG Claude can look at. Uses the running dev server on :5180,
+// or starts a temporary one on :5181. Never reports UI state (noreport=1), so Mark's selection stays untouched.
+import fs from 'node:fs';
+import path from 'node:path';
+import { createServer, type ViteDevServer } from 'vite';
+import { chromium } from 'playwright';
+import { ROOT } from './load-files';
+
+const args = process.argv.slice(2);
+const VALUE_FLAGS = ['--cam', '--person', '--time', '--size', '--out'];
+const flag = (n: string) => {
+  const i = args.indexOf(`--${n}`);
+  return i >= 0 ? args[i + 1] : undefined;
+};
+const positional = args.filter((a, i) => !a.startsWith('--') && !VALUE_FLAGS.includes(args[i - 1]));
+const [room, version = 'current'] = positional;
+if (!room) {
+  console.log('usage: npm run snap -- <room> [version] [--cam x,z,yaw,pitch] [--top] [--person heli] [--time 9.5] [--size 1280x800] [--out file.png]');
+  process.exit(1);
+}
+
+async function reachable(url: string) {
+  try {
+    return (await fetch(url)).ok;
+  } catch {
+    return false;
+  }
+}
+
+let server: ViteDevServer | undefined;
+let base = 'http://localhost:5180/';
+if (!(await reachable(`${base}api/bundle`))) {
+  server = await createServer({ root: ROOT, server: { port: 5181, strictPort: true }, logLevel: 'error' });
+  await server.listen();
+  base = 'http://localhost:5181/';
+}
+
+const q = new URLSearchParams({ room, version, noreport: '1' });
+if (flag('cam')) q.set('cam', flag('cam')!);
+if (args.includes('--top')) q.set('view', 'top');
+if (flag('person')) q.set('person', flag('person')!);
+if (flag('time')) q.set('time', flag('time')!);
+if (args.includes('--no-ao')) q.set('ao', '0');
+const [w, h] = (flag('size') ?? '1280x800').split('x').map(Number);
+
+const browser = await chromium.launch({ args: ['--use-angle=swiftshader', '--enable-unsafe-swiftshader', '--ignore-gpu-blocklist'] });
+try {
+  const page = await browser.newPage({ viewport: { width: w, height: h } });
+  const errors: string[] = [];
+  page.on('pageerror', (e) => errors.push(e.message));
+  page.on('console', (m) => m.type() === 'error' && errors.push(m.text()));
+  await page.goto(`${base}?${q}`);
+  await page.waitForFunction(() => window.__sceneReady === true, null, { timeout: 60000 });
+  await page.waitForLoadState('networkidle');
+  await page.waitForTimeout(800);
+  const outDir = path.join(ROOT, '.snaps');
+  fs.mkdirSync(outDir, { recursive: true });
+  const out = flag('out') ?? path.join(outDir, `${room}-${version.replace(/\//g, '_')}${args.includes('--top') ? '-top' : ''}.png`);
+  await page.screenshot({ path: out });
+  console.log(out);
+  if (errors.length) console.log(`page errors:\n${errors.join('\n')}`);
+} finally {
+  await browser.close();
+  await server?.close();
+}

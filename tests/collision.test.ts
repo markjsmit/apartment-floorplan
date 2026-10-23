@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { RoomSchema } from '../src/model/schema';
 import { resolveWalls } from '../src/model/geometry';
-import { buildColliders, findFreeSpawn, isFree, moveWithCollision } from '../src/model/collision';
+import { buildColliders, findFreeSpawn, isFree, moveWithCollision, nearestFree } from '../src/model/collision';
 
 const room = RoomSchema.parse({
   id: 'r', name: 'R', footprint: [[0, 0], [300, 0], [300, 300], [0, 300]],
@@ -54,5 +54,25 @@ describe('findFreeSpawn', () => {
     const colliders = buildColliders(walls, [box(150, 150)]);
     const p = findFreeSpawn(room, colliders, 20);
     expect(isFree(p, 20, colliders)).toBe(true);
+  });
+});
+
+describe('squeezed between furniture and a wall', () => {
+  // a shelf ending 30 cm from the south wall: too narrow for a 40 cm wide player
+  const shelf = { position: [40, 0, 230] as [number, number, number], rotationDeg: 0,
+    min: [-40, 0, -40] as [number, number, number], max: [40, 80, 40] as [number, number, number] };
+  const colliders = buildColliders(walls, [shelf]);
+
+  it('a move into the gap is refused instead of ending up inside something', () => {
+    const start: [number, number] = [100, 278];
+    expect(isFree(start, 20, colliders)).toBe(true);
+    const p = moveWithCollision(start, [-80, 0], 20, colliders);
+    expect(isFree(p, 20, colliders)).toBe(true);
+  });
+
+  it('nearestFree gets out of a pinch', () => {
+    const p = nearestFree([40, 285], 20, colliders, room.footprint);
+    expect(isFree(p, 20, colliders)).toBe(true);
+    expect(p[1]).toBeLessThanOrEqual(280);
   });
 });

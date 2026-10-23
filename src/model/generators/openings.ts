@@ -31,6 +31,13 @@ export function door(params: Record<string, unknown>): Part[] {
     box({ id: 'jamb-left', tags: ['frame'], size: [F, H, t], position: [-W / 2 + F / 2, H / 2, -t / 2], material: 'white-paint' }),
     box({ id: 'jamb-right', tags: ['frame'], size: [F, H, t], position: [W / 2 - F / 2, H / 2, -t / 2], material: 'white-paint' }),
     box({ id: 'head', tags: ['frame'], size: [W - 2 * F, F, t], position: [0, H - F / 2, -t / 2], material: 'white-paint' }),
+    // casings (architraves) on both faces cover the joint between frame and wall
+    box({ id: 'casing-left', tags: ['frame', 'casing'], size: [7, H + 6, 1.5], position: [-W / 2 + F - 3.5, (H + 6) / 2, 0.75], material: 'white-paint' }),
+    box({ id: 'casing-right', tags: ['frame', 'casing'], size: [7, H + 6, 1.5], position: [W / 2 - F + 3.5, (H + 6) / 2, 0.75], material: 'white-paint' }),
+    box({ id: 'casing-top', tags: ['frame', 'casing'], size: [W - 2 * F + 14, 7, 1.5], position: [0, H + 6 - 3.5, 0.75], material: 'white-paint' }),
+    box({ id: 'casing-left-out', tags: ['frame', 'casing'], size: [7, H + 6, 1.5], position: [-W / 2 + F - 3.5, (H + 6) / 2, -t - 0.75], material: 'white-paint' }),
+    box({ id: 'casing-right-out', tags: ['frame', 'casing'], size: [7, H + 6, 1.5], position: [W / 2 - F + 3.5, (H + 6) / 2, -t - 0.75], material: 'white-paint' }),
+    box({ id: 'casing-top-out', tags: ['frame', 'casing'], size: [W - 2 * F + 14, 7, 1.5], position: [0, H + 6 - 3.5, -t - 0.75], material: 'white-paint' }),
     box({ id: 'leaf', tags: ['door leaf', 'door'], size: [leafW, leafH, 4], position: [-W / 2 + F + 0.3 + leafW / 2, 0.5 + leafH / 2, -2], material: 'white-laminate', pivot: hinge }),
     box({ id: 'handle-in', tags: ['handle'], size: [12, 2, 2], position: [handleX, 105, 2], material: 'metal-black', pivot: hinge }),
     box({ id: 'handle-out', tags: ['handle'], size: [12, 2, 2], position: [handleX, 105, -6], material: 'metal-black', pivot: hinge }),
