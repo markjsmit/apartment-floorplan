@@ -1,5 +1,6 @@
 import type { AssetState, FurnitureAsset, Part } from '../schema';
 import { kallax, kallaxDesk, kallaxInsert, kallaxUnderframe, lackShelf, swivelChair } from './kallax';
+import { besta } from './besta';
 import { group } from './group';
 import { door, windowParts } from './openings';
 import { kitchenCounter, kitchenIsland, kitchenTall, kitchenWallCabinet, plainBox, slidingDoor, trackLight } from './builtins';
@@ -18,6 +19,7 @@ export const generators: Record<string, Generator> = {
   'kallax-desk': kallaxDesk,
   'lack-shelf': lackShelf,
   'swivel-chair': swivelChair,
+  besta,
   group: (params) => group(params, generators),
   door,
   window: windowParts,

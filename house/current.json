@@ -66,6 +66,12 @@
           "id": "storage.kallax-mid-west-high", "asset": "ikea-kallax-112x147", "params": { "cols": 4, "rows": 3 },
           "name": "Kallax 3x4 (middle, faces the passage, top)", "tags": ["middle kallax", "back-to-back kallax", "passage side"],
           "position": [141.5, 112, 226.5], "rotation": -90
+        },
+        {
+          "id": "storage.besta-wall", "asset": "ikea-besta-60x22x64", "params": { "cols": 4, "rows": [64, 64, 64] },
+          "name": "BESTÅ wall (left wall, 4 x 3 shallow cabinets)", "tags": ["besta wall", "left wall cabinets", "shallow cabinets"],
+          "against": { "wall": "storage.wall-3", "offset": 37, "elevation": 32 },
+          "assumptions": [{ "path": "against.elevation", "note": "hung 32 cm above the floor so the top (224) lines up with the Kallax towers; floor below stays free" }]
         }
       ],
       "assumptions": [

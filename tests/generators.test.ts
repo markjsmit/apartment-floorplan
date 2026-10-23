@@ -1,4 +1,5 @@
 import { describe, expect, it } from 'vitest';
+import { generators } from '../src/model/generators';
 import { assetSize, openingParams } from '../src/model/assets';
 import { FurnitureAssetSchema } from '../src/model/schema';
 import { door, windowParts } from '../src/model/generators/openings';
@@ -50,5 +51,22 @@ describe('window params', () => {
     });
     const p = openingParams(asset, { width: 100, height: 125, params: { sillBoard: false } }, 12);
     expect(p).toEqual({ frameMaterial: 'white-laminate', sillBoard: false, width: 100, height: 125, wallThickness: 12 });
+  });
+});
+
+describe('besta generator', () => {
+  it('builds a 4 x 3 grid of 60x22x64 cabinets with doors that open', () => {
+    const out = generators.besta({ cols: 4, rows: [64, 64, 64] });
+    const g = Array.isArray(out) ? { parts: out, states: [] } : out;
+    const closed = assetSize(g.parts, undefined);
+    expect(closed.w).toBeCloseTo(240);
+    expect(closed.h).toBeCloseTo(192);
+    expect(closed.d).toBeCloseTo(22);
+    expect(g.parts.filter((p) => p.id.endsWith('-door'))).toHaveLength(12);
+    const open = g.states!.find((s) => s.id === 'open')!;
+    expect(assetSize(g.parts, open).d).toBeGreaterThan(70);
+  });
+  it('can be open frames', () => {
+    expect(Array.isArray(generators.besta({ doors: false }))).toBe(true);
   });
 });

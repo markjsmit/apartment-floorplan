@@ -1,0 +1,27 @@
+{
+  "id": "ikea-besta-60x22x64",
+  "name": "BESTÅ wall cabinet 60x22x64, white / LAPPVIKEN white",
+  "tags": ["besta", "ikea", "wall cabinet", "shallow cabinet", "cabinet", "low profile"],
+  "description": "Shallow BESTÅ frame 60x20x64 + LAPPVIKEN door = 60 x 22 x 64 cm (W x D x H). Wall-mounted or floor-standing; stack them. Use cols/rows for a whole wall (rows = heights bottom → top, 64 or 38). Double-click a door to open.",
+  "product": {
+    "vendor": "IKEA Israel",
+    "itemNo": "s79429664",
+    "name": "BESTÅ קומבינציית ארון לקיר 60x22x64 ס\"מ, לבן/Lappviken לבן",
+    "price": 410.0,
+    "currency": "ILS",
+    "url": "https://www.ikea.com/il/he/p/besta-wall-mounted-cabinet-combination-white-lappviken-white-s79429664/"
+  },
+  "source": {
+    "kind": "procedural",
+    "generator": "besta",
+    "notes": "Sizes from IKEA Israel: frame 60x20x64 (602.459.19, ₪225), combination with door 60x22x64 (s79429664, ₪410). Board thickness approximated (1.6 cm).",
+    "license": "self-made"
+  },
+  "params": {
+    "cols": { "default": 1, "description": "frames side by side (60 cm each)" },
+    "rows": { "default": [64], "description": "frame heights bottom → top, e.g. [64, 64, 64]" },
+    "depth": { "default": 20, "description": "frame depth: 20 or 40 (doors add 2)" },
+    "doors": { "default": true, "description": "false = open frames" },
+    "color": { "default": "white", "description": "white | dark-grey | white-oak | #hex" }
+  }
+}
