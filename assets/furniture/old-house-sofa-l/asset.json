@@ -1,0 +1,523 @@
+{
+  "id": "old-house-sofa-l",
+  "name": "Grey L-shaped sofa (old house)",
+  "tags": [
+    "old house",
+    "living room",
+    "sofa",
+    "couch",
+    "corner sofa",
+    "chaise",
+    "grey"
+  ],
+  "description": "280 x 95 cm, chaise on the left (165 deep), seat 45, back 88. Dark grey woven fabric. Sizes estimated from photos of the old apartment — measure before relying on them.",
+  "source": {
+    "kind": "parts",
+    "notes": "Modelled from Mark's photos in sources/old house/ (living room photos 08, 13, 17).",
+    "license": "self-made"
+  },
+  "parts": [
+    {
+      "id": "base",
+      "tags": [
+        "sofa",
+        "base"
+      ],
+      "geometry": {
+        "type": "box",
+        "size": [
+          280,
+          36,
+          95
+        ]
+      },
+      "position": [
+        0,
+        22,
+        47.5
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "material": "fabric-grey",
+      "color": "#9ba1a8",
+      "castShadow": true,
+      "glass": false
+    },
+    {
+      "id": "chaise-base",
+      "tags": [
+        "sofa",
+        "chaise"
+      ],
+      "geometry": {
+        "type": "box",
+        "size": [
+          95,
+          36,
+          70
+        ]
+      },
+      "position": [
+        -92.5,
+        22,
+        130
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "material": "fabric-grey",
+      "color": "#9ba1a8",
+      "castShadow": true,
+      "glass": false
+    },
+    {
+      "id": "arm-right",
+      "tags": [
+        "sofa",
+        "arm"
+      ],
+      "geometry": {
+        "type": "box",
+        "size": [
+          25,
+          58,
+          95
+        ]
+      },
+      "position": [
+        127.5,
+        33,
+        47.5
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "material": "fabric-grey",
+      "color": "#9ba1a8",
+      "castShadow": true,
+      "glass": false
+    },
+    {
+      "id": "back",
+      "tags": [
+        "sofa",
+        "back"
+      ],
+      "geometry": {
+        "type": "box",
+        "size": [
+          255,
+          48,
+          22
+        ]
+      },
+      "position": [
+        -12.5,
+        64,
+        11
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "material": "fabric-grey",
+      "color": "#9ba1a8",
+      "castShadow": true,
+      "glass": false
+    },
+    {
+      "id": "seat-1",
+      "tags": [
+        "sofa",
+        "seat",
+        "cushion"
+      ],
+      "geometry": {
+        "type": "box",
+        "size": [
+          80,
+          10,
+          73
+        ]
+      },
+      "position": [
+        -5,
+        45,
+        58.5
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "material": "fabric-grey",
+      "color": "#9ba1a8",
+      "castShadow": true,
+      "glass": false
+    },
+    {
+      "id": "seat-2",
+      "tags": [
+        "sofa",
+        "seat",
+        "cushion"
+      ],
+      "geometry": {
+        "type": "box",
+        "size": [
+          80,
+          10,
+          73
+        ]
+      },
+      "position": [
+        75,
+        45,
+        58.5
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "material": "fabric-grey",
+      "color": "#9ba1a8",
+      "castShadow": true,
+      "glass": false
+    },
+    {
+      "id": "chaise-seat",
+      "tags": [
+        "sofa",
+        "chaise",
+        "cushion"
+      ],
+      "geometry": {
+        "type": "box",
+        "size": [
+          95,
+          10,
+          143
+        ]
+      },
+      "position": [
+        -92.5,
+        45,
+        93.5
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "material": "fabric-grey",
+      "color": "#9ba1a8",
+      "castShadow": true,
+      "glass": false
+    },
+    {
+      "id": "back-cushion-1",
+      "tags": [
+        "sofa",
+        "cushion"
+      ],
+      "geometry": {
+        "type": "box",
+        "size": [
+          91,
+          38,
+          14
+        ]
+      },
+      "position": [
+        -92.5,
+        66,
+        28
+      ],
+      "rotation": [
+        -10,
+        0,
+        0
+      ],
+      "material": "fabric-grey",
+      "color": "#9ba1a8",
+      "castShadow": true,
+      "glass": false
+    },
+    {
+      "id": "back-cushion-2",
+      "tags": [
+        "sofa",
+        "cushion"
+      ],
+      "geometry": {
+        "type": "box",
+        "size": [
+          78,
+          38,
+          14
+        ]
+      },
+      "position": [
+        -5,
+        66,
+        28
+      ],
+      "rotation": [
+        -10,
+        0,
+        0
+      ],
+      "material": "fabric-grey",
+      "color": "#9ba1a8",
+      "castShadow": true,
+      "glass": false
+    },
+    {
+      "id": "back-cushion-3",
+      "tags": [
+        "sofa",
+        "cushion"
+      ],
+      "geometry": {
+        "type": "box",
+        "size": [
+          78,
+          38,
+          14
+        ]
+      },
+      "position": [
+        75,
+        66,
+        28
+      ],
+      "rotation": [
+        -10,
+        0,
+        0
+      ],
+      "material": "fabric-grey",
+      "color": "#9ba1a8",
+      "castShadow": true,
+      "glass": false
+    },
+    {
+      "id": "pillow-1",
+      "tags": [
+        "pillow"
+      ],
+      "geometry": {
+        "type": "box",
+        "size": [
+          42,
+          42,
+          12
+        ]
+      },
+      "position": [
+        -115,
+        70,
+        40
+      ],
+      "rotation": [
+        -15,
+        0,
+        0
+      ],
+      "material": "fabric-grey",
+      "color": "#e3ddd0",
+      "castShadow": true,
+      "glass": false
+    },
+    {
+      "id": "pillow-2",
+      "tags": [
+        "pillow"
+      ],
+      "geometry": {
+        "type": "box",
+        "size": [
+          42,
+          42,
+          12
+        ]
+      },
+      "position": [
+        -70,
+        70,
+        40
+      ],
+      "rotation": [
+        -15,
+        0,
+        0
+      ],
+      "material": "fabric-grey",
+      "color": "#b9c9bc",
+      "castShadow": true,
+      "glass": false
+    },
+    {
+      "id": "pillow-3",
+      "tags": [
+        "pillow"
+      ],
+      "geometry": {
+        "type": "box",
+        "size": [
+          42,
+          42,
+          12
+        ]
+      },
+      "position": [
+        90,
+        70,
+        40
+      ],
+      "rotation": [
+        -15,
+        0,
+        0
+      ],
+      "material": "fabric-grey",
+      "color": "#e3ddd0",
+      "castShadow": true,
+      "glass": false
+    },
+    {
+      "id": "leg-1",
+      "tags": [
+        "leg"
+      ],
+      "geometry": {
+        "type": "cylinder",
+        "radius": 1.6,
+        "height": 4,
+        "segments": 24
+      },
+      "position": [
+        -136,
+        2,
+        4
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "material": "metal-black",
+      "castShadow": true,
+      "glass": false
+    },
+    {
+      "id": "leg-2",
+      "tags": [
+        "leg"
+      ],
+      "geometry": {
+        "type": "cylinder",
+        "radius": 1.6,
+        "height": 4,
+        "segments": 24
+      },
+      "position": [
+        136,
+        2,
+        4
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "material": "metal-black",
+      "castShadow": true,
+      "glass": false
+    },
+    {
+      "id": "leg-3",
+      "tags": [
+        "leg"
+      ],
+      "geometry": {
+        "type": "cylinder",
+        "radius": 1.6,
+        "height": 4,
+        "segments": 24
+      },
+      "position": [
+        136,
+        2,
+        91
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "material": "metal-black",
+      "castShadow": true,
+      "glass": false
+    },
+    {
+      "id": "leg-4",
+      "tags": [
+        "leg"
+      ],
+      "geometry": {
+        "type": "cylinder",
+        "radius": 1.6,
+        "height": 4,
+        "segments": 24
+      },
+      "position": [
+        -136,
+        2,
+        161
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "material": "metal-black",
+      "castShadow": true,
+      "glass": false
+    },
+    {
+      "id": "leg-5",
+      "tags": [
+        "leg"
+      ],
+      "geometry": {
+        "type": "cylinder",
+        "radius": 1.6,
+        "height": 4,
+        "segments": 24
+      },
+      "position": [
+        -49,
+        2,
+        161
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "material": "metal-black",
+      "castShadow": true,
+      "glass": false
+    }
+  ]
+}

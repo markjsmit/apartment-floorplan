@@ -1,0 +1,172 @@
+{
+  "id": "old-house-washing-machine",
+  "name": "Samsung washing machine (old house)",
+  "tags": [
+    "old house",
+    "laundry room",
+    "washing machine",
+    "laundry",
+    "appliance",
+    "samsung",
+    "washer"
+  ],
+  "description": "60 x 60 x 85 cm front loader (Samsung ecobubble). Sizes estimated from photos of the old apartment — measure before relying on them.",
+  "source": {
+    "kind": "parts",
+    "notes": "Modelled from Mark's photos in sources/old house/ (laundry photos 09, 16).",
+    "license": "self-made"
+  },
+  "parts": [
+    {
+      "id": "body",
+      "tags": [
+        "appliance"
+      ],
+      "geometry": {
+        "type": "box",
+        "size": [
+          59.8,
+          85,
+          58
+        ]
+      },
+      "position": [
+        0,
+        42.5,
+        29
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "material": "white-laminate",
+      "castShadow": true,
+      "glass": false
+    },
+    {
+      "id": "panel",
+      "tags": [],
+      "geometry": {
+        "type": "box",
+        "size": [
+          59.8,
+          14,
+          0.4
+        ]
+      },
+      "position": [
+        0,
+        77,
+        58.2
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "color": "#ebebeb",
+      "castShadow": false,
+      "glass": false
+    },
+    {
+      "id": "display",
+      "tags": [],
+      "geometry": {
+        "type": "box",
+        "size": [
+          14,
+          5,
+          0.3
+        ]
+      },
+      "position": [
+        12,
+        77,
+        58.5
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "color": "#222",
+      "castShadow": false,
+      "glass": false
+    },
+    {
+      "id": "knob",
+      "tags": [],
+      "geometry": {
+        "type": "cylinder",
+        "radius": 3,
+        "height": 1.5,
+        "segments": 20
+      },
+      "position": [
+        -4,
+        77,
+        59
+      ],
+      "rotation": [
+        90,
+        0,
+        0
+      ],
+      "color": "#3a3a3a",
+      "castShadow": true,
+      "glass": false
+    },
+    {
+      "id": "door-ring",
+      "tags": [
+        "door"
+      ],
+      "geometry": {
+        "type": "cylinder",
+        "radius": 21,
+        "height": 3,
+        "segments": 40
+      },
+      "position": [
+        0,
+        40,
+        59.5
+      ],
+      "rotation": [
+        90,
+        0,
+        0
+      ],
+      "color": "#2a2c30",
+      "castShadow": true,
+      "glass": false
+    },
+    {
+      "id": "door-glass",
+      "tags": [
+        "door",
+        "glass"
+      ],
+      "geometry": {
+        "type": "cylinder",
+        "radius": 15,
+        "height": 0.6,
+        "segments": 40
+      },
+      "position": [
+        0,
+        40,
+        61.2
+      ],
+      "rotation": [
+        90,
+        0,
+        0
+      ],
+      "color": "#6a7a86",
+      "castShadow": false,
+      "glass": false
+    }
+  ]
+}

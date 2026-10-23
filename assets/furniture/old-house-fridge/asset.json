@@ -1,0 +1,290 @@
+{
+  "id": "old-house-fridge",
+  "name": "Stainless 4-door fridge (old house)",
+  "tags": [
+    "old house",
+    "kitchen",
+    "fridge",
+    "refrigerator",
+    "appliance",
+    "kitchen"
+  ],
+  "description": "French-door fridge, ~91 x 72 x 178 cm (typical Samsung 4-door size). Double-click a door to open all four. Sizes estimated from photos of the old apartment — measure before relying on them.",
+  "source": {
+    "kind": "parts",
+    "notes": "Modelled from Mark's photos in sources/old house/ (photos 07, 15).",
+    "license": "self-made"
+  },
+  "parts": [
+    {
+      "id": "body",
+      "tags": [
+        "fridge",
+        "body"
+      ],
+      "geometry": {
+        "type": "box",
+        "size": [
+          91,
+          176,
+          64
+        ]
+      },
+      "position": [
+        0,
+        90,
+        32
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "material": "steel-brushed",
+      "castShadow": true,
+      "glass": false
+    },
+    {
+      "id": "kick",
+      "tags": [],
+      "geometry": {
+        "type": "box",
+        "size": [
+          87,
+          2,
+          62
+        ]
+      },
+      "position": [
+        0,
+        1,
+        32
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "color": "#2a2a2a",
+      "castShadow": false,
+      "glass": false
+    },
+    {
+      "id": "inside",
+      "tags": [],
+      "geometry": {
+        "type": "box",
+        "size": [
+          85,
+          166,
+          2
+        ]
+      },
+      "position": [
+        0,
+        91,
+        62.5
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "color": "#f2f2f2",
+      "castShadow": false,
+      "glass": false
+    },
+    {
+      "id": "door-top-left",
+      "tags": [
+        "door",
+        "front"
+      ],
+      "geometry": {
+        "type": "box",
+        "size": [
+          45.1,
+          106,
+          6
+        ]
+      },
+      "position": [
+        -22.75,
+        124,
+        69
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "pivot": [
+        -45.3,
+        124,
+        72
+      ],
+      "material": "steel-brushed",
+      "castShadow": true,
+      "glass": false
+    },
+    {
+      "id": "door-top-right",
+      "tags": [
+        "door",
+        "front"
+      ],
+      "geometry": {
+        "type": "box",
+        "size": [
+          45.1,
+          106,
+          6
+        ]
+      },
+      "position": [
+        22.75,
+        124,
+        69
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "pivot": [
+        45.3,
+        124,
+        72
+      ],
+      "material": "steel-brushed",
+      "castShadow": true,
+      "glass": false
+    },
+    {
+      "id": "door-bottom-left",
+      "tags": [
+        "door",
+        "front"
+      ],
+      "geometry": {
+        "type": "box",
+        "size": [
+          45.1,
+          66,
+          6
+        ]
+      },
+      "position": [
+        -22.75,
+        36,
+        69
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "pivot": [
+        -45.3,
+        36,
+        72
+      ],
+      "material": "steel-brushed",
+      "castShadow": true,
+      "glass": false
+    },
+    {
+      "id": "door-bottom-right",
+      "tags": [
+        "door",
+        "front"
+      ],
+      "geometry": {
+        "type": "box",
+        "size": [
+          45.1,
+          66,
+          6
+        ]
+      },
+      "position": [
+        22.75,
+        36,
+        69
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "pivot": [
+        45.3,
+        36,
+        72
+      ],
+      "material": "steel-brushed",
+      "castShadow": true,
+      "glass": false
+    }
+  ],
+  "states": [
+    {
+      "id": "closed",
+      "name": "Closed",
+      "parts": {}
+    },
+    {
+      "id": "open",
+      "name": "Open",
+      "parts": {
+        "door-top-left": {
+          "rotation": [
+            0,
+            -95,
+            0
+          ]
+        },
+        "door-top-right": {
+          "rotation": [
+            0,
+            95,
+            0
+          ]
+        },
+        "door-bottom-left": {
+          "rotation": [
+            0,
+            -95,
+            0
+          ]
+        },
+        "door-bottom-right": {
+          "rotation": [
+            0,
+            95,
+            0
+          ]
+        }
+      }
+    }
+  ],
+  "defaultState": "closed",
+  "interactions": [
+    {
+      "part": "door-top-left",
+      "action": "cycleStates"
+    },
+    {
+      "part": "door-top-right",
+      "action": "cycleStates"
+    },
+    {
+      "part": "door-bottom-left",
+      "action": "cycleStates"
+    },
+    {
+      "part": "door-bottom-right",
+      "action": "cycleStates"
+    }
+  ]
+}

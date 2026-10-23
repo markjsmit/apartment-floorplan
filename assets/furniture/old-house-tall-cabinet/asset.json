@@ -1,0 +1,651 @@
+{
+  "id": "old-house-tall-cabinet",
+  "name": "Tall grey-wood cabinet (old house)",
+  "tags": [
+    "old house",
+    "living room",
+    "cabinet",
+    "cupboard",
+    "storage",
+    "drawers",
+    "grey wood"
+  ],
+  "description": "60 x 40 x 190 cm, one door on top (hinge right), 3 drawers. Double-click a front to open. Sizes estimated from photos of the old apartment — measure before relying on them.",
+  "source": {
+    "kind": "parts",
+    "notes": "Modelled from Mark's photos in sources/old house/ (photo 10).",
+    "license": "self-made"
+  },
+  "parts": [
+    {
+      "id": "plinth",
+      "tags": [],
+      "geometry": {
+        "type": "box",
+        "size": [
+          56,
+          6,
+          36
+        ]
+      },
+      "position": [
+        0,
+        3,
+        18
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "color": "#5b534b",
+      "castShadow": true,
+      "glass": false
+    },
+    {
+      "id": "side-left",
+      "tags": [],
+      "geometry": {
+        "type": "box",
+        "size": [
+          2,
+          184,
+          40
+        ]
+      },
+      "position": [
+        -29,
+        98,
+        20
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "color": "#756c63",
+      "castShadow": true,
+      "glass": false
+    },
+    {
+      "id": "side-right",
+      "tags": [],
+      "geometry": {
+        "type": "box",
+        "size": [
+          2,
+          184,
+          40
+        ]
+      },
+      "position": [
+        29,
+        98,
+        20
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "color": "#756c63",
+      "castShadow": true,
+      "glass": false
+    },
+    {
+      "id": "top",
+      "tags": [
+        "top"
+      ],
+      "geometry": {
+        "type": "box",
+        "size": [
+          60,
+          2,
+          40
+        ]
+      },
+      "position": [
+        0,
+        189,
+        20
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "color": "#756c63",
+      "castShadow": true,
+      "glass": false
+    },
+    {
+      "id": "bottom",
+      "tags": [],
+      "geometry": {
+        "type": "box",
+        "size": [
+          56,
+          2,
+          38
+        ]
+      },
+      "position": [
+        0,
+        7,
+        20
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "color": "#756c63",
+      "castShadow": true,
+      "glass": false
+    },
+    {
+      "id": "back",
+      "tags": [],
+      "geometry": {
+        "type": "box",
+        "size": [
+          56,
+          182,
+          1
+        ]
+      },
+      "position": [
+        0,
+        97,
+        0.5
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "color": "#8d847a",
+      "castShadow": true,
+      "glass": false
+    },
+    {
+      "id": "shelf",
+      "tags": [
+        "shelf"
+      ],
+      "geometry": {
+        "type": "box",
+        "size": [
+          56,
+          2,
+          38
+        ]
+      },
+      "position": [
+        0,
+        129,
+        20
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "color": "#8d847a",
+      "castShadow": true,
+      "glass": false
+    },
+    {
+      "id": "door",
+      "tags": [
+        "door",
+        "front"
+      ],
+      "geometry": {
+        "type": "box",
+        "size": [
+          59,
+          118,
+          2
+        ]
+      },
+      "position": [
+        0,
+        129,
+        41
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "pivot": [
+        29.5,
+        129,
+        42
+      ],
+      "color": "#756c63",
+      "castShadow": true,
+      "glass": false
+    },
+    {
+      "id": "door-handle",
+      "tags": [
+        "handle"
+      ],
+      "geometry": {
+        "type": "box",
+        "size": [
+          1.5,
+          20,
+          2
+        ]
+      },
+      "position": [
+        -25,
+        129,
+        43
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "pivot": [
+        29.5,
+        129,
+        42
+      ],
+      "color": "#c4c6c8",
+      "castShadow": true,
+      "glass": false
+    },
+    {
+      "id": "drawer-3-front",
+      "tags": [
+        "drawer",
+        "front"
+      ],
+      "geometry": {
+        "type": "box",
+        "size": [
+          59,
+          19,
+          2
+        ]
+      },
+      "position": [
+        0,
+        17.5,
+        41
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "color": "#756c63",
+      "castShadow": true,
+      "glass": false
+    },
+    {
+      "id": "drawer-3-body",
+      "tags": [
+        "drawer"
+      ],
+      "geometry": {
+        "type": "box",
+        "size": [
+          54,
+          14,
+          36
+        ]
+      },
+      "position": [
+        0,
+        16.5,
+        22
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "color": "#8d847a",
+      "castShadow": true,
+      "glass": false
+    },
+    {
+      "id": "drawer-3-handle",
+      "tags": [
+        "drawer",
+        "handle"
+      ],
+      "geometry": {
+        "type": "box",
+        "size": [
+          12,
+          1.5,
+          2
+        ]
+      },
+      "position": [
+        0,
+        21.5,
+        43
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "color": "#c4c6c8",
+      "castShadow": true,
+      "glass": false
+    },
+    {
+      "id": "drawer-2-front",
+      "tags": [
+        "drawer",
+        "front"
+      ],
+      "geometry": {
+        "type": "box",
+        "size": [
+          59,
+          19,
+          2
+        ]
+      },
+      "position": [
+        0,
+        38,
+        41
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "color": "#756c63",
+      "castShadow": true,
+      "glass": false
+    },
+    {
+      "id": "drawer-2-body",
+      "tags": [
+        "drawer"
+      ],
+      "geometry": {
+        "type": "box",
+        "size": [
+          54,
+          14,
+          36
+        ]
+      },
+      "position": [
+        0,
+        37,
+        22
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "color": "#8d847a",
+      "castShadow": true,
+      "glass": false
+    },
+    {
+      "id": "drawer-2-handle",
+      "tags": [
+        "drawer",
+        "handle"
+      ],
+      "geometry": {
+        "type": "box",
+        "size": [
+          12,
+          1.5,
+          2
+        ]
+      },
+      "position": [
+        0,
+        42,
+        43
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "color": "#c4c6c8",
+      "castShadow": true,
+      "glass": false
+    },
+    {
+      "id": "drawer-1-front",
+      "tags": [
+        "drawer",
+        "front"
+      ],
+      "geometry": {
+        "type": "box",
+        "size": [
+          59,
+          19,
+          2
+        ]
+      },
+      "position": [
+        0,
+        58.5,
+        41
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "color": "#756c63",
+      "castShadow": true,
+      "glass": false
+    },
+    {
+      "id": "drawer-1-body",
+      "tags": [
+        "drawer"
+      ],
+      "geometry": {
+        "type": "box",
+        "size": [
+          54,
+          14,
+          36
+        ]
+      },
+      "position": [
+        0,
+        57.5,
+        22
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "color": "#8d847a",
+      "castShadow": true,
+      "glass": false
+    },
+    {
+      "id": "drawer-1-handle",
+      "tags": [
+        "drawer",
+        "handle"
+      ],
+      "geometry": {
+        "type": "box",
+        "size": [
+          12,
+          1.5,
+          2
+        ]
+      },
+      "position": [
+        0,
+        62.5,
+        43
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "color": "#c4c6c8",
+      "castShadow": true,
+      "glass": false
+    }
+  ],
+  "states": [
+    {
+      "id": "closed",
+      "name": "Closed",
+      "parts": {}
+    },
+    {
+      "id": "open",
+      "name": "Open",
+      "parts": {
+        "door": {
+          "rotation": [
+            0,
+            95,
+            0
+          ]
+        },
+        "door-handle": {
+          "rotation": [
+            0,
+            95,
+            0
+          ]
+        },
+        "drawer-3-front": {
+          "position": [
+            0,
+            17.5,
+            73
+          ]
+        },
+        "drawer-3-body": {
+          "position": [
+            0,
+            16.5,
+            54
+          ]
+        },
+        "drawer-3-handle": {
+          "position": [
+            0,
+            21.5,
+            75
+          ]
+        },
+        "drawer-2-front": {
+          "position": [
+            0,
+            38,
+            73
+          ]
+        },
+        "drawer-2-body": {
+          "position": [
+            0,
+            37,
+            54
+          ]
+        },
+        "drawer-2-handle": {
+          "position": [
+            0,
+            42,
+            75
+          ]
+        },
+        "drawer-1-front": {
+          "position": [
+            0,
+            58.5,
+            73
+          ]
+        },
+        "drawer-1-body": {
+          "position": [
+            0,
+            57.5,
+            54
+          ]
+        },
+        "drawer-1-handle": {
+          "position": [
+            0,
+            62.5,
+            75
+          ]
+        }
+      }
+    }
+  ],
+  "defaultState": "closed",
+  "interactions": [
+    {
+      "part": "door",
+      "action": "cycleStates"
+    },
+    {
+      "part": "door-handle",
+      "action": "cycleStates"
+    },
+    {
+      "part": "drawer-3-front",
+      "action": "cycleStates"
+    },
+    {
+      "part": "drawer-3-body",
+      "action": "cycleStates"
+    },
+    {
+      "part": "drawer-3-handle",
+      "action": "cycleStates"
+    },
+    {
+      "part": "drawer-2-front",
+      "action": "cycleStates"
+    },
+    {
+      "part": "drawer-2-body",
+      "action": "cycleStates"
+    },
+    {
+      "part": "drawer-2-handle",
+      "action": "cycleStates"
+    },
+    {
+      "part": "drawer-1-front",
+      "action": "cycleStates"
+    },
+    {
+      "part": "drawer-1-body",
+      "action": "cycleStates"
+    },
+    {
+      "part": "drawer-1-handle",
+      "action": "cycleStates"
+    }
+  ]
+}

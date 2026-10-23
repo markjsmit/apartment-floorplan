@@ -1,0 +1,293 @@
+{
+  "id": "old-house-bed-black",
+  "name": "Black upholstered bed 160x200 (old house)",
+  "tags": [
+    "old house",
+    "bedroom",
+    "bed",
+    "double bed",
+    "black",
+    "headboard"
+  ],
+  "description": "Black upholstered bed with a tall tufted headboard and thin metal hairpin legs, mattress 160 x 200 (could be 180 — check). Outside 178 x 215, headboard 118 high. Sizes estimated from photos of the old apartment — measure before relying on them.",
+  "source": {
+    "kind": "parts",
+    "notes": "Modelled from Mark's photos in sources/old house/ (bedroom photos 05, 21, 24, 25).",
+    "license": "self-made"
+  },
+  "parts": [
+    {
+      "id": "leg-1",
+      "tags": [
+        "leg"
+      ],
+      "geometry": {
+        "type": "cylinder",
+        "radius": 0.9,
+        "height": 14,
+        "segments": 8
+      },
+      "position": [
+        -80,
+        7,
+        20
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "material": "metal-black",
+      "castShadow": true,
+      "glass": false
+    },
+    {
+      "id": "leg-2",
+      "tags": [
+        "leg"
+      ],
+      "geometry": {
+        "type": "cylinder",
+        "radius": 0.9,
+        "height": 14,
+        "segments": 8
+      },
+      "position": [
+        80,
+        7,
+        20
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "material": "metal-black",
+      "castShadow": true,
+      "glass": false
+    },
+    {
+      "id": "leg-3",
+      "tags": [
+        "leg"
+      ],
+      "geometry": {
+        "type": "cylinder",
+        "radius": 0.9,
+        "height": 14,
+        "segments": 8
+      },
+      "position": [
+        -80,
+        7,
+        205
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "material": "metal-black",
+      "castShadow": true,
+      "glass": false
+    },
+    {
+      "id": "leg-4",
+      "tags": [
+        "leg"
+      ],
+      "geometry": {
+        "type": "cylinder",
+        "radius": 0.9,
+        "height": 14,
+        "segments": 8
+      },
+      "position": [
+        80,
+        7,
+        205
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "material": "metal-black",
+      "castShadow": true,
+      "glass": false
+    },
+    {
+      "id": "frame",
+      "tags": [
+        "bed",
+        "frame"
+      ],
+      "geometry": {
+        "type": "box",
+        "size": [
+          178,
+          26,
+          203
+        ]
+      },
+      "position": [
+        0,
+        27,
+        113.5
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "material": "fabric-grey",
+      "color": "#3a3a3e",
+      "castShadow": true,
+      "glass": false
+    },
+    {
+      "id": "headboard",
+      "tags": [
+        "bed",
+        "headboard"
+      ],
+      "geometry": {
+        "type": "box",
+        "size": [
+          182,
+          104,
+          12
+        ]
+      },
+      "position": [
+        0,
+        66,
+        6
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "material": "fabric-grey",
+      "color": "#3a3a3e",
+      "castShadow": true,
+      "glass": false
+    },
+    {
+      "id": "mattress",
+      "tags": [
+        "bed",
+        "mattress"
+      ],
+      "geometry": {
+        "type": "box",
+        "size": [
+          160,
+          20,
+          198
+        ]
+      },
+      "position": [
+        0,
+        50,
+        112
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "material": "linen-white",
+      "castShadow": true,
+      "glass": false
+    },
+    {
+      "id": "duvet",
+      "tags": [
+        "bed",
+        "duvet"
+      ],
+      "geometry": {
+        "type": "box",
+        "size": [
+          168,
+          6,
+          160
+        ]
+      },
+      "position": [
+        0,
+        63,
+        135
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "material": "fabric-grey",
+      "color": "#b7babf",
+      "castShadow": true,
+      "glass": false
+    },
+    {
+      "id": "pillow-1",
+      "tags": [
+        "bed",
+        "pillow"
+      ],
+      "geometry": {
+        "type": "box",
+        "size": [
+          62,
+          12,
+          40
+        ]
+      },
+      "position": [
+        -40,
+        66,
+        36
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "material": "fabric-grey",
+      "color": "#8a8d92",
+      "castShadow": true,
+      "glass": false
+    },
+    {
+      "id": "pillow-2",
+      "tags": [
+        "bed",
+        "pillow"
+      ],
+      "geometry": {
+        "type": "box",
+        "size": [
+          62,
+          12,
+          40
+        ]
+      },
+      "position": [
+        40,
+        66,
+        36
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "material": "fabric-grey",
+      "color": "#8a8d92",
+      "castShadow": true,
+      "glass": false
+    }
+  ]
+}

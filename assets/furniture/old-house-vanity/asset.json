@@ -1,0 +1,640 @@
+{
+  "id": "old-house-vanity",
+  "name": "White dressing table with mirror (old house)",
+  "tags": [
+    "old house",
+    "bedroom",
+    "vanity",
+    "dressing table",
+    "makeup table",
+    "mirror",
+    "drawers",
+    "white"
+  ],
+  "description": "100 x 45 x 76 cm (121 with the mirror), 5-drawer column on the right, folding mirror on top. Sizes estimated from photos of the old apartment — measure before relying on them.",
+  "source": {
+    "kind": "parts",
+    "notes": "Modelled from Mark's photos in sources/old house/ (photos 21, 25).",
+    "license": "self-made"
+  },
+  "parts": [
+    {
+      "id": "top",
+      "tags": [
+        "top"
+      ],
+      "geometry": {
+        "type": "box",
+        "size": [
+          100,
+          2.5,
+          45
+        ]
+      },
+      "position": [
+        0,
+        74.75,
+        22.5
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "material": "white-laminate",
+      "castShadow": true,
+      "glass": false
+    },
+    {
+      "id": "drawer-unit",
+      "tags": [
+        "drawers"
+      ],
+      "geometry": {
+        "type": "box",
+        "size": [
+          40,
+          72.5,
+          43
+        ]
+      },
+      "position": [
+        30,
+        36.25,
+        21.5
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "material": "white-laminate",
+      "castShadow": true,
+      "glass": false
+    },
+    {
+      "id": "side-left",
+      "tags": [],
+      "geometry": {
+        "type": "box",
+        "size": [
+          2.5,
+          72.5,
+          43
+        ]
+      },
+      "position": [
+        -48.75,
+        36.25,
+        21.5
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "material": "white-laminate",
+      "castShadow": true,
+      "glass": false
+    },
+    {
+      "id": "back-rail",
+      "tags": [],
+      "geometry": {
+        "type": "box",
+        "size": [
+          56,
+          8,
+          2
+        ]
+      },
+      "position": [
+        -9,
+        69,
+        1
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "material": "white-laminate",
+      "castShadow": true,
+      "glass": false
+    },
+    {
+      "id": "mirror-back",
+      "tags": [
+        "mirror"
+      ],
+      "geometry": {
+        "type": "box",
+        "size": [
+          56,
+          45,
+          2
+        ]
+      },
+      "position": [
+        -15,
+        98.5,
+        6
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "material": "white-laminate",
+      "castShadow": true,
+      "glass": false
+    },
+    {
+      "id": "mirror",
+      "tags": [
+        "mirror"
+      ],
+      "geometry": {
+        "type": "box",
+        "size": [
+          50,
+          39,
+          0.6
+        ]
+      },
+      "position": [
+        -15,
+        98.5,
+        7.3
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "material": "mirror",
+      "castShadow": true,
+      "glass": false
+    },
+    {
+      "id": "mirror-wing-left",
+      "tags": [
+        "mirror"
+      ],
+      "geometry": {
+        "type": "box",
+        "size": [
+          14,
+          39,
+          1
+        ]
+      },
+      "position": [
+        -47,
+        98.5,
+        10
+      ],
+      "rotation": [
+        0,
+        30,
+        0
+      ],
+      "material": "mirror",
+      "castShadow": true,
+      "glass": false
+    },
+    {
+      "id": "mirror-wing-right",
+      "tags": [
+        "mirror"
+      ],
+      "geometry": {
+        "type": "box",
+        "size": [
+          14,
+          39,
+          1
+        ]
+      },
+      "position": [
+        17,
+        98.5,
+        10
+      ],
+      "rotation": [
+        0,
+        -30,
+        0
+      ],
+      "material": "mirror",
+      "castShadow": true,
+      "glass": false
+    },
+    {
+      "id": "drawer-1-front",
+      "tags": [
+        "drawer",
+        "front"
+      ],
+      "geometry": {
+        "type": "box",
+        "size": [
+          39,
+          13.4,
+          1.6
+        ]
+      },
+      "position": [
+        30,
+        66.3,
+        43.8
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "material": "white-laminate",
+      "castShadow": true,
+      "glass": false
+    },
+    {
+      "id": "drawer-1-grip",
+      "tags": [
+        "drawer",
+        "handle"
+      ],
+      "geometry": {
+        "type": "box",
+        "size": [
+          16,
+          0.8,
+          0.2
+        ]
+      },
+      "position": [
+        30,
+        70.8,
+        44.65
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "color": "#9a9a96",
+      "castShadow": false,
+      "glass": false
+    },
+    {
+      "id": "drawer-2-front",
+      "tags": [
+        "drawer",
+        "front"
+      ],
+      "geometry": {
+        "type": "box",
+        "size": [
+          39,
+          13.4,
+          1.6
+        ]
+      },
+      "position": [
+        30,
+        51.9,
+        43.8
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "material": "white-laminate",
+      "castShadow": true,
+      "glass": false
+    },
+    {
+      "id": "drawer-2-grip",
+      "tags": [
+        "drawer",
+        "handle"
+      ],
+      "geometry": {
+        "type": "box",
+        "size": [
+          16,
+          0.8,
+          0.2
+        ]
+      },
+      "position": [
+        30,
+        56.4,
+        44.65
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "color": "#9a9a96",
+      "castShadow": false,
+      "glass": false
+    },
+    {
+      "id": "drawer-3-front",
+      "tags": [
+        "drawer",
+        "front"
+      ],
+      "geometry": {
+        "type": "box",
+        "size": [
+          39,
+          13.4,
+          1.6
+        ]
+      },
+      "position": [
+        30,
+        37.5,
+        43.8
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "material": "white-laminate",
+      "castShadow": true,
+      "glass": false
+    },
+    {
+      "id": "drawer-3-grip",
+      "tags": [
+        "drawer",
+        "handle"
+      ],
+      "geometry": {
+        "type": "box",
+        "size": [
+          16,
+          0.8,
+          0.2
+        ]
+      },
+      "position": [
+        30,
+        42,
+        44.65
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "color": "#9a9a96",
+      "castShadow": false,
+      "glass": false
+    },
+    {
+      "id": "drawer-4-front",
+      "tags": [
+        "drawer",
+        "front"
+      ],
+      "geometry": {
+        "type": "box",
+        "size": [
+          39,
+          13.4,
+          1.6
+        ]
+      },
+      "position": [
+        30,
+        23.1,
+        43.8
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "material": "white-laminate",
+      "castShadow": true,
+      "glass": false
+    },
+    {
+      "id": "drawer-4-grip",
+      "tags": [
+        "drawer",
+        "handle"
+      ],
+      "geometry": {
+        "type": "box",
+        "size": [
+          16,
+          0.8,
+          0.2
+        ]
+      },
+      "position": [
+        30,
+        27.6,
+        44.65
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "color": "#9a9a96",
+      "castShadow": false,
+      "glass": false
+    },
+    {
+      "id": "drawer-5-front",
+      "tags": [
+        "drawer",
+        "front"
+      ],
+      "geometry": {
+        "type": "box",
+        "size": [
+          39,
+          13.4,
+          1.6
+        ]
+      },
+      "position": [
+        30,
+        8.7,
+        43.8
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "material": "white-laminate",
+      "castShadow": true,
+      "glass": false
+    },
+    {
+      "id": "drawer-5-grip",
+      "tags": [
+        "drawer",
+        "handle"
+      ],
+      "geometry": {
+        "type": "box",
+        "size": [
+          16,
+          0.8,
+          0.2
+        ]
+      },
+      "position": [
+        30,
+        13.2,
+        44.65
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "color": "#9a9a96",
+      "castShadow": false,
+      "glass": false
+    }
+  ],
+  "states": [
+    {
+      "id": "closed",
+      "name": "Closed",
+      "parts": {}
+    },
+    {
+      "id": "open",
+      "name": "Open",
+      "parts": {
+        "drawer-1-front": {
+          "position": [
+            30,
+            66.3,
+            73.8
+          ]
+        },
+        "drawer-1-grip": {
+          "position": [
+            30,
+            70.8,
+            74.65
+          ]
+        },
+        "drawer-2-front": {
+          "position": [
+            30,
+            51.9,
+            73.8
+          ]
+        },
+        "drawer-2-grip": {
+          "position": [
+            30,
+            56.4,
+            74.65
+          ]
+        },
+        "drawer-3-front": {
+          "position": [
+            30,
+            37.5,
+            73.8
+          ]
+        },
+        "drawer-3-grip": {
+          "position": [
+            30,
+            42,
+            74.65
+          ]
+        },
+        "drawer-4-front": {
+          "position": [
+            30,
+            23.1,
+            73.8
+          ]
+        },
+        "drawer-4-grip": {
+          "position": [
+            30,
+            27.6,
+            74.65
+          ]
+        },
+        "drawer-5-front": {
+          "position": [
+            30,
+            8.7,
+            73.8
+          ]
+        },
+        "drawer-5-grip": {
+          "position": [
+            30,
+            13.2,
+            74.65
+          ]
+        }
+      }
+    }
+  ],
+  "defaultState": "closed",
+  "interactions": [
+    {
+      "part": "drawer-1-front",
+      "action": "cycleStates"
+    },
+    {
+      "part": "drawer-1-grip",
+      "action": "cycleStates"
+    },
+    {
+      "part": "drawer-2-front",
+      "action": "cycleStates"
+    },
+    {
+      "part": "drawer-2-grip",
+      "action": "cycleStates"
+    },
+    {
+      "part": "drawer-3-front",
+      "action": "cycleStates"
+    },
+    {
+      "part": "drawer-3-grip",
+      "action": "cycleStates"
+    },
+    {
+      "part": "drawer-4-front",
+      "action": "cycleStates"
+    },
+    {
+      "part": "drawer-4-grip",
+      "action": "cycleStates"
+    },
+    {
+      "part": "drawer-5-front",
+      "action": "cycleStates"
+    },
+    {
+      "part": "drawer-5-grip",
+      "action": "cycleStates"
+    }
+  ]
+}

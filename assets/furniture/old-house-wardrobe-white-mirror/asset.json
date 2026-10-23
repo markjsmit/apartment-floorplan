@@ -1,0 +1,357 @@
+{
+  "id": "old-house-wardrobe-white-mirror",
+  "name": "White wardrobe with mirror door (old house)",
+  "tags": [
+    "old house",
+    "small bedroom",
+    "wardrobe",
+    "closet",
+    "cupboard",
+    "mirror",
+    "white"
+  ],
+  "description": "100 x 55 x 200 cm, 2 doors, the right one with a full mirror. Double-click to open. Sizes estimated from photos of the old apartment — measure before relying on them.",
+  "source": {
+    "kind": "parts",
+    "notes": "Modelled from Mark's photos in sources/old house/ (photo 04).",
+    "license": "self-made"
+  },
+  "parts": [
+    {
+      "id": "plinth",
+      "tags": [],
+      "geometry": {
+        "type": "box",
+        "size": [
+          96,
+          2,
+          51
+        ]
+      },
+      "position": [
+        0,
+        1,
+        27.5
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "color": "#444",
+      "castShadow": true,
+      "glass": false
+    },
+    {
+      "id": "body",
+      "tags": [
+        "wardrobe",
+        "body"
+      ],
+      "geometry": {
+        "type": "box",
+        "size": [
+          100,
+          198,
+          55
+        ]
+      },
+      "position": [
+        0,
+        101,
+        27.5
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "material": "white-laminate",
+      "castShadow": true,
+      "glass": false
+    },
+    {
+      "id": "inside",
+      "tags": [],
+      "geometry": {
+        "type": "box",
+        "size": [
+          96,
+          192,
+          1
+        ]
+      },
+      "position": [
+        0,
+        100,
+        54.6
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "color": "#d9d6cf",
+      "castShadow": false,
+      "glass": false
+    },
+    {
+      "id": "rail",
+      "tags": [],
+      "geometry": {
+        "type": "box",
+        "size": [
+          94,
+          2,
+          2
+        ]
+      },
+      "position": [
+        0,
+        175,
+        27.5
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "color": "#c4c6c8",
+      "castShadow": true,
+      "glass": false
+    },
+    {
+      "id": "door-left",
+      "tags": [
+        "door",
+        "front"
+      ],
+      "geometry": {
+        "type": "box",
+        "size": [
+          49.6,
+          196,
+          2
+        ]
+      },
+      "position": [
+        -25,
+        100,
+        56
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "pivot": [
+        -49.8,
+        100,
+        57
+      ],
+      "material": "white-laminate",
+      "castShadow": true,
+      "glass": false
+    },
+    {
+      "id": "door-right",
+      "tags": [
+        "door",
+        "front"
+      ],
+      "geometry": {
+        "type": "box",
+        "size": [
+          49.6,
+          196,
+          2
+        ]
+      },
+      "position": [
+        25,
+        100,
+        56
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "pivot": [
+        49.8,
+        100,
+        57
+      ],
+      "material": "white-laminate",
+      "castShadow": true,
+      "glass": false
+    },
+    {
+      "id": "handle-left",
+      "tags": [
+        "handle"
+      ],
+      "geometry": {
+        "type": "box",
+        "size": [
+          1.5,
+          30,
+          2.5
+        ]
+      },
+      "position": [
+        -4,
+        105,
+        58.25
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "pivot": [
+        -49.8,
+        100,
+        57
+      ],
+      "color": "#c4c6c8",
+      "castShadow": true,
+      "glass": false
+    },
+    {
+      "id": "handle-right",
+      "tags": [
+        "handle"
+      ],
+      "geometry": {
+        "type": "box",
+        "size": [
+          1.5,
+          30,
+          2.5
+        ]
+      },
+      "position": [
+        4,
+        105,
+        58.25
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "pivot": [
+        49.8,
+        100,
+        57
+      ],
+      "color": "#c4c6c8",
+      "castShadow": true,
+      "glass": false
+    },
+    {
+      "id": "mirror",
+      "tags": [
+        "mirror"
+      ],
+      "geometry": {
+        "type": "box",
+        "size": [
+          44,
+          184,
+          0.4
+        ]
+      },
+      "position": [
+        26,
+        100,
+        57.2
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "pivot": [
+        49.8,
+        100,
+        57
+      ],
+      "material": "mirror",
+      "castShadow": false,
+      "glass": false
+    }
+  ],
+  "states": [
+    {
+      "id": "closed",
+      "name": "Closed",
+      "parts": {}
+    },
+    {
+      "id": "open",
+      "name": "Open",
+      "parts": {
+        "door-left": {
+          "rotation": [
+            0,
+            -95,
+            0
+          ]
+        },
+        "handle-left": {
+          "rotation": [
+            0,
+            -95,
+            0
+          ]
+        },
+        "door-right": {
+          "rotation": [
+            0,
+            95,
+            0
+          ]
+        },
+        "handle-right": {
+          "rotation": [
+            0,
+            95,
+            0
+          ]
+        },
+        "mirror": {
+          "rotation": [
+            0,
+            95,
+            0
+          ]
+        }
+      }
+    }
+  ],
+  "defaultState": "closed",
+  "interactions": [
+    {
+      "part": "door-left",
+      "action": "cycleStates"
+    },
+    {
+      "part": "handle-left",
+      "action": "cycleStates"
+    },
+    {
+      "part": "door-right",
+      "action": "cycleStates"
+    },
+    {
+      "part": "handle-right",
+      "action": "cycleStates"
+    },
+    {
+      "part": "mirror",
+      "action": "cycleStates"
+    }
+  ]
+}

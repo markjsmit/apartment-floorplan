@@ -1,0 +1,74 @@
+{
+  "id": "old-house-floor-mirror",
+  "name": "Black floor mirror (old house)",
+  "tags": [
+    "old house",
+    "bedroom",
+    "mirror",
+    "floor mirror",
+    "black"
+  ],
+  "description": "45 x 160 cm black frame, leaning against the wall. Sizes estimated from photos of the old apartment — measure before relying on them.",
+  "source": {
+    "kind": "parts",
+    "notes": "Modelled from Mark's photos in sources/old house/ (photos 05, 21).",
+    "license": "self-made"
+  },
+  "parts": [
+    {
+      "id": "frame",
+      "tags": [
+        "mirror",
+        "frame"
+      ],
+      "geometry": {
+        "type": "box",
+        "size": [
+          45,
+          160,
+          2.5
+        ]
+      },
+      "position": [
+        0,
+        79.6,
+        11.9
+      ],
+      "rotation": [
+        -8,
+        0,
+        0
+      ],
+      "material": "metal-black",
+      "castShadow": true,
+      "glass": false
+    },
+    {
+      "id": "mirror",
+      "tags": [
+        "mirror"
+      ],
+      "geometry": {
+        "type": "box",
+        "size": [
+          41,
+          156,
+          0.4
+        ]
+      },
+      "position": [
+        0,
+        79.8,
+        13.3
+      ],
+      "rotation": [
+        -8,
+        0,
+        0
+      ],
+      "material": "mirror",
+      "castShadow": false,
+      "glass": false
+    }
+  ]
+}

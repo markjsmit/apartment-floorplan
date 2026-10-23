@@ -1,0 +1,176 @@
+{
+  "id": "old-house-shoe-rack",
+  "name": "White shoe rack (old house)",
+  "tags": [
+    "old house",
+    "hall",
+    "shoe rack",
+    "shoes",
+    "entrance",
+    "white"
+  ],
+  "description": "60 x 32 x 80 cm, open, 2 sloped shelves under the top. Sizes estimated from photos of the old apartment — measure before relying on them.",
+  "source": {
+    "kind": "parts",
+    "notes": "Modelled from Mark's photos in sources/old house/ (entrance photo 03).",
+    "license": "self-made"
+  },
+  "parts": [
+    {
+      "id": "side-left",
+      "tags": [],
+      "geometry": {
+        "type": "box",
+        "size": [
+          2,
+          80,
+          32
+        ]
+      },
+      "position": [
+        -29,
+        40,
+        16
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "material": "white-laminate",
+      "castShadow": true,
+      "glass": false
+    },
+    {
+      "id": "side-right",
+      "tags": [],
+      "geometry": {
+        "type": "box",
+        "size": [
+          2,
+          80,
+          32
+        ]
+      },
+      "position": [
+        29,
+        40,
+        16
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "material": "white-laminate",
+      "castShadow": true,
+      "glass": false
+    },
+    {
+      "id": "top",
+      "tags": [
+        "top"
+      ],
+      "geometry": {
+        "type": "box",
+        "size": [
+          60,
+          2.5,
+          32
+        ]
+      },
+      "position": [
+        0,
+        78.75,
+        16
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "material": "white-laminate",
+      "castShadow": true,
+      "glass": false
+    },
+    {
+      "id": "shelf-1",
+      "tags": [
+        "shelf"
+      ],
+      "geometry": {
+        "type": "box",
+        "size": [
+          56,
+          1.5,
+          28
+        ]
+      },
+      "position": [
+        0,
+        50,
+        16
+      ],
+      "rotation": [
+        12,
+        0,
+        0
+      ],
+      "material": "white-laminate",
+      "castShadow": true,
+      "glass": false
+    },
+    {
+      "id": "shelf-2",
+      "tags": [
+        "shelf"
+      ],
+      "geometry": {
+        "type": "box",
+        "size": [
+          56,
+          1.5,
+          28
+        ]
+      },
+      "position": [
+        0,
+        22,
+        16
+      ],
+      "rotation": [
+        12,
+        0,
+        0
+      ],
+      "material": "white-laminate",
+      "castShadow": true,
+      "glass": false
+    },
+    {
+      "id": "rail",
+      "tags": [],
+      "geometry": {
+        "type": "box",
+        "size": [
+          56,
+          4,
+          2
+        ]
+      },
+      "position": [
+        0,
+        4,
+        30
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "material": "white-laminate",
+      "castShadow": true,
+      "glass": false
+    }
+  ]
+}

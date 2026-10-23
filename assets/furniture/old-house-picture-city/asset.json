@@ -1,0 +1,75 @@
+{
+  "id": "old-house-picture-city",
+  "name": "Big city-at-night picture (old house)",
+  "tags": [
+    "old house",
+    "bedroom",
+    "picture",
+    "poster",
+    "art",
+    "decor"
+  ],
+  "description": "60 x 90 cm framed print (warm city at night), leaning against the wall. Sizes estimated from photos of the old apartment — measure before relying on them.",
+  "source": {
+    "kind": "parts",
+    "notes": "Modelled from Mark's photos in sources/old house/ (photos 05, 21, 25).",
+    "license": "self-made"
+  },
+  "parts": [
+    {
+      "id": "frame",
+      "tags": [
+        "picture",
+        "frame"
+      ],
+      "geometry": {
+        "type": "box",
+        "size": [
+          60,
+          90,
+          2.5
+        ]
+      },
+      "position": [
+        0,
+        44.6,
+        6.7
+      ],
+      "rotation": [
+        -8,
+        0,
+        0
+      ],
+      "color": "#cfcac2",
+      "castShadow": true,
+      "glass": false
+    },
+    {
+      "id": "print",
+      "tags": [
+        "picture"
+      ],
+      "geometry": {
+        "type": "box",
+        "size": [
+          54,
+          84,
+          0.3
+        ]
+      },
+      "position": [
+        0,
+        44.8,
+        8.1
+      ],
+      "rotation": [
+        -8,
+        0,
+        0
+      ],
+      "color": "#8a5527",
+      "castShadow": false,
+      "glass": false
+    }
+  ]
+}

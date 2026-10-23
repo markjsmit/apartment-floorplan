@@ -1,0 +1,14 @@
+{
+  "id": "mirror",
+  "name": "Mirror",
+  "tags": [
+    "mirror",
+    "glass",
+    "reflective"
+  ],
+  "fallbackColor": "#dde5e8",
+  "roughness": 0.08,
+  "metalness": 0.35,
+  "source": "self-made (plain colour)",
+  "license": "CC0"
+}

@@ -1,0 +1,181 @@
+{
+  "id": "old-house-coffee-table",
+  "name": "Grey-oak coffee table (old house)",
+  "tags": [
+    "old house",
+    "living room",
+    "coffee table",
+    "table",
+    "wood"
+  ],
+  "description": "120 x 60 x 45 cm, chunky legs and a shelf underneath, rustic grey oak look. Sizes estimated from photos of the old apartment — measure before relying on them.",
+  "source": {
+    "kind": "parts",
+    "notes": "Modelled from Mark's photos in sources/old house/ (photos 08, 13, 17).",
+    "license": "self-made"
+  },
+  "parts": [
+    {
+      "id": "top",
+      "tags": [
+        "top"
+      ],
+      "geometry": {
+        "type": "box",
+        "size": [
+          120,
+          4,
+          60
+        ]
+      },
+      "position": [
+        0,
+        43,
+        30
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "color": "#9a8c79",
+      "castShadow": true,
+      "glass": false
+    },
+    {
+      "id": "leg-1",
+      "tags": [
+        "leg"
+      ],
+      "geometry": {
+        "type": "box",
+        "size": [
+          7,
+          41,
+          7
+        ]
+      },
+      "position": [
+        -54.5,
+        20.5,
+        5.5
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "color": "#9a8c79",
+      "castShadow": true,
+      "glass": false
+    },
+    {
+      "id": "leg-2",
+      "tags": [
+        "leg"
+      ],
+      "geometry": {
+        "type": "box",
+        "size": [
+          7,
+          41,
+          7
+        ]
+      },
+      "position": [
+        54.5,
+        20.5,
+        5.5
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "color": "#9a8c79",
+      "castShadow": true,
+      "glass": false
+    },
+    {
+      "id": "leg-3",
+      "tags": [
+        "leg"
+      ],
+      "geometry": {
+        "type": "box",
+        "size": [
+          7,
+          41,
+          7
+        ]
+      },
+      "position": [
+        -54.5,
+        20.5,
+        54.5
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "color": "#9a8c79",
+      "castShadow": true,
+      "glass": false
+    },
+    {
+      "id": "leg-4",
+      "tags": [
+        "leg"
+      ],
+      "geometry": {
+        "type": "box",
+        "size": [
+          7,
+          41,
+          7
+        ]
+      },
+      "position": [
+        54.5,
+        20.5,
+        54.5
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "color": "#9a8c79",
+      "castShadow": true,
+      "glass": false
+    },
+    {
+      "id": "shelf",
+      "tags": [
+        "shelf"
+      ],
+      "geometry": {
+        "type": "box",
+        "size": [
+          102,
+          2.5,
+          50
+        ]
+      },
+      "position": [
+        0,
+        12,
+        30
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "color": "#9a8c79",
+      "castShadow": true,
+      "glass": false
+    }
+  ]
+}

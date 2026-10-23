@@ -1,0 +1,120 @@
+{
+  "id": "old-house-wall-clock",
+  "name": "Big wall clock (old house)",
+  "tags": [
+    "old house",
+    "living room",
+    "clock",
+    "wall clock",
+    "decor"
+  ],
+  "description": "Round wall clock, ø60, Roman numerals. Hang it with elevation (~170). Sizes estimated from photos of the old apartment — measure before relying on them.",
+  "source": {
+    "kind": "parts",
+    "notes": "Modelled from Mark's photos in sources/old house/ (photo 13).",
+    "license": "self-made"
+  },
+  "parts": [
+    {
+      "id": "rim",
+      "tags": [
+        "clock"
+      ],
+      "geometry": {
+        "type": "cylinder",
+        "radius": 30,
+        "height": 5,
+        "segments": 48
+      },
+      "position": [
+        0,
+        30,
+        2.5
+      ],
+      "rotation": [
+        90,
+        0,
+        0
+      ],
+      "color": "#7a6650",
+      "castShadow": true,
+      "glass": false
+    },
+    {
+      "id": "face",
+      "tags": [
+        "clock",
+        "face"
+      ],
+      "geometry": {
+        "type": "cylinder",
+        "radius": 26.5,
+        "height": 0.6,
+        "segments": 48
+      },
+      "position": [
+        0,
+        30,
+        5.2
+      ],
+      "rotation": [
+        90,
+        0,
+        0
+      ],
+      "color": "#e6dcc6",
+      "castShadow": false,
+      "glass": false
+    },
+    {
+      "id": "minute-hand",
+      "tags": [],
+      "geometry": {
+        "type": "box",
+        "size": [
+          1.2,
+          20,
+          0.3
+        ]
+      },
+      "position": [
+        0,
+        39,
+        5.8
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "color": "#222",
+      "castShadow": false,
+      "glass": false
+    },
+    {
+      "id": "hour-hand",
+      "tags": [],
+      "geometry": {
+        "type": "box",
+        "size": [
+          14,
+          1.6,
+          0.3
+        ]
+      },
+      "position": [
+        6.5,
+        30,
+        5.9
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "color": "#222",
+      "castShadow": false,
+      "glass": false
+    }
+  ]
+}

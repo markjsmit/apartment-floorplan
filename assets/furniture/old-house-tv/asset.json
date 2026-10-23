@@ -1,0 +1,128 @@
+{
+  "id": "old-house-tv",
+  "name": "TV 65\" (old house)",
+  "tags": [
+    "old house",
+    "living room",
+    "tv",
+    "television",
+    "screen"
+  ],
+  "description": "65\" TV on its feet: 145 x 84 panel, 93 high with feet. Put it on the TV bench (elevation 50). Sizes estimated from photos of the old apartment — measure before relying on them.",
+  "source": {
+    "kind": "parts",
+    "notes": "Modelled from Mark's photos in sources/old house/ (photo 13).",
+    "license": "self-made"
+  },
+  "parts": [
+    {
+      "id": "panel",
+      "tags": [
+        "tv"
+      ],
+      "geometry": {
+        "type": "box",
+        "size": [
+          145,
+          84,
+          3
+        ]
+      },
+      "position": [
+        0,
+        51,
+        13
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "color": "#1b1c1f",
+      "castShadow": true,
+      "glass": false
+    },
+    {
+      "id": "screen",
+      "tags": [
+        "tv",
+        "screen"
+      ],
+      "geometry": {
+        "type": "box",
+        "size": [
+          142,
+          81,
+          0.2
+        ]
+      },
+      "position": [
+        0,
+        51,
+        14.6
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "color": "#0a0d14",
+      "castShadow": false,
+      "glass": false
+    },
+    {
+      "id": "foot-left",
+      "tags": [
+        "foot"
+      ],
+      "geometry": {
+        "type": "box",
+        "size": [
+          5,
+          9,
+          26
+        ]
+      },
+      "position": [
+        -58,
+        4.5,
+        13
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "material": "metal-black",
+      "castShadow": true,
+      "glass": false
+    },
+    {
+      "id": "foot-right",
+      "tags": [
+        "foot"
+      ],
+      "geometry": {
+        "type": "box",
+        "size": [
+          5,
+          9,
+          26
+        ]
+      },
+      "position": [
+        58,
+        4.5,
+        13
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "material": "metal-black",
+      "castShadow": true,
+      "glass": false
+    }
+  ]
+}

@@ -1,0 +1,205 @@
+{
+  "id": "old-house-dining-table",
+  "name": "Grey-oak dining table (old house)",
+  "tags": [
+    "old house",
+    "kitchen",
+    "dining table",
+    "table",
+    "kitchen table",
+    "wood"
+  ],
+  "description": "120 x 80 x 76 cm, square chunky legs, same grey-oak look as the living-room set. Seats 4. Sizes estimated from photos of the old apartment — measure before relying on them.",
+  "source": {
+    "kind": "parts",
+    "notes": "Modelled from Mark's photos in sources/old house/ (photos 20, 23).",
+    "license": "self-made"
+  },
+  "parts": [
+    {
+      "id": "top",
+      "tags": [
+        "top"
+      ],
+      "geometry": {
+        "type": "box",
+        "size": [
+          120,
+          5,
+          80
+        ]
+      },
+      "position": [
+        0,
+        73.5,
+        40
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "color": "#9a8c79",
+      "castShadow": true,
+      "glass": false
+    },
+    {
+      "id": "apron-front",
+      "tags": [],
+      "geometry": {
+        "type": "box",
+        "size": [
+          100,
+          8,
+          2
+        ]
+      },
+      "position": [
+        0,
+        67,
+        73
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "color": "#9a8c79",
+      "castShadow": true,
+      "glass": false
+    },
+    {
+      "id": "apron-back",
+      "tags": [],
+      "geometry": {
+        "type": "box",
+        "size": [
+          100,
+          8,
+          2
+        ]
+      },
+      "position": [
+        0,
+        67,
+        7
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "color": "#9a8c79",
+      "castShadow": true,
+      "glass": false
+    },
+    {
+      "id": "leg-1",
+      "tags": [
+        "leg"
+      ],
+      "geometry": {
+        "type": "box",
+        "size": [
+          8,
+          71,
+          8
+        ]
+      },
+      "position": [
+        -54,
+        35.5,
+        6
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "color": "#9a8c79",
+      "castShadow": true,
+      "glass": false
+    },
+    {
+      "id": "leg-2",
+      "tags": [
+        "leg"
+      ],
+      "geometry": {
+        "type": "box",
+        "size": [
+          8,
+          71,
+          8
+        ]
+      },
+      "position": [
+        54,
+        35.5,
+        6
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "color": "#9a8c79",
+      "castShadow": true,
+      "glass": false
+    },
+    {
+      "id": "leg-3",
+      "tags": [
+        "leg"
+      ],
+      "geometry": {
+        "type": "box",
+        "size": [
+          8,
+          71,
+          8
+        ]
+      },
+      "position": [
+        -54,
+        35.5,
+        74
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "color": "#9a8c79",
+      "castShadow": true,
+      "glass": false
+    },
+    {
+      "id": "leg-4",
+      "tags": [
+        "leg"
+      ],
+      "geometry": {
+        "type": "box",
+        "size": [
+          8,
+          71,
+          8
+        ]
+      },
+      "position": [
+        54,
+        35.5,
+        74
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "color": "#9a8c79",
+      "castShadow": true,
+      "glass": false
+    }
+  ]
+}

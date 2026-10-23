@@ -1,0 +1,32 @@
+{
+  "id": "old-house-kallax-white-2x4",
+  "name": "White KALLAX 77x147 (old house)",
+  "tags": [
+    "old house",
+    "bedroom",
+    "kallax",
+    "ikea",
+    "shelf",
+    "bookcase",
+    "white"
+  ],
+  "description": "White KALLAX in the bedroom, open cubes. Only one corner is in the photo: 2x4 (77 x 147) is a guess, it may be bigger. Sizes estimated from photos of the old apartment — measure before relying on them.",
+  "source": {
+    "kind": "procedural",
+    "generator": "kallax",
+    "notes": "Modelled from Mark's photos in sources/old house/ (photo 25). KALLAX sizes from IKEA.",
+    "license": "self-made"
+  },
+  "parts": [],
+  "params": {
+    "cols": {
+      "default": 2
+    },
+    "rows": {
+      "default": 4
+    },
+    "color": {
+      "default": "white"
+    }
+  }
+}

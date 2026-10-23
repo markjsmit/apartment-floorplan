@@ -1,0 +1,83 @@
+{
+  "id": "old-house-kallax-oak-stack",
+  "name": "Oak KALLAX kitchen shelf (old house)",
+  "tags": [
+    "old house",
+    "kitchen",
+    "kallax",
+    "ikea",
+    "shelf",
+    "kitchen shelf",
+    "drawers",
+    "oak",
+    "white stained oak"
+  ],
+  "description": "KALLAX 4x4 (147x147) white stained oak with 2 drawer inserts in the left column, a KALLAX 2x2 (77x77) on top over the left half: 147 x 39 x 224. Sizes estimated from photos of the old apartment — measure before relying on them.",
+  "source": {
+    "kind": "procedural",
+    "generator": "group",
+    "notes": "Modelled from Mark's photos in sources/old house/ (07, 15, 20, 23). KALLAX sizes from IKEA (see ikea-kallax-* assets).",
+    "license": "self-made"
+  },
+  "parts": [],
+  "params": {
+    "members": {
+      "default": [
+        {
+          "prefix": "lower",
+          "generator": "kallax",
+          "offset": [
+            0,
+            0,
+            0
+          ],
+          "params": {
+            "cols": 4,
+            "rows": 4,
+            "color": "white-oak",
+            "inserts": [
+              [
+                "drawers",
+                "",
+                "",
+                ""
+              ],
+              [
+                "drawers",
+                "",
+                "",
+                ""
+              ],
+              [
+                "",
+                "",
+                "",
+                ""
+              ],
+              [
+                "",
+                "",
+                "",
+                ""
+              ]
+            ]
+          }
+        },
+        {
+          "prefix": "upper",
+          "generator": "kallax",
+          "offset": [
+            -35,
+            147,
+            0
+          ],
+          "params": {
+            "cols": 2,
+            "rows": 2,
+            "color": "white-oak"
+          }
+        }
+      ]
+    }
+  }
+}

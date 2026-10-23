@@ -1,0 +1,241 @@
+{
+  "id": "old-house-bed-small",
+  "name": "Small bedroom bed 140x190 (old house)",
+  "tags": [
+    "old house",
+    "small bedroom",
+    "bed",
+    "double bed",
+    "guest bed"
+  ],
+  "description": "Simple bed, mattress 140 x 190 (guess), no headboard, 50 high. Sizes estimated from photos of the old apartment — measure before relying on them.",
+  "source": {
+    "kind": "parts",
+    "notes": "Modelled from Mark's photos in sources/old house/ (photos 02, 04).",
+    "license": "self-made"
+  },
+  "parts": [
+    {
+      "id": "leg-1",
+      "tags": [
+        "leg"
+      ],
+      "geometry": {
+        "type": "box",
+        "size": [
+          5,
+          5,
+          5
+        ]
+      },
+      "position": [
+        -66,
+        2.5,
+        4
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "color": "#333",
+      "castShadow": true,
+      "glass": false
+    },
+    {
+      "id": "leg-2",
+      "tags": [
+        "leg"
+      ],
+      "geometry": {
+        "type": "box",
+        "size": [
+          5,
+          5,
+          5
+        ]
+      },
+      "position": [
+        66,
+        2.5,
+        4
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "color": "#333",
+      "castShadow": true,
+      "glass": false
+    },
+    {
+      "id": "leg-3",
+      "tags": [
+        "leg"
+      ],
+      "geometry": {
+        "type": "box",
+        "size": [
+          5,
+          5,
+          5
+        ]
+      },
+      "position": [
+        -66,
+        2.5,
+        190
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "color": "#333",
+      "castShadow": true,
+      "glass": false
+    },
+    {
+      "id": "leg-4",
+      "tags": [
+        "leg"
+      ],
+      "geometry": {
+        "type": "box",
+        "size": [
+          5,
+          5,
+          5
+        ]
+      },
+      "position": [
+        66,
+        2.5,
+        190
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "color": "#333",
+      "castShadow": true,
+      "glass": false
+    },
+    {
+      "id": "base",
+      "tags": [
+        "bed",
+        "base"
+      ],
+      "geometry": {
+        "type": "box",
+        "size": [
+          144,
+          30,
+          194
+        ]
+      },
+      "position": [
+        0,
+        20,
+        97
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "color": "#d8d6d0",
+      "castShadow": true,
+      "glass": false
+    },
+    {
+      "id": "mattress",
+      "tags": [
+        "bed",
+        "mattress"
+      ],
+      "geometry": {
+        "type": "box",
+        "size": [
+          140,
+          18,
+          190
+        ]
+      },
+      "position": [
+        0,
+        44,
+        97
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "material": "linen-white",
+      "castShadow": true,
+      "glass": false
+    },
+    {
+      "id": "throw",
+      "tags": [
+        "bed",
+        "blanket"
+      ],
+      "geometry": {
+        "type": "box",
+        "size": [
+          146,
+          10,
+          58
+        ]
+      },
+      "position": [
+        0,
+        57,
+        30
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "material": "fabric-grey",
+      "color": "#5d8fd0",
+      "castShadow": true,
+      "glass": false
+    },
+    {
+      "id": "duvet",
+      "tags": [
+        "bed",
+        "duvet"
+      ],
+      "geometry": {
+        "type": "box",
+        "size": [
+          146,
+          6,
+          136
+        ]
+      },
+      "position": [
+        0,
+        56,
+        126
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "material": "fabric-grey",
+      "color": "#c9d6d4",
+      "castShadow": true,
+      "glass": false
+    }
+  ]
+}

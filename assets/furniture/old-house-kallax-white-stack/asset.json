@@ -1,0 +1,84 @@
+{
+  "id": "old-house-kallax-white-stack",
+  "name": "White KALLAX stack 147x224 (old house)",
+  "tags": [
+    "old house",
+    "living room",
+    "kallax",
+    "ikea",
+    "shelf",
+    "bookcase",
+    "games shelf",
+    "drawers",
+    "white"
+  ],
+  "description": "KALLAX 4x4 (147x147) with 4 drawer inserts + 4 black DRÖNA boxes checkered in the bottom two rows, a KALLAX 4x2 (147x77) on top: 147 x 39 x 224. Which cells hold which insert is from photo 10, roughly. Sizes estimated from photos of the old apartment — measure before relying on them.",
+  "source": {
+    "kind": "procedural",
+    "generator": "group",
+    "notes": "Modelled from Mark's photos in sources/old house/ (photo 10). KALLAX sizes from IKEA (see ikea-kallax-* assets).",
+    "license": "self-made"
+  },
+  "parts": [],
+  "params": {
+    "members": {
+      "default": [
+        {
+          "prefix": "lower",
+          "generator": "kallax",
+          "offset": [
+            0,
+            0,
+            0
+          ],
+          "params": {
+            "cols": 4,
+            "rows": 4,
+            "color": "white",
+            "boxColor": "black",
+            "inserts": [
+              [
+                "",
+                "",
+                "",
+                ""
+              ],
+              [
+                "",
+                "",
+                "",
+                ""
+              ],
+              [
+                "box",
+                "drawers",
+                "box",
+                "drawers"
+              ],
+              [
+                "drawers",
+                "box",
+                "drawers",
+                "box"
+              ]
+            ]
+          }
+        },
+        {
+          "prefix": "upper",
+          "generator": "kallax",
+          "offset": [
+            0,
+            147,
+            0
+          ],
+          "params": {
+            "cols": 4,
+            "rows": 2,
+            "color": "white"
+          }
+        }
+      ]
+    }
+  }
+}

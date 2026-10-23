@@ -1,0 +1,477 @@
+{
+  "id": "old-house-office-chair",
+  "name": "Black mesh office chair (old house)",
+  "tags": [
+    "old house",
+    "office",
+    "office chair",
+    "desk chair",
+    "chair",
+    "black"
+  ],
+  "description": "64 x 64 x 110 cm, mesh back, armrests, seat 48. There are 2. Sizes estimated from photos of the old apartment — measure before relying on them.",
+  "source": {
+    "kind": "parts",
+    "notes": "Modelled from Mark's photos in sources/old house/ (photos 06, 12).",
+    "license": "self-made"
+  },
+  "parts": [
+    {
+      "id": "base-1",
+      "tags": [
+        "chair",
+        "base"
+      ],
+      "geometry": {
+        "type": "box",
+        "size": [
+          30,
+          3,
+          4
+        ]
+      },
+      "position": [
+        15,
+        3.5,
+        32
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "material": "metal-black",
+      "castShadow": true,
+      "glass": false
+    },
+    {
+      "id": "base-2",
+      "tags": [
+        "chair",
+        "base"
+      ],
+      "geometry": {
+        "type": "box",
+        "size": [
+          30,
+          3,
+          4
+        ]
+      },
+      "position": [
+        4.64,
+        3.5,
+        17.73
+      ],
+      "rotation": [
+        0,
+        72,
+        0
+      ],
+      "material": "metal-black",
+      "castShadow": true,
+      "glass": false
+    },
+    {
+      "id": "base-3",
+      "tags": [
+        "chair",
+        "base"
+      ],
+      "geometry": {
+        "type": "box",
+        "size": [
+          30,
+          3,
+          4
+        ]
+      },
+      "position": [
+        -12.14,
+        3.5,
+        23.18
+      ],
+      "rotation": [
+        0,
+        144,
+        0
+      ],
+      "material": "metal-black",
+      "castShadow": true,
+      "glass": false
+    },
+    {
+      "id": "base-4",
+      "tags": [
+        "chair",
+        "base"
+      ],
+      "geometry": {
+        "type": "box",
+        "size": [
+          30,
+          3,
+          4
+        ]
+      },
+      "position": [
+        -12.14,
+        3.5,
+        40.82
+      ],
+      "rotation": [
+        0,
+        216,
+        0
+      ],
+      "material": "metal-black",
+      "castShadow": true,
+      "glass": false
+    },
+    {
+      "id": "base-5",
+      "tags": [
+        "chair",
+        "base"
+      ],
+      "geometry": {
+        "type": "box",
+        "size": [
+          30,
+          3,
+          4
+        ]
+      },
+      "position": [
+        4.64,
+        3.5,
+        46.27
+      ],
+      "rotation": [
+        0,
+        288,
+        0
+      ],
+      "material": "metal-black",
+      "castShadow": true,
+      "glass": false
+    },
+    {
+      "id": "wheel-1",
+      "tags": [
+        "wheel"
+      ],
+      "geometry": {
+        "type": "cylinder",
+        "radius": 2.5,
+        "height": 3,
+        "segments": 12
+      },
+      "position": [
+        29,
+        2.5,
+        32
+      ],
+      "rotation": [
+        90,
+        0,
+        0
+      ],
+      "color": "#111",
+      "castShadow": true,
+      "glass": false
+    },
+    {
+      "id": "wheel-2",
+      "tags": [
+        "wheel"
+      ],
+      "geometry": {
+        "type": "cylinder",
+        "radius": 2.5,
+        "height": 3,
+        "segments": 12
+      },
+      "position": [
+        8.96,
+        2.5,
+        4.42
+      ],
+      "rotation": [
+        90,
+        0,
+        0
+      ],
+      "color": "#111",
+      "castShadow": true,
+      "glass": false
+    },
+    {
+      "id": "wheel-3",
+      "tags": [
+        "wheel"
+      ],
+      "geometry": {
+        "type": "cylinder",
+        "radius": 2.5,
+        "height": 3,
+        "segments": 12
+      },
+      "position": [
+        -23.46,
+        2.5,
+        14.95
+      ],
+      "rotation": [
+        90,
+        0,
+        0
+      ],
+      "color": "#111",
+      "castShadow": true,
+      "glass": false
+    },
+    {
+      "id": "wheel-4",
+      "tags": [
+        "wheel"
+      ],
+      "geometry": {
+        "type": "cylinder",
+        "radius": 2.5,
+        "height": 3,
+        "segments": 12
+      },
+      "position": [
+        -23.46,
+        2.5,
+        49.05
+      ],
+      "rotation": [
+        90,
+        0,
+        0
+      ],
+      "color": "#111",
+      "castShadow": true,
+      "glass": false
+    },
+    {
+      "id": "wheel-5",
+      "tags": [
+        "wheel"
+      ],
+      "geometry": {
+        "type": "cylinder",
+        "radius": 2.5,
+        "height": 3,
+        "segments": 12
+      },
+      "position": [
+        8.96,
+        2.5,
+        59.58
+      ],
+      "rotation": [
+        90,
+        0,
+        0
+      ],
+      "color": "#111",
+      "castShadow": true,
+      "glass": false
+    },
+    {
+      "id": "column",
+      "tags": [
+        "chair",
+        "column"
+      ],
+      "geometry": {
+        "type": "cylinder",
+        "radius": 2.5,
+        "height": 38,
+        "segments": 24
+      },
+      "position": [
+        0,
+        24,
+        32
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "material": "metal-black",
+      "castShadow": true,
+      "glass": false
+    },
+    {
+      "id": "seat",
+      "tags": [
+        "chair",
+        "seat"
+      ],
+      "geometry": {
+        "type": "box",
+        "size": [
+          50,
+          7,
+          48
+        ]
+      },
+      "position": [
+        0,
+        46.5,
+        32
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "material": "fabric-grey",
+      "color": "#3a3b3e",
+      "castShadow": true,
+      "glass": false
+    },
+    {
+      "id": "back",
+      "tags": [
+        "chair",
+        "back"
+      ],
+      "geometry": {
+        "type": "box",
+        "size": [
+          48,
+          60,
+          4
+        ]
+      },
+      "position": [
+        0,
+        84,
+        7
+      ],
+      "rotation": [
+        -8,
+        0,
+        0
+      ],
+      "material": "fabric-grey",
+      "color": "#3a3b3e",
+      "castShadow": true,
+      "glass": false
+    },
+    {
+      "id": "arm-post-left",
+      "tags": [
+        "arm"
+      ],
+      "geometry": {
+        "type": "box",
+        "size": [
+          4,
+          16,
+          4
+        ]
+      },
+      "position": [
+        -26,
+        58,
+        30
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "material": "metal-black",
+      "castShadow": true,
+      "glass": false
+    },
+    {
+      "id": "arm-post-right",
+      "tags": [
+        "arm"
+      ],
+      "geometry": {
+        "type": "box",
+        "size": [
+          4,
+          16,
+          4
+        ]
+      },
+      "position": [
+        26,
+        58,
+        30
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "material": "metal-black",
+      "castShadow": true,
+      "glass": false
+    },
+    {
+      "id": "arm-pad-left",
+      "tags": [
+        "arm"
+      ],
+      "geometry": {
+        "type": "box",
+        "size": [
+          6,
+          2.5,
+          26
+        ]
+      },
+      "position": [
+        -26,
+        67,
+        30
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "color": "#1e1e1e",
+      "castShadow": true,
+      "glass": false
+    },
+    {
+      "id": "arm-pad-right",
+      "tags": [
+        "arm"
+      ],
+      "geometry": {
+        "type": "box",
+        "size": [
+          6,
+          2.5,
+          26
+        ]
+      },
+      "position": [
+        26,
+        67,
+        30
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "color": "#1e1e1e",
+      "castShadow": true,
+      "glass": false
+    }
+  ]
+}

@@ -1,0 +1,264 @@
+{
+  "id": "old-house-shelf-black-plastic",
+  "name": "Black plastic shelving unit (old house)",
+  "tags": [
+    "old house",
+    "storage room",
+    "shelf",
+    "shelving unit",
+    "storage",
+    "plastic",
+    "black"
+  ],
+  "description": "90 x 45 x 180 cm, 5 shelves. There are 2 in the storage room. Sizes estimated from photos of the old apartment — measure before relying on them.",
+  "source": {
+    "kind": "parts",
+    "notes": "Modelled from Mark's photos in sources/old house/ (photo 22).",
+    "license": "self-made"
+  },
+  "parts": [
+    {
+      "id": "post-1",
+      "tags": [
+        "post"
+      ],
+      "geometry": {
+        "type": "box",
+        "size": [
+          4,
+          180,
+          4
+        ]
+      },
+      "position": [
+        -43,
+        90,
+        2
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "color": "#26262a",
+      "castShadow": true,
+      "glass": false
+    },
+    {
+      "id": "post-2",
+      "tags": [
+        "post"
+      ],
+      "geometry": {
+        "type": "box",
+        "size": [
+          4,
+          180,
+          4
+        ]
+      },
+      "position": [
+        43,
+        90,
+        2
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "color": "#26262a",
+      "castShadow": true,
+      "glass": false
+    },
+    {
+      "id": "post-3",
+      "tags": [
+        "post"
+      ],
+      "geometry": {
+        "type": "box",
+        "size": [
+          4,
+          180,
+          4
+        ]
+      },
+      "position": [
+        -43,
+        90,
+        43
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "color": "#26262a",
+      "castShadow": true,
+      "glass": false
+    },
+    {
+      "id": "post-4",
+      "tags": [
+        "post"
+      ],
+      "geometry": {
+        "type": "box",
+        "size": [
+          4,
+          180,
+          4
+        ]
+      },
+      "position": [
+        43,
+        90,
+        43
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "color": "#26262a",
+      "castShadow": true,
+      "glass": false
+    },
+    {
+      "id": "shelf-1",
+      "tags": [
+        "shelf"
+      ],
+      "geometry": {
+        "type": "box",
+        "size": [
+          90,
+          3,
+          45
+        ]
+      },
+      "position": [
+        0,
+        2,
+        22.5
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "color": "#26262a",
+      "castShadow": true,
+      "glass": false
+    },
+    {
+      "id": "shelf-2",
+      "tags": [
+        "shelf"
+      ],
+      "geometry": {
+        "type": "box",
+        "size": [
+          90,
+          3,
+          45
+        ]
+      },
+      "position": [
+        0,
+        46,
+        22.5
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "color": "#26262a",
+      "castShadow": true,
+      "glass": false
+    },
+    {
+      "id": "shelf-3",
+      "tags": [
+        "shelf"
+      ],
+      "geometry": {
+        "type": "box",
+        "size": [
+          90,
+          3,
+          45
+        ]
+      },
+      "position": [
+        0,
+        90,
+        22.5
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "color": "#26262a",
+      "castShadow": true,
+      "glass": false
+    },
+    {
+      "id": "shelf-4",
+      "tags": [
+        "shelf"
+      ],
+      "geometry": {
+        "type": "box",
+        "size": [
+          90,
+          3,
+          45
+        ]
+      },
+      "position": [
+        0,
+        134,
+        22.5
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "color": "#26262a",
+      "castShadow": true,
+      "glass": false
+    },
+    {
+      "id": "shelf-5",
+      "tags": [
+        "shelf"
+      ],
+      "geometry": {
+        "type": "box",
+        "size": [
+          90,
+          3,
+          45
+        ]
+      },
+      "position": [
+        0,
+        178.5,
+        22.5
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "color": "#26262a",
+      "castShadow": true,
+      "glass": false
+    }
+  ]
+}

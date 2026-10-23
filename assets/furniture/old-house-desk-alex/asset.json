@@ -1,0 +1,906 @@
+{
+  "id": "old-house-desk-alex",
+  "name": "White desk on 2 ALEX drawers (old house)",
+  "tags": [
+    "old house",
+    "office",
+    "desk",
+    "alex",
+    "ikea",
+    "lagkapten",
+    "drawers",
+    "white"
+  ],
+  "description": "200 x 60 x 73 cm: white tabletop (LAGKAPTEN-style) on two IKEA ALEX drawer units (36 x 58 x 70, 5 drawers each). Desk length estimated (IKEA sells this combo as 140 or 200). Sizes estimated from photos of the old apartment — measure before relying on them.",
+  "source": {
+    "kind": "parts",
+    "notes": "Modelled from Mark's photos in sources/old house/ (office photos 06, 12).",
+    "license": "self-made"
+  },
+  "parts": [
+    {
+      "id": "top",
+      "tags": [
+        "desk",
+        "top"
+      ],
+      "geometry": {
+        "type": "box",
+        "size": [
+          200,
+          3,
+          60
+        ]
+      },
+      "position": [
+        0,
+        71.5,
+        30
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "material": "white-laminate",
+      "castShadow": true,
+      "glass": false
+    },
+    {
+      "id": "alex-left-body",
+      "tags": [
+        "alex",
+        "drawers"
+      ],
+      "geometry": {
+        "type": "box",
+        "size": [
+          36,
+          70,
+          57
+        ]
+      },
+      "position": [
+        -82,
+        35,
+        28.5
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "material": "white-laminate",
+      "castShadow": true,
+      "glass": false
+    },
+    {
+      "id": "alex-left-drawer-1-front",
+      "tags": [
+        "drawer",
+        "front"
+      ],
+      "geometry": {
+        "type": "box",
+        "size": [
+          35.4,
+          12.8,
+          1
+        ]
+      },
+      "position": [
+        -82,
+        62.6,
+        57.5
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "material": "white-laminate",
+      "castShadow": true,
+      "glass": false
+    },
+    {
+      "id": "alex-left-drawer-1-grip",
+      "tags": [
+        "drawer",
+        "handle"
+      ],
+      "geometry": {
+        "type": "box",
+        "size": [
+          16,
+          1.2,
+          0.2
+        ]
+      },
+      "position": [
+        -82,
+        67.4,
+        58.05
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "color": "#a8a8a4",
+      "castShadow": false,
+      "glass": false
+    },
+    {
+      "id": "alex-left-drawer-2-front",
+      "tags": [
+        "drawer",
+        "front"
+      ],
+      "geometry": {
+        "type": "box",
+        "size": [
+          35.4,
+          12.8,
+          1
+        ]
+      },
+      "position": [
+        -82,
+        48.8,
+        57.5
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "material": "white-laminate",
+      "castShadow": true,
+      "glass": false
+    },
+    {
+      "id": "alex-left-drawer-2-grip",
+      "tags": [
+        "drawer",
+        "handle"
+      ],
+      "geometry": {
+        "type": "box",
+        "size": [
+          16,
+          1.2,
+          0.2
+        ]
+      },
+      "position": [
+        -82,
+        53.6,
+        58.05
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "color": "#a8a8a4",
+      "castShadow": false,
+      "glass": false
+    },
+    {
+      "id": "alex-left-drawer-3-front",
+      "tags": [
+        "drawer",
+        "front"
+      ],
+      "geometry": {
+        "type": "box",
+        "size": [
+          35.4,
+          12.8,
+          1
+        ]
+      },
+      "position": [
+        -82,
+        35,
+        57.5
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "material": "white-laminate",
+      "castShadow": true,
+      "glass": false
+    },
+    {
+      "id": "alex-left-drawer-3-grip",
+      "tags": [
+        "drawer",
+        "handle"
+      ],
+      "geometry": {
+        "type": "box",
+        "size": [
+          16,
+          1.2,
+          0.2
+        ]
+      },
+      "position": [
+        -82,
+        39.8,
+        58.05
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "color": "#a8a8a4",
+      "castShadow": false,
+      "glass": false
+    },
+    {
+      "id": "alex-left-drawer-4-front",
+      "tags": [
+        "drawer",
+        "front"
+      ],
+      "geometry": {
+        "type": "box",
+        "size": [
+          35.4,
+          12.8,
+          1
+        ]
+      },
+      "position": [
+        -82,
+        21.2,
+        57.5
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "material": "white-laminate",
+      "castShadow": true,
+      "glass": false
+    },
+    {
+      "id": "alex-left-drawer-4-grip",
+      "tags": [
+        "drawer",
+        "handle"
+      ],
+      "geometry": {
+        "type": "box",
+        "size": [
+          16,
+          1.2,
+          0.2
+        ]
+      },
+      "position": [
+        -82,
+        26,
+        58.05
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "color": "#a8a8a4",
+      "castShadow": false,
+      "glass": false
+    },
+    {
+      "id": "alex-left-drawer-5-front",
+      "tags": [
+        "drawer",
+        "front"
+      ],
+      "geometry": {
+        "type": "box",
+        "size": [
+          35.4,
+          12.8,
+          1
+        ]
+      },
+      "position": [
+        -82,
+        7.4,
+        57.5
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "material": "white-laminate",
+      "castShadow": true,
+      "glass": false
+    },
+    {
+      "id": "alex-left-drawer-5-grip",
+      "tags": [
+        "drawer",
+        "handle"
+      ],
+      "geometry": {
+        "type": "box",
+        "size": [
+          16,
+          1.2,
+          0.2
+        ]
+      },
+      "position": [
+        -82,
+        12.2,
+        58.05
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "color": "#a8a8a4",
+      "castShadow": false,
+      "glass": false
+    },
+    {
+      "id": "alex-right-body",
+      "tags": [
+        "alex",
+        "drawers"
+      ],
+      "geometry": {
+        "type": "box",
+        "size": [
+          36,
+          70,
+          57
+        ]
+      },
+      "position": [
+        82,
+        35,
+        28.5
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "material": "white-laminate",
+      "castShadow": true,
+      "glass": false
+    },
+    {
+      "id": "alex-right-drawer-1-front",
+      "tags": [
+        "drawer",
+        "front"
+      ],
+      "geometry": {
+        "type": "box",
+        "size": [
+          35.4,
+          12.8,
+          1
+        ]
+      },
+      "position": [
+        82,
+        62.6,
+        57.5
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "material": "white-laminate",
+      "castShadow": true,
+      "glass": false
+    },
+    {
+      "id": "alex-right-drawer-1-grip",
+      "tags": [
+        "drawer",
+        "handle"
+      ],
+      "geometry": {
+        "type": "box",
+        "size": [
+          16,
+          1.2,
+          0.2
+        ]
+      },
+      "position": [
+        82,
+        67.4,
+        58.05
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "color": "#a8a8a4",
+      "castShadow": false,
+      "glass": false
+    },
+    {
+      "id": "alex-right-drawer-2-front",
+      "tags": [
+        "drawer",
+        "front"
+      ],
+      "geometry": {
+        "type": "box",
+        "size": [
+          35.4,
+          12.8,
+          1
+        ]
+      },
+      "position": [
+        82,
+        48.8,
+        57.5
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "material": "white-laminate",
+      "castShadow": true,
+      "glass": false
+    },
+    {
+      "id": "alex-right-drawer-2-grip",
+      "tags": [
+        "drawer",
+        "handle"
+      ],
+      "geometry": {
+        "type": "box",
+        "size": [
+          16,
+          1.2,
+          0.2
+        ]
+      },
+      "position": [
+        82,
+        53.6,
+        58.05
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "color": "#a8a8a4",
+      "castShadow": false,
+      "glass": false
+    },
+    {
+      "id": "alex-right-drawer-3-front",
+      "tags": [
+        "drawer",
+        "front"
+      ],
+      "geometry": {
+        "type": "box",
+        "size": [
+          35.4,
+          12.8,
+          1
+        ]
+      },
+      "position": [
+        82,
+        35,
+        57.5
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "material": "white-laminate",
+      "castShadow": true,
+      "glass": false
+    },
+    {
+      "id": "alex-right-drawer-3-grip",
+      "tags": [
+        "drawer",
+        "handle"
+      ],
+      "geometry": {
+        "type": "box",
+        "size": [
+          16,
+          1.2,
+          0.2
+        ]
+      },
+      "position": [
+        82,
+        39.8,
+        58.05
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "color": "#a8a8a4",
+      "castShadow": false,
+      "glass": false
+    },
+    {
+      "id": "alex-right-drawer-4-front",
+      "tags": [
+        "drawer",
+        "front"
+      ],
+      "geometry": {
+        "type": "box",
+        "size": [
+          35.4,
+          12.8,
+          1
+        ]
+      },
+      "position": [
+        82,
+        21.2,
+        57.5
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "material": "white-laminate",
+      "castShadow": true,
+      "glass": false
+    },
+    {
+      "id": "alex-right-drawer-4-grip",
+      "tags": [
+        "drawer",
+        "handle"
+      ],
+      "geometry": {
+        "type": "box",
+        "size": [
+          16,
+          1.2,
+          0.2
+        ]
+      },
+      "position": [
+        82,
+        26,
+        58.05
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "color": "#a8a8a4",
+      "castShadow": false,
+      "glass": false
+    },
+    {
+      "id": "alex-right-drawer-5-front",
+      "tags": [
+        "drawer",
+        "front"
+      ],
+      "geometry": {
+        "type": "box",
+        "size": [
+          35.4,
+          12.8,
+          1
+        ]
+      },
+      "position": [
+        82,
+        7.4,
+        57.5
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "material": "white-laminate",
+      "castShadow": true,
+      "glass": false
+    },
+    {
+      "id": "alex-right-drawer-5-grip",
+      "tags": [
+        "drawer",
+        "handle"
+      ],
+      "geometry": {
+        "type": "box",
+        "size": [
+          16,
+          1.2,
+          0.2
+        ]
+      },
+      "position": [
+        82,
+        12.2,
+        58.05
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "color": "#a8a8a4",
+      "castShadow": false,
+      "glass": false
+    }
+  ],
+  "states": [
+    {
+      "id": "closed",
+      "name": "Closed",
+      "parts": {}
+    },
+    {
+      "id": "open",
+      "name": "Open",
+      "parts": {
+        "alex-left-drawer-1-front": {
+          "position": [
+            -82,
+            62.6,
+            87.5
+          ]
+        },
+        "alex-left-drawer-1-grip": {
+          "position": [
+            -82,
+            67.4,
+            88.05
+          ]
+        },
+        "alex-left-drawer-2-front": {
+          "position": [
+            -82,
+            48.8,
+            87.5
+          ]
+        },
+        "alex-left-drawer-2-grip": {
+          "position": [
+            -82,
+            53.6,
+            88.05
+          ]
+        },
+        "alex-left-drawer-3-front": {
+          "position": [
+            -82,
+            35,
+            87.5
+          ]
+        },
+        "alex-left-drawer-3-grip": {
+          "position": [
+            -82,
+            39.8,
+            88.05
+          ]
+        },
+        "alex-left-drawer-4-front": {
+          "position": [
+            -82,
+            21.2,
+            87.5
+          ]
+        },
+        "alex-left-drawer-4-grip": {
+          "position": [
+            -82,
+            26,
+            88.05
+          ]
+        },
+        "alex-left-drawer-5-front": {
+          "position": [
+            -82,
+            7.4,
+            87.5
+          ]
+        },
+        "alex-left-drawer-5-grip": {
+          "position": [
+            -82,
+            12.2,
+            88.05
+          ]
+        },
+        "alex-right-drawer-1-front": {
+          "position": [
+            82,
+            62.6,
+            87.5
+          ]
+        },
+        "alex-right-drawer-1-grip": {
+          "position": [
+            82,
+            67.4,
+            88.05
+          ]
+        },
+        "alex-right-drawer-2-front": {
+          "position": [
+            82,
+            48.8,
+            87.5
+          ]
+        },
+        "alex-right-drawer-2-grip": {
+          "position": [
+            82,
+            53.6,
+            88.05
+          ]
+        },
+        "alex-right-drawer-3-front": {
+          "position": [
+            82,
+            35,
+            87.5
+          ]
+        },
+        "alex-right-drawer-3-grip": {
+          "position": [
+            82,
+            39.8,
+            88.05
+          ]
+        },
+        "alex-right-drawer-4-front": {
+          "position": [
+            82,
+            21.2,
+            87.5
+          ]
+        },
+        "alex-right-drawer-4-grip": {
+          "position": [
+            82,
+            26,
+            88.05
+          ]
+        },
+        "alex-right-drawer-5-front": {
+          "position": [
+            82,
+            7.4,
+            87.5
+          ]
+        },
+        "alex-right-drawer-5-grip": {
+          "position": [
+            82,
+            12.2,
+            88.05
+          ]
+        }
+      }
+    }
+  ],
+  "defaultState": "closed",
+  "interactions": [
+    {
+      "part": "alex-left-drawer-1-front",
+      "action": "cycleStates"
+    },
+    {
+      "part": "alex-left-drawer-1-grip",
+      "action": "cycleStates"
+    },
+    {
+      "part": "alex-left-drawer-2-front",
+      "action": "cycleStates"
+    },
+    {
+      "part": "alex-left-drawer-2-grip",
+      "action": "cycleStates"
+    },
+    {
+      "part": "alex-left-drawer-3-front",
+      "action": "cycleStates"
+    },
+    {
+      "part": "alex-left-drawer-3-grip",
+      "action": "cycleStates"
+    },
+    {
+      "part": "alex-left-drawer-4-front",
+      "action": "cycleStates"
+    },
+    {
+      "part": "alex-left-drawer-4-grip",
+      "action": "cycleStates"
+    },
+    {
+      "part": "alex-left-drawer-5-front",
+      "action": "cycleStates"
+    },
+    {
+      "part": "alex-left-drawer-5-grip",
+      "action": "cycleStates"
+    },
+    {
+      "part": "alex-right-drawer-1-front",
+      "action": "cycleStates"
+    },
+    {
+      "part": "alex-right-drawer-1-grip",
+      "action": "cycleStates"
+    },
+    {
+      "part": "alex-right-drawer-2-front",
+      "action": "cycleStates"
+    },
+    {
+      "part": "alex-right-drawer-2-grip",
+      "action": "cycleStates"
+    },
+    {
+      "part": "alex-right-drawer-3-front",
+      "action": "cycleStates"
+    },
+    {
+      "part": "alex-right-drawer-3-grip",
+      "action": "cycleStates"
+    },
+    {
+      "part": "alex-right-drawer-4-front",
+      "action": "cycleStates"
+    },
+    {
+      "part": "alex-right-drawer-4-grip",
+      "action": "cycleStates"
+    },
+    {
+      "part": "alex-right-drawer-5-front",
+      "action": "cycleStates"
+    },
+    {
+      "part": "alex-right-drawer-5-grip",
+      "action": "cycleStates"
+    }
+  ],
+  "product": {
+    "vendor": "IKEA",
+    "name": "LAGKAPTEN / ALEX desk, white"
+  }
+}

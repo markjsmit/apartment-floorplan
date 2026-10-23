@@ -1,0 +1,182 @@
+{
+  "id": "old-house-gold-mirror",
+  "name": "Gold framed mirror (old house)",
+  "tags": [
+    "old house",
+    "hall",
+    "mirror",
+    "wall mirror",
+    "gold",
+    "decor"
+  ],
+  "description": "85 x 105 cm, ornate gold frame. Hang it with elevation (~95). Sizes estimated from photos of the old apartment — measure before relying on them.",
+  "source": {
+    "kind": "parts",
+    "notes": "Modelled from Mark's photos in sources/old house/ (entrance photo 01).",
+    "license": "self-made"
+  },
+  "parts": [
+    {
+      "id": "frame-top",
+      "tags": [
+        "frame"
+      ],
+      "geometry": {
+        "type": "box",
+        "size": [
+          85,
+          14,
+          6
+        ]
+      },
+      "position": [
+        0,
+        98,
+        3
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "material": "gold-leaf",
+      "castShadow": true,
+      "glass": false
+    },
+    {
+      "id": "frame-bottom",
+      "tags": [
+        "frame"
+      ],
+      "geometry": {
+        "type": "box",
+        "size": [
+          85,
+          14,
+          6
+        ]
+      },
+      "position": [
+        0,
+        7,
+        3
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "material": "gold-leaf",
+      "castShadow": true,
+      "glass": false
+    },
+    {
+      "id": "frame-left",
+      "tags": [
+        "frame"
+      ],
+      "geometry": {
+        "type": "box",
+        "size": [
+          14,
+          77,
+          6
+        ]
+      },
+      "position": [
+        -35.5,
+        52.5,
+        3
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "material": "gold-leaf",
+      "castShadow": true,
+      "glass": false
+    },
+    {
+      "id": "frame-right",
+      "tags": [
+        "frame"
+      ],
+      "geometry": {
+        "type": "box",
+        "size": [
+          14,
+          77,
+          6
+        ]
+      },
+      "position": [
+        35.5,
+        52.5,
+        3
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "material": "gold-leaf",
+      "castShadow": true,
+      "glass": false
+    },
+    {
+      "id": "frame-lip",
+      "tags": [
+        "frame"
+      ],
+      "geometry": {
+        "type": "box",
+        "size": [
+          61,
+          81,
+          2
+        ]
+      },
+      "position": [
+        0,
+        52.5,
+        4.5
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "material": "gold-leaf",
+      "castShadow": true,
+      "glass": false
+    },
+    {
+      "id": "mirror",
+      "tags": [
+        "mirror"
+      ],
+      "geometry": {
+        "type": "box",
+        "size": [
+          57,
+          77,
+          0.5
+        ]
+      },
+      "position": [
+        0,
+        52.5,
+        5.8
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "material": "mirror",
+      "castShadow": false,
+      "glass": false
+    }
+  ]
+}

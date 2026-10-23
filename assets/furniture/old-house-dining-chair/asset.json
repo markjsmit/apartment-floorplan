@@ -1,0 +1,183 @@
+{
+  "id": "old-house-dining-chair",
+  "name": "Black upholstered dining chair (old house)",
+  "tags": [
+    "old house",
+    "kitchen",
+    "chair",
+    "dining chair",
+    "black"
+  ],
+  "description": "45 x 55 x 100 cm, seat 52, tall upholstered back. There are 4. Sizes estimated from photos of the old apartment — measure before relying on them.",
+  "source": {
+    "kind": "parts",
+    "notes": "Modelled from Mark's photos in sources/old house/ (photos 20, 23).",
+    "license": "self-made"
+  },
+  "parts": [
+    {
+      "id": "leg-1",
+      "tags": [
+        "leg"
+      ],
+      "geometry": {
+        "type": "box",
+        "size": [
+          3.5,
+          44,
+          3.5
+        ]
+      },
+      "position": [
+        -19,
+        22,
+        2
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "color": "#1c1c1c",
+      "castShadow": true,
+      "glass": false
+    },
+    {
+      "id": "leg-2",
+      "tags": [
+        "leg"
+      ],
+      "geometry": {
+        "type": "box",
+        "size": [
+          3.5,
+          44,
+          3.5
+        ]
+      },
+      "position": [
+        19,
+        22,
+        2
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "color": "#1c1c1c",
+      "castShadow": true,
+      "glass": false
+    },
+    {
+      "id": "leg-3",
+      "tags": [
+        "leg"
+      ],
+      "geometry": {
+        "type": "box",
+        "size": [
+          3.5,
+          44,
+          3.5
+        ]
+      },
+      "position": [
+        -19,
+        22,
+        52
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "color": "#1c1c1c",
+      "castShadow": true,
+      "glass": false
+    },
+    {
+      "id": "leg-4",
+      "tags": [
+        "leg"
+      ],
+      "geometry": {
+        "type": "box",
+        "size": [
+          3.5,
+          44,
+          3.5
+        ]
+      },
+      "position": [
+        19,
+        22,
+        52
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "color": "#1c1c1c",
+      "castShadow": true,
+      "glass": false
+    },
+    {
+      "id": "seat",
+      "tags": [
+        "seat"
+      ],
+      "geometry": {
+        "type": "box",
+        "size": [
+          45,
+          9,
+          47
+        ]
+      },
+      "position": [
+        0,
+        48.5,
+        31.5
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "material": "fabric-grey",
+      "color": "#3d3f44",
+      "castShadow": true,
+      "glass": false
+    },
+    {
+      "id": "back",
+      "tags": [
+        "back"
+      ],
+      "geometry": {
+        "type": "box",
+        "size": [
+          45,
+          56,
+          8
+        ]
+      },
+      "position": [
+        0,
+        72,
+        4
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "material": "fabric-grey",
+      "color": "#3d3f44",
+      "castShadow": true,
+      "glass": false
+    }
+  ]
+}

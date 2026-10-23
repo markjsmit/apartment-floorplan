@@ -1,0 +1,648 @@
+{
+  "meta": {
+    "name": "Old house",
+    "kind": "saved",
+    "note": "Furniture from Mark's old apartment (sources/old house photos), one room per old room. Room sizes are made up — just a place to look at the pieces.",
+    "createdAt": "2026-10-23T11:38:44.796Z"
+  },
+  "assumptions": [],
+  "rooms": [
+    {
+      "id": "old-living",
+      "name": "Old living room",
+      "tags": [
+        "old house",
+        "living room"
+      ],
+      "footprint": [
+        [
+          0,
+          0
+        ],
+        [
+          450,
+          0
+        ],
+        [
+          450,
+          400
+        ],
+        [
+          0,
+          400
+        ]
+      ],
+      "ceilingHeight": 250,
+      "northAngle": 0,
+      "floor": {
+        "material": "tiles-white"
+      },
+      "ceiling": {
+        "material": "white-paint"
+      },
+      "wallMaterial": "white-paint",
+      "openings": [],
+      "items": [
+        {
+          "id": "old-living.sofa",
+          "asset": "old-house-sofa-l",
+          "against": {
+            "wall": "old-living.wall-0",
+            "offset": 30
+          }
+        },
+        {
+          "id": "old-living.armchair",
+          "asset": "old-house-armchair",
+          "against": {
+            "wall": "old-living.wall-1",
+            "offset": 20
+          }
+        },
+        {
+          "id": "old-living.coffee-table",
+          "asset": "old-house-coffee-table",
+          "position": [
+            190,
+            0,
+            195
+          ],
+          "rotation": 0
+        },
+        {
+          "id": "old-living.tv-bench",
+          "asset": "old-house-tv-bench",
+          "against": {
+            "wall": "old-living.wall-2",
+            "offset": 135
+          }
+        },
+        {
+          "id": "old-living.tv",
+          "asset": "old-house-tv",
+          "against": {
+            "wall": "old-living.wall-2",
+            "offset": 152.5,
+            "gap": 8,
+            "elevation": 50
+          }
+        },
+        {
+          "id": "old-living.clock",
+          "asset": "old-house-wall-clock",
+          "against": {
+            "wall": "old-living.wall-3",
+            "offset": 160,
+            "elevation": 165
+          }
+        },
+        {
+          "id": "old-living.kallax",
+          "asset": "old-house-kallax-white-stack",
+          "against": {
+            "wall": "old-living.wall-1",
+            "offset": 140
+          }
+        },
+        {
+          "id": "old-living.cabinet",
+          "asset": "old-house-tall-cabinet",
+          "against": {
+            "wall": "old-living.wall-1",
+            "offset": 310
+          }
+        }
+      ],
+      "assumptions": [
+        {
+          "path": "footprint",
+          "note": "showroom only — not the real size of the old room"
+        }
+      ]
+    },
+    {
+      "id": "old-kitchen",
+      "name": "Old kitchen & dining",
+      "tags": [
+        "old house",
+        "kitchen"
+      ],
+      "footprint": [
+        [
+          0,
+          0
+        ],
+        [
+          400,
+          0
+        ],
+        [
+          400,
+          330
+        ],
+        [
+          0,
+          330
+        ]
+      ],
+      "ceilingHeight": 250,
+      "northAngle": 0,
+      "floor": {
+        "material": "tiles-white"
+      },
+      "ceiling": {
+        "material": "white-paint"
+      },
+      "wallMaterial": "white-paint",
+      "openings": [],
+      "items": [
+        {
+          "id": "old-kitchen.fridge",
+          "asset": "old-house-fridge",
+          "against": {
+            "wall": "old-kitchen.wall-0",
+            "offset": 30
+          }
+        },
+        {
+          "id": "old-kitchen.kallax",
+          "asset": "old-house-kallax-oak-stack",
+          "against": {
+            "wall": "old-kitchen.wall-1",
+            "offset": 30
+          }
+        },
+        {
+          "id": "old-kitchen.table",
+          "asset": "old-house-dining-table",
+          "position": [
+            200,
+            0,
+            170
+          ],
+          "rotation": 0
+        },
+        {
+          "id": "old-kitchen.chair-1",
+          "asset": "old-house-dining-chair",
+          "position": [
+            170,
+            0,
+            114
+          ],
+          "rotation": 0
+        },
+        {
+          "id": "old-kitchen.chair-2",
+          "asset": "old-house-dining-chair",
+          "position": [
+            230,
+            0,
+            114
+          ],
+          "rotation": 0
+        },
+        {
+          "id": "old-kitchen.chair-3",
+          "asset": "old-house-dining-chair",
+          "position": [
+            170,
+            0,
+            306
+          ],
+          "rotation": 180
+        },
+        {
+          "id": "old-kitchen.chair-4",
+          "asset": "old-house-dining-chair",
+          "position": [
+            230,
+            0,
+            306
+          ],
+          "rotation": 180
+        }
+      ],
+      "assumptions": [
+        {
+          "path": "footprint",
+          "note": "showroom only — not the real size of the old room"
+        }
+      ]
+    },
+    {
+      "id": "old-bedroom",
+      "name": "Old bedroom",
+      "tags": [
+        "old house",
+        "bedroom"
+      ],
+      "footprint": [
+        [
+          0,
+          0
+        ],
+        [
+          410,
+          0
+        ],
+        [
+          410,
+          320
+        ],
+        [
+          0,
+          320
+        ]
+      ],
+      "ceilingHeight": 250,
+      "northAngle": 0,
+      "floor": {
+        "material": "tiles-white"
+      },
+      "ceiling": {
+        "material": "white-paint"
+      },
+      "wallMaterial": "white-paint",
+      "openings": [],
+      "items": [
+        {
+          "id": "old-bedroom.bed",
+          "asset": "old-house-bed-black",
+          "against": {
+            "wall": "old-bedroom.wall-0",
+            "offset": 120
+          }
+        },
+        {
+          "id": "old-bedroom.nightstand-left",
+          "asset": "old-house-nightstand",
+          "against": {
+            "wall": "old-bedroom.wall-0",
+            "offset": 70
+          }
+        },
+        {
+          "id": "old-bedroom.nightstand-right",
+          "asset": "old-house-nightstand",
+          "against": {
+            "wall": "old-bedroom.wall-0",
+            "offset": 307
+          }
+        },
+        {
+          "id": "old-bedroom.picture",
+          "asset": "old-house-picture-city",
+          "against": {
+            "wall": "old-bedroom.wall-0",
+            "offset": 5
+          }
+        },
+        {
+          "id": "old-bedroom.vanity",
+          "asset": "old-house-vanity",
+          "against": {
+            "wall": "old-bedroom.wall-1",
+            "offset": 60
+          }
+        },
+        {
+          "id": "old-bedroom.floor-mirror",
+          "asset": "old-house-floor-mirror",
+          "against": {
+            "wall": "old-bedroom.wall-3",
+            "offset": 60
+          }
+        },
+        {
+          "id": "old-bedroom.kallax",
+          "asset": "old-house-kallax-white-2x4",
+          "against": {
+            "wall": "old-bedroom.wall-2",
+            "offset": 40
+          }
+        }
+      ],
+      "assumptions": [
+        {
+          "path": "footprint",
+          "note": "showroom only — not the real size of the old room"
+        }
+      ]
+    },
+    {
+      "id": "old-small-bedroom",
+      "name": "Old small bedroom",
+      "tags": [
+        "old house",
+        "small bedroom"
+      ],
+      "footprint": [
+        [
+          0,
+          0
+        ],
+        [
+          300,
+          0
+        ],
+        [
+          300,
+          270
+        ],
+        [
+          0,
+          270
+        ]
+      ],
+      "ceilingHeight": 250,
+      "northAngle": 0,
+      "floor": {
+        "material": "tiles-white"
+      },
+      "ceiling": {
+        "material": "white-paint"
+      },
+      "wallMaterial": "white-paint",
+      "openings": [],
+      "items": [
+        {
+          "id": "old-small-bedroom.bed",
+          "asset": "old-house-bed-small",
+          "against": {
+            "wall": "old-small-bedroom.wall-0",
+            "offset": 10
+          }
+        },
+        {
+          "id": "old-small-bedroom.wardrobe-grey",
+          "asset": "old-house-wardrobe-grey",
+          "against": {
+            "wall": "old-small-bedroom.wall-0",
+            "offset": 170
+          }
+        },
+        {
+          "id": "old-small-bedroom.wardrobe-white",
+          "asset": "old-house-wardrobe-white-mirror",
+          "against": {
+            "wall": "old-small-bedroom.wall-1",
+            "offset": 80
+          }
+        }
+      ],
+      "assumptions": [
+        {
+          "path": "footprint",
+          "note": "showroom only — not the real size of the old room"
+        }
+      ]
+    },
+    {
+      "id": "old-office",
+      "name": "Old office",
+      "tags": [
+        "old house",
+        "office"
+      ],
+      "footprint": [
+        [
+          0,
+          0
+        ],
+        [
+          360,
+          0
+        ],
+        [
+          360,
+          300
+        ],
+        [
+          0,
+          300
+        ]
+      ],
+      "ceilingHeight": 250,
+      "northAngle": 0,
+      "floor": {
+        "material": "tiles-white"
+      },
+      "ceiling": {
+        "material": "white-paint"
+      },
+      "wallMaterial": "white-paint",
+      "openings": [],
+      "items": [
+        {
+          "id": "old-office.desk-alex",
+          "asset": "old-house-desk-alex",
+          "against": {
+            "wall": "old-office.wall-0",
+            "offset": 20
+          }
+        },
+        {
+          "id": "old-office.desk-oak",
+          "asset": "old-house-desk-oak-drawers",
+          "against": {
+            "wall": "old-office.wall-1",
+            "offset": 90
+          }
+        },
+        {
+          "id": "old-office.monitors",
+          "asset": "old-house-dual-monitors",
+          "against": {
+            "wall": "old-office.wall-1",
+            "offset": 107.5,
+            "gap": 5,
+            "elevation": 73
+          }
+        },
+        {
+          "id": "old-office.chair-1",
+          "asset": "old-house-office-chair",
+          "position": [
+            120,
+            0,
+            150
+          ],
+          "rotation": 180
+        },
+        {
+          "id": "old-office.chair-2",
+          "asset": "old-house-office-chair",
+          "position": [
+            205,
+            0,
+            170
+          ],
+          "rotation": 90
+        }
+      ],
+      "assumptions": [
+        {
+          "path": "footprint",
+          "note": "showroom only — not the real size of the old room"
+        }
+      ]
+    },
+    {
+      "id": "old-utility",
+      "name": "Old laundry, storage & bath",
+      "tags": [
+        "old house",
+        "laundry room",
+        "storage room",
+        "bathroom"
+      ],
+      "footprint": [
+        [
+          0,
+          0
+        ],
+        [
+          320,
+          0
+        ],
+        [
+          320,
+          260
+        ],
+        [
+          0,
+          260
+        ]
+      ],
+      "ceilingHeight": 250,
+      "northAngle": 0,
+      "floor": {
+        "material": "tiles-white"
+      },
+      "ceiling": {
+        "material": "white-paint"
+      },
+      "wallMaterial": "white-paint",
+      "openings": [],
+      "items": [
+        {
+          "id": "old-utility.washer",
+          "asset": "old-house-washing-machine",
+          "against": {
+            "wall": "old-utility.wall-0",
+            "offset": 10
+          }
+        },
+        {
+          "id": "old-utility.dryer",
+          "asset": "old-house-dryer",
+          "against": {
+            "wall": "old-utility.wall-0",
+            "offset": 72
+          }
+        },
+        {
+          "id": "old-utility.white-shelf",
+          "asset": "old-house-shelf-white-metal",
+          "against": {
+            "wall": "old-utility.wall-0",
+            "offset": 200
+          }
+        },
+        {
+          "id": "old-utility.black-shelf-1",
+          "asset": "old-house-shelf-black-plastic",
+          "against": {
+            "wall": "old-utility.wall-2",
+            "offset": 20
+          }
+        },
+        {
+          "id": "old-utility.black-shelf-2",
+          "asset": "old-house-shelf-black-plastic",
+          "against": {
+            "wall": "old-utility.wall-2",
+            "offset": 120
+          }
+        },
+        {
+          "id": "old-utility.bamboo-shelf",
+          "asset": "old-house-shelf-bamboo",
+          "against": {
+            "wall": "old-utility.wall-3",
+            "offset": 40
+          }
+        }
+      ],
+      "assumptions": [
+        {
+          "path": "footprint",
+          "note": "showroom only — not the real size of the old room"
+        }
+      ]
+    },
+    {
+      "id": "old-hall",
+      "name": "Old entrance hall",
+      "tags": [
+        "old house",
+        "hall",
+        "entrance"
+      ],
+      "footprint": [
+        [
+          0,
+          0
+        ],
+        [
+          260,
+          0
+        ],
+        [
+          260,
+          160
+        ],
+        [
+          0,
+          160
+        ]
+      ],
+      "ceilingHeight": 250,
+      "northAngle": 0,
+      "floor": {
+        "material": "tiles-white"
+      },
+      "ceiling": {
+        "material": "white-paint"
+      },
+      "wallMaterial": "white-paint",
+      "openings": [],
+      "items": [
+        {
+          "id": "old-hall.mirror",
+          "asset": "old-house-gold-mirror",
+          "against": {
+            "wall": "old-hall.wall-0",
+            "offset": 60,
+            "elevation": 95
+          }
+        },
+        {
+          "id": "old-hall.shoe-rack",
+          "asset": "old-house-shoe-rack",
+          "against": {
+            "wall": "old-hall.wall-2",
+            "offset": 40
+          }
+        }
+      ],
+      "assumptions": [
+        {
+          "path": "footprint",
+          "note": "showroom only — not the real size of the old room"
+        }
+      ]
+    }
+  ]
+}

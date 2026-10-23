@@ -1,0 +1,249 @@
+{
+  "id": "old-house-tv-bench",
+  "name": "Grey-oak TV bench (old house)",
+  "tags": [
+    "old house",
+    "living room",
+    "tv bench",
+    "tv stand",
+    "media",
+    "wood"
+  ],
+  "description": "180 x 45 x 50 cm, open compartments, matches the coffee table. Sizes estimated from photos of the old apartment — measure before relying on them.",
+  "source": {
+    "kind": "parts",
+    "notes": "Modelled from Mark's photos in sources/old house/ (photos 13, 17).",
+    "license": "self-made"
+  },
+  "parts": [
+    {
+      "id": "top",
+      "tags": [
+        "top"
+      ],
+      "geometry": {
+        "type": "box",
+        "size": [
+          180,
+          3,
+          45
+        ]
+      },
+      "position": [
+        0,
+        48.5,
+        22.5
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "color": "#9a8c79",
+      "castShadow": true,
+      "glass": false
+    },
+    {
+      "id": "bottom",
+      "tags": [],
+      "geometry": {
+        "type": "box",
+        "size": [
+          174,
+          3,
+          44
+        ]
+      },
+      "position": [
+        0,
+        6.5,
+        22
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "color": "#9a8c79",
+      "castShadow": true,
+      "glass": false
+    },
+    {
+      "id": "plinth",
+      "tags": [],
+      "geometry": {
+        "type": "box",
+        "size": [
+          170,
+          5,
+          38
+        ]
+      },
+      "position": [
+        0,
+        2.5,
+        21
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "color": "#5d544a",
+      "castShadow": true,
+      "glass": false
+    },
+    {
+      "id": "side-left",
+      "tags": [],
+      "geometry": {
+        "type": "box",
+        "size": [
+          3,
+          39,
+          45
+        ]
+      },
+      "position": [
+        -88.5,
+        27.5,
+        22.5
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "color": "#9a8c79",
+      "castShadow": true,
+      "glass": false
+    },
+    {
+      "id": "side-right",
+      "tags": [],
+      "geometry": {
+        "type": "box",
+        "size": [
+          3,
+          39,
+          45
+        ]
+      },
+      "position": [
+        88.5,
+        27.5,
+        22.5
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "color": "#9a8c79",
+      "castShadow": true,
+      "glass": false
+    },
+    {
+      "id": "divider-1",
+      "tags": [],
+      "geometry": {
+        "type": "box",
+        "size": [
+          2,
+          39,
+          43
+        ]
+      },
+      "position": [
+        -30,
+        27.5,
+        22.5
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "color": "#9a8c79",
+      "castShadow": true,
+      "glass": false
+    },
+    {
+      "id": "divider-2",
+      "tags": [],
+      "geometry": {
+        "type": "box",
+        "size": [
+          2,
+          39,
+          43
+        ]
+      },
+      "position": [
+        30,
+        27.5,
+        22.5
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "color": "#9a8c79",
+      "castShadow": true,
+      "glass": false
+    },
+    {
+      "id": "back",
+      "tags": [],
+      "geometry": {
+        "type": "box",
+        "size": [
+          174,
+          39,
+          1.5
+        ]
+      },
+      "position": [
+        0,
+        27.5,
+        0.75
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "color": "#6e6457",
+      "castShadow": true,
+      "glass": false
+    },
+    {
+      "id": "shelf",
+      "tags": [
+        "shelf"
+      ],
+      "geometry": {
+        "type": "box",
+        "size": [
+          58,
+          2,
+          42
+        ]
+      },
+      "position": [
+        0,
+        28,
+        22
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "color": "#9a8c79",
+      "castShadow": true,
+      "glass": false
+    }
+  ]
+}

@@ -1,0 +1,380 @@
+{
+  "id": "old-house-desk-oak-drawers",
+  "name": "White desk with oak drawer cabinet (old house)",
+  "tags": [
+    "old house",
+    "office",
+    "desk",
+    "drawers",
+    "white",
+    "oak"
+  ],
+  "description": "160 x 75 x 73 cm white desk, a light-oak 3-drawer cabinet (40 x 50 x 68) under the left end, legs on the right. Sizes estimated from photos of the old apartment — measure before relying on them.",
+  "source": {
+    "kind": "parts",
+    "notes": "Modelled from Mark's photos in sources/old house/ (photo 12).",
+    "license": "self-made"
+  },
+  "parts": [
+    {
+      "id": "top",
+      "tags": [
+        "desk",
+        "top"
+      ],
+      "geometry": {
+        "type": "box",
+        "size": [
+          160,
+          3,
+          75
+        ]
+      },
+      "position": [
+        0,
+        71.5,
+        37.5
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "material": "white-laminate",
+      "castShadow": true,
+      "glass": false
+    },
+    {
+      "id": "cabinet",
+      "tags": [
+        "cabinet",
+        "drawers"
+      ],
+      "geometry": {
+        "type": "box",
+        "size": [
+          40,
+          68,
+          50
+        ]
+      },
+      "position": [
+        -58,
+        34,
+        25
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "color": "#c79f6b",
+      "castShadow": true,
+      "glass": false
+    },
+    {
+      "id": "leg-front",
+      "tags": [
+        "leg"
+      ],
+      "geometry": {
+        "type": "box",
+        "size": [
+          5,
+          70,
+          5
+        ]
+      },
+      "position": [
+        76,
+        35,
+        70
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "material": "white-laminate",
+      "castShadow": true,
+      "glass": false
+    },
+    {
+      "id": "leg-back",
+      "tags": [
+        "leg"
+      ],
+      "geometry": {
+        "type": "box",
+        "size": [
+          5,
+          70,
+          5
+        ]
+      },
+      "position": [
+        76,
+        35,
+        5
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "material": "white-laminate",
+      "castShadow": true,
+      "glass": false
+    },
+    {
+      "id": "drawer-1-front",
+      "tags": [
+        "drawer",
+        "front"
+      ],
+      "geometry": {
+        "type": "box",
+        "size": [
+          39,
+          20.5,
+          1.5
+        ]
+      },
+      "position": [
+        -58,
+        56,
+        50.75
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "color": "#c79f6b",
+      "castShadow": true,
+      "glass": false
+    },
+    {
+      "id": "drawer-1-handle",
+      "tags": [
+        "drawer",
+        "handle"
+      ],
+      "geometry": {
+        "type": "box",
+        "size": [
+          10,
+          1.5,
+          1.5
+        ]
+      },
+      "position": [
+        -58,
+        62,
+        52.25
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "color": "#c4c6c8",
+      "castShadow": true,
+      "glass": false
+    },
+    {
+      "id": "drawer-2-front",
+      "tags": [
+        "drawer",
+        "front"
+      ],
+      "geometry": {
+        "type": "box",
+        "size": [
+          39,
+          20.5,
+          1.5
+        ]
+      },
+      "position": [
+        -58,
+        34,
+        50.75
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "color": "#c79f6b",
+      "castShadow": true,
+      "glass": false
+    },
+    {
+      "id": "drawer-2-handle",
+      "tags": [
+        "drawer",
+        "handle"
+      ],
+      "geometry": {
+        "type": "box",
+        "size": [
+          10,
+          1.5,
+          1.5
+        ]
+      },
+      "position": [
+        -58,
+        40,
+        52.25
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "color": "#c4c6c8",
+      "castShadow": true,
+      "glass": false
+    },
+    {
+      "id": "drawer-3-front",
+      "tags": [
+        "drawer",
+        "front"
+      ],
+      "geometry": {
+        "type": "box",
+        "size": [
+          39,
+          20.5,
+          1.5
+        ]
+      },
+      "position": [
+        -58,
+        12,
+        50.75
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "color": "#c79f6b",
+      "castShadow": true,
+      "glass": false
+    },
+    {
+      "id": "drawer-3-handle",
+      "tags": [
+        "drawer",
+        "handle"
+      ],
+      "geometry": {
+        "type": "box",
+        "size": [
+          10,
+          1.5,
+          1.5
+        ]
+      },
+      "position": [
+        -58,
+        18,
+        52.25
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "color": "#c4c6c8",
+      "castShadow": true,
+      "glass": false
+    }
+  ],
+  "states": [
+    {
+      "id": "closed",
+      "name": "Closed",
+      "parts": {}
+    },
+    {
+      "id": "open",
+      "name": "Open",
+      "parts": {
+        "drawer-1-front": {
+          "position": [
+            -58,
+            56,
+            80.75
+          ]
+        },
+        "drawer-1-handle": {
+          "position": [
+            -58,
+            62,
+            82.25
+          ]
+        },
+        "drawer-2-front": {
+          "position": [
+            -58,
+            34,
+            80.75
+          ]
+        },
+        "drawer-2-handle": {
+          "position": [
+            -58,
+            40,
+            82.25
+          ]
+        },
+        "drawer-3-front": {
+          "position": [
+            -58,
+            12,
+            80.75
+          ]
+        },
+        "drawer-3-handle": {
+          "position": [
+            -58,
+            18,
+            82.25
+          ]
+        }
+      }
+    }
+  ],
+  "defaultState": "closed",
+  "interactions": [
+    {
+      "part": "drawer-1-front",
+      "action": "cycleStates"
+    },
+    {
+      "part": "drawer-1-handle",
+      "action": "cycleStates"
+    },
+    {
+      "part": "drawer-2-front",
+      "action": "cycleStates"
+    },
+    {
+      "part": "drawer-2-handle",
+      "action": "cycleStates"
+    },
+    {
+      "part": "drawer-3-front",
+      "action": "cycleStates"
+    },
+    {
+      "part": "drawer-3-handle",
+      "action": "cycleStates"
+    }
+  ]
+}

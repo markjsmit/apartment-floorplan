@@ -1,0 +1,256 @@
+{
+  "id": "old-house-shelf-white-metal",
+  "name": "White metal shelving unit (old house)",
+  "tags": [
+    "old house",
+    "laundry room",
+    "shelf",
+    "shelving unit",
+    "storage",
+    "metal",
+    "white"
+  ],
+  "description": "90 x 40 x 180 cm, 5 shelves. Sizes estimated from photos of the old apartment — measure before relying on them.",
+  "source": {
+    "kind": "parts",
+    "notes": "Modelled from Mark's photos in sources/old house/ (photos 09, 16).",
+    "license": "self-made"
+  },
+  "parts": [
+    {
+      "id": "post-1",
+      "tags": [
+        "post"
+      ],
+      "geometry": {
+        "type": "cylinder",
+        "radius": 1.2,
+        "height": 180,
+        "segments": 10
+      },
+      "position": [
+        -44,
+        90,
+        1.5
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "color": "#f0f0ee",
+      "castShadow": true,
+      "glass": false
+    },
+    {
+      "id": "post-2",
+      "tags": [
+        "post"
+      ],
+      "geometry": {
+        "type": "cylinder",
+        "radius": 1.2,
+        "height": 180,
+        "segments": 10
+      },
+      "position": [
+        44,
+        90,
+        1.5
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "color": "#f0f0ee",
+      "castShadow": true,
+      "glass": false
+    },
+    {
+      "id": "post-3",
+      "tags": [
+        "post"
+      ],
+      "geometry": {
+        "type": "cylinder",
+        "radius": 1.2,
+        "height": 180,
+        "segments": 10
+      },
+      "position": [
+        -44,
+        90,
+        38.5
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "color": "#f0f0ee",
+      "castShadow": true,
+      "glass": false
+    },
+    {
+      "id": "post-4",
+      "tags": [
+        "post"
+      ],
+      "geometry": {
+        "type": "cylinder",
+        "radius": 1.2,
+        "height": 180,
+        "segments": 10
+      },
+      "position": [
+        44,
+        90,
+        38.5
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "color": "#f0f0ee",
+      "castShadow": true,
+      "glass": false
+    },
+    {
+      "id": "shelf-1",
+      "tags": [
+        "shelf"
+      ],
+      "geometry": {
+        "type": "box",
+        "size": [
+          90,
+          2,
+          40
+        ]
+      },
+      "position": [
+        0,
+        4,
+        20
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "color": "#f4f4f2",
+      "castShadow": true,
+      "glass": false
+    },
+    {
+      "id": "shelf-2",
+      "tags": [
+        "shelf"
+      ],
+      "geometry": {
+        "type": "box",
+        "size": [
+          90,
+          2,
+          40
+        ]
+      },
+      "position": [
+        0,
+        47,
+        20
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "color": "#f4f4f2",
+      "castShadow": true,
+      "glass": false
+    },
+    {
+      "id": "shelf-3",
+      "tags": [
+        "shelf"
+      ],
+      "geometry": {
+        "type": "box",
+        "size": [
+          90,
+          2,
+          40
+        ]
+      },
+      "position": [
+        0,
+        90,
+        20
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "color": "#f4f4f2",
+      "castShadow": true,
+      "glass": false
+    },
+    {
+      "id": "shelf-4",
+      "tags": [
+        "shelf"
+      ],
+      "geometry": {
+        "type": "box",
+        "size": [
+          90,
+          2,
+          40
+        ]
+      },
+      "position": [
+        0,
+        133,
+        20
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "color": "#f4f4f2",
+      "castShadow": true,
+      "glass": false
+    },
+    {
+      "id": "shelf-5",
+      "tags": [
+        "shelf"
+      ],
+      "geometry": {
+        "type": "box",
+        "size": [
+          90,
+          2,
+          40
+        ]
+      },
+      "position": [
+        0,
+        178,
+        20
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "color": "#f4f4f2",
+      "castShadow": true,
+      "glass": false
+    }
+  ]
+}

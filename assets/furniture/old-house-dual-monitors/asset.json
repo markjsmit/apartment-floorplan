@@ -1,0 +1,205 @@
+{
+  "id": "old-house-dual-monitors",
+  "name": "Two 27\" monitors on an arm (old house)",
+  "tags": [
+    "old house",
+    "office",
+    "monitor",
+    "screen",
+    "computer",
+    "monitor arm"
+  ],
+  "description": "Two 27\" monitors (61.5 x 37) on a desk-clamp arm, 125 wide. Put them on a desk (elevation 73). Sizes estimated from photos of the old apartment — measure before relying on them.",
+  "source": {
+    "kind": "parts",
+    "notes": "Modelled from Mark's photos in sources/old house/ (photo 12).",
+    "license": "self-made"
+  },
+  "parts": [
+    {
+      "id": "clamp",
+      "tags": [],
+      "geometry": {
+        "type": "box",
+        "size": [
+          10,
+          4,
+          12
+        ]
+      },
+      "position": [
+        0,
+        2,
+        6
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "material": "metal-black",
+      "castShadow": true,
+      "glass": false
+    },
+    {
+      "id": "pole",
+      "tags": [
+        "arm"
+      ],
+      "geometry": {
+        "type": "cylinder",
+        "radius": 2,
+        "height": 46,
+        "segments": 24
+      },
+      "position": [
+        0,
+        27,
+        6
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "material": "metal-black",
+      "castShadow": true,
+      "glass": false
+    },
+    {
+      "id": "arm",
+      "tags": [
+        "arm"
+      ],
+      "geometry": {
+        "type": "box",
+        "size": [
+          70,
+          3,
+          4
+        ]
+      },
+      "position": [
+        0,
+        38,
+        10
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "material": "metal-black",
+      "castShadow": true,
+      "glass": false
+    },
+    {
+      "id": "monitor-left",
+      "tags": [
+        "monitor"
+      ],
+      "geometry": {
+        "type": "box",
+        "size": [
+          61.5,
+          37,
+          4
+        ]
+      },
+      "position": [
+        -31.5,
+        38,
+        14
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "color": "#1b1c1e",
+      "castShadow": true,
+      "glass": false
+    },
+    {
+      "id": "monitor-right",
+      "tags": [
+        "monitor"
+      ],
+      "geometry": {
+        "type": "box",
+        "size": [
+          61.5,
+          37,
+          4
+        ]
+      },
+      "position": [
+        31.5,
+        38,
+        14
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "color": "#1b1c1e",
+      "castShadow": true,
+      "glass": false
+    },
+    {
+      "id": "screen-left",
+      "tags": [
+        "screen"
+      ],
+      "geometry": {
+        "type": "box",
+        "size": [
+          59.5,
+          34,
+          0.2
+        ]
+      },
+      "position": [
+        -31.5,
+        38.8,
+        16.1
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "color": "#0b0d10",
+      "castShadow": false,
+      "glass": false
+    },
+    {
+      "id": "screen-right",
+      "tags": [
+        "screen"
+      ],
+      "geometry": {
+        "type": "box",
+        "size": [
+          59.5,
+          34,
+          0.2
+        ]
+      },
+      "position": [
+        31.5,
+        38.8,
+        16.1
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "color": "#0b0d10",
+      "castShadow": false,
+      "glass": false
+    }
+  ]
+}
