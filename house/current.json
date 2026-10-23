@@ -75,38 +75,22 @@
           "assumptions": [{ "path": "params", "note": "self-built: 18 mm plywood, 4 bays of ~64 cm, 7 levels ~30 cm apart, 4 mm back; from just past the door swing to the window wall (covers ~5 cm of the window's left edge); freestanding, tied in at the top" }]
         },
         {
-          "id": "storage.top-tie", "asset": "box", "params": { "width": 82.5, "height": 1.8, "depth": 60, "material": "white-paint" },
-          "name": "High shelf across the passage (shelving ↔ middle tower)", "tags": ["top tie", "high shelf", "bracing", "passage tie"],
-          "position": [61.25, 224, 153],
-          "assumptions": [{ "path": "params", "note": "18 mm plywood painted white at 224, 60 deep = suitcase slot (large 52, XL ~55), opens to the room, screwed into the shelving top and the middle tower top" }]
+          "id": "storage.high-shelf", "asset": "box", "params": { "width": 300, "height": 1.8, "depth": 60, "material": "white-paint" },
+          "name": "High shelf (wall to wall, suitcase slots over passage and aisle)", "tags": ["high shelf", "suitcase shelf", "top tie", "bracing", "wall to wall board"],
+          "position": [150, 224, 153],
+          "assumptions": [{ "path": "params", "note": "18 mm plywood painted white at 224, 60 deep, one piece-line wall to wall over the left shelving, passage, middle tower, aisle and wall tower (2 sheets joined over a tower); suitcase slots (large 52, XL ~55) open to the room" }]
         },
         {
-          "id": "storage.aisle-tie", "asset": "box", "params": { "width": 79.5, "height": 1.8, "depth": 60, "material": "white-paint" },
-          "name": "High shelf across the aisle (Kallax ↔ Kallax)", "tags": ["aisle tie", "high shelf", "bracing"],
-          "position": [221.25, 224, 153],
-          "assumptions": [{ "path": "params", "note": "18 mm plywood painted white at 224, 60 deep = suitcase slot (large 52, XL ~55), opens to the room, screwed into both tower tops" }]
+          "id": "storage.high-shelf-back", "asset": "box", "params": { "width": 300, "height": 44.2, "depth": 1.8, "material": "white-paint" },
+          "name": "Back wall of the high shelf (wall to wall, to the ceiling)", "tags": ["little wall", "back wall", "suitcase stop", "bracing"],
+          "position": [150, 225.8, 211.2],
+          "assumptions": [{ "path": "params", "note": "18 mm plywood painted white from the high shelf to the 270 ceiling; stops suitcases sliding into the aisle and stiffens the structure" }]
         },
         {
-          "id": "storage.fascia-mid", "asset": "box", "params": { "width": 79, "height": 46, "depth": 1.8, "material": "white-paint" },
-          "name": "Panel to the ceiling (over the middle tower)", "tags": ["fascia", "little wall", "bulkhead"],
-          "position": [142, 224, 151.2],
-          "assumptions": [{ "path": "params", "note": "closes the top of the middle tower from 224 to the 270 ceiling; the suitcase slots either side stay open" }]
-        },
-        {
-          "id": "storage.fascia-wall", "asset": "box", "params": { "width": 39, "height": 46, "depth": 1.8, "material": "white-paint" },
-          "name": "Panel to the ceiling (over the wall tower)", "tags": ["fascia", "little wall", "bulkhead"],
-          "position": [280.5, 224, 151.2]
-        },
-        {
-          "id": "storage.fascia-left", "asset": "box", "params": { "width": 153, "height": 46, "depth": 1.8, "material": "white-paint" },
-          "name": "Panel to the ceiling (over the left shelving)", "tags": ["fascia", "little wall", "bulkhead"],
-          "position": [20, 224, 76.5], "rotation": 90
-        },
-        {
-          "id": "storage.top-deck", "asset": "box", "params": { "width": 300, "height": 1.8, "depth": 73, "material": "white-paint" },
-          "name": "Suitcase board (entry wall, wall to wall, 2 cubes deep)", "tags": ["top deck", "suitcase shelf", "wall to wall board", "bracing"],
-          "position": [150, 224, 227],
-          "assumptions": [{ "path": "params", "note": "18 mm plywood on top of everything along the entry wall: 2 Kallax cubes deep (73), wall to wall, ties the left storage + both towers together; 44 cm free above for suitcases lying flat; 300 cm > a 244 sheet, so 2 pieces joined over a tower" }]
+          "id": "storage.top-deck", "asset": "box", "params": { "width": 300, "height": 1.8, "depth": 40, "material": "white-paint" },
+          "name": "High shelf along the entry wall (wall to wall, 40 deep)", "tags": ["top deck", "suitcase shelf", "wall to wall board", "bracing"],
+          "position": [150, 224, 260],
+          "assumptions": [{ "path": "params", "note": "18 mm plywood painted white on top of everything along the entry wall, wall to wall (ties the left shelving + both towers together); 40 deep so it is easy to reach from the aisle/passage below through the 47 cm gap behind the suitcase slots; 300 cm > a 244 sheet, so 2 pieces joined over a tower" }]
         },
         {
           "id": "storage.suitcase-1", "asset": "suitcase", "params": { "color": "#2f4a6d" },
