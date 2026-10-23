@@ -40,6 +40,32 @@
           "id": "storage.kallax-high", "asset": "ikea-kallax-112x147", "params": { "cols": 4, "rows": 3 },
           "name": "Kallax 3x4 (lying, top)", "tags": ["kallax tower", "top kallax"],
           "against": { "wall": "storage.wall-1", "offset": 153, "elevation": 112 }
+        },
+        {
+          "id": "storage.kallax-mid-east-low", "asset": "ikea-kallax-112x147", "params": { "cols": 4, "rows": 3 },
+          "name": "Kallax 3x4 (middle, faces the wall tower, bottom)", "tags": ["middle kallax", "back-to-back kallax", "aisle side"],
+          "position": [152, 0, 226.5], "rotation": 90
+        },
+        {
+          "id": "storage.kallax-mid-east-high", "asset": "ikea-kallax-112x147", "params": { "cols": 4, "rows": 3 },
+          "name": "Kallax 3x4 (middle, faces the wall tower, top)", "tags": ["middle kallax", "back-to-back kallax", "aisle side"],
+          "position": [152, 112, 226.5], "rotation": 90
+        },
+        {
+          "id": "storage.kallax-divider", "asset": "box", "params": { "width": 147, "height": 224, "depth": 0.5, "material": "white-laminate" },
+          "name": "Divider board between the back-to-back Kallax", "tags": ["divider", "back panel", "hardboard"],
+          "position": [151.5, 0, 226.5], "rotation": 90,
+          "assumptions": [{ "path": "params", "note": "thin white hardboard/MDF ~5 mm, 147 x 224 (standard sheets are 122 x 244, so two pieces or a cut-down larger sheet)" }]
+        },
+        {
+          "id": "storage.kallax-mid-west-low", "asset": "ikea-kallax-112x147", "params": { "cols": 4, "rows": 3 },
+          "name": "Kallax 3x4 (middle, faces the room, bottom)", "tags": ["middle kallax", "back-to-back kallax", "room side"],
+          "position": [151.5, 0, 226.5], "rotation": -90
+        },
+        {
+          "id": "storage.kallax-mid-west-high", "asset": "ikea-kallax-112x147", "params": { "cols": 4, "rows": 3 },
+          "name": "Kallax 3x4 (middle, faces the room, top)", "tags": ["middle kallax", "back-to-back kallax", "room side"],
+          "position": [151.5, 112, 226.5], "rotation": -90
         }
       ],
       "assumptions": [
