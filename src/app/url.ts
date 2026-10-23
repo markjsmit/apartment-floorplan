@@ -11,18 +11,29 @@ export type UrlState = {
   view?: View;
   person?: Person;
   time?: number;
+  /** opening to start at (the house's entry door) */
+  spawnAt?: string;
   noreport: boolean;
 };
 
-type BundleLike = { versionOrder: string[]; versions: Record<string, { rooms: { id: string }[] }> };
+type BundleLike = {
+  versionOrder: string[];
+  versions: Record<string, { rooms: { id: string; openings?: { id: string }[] }[]; layout?: { entry?: string } | null }>;
+};
 
 export function parseUrlState(search: string, bundle: BundleLike): UrlState {
   const q = new URLSearchParams(search);
   const v = q.get('version');
   const versionId = v && bundle.versions[v] ? v : 'current';
   const rooms = bundle.versions[versionId]?.rooms ?? [];
+  // no room in the link: the house's entry (a door or a room id), else the first room
+  const entry = bundle.versions[versionId]?.layout?.entry;
+  const entryRoom = entry ? rooms.find((x) => x.id === entry || x.openings?.some((o) => o.id === entry)) : undefined;
+  const entryDoor = entryRoom && entryRoom.id !== entry ? entry : undefined;
   const r = q.get('room');
-  const roomId = r && rooms.some((x) => x.id === r) ? r : (rooms[0]?.id ?? null);
+  const linked = r && rooms.some((x) => x.id === r) ? r : null;
+  const roomId = linked ?? entryRoom?.id ?? rooms[0]?.id ?? null;
+  const spawnAt = !linked ? entryDoor : undefined;
 
   const camParts = (q.get('cam') ?? '').split(',').map(Number);
   const camera = camParts.length === 4 && camParts.every(Number.isFinite)
@@ -33,7 +44,7 @@ export function parseUrlState(search: string, bundle: BundleLike): UrlState {
   const person = p === 'mark' || p === 'heli' ? p : undefined;
   const t = Number(q.get('time'));
   const time = q.has('time') && Number.isFinite(t) ? t : undefined;
-  return { roomId, versionId, camera, view, person, time, noreport: q.get('noreport') === '1' };
+  return { roomId, versionId, camera, view, person, time, spawnAt, noreport: q.get('noreport') === '1' };
 }
 
 const round1 = (n: number) => Math.round(n * 10) / 10;

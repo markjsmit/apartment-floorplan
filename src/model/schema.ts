@@ -101,6 +101,8 @@ export type Placement = z.infer<typeof PlacementSchema>;
 // (house cm; room-local point p ends up at rotate(p, rotationDeg) + [x, z]).
 export const LayoutSchema = z.object({
   anchor: z.string().optional(),
+  /** where you start when a link names no room: a door id (e.g. the front door) or a room id */
+  entry: z.string().optional(),
   placements: z.record(PlacementSchema).default({}),
 });
 

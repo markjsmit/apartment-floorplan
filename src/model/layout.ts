@@ -155,6 +155,10 @@ export function computeLayout(house: House): Layout {
     }
   }
 
+  const entry = house.layout?.entry;
+  if (entry && !house.rooms.some((r) => r.id === entry || r.openings.some((o) => o.id === entry))) {
+    issues.push(`layout.entry "${entry}" is not a room or door id`);
+  }
   issues.push(...crowdedWalls(house.rooms, placements));
   return { placements, doorways, hiddenAssets, northAngle, issues };
 }

@@ -72,3 +72,31 @@ describe('shareUrl', () => {
     expect(shareUrl({ roomId: 'a', versionId: 'current' }, '', 'http://localhost:5180/')).toBe('http://localhost:5180/?room=a&version=current');
   });
 });
+
+describe('entry point', () => {
+  const withEntry = {
+    versionOrder: ['current'],
+    versions: {
+      current: {
+        rooms: [{ id: 'storage', openings: [] }, { id: 'living', openings: [{ id: 'living.front-door' }] }],
+        layout: { entry: 'living.front-door' },
+      },
+    },
+  };
+
+  it('starts at the entry door when the link names no room', () => {
+    const s = parseUrlState('', withEntry);
+    expect(s.roomId).toBe('living');
+    expect(s.spawnAt).toBe('living.front-door');
+  });
+
+  it('also accepts a room id as the entry', () => {
+    const s = parseUrlState('', { ...withEntry, versions: { current: { ...withEntry.versions.current, layout: { entry: 'living' } } } });
+    expect(s.roomId).toBe('living');
+    expect(s.spawnAt).toBeUndefined();
+  });
+
+  it('a room in the link still wins', () => {
+    expect(parseUrlState('?room=storage', withEntry).roomId).toBe('storage');
+  });
+});

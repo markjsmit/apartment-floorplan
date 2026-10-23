@@ -1768,5 +1768,8 @@
         }
       ]
     }
-  ]
+  ],
+  "layout": {
+    "entry": "living.front-door"
+  }
 }

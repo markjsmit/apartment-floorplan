@@ -147,8 +147,10 @@ export function PlayerControls({ house, layout, driveCamera }: { house: House; l
       lookDelta.pitch -= e.deltaY * 0.15;
     };
     let last: { x: number; y: number; id: number } | null = null;
+    // phones use the on-screen buttons only (no swipe-to-look)
+    const phone = window.matchMedia('(pointer: coarse) and (max-width: 900px)').matches;
     const pdown = (e: PointerEvent) => {
-      if (e.pointerType !== 'touch') return;
+      if (e.pointerType !== 'touch' || phone) return;
       last = { x: e.clientX, y: e.clientY, id: e.pointerId };
     };
     const pmove = (e: PointerEvent) => {

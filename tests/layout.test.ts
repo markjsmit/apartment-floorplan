@@ -110,3 +110,10 @@ describe('computeLayout: rooms that crowd each other', () => {
     expect(l.issues).toEqual([]);
   });
 });
+
+describe('layout.entry', () => {
+  it('warns about an entry that does not exist', () => {
+    const l = computeLayout(house([room('a', 300, 300)], { entry: 'a.front-dor' }));
+    expect(l.issues.join()).toMatch(/entry "a\.front-dor"/);
+  });
+});

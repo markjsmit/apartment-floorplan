@@ -7,7 +7,7 @@ import { InfoPanel } from './InfoPanel';
 import { MeasurePanel } from './MeasurePanel';
 import { Tabs } from './Tabs';
 import { Toolbar } from './Toolbar';
-import { TouchControls } from './TouchControls';
+import { PersonSwitch, TouchControls } from './TouchControls';
 import { useDevLink } from './useDevLink';
 import { useIsMobile, useIsTouch } from './useIsMobile';
 import { poseFromRoom, useStore } from './store';
@@ -28,6 +28,7 @@ export function App() {
         useStore.setState({
           versionId: u.versionId,
           roomId: u.roomId,
+          spawnAt: u.spawnAt ?? null,
           noreport: u.noreport,
           ...(u.view ? { view: u.view } : {}),
           ...(u.person ? { person: u.person } : {}),
@@ -54,7 +55,9 @@ export function App() {
   return (
     <div className={mobile ? 'app mobile' : 'app'}>
       <Viewer />
-      <Tabs showVersions={!mobile} />
+      {/* rooms are connected, so the phone has no tabs: you walk between rooms */}
+      {!mobile && <Tabs showVersions />}
+      {mobile && <PersonSwitch />}
       {!mobile && <Toolbar />}
       {!mobile && <Hud />}
       <InfoPanel compact={mobile} />

@@ -1,4 +1,5 @@
 import { held, type MoveKey } from '../scene/input';
+import { useStore } from './store';
 
 function HoldButton({ k, className, label }: { k: MoveKey; className: string; label: string }) {
   const on = (e: React.PointerEvent) => {
@@ -14,14 +15,32 @@ function HoldButton({ k, className, label }: { k: MoveKey; className: string; la
   );
 }
 
-/** On-screen buttons for phones/tablets: ▲▼ walk, ◀▶ step sideways; swiping on the view turns and looks around. */
+/** Phone/tablet controls, buttons only: ▲▼ walk, ◀▶ turn (left hand); look up/down (right hand). */
 export function TouchControls() {
   return (
-    <div className="touchpad">
-      <HoldButton k="forward" className="up" label="▲" />
-      <HoldButton k="strafeLeft" className="left" label="◀" />
-      <HoldButton k="back" className="down" label="▼" />
-      <HoldButton k="strafeRight" className="right" label="▶" />
+    <>
+      <div className="touchpad">
+        <HoldButton k="forward" className="up" label="▲" />
+        <HoldButton k="left" className="left" label="◀" />
+        <HoldButton k="back" className="down" label="▼" />
+        <HoldButton k="right" className="right" label="▶" />
+      </div>
+      <div className="touchpad look">
+        <HoldButton k="up" className="up" label="⤒" />
+        <HoldButton k="down" className="down" label="⤓" />
+      </div>
+    </>
+  );
+}
+
+/** Eye height switch for the phone layout (the desktop toolbar has the same). */
+export function PersonSwitch() {
+  const person = useStore((s) => s.person);
+  const setPerson = useStore((s) => s.setPerson);
+  return (
+    <div className="seg person-switch">
+      <button className={person === 'mark' ? 'on' : ''} onClick={() => setPerson('mark')}>Mark</button>
+      <button className={person === 'heli' ? 'on' : ''} onClick={() => setPerson('heli')}>Heli</button>
     </div>
   );
 }
