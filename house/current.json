@@ -59,13 +59,23 @@
         },
         {
           "id": "storage.kallax-mid-west-low", "asset": "ikea-kallax-112x147", "params": { "cols": 4, "rows": 3 },
-          "name": "Kallax 3x4 (middle, faces the room, bottom)", "tags": ["middle kallax", "back-to-back kallax", "room side"],
+          "name": "Kallax 3x4 (middle, faces the passage, bottom)", "tags": ["middle kallax", "back-to-back kallax", "passage side"],
           "position": [151.5, 0, 226.5], "rotation": -90
         },
         {
           "id": "storage.kallax-mid-west-high", "asset": "ikea-kallax-112x147", "params": { "cols": 4, "rows": 3 },
-          "name": "Kallax 3x4 (middle, faces the room, top)", "tags": ["middle kallax", "back-to-back kallax", "room side"],
+          "name": "Kallax 3x4 (middle, faces the passage, top)", "tags": ["middle kallax", "back-to-back kallax", "passage side"],
           "position": [151.5, 112, 226.5], "rotation": -90
+        },
+        {
+          "id": "storage.kallax-left-low", "asset": "ikea-kallax-112x147", "params": { "cols": 4, "rows": 3 },
+          "name": "Kallax 3x4 (left wall, bottom)", "tags": ["left kallax", "passage kallax"],
+          "against": { "wall": "storage.wall-3", "offset": 58 }
+        },
+        {
+          "id": "storage.kallax-left-high", "asset": "ikea-kallax-112x147", "params": { "cols": 4, "rows": 3 },
+          "name": "Kallax 3x4 (left wall, top)", "tags": ["left kallax", "passage kallax"],
+          "against": { "wall": "storage.wall-3", "offset": 58, "elevation": 112 }
         }
       ],
       "assumptions": [
