@@ -585,16 +585,7 @@
         {
           "id": "storage.left-shelving",
           "asset": "diy-plywood-shelving",
-          "params": {
-            "width": 265,
-            "height": 224,
-            "depth": 20,
-            "sections": 4,
-            "shelves": 6,
-            "material": "wood-oak-light",
-            "contents": "random",
-            "seed": "left"
-          },
+          "params": {"width": 265, "height": 224, "depth": 20, "sections": 4, "shelves": 6, "material": "wood-oak-light", "contents": "random", "seed": "left", "back": false, "stiles": true},
           "name": "Plywood shelving (left wall, DIY)",
           "tags": [
             "left shelving",
@@ -609,10 +600,11 @@
           "assumptions": [
             {
               "path": "params",
-              "note": "self-built: 18 mm plywood, 4 bays of ~64 cm, 7 levels ~30 cm apart, 4 mm back; from just past the door swing to the window wall (covers ~5 cm of the window's left edge); freestanding, tied in at the top"
+              "note": "self-built: 18 mm plywood, 4 bays of ~64 cm, 7 levels ~30 cm apart; no back panel — held square by 2.5 cm battens up the back of every upright (both sides, 1 cm in, shelves notched + screwed into them), its top (screwed to the high shelf, see storage.shelving-ties) and the window wall; from just past the door swing to the window wall (covers ~5 cm of the window's left edge); freestanding, tied in at the top"
             }
           ]
         },
+        {"id": "storage.shelving-ties", "asset": "group", "params": {"members": [{"generator": "box", "prefix": "shelving-1-up", "params": {"width": 0.3, "height": 5, "depth": 3, "color": "#2b2b2b"}, "offset": [20.15, 219, 158.5]}, {"generator": "box", "prefix": "shelving-1-under", "params": {"width": 5, "height": 0.3, "depth": 3, "color": "#2b2b2b"}, "offset": [22.5, 223.7, 158.5]}, {"generator": "box", "prefix": "shelving-2-up", "params": {"width": 0.3, "height": 5, "depth": 3, "color": "#2b2b2b"}, "offset": [20.15, 219, 181.5]}, {"generator": "box", "prefix": "shelving-2-under", "params": {"width": 5, "height": 0.3, "depth": 3, "color": "#2b2b2b"}, "offset": [22.5, 223.7, 181.5]}, {"generator": "box", "prefix": "shelving-3-up", "params": {"width": 0.3, "height": 5, "depth": 3, "color": "#2b2b2b"}, "offset": [20.15, 219, 204.5]}, {"generator": "box", "prefix": "shelving-3-under", "params": {"width": 5, "height": 0.3, "depth": 3, "color": "#2b2b2b"}, "offset": [22.5, 223.7, 204.5]}, {"generator": "box", "prefix": "tower-1-up", "params": {"width": 0.3, "height": 5, "depth": 3, "color": "#2b2b2b"}, "offset": [102.35, 219, 163.5]}, {"generator": "box", "prefix": "tower-1-under", "params": {"width": 5, "height": 0.3, "depth": 3, "color": "#2b2b2b"}, "offset": [100, 223.7, 163.5]}, {"generator": "box", "prefix": "tower-2-up", "params": {"width": 0.3, "height": 5, "depth": 3, "color": "#2b2b2b"}, "offset": [102.35, 219, 198.5]}, {"generator": "box", "prefix": "tower-2-under", "params": {"width": 5, "height": 0.3, "depth": 3, "color": "#2b2b2b"}, "offset": [100, 223.7, 198.5]}]}, "name": "Steel angle brackets: shelving + middle tower → high shelf", "tags": ["brackets", "ties", "bracing", "hardware"], "position": [0, 0, 0], "allowOverlap": ["storage.high-shelf", "storage.left-shelving", "storage.kallax-mid-west-high", "storage.lighting", "storage.suitcase-2", "storage.kallax-divider"], "assumptions": [{"path": "params", "note": "~5 x 5 x 3 cm steel L-brackets, screwed into the shelving's top/uprights and the Kallax side (near the edge — Kallax tops are hollow) and up into the high shelf; they stop the 20 cm deep shelving tipping into the passage and keep it square without a back panel"}]},
         {
           "id": "storage.bridge-high-1",
           "asset": "diy-bridge-shelf",

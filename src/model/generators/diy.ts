@@ -10,7 +10,9 @@ const num = (v: unknown, d: number) => (v === undefined || v === null || v === '
 /**
  * Params: width (x), height, depth, sections (bays side by side), shelves (inner shelves per bay, evenly spaced),
  * board (thickness, 1.8 = 18 mm plywood), back (hardboard back panel, default true), material,
- * contents: random stuff on every level (books | boxes | bins | stuff | random | ""), seed.
+ * contents: random stuff on every level (books | boxes | bins | stuff | random | ""), seed,
+ * stiles (true → a square batten up the back of each upright on both sides, set `stileInset` in from the back edge; the
+ * shelves are notched around them and screwed into them, which keeps the box square without a back panel), stileSize (2.5).
  */
 export function plywoodShelving(params: Record<string, unknown>): Part[] {
   const W = num(params.width, 120);
@@ -54,6 +56,17 @@ export function plywoodShelving(params: Record<string, unknown>): Part[] {
     }
   }
   if (back) parts.push({ ...box('back', ['back panel'], [W, H, backT], [0, H / 2, backT / 2]), material: 'white-laminate' });
+  if (params.stiles === true) {
+    const sz = num(params.stileSize, 2.5);
+    const z = backT + num(params.stileInset, 1) + sz / 2;
+    for (let i = 0; i <= sections; i++) {
+      const xu = -W / 2 + t / 2 + i * (bay + t);
+      for (const side of [-1, 1]) {
+        if ((i === 0 && side < 0) || (i === sections && side > 0)) continue; // outer sides: inside face only
+        parts.push(box(`stile-${i}${side < 0 ? 'l' : 'r'}`, ['stile', 'batten', 'bracing'], [sz, H - 2 * t, sz], [xu + side * (t / 2 + sz / 2), H / 2, z]));
+      }
+    }
+  }
   return parts;
 }
 

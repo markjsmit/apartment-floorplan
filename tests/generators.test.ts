@@ -148,3 +148,10 @@ describe('led strip', () => {
     expect(s.min[1]).toBeLessThan(0);
   });
 });
+
+describe('plywood shelving stiles', () => {
+  it('puts a batten on both sides of each inner upright and inside each outer side', () => {
+    const parts = generators['plywood-shelving']({ width: 130, height: 100, depth: 20, sections: 2, shelves: 1, back: false, stiles: true }) as Part[];
+    expect(parts.filter((p) => p.tags.includes('stile'))).toHaveLength(4);
+  });
+});
