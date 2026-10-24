@@ -1034,6 +1034,32 @@
             207
           ],
           "rotation": 180
+        },
+        {
+          "id": "storage.pegboard",
+          "asset": "diy-pegboard",
+          "params": {
+            "width": 120,
+            "height": 40,
+            "elevation": 125,
+            "ceiling": 270
+          },
+          "name": "Pegboard strip (left wall, window side)",
+          "tags": [
+            "pegboard",
+            "tool strip",
+            "left wall"
+          ],
+          "against": {
+            "wall": "storage.wall-3",
+            "offset": 165
+          },
+          "assumptions": [
+            {
+              "path": "params",
+              "note": "small strip 120 x 40 (125-165 cm high) on the window side of the left wall, 15 cm from the window corner; on 2 floor-to-ceiling 2x4 posts with adjusters, no wall drilling. 4.4 cm deep, ~16 cm with the tool shelf"
+            }
+          ]
         }
       ],
       "assumptions": [
