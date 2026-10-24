@@ -787,6 +787,29 @@
           ]
         },
         {
+          "id": "storage.aisle-light",
+          "asset": "surface-light",
+          "params": {},
+          "name": "Aisle lamp (under the top board)",
+          "tags": [
+            "light",
+            "lamp",
+            "aisle lamp"
+          ],
+          "position": [
+            221,
+            224,
+            182
+          ],
+          "rotation": 0,
+          "assumptions": [
+            {
+              "path": "position",
+              "note": "on the room switch; cable in a surface channel from the ceiling light point down the wall-bed closet side and along the underside of the top board"
+            }
+          ]
+        },
+        {
           "id": "storage.wall-bed",
           "asset": "diy-wall-bed-desk",
           "params": {
@@ -816,7 +839,8 @@
           "allowOverlap": [
             "storage.ironing-board",
             "storage.kallax-low",
-            "storage.kallax-high"
+            "storage.kallax-high",
+            "storage.kallax-top"
           ],
           "assumptions": [
             {
@@ -829,21 +853,91 @@
           "id": "storage.stuff-wall-top",
           "asset": "stuff",
           "params": {
-            "width": 136,
+            "width": 52,
             "depth": 38,
             "height": 40,
             "seed": "wall-top"
           },
-          "name": "Stuff on top of the wall Kallax",
+          "name": "Stuff on the top board (over the wall Kallax, front)",
           "tags": [
             "stuff",
             "demo"
           ],
           "against": {
             "wall": "storage.wall-1",
-            "offset": 162,
+            "offset": 155,
+            "elevation": 225.8
+          }
+        },
+        {
+          "id": "storage.stuff-mid-top",
+          "asset": "stuff",
+          "params": {
+            "width": 78,
+            "depth": 86,
+            "height": 44,
+            "seed": "mid-top"
+          },
+          "name": "Stuff on top of the middle Kallax block (behind the board)",
+          "tags": [
+            "stuff",
+            "demo"
+          ],
+          "position": [
+            141.75,
+            224,
+            300
+          ],
+          "rotation": 180
+        },
+        {
+          "id": "storage.stuff-wall-rear",
+          "asset": "stuff",
+          "params": {
+            "width": 84,
+            "depth": 38,
+            "height": 44,
+            "seed": "wall-rear"
+          },
+          "name": "Stuff on top of the wall Kallax (behind the board)",
+          "tags": [
+            "stuff",
+            "demo"
+          ],
+          "against": {
+            "wall": "storage.wall-1",
+            "offset": 214,
             "elevation": 224
           }
+        },
+        {
+          "id": "storage.kallax-top",
+          "asset": "box",
+          "params": {
+            "width": 197.5,
+            "height": 1.8,
+            "depth": 58,
+            "material": "wood-oak-light"
+          },
+          "name": "Top board (front strip, suitcases)",
+          "tags": [
+            "top board",
+            "high shelf",
+            "top shelf",
+            "diy"
+          ],
+          "position": [
+            201.25,
+            224,
+            153
+          ],
+          "rotation": 0,
+          "assumptions": [
+            {
+              "path": "params",
+              "note": "one plywood board 197.5 x 58 at the window end, screwed onto both Kallax tops and bridging the aisle; behind it the aisle stays open (a hole), so both Kallax tops are reachable from the aisle"
+            }
+          ]
         },
         {
           "id": "storage.suitcase-1",
@@ -851,17 +945,17 @@
           "params": {
             "color": "#2f4a6d"
           },
-          "name": "Large suitcase (on the Kallax block, door end)",
+          "name": "Large suitcase (top board, over the aisle)",
           "tags": [
             "suitcase",
             "demo"
           ],
           "position": [
-            141.75,
-            224,
-            244
+            221.25,
+            225.8,
+            207
           ],
-          "rotation": 0
+          "rotation": 180
         },
         {
           "id": "storage.suitcase-2",
@@ -869,17 +963,17 @@
           "params": {
             "color": "#4a4d52"
           },
-          "name": "Large suitcase (on the Kallax block, window end)",
+          "name": "Large suitcase (top board, over the middle block)",
           "tags": [
             "suitcase",
             "demo"
           ],
           "position": [
             141.75,
-            224,
-            188
+            225.8,
+            207
           ],
-          "rotation": 0
+          "rotation": 180
         }
       ],
       "assumptions": [
