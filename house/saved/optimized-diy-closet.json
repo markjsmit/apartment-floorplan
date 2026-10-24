@@ -1,18 +1,14 @@
 {
   "meta": {
-    "name": "AI suggestion",
-    "kind": "suggestion",
-    "note": "Storage room without the DIY closet: 2 large suitcases on top of the back-to-back Kallax block",
+    "name": "Optimized (DIY closet)",
+    "kind": "saved",
+    "note": "Mark's new apartment, Tel Aviv, 27th floor.",
     "location": {
       "lat": 32.0853,
       "lon": 34.7818,
       "label": "Tel Aviv"
     },
-    "createdAt": "2026-10-24T10:38:02.451Z",
-    "baseRoomHashes": {
-      "storage": "8dd4c419d2211f1d",
-      "living": "32d9d692502274ce"
-    }
+    "createdAt": "2026-10-24T10:54:48.880Z"
   },
   "assumptions": [],
   "rooms": [
@@ -588,6 +584,223 @@
           "rotation": -90
         },
         {
+          "id": "storage.left-shelving",
+          "asset": "diy-plywood-shelving",
+          "params": {
+            "width": 265,
+            "height": 224,
+            "depth": 20,
+            "sections": 4,
+            "shelves": 6,
+            "material": "wood-oak-light",
+            "contents": "random",
+            "seed": "left",
+            "back": false,
+            "stiles": true
+          },
+          "name": "Plywood shelving (left wall, DIY)",
+          "tags": [
+            "left shelving",
+            "left wall shelves",
+            "diy shelves",
+            "plywood shelves"
+          ],
+          "against": {
+            "wall": "storage.wall-3",
+            "offset": 35
+          },
+          "assumptions": [
+            {
+              "path": "params",
+              "note": "self-built: 18 mm plywood, 4 bays of ~64 cm, 7 levels ~30 cm apart; no back panel — held square by 2.5 cm battens up the back of every upright (both sides, 1 cm in, shelves notched + screwed into them), its top (screwed to the high shelf, see storage.shelving-ties) and the window wall; from just past the door swing to the window wall (covers ~5 cm of the window's left edge); freestanding, tied in at the top"
+            }
+          ]
+        },
+        {
+          "id": "storage.shelving-ties",
+          "asset": "group",
+          "params": {
+            "members": [
+              {
+                "generator": "box",
+                "prefix": "shelving-1-up",
+                "params": {
+                  "width": 0.3,
+                  "height": 5,
+                  "depth": 3,
+                  "color": "#2b2b2b"
+                },
+                "offset": [
+                  20.15,
+                  219,
+                  158.5
+                ]
+              },
+              {
+                "generator": "box",
+                "prefix": "shelving-1-under",
+                "params": {
+                  "width": 5,
+                  "height": 0.3,
+                  "depth": 3,
+                  "color": "#2b2b2b"
+                },
+                "offset": [
+                  22.5,
+                  223.7,
+                  158.5
+                ]
+              },
+              {
+                "generator": "box",
+                "prefix": "shelving-2-up",
+                "params": {
+                  "width": 0.3,
+                  "height": 5,
+                  "depth": 3,
+                  "color": "#2b2b2b"
+                },
+                "offset": [
+                  20.15,
+                  219,
+                  181.5
+                ]
+              },
+              {
+                "generator": "box",
+                "prefix": "shelving-2-under",
+                "params": {
+                  "width": 5,
+                  "height": 0.3,
+                  "depth": 3,
+                  "color": "#2b2b2b"
+                },
+                "offset": [
+                  22.5,
+                  223.7,
+                  181.5
+                ]
+              },
+              {
+                "generator": "box",
+                "prefix": "shelving-3-up",
+                "params": {
+                  "width": 0.3,
+                  "height": 5,
+                  "depth": 3,
+                  "color": "#2b2b2b"
+                },
+                "offset": [
+                  20.15,
+                  219,
+                  204.5
+                ]
+              },
+              {
+                "generator": "box",
+                "prefix": "shelving-3-under",
+                "params": {
+                  "width": 5,
+                  "height": 0.3,
+                  "depth": 3,
+                  "color": "#2b2b2b"
+                },
+                "offset": [
+                  22.5,
+                  223.7,
+                  204.5
+                ]
+              },
+              {
+                "generator": "box",
+                "prefix": "tower-1-up",
+                "params": {
+                  "width": 0.3,
+                  "height": 5,
+                  "depth": 3,
+                  "color": "#2b2b2b"
+                },
+                "offset": [
+                  102.35,
+                  219,
+                  163.5
+                ]
+              },
+              {
+                "generator": "box",
+                "prefix": "tower-1-under",
+                "params": {
+                  "width": 5,
+                  "height": 0.3,
+                  "depth": 3,
+                  "color": "#2b2b2b"
+                },
+                "offset": [
+                  100,
+                  223.7,
+                  163.5
+                ]
+              },
+              {
+                "generator": "box",
+                "prefix": "tower-2-up",
+                "params": {
+                  "width": 0.3,
+                  "height": 5,
+                  "depth": 3,
+                  "color": "#2b2b2b"
+                },
+                "offset": [
+                  102.35,
+                  219,
+                  198.5
+                ]
+              },
+              {
+                "generator": "box",
+                "prefix": "tower-2-under",
+                "params": {
+                  "width": 5,
+                  "height": 0.3,
+                  "depth": 3,
+                  "color": "#2b2b2b"
+                },
+                "offset": [
+                  100,
+                  223.7,
+                  198.5
+                ]
+              }
+            ]
+          },
+          "name": "Steel angle brackets: shelving + middle tower → high shelf",
+          "tags": [
+            "brackets",
+            "ties",
+            "bracing",
+            "hardware"
+          ],
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "allowOverlap": [
+            "storage.high-shelf",
+            "storage.left-shelving",
+            "storage.kallax-mid-west-high",
+            "storage.lighting",
+            "storage.suitcase-2",
+            "storage.kallax-divider"
+          ],
+          "assumptions": [
+            {
+              "path": "params",
+              "note": "~5 x 5 x 3 cm steel L-brackets, screwed into the shelving's top/uprights and the Kallax side (near the edge — Kallax tops are hollow) and up into the high shelf; they stop the 20 cm deep shelving tipping into the passage and keep it square without a back panel"
+            }
+          ]
+        },
+        {
           "id": "storage.bridge-high-1",
           "asset": "diy-bridge-shelf",
           "params": {
@@ -761,51 +974,203 @@
           "rotation": -90
         },
         {
-          "id": "storage.ceiling-light",
-          "asset": "surface-light",
+          "id": "storage.lighting",
+          "asset": "group",
           "params": {
-            "diameter": 40,
-            "intensity": 20000
+            "members": [
+              {
+                "generator": "box",
+                "prefix": "cable-ceiling",
+                "params": {
+                  "width": 1.6,
+                  "height": 1.6,
+                  "depth": 64.6,
+                  "color": "#f2f1ec"
+                },
+                "offset": [
+                  150,
+                  268.4,
+                  150
+                ]
+              },
+              {
+                "generator": "box",
+                "prefix": "cable-down-outside",
+                "params": {
+                  "width": 1.6,
+                  "height": 20.4,
+                  "depth": 1.6,
+                  "color": "#f2f1ec"
+                },
+                "offset": [
+                  150,
+                  248,
+                  213
+                ]
+              },
+              {
+                "generator": "box",
+                "prefix": "junction",
+                "params": {
+                  "width": 12,
+                  "height": 12,
+                  "depth": 6,
+                  "color": "#f2f1ec"
+                },
+                "offset": [
+                  150,
+                  236,
+                  213
+                ]
+              },
+              {
+                "generator": "box",
+                "prefix": "cable-to-channel",
+                "params": {
+                  "width": 1.6,
+                  "height": 8.4,
+                  "depth": 1.6,
+                  "color": "#f2f1ec"
+                },
+                "offset": [
+                  150,
+                  227.6,
+                  213
+                ]
+              },
+              {
+                "generator": "box",
+                "prefix": "cable-channel",
+                "params": {
+                  "width": 160,
+                  "height": 1.6,
+                  "depth": 1.6,
+                  "color": "#f2f1ec"
+                },
+                "offset": [
+                  141.25,
+                  226,
+                  213
+                ]
+              },
+              {
+                "generator": "box",
+                "prefix": "cable-over-edge-1",
+                "params": {
+                  "width": 1.6,
+                  "height": 5.2,
+                  "depth": 1.6,
+                  "color": "#f2f1ec"
+                },
+                "offset": [
+                  61.25,
+                  222.4,
+                  213
+                ]
+              },
+              {
+                "generator": "box",
+                "prefix": "cable-under-1",
+                "params": {
+                  "width": 1.6,
+                  "height": 1.6,
+                  "depth": 15,
+                  "color": "#f2f1ec"
+                },
+                "offset": [
+                  61.25,
+                  222.4,
+                  198
+                ]
+              },
+              {
+                "generator": "surface-light",
+                "prefix": "lamp-1",
+                "params": {
+                  "diameter": 30,
+                  "height": 6
+                },
+                "offset": [
+                  61.25,
+                  224,
+                  183
+                ]
+              },
+              {
+                "generator": "box",
+                "prefix": "cable-over-edge-2",
+                "params": {
+                  "width": 1.6,
+                  "height": 5.2,
+                  "depth": 1.6,
+                  "color": "#f2f1ec"
+                },
+                "offset": [
+                  221.25,
+                  222.4,
+                  213
+                ]
+              },
+              {
+                "generator": "box",
+                "prefix": "cable-under-2",
+                "params": {
+                  "width": 1.6,
+                  "height": 1.6,
+                  "depth": 15,
+                  "color": "#f2f1ec"
+                },
+                "offset": [
+                  221.25,
+                  222.4,
+                  198
+                ]
+              },
+              {
+                "generator": "surface-light",
+                "prefix": "lamp-2",
+                "params": {
+                  "diameter": 30,
+                  "height": 6
+                },
+                "offset": [
+                  221.25,
+                  224,
+                  183
+                ]
+              }
+            ]
           },
-          "name": "Ceiling lamp",
+          "name": "Lighting: 2 round LED lights under the high shelf (on the room switch)",
           "tags": [
-            "light",
-            "lamp",
-            "ceiling lamp"
+            "lighting",
+            "lamps",
+            "wiring",
+            "lights"
           ],
           "position": [
-            150,
-            270,
-            150
+            0,
+            0,
+            0
           ],
-          "rotation": 0,
+          "allowOverlap": [
+            "storage.high-shelf",
+            "storage.high-shelf-back",
+            "storage.kallax-divider",
+            "storage.stuff-mid-top",
+            "storage.stuff-wall-top",
+            "storage.kallax-high",
+            "storage.kallax-mid-east-high",
+            "storage.kallax-mid-west-high",
+            "storage.left-shelving",
+            "storage.suitcase-1",
+            "storage.suitcase-2",
+            "storage.wall-bed"
+          ],
           "assumptions": [
             {
-              "path": "position",
-              "note": "ceiling light point assumed in the middle of the room (150, 150); one strong round surface lamp (Ø40, ~36 W) on the room switch"
-            }
-          ]
-        },
-        {
-          "id": "storage.aisle-light",
-          "asset": "surface-light",
-          "params": {},
-          "name": "Aisle lamp (under the top board)",
-          "tags": [
-            "light",
-            "lamp",
-            "aisle lamp"
-          ],
-          "position": [
-            221,
-            224,
-            182
-          ],
-          "rotation": 0,
-          "assumptions": [
-            {
-              "path": "position",
-              "note": "on the room switch; cable in a surface channel from the ceiling light point down the wall-bed closet side and along the underside of the top board"
+              "path": "params",
+              "note": "ceiling light point assumed in the middle of the room (150, 150). Cable channel along the ceiling to just behind the suitcase slots' back wall, down its outside face (aisle/entry side) to a junction box, along that outside face, then over the shelf's back edge and under the shelf to 2 round LED surface lights (Ø30, ~24 W): one over the passage, one over the aisle. Nothing runs inside the suitcase slots, no holes in the shelf."
             }
           ]
         },
@@ -837,10 +1202,11 @@
             "offset": 0
           },
           "allowOverlap": [
+            "storage.high-shelf",
             "storage.ironing-board",
+            "storage.high-shelf-back",
             "storage.kallax-low",
-            "storage.kallax-high",
-            "storage.kallax-top"
+            "storage.kallax-high"
           ],
           "assumptions": [
             {
@@ -850,92 +1216,31 @@
           ]
         },
         {
-          "id": "storage.stuff-wall-top",
-          "asset": "stuff",
-          "params": {
-            "width": 52,
-            "depth": 38,
-            "height": 40,
-            "seed": "wall-top"
-          },
-          "name": "Stuff on the top board (over the wall Kallax, front)",
-          "tags": [
-            "stuff",
-            "demo"
-          ],
-          "against": {
-            "wall": "storage.wall-1",
-            "offset": 155,
-            "elevation": 225.8
-          }
-        },
-        {
-          "id": "storage.stuff-mid-top",
-          "asset": "stuff",
-          "params": {
-            "width": 78,
-            "depth": 46,
-            "height": 44,
-            "seed": "mid-top"
-          },
-          "name": "Stuff on top of the middle Kallax block (between back wall and entry shelf)",
-          "tags": [
-            "stuff",
-            "demo"
-          ],
-          "position": [
-            141.75,
-            224,
-            260
-          ],
-          "rotation": 180
-        },
-        {
-          "id": "storage.stuff-wall-rear",
-          "asset": "stuff",
-          "params": {
-            "width": 46,
-            "depth": 38,
-            "height": 44,
-            "seed": "wall-rear"
-          },
-          "name": "Stuff on top of the wall Kallax (between back wall and entry shelf)",
-          "tags": [
-            "stuff",
-            "demo"
-          ],
-          "against": {
-            "wall": "storage.wall-1",
-            "offset": 213,
-            "elevation": 224
-          }
-        },
-        {
-          "id": "storage.kallax-top",
+          "id": "storage.high-shelf",
           "asset": "box",
           "params": {
-            "width": 197.5,
+            "width": 300,
             "height": 1.8,
-            "depth": 58,
+            "depth": 60,
             "material": "wood-oak-light"
           },
-          "name": "Top board (front strip, suitcases)",
+          "name": "High shelf (wall to wall, suitcase slots over passage and aisle)",
           "tags": [
-            "top board",
             "high shelf",
-            "top shelf",
-            "diy"
+            "suitcase shelf",
+            "top tie",
+            "bracing",
+            "wall to wall board"
           ],
           "position": [
-            201.25,
+            150,
             224,
             153
           ],
-          "rotation": 0,
           "assumptions": [
             {
               "path": "params",
-              "note": "one plywood board 197.5 x 58 at the window end, screwed onto both Kallax tops and bridging the aisle, with a back wall to the ceiling so the suitcases cannot slide off the back. A second board (40 deep) bridges the aisle at the entry wall; between the two the aisle stays open, so both Kallax tops are reachable from the aisle"
+              "note": "18 mm plywood light wood (unpainted plywood, oak-veneer look for now) at 224, 60 deep, one piece-line wall to wall over the left shelving, passage, middle tower, aisle and wall tower (2 sheets joined over a tower); suitcase slots (large 52, XL ~55) open to the room"
             }
           ]
         },
@@ -943,66 +1248,120 @@
           "id": "storage.high-shelf-back",
           "asset": "box",
           "params": {
-            "width": 197.5,
+            "width": 300,
             "height": 44.2,
             "depth": 1.8,
             "material": "wood-oak-light"
           },
-          "name": "Back wall of the suitcase shelf (to the ceiling)",
+          "name": "Back wall of the high shelf (wall to wall, to the ceiling)",
           "tags": [
-            "suitcase back wall",
+            "little wall",
             "back wall",
-            "diy"
+            "suitcase stop",
+            "bracing"
           ],
           "position": [
-            201.25,
+            150,
             225.8,
-            209.2
+            211.2
           ],
-          "rotation": 0
+          "assumptions": [
+            {
+              "path": "params",
+              "note": "18 mm plywood light wood (unpainted plywood, oak-veneer look for now) from the high shelf to the 270 ceiling; stops suitcases sliding into the aisle and stiffens the structure"
+            }
+          ]
         },
         {
-          "id": "storage.top-deck",
-          "asset": "box",
-          "params": {
-            "width": 197.5,
-            "height": 1.8,
-            "depth": 40,
-            "material": "wood-oak-light"
-          },
-          "name": "Top shelf against the entry wall (connects the Kallax tops)",
-          "tags": [
-            "entry shelf",
-            "top deck",
-            "diy"
-          ],
-          "position": [
-            201.25,
-            224,
-            260
-          ],
-          "rotation": 0
-        },
-        {
-          "id": "storage.stuff-entry-shelf",
+          "id": "storage.stuff-mid-top",
           "asset": "stuff",
           "params": {
-            "width": 195,
-            "depth": 38,
+            "width": 78,
+            "depth": 56,
             "height": 42,
-            "seed": "entry"
+            "seed": "mid-top"
           },
-          "name": "Stuff on the entry-wall top shelf",
+          "name": "Stuff on the high shelf (over the middle tower)",
           "tags": [
             "stuff",
             "demo"
           ],
           "position": [
-            201.25,
+            142,
+            225.8,
+            211.2
+          ],
+          "rotation": 180
+        },
+        {
+          "id": "storage.stuff-wall-top",
+          "asset": "stuff",
+          "params": {
+            "width": 38,
+            "depth": 56,
+            "height": 42,
+            "seed": "wall-top"
+          },
+          "name": "Stuff on the high shelf (over the wall tower)",
+          "tags": [
+            "stuff",
+            "demo"
+          ],
+          "position": [
+            280.5,
+            225.8,
+            211.2
+          ],
+          "rotation": 180
+        },
+        {
+          "id": "storage.stuff-entry-shelf",
+          "asset": "stuff",
+          "params": {
+            "width": 298,
+            "depth": 38,
+            "height": 42,
+            "seed": "entry"
+          },
+          "name": "Stuff on the entry-wall shelf",
+          "tags": [
+            "stuff",
+            "demo"
+          ],
+          "position": [
+            150,
             225.8,
             300
           ],
           "rotation": 180
+        },
+        {
+          "id": "storage.top-deck",
+          "asset": "box",
+          "params": {
+            "width": 300,
+            "height": 1.8,
+            "depth": 40,
+            "material": "wood-oak-light"
+          },
+          "name": "High shelf along the entry wall (wall to wall, 40 deep)",
+          "tags": [
+            "top deck",
+            "suitcase shelf",
+            "wall to wall board",
+            "bracing"
+          ],
+          "position": [
+            150,
+            224,
+            260
+          ],
+          "assumptions": [
+            {
+              "path": "params",
+              "note": "18 mm plywood light wood (unpainted plywood, oak-veneer look for now) on top of everything along the entry wall, wall to wall (ties the left shelving + both towers together); 40 deep so it is easy to reach from the aisle/passage below through the 47 cm gap behind the suitcase slots; 300 cm > a 244 sheet, so 2 pieces joined over a tower"
+            }
+          ]
         },
         {
           "id": "storage.suitcase-1",
@@ -1010,7 +1369,7 @@
           "params": {
             "color": "#2f4a6d"
           },
-          "name": "Large suitcase (top board, over the aisle)",
+          "name": "Large suitcase (aisle slot)",
           "tags": [
             "suitcase",
             "demo"
@@ -1028,43 +1387,17 @@
           "params": {
             "color": "#4a4d52"
           },
-          "name": "Large suitcase (top board, over the middle block)",
+          "name": "Large suitcase (passage slot)",
           "tags": [
             "suitcase",
             "demo"
           ],
           "position": [
-            141.75,
+            61.25,
             225.8,
             207
           ],
           "rotation": 180
-        },
-        {
-          "id": "storage.pegboard",
-          "asset": "diy-pegboard",
-          "params": {
-            "width": 137,
-            "height": 140,
-            "elevation": 60,
-            "ceiling": 270
-          },
-          "name": "Pegboard (left wall, opposite the Kallax)",
-          "tags": [
-            "pegboard",
-            "tool wall",
-            "left wall"
-          ],
-          "against": {
-            "wall": "storage.wall-3",
-            "offset": 10
-          },
-          "assumptions": [
-            {
-              "path": "params",
-              "note": "board 137 x 140 (60-200 cm high) from 10 cm off the entry corner to where the Kallax ends; on 2 floor-to-ceiling 2x4 posts with adjusters, no wall drilling. 4.4 cm deep, ~16 cm with the tool shelves, so the passage stays ~86 cm"
-            }
-          ]
         }
       ],
       "assumptions": [
