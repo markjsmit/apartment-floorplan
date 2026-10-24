@@ -874,11 +874,11 @@
           "asset": "stuff",
           "params": {
             "width": 78,
-            "depth": 86,
+            "depth": 46,
             "height": 44,
             "seed": "mid-top"
           },
-          "name": "Stuff on top of the middle Kallax block (behind the board)",
+          "name": "Stuff on top of the middle Kallax block (between back wall and entry shelf)",
           "tags": [
             "stuff",
             "demo"
@@ -886,7 +886,7 @@
           "position": [
             141.75,
             224,
-            300
+            260
           ],
           "rotation": 180
         },
@@ -894,19 +894,19 @@
           "id": "storage.stuff-wall-rear",
           "asset": "stuff",
           "params": {
-            "width": 84,
+            "width": 46,
             "depth": 38,
             "height": 44,
             "seed": "wall-rear"
           },
-          "name": "Stuff on top of the wall Kallax (behind the board)",
+          "name": "Stuff on top of the wall Kallax (between back wall and entry shelf)",
           "tags": [
             "stuff",
             "demo"
           ],
           "against": {
             "wall": "storage.wall-1",
-            "offset": 214,
+            "offset": 213,
             "elevation": 224
           }
         },
@@ -935,9 +935,74 @@
           "assumptions": [
             {
               "path": "params",
-              "note": "one plywood board 197.5 x 58 at the window end, screwed onto both Kallax tops and bridging the aisle; behind it the aisle stays open (a hole), so both Kallax tops are reachable from the aisle"
+              "note": "one plywood board 197.5 x 58 at the window end, screwed onto both Kallax tops and bridging the aisle, with a back wall to the ceiling so the suitcases cannot slide off the back. A second board (40 deep) bridges the aisle at the entry wall; between the two the aisle stays open, so both Kallax tops are reachable from the aisle"
             }
           ]
+        },
+        {
+          "id": "storage.high-shelf-back",
+          "asset": "box",
+          "params": {
+            "width": 197.5,
+            "height": 44.2,
+            "depth": 1.8,
+            "material": "wood-oak-light"
+          },
+          "name": "Back wall of the suitcase shelf (to the ceiling)",
+          "tags": [
+            "suitcase back wall",
+            "back wall",
+            "diy"
+          ],
+          "position": [
+            201.25,
+            225.8,
+            209.2
+          ],
+          "rotation": 0
+        },
+        {
+          "id": "storage.top-deck",
+          "asset": "box",
+          "params": {
+            "width": 197.5,
+            "height": 1.8,
+            "depth": 40,
+            "material": "wood-oak-light"
+          },
+          "name": "Top shelf against the entry wall (connects the Kallax tops)",
+          "tags": [
+            "entry shelf",
+            "top deck",
+            "diy"
+          ],
+          "position": [
+            201.25,
+            224,
+            260
+          ],
+          "rotation": 0
+        },
+        {
+          "id": "storage.stuff-entry-shelf",
+          "asset": "stuff",
+          "params": {
+            "width": 195,
+            "depth": 38,
+            "height": 42,
+            "seed": "entry"
+          },
+          "name": "Stuff on the entry-wall top shelf",
+          "tags": [
+            "stuff",
+            "demo"
+          ],
+          "position": [
+            201.25,
+            225.8,
+            300
+          ],
+          "rotation": 180
         },
         {
           "id": "storage.suitcase-1",
