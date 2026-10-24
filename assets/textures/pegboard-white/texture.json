@@ -1,0 +1,11 @@
+{
+  "id": "pegboard-white",
+  "name": "White pegboard (hardboard, 6 mm holes on 25 mm grid)",
+  "tags": ["pegboard", "white", "hardboard", "tools"],
+  "maps": { "color": "color.jpg" },
+  "tileSize": [10, 10],
+  "fallbackColor": "#efeee9",
+  "roughness": 0.6,
+  "source": "self-made (generated with PIL: white pre-finished hardboard, standard 6 mm holes at 25 mm pitch)",
+  "license": "CC0"
+}

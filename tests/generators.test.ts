@@ -154,4 +154,15 @@ describe('plywood shelving stiles', () => {
     const parts = generators['plywood-shelving']({ width: 130, height: 100, depth: 20, sections: 2, shelves: 1, back: false, stiles: true }) as Part[];
     expect(parts.filter((p) => p.tags.includes('stile'))).toHaveLength(4);
   });
+  it('stands the pegboard on floor-to-ceiling posts and keeps its tools within the board and ~16 cm deep', () => {
+    const parts = generators.pegboard({ width: 137, height: 140, elevation: 60, ceiling: 270 }) as Part[];
+    const posts = parts.filter((p) => p.id.startsWith('post-'));
+    expect(posts).toHaveLength(2);
+    for (const p of posts) expect(p.position[1] + (p.geometry as { size: number[] }).size[1] / 2).toBeCloseTo(269);
+    for (const p of parts.filter((q) => q.tags.includes('tools') && q.geometry.type === 'box')) {
+      const [sx, , sz] = (p.geometry as { size: number[] }).size;
+      expect(Math.abs(p.position[0]) + sx / 2).toBeLessThanOrEqual(137 / 2);
+      expect(p.position[2] + sz / 2).toBeLessThanOrEqual(16.5);
+    }
+  });
 });

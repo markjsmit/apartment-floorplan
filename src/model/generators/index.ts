@@ -2,6 +2,7 @@ import type { AssetState, FurnitureAsset, Part } from '../schema';
 import { kallax, kallaxDesk, kallaxInsert, kallaxUnderframe, lackShelf, swivelChair } from './kallax';
 import { besta } from './besta';
 import { bridgeShelf, plywoodShelving, wallBedDesk } from './diy';
+import { pegboard } from './pegboard';
 import { group } from './group';
 import { suitcase } from './suitcase';
 import { stuff } from './stuff';
@@ -27,6 +28,7 @@ export const generators: Record<string, Generator> = {
   'plywood-shelving': plywoodShelving,
   'bridge-shelf': bridgeShelf,
   'wall-bed-desk': wallBedDesk,
+  pegboard,
   suitcase,
   stuff,
   'led-strip': ledStrip,

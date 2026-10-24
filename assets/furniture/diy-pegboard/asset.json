@@ -1,0 +1,16 @@
+{
+  "id": "diy-pegboard",
+  "name": "Pegboard on floor-to-ceiling posts (no drilling)",
+  "tags": ["pegboard", "tools", "diy", "no drilling"],
+  "description": "White pre-finished hardboard pegboard (6 mm, holes 6 mm on a 25 mm grid) screwed to two 2x4 posts laid flat, wedged between floor and ceiling with 2x4 post adjusters (e.g. LABRICO) — nothing is fixed to the wall. ~4.4 cm deep without tools, ~15 cm with hooks and tools. Origin: back-centre on the floor.",
+  "source": { "kind": "procedural", "generator": "pegboard", "license": "self-made", "notes": "2x4 = 3.8 x 8.9 cm. Pegboard sheets are sold 122 x 244 and cut to size. Tools are demo shapes." },
+  "params": {
+    "width": { "default": 120, "description": "cm (board)" },
+    "height": { "default": 120, "description": "cm (board)" },
+    "elevation": { "default": 70, "description": "cm, bottom of the board" },
+    "ceiling": { "default": 270, "description": "cm, post height incl. adjuster" },
+    "postInset": { "default": 6, "description": "cm from the board edge to the post" },
+    "material": { "default": "pegboard-white", "description": "texture id" },
+    "tools": { "default": true, "description": "demo tools on hooks" }
+  }
+}
