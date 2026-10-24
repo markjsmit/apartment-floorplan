@@ -5,7 +5,9 @@ export type Collider =
   | { kind: 'segment'; a: Vec2; b: Vec2 }
   | { kind: 'obb'; center: Vec2; half: Vec2; angleDeg: number };
 
-export type PlacedBounds = { position: Vec3; rotationDeg: number; min: Vec3; max: Vec3 };
+type Bounds = { min: Vec3; max: Vec3 };
+/** An item's bounds; with `parts` (item-local part bounds) only the parts block walking, not the whole box. */
+export type PlacedBounds = Bounds & { position: Vec3; rotationDeg: number; parts?: Bounds[] };
 
 // Anything whose bottom is above this (cm) is treated as wall-mounted and doesn't block walking.
 const OVERHEAD = 150;
@@ -15,18 +17,28 @@ const DEG = Math.PI / 180;
 export function buildColliders(walls: WallInfo[], items: PlacedBounds[]): Collider[] {
   const colliders: Collider[] = walls.map((w) => ({ kind: 'segment', a: w.start, b: w.end }));
   for (const it of items) {
-    if (it.position[1] + it.min[1] > OVERHEAD) continue;
-    const lx = (it.min[0] + it.max[0]) / 2;
-    const lz = (it.min[2] + it.max[2]) / 2;
-    const [rx, rz] = rotate([lx, lz], it.rotationDeg);
-    colliders.push({
-      kind: 'obb',
-      center: [it.position[0] + rx, it.position[2] + rz],
-      half: [(it.max[0] - it.min[0]) / 2, (it.max[2] - it.min[2]) / 2],
-      angleDeg: it.rotationDeg,
-    });
+    for (const b of blockingBoxes(it.parts ?? [it], it.position[1])) {
+      const lx = (b.min[0] + b.max[0]) / 2;
+      const lz = (b.min[2] + b.max[2]) / 2;
+      const [rx, rz] = rotate([lx, lz], it.rotationDeg);
+      colliders.push({
+        kind: 'obb',
+        center: [it.position[0] + rx, it.position[2] + rz],
+        half: [(b.max[0] - b.min[0]) / 2, (b.max[2] - b.min[2]) / 2],
+        angleDeg: it.rotationDeg,
+      });
+    }
   }
   return colliders;
+}
+
+/** The boxes you'd bump into below head height, minus those whose footprint lies inside another one. */
+function blockingBoxes(boxes: Bounds[], elevation: number): Bounds[] {
+  const low = boxes.filter((b) => elevation + b.min[1] <= OVERHEAD && b.max[0] > b.min[0] && b.max[2] > b.min[2]);
+  const within = (a: Bounds, b: Bounds) =>
+    a.min[0] >= b.min[0] - 0.5 && a.max[0] <= b.max[0] + 0.5 && a.min[2] >= b.min[2] - 0.5 && a.max[2] <= b.max[2] + 0.5;
+  // keep the first of two identical footprints
+  return low.filter((a, i) => !low.some((b, j) => j !== i && within(a, b) && (!within(b, a) || j < i)));
 }
 
 // Same convention as three.js rotation about +Y: local x -> (cos, -sin), local z -> (sin, cos).

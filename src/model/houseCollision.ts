@@ -1,5 +1,5 @@
 import type { FurnitureAsset, House, Opening, Vec2 } from './schema';
-import { initialState } from './assets';
+import { assetSize, findState, initialState } from './assets';
 import { pointInPolygon, polygonCentroid, resolveWalls } from './geometry';
 import { buildColliders, isFree, nearestFree, type Collider } from './collision';
 import { toLocal, toWorld, type Layout } from './layout';
@@ -48,7 +48,11 @@ export function buildHouseColliders(
     }
     const items = placeRoomItems(room, furniture, walls, itemStates).map((p) => {
       const [x, z] = toWorld([p.position[0], p.position[2]], pl);
-      return { position: [x, p.position[1], z] as [number, number, number], rotationDeg: p.rotationDeg + pl.rotationDeg, min: p.size.min, max: p.size.max };
+      const state = findState(p.asset, p.stateId);
+      return {
+        position: [x, p.position[1], z] as [number, number, number], rotationDeg: p.rotationDeg + pl.rotationDeg,
+        min: p.size.min, max: p.size.max, parts: p.parts.map((part) => assetSize([part], state)),
+      };
     });
     colliders.push(...buildColliders([], items));
   }

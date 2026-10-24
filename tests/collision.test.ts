@@ -99,3 +99,36 @@ describe('resolvePlayerPosition', () => {
     expect(resolvePlayerPosition([100, 100], room, buildColliders(walls, []), 20)).toEqual([100, 100]);
   });
 });
+
+describe('buildColliders: items made of parts', () => {
+  const v = (x: number, y: number, z: number) => [x, y, z] as [number, number, number];
+  // a wall bed: a 144 x 39 housing with a 90 wide desk top folded out to 92 cm, at the left
+  const wallBed = {
+    position: v(150, 0, 0), rotationDeg: 0, min: v(-72, 0, 0), max: v(72, 226, 92),
+    parts: [
+      { min: v(-72, 0, 0), max: v(72, 30, 39) }, // base
+      { min: v(-72, 0, 0), max: v(-70, 224, 39) }, // side
+      { min: v(-70, 30, 20), max: v(70, 220, 32) }, // bed board
+      { min: v(-65, 73, 32), max: v(25, 75, 92) }, // desk top
+      { min: v(-72, 224, 0), max: v(81, 226, 60) }, // top board, overhead
+    ],
+  };
+
+  it('blocks only where the parts are, not the whole bounding box', () => {
+    const colliders = buildColliders(walls, [wallBed]);
+    // in front of the housing, right of the desk: free
+    expect(isFree([205, 70], 20, colliders)).toBe(true);
+    // at the desk: blocked
+    expect(isFree([130, 70], 20, colliders)).toBe(false);
+    // at the housing: blocked
+    expect(isFree([200, 20], 5, colliders)).toBe(false);
+  });
+
+  it('does not let an overhead part hide the parts under it', () => {
+    expect(isFree([150, 20], 5, buildColliders(walls, [wallBed]))).toBe(false);
+  });
+
+  it('merges parts that sit inside another part into one collider', () => {
+    expect(buildColliders([], [wallBed])).toHaveLength(2);
+  });
+});
