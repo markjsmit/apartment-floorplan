@@ -162,6 +162,13 @@ describe('plywood shelving stiles', () => {
       expect(p.position[1] - half).toBeGreaterThanOrEqual(125 - 3);
     }
   });
+  it('hangs several pegboard sheets on the same posts', () => {
+    const parts = generators.pegboard({ width: 120, boards: [{ elevation: 40, height: 50 }, { elevation: 95, height: 50 }, { elevation: 150, height: 50, tools: false }] }) as Part[];
+    expect(parts.filter((p) => p.tags.includes('pegboard')).map((p) => p.id)).toEqual(['board-1', 'board-2', 'board-3']);
+    expect(parts.filter((p) => p.id.startsWith('post-'))).toHaveLength(2);
+    expect(parts.some((p) => p.id.startsWith('b3-'))).toBe(false);
+    expect(new Set(parts.map((p) => p.id)).size).toBe(parts.length);
+  });
   it('stands the pegboard on floor-to-ceiling posts and keeps its tools within the board and ~16 cm deep', () => {
     const parts = generators.pegboard({ width: 137, height: 140, elevation: 60, ceiling: 270 }) as Part[];
     const posts = parts.filter((p) => p.id.startsWith('post-'));

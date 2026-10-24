@@ -1040,11 +1040,28 @@
           "asset": "diy-pegboard",
           "params": {
             "width": 120,
-            "height": 40,
-            "elevation": 125,
-            "ceiling": 270
+            "ceiling": 270,
+            "boards": [
+              {
+                "elevation": 40,
+                "height": 50
+              },
+              {
+                "elevation": 95,
+                "height": 50
+              },
+              {
+                "elevation": 150,
+                "height": 50
+              },
+              {
+                "elevation": 205,
+                "height": 50,
+                "tools": false
+              }
+            ]
           },
-          "name": "Pegboard strip (left wall, window side)",
+          "name": "Pegboard (left wall, window side, 4 sheets)",
           "tags": [
             "pegboard",
             "tool strip",
@@ -1057,7 +1074,7 @@
           "assumptions": [
             {
               "path": "params",
-              "note": "small strip 120 x 40 (125-165 cm high) on the window side of the left wall, 15 cm from the window corner; on 2 floor-to-ceiling 2x4 posts with adjusters, no wall drilling. 4.4 cm deep, ~16 cm with the tool shelf"
+              "note": "4 sheets of 120 x 50 (all cut from one 122 x 244 pegboard sheet), 40-255 cm high, on the window side of the left wall 15 cm from the window corner. Start with one sheet and add more as needed; the top one is shown empty. On 2 floor-to-ceiling 2x4 posts with adjusters, no wall drilling. 4.4 cm deep, ~16 cm with the tool shelves"
             }
           ]
         }
