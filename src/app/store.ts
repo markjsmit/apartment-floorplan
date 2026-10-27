@@ -5,6 +5,7 @@ import { computeLayout, toLocal, toWorld, type Layout } from '../model/layout';
 import type { Selection } from '../model/lookup';
 import { findById } from '../model/lookup';
 import { initialState, nextState, openingParams, resolveAsset, resolveParams } from '../model/assets';
+import { baseVersionId, composeHouse } from '../model/roomVersions';
 import type { CameraPose, Person, View } from './url';
 
 export const EYE_HEIGHT: Record<Person, number> = { mark: 188, heli: 151 };
@@ -16,7 +17,12 @@ type State = {
   bundle: Bundle | null;
   loadError: string | null;
   roomId: string | null;
+  /** the active room's version (kept in sync with roomVersions + roomId) */
   versionId: string;
+  /** per-room version choices: {roomId: versionId}; rooms not listed show Current */
+  roomVersions: Record<string, string>;
+  /** the house on screen: Current with each room's chosen version (recomputed only when bundle/roomVersions change) */
+  house: House | null;
   selection: Selection | null;
   /** View-only furniture states (bed up/down) toggled by double-click; keyed by item/opening id. */
   itemStates: Record<string, string>;
@@ -43,7 +49,8 @@ type Actions = {
   setRoom: (id: string, spawnAt?: string) => boolean;
   /** the player walked into a room: just update which room is active */
   enterRoom: (id: string) => void;
-  setVersion: (id: string) => boolean;
+  /** show version `id` for one room (default: the active room); false if that version doesn't have the room */
+  setVersion: (id: string, roomId?: string) => boolean;
   select: (s: Selection | null) => void;
   selectById: (id: string) => boolean;
   cycleState: (id: string) => void;
@@ -64,11 +71,29 @@ function todayOfYear(): number {
 
 let toastId = 0;
 
+/** The version a room shows: its own choice, else Current. */
+export function roomVersionOf(s: Pick<State, 'bundle' | 'roomVersions'>, roomId: string | null): string {
+  const base = s.bundle ? baseVersionId(s.bundle) : 'current';
+  return (roomId && s.roomVersions[roomId]) || base;
+}
+
+/** Keep only choices whose version still exists, still has the room, and isn't the base. */
+function pruneRoomVersions(bundle: Bundle, rv: Record<string, string>): Record<string, string> {
+  const base = baseVersionId(bundle);
+  const out: Record<string, string> = {};
+  for (const [room, vid] of Object.entries(rv)) {
+    if (vid !== base && bundle.versions[vid]?.rooms.some((r) => r.id === room)) out[room] = vid;
+  }
+  return out;
+}
+
 export const useStore = create<State & Actions>((set, get) => ({
   bundle: null,
   loadError: null,
   roomId: null,
   versionId: 'current',
+  roomVersions: {},
+  house: null,
   selection: null,
   itemStates: {},
   person: 'mark',
@@ -85,33 +110,49 @@ export const useStore = create<State & Actions>((set, get) => ({
   noreport: typeof location !== 'undefined' && new URLSearchParams(location.search).get('noreport') === '1',
 
   setBundle: (bundle) => {
-    const { versionId, roomId } = get();
-    const vid = bundle.versions[versionId] ? versionId : 'current';
-    const rooms = bundle.versions[vid]?.rooms ?? [];
+    const { roomId } = get();
+    const roomVersions = pruneRoomVersions(bundle, get().roomVersions);
+    const house = composeHouse(bundle, roomVersions);
+    const rooms = house?.rooms ?? [];
     const rid = rooms.some((r) => r.id === roomId) ? roomId : (rooms[0]?.id ?? null);
     const selection = get().selection;
-    const stillThere = selection && bundle.versions[vid] && findById(bundle.versions[vid], selection.id);
-    set({ bundle, versionId: vid, roomId: rid, selection: stillThere ? selection : null, spawnTick: rid !== roomId ? get().spawnTick + 1 : get().spawnTick });
+    const stillThere = selection && house && findById(house, selection.id);
+    set({
+      bundle,
+      house,
+      roomVersions,
+      versionId: roomVersionOf({ bundle, roomVersions }, rid),
+      roomId: rid,
+      selection: stillThere ? selection : null,
+      spawnTick: rid !== roomId ? get().spawnTick + 1 : get().spawnTick,
+    });
   },
   setLoadError: (loadError) => set({ loadError }),
   setRoom: (id, spawnAt) => {
     if (!currentHouse(get())?.rooms.some((r) => r.id === id)) return false;
-    if (id !== get().roomId) set({ roomId: id, selection: null, spawnTick: get().spawnTick + 1, spawnAt: spawnAt ?? null });
+    if (id !== get().roomId) {
+      set({ roomId: id, versionId: roomVersionOf(get(), id), selection: null, spawnTick: get().spawnTick + 1, spawnAt: spawnAt ?? null });
+    }
     return true;
   },
   enterRoom: (id) => {
-    if (id !== get().roomId) set({ roomId: id });
+    if (id !== get().roomId) set({ roomId: id, versionId: roomVersionOf(get(), id) });
   },
-  setVersion: (id) => {
-    const house = get().bundle?.versions[id];
-    if (!house) return false;
-    const sameRoom = house.rooms.some((r) => r.id === get().roomId);
+  setVersion: (id, roomId) => {
+    const { bundle } = get();
+    const room = roomId ?? get().roomId;
+    if (!bundle || !room || !bundle.versions[id]?.rooms.some((r) => r.id === room)) return false;
+    const roomVersions = { ...get().roomVersions };
+    if (id === baseVersionId(bundle)) delete roomVersions[room];
+    else roomVersions[room] = id;
+    if (roomVersions[room] === get().roomVersions[room]) return true;
+    const house = composeHouse(bundle, roomVersions);
     const sel = get().selection;
     set({
-      versionId: id,
-      roomId: sameRoom ? get().roomId : (house.rooms[0]?.id ?? null),
-      selection: sel && findById(house, sel.id) ? sel : null,
-      spawnTick: sameRoom ? get().spawnTick : get().spawnTick + 1,
+      roomVersions,
+      house,
+      versionId: roomVersionOf({ bundle, roomVersions }, get().roomId),
+      selection: sel && house && findById(house, sel.id) ? sel : null,
     });
     return true;
   },
@@ -155,17 +196,18 @@ export const useStore = create<State & Actions>((set, get) => ({
   },
 }));
 
-export function currentHouse(s: Pick<State, 'bundle' | 'versionId'>): House | null {
-  return s.bundle?.versions[s.versionId] ?? null;
+/** The house on screen (every room in its own chosen version). */
+export function currentHouse(s: Pick<State, 'house'>): House | null {
+  return s.house;
 }
 
-export function currentRoom(s: Pick<State, 'bundle' | 'versionId' | 'roomId'>) {
+export function currentRoom(s: Pick<State, 'house' | 'roomId'>) {
   return currentHouse(s)?.rooms.find((r) => r.id === s.roomId) ?? null;
 }
 
 const layoutCache = new WeakMap<House, Layout>();
-/** Where every room of the open version sits in house space (cached per house object). */
-export function currentLayout(s: Pick<State, 'bundle' | 'versionId'>): Layout | null {
+/** Where every room of the house on screen sits in house space (cached per house object). */
+export function currentLayout(s: Pick<State, 'house'>): Layout | null {
   const house = currentHouse(s);
   if (!house) return null;
   let l = layoutCache.get(house);
@@ -177,13 +219,13 @@ export function currentLayout(s: Pick<State, 'bundle' | 'versionId'>): Layout | 
 }
 
 /** House-space point -> coordinates of the active room (what the JSON uses). */
-export function toRoomLocal(s: Pick<State, 'bundle' | 'versionId' | 'roomId'>, p: Vec2): Vec2 {
+export function toRoomLocal(s: Pick<State, 'house' | 'roomId'>, p: Vec2): Vec2 {
   const pl = s.roomId ? currentLayout(s)?.placements[s.roomId] : undefined;
   return pl ? toLocal(p, pl) : p;
 }
 
 /** The player's pose in the active room's own coordinates (yaw too: rooms can be turned in the house). */
-export function poseInRoom(s: Pick<State, 'bundle' | 'versionId' | 'roomId' | 'camera'>): CameraPose {
+export function poseInRoom(s: Pick<State, 'house' | 'roomId' | 'camera'>): CameraPose {
   const pl = s.roomId ? currentLayout(s)?.placements[s.roomId] : undefined;
   if (!pl) return s.camera;
   const [x, z] = toLocal([s.camera.x, s.camera.z], pl);
@@ -191,7 +233,7 @@ export function poseInRoom(s: Pick<State, 'bundle' | 'versionId' | 'roomId' | 'c
 }
 
 /** A pose given in a room's own coordinates (e.g. a `cam=` link) -> house space. */
-export function poseFromRoom(s: Pick<State, 'bundle' | 'versionId'>, roomId: string | null, pose: CameraPose): CameraPose {
+export function poseFromRoom(s: Pick<State, 'house'>, roomId: string | null, pose: CameraPose): CameraPose {
   const pl = roomId ? currentLayout(s)?.placements[roomId] : undefined;
   if (!pl) return pose;
   const [x, z] = toWorld([pose.x, pose.z], pl);

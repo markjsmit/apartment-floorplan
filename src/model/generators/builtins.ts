@@ -3,27 +3,27 @@ import type { AssetState, FurnitureAsset, Part, PartOverride, Vec3 } from '../sc
 // Built-in fixtures that come with an apartment: kitchen runs, island, tall units, wall cabinets, soffits,
 // pillars, sliding balcony doors, track lights. Item convention: origin back-centre on the floor, +z out of the front.
 
-type WithStates = { parts: Part[]; states: AssetState[]; interactions: FurnitureAsset['interactions'] };
+export type WithStates = { parts: Part[]; states: AssetState[]; interactions: FurnitureAsset['interactions'] };
 
-type Extra = Partial<Pick<Part, 'material' | 'color' | 'pivot' | 'castShadow' | 'glass' | 'rotation'>>;
+export type Extra = Partial<Pick<Part, 'material' | 'color' | 'pivot' | 'castShadow' | 'glass' | 'rotation'>>;
 
-function box(id: string, tags: string[], size: Vec3, position: Vec3, extra: Extra = {}): Part {
+export function box(id: string, tags: string[], size: Vec3, position: Vec3, extra: Extra = {}): Part {
   return { id, tags, geometry: { type: 'box', size }, position, rotation: [0, 0, 0], castShadow: true, glass: false, ...extra };
 }
 
-function cyl(id: string, tags: string[], radius: number, height: number, position: Vec3, extra: Extra = {}): Part {
+export function cyl(id: string, tags: string[], radius: number, height: number, position: Vec3, extra: Extra = {}): Part {
   return {
     id, tags, geometry: { type: 'cylinder', radius, height, segments: 24 }, position, rotation: [0, 0, 0], castShadow: true, glass: false, ...extra,
   };
 }
 
-const num = (v: unknown, d: number) => (v === undefined || v === null || v === '' ? d : Number(v));
-const str = (v: unknown, d: string) => (typeof v === 'string' && v ? v : d);
+export const num = (v: unknown, d: number) => (v === undefined || v === null || v === '' ? d : Number(v));
+export const str = (v: unknown, d: string) => (typeof v === 'string' && v ? v : d);
 
-const FRONT_T = 1.8; // door / drawer front thickness
-const GAP = 0.3; // gap between fronts
-const PLINTH = 10;
-const HANDLE = 'stainless';
+export const FRONT_T = 1.8; // door / drawer front thickness
+export const GAP = 0.3; // gap between fronts
+export const PLINTH = 10;
+export const HANDLE = 'stainless';
 
 /** Plain box (pillar, soffit, wall finish band, AC grille, ...). */
 export function plainBox(params: Record<string, unknown>): Part[] {

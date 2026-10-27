@@ -20,7 +20,7 @@ export function Toolbar() {
   const measuring = useMeasure((m) => m.active);
   const toggleMeasure = useMeasure((m) => m.toggle);
   const share = async () => {
-    const url = shareUrl({ roomId: s.roomId, versionId: s.versionId }, s.bundle?.site.publicUrl ?? '', `${location.origin}${import.meta.env.BASE_URL}`);
+    const url = shareUrl({ roomId: s.roomId, versionId: s.versionId, roomVersions: s.roomVersions }, s.bundle?.site.publicUrl ?? '', `${location.origin}${import.meta.env.BASE_URL}`);
     try {
       await navigator.clipboard.writeText(url);
       s.toast('Link copied.');

@@ -1,0 +1,18 @@
+{
+  "id": "bathroom-vanity",
+  "name": "Bathroom vanity with basin",
+  "tags": ["bathroom", "vanity", "washbasin", "sink", "basin", "mirror", "cabinet", "built-in"],
+  "description": "Floor-standing 2-door white cabinet with an integrated white ceramic basin top (bowl ~60 x 31, 13 cm deep), single-lever tap on the back deck, mirror above. Standard vanity sizes (e.g. IKEA HEMNES/ODENSVIK, TÄNNFORSEN): 60-120 wide, 46-49 deep, basin top at 85. Double-click a door to open.",
+  "source": { "kind": "procedural", "generator": "bathroom-vanity", "license": "self-made" },
+  "params": {
+    "width": { "default": 80 },
+    "depth": { "default": 46 },
+    "height": { "default": 85, "description": "basin top surface" },
+    "mirror": { "default": true },
+    "mirrorWidth": { "default": null, "description": "null = same as width" },
+    "mirrorHeight": { "default": 80 },
+    "mirrorBottom": { "default": 110, "description": "cm above the floor" },
+    "mirrorFrame": { "default": "wood-oak-light", "description": "texture id; \"\" = frameless" },
+    "handles": { "default": "knob", "description": "knob | bar | none" }
+  }
+}

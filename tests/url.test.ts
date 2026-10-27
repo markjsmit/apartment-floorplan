@@ -28,10 +28,30 @@ describe('parseUrlState', () => {
     expect(s.camera).toBeUndefined();
   });
 
-  it('falls back to the first room of the chosen version', () => {
+  it('keeps the room and drops a version that does not have it', () => {
     const s = parseUrlState('?room=storage&version=suggestion', bundle);
+    expect(s.roomId).toBe('storage');
+    expect(s.versionId).toBe('current');
+    expect(s.roomVersions).toEqual({});
+  });
+
+  it('applies version= to the linked room only', () => {
+    const s = parseUrlState('?room=bedroom&version=suggestion', bundle);
     expect(s.versionId).toBe('suggestion');
-    expect(s.roomId).toBe('bedroom');
+    expect(s.roomVersions).toEqual({ bedroom: 'suggestion' });
+  });
+
+  it('accepts a room only the linked version has', () => {
+    const b = { ...bundle, versions: { ...bundle.versions, suggestion: { rooms: [{ id: 'bedroom' }, { id: 'attic' }] } } };
+    const s = parseUrlState('?room=attic&version=suggestion', b);
+    expect(s.roomId).toBe('attic');
+    expect(s.roomVersions).toEqual({ attic: 'suggestion' });
+  });
+
+  it('reads other rooms\' versions from rv=, ignoring unknown ones', () => {
+    const s = parseUrlState('?room=storage&version=current&rv=bedroom:saved/bed-left,storage:suggestion,x:current,junk', bundle);
+    expect(s.roomVersions).toEqual({ bedroom: 'saved/bed-left' });
+    expect(s.versionId).toBe('current');
   });
 
   it('copes with a bundle with no rooms', () => {
@@ -48,6 +68,13 @@ describe('serializeUrlState', () => {
     expect(s.roomId).toBe('storage');
     expect(s.versionId).toBe('current');
     expect(s.camera).toEqual({ x: 1.4, z: 2, yaw: 3, pitch: 4 });
+  });
+
+  it('round-trips other rooms\' versions', () => {
+    const q = serializeUrlState({ roomId: 'storage', versionId: 'current', roomVersions: { bedroom: 'saved/bed-left' } });
+    const s = parseUrlState(q, bundle);
+    expect(s.roomId).toBe('storage');
+    expect(s.roomVersions).toEqual({ bedroom: 'saved/bed-left' });
   });
 
   it('round-trips a saved version', () => {

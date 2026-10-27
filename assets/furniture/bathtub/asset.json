@@ -1,0 +1,16 @@
+{
+  "id": "bathtub",
+  "name": "Built-in bathtub",
+  "tags": ["bathroom", "bath", "bathtub", "tub", "mixer", "hand shower", "built-in"],
+  "description": "White acrylic built-in bath (standard 170 x 70, rim at 55, ~42 cm deep inside) with tiled front and end panels, a bar mixer with spout and a hand shower on the back wall at the mixer end, optional fixed glass screen (140 high) on the front edge at that end.",
+  "source": { "kind": "procedural", "generator": "bathtub", "license": "self-made" },
+  "params": {
+    "length": { "default": 170, "description": "along the wall" },
+    "width": { "default": 70, "description": "out from the wall" },
+    "height": { "default": 55, "description": "rim" },
+    "panelMaterial": { "default": "tiles-dark-grey", "description": "texture id of the front/end panels" },
+    "mixerSide": { "default": "left", "description": "left | right: end with the mixer, hand shower, drain and screen" },
+    "screen": { "default": false, "description": "fixed glass bath screen" },
+    "screenWidth": { "default": 80 }
+  }
+}

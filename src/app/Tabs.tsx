@@ -1,3 +1,4 @@
+import { versionsForRoom } from '../model/roomVersions';
 import { currentHouse, useStore } from './store';
 
 export function Tabs({ showVersions }: { showVersions: boolean }) {
@@ -8,6 +9,9 @@ export function Tabs({ showVersions }: { showVersions: boolean }) {
   const setVersion = useStore((s) => s.setVersion);
   const house = useStore(currentHouse);
   if (!bundle || !house) return null;
+  // versions are per room: only the ones about this room (Current always); the other rooms keep theirs
+  const offered = roomId ? versionsForRoom(bundle, roomId) : [];
+  const versionIds = offered.includes(versionId) || !bundle.versions[versionId] ? offered : [...offered, versionId];
 
   return (
     <div className="tabs">
@@ -21,7 +25,7 @@ export function Tabs({ showVersions }: { showVersions: boolean }) {
       </div>
       {showVersions && (
         <div className="tab-row versions">
-          {bundle.versionOrder.map((id) => {
+          {versionIds.map((id) => {
             const v = bundle.versions[id];
             const kind = v.meta.kind;
             return (

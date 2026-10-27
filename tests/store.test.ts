@@ -25,3 +25,49 @@ describe('store navigation', () => {
     expect(useStore.getState().versionId).toBe('current');
   });
 });
+
+describe('per-room versions', () => {
+  const r = (id: string, ceilingHeight = 260) => ({ ...room(id), ceilingHeight });
+  const two = buildBundle([
+    { path: 'house/current.json', json: { meta: { name: 'Current', kind: 'current' }, rooms: [r('bedroom'), r('storage')] } },
+    { path: 'house/suggestion.json', json: { meta: { name: 'AI suggestion', kind: 'suggestion' }, rooms: [r('bedroom', 240), r('storage', 230)] } },
+    { path: 'house/saved/bed.json', json: { meta: { name: 'Bed', kind: 'saved', rooms: ['bedroom'] }, rooms: [r('bedroom', 250)] } },
+  ], { publicUrl: '' });
+  const ceiling = (id: string) => useStore.getState().house!.rooms.find((x) => x.id === id)!.ceilingHeight;
+
+  it('switches only the active room', () => {
+    useStore.setState({ roomVersions: {} });
+    useStore.getState().setBundle(two);
+    useStore.getState().setRoom('bedroom');
+    expect(useStore.getState().setVersion('suggestion')).toBe(true);
+    expect(useStore.getState().versionId).toBe('suggestion');
+    expect(ceiling('bedroom')).toBe(240);
+    expect(ceiling('storage')).toBe(260);
+
+    // another room keeps Current; walking back shows the bedroom's own choice again
+    useStore.getState().setRoom('storage');
+    expect(useStore.getState().versionId).toBe('current');
+    useStore.getState().enterRoom('bedroom');
+    expect(useStore.getState().versionId).toBe('suggestion');
+  });
+
+  it('refuses a version without the active room, and current clears the choice', () => {
+    useStore.getState().setRoom('storage');
+    expect(useStore.getState().setVersion('saved/bed')).toBe(false);
+    expect(useStore.getState().setVersion('saved/bed', 'bedroom')).toBe(true);
+    expect(ceiling('bedroom')).toBe(250);
+    expect(useStore.getState().setVersion('current', 'bedroom')).toBe(true);
+    expect(useStore.getState().roomVersions).toEqual({});
+    expect(useStore.getState().house).toBe(two.versions.current);
+  });
+
+  it('drops choices whose version is gone on reload', () => {
+    useStore.getState().setRoom('bedroom');
+    useStore.getState().setVersion('suggestion');
+    const without = { ...two, versions: { current: two.versions.current }, versionOrder: ['current'] };
+    useStore.getState().setBundle(without);
+    expect(useStore.getState().roomVersions).toEqual({});
+    expect(useStore.getState().versionId).toBe('current');
+    expect(ceiling('bedroom')).toBe(260);
+  });
+});

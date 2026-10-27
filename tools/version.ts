@@ -1,9 +1,10 @@
-// npm run versions -- list | suggest [--from <id>] [--note "..."] [--force] | promote [--force]
-//                    | save "<name>" [--from <id>] | drop-suggestion
+// npm run versions -- list | suggest [--from <id>] [--note "..."] [--room <id>]... [--force]
+//                    | promote [--room <id>]... [--force] | save "<name>" [--from <id>] [--room <id>]... | drop-suggestion
+// Files are whole houses; the viewer shows versions per room. --room = the room(s) a version is about (meta.rooms).
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { makeSuggestion, promote, savedId, versionIdFromPath, versionPath, type RawHouse } from '../src/model/versions';
+import { makeSuggestion, markPromoted, promote, suggestionChanges, savedId, versionIdFromPath, versionPath, type RawHouse } from '../src/model/versions';
 
 const root = fileURLToPath(new URL('..', import.meta.url));
 const abs = (rel: string) => path.join(root, rel);
@@ -20,7 +21,24 @@ const flag = (name: string) => {
   return i >= 0 ? (args[i + 1] ?? '') : undefined;
 };
 const has = (name: string) => args.includes(`--${name}`);
-const VALUE_FLAGS = ['--from', '--note'];
+/** all values of a repeatable flag (--room a --room b) */
+const flags = (name: string) => args.flatMap((a, i) => (a === `--${name}` && args[i + 1] !== undefined ? [args[i + 1]] : []));
+const VALUE_FLAGS = ['--from', '--note', '--room'];
+const USAGE =
+  'usage: npm run versions -- list | suggest [--from id] [--note ..] [--room id].. [--force] | promote [--room id].. [--force]' +
+  ' | save "<name>" [--from id] [--room id].. | drop-suggestion';
+
+/** --room values, checked against the version they're taken from */
+function roomsFlag(h: RawHouse, from: string): string[] | undefined {
+  const rooms = flags('room');
+  if (!rooms.length) return undefined;
+  const missing = rooms.filter((r) => !h.rooms.some((x) => x.id === r));
+  if (missing.length) {
+    console.error(`${from} has no room ${missing.join(', ')} (have: ${h.rooms.map((x) => x.id).join(', ')})`);
+    process.exit(1);
+  }
+  return [...new Set(rooms)];
+}
 const positional = args.filter((a, i) => !a.startsWith('--') && !VALUE_FLAGS.includes(args[i - 1]));
 
 function list() {
@@ -35,7 +53,8 @@ function list() {
   }
   for (const id of ids) {
     const h = read(id);
-    console.log(`${id.padEnd(30)} ${String(h.meta.name)}${h.meta.note ? ` — ${h.meta.note}` : ''}`);
+    const rooms = Array.isArray(h.meta.rooms) && h.meta.rooms.length ? ` [rooms: ${h.meta.rooms.join(', ')}]` : '';
+    console.log(`${id.padEnd(30)} ${String(h.meta.name)}${rooms}${h.meta.note ? ` — ${h.meta.note}` : ''}`);
   }
 }
 
@@ -50,23 +69,38 @@ switch (cmd) {
       process.exit(1);
     }
     const from = flag('from') ?? 'current';
-    write('suggestion', makeSuggestion(read(from), flag('note')));
-    console.log(`created suggestion from ${from}`);
+    const base = read(from);
+    const rooms = roomsFlag(base, from);
+    write('suggestion', makeSuggestion(base, flag('note'), rooms));
+    console.log(`created suggestion from ${from}${rooms ? ` (about: ${rooms.join(', ')})` : ''}`);
     break;
   }
   case 'promote': {
+    if (!exists('suggestion')) {
+      console.error('no house/suggestion.json to promote');
+      process.exit(1);
+    }
+    const suggestion = read('suggestion');
+    const rooms = flags('room').length ? [...new Set(flags('room'))] : undefined;
     let res;
     try {
-      res = promote(read('current'), read('suggestion'), { force: has('force') });
+      res = promote(read('current'), suggestion, { force: has('force'), rooms });
     } catch (e) {
       console.error((e as Error).message);
       process.exit(1);
     }
     write('current', res.house);
-    console.log(`changed rooms: ${res.changed.join(', ') || '(none)'}`);
+    console.log(`changed rooms${rooms ? ` (of ${rooms.join(', ')})` : ''}: ${res.changed.join(', ') || '(none)'}`);
     if (res.conflicts.length && !has('force')) {
       console.log(`CONFLICTS (Current also changed these, kept Current's): ${res.conflicts.join(', ')}`);
       console.log('suggestion kept; re-run with --force to take the suggestion for those rooms');
+    }
+    // only some rooms promoted: keep the suggestion for its other changes (promoted rooms no longer count as changed)
+    const rest = markPromoted(suggestion, res.applied);
+    const remaining = suggestionChanges(rest);
+    if (remaining.length) {
+      write('suggestion', rest);
+      if (res.applied.length) console.log(`promoted ${res.applied.join(', ')}; suggestion kept for: ${remaining.join(', ')}`);
     } else {
       fs.rmSync(abs(versionPath('suggestion')));
       console.log('suggestion promoted into current and removed');
@@ -75,16 +109,18 @@ switch (cmd) {
   }
   case 'save': {
     if (!arg) {
-      console.error('usage: npm run versions -- save "<name>" [--from <id>]');
+      console.error('usage: npm run versions -- save "<name>" [--from <id>] [--room <id>]...');
       process.exit(1);
     }
     const from = flag('from') ?? 'current';
     const h = structuredClone(read(from));
+    const rooms = roomsFlag(h, from);
     const id = savedId(arg, exists);
     h.meta = { ...h.meta, name: arg, kind: 'saved', createdAt: new Date().toISOString() };
     delete h.meta.baseRoomHashes;
+    if (rooms) h.meta.rooms = rooms;
     write(id, h);
-    console.log(`saved ${from} as ${id}`);
+    console.log(`saved ${from} as ${id}${rooms ? ` (about: ${rooms.join(', ')})` : ''}`);
     break;
   }
   case 'drop-suggestion':
@@ -92,6 +128,6 @@ switch (cmd) {
     console.log('suggestion removed');
     break;
   default:
-    console.log('usage: npm run versions -- list | suggest [--from id] [--note ..] [--force] | promote [--force] | save "<name>" [--from id] | drop-suggestion');
+    console.log(USAGE);
     process.exit(cmd ? 1 : 0);
 }

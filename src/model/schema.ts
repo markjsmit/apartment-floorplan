@@ -90,6 +90,8 @@ export const HouseMetaSchema = z.object({
   note: z.string().optional(),
   location: z.object({ lat: z.number(), lon: z.number(), label: z.string().optional() }).optional(),
   baseRoomHashes: z.record(z.string()).optional(),
+  /** the rooms this version is about (e.g. a saved snapshot of one room's design); shown as a tab only there */
+  rooms: z.array(z.string()).optional(),
 });
 export type HouseMeta = z.infer<typeof HouseMetaSchema>;
 

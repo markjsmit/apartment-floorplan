@@ -53,30 +53,56 @@ export function roomHash(room: unknown): string {
   return h1.toString(16).padStart(8, '0') + h2.toString(16).padStart(8, '0');
 }
 
-export function makeSuggestion(base: RawHouse, note?: string): RawHouse {
+/** `rooms`: the rooms the suggestion is about (meta.rooms: its tab only shows there). */
+export function makeSuggestion(base: RawHouse, note?: string, rooms?: string[]): RawHouse {
   const copy = structuredClone(base);
+  const { rooms: _baseRooms, ...meta } = copy.meta;
   copy.meta = {
-    ...copy.meta,
+    ...meta,
     name: 'AI suggestion',
     kind: 'suggestion',
     createdAt: new Date().toISOString(),
     ...(note ? { note } : {}),
+    ...(rooms?.length ? { rooms } : {}),
     baseRoomHashes: Object.fromEntries(base.rooms.map((r) => [r.id, roomHash(r)])),
   };
   return copy;
 }
 
-export type PromoteResult = { house: RawHouse; changed: string[]; conflicts: string[] };
+/** After promoting some rooms: the suggestion's base for those is now Current's, so they no longer count as changed. */
+export function markPromoted(suggestion: RawHouse, promoted: string[]): RawHouse {
+  const base = { ...((suggestion.meta.baseRoomHashes ?? {}) as Record<string, string>) };
+  for (const id of promoted) {
+    const r = suggestion.rooms.find((x) => x.id === id);
+    if (r) base[id] = roomHash(r);
+    else delete base[id];
+  }
+  return { ...suggestion, meta: { ...suggestion.meta, baseRoomHashes: base } };
+}
+
+/** Rooms the suggestion changed vs. the version it was made from (added, edited or deleted). */
+export function suggestionChanges(suggestion: RawHouse): string[] {
+  const base = (suggestion.meta.baseRoomHashes ?? {}) as Record<string, string>;
+  const sugById = new Map(suggestion.rooms.map((r) => [r.id, r]));
+  return [...new Set([...Object.keys(base), ...sugById.keys()])].filter((id) => {
+    const sug = sugById.get(id);
+    return (sug ? roomHash(sug) : null) !== (base[id] ?? null);
+  });
+}
+
+/** changed = rooms the suggestion changed (within `rooms` if given), applied = the ones copied into Current. */
+export type PromoteResult = { house: RawHouse; changed: string[]; conflicts: string[]; applied: string[] };
 
 /**
- * Copy the rooms the suggestion changed (vs. the version it was made from) into Current.
+ * Copy the rooms the suggestion changed (vs. the version it was made from) into Current; only `rooms` if given.
  * A room Current also changed meanwhile is a conflict: Current's room is kept unless `force`.
  */
-export function promote(current: RawHouse, suggestion: RawHouse, opts: { force?: boolean } = {}): PromoteResult {
+export function promote(current: RawHouse, suggestion: RawHouse, opts: { force?: boolean; rooms?: string[] } = {}): PromoteResult {
   const base = (suggestion.meta.baseRoomHashes ?? {}) as Record<string, string>;
   const sugById = new Map(suggestion.rooms.map((r) => [r.id, r]));
   const curById = new Map(current.rooms.map((r) => [r.id, r]));
-  const ids = new Set([...Object.keys(base), ...sugById.keys()]);
+  const only = opts.rooms ? new Set(opts.rooms) : null;
+  const ids = new Set([...Object.keys(base), ...sugById.keys()].filter((id) => !only || only.has(id)));
 
   const changed: string[] = [];
   const conflicts: string[] = [];
@@ -102,5 +128,5 @@ export function promote(current: RawHouse, suggestion: RawHouse, opts: { force?:
   for (const r of suggestion.rooms) {
     if (apply.has(r.id) && !curById.has(r.id)) rooms.push(structuredClone(r));
   }
-  return { house: { ...current, rooms }, changed, conflicts };
+  return { house: { ...current, rooms }, changed, conflicts, applied: [...apply] };
 }

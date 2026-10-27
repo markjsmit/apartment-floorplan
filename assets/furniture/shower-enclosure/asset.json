@@ -1,0 +1,15 @@
+{
+  "id": "shower-enclosure",
+  "name": "Walk-in shower",
+  "tags": ["bathroom", "shower", "walk-in shower", "glass", "rain shower", "built-in"],
+  "description": "Floor-level shower corner: hinged glass door (up to 80 wide, a fixed panel fills wider fronts) + optional side panel in thin chrome frames, 200 high; rain head (Ø25) on an arm from the back wall at 210, bar mixer at 105, hand shower on an 80 cm rail, square floor drain. Origin back-centre of the shower area. Double-click the door to open.",
+  "source": { "kind": "procedural", "generator": "shower-enclosure", "license": "self-made" },
+  "params": {
+    "width": { "default": 90 },
+    "depth": { "default": 90 },
+    "height": { "default": 200, "description": "glass" },
+    "glass": { "default": "frosted", "description": "frosted | clear" },
+    "doorSide": { "default": "right", "description": "left | right: end of the front the door hinges at (and the side panel closes); the other end is the room wall" },
+    "sidePanel": { "default": true }
+  }
+}

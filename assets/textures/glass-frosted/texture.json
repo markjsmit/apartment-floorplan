@@ -1,0 +1,9 @@
+{
+  "id": "glass-frosted",
+  "name": "Frosted glass",
+  "tags": ["glass", "frosted", "satin", "shower", "bathroom"],
+  "fallbackColor": "#eef1f2",
+  "roughness": 0.6,
+  "source": "self-made (plain colour; glass parts with a roughness above 0.3 render more opaque = frosted)",
+  "license": "CC0"
+}

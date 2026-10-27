@@ -8,7 +8,10 @@
       "lon": 34.7818,
       "label": "Tel Aviv"
     },
-    "createdAt": "2026-10-24T10:54:48.880Z"
+    "createdAt": "2026-10-24T10:54:48.880Z",
+    "rooms": [
+      "storage"
+    ]
   },
   "assumptions": [],
   "rooms": [
@@ -612,7 +615,7 @@
           "assumptions": [
             {
               "path": "params",
-              "note": "self-built: 18 mm plywood, 4 bays of ~64 cm, 7 levels ~30 cm apart; no back panel — held square by 2.5 cm battens up the back of every upright (both sides, 1 cm in, shelves notched + screwed into them), its top (screwed to the high shelf, see storage.shelving-ties) and the window wall; from just past the door swing to the window wall (covers ~5 cm of the window's left edge); freestanding, tied in at the top"
+              "note": "self-built: 18 mm plywood, 4 bays of ~64 cm, 7 levels ~30 cm apart; no back panel \u2014 held square by 2.5 cm battens up the back of every upright (both sides, 1 cm in, shelves notched + screwed into them), its top (screwed to the high shelf, see storage.shelving-ties) and the window wall; from just past the door swing to the window wall (covers ~5 cm of the window's left edge); freestanding, tied in at the top"
             }
           ]
         },
@@ -773,7 +776,7 @@
               }
             ]
           },
-          "name": "Steel angle brackets: shelving + middle tower → high shelf",
+          "name": "Steel angle brackets: shelving + middle tower \u2192 high shelf",
           "tags": [
             "brackets",
             "ties",
@@ -796,7 +799,7 @@
           "assumptions": [
             {
               "path": "params",
-              "note": "~5 x 5 x 3 cm steel L-brackets, screwed into the shelving's top/uprights and the Kallax side (near the edge — Kallax tops are hollow) and up into the high shelf; they stop the 20 cm deep shelving tipping into the passage and keep it square without a back panel"
+              "note": "~5 x 5 x 3 cm steel L-brackets, screwed into the shelving's top/uprights and the Kallax side (near the edge \u2014 Kallax tops are hollow) and up into the high shelf; they stop the 20 cm deep shelving tipping into the passage and keep it square without a back panel"
             }
           ]
         },
@@ -1170,7 +1173,7 @@
           "assumptions": [
             {
               "path": "params",
-              "note": "ceiling light point assumed in the middle of the room (150, 150). Cable channel along the ceiling to just behind the suitcase slots' back wall, down its outside face (aisle/entry side) to a junction box, along that outside face, then over the shelf's back edge and under the shelf to 2 round LED surface lights (Ø30, ~24 W): one over the passage, one over the aisle. Nothing runs inside the suitcase slots, no holes in the shelf."
+              "note": "ceiling light point assumed in the middle of the room (150, 150). Cable channel along the ceiling to just behind the suitcase slots' back wall, down its outside face (aisle/entry side) to a junction box, along that outside face, then over the shelf's back edge and under the shelf to 2 round LED surface lights (\u00d830, ~24 W): one over the passage, one over the aisle. Nothing runs inside the suitcase slots, no holes in the shelf."
             }
           ]
         },
@@ -1211,7 +1214,7 @@
           "assumptions": [
             {
               "path": "params",
-              "note": "Mark's existing 140 x 190 bed frame top on a board; closet around the bed (18 mm back + sides to 224, top shelf 60 deep over the desk, extended 9.4 cm to butt against the Kallax high shelf and joined with metal plates); base 30 high x 39 deep (pillows, bedding) so the swinging mattress clears the top (peaks ~222.4); hinge 31.8 → everything folded stays within 39; desk 90 x 60 at 75 at the window end (keeps ~57 cm free in front of the aisle); hinges, locks and legs not chosen yet"
+              "note": "Mark's existing 140 x 190 bed frame top on a board; closet around the bed (18 mm back + sides to 224, top shelf 60 deep over the desk, extended 9.4 cm to butt against the Kallax high shelf and joined with metal plates); base 30 high x 39 deep (pillows, bedding) so the swinging mattress clears the top (peaks ~222.4); hinge 31.8 \u2192 everything folded stays within 39; desk 90 x 60 at 75 at the window end (keeps ~57 cm free in front of the aisle); hinges, locks and legs not chosen yet"
             }
           ]
         },
@@ -1407,7 +1410,7 @@
         },
         {
           "path": "ceilingHeight",
-          "note": "270 assumed for the whole apartment (living-room photos say 2.70-2.85; the bedroom photo said ~2.50) — please measure"
+          "note": "270 assumed for the whole apartment (living-room photos say 2.70-2.85; the bedroom photo said ~2.50) \u2014 please measure"
         },
         {
           "path": "openings[storage.door].width",
@@ -1911,7 +1914,7 @@
         },
         {
           "path": "ceilingHeight",
-          "note": "270 assumed for the whole apartment: photos say 2.70-2.85 (counter and front door as rulers) — please measure"
+          "note": "270 assumed for the whole apartment: photos say 2.70-2.85 (counter and front door as rulers) \u2014 please measure"
         },
         {
           "path": "openings[living.front-door]",

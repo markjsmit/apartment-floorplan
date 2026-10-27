@@ -34,7 +34,9 @@ function buildUiState(s: StoreState) {
   const pose = poseInRoom(s);
   return {
     room: s.roomId,
+    // the active room's version; other rooms show Current unless listed in roomVersions
     version: s.versionId,
+    roomVersions: s.roomVersions,
     selection,
     camera: {
       // room-local cm; yaw 0 looks towards -z, positive turns left
@@ -63,14 +65,20 @@ async function reload() {
   }
 }
 
+/** Go to a room, and (optionally) show that room in `version`; other rooms keep their versions. */
 async function goto(room: string, version?: string) {
   const s = useStore.getState();
-  if (version && !s.setVersion(version)) {
+  // the room first (it may only exist in `version`: then setting the version adds it to the house)
+  const entered = s.setRoom(room);
+  if (version && !useStore.getState().setVersion(version, room)) {
     // Claude may have just written the file; the reload can still be on its way
     await reload();
-    if (!useStore.getState().setVersion(version)) return s.toast(`Claude asked for version "${version}", which doesn't exist.`);
+    if (!useStore.getState().setVersion(version, room)) {
+      const exists = !!useStore.getState().bundle?.versions[version];
+      return s.toast(exists ? `Claude asked for room "${room}" in version "${version}", which doesn't have it.` : `Claude asked for version "${version}", which doesn't exist.`);
+    }
   }
-  if (!useStore.getState().setRoom(room)) useStore.getState().toast(`Claude asked for room "${room}", which isn't in this version.`);
+  if (!entered && !useStore.getState().setRoom(room)) useStore.getState().toast(`Claude asked for room "${room}", which isn't in the house.`);
 }
 
 /** Dev mode only: live reload from disk, Claude's commands, and reporting what Mark sees to .ui-state/. */

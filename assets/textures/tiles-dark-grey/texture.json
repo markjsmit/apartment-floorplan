@@ -1,0 +1,10 @@
+{
+  "id": "tiles-dark-grey",
+  "name": "Dark anthracite tiles 30x60",
+  "tags": ["tiles", "dark grey", "anthracite", "bathroom", "30x60", "wall"],
+  "tileSize": [60, 30],
+  "fallbackColor": "#3c3d40",
+  "roughness": 0.4,
+  "source": "self-made (plain colour, anthracite 30x60 bathroom tiles laid landscape)",
+  "license": "CC0"
+}

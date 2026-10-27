@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { makeSuggestion, promote, roomHash, savedId, slugify, versionIdFromPath, versionPath, type RawHouse } from '../src/model/versions';
+import { makeSuggestion, markPromoted, promote, roomHash, suggestionChanges, savedId, slugify, versionIdFromPath, versionPath, type RawHouse } from '../src/model/versions';
 
 const room = (id: string, ceilingHeight = 260) => ({
   id, name: id, footprint: [[0, 0], [300, 0], [300, 300], [0, 300]], ceilingHeight,
@@ -86,5 +86,45 @@ describe('promote validation', () => {
     const s = makeSuggestion(current());
     s.rooms[0] = { id: 'a', name: 'half edited' };
     expect(() => promote(current(), s)).toThrow(/a/);
+  });
+});
+
+describe('promote one room', () => {
+  it('only takes the given rooms and keeps the rest of the suggestion', () => {
+    const s = makeSuggestion(current());
+    s.rooms = [room('a', 240), room('b', 230)];
+    const res = promote(current(), s, { rooms: ['a'] });
+    expect(res.changed).toEqual(['a']);
+    expect(res.applied).toEqual(['a']);
+    expect(res.house.rooms.map((r) => r.ceilingHeight)).toEqual([240, 260]);
+    // promoted rooms no longer count as changed; b still does
+    const rest = markPromoted(s, res.applied);
+    expect(suggestionChanges(rest)).toEqual(['b']);
+    expect(promote(res.house, rest).house.rooms.map((r) => r.ceilingHeight)).toEqual([240, 230]);
+  });
+
+  it('keeps the conflict logic', () => {
+    const s = makeSuggestion(current());
+    s.rooms[0] = room('a', 240);
+    const cur = current();
+    cur.rooms[0] = room('a', 220);
+    const res = promote(cur, s, { rooms: ['a'] });
+    expect(res.conflicts).toEqual(['a']);
+    expect(res.applied).toEqual([]);
+    expect(promote(cur, s, { rooms: ['a'], force: true }).applied).toEqual(['a']);
+  });
+
+  it('an unchanged or unknown room promotes nothing', () => {
+    const s = makeSuggestion(current());
+    s.rooms[0] = room('a', 240);
+    expect(promote(current(), s, { rooms: ['b', 'zz'] }).changed).toEqual([]);
+  });
+});
+
+describe('meta.rooms', () => {
+  it('makeSuggestion records the rooms it is about, and not those of its base', () => {
+    expect(makeSuggestion(current(), undefined, ['a']).meta.rooms).toEqual(['a']);
+    const saved = { ...current(), meta: { name: 'S', kind: 'saved', rooms: ['b'] } };
+    expect(makeSuggestion(saved).meta.rooms).toBeUndefined();
   });
 });

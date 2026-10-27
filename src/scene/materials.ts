@@ -33,8 +33,11 @@ export function getMaterial(bundle: Bundle | null, textureId: string | undefined
   let m = materialCache.get(key);
   if (m) return m;
   if (glass) {
+    // a rough glass texture (glass-frosted) reads as frosted: more opaque, blurry highlights
+    const frosted = (t?.roughness ?? 0) > 0.3;
     m = new MeshPhysicalMaterial({
-      color: new Color(t?.fallbackColor ?? '#d8ecf2'), roughness: 0.05, metalness: 0, transparent: true, opacity: 0.18, depthWrite: false,
+      color: new Color(t?.fallbackColor ?? '#d8ecf2'), roughness: frosted ? t!.roughness : 0.05, metalness: 0, transparent: true,
+      opacity: frosted ? 0.6 : 0.18, depthWrite: false,
     });
   } else {
     const mat = new MeshStandardMaterial({

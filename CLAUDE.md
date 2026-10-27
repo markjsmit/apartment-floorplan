@@ -51,15 +51,22 @@ breaks or changes (furniture no longer fits, a window now blocked, walkway < ~70
 ## Versions (tabs in row 2)
 
 Files: `house/current.json`, `house/suggestion.json` (the "AI suggestion" tab; absent = no tab), `house/saved/<slug>.json`.
+Files are whole houses, but **versions are per room**: the tab row shows only the versions for the open room, and
+switching changes only that room (every other room keeps its own choice, default Current). A version is offered for a
+room when its `meta.rooms` lists it, or (no `meta.rooms`) when its copy of the room differs from Current's.
 ```
-npm run -s versions -- list
-npm run -s versions -- suggest [--from <id>] [--note "..."]   # start a "what if" copy, then edit suggestion.json
-npm run -s versions -- save "Bed on left wall" [--from <id>]   # snapshot for comparing / stable share links
-npm run -s versions -- promote [--force]                        # "make this my main": merges changed rooms into Current
+npm run -s versions -- list                                    # shows [rooms: …] when meta.rooms is set
+npm run -s versions -- suggest [--from <id>] [--note "..."] [--room <id>]...   # "what if" copy, then edit suggestion.json
+npm run -s versions -- save "Bed on left wall" [--from <id>] [--room <id>]...  # snapshot for comparing / stable links
+npm run -s versions -- promote [--room <id>]... [--force]     # "make this my main": changed rooms (or just --room) into Current
 npm run -s versions -- drop-suggestion
 ```
-After `suggest`, show it: `npm run -s ui -- goto <room> suggestion`. Promote reports conflicts (rooms Current also
-changed); ask Mark before `--force`. Share links to saved versions never change; links to current/suggestion do.
+`--room` (repeatable) sets `meta.rooms` = the rooms the version is about; pass it when the idea is about one room.
+`promote --room` keeps the suggestion for its other changed rooms. After `suggest`, show it:
+`npm run -s ui -- goto <room> suggestion` (sets that room's version). Promote reports conflicts (rooms Current also
+changed); ask Mark before `--force`. ui-state `version` = the open room's version, `roomVersions` = all non-Current
+choices. Links: `?room=X&version=V` (V for room X) `&rv=room:ver,…` (other rooms). Saved-version links never change;
+current/suggestion ones do.
 
 ## Data model (cm, Y up, degrees)
 

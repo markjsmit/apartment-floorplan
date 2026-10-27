@@ -10,6 +10,7 @@ import { Toolbar } from './Toolbar';
 import { PersonSwitch, TouchControls } from './TouchControls';
 import { useDevLink } from './useDevLink';
 import { useIsMobile, useIsTouch } from './useIsMobile';
+import { composeHouse } from '../model/roomVersions';
 import { poseFromRoom, useStore } from './store';
 import { parseUrlState, serializeUrlState } from './url';
 
@@ -17,6 +18,7 @@ export function App() {
   const bundle = useStore((s) => s.bundle);
   const roomId = useStore((s) => s.roomId);
   const versionId = useStore((s) => s.versionId);
+  const roomVersions = useStore((s) => s.roomVersions);
   const mobile = useIsMobile();
   const touch = useIsTouch();
   useDevLink();
@@ -26,7 +28,8 @@ export function App() {
       .then((b) => {
         const u = parseUrlState(location.search, b);
         useStore.setState({
-          versionId: u.versionId,
+          // version= applies to the linked room only (setBundle derives versionId from roomVersions)
+          roomVersions: u.roomVersions,
           roomId: u.roomId,
           spawnAt: u.spawnAt ?? null,
           noreport: u.noreport,
@@ -34,7 +37,7 @@ export function App() {
           ...(u.person ? { person: u.person } : {}),
           ...(u.time !== undefined ? { timeOfDay: u.time } : {}),
           // cam= in a link is in the room's own coordinates
-          ...(u.camera ? { camera: poseFromRoom({ bundle: b, versionId: u.versionId }, u.roomId, u.camera) } : {}),
+          ...(u.camera ? { camera: poseFromRoom({ house: composeHouse(b, u.roomVersions) }, u.roomId, u.camera) } : {}),
         });
         useStore.getState().setBundle(b);
         if (!u.camera) useStore.setState((s) => ({ spawnTick: s.spawnTick + 1 }));
@@ -42,15 +45,15 @@ export function App() {
       .catch((e) => useStore.getState().setLoadError(e.message));
   }, []);
 
-  // keep the address bar pointing at the open room + version (camera is only added for snapshots)
+  // keep the address bar pointing at the open room + its version, + other rooms' choices (camera is only added for snapshots)
   useEffect(() => {
     if (!bundle) return;
     // keep any other params (noreport, view, debug flags...) as they were
     const q = new URLSearchParams(location.search);
-    ['room', 'version', 'cam'].forEach((k) => q.delete(k));
+    ['room', 'version', 'rv', 'cam'].forEach((k) => q.delete(k));
     const rest = q.toString();
-    history.replaceState(null, '', `${serializeUrlState({ roomId, versionId })}${rest ? `&${rest}` : ''}`);
-  }, [bundle, roomId, versionId]);
+    history.replaceState(null, '', `${serializeUrlState({ roomId, versionId, roomVersions })}${rest ? `&${rest}` : ''}`);
+  }, [bundle, roomId, versionId, roomVersions]);
 
   return (
     <div className={mobile ? 'app mobile' : 'app'}>

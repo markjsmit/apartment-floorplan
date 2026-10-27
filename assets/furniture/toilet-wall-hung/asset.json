@@ -1,0 +1,14 @@
+{
+  "id": "toilet-wall-hung",
+  "name": "Wall-hung toilet with cistern ledge",
+  "tags": ["bathroom", "toilet", "wc", "wall-hung", "ledge", "flush plate", "built-in"],
+  "description": "Wall-hung bowl (36 wide, 54 deep, seat at 42) in front of a tiled concealed-cistern box with a chrome dual flush plate (~24 x 16). Typical in-wall frame (Geberit Duofix / Grohe Rapid SL): 112 high, the boxing 15-25 deep.",
+  "source": { "kind": "procedural", "generator": "toilet-wall-hung", "license": "self-made" },
+  "params": {
+    "ledgeWidth": { "default": 60 },
+    "ledgeHeight": { "default": 110 },
+    "ledgeDepth": { "default": 20, "description": "the bowl hangs in front of it" },
+    "ledgeMaterial": { "default": "tiles-dark-grey", "description": "texture id" },
+    "bowlOffset": { "default": 0, "description": "bowl centre, cm from the ledge's centre (+ = right)" }
+  }
+}
