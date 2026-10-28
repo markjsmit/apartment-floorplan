@@ -33,6 +33,19 @@ entry are therefore up to ~1 m off in x. Everything west of the hallway end is u
 3. Findings that agreed across passes were applied. Where passes disagreed, the photos were re-read, and the
    remaining questions are listed below.
 
+## Cycle 2 (photo-vs-render, poses solved per photo)
+
+- **Hallway south side** is on z 486: the hallway is as wide as its 209 opening to the living room. The glossy
+  **123 × 38 block** is the corner column north of the fridge (x 508–631, z 486–524), west face flush with the tall
+  units. **"1.68 m"** on the notes = from the pillar (z 356) to the start of the fridge run (z 524).
+- **Bathroom** 224 × 188 at x 578–802, z 496–684. Door at x 650–730: bath along the west wall just west of it,
+  toilet straight ahead, vanity + washer column on the east wall.
+- **Front door** is 140 from the dining corner (the notes label is upside down). Kitchen tall units from the block:
+  fridge 100, oven 60, narrow 36. The entrance bulkhead (~215) runs over the whole counter.
+- **En-suite**: frosted glass panel + door from the bedroom entry, toilet on the west wall under a tiled ledge, shower
+  at the end. The vanity + mirror stand in the entry.
+- **Lights** placed from a light survey (soffit downlights, two track rails, mirror lights, en-suite panel).
+
 ## What the sweep changed (commit `2debbe0` and after)
 
 - **Hallway:** it ends at x ≈ 812, so the bedroom door is right next to the bathroom door. On the north side there is

@@ -151,8 +151,10 @@
           "id": "living.wall-2",
           "edge": 2,
           "tags": [
-            "tall units end"
-          ]
+            "tall units end",
+            "block side"
+          ],
+          "material": "white-gloss"
         },
         {
           "id": "living.wall-3",
@@ -287,19 +289,14 @@
           ],
           "against": {
             "wall": "living.wall-3",
-            "offset": 0
+            "offset": 38
           },
           "params": {
             "height": 238,
             "depth": 59.5,
             "columns": [
               {
-                "w": 55,
-                "kind": "pantry",
-                "handle": "right"
-              },
-              {
-                "w": 95,
+                "w": 100,
                 "kind": "fridge"
               },
               {
@@ -308,11 +305,34 @@
                 "handle": "left"
               },
               {
-                "w": 24,
+                "w": 36,
                 "kind": "pantry",
                 "handle": "left"
               }
             ]
+          },
+          "builtIn": true
+        },
+        {
+          "id": "living.block",
+          "asset": "box",
+          "name": "Glossy block (hallway cabin)",
+          "tags": [
+            "hallway cabin",
+            "block",
+            "glossy cabinet",
+            "unknown",
+            "built-in"
+          ],
+          "params": {
+            "width": 38,
+            "height": 238,
+            "depth": 59.5,
+            "material": "white-gloss"
+          },
+          "against": {
+            "wall": "living.wall-3",
+            "offset": 0
           },
           "builtIn": true
         },
@@ -698,7 +718,11 @@
         },
         {
           "path": "items[living.tall-units]",
-          "note": "columns from north: pantry 55, fridge niche 95 (side-by-side fridge ~91), oven 60, narrow door 24 (photos 160651, 160731-33); widths estimated"
+          "note": "from the glossy block south: fridge niche 100 (side-by-side fridge ~91), oven 60, narrow door 36 (photos 160651, 160731-33, video 24.5-25.5 s); widths estimated. The notes' 1.68 m = pillar to the start of the fridge run (z 356 -> 524)"
+        },
+        {
+          "path": "items[living.block]",
+          "note": "the 123 x 38 block (notes 'hallway cabin'): west face flush with the tall units, north face on the hallway line z 486 (video 24.5-25.5 s, photo 160802: the tile/laminate seam runs under it); unknown if it opens"
         },
         {
           "path": "items[living.island]",
@@ -968,11 +992,11 @@
         ],
         [
           812,
-          524
+          486
         ],
         [
           586,
-          524
+          486
         ]
       ],
       "ceilingHeight": 238,
@@ -1080,7 +1104,7 @@
           },
           "type": "door",
           "wall": "hallway.wall-5",
-          "offset": 45,
+          "offset": 58.5,
           "width": 80,
           "height": 211,
           "asset": "door-basic",
@@ -1102,7 +1126,7 @@
           },
           "type": "door",
           "wall": "hallway.wall-6",
-          "offset": 10,
+          "offset": 82,
           "width": 80,
           "height": 211,
           "asset": "door-basic",
@@ -1119,7 +1143,7 @@
           "id": "hallway.opening-living",
           "type": "opening",
           "wall": "hallway.wall-7",
-          "offset": 38,
+          "offset": 0,
           "width": 209,
           "height": 238,
           "name": "Opening to the living room",
@@ -1135,25 +1159,45 @@
       ],
       "items": [
         {
-          "id": "hallway.block",
+          "id": "hallway.block-face",
           "asset": "box",
-          "name": "Built-in block (unknown)",
+          "name": "Glossy block (hallway face)",
           "tags": [
             "hallway cabin",
-            "hallway block",
-            "unknown",
-            "built-in",
-            "sticking out"
+            "block",
+            "glossy cabinet"
+          ],
+          "position": [
+            609,
+            0,
+            485.6
           ],
           "params": {
-            "width": 123,
+            "width": 44,
             "height": 238,
-            "depth": 38,
-            "material": "white-paint"
+            "depth": 1,
+            "material": "white-gloss"
           },
-          "against": {
-            "wall": "hallway.wall-6",
-            "offset": 103
+          "rotation": 180,
+          "builtIn": true
+        },
+        {
+          "id": "hallway.ceiling-light",
+          "asset": "surface-light",
+          "name": "Ceiling light",
+          "tags": [
+            "light",
+            "ceiling light"
+          ],
+          "position": [
+            700,
+            238,
+            430
+          ],
+          "params": {
+            "diameter": 12,
+            "height": 6,
+            "intensity": 12000
           },
           "builtIn": true
         }
@@ -1161,11 +1205,7 @@
       "assumptions": [
         {
           "path": "footprint",
-          "note": "168 wide from the pillar line to the bathroom wall (notes '1.68 m' — read as the hallway width; Mark doesn't remember). The door alcove in front of the storage room door is the 98 x 65 corner cut out of that room"
-        },
-        {
-          "path": "items[hallway.block]",
-          "note": "123 x 38 (notes 'hallway cabin'), right after the fridge (video 0:25). Mark: no knobs seen, unknown if it opens; height up to the lowered ceiling assumed"
+          "note": "south wall on z 486, in line with the glossy block's face, so the hallway is as wide as its 209 opening to the living room (photos 160740, 160803, video 39-40 s). The door alcove in front of the storage room door is the 98 x 65 corner cut out of that room"
         },
         {
           "path": "ceilingHeight",
@@ -1181,7 +1221,7 @@
         },
         {
           "path": "walls[hallway.wall-5]",
-          "note": "end wall at x 812: the 123 block, a switch strip, the bathroom door and ~10 cm of wall (photos 160921-22); hallway length not measured"
+          "note": "end wall at x 812: along the south side the block, a switch strip, the bathroom door and ~80 cm of wall (photos 160740, 160803, 160921-22); hallway length not measured"
         }
       ]
     },
@@ -1308,10 +1348,10 @@
           "id": "storage.window",
           "type": "window",
           "wall": "storage.wall-0",
-          "offset": 123,
+          "offset": 85,
           "width": 120,
-          "height": 120,
-          "sill": 102,
+          "height": 110,
+          "sill": 112,
           "asset": "window-basic",
           "params": {
             "frameMaterial": "aluminium-grey",
@@ -2113,7 +2153,7 @@
         },
         {
           "path": "openings[storage.window]",
-          "note": "top 55 below the ceiling (Mark's 55 cm rule, assumed for every outside window); size from the photos: window right of centre on the north wall, a dresser fitted under it"
+          "note": "top 55 below the ceiling (Mark's 55 cm rule, assumed for every outside window); ~120 x 110, about centred on the north wall (photos 160749-51); not measured"
         },
         {
           "path": "openings[storage.door]",
@@ -2135,20 +2175,20 @@
       ],
       "footprint": [
         [
-          636,
-          534
+          578,
+          496
         ],
         [
-          860,
-          534
+          802,
+          496
         ],
         [
-          860,
-          722
+          802,
+          684
         ],
         [
-          636,
-          722
+          578,
+          684
         ]
       ],
       "ceilingHeight": 238,
@@ -2206,7 +2246,7 @@
           "id": "bathroom.door",
           "type": "door",
           "wall": "bathroom.wall-0",
-          "offset": 86,
+          "offset": 72,
           "width": 80,
           "height": 211,
           "tags": [
@@ -2336,9 +2376,9 @@
             "mirror light"
           ],
           "position": [
-            846,
+            788,
             226,
-            617
+            579
           ],
           "params": {
             "diameter": 10,
@@ -2371,7 +2411,7 @@
       "assumptions": [
         {
           "path": "footprint",
-          "note": "NOT measured: ~224 x 188. Width from the fittings in a row along the far wall (bath 70, ~16 cm, toilet, washer column 62) with the toilet straight ahead through the door; depth = bath 170 + ledge 18 (the bath's end touches the door wall, photo 160816). The vanity sits past the door's left jamb, so the room reaches ~50 cm east of the hallway end. ~58 cm between the kitchen wall and the bath wall is unexplained"
+          "note": "NOT measured: ~224 x 188. Width from the fittings in a row along the far wall (bath 70, ~16 cm, toilet, washer column 62) with the toilet straight ahead through the door; depth = bath 170 + ledge 18 (the bath's end touches the door wall, photo 160816). West wall = the kitchen wall (+10); the door is at x 650-730 in the hallway's south wall, so the bath is just west of it (hidden from the doorway) and the vanity just east of it"
         },
         {
           "path": "ceilingHeight",
@@ -2422,16 +2462,8 @@
           545
         ],
         [
-          870,
-          545
-        ],
-        [
-          870,
-          524
-        ],
-        [
           822,
-          524
+          545
         ],
         [
           822,
@@ -2507,28 +2539,14 @@
           "id": "bedroom.wall-5",
           "edge": 5,
           "tags": [
-            "jog"
-          ]
-        },
-        {
-          "id": "bedroom.wall-6",
-          "edge": 6,
-          "tags": [
-            "bathroom wall"
-          ]
-        },
-        {
-          "id": "bedroom.wall-7",
-          "edge": 7,
-          "tags": [
             "hallway wall",
             "door wall",
             "entry wall"
           ]
         },
         {
-          "id": "bedroom.wall-8",
-          "edge": 8,
+          "id": "bedroom.wall-6",
+          "edge": 6,
           "tags": [
             "shoe rack wall",
             "recess",
@@ -2536,8 +2554,8 @@
           ]
         },
         {
-          "id": "bedroom.wall-9",
-          "edge": 9,
+          "id": "bedroom.wall-7",
+          "edge": 7,
           "tags": [
             "recess",
             "pier",
@@ -2545,15 +2563,15 @@
           ]
         },
         {
-          "id": "bedroom.wall-10",
-          "edge": 10,
+          "id": "bedroom.wall-8",
+          "edge": 8,
           "tags": [
             "pier"
           ]
         },
         {
-          "id": "bedroom.wall-11",
-          "edge": 11,
+          "id": "bedroom.wall-9",
+          "edge": 9,
           "tags": [
             "storage room wall",
             "west wall"
@@ -2565,8 +2583,8 @@
         {
           "id": "bedroom.door",
           "type": "door",
-          "wall": "bedroom.wall-7",
-          "offset": 56.5,
+          "wall": "bedroom.wall-5",
+          "offset": 64,
           "width": 80,
           "height": 211,
           "tags": [
@@ -2685,7 +2703,7 @@
             "mirror"
           ],
           "against": {
-            "wall": "bedroom.wall-7",
+            "wall": "bedroom.wall-5",
             "offset": 0
           },
           "params": {
@@ -2704,7 +2722,7 @@
           "position": [
             830,
             228,
-            496
+            517
           ],
           "params": {
             "diameter": 10,
@@ -2724,7 +2742,7 @@
           "note": "bedroom measured 3.08 x 4.06 (notes); the entry (door from the hallway, shoe-rack recess, closet and en-suite doors) is from the photos/video, not measured"
         },
         {
-          "path": "walls[bedroom.wall-8]",
+          "path": "walls[bedroom.wall-6]",
           "note": "shoe-rack recess right inside the door, ~80 wide (notes 'bedroom side cabin 80 x …', depth not written; ~48 here) — photos 160820-23, 160857-58"
         },
         {
