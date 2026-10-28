@@ -5,7 +5,7 @@ import { aisleDoors, bridgeShelf, dryingRack, plywoodShelving, wallBedDesk } fro
 import { pegboard } from './pegboard';
 import { group } from './group';
 import { suitcase } from './suitcase';
-import { backpack, hookRail, iceSkates } from './sport';
+import { backpack, hookRail, iceSkates, skateBagItem } from './sport';
 import { stuff } from './stuff';
 import { ledStrip, surfaceLight } from './lights';
 import { door, doorOpenAngle, doorStates, windowParts } from './openings';
@@ -37,6 +37,7 @@ export const generators: Record<string, Generator> = {
   backpack,
   'hook-rail': hookRail,
   'ice-skates': iceSkates,
+  'skate-bag': skateBagItem,
   stuff,
   'led-strip': ledStrip,
   'surface-light': surfaceLight,

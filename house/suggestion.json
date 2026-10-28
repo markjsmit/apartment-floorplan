@@ -2,7 +2,7 @@
   "meta": {
     "name": "AI suggestion",
     "kind": "suggestion",
-    "note": "Skating corner in the window corner of the left wall: our TJUSIG shoe bench (figure skates on the tubes, backpacks on top), hooks with the two red skate bags above (hockey skates stay in theirs); no pegboard, no shelf, no aisle doors",
+    "note": "Skating corner in the window corner of the left wall: our TJUSIG shoe bench (backpacks on the tubes, the two red skate bags with the skates inside on the seat) with the pegboard on posts above it; no shelf, no aisle doors",
     "location": {
       "lat": 32.0853,
       "lon": 34.7818,
@@ -1567,7 +1567,8 @@
           ],
           "against": {
             "wall": "storage.wall-5",
-            "offset": 180.5
+            "offset": 180.5,
+            "gap": 4.5
           }
         },
         {
@@ -2275,41 +2276,86 @@
           }
         },
         {
-          "id": "storage.figure-skates",
-          "asset": "ice-skates",
-          "name": "Figure skates (on the shoe rack)",
+          "id": "storage.pegboard",
+          "asset": "diy-pegboard",
+          "name": "Pegboard on posts (above the shoe bench)",
           "tags": [
-            "skates",
-            "figure skates"
+            "pegboard",
+            "tools wall"
           ],
           "against": {
             "wall": "storage.wall-5",
-            "offset": 193.0,
-            "elevation": 34.6,
-            "gap": 5
+            "offset": 180.5
           },
           "params": {
-            "kind": "figure",
-            "seed": "fig",
-            "pose": "lying",
-            "slope": 21.8
+            "width": 81,
+            "ceiling": 277,
+            "boards": [
+              {
+                "elevation": 95,
+                "height": 50
+              },
+              {
+                "elevation": 150,
+                "height": 50
+              },
+              {
+                "elevation": 205,
+                "height": 50,
+                "tools": false
+              }
+            ]
+          }
+        },
+        {
+          "id": "storage.skate-bag-1",
+          "asset": "skate-bag",
+          "name": "Skate bag (figure skates inside)",
+          "tags": [
+            "skate bag"
+          ],
+          "against": {
+            "wall": "storage.wall-5",
+            "offset": 181.0,
+            "elevation": 50,
+            "gap": 6
+          }
+        },
+        {
+          "id": "storage.skate-bag-2",
+          "asset": "skate-bag",
+          "name": "Skate bag (hockey skates inside)",
+          "tags": [
+            "skate bag",
+            "hockey skates"
+          ],
+          "against": {
+            "wall": "storage.wall-5",
+            "offset": 221.0,
+            "elevation": 50,
+            "gap": 6
+          },
+          "params": {
+            "flip": true
           }
         },
         {
           "id": "storage.backpack-1",
           "asset": "backpack",
-          "name": "Mark's backpack (cream canvas)",
+          "name": "Mark's backpack (cream canvas, under the bench)",
           "tags": [
             "backpack"
           ],
           "against": {
             "wall": "storage.wall-5",
-            "offset": 210.5,
-            "elevation": 50,
-            "gap": 2
+            "offset": 187.5,
+            "elevation": 34.5,
+            "gap": 11
           },
           "params": {
             "pose": "lying",
+            "inward": true,
+            "slope": 21.8,
             "color": "#d6cfae",
             "flap": "#2f3d50",
             "accent": "#c49a68",
@@ -2319,40 +2365,22 @@
         {
           "id": "storage.backpack-2",
           "asset": "backpack",
-          "name": "Backpack 2 (dropped on top)",
+          "name": "Backpack 2 (under the bench)",
           "tags": [
             "backpack"
           ],
           "against": {
             "wall": "storage.wall-5",
-            "offset": 181.5,
-            "elevation": 50,
-            "gap": 1
+            "offset": 221.5,
+            "elevation": 34.5,
+            "gap": 11
           },
           "params": {
-            "pose": "slumped",
+            "pose": "lying",
+            "inward": true,
+            "slope": 21.8,
             "color": "#3f4a3c",
-            "seed": "bp1"
-          }
-        },
-        {
-          "id": "storage.skate-hooks",
-          "asset": "hook-rail",
-          "name": "Hooks for the skate bags (hockey skates live in their bag)",
-          "tags": [
-            "hooks",
-            "skate hooks"
-          ],
-          "against": {
-            "wall": "storage.wall-5",
-            "offset": 179.5,
-            "elevation": 165
-          },
-          "params": {
-            "width": 60,
-            "hooks": 3,
-            "bags": 2,
-            "seed": "rail"
+            "seed": "bp2"
           }
         }
       ],

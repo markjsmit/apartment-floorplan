@@ -1,0 +1,26 @@
+{
+  "id": "skate-bag",
+  "name": "Skate bag (triangular)",
+  "tags": [
+    "skate bag",
+    "bag",
+    "skating"
+  ],
+  "description": "Triangular skate bag for one pair (~40 long x 34 high at the heel x 22 wide; the skates inside are an L, so the side is a right-ish triangle), standing on its bottom. flip = heel end at +x.",
+  "source": {
+    "kind": "procedural",
+    "generator": "skate-bag",
+    "license": "self-made",
+    "notes": "Sizes: Decathlon Fit 26 L (45 x 26 x 35), Decathlon 500 (40 x 20 x 35), Graf (40 x 24 x 36)."
+  },
+  "params": {
+    "color": {
+      "default": "#b3202a",
+      "description": "#hex"
+    },
+    "flip": {
+      "default": false,
+      "description": "heel end at +x"
+    }
+  }
+}

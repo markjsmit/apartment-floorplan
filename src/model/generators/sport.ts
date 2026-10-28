@@ -50,7 +50,8 @@ const pad = (id: string, tags: string[], w: number, h: number, depth: number, so
 /**
  * Soft backpack / gym bag (padded fabric shapes, a bit different per `seed`). Params: color, accent, seed, pose:
  * - slumped: standing, sagging and leaning back against the wall, a shoulder strap flopped out to the side
- * - lying: dropped flat on its back, top towards +x, straps spread out
+ * - lying: dropped flat on its back, top towards +x, straps spread out (inward: top towards -z, into a shelf;
+ *   slope: tilted front-down by that many degrees, e.g. on a shoe rack's tubes)
  * - stuffed: pushed into a Kallax cube (fills ~31 x 28 x 36), pocket bulging out and a strap hanging out of the front
  */
 export function backpack(params: Record<string, unknown>): Part[] {
@@ -67,7 +68,7 @@ export function backpack(params: Record<string, unknown>): Part[] {
     // outline in x/y, then turned flat: outline +y (the top) → +x, thickness → up
     const L = 44 + j(2), W = 30 + j(2), T = 13 + j(2);
     const flat: Vec3 = [-90, 0, -90];
-    return [
+    const parts = [
       pad('body', tags, W, L, T, 4.5, 6, 13, [0, T / 2, W / 2], flat, color),
       ...(flap ? [pad('flap', [...tags, 'flap'], W + 1, L * 0.42, 4, 1.8, 5, 13, [L * 0.26, T - 0.8, W / 2], [-90 + j(3), 0, -90], flap)] : []),
       pad('pocket', [...tags, 'pocket'], W * 0.7, L * 0.42, 5, 2.2, 4, 5, [-L * 0.16, T + 1.5, W / 2 + j(1.5)], flat, color),
@@ -76,6 +77,10 @@ export function backpack(params: Record<string, unknown>): Part[] {
       strap('strap-1', [28, 0.8, 4.5], [j(3), 0.5, W - 2], [0, 18 + j(10), 0]),
       strap('strap-2', [24, 0.8, 4.5], [j(3) + 3, 0.5, 3], [0, -14 + j(10), 0]),
     ];
+    // inward: turned so its top points into the shelf (e.g. pushed under a bench); slope: front-down degrees
+    const inward = params.inward ? turn(parts, [0, 90, 0], [-W / 2, 0, L / 2]) : parts;
+    const slope = num(params.slope, 0);
+    return slope ? turn(inward, [slope, 0, 0]) : inward;
   }
 
   if (pose === 'stuffed') {
@@ -144,6 +149,21 @@ function skateBag(id: string, x: number, hookY: number, hookZ: number, color: st
     box(`${id}-vent`, [...tags, 'vent'], [9, 5, 0.4], [cx - 9, cy - h * 0.3, cz + w / 2 + 0.4], [0, 0, 0], '#3a3b3f', FABRIC),
     box(`${id}-handle`, [...tags, 'strap'], [3, 8, 0.8], [x, hookY - 2.5, hookZ], [0, 0, 0], DARK, FABRIC),
   ];
+}
+
+/**
+ * One skate bag standing on a surface (origin back-centre at the bottom), its long side along x. Params: color,
+ * flip (heel side at +x instead of -x).
+ */
+export function skateBagItem(params: Record<string, unknown>): Part[] {
+  const parts = skateBag('bag', -11, 40, 13.2, String(params.color ?? '#b3202a'));
+  if (!params.flip) return parts;
+  return parts.map((p) => ({
+    ...p,
+    position: [-p.position[0], p.position[1], p.position[2]],
+    rotation: [p.rotation[0], -p.rotation[1], -p.rotation[2]],
+    geometry: p.geometry?.type === 'prism' ? { ...p.geometry, points: p.geometry.points.map(([x, y]) => [-x, y] as Vec2).reverse() } : p.geometry,
+  }));
 }
 
 /**
