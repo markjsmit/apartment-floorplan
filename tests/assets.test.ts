@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest';
-import { FurnitureAssetSchema, ItemSchema } from '../src/model/schema';
-import { withSections,
+import { FurnitureAssetSchema, ItemSchema, type Part } from '../src/model/schema';
+import { generators } from '../src/model/generators';
+import { withSections, resolveAsset,
   assetSize, initialState, interactivePart, nextState, partTransform, resolveParams, resolveParts,
 } from '../src/model/assets';
 
@@ -136,6 +137,15 @@ describe('withSections', () => {
     }));
     expect(a.parts.map((p) => p.section)).toEqual(['body', 'glass', 'glass']);
     expect(a.parts.find((p) => p.id === 'glass')?.open).toBeUndefined(); // one moving group: the whole item's state
+  });
+
+  it('keeps a door leaf and its tilted handle parts (same hinge) in one section', () => {
+    const parts = (generators.door({ width: 80, height: 211, wallThickness: 10, hinge: 'right' }) as { parts: Part[] }).parts;
+    const a = withSections(resolveAsset(FurnitureAssetSchema.parse({ id: 'door-basic', name: 'd', source: { kind: 'procedural', generator: 'door', license: 'self-made' } }), { width: 80, height: 211, wallThickness: 10, hinge: 'right' }));
+    const moving = a.parts.filter((p) => p.pivot);
+    expect(moving.length).toBe(parts.filter((p) => p.pivot).length);
+    expect(new Set(moving.map((p) => p.section)).size).toBe(1);
+    expect(moving.every((p) => !p.open)).toBe(true); // one moving group: the door's own state opens it
   });
 
   it('leaves pieces alone that name their own sections or never move', () => {

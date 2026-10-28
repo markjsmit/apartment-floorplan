@@ -59,7 +59,11 @@ export function withSections(asset: FurnitureAsset): FurnitureAsset {
       const o = st.parts[id];
       if (!o) return null;
       const shift = o.position?.map((v, k) => Math.round((v - part.position[k]) * 10) / 10);
-      return { shift, rotation: o.rotation, visible: o.visible, material: o.material };
+      // parts turning about the same hinge move together, even when their own tilt makes their rotations differ (a
+      // door leaf and its handle roses)
+      return part.pivot && o.rotation
+        ? { shift, hinge: part.pivot.map((v) => Math.round(v * 10) / 10), visible: o.visible, material: o.material }
+        : { shift, rotation: o.rotation, visible: o.visible, material: o.material };
     }));
   };
   const still = JSON.stringify(asset.states.map(() => null));
