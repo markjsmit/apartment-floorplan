@@ -1,0 +1,3129 @@
+{
+  "meta": {
+    "name": "No bed - desk at the window (6 Kallax)",
+    "kind": "saved",
+    "note": "No bed: the old oak desk under the window; Kallax stacks on the west wall and twice on the east wall (own 4 + 2 new); DIY shelves on the hallway wall; big open middle (room for the 90x190 mattress on the floor).",
+    "location": {
+      "lat": 32.0853,
+      "lon": 34.7818,
+      "label": "Tel Aviv"
+    },
+    "rooms": [
+      "storage"
+    ],
+    "createdAt": "2026-10-28T15:25:06.381Z"
+  },
+  "assumptions": [
+    {
+      "path": "rooms",
+      "note": "Whole flat from Mark's visit (27 Oct): laser measurements on the notes sheet + photos + walk-through video. Rooms marked 'NOT measured' are estimates"
+    }
+  ],
+  "rooms": [
+    {
+      "id": "living",
+      "name": "Living room + kitchen",
+      "tags": [
+        "living room",
+        "salon",
+        "kitchen",
+        "dining",
+        "open space",
+        "living"
+      ],
+      "footprint": [
+        [
+          0,
+          0
+        ],
+        [
+          585,
+          0
+        ],
+        [
+          585,
+          445
+        ],
+        [
+          568,
+          445
+        ],
+        [
+          568,
+          720
+        ],
+        [
+          0,
+          720
+        ]
+      ],
+      "ceilingHeight": 277,
+      "northAngle": 0,
+      "floor": {
+        "material": "tiles-porcelain-60"
+      },
+      "ceiling": {
+        "material": "white-paint",
+        "lowered": [
+          {
+            "id": "living.ceiling-kitchen",
+            "footprint": [
+              [
+                415,
+                0
+              ],
+              [
+                585,
+                0
+              ],
+              [
+                585,
+                445
+              ],
+              [
+                568,
+                445
+              ],
+              [
+                568,
+                720
+              ],
+              [
+                415,
+                720
+              ]
+            ],
+            "height": 238,
+            "tags": [
+              "lowered ceiling",
+              "soffit",
+              "AC"
+            ]
+          },
+          {
+            "id": "living.ceiling-entrance",
+            "footprint": [
+              [
+                0,
+                680
+              ],
+              [
+                508,
+                680
+              ],
+              [
+                508,
+                720
+              ],
+              [
+                0,
+                720
+              ]
+            ],
+            "height": 215,
+            "tags": [
+              "lowered ceiling",
+              "bulkhead",
+              "entrance"
+            ]
+          }
+        ]
+      },
+      "wallMaterial": "white-paint",
+      "walls": [
+        {
+          "id": "living.wall-0",
+          "edge": 0,
+          "tags": [
+            "balcony wall",
+            "window wall"
+          ],
+          "thickness": 20
+        },
+        {
+          "id": "living.wall-1",
+          "edge": 1,
+          "tags": [
+            "sofa wall",
+            "storage room wall",
+            "second bedroom wall",
+            "hallway opening"
+          ],
+          "thickness": 1
+        },
+        {
+          "id": "living.wall-2",
+          "edge": 2,
+          "tags": [
+            "tall units end",
+            "block side"
+          ],
+          "material": "white-gloss"
+        },
+        {
+          "id": "living.wall-3",
+          "edge": 3,
+          "tags": [
+            "fridge wall",
+            "tall units wall"
+          ]
+        },
+        {
+          "id": "living.wall-4",
+          "edge": 4,
+          "tags": [
+            "kitchen wall",
+            "entrance wall",
+            "front door wall"
+          ]
+        },
+        {
+          "id": "living.wall-5",
+          "edge": 5,
+          "tags": [
+            "dining wall",
+            "TV wall",
+            "bookshelf wall"
+          ]
+        }
+      ],
+      "openings": [
+        {
+          "id": "living.balcony-door",
+          "type": "door",
+          "wall": "living.wall-0",
+          "offset": 70,
+          "width": 280,
+          "height": 222,
+          "asset": "sliding-door",
+          "name": "Balcony door",
+          "tags": [
+            "balcony door",
+            "sliding door",
+            "balcony"
+          ],
+          "leadsTo": {
+            "room": "balcony",
+            "opening": "balcony.door"
+          }
+        },
+        {
+          "id": "living.sofa-window",
+          "type": "window",
+          "wall": "living.wall-0",
+          "offset": 415,
+          "width": 120,
+          "height": 125,
+          "sill": 97,
+          "asset": "window-basic",
+          "params": {
+            "frameMaterial": "aluminium-grey",
+            "sillBoard": false
+          },
+          "name": "Window next to the sofa",
+          "tags": [
+            "sofa window",
+            "view window"
+          ]
+        },
+        {
+          "id": "living.hallway-opening",
+          "type": "opening",
+          "wall": "living.wall-1",
+          "offset": 287,
+          "width": 158,
+          "height": 238,
+          "name": "Opening to the hallway",
+          "tags": [
+            "hallway",
+            "hallway opening",
+            "kitchen passage"
+          ],
+          "leadsTo": {
+            "room": "hallway",
+            "opening": "hallway.opening-living"
+          }
+        },
+        {
+          "id": "living.front-door",
+          "type": "door",
+          "wall": "living.wall-4",
+          "offset": 328,
+          "width": 100,
+          "height": 213,
+          "asset": "door-basic",
+          "name": "Front door",
+          "tags": [
+            "front door",
+            "entrance",
+            "the door"
+          ]
+        },
+        {
+          "id": "living.tall-window",
+          "type": "window",
+          "wall": "living.wall-5",
+          "offset": 565,
+          "width": 150,
+          "height": 167,
+          "sill": 55,
+          "asset": "window-basic",
+          "params": {
+            "frameMaterial": "aluminium-grey",
+            "sillBoard": false
+          },
+          "name": "Big window next to the TV",
+          "tags": [
+            "tall window",
+            "corner window",
+            "TV window"
+          ]
+        }
+      ],
+      "items": [
+        {
+          "id": "living.block",
+          "asset": "box",
+          "name": "Glossy column",
+          "tags": [
+            "glossy column",
+            "block",
+            "built-in"
+          ],
+          "params": {
+            "width": 24,
+            "height": 185,
+            "depth": 59.5,
+            "material": "white-gloss"
+          },
+          "against": {
+            "wall": "living.wall-3",
+            "offset": 0
+          },
+          "builtIn": true
+        },
+        {
+          "id": "living.fridge-niche",
+          "asset": "kitchen-tall",
+          "name": "Fridge niche",
+          "tags": [
+            "fridge",
+            "fridge niche",
+            "tall units"
+          ],
+          "against": {
+            "wall": "living.wall-3",
+            "offset": 24
+          },
+          "params": {
+            "height": 185,
+            "depth": 59.5,
+            "fridgeNiche": 185,
+            "columns": [
+              {
+                "w": 99,
+                "kind": "fridge"
+              }
+            ]
+          },
+          "builtIn": true
+        },
+        {
+          "id": "living.oven-column",
+          "asset": "kitchen-tall",
+          "name": "Oven column",
+          "tags": [
+            "oven",
+            "oven column",
+            "tall units"
+          ],
+          "against": {
+            "wall": "living.wall-3",
+            "offset": 123
+          },
+          "params": {
+            "height": 185,
+            "depth": 59.5,
+            "microwave": false,
+            "topDoors": 185,
+            "columns": [
+              {
+                "w": 60,
+                "kind": "oven",
+                "handle": "left"
+              },
+              {
+                "w": 32,
+                "kind": "pantry",
+                "handle": "left"
+              }
+            ]
+          },
+          "builtIn": true
+        },
+        {
+          "id": "living.counter-column",
+          "asset": "kitchen-wall-cabinet",
+          "name": "Cabinet column on the counter",
+          "tags": [
+            "side cabinet",
+            "counter column",
+            "tall units",
+            "appliance garage"
+          ],
+          "against": {
+            "wall": "living.wall-3",
+            "offset": 215,
+            "elevation": 90
+          },
+          "params": {
+            "width": 60,
+            "height": 95,
+            "depth": 59.5,
+            "niche": 39,
+            "nicheDoor": true,
+            "lift": "up"
+          },
+          "allowOverlap": [
+            "living.counter"
+          ],
+          "builtIn": true
+        },
+        {
+          "id": "living.top-left",
+          "asset": "kitchen-wall-cabinet",
+          "name": "Top cabinet over the fridge",
+          "tags": [
+            "top cabinet",
+            "tall units"
+          ],
+          "against": {
+            "wall": "living.wall-3",
+            "offset": 0,
+            "elevation": 185
+          },
+          "params": {
+            "width": 123,
+            "height": 53,
+            "depth": 59.5,
+            "lift": "tilt",
+            "tiltDeg": 88
+          },
+          "builtIn": true
+        },
+        {
+          "id": "living.top-right",
+          "asset": "kitchen-wall-cabinet",
+          "name": "Top cabinet over the oven",
+          "tags": [
+            "top cabinet",
+            "tall units"
+          ],
+          "against": {
+            "wall": "living.wall-3",
+            "offset": 123,
+            "elevation": 185
+          },
+          "params": {
+            "width": 152,
+            "height": 53,
+            "depth": 59.5,
+            "lift": "tilt",
+            "tiltDeg": 88
+          },
+          "builtIn": true
+        },
+        {
+          "id": "living.counter",
+          "asset": "kitchen-counter",
+          "name": "Kitchen counter",
+          "tags": [
+            "counter",
+            "sink",
+            "worktop"
+          ],
+          "against": {
+            "wall": "living.wall-4",
+            "offset": 0
+          },
+          "allowOverlap": [
+            "living.counter-column"
+          ],
+          "params": {
+            "length": 310,
+            "sinkCenter": 162,
+            "modules": [
+              {
+                "w": 62,
+                "kind": "door",
+                "handle": "left"
+              },
+              {
+                "w": 60,
+                "kind": "drawers"
+              },
+              {
+                "w": 80,
+                "kind": "sink"
+              },
+              {
+                "w": 60,
+                "kind": "drawers"
+              },
+              {
+                "w": 30,
+                "kind": "door",
+                "handle": "left"
+              },
+              {
+                "w": 18,
+                "kind": "panel"
+              }
+            ]
+          },
+          "builtIn": true
+        },
+        {
+          "id": "living.island",
+          "asset": "kitchen-island",
+          "name": "Kitchen island",
+          "tags": [
+            "island",
+            "hob",
+            "stove"
+          ],
+          "position": [
+            314,
+            0,
+            448
+          ],
+          "params": {
+            "length": 170,
+            "depth": 100,
+            "overhang": 38,
+            "hobCenter": 125,
+            "modules": [
+              {
+                "w": 81,
+                "kind": "drawers"
+              },
+              {
+                "w": 81,
+                "kind": "drawers"
+              }
+            ]
+          },
+          "builtIn": true
+        },
+        {
+          "id": "living.pillar",
+          "asset": "box",
+          "name": "Pillar",
+          "tags": [
+            "pillar",
+            "map pillar",
+            "column"
+          ],
+          "position": [
+            452,
+            0,
+            339
+          ],
+          "params": {
+            "width": 116,
+            "height": 277,
+            "depth": 17,
+            "material": "white-paint"
+          },
+          "builtIn": true
+        },
+        {
+          "id": "living.ac-vent-kitchen",
+          "asset": "box",
+          "name": "AC vent (kitchen)",
+          "tags": [
+            "AC",
+            "vent",
+            "air conditioning"
+          ],
+          "position": [
+            414.4,
+            245,
+            680
+          ],
+          "params": {
+            "width": 1.2,
+            "height": 14,
+            "depth": 230,
+            "color": "#9c9c98"
+          },
+          "rotation": 180,
+          "builtIn": true
+        },
+        {
+          "id": "living.ac-vent-living",
+          "asset": "box",
+          "name": "AC vent (living room)",
+          "tags": [
+            "AC",
+            "vent",
+            "air conditioning"
+          ],
+          "position": [
+            415,
+            245,
+            165
+          ],
+          "params": {
+            "width": 170,
+            "height": 14,
+            "depth": 1.2,
+            "color": "#9c9c98"
+          },
+          "rotation": 270,
+          "builtIn": true
+        },
+        {
+          "id": "living.sofa-spot-1",
+          "asset": "surface-light",
+          "name": "Downlight over the sofa 1",
+          "tags": [
+            "light",
+            "downlight",
+            "spot"
+          ],
+          "position": [
+            492,
+            238,
+            140
+          ],
+          "params": {
+            "diameter": 9,
+            "height": 1,
+            "intensity": 6000
+          },
+          "builtIn": true
+        },
+        {
+          "id": "living.sofa-spot-2",
+          "asset": "surface-light",
+          "name": "Downlight over the sofa 2",
+          "tags": [
+            "light",
+            "downlight",
+            "spot"
+          ],
+          "position": [
+            492,
+            238,
+            172
+          ],
+          "params": {
+            "diameter": 9,
+            "height": 1,
+            "intensity": 6000
+          },
+          "builtIn": true
+        },
+        {
+          "id": "living.sofa-spot-3",
+          "asset": "surface-light",
+          "name": "Downlight over the sofa 3",
+          "tags": [
+            "light",
+            "downlight",
+            "spot"
+          ],
+          "position": [
+            495,
+            238,
+            234
+          ],
+          "params": {
+            "diameter": 9,
+            "height": 1,
+            "intensity": 6000
+          },
+          "builtIn": true
+        },
+        {
+          "id": "living.sofa-spot-4",
+          "asset": "surface-light",
+          "name": "Downlight over the sofa 4",
+          "tags": [
+            "light",
+            "downlight",
+            "spot"
+          ],
+          "position": [
+            495,
+            238,
+            264
+          ],
+          "params": {
+            "diameter": 9,
+            "height": 1,
+            "intensity": 6000
+          },
+          "builtIn": true
+        },
+        {
+          "id": "living.kitchen-spot-1",
+          "asset": "surface-light",
+          "name": "Kitchen downlight 1",
+          "tags": [
+            "light",
+            "downlight",
+            "spot"
+          ],
+          "position": [
+            445,
+            238,
+            600
+          ],
+          "params": {
+            "diameter": 9,
+            "height": 1,
+            "intensity": 6000
+          },
+          "builtIn": true
+        },
+        {
+          "id": "living.kitchen-spot-2",
+          "asset": "surface-light",
+          "name": "Kitchen downlight 2",
+          "tags": [
+            "light",
+            "downlight",
+            "spot"
+          ],
+          "position": [
+            445,
+            238,
+            633
+          ],
+          "params": {
+            "diameter": 9,
+            "height": 1,
+            "intensity": 6000
+          },
+          "builtIn": true
+        },
+        {
+          "id": "living.kitchen-spot-3",
+          "asset": "surface-light",
+          "name": "Kitchen downlight 3",
+          "tags": [
+            "light",
+            "downlight",
+            "spot"
+          ],
+          "position": [
+            445,
+            238,
+            663
+          ],
+          "params": {
+            "diameter": 9,
+            "height": 1,
+            "intensity": 6000
+          },
+          "builtIn": true
+        },
+        {
+          "id": "living.track-light",
+          "asset": "track-light",
+          "name": "Track light (sofa side)",
+          "tags": [
+            "light",
+            "track light",
+            "spots"
+          ],
+          "position": [
+            215,
+            255,
+            270
+          ],
+          "rotation": 270,
+          "params": {
+            "length": 100,
+            "spots": 2
+          },
+          "builtIn": true
+        },
+        {
+          "id": "living.track-light-dining",
+          "asset": "track-light",
+          "name": "Track light (dining)",
+          "tags": [
+            "light",
+            "track light",
+            "spots",
+            "dining"
+          ],
+          "position": [
+            150,
+            255,
+            580
+          ],
+          "rotation": 270,
+          "params": {
+            "length": 120,
+            "spots": 3
+          },
+          "builtIn": true
+        }
+      ],
+      "assumptions": [
+        {
+          "path": "footprint",
+          "note": "from Mark's laser measurements (notes photo): balcony wall 585 (70 | door 280 | 65 | window 120 | 53), TV wall 720, kitchen wall 568, sofa wall 277 to its end, pillar 339 from the balcony wall and 366 from the kitchen wall. The 17 cm step between 585 and 568 is hidden behind the tall units' end"
+        },
+        {
+          "path": "openings[living.hallway-opening]",
+          "note": "the hallway mouth from the storage room wall's end (sofa wall 277 + 10) to the glossy block (158 wide = the notes' 1.68 m from the sofa wall's end at 277 to the glossy column at 445), split by the pillar; top = the lowered ceiling (238)"
+        },
+        {
+          "path": "openings[living.tall-window]",
+          "note": "150-160 wide on the TV wall right at the balcony corner (notes); top 55 below the ceiling (Mark: the 55 on the notes = window top to ceiling); sill ~55 from the photos"
+        },
+        {
+          "path": "openings[living.sofa-window]",
+          "note": "top 55 below the ceiling (measured); ~120 x 125, sill ~97 scaled from the balcony door in the photos"
+        },
+        {
+          "path": "items[living.kitchen-spot-1]",
+          "note": "lights from the light survey: 2 pairs of downlights in the soffit over the sofa, 3 over the kitchen, 2 track rails (sofa side, dining); positions ±30-50 cm"
+        },
+        {
+          "path": "ceiling.lowered[living.ceiling-entrance]",
+          "note": "bulkhead over the front door and the whole counter up to the tall units, underside ~215 (door head), ~40 deep: from the photos, not measured"
+        },
+        {
+          "path": "openings[living.front-door]",
+          "note": "140 from the dining corner (notes, the label is upside down; photo 160730 agrees); width 100 / height 213 assumed"
+        },
+        {
+          "path": "items[living.fridge-niche]",
+          "note": "tall-unit wall from the glossy column (445) south, fitted on ad photo ...57de2: glossy 24, fridge niche 99, oven 60, narrow door 32, cabinet column on the counter 60 (open appliance niche ~40 on the counter, a lift-up flap cabinet, a top door in line with the top row — ad photo a5770c1f); oven column: 2 drawers, oven, a cabinet door above it, no microwave; widths ±5 (photos 160651, 160731-33, video 24.5-25.5 s); widths estimated. The notes' 1.68 m = pillar to the start of the fridge run (z 356 -> 524)"
+        },
+        {
+          "path": "items[living.block]",
+          "note": "glossy handleless column, 24 wide on the kitchen side (ad photo ...57de2); the hallway side is a glossy cabinet (hallway.cabinet)"
+        },
+        {
+          "path": "items[living.island]",
+          "note": "~170 x 100 from the photos, ~110 walkway to the counter; position re-used from the earlier photo estimate"
+        },
+        {
+          "path": "items[living.pillar]",
+          "note": "116 x 17 (notes), 394 from the TV wall; grey plaster now painted white like every wall"
+        },
+        {
+          "path": "ceiling.lowered[living.ceiling-kitchen]",
+          "note": "lowered ceiling at 238 (notes) over the tall units and the hallway mouth; extent from the photos"
+        }
+      ]
+    },
+    {
+      "id": "balcony",
+      "name": "Balcony",
+      "tags": [
+        "balcony",
+        "outside",
+        "terrace",
+        "mirpeset"
+      ],
+      "footprint": [
+        [
+          0,
+          -265
+        ],
+        [
+          410,
+          -265
+        ],
+        [
+          410,
+          -20
+        ],
+        [
+          0,
+          -20
+        ]
+      ],
+      "ceilingHeight": 277,
+      "northAngle": 0,
+      "floor": {
+        "material": "tiles-porcelain-60"
+      },
+      "ceiling": {
+        "material": "white-paint"
+      },
+      "wallMaterial": "white-paint",
+      "walls": [
+        {
+          "id": "balcony.wall-0",
+          "edge": 0,
+          "tags": [
+            "railing",
+            "glass railing",
+            "view"
+          ]
+        },
+        {
+          "id": "balcony.wall-1",
+          "edge": 1,
+          "tags": [
+            "side wall",
+            "stone wall"
+          ],
+          "material": "plaster"
+        },
+        {
+          "id": "balcony.wall-2",
+          "edge": 2,
+          "tags": [
+            "facade",
+            "living room wall"
+          ],
+          "thickness": 20
+        },
+        {
+          "id": "balcony.wall-3",
+          "edge": 3,
+          "tags": [
+            "railing",
+            "glass railing"
+          ]
+        }
+      ],
+      "openings": [
+        {
+          "id": "balcony.railing-north",
+          "type": "opening",
+          "wall": "balcony.wall-0",
+          "offset": 0,
+          "width": 410,
+          "height": 270,
+          "name": "Open side (railing)",
+          "tags": [
+            "railing",
+            "view"
+          ]
+        },
+        {
+          "id": "balcony.railing-west",
+          "type": "opening",
+          "wall": "balcony.wall-3",
+          "offset": 0,
+          "width": 245,
+          "height": 270,
+          "name": "Open end (railing)",
+          "tags": [
+            "railing"
+          ]
+        },
+        {
+          "id": "balcony.door",
+          "type": "door",
+          "wall": "balcony.wall-2",
+          "offset": 60,
+          "width": 280,
+          "height": 222,
+          "name": "Balcony door",
+          "tags": [
+            "balcony door",
+            "sliding door"
+          ],
+          "leadsTo": {
+            "room": "living",
+            "opening": "living.balcony-door"
+          }
+        }
+      ],
+      "items": [
+        {
+          "id": "balcony.rail-north",
+          "asset": "box",
+          "name": "Railing (top rail)",
+          "tags": [
+            "railing",
+            "handrail"
+          ],
+          "position": [
+            205,
+            106,
+            -265
+          ],
+          "params": {
+            "width": 410,
+            "height": 4,
+            "depth": 5,
+            "material": "aluminium-grey"
+          },
+          "builtIn": true
+        },
+        {
+          "id": "balcony.rail-west",
+          "asset": "box",
+          "name": "Railing end (top rail)",
+          "tags": [
+            "railing",
+            "handrail"
+          ],
+          "position": [
+            0,
+            106,
+            -142.5
+          ],
+          "params": {
+            "width": 245,
+            "height": 4,
+            "depth": 5,
+            "material": "aluminium-grey"
+          },
+          "rotation": 90,
+          "allowOverlap": [
+            "balcony.rail-north"
+          ],
+          "builtIn": true
+        },
+        {
+          "id": "balcony.rail-glass-north",
+          "asset": "box",
+          "name": "Glass railing",
+          "tags": [
+            "railing",
+            "glass"
+          ],
+          "position": [
+            205,
+            5,
+            -264
+          ],
+          "params": {
+            "width": 410,
+            "height": 100,
+            "depth": 1.2,
+            "material": "glass"
+          },
+          "builtIn": true
+        },
+        {
+          "id": "balcony.rail-glass-west",
+          "asset": "box",
+          "name": "Glass railing (end)",
+          "tags": [
+            "railing",
+            "glass"
+          ],
+          "position": [
+            1,
+            5,
+            -142.5
+          ],
+          "params": {
+            "width": 245,
+            "height": 100,
+            "depth": 1.2,
+            "material": "glass"
+          },
+          "rotation": 90,
+          "allowOverlap": [
+            "balcony.rail-glass-north"
+          ],
+          "builtIn": true
+        }
+      ],
+      "assumptions": [
+        {
+          "path": "footprint",
+          "note": "NOT measured: Mark remembers ~10 m2; it ends at the stone side wall right after the door (photos 160716-18; the sofa window looks past it, 160714) -> ~410 wide (stone wall just west of the sofa window), ~245 deep (Mark: wider and less deep than 370 x 270). Glass railing on the north and west"
+        }
+      ]
+    },
+    {
+      "id": "hallway",
+      "name": "Hallway",
+      "tags": [
+        "hallway",
+        "corridor",
+        "hall",
+        "passage"
+      ],
+      "footprint": [
+        [
+          586,
+          287
+        ],
+        [
+          688,
+          287
+        ],
+        [
+          688,
+          380.5
+        ],
+        [
+          700,
+          380.5
+        ],
+        [
+          700,
+          342.5
+        ],
+        [
+          823,
+          342.5
+        ],
+        [
+          823,
+          486
+        ],
+        [
+          586,
+          486
+        ]
+      ],
+      "ceilingHeight": 238,
+      "northAngle": 0,
+      "floor": {
+        "material": "laminate-oak"
+      },
+      "ceiling": {
+        "material": "white-paint"
+      },
+      "wallMaterial": "white-paint",
+      "walls": [
+        {
+          "id": "hallway.wall-0",
+          "edge": 0,
+          "tags": [
+            "storage room door wall",
+            "door alcove"
+          ]
+        },
+        {
+          "id": "hallway.wall-1",
+          "edge": 1,
+          "tags": [
+            "poster wall",
+            "door alcove",
+            "little wall"
+          ]
+        },
+        {
+          "id": "hallway.wall-2",
+          "edge": 2,
+          "tags": [
+            "fin",
+            "little wall"
+          ]
+        },
+        {
+          "id": "hallway.wall-3",
+          "edge": 3,
+          "tags": [
+            "niche",
+            "little wall"
+          ]
+        },
+        {
+          "id": "hallway.wall-4",
+          "edge": 4,
+          "tags": [
+            "dresser wall",
+            "niche",
+            "storage room wall",
+            "storage area",
+            "hallway cabin"
+          ]
+        },
+        {
+          "id": "hallway.wall-5",
+          "edge": 5,
+          "tags": [
+            "end wall",
+            "bedroom door wall"
+          ]
+        },
+        {
+          "id": "hallway.wall-6",
+          "edge": 6,
+          "tags": [
+            "bathroom wall",
+            "cabinet wall"
+          ]
+        },
+        {
+          "id": "hallway.wall-7",
+          "edge": 7,
+          "tags": [
+            "living room side"
+          ],
+          "thickness": 1
+        }
+      ],
+      "openings": [
+        {
+          "id": "hallway.storage-door",
+          "type": "door",
+          "wall": "hallway.wall-0",
+          "offset": 14,
+          "width": 80,
+          "height": 211,
+          "name": "Door to the storage / guest room",
+          "tags": [
+            "storage room door",
+            "guest room door",
+            "second bedroom door"
+          ],
+          "leadsTo": {
+            "room": "storage",
+            "opening": "storage.door"
+          }
+        },
+        {
+          "id": "hallway.bedroom-door",
+          "params": {
+            "hinge": "right",
+            "swing": "out"
+          },
+          "type": "door",
+          "wall": "hallway.wall-5",
+          "offset": 38,
+          "width": 80,
+          "height": 211,
+          "asset": "door-basic",
+          "name": "Door to the master bedroom",
+          "tags": [
+            "bedroom door",
+            "master bedroom door"
+          ],
+          "leadsTo": {
+            "room": "bedroom",
+            "opening": "bedroom.door"
+          }
+        },
+        {
+          "id": "hallway.bathroom-door",
+          "params": {
+            "hinge": "right",
+            "swing": "out"
+          },
+          "type": "door",
+          "wall": "hallway.wall-6",
+          "offset": 93,
+          "width": 80,
+          "height": 211,
+          "asset": "door-basic",
+          "name": "Bathroom door",
+          "tags": [
+            "bathroom door"
+          ],
+          "leadsTo": {
+            "room": "bathroom",
+            "opening": "bathroom.door"
+          }
+        },
+        {
+          "id": "hallway.opening-living",
+          "type": "opening",
+          "wall": "hallway.wall-7",
+          "offset": 41,
+          "width": 158,
+          "height": 238,
+          "name": "Opening to the living room",
+          "tags": [
+            "living room",
+            "kitchen"
+          ],
+          "leadsTo": {
+            "room": "living",
+            "opening": "living.hallway-opening"
+          }
+        }
+      ],
+      "items": [
+        {
+          "id": "hallway.cabinet",
+          "asset": "kitchen-tall",
+          "name": "Glossy hallway cabinet",
+          "tags": [
+            "hallway cabinet",
+            "glossy block",
+            "cabinet",
+            "built-in"
+          ],
+          "against": {
+            "wall": "hallway.wall-6",
+            "offset": 201
+          },
+          "params": {
+            "height": 238,
+            "depth": 38,
+            "topDoors": 238,
+            "columns": [
+              {
+                "w": 36,
+                "kind": "pantry",
+                "handle": "none"
+              }
+            ]
+          },
+          "builtIn": true
+        },
+        {
+          "id": "hallway.cabinet-door-side",
+          "asset": "kitchen-tall",
+          "name": "Glossy hallway cabinet (by the bathroom door)",
+          "tags": [
+            "hallway cabinet",
+            "glossy block",
+            "cabinet",
+            "built-in"
+          ],
+          "against": {
+            "wall": "hallway.wall-6",
+            "offset": 173
+          },
+          "params": {
+            "height": 238,
+            "depth": 38,
+            "topDoors": 55,
+            "columns": [
+              {
+                "w": 28,
+                "kind": "pantry",
+                "handle": "none"
+              }
+            ]
+          },
+          "builtIn": true
+        },
+        {
+          "id": "hallway.ceiling-light",
+          "asset": "surface-light",
+          "name": "Ceiling light",
+          "tags": [
+            "light",
+            "ceiling light"
+          ],
+          "position": [
+            700,
+            238,
+            430
+          ],
+          "params": {
+            "diameter": 12,
+            "height": 6,
+            "intensity": 12000
+          },
+          "builtIn": true
+        }
+      ],
+      "assumptions": [
+        {
+          "path": "footprint",
+          "note": "mouth 158 wide (the notes' 1.68 m from the sofa wall's end to the glossy block, ad photo ...57de2); east of the block (x 631) the hallway widens to z 486, where the bathroom door is (photos 160740, 160803, video 39-40 s). The door alcove in front of the storage room door is the 98 x 65 corner cut out of that room"
+        },
+        {
+          "path": "ceilingHeight",
+          "note": "the lowered ceiling (238, notes) assumed for the whole hallway"
+        },
+        {
+          "path": "openings[hallway.bedroom-door]",
+          "note": "standard 80 door at the south end of the end wall, hinged south, opens into the bedroom (photos 160740, 160921-24, video 25-27 s)"
+        },
+        {
+          "path": "walls[hallway.wall-4]",
+          "note": "the dresser niche = the notes' 'hallway cabin 123 x 38' (Mark): 123 wide from the fin to the end wall, 38 deep; the bedroom door's north jamb is at the niche's depth (the dresser touches its frame, photos 160740, 160922)"
+        },
+        {
+          "path": "walls[hallway.wall-5]",
+          "note": "end wall at x 823 (fin 700 + niche 123): along the south side the glossy block, a switch strip, the bathroom door (x 650-730) and ~90 cm of wall"
+        }
+      ]
+    },
+    {
+      "id": "storage",
+      "name": "Storage / guest room",
+      "tags": [
+        "storage room",
+        "second bedroom",
+        "guest room",
+        "office",
+        "work room",
+        "study",
+        "spare room"
+      ],
+      "footprint": [
+        [
+          597,
+          15.5
+        ],
+        [
+          898,
+          15.5
+        ],
+        [
+          898,
+          332.5
+        ],
+        [
+          698,
+          332.5
+        ],
+        [
+          698,
+          277
+        ],
+        [
+          597,
+          277
+        ]
+      ],
+      "ceilingHeight": 277,
+      "northAngle": 0,
+      "floor": {
+        "material": "laminate-oak"
+      },
+      "ceiling": {
+        "material": "white-paint"
+      },
+      "wallMaterial": "white-paint",
+      "walls": [
+        {
+          "id": "storage.wall-0",
+          "edge": 0,
+          "tags": [
+            "window wall",
+            "back wall"
+          ],
+          "thickness": 25
+        },
+        {
+          "id": "storage.wall-1",
+          "edge": 1,
+          "tags": [
+            "bed wall",
+            "right wall",
+            "desk wall"
+          ]
+        },
+        {
+          "id": "storage.wall-2",
+          "edge": 2,
+          "tags": [
+            "hallway wall",
+            "kallax wall"
+          ]
+        },
+        {
+          "id": "storage.wall-3",
+          "edge": 3,
+          "tags": [
+            "alcove side"
+          ]
+        },
+        {
+          "id": "storage.wall-4",
+          "edge": 4,
+          "tags": [
+            "door wall",
+            "entry wall"
+          ]
+        },
+        {
+          "id": "storage.wall-5",
+          "edge": 5,
+          "tags": [
+            "left wall",
+            "sofa wall",
+            "living room wall"
+          ]
+        }
+      ],
+      "openings": [
+        {
+          "id": "storage.door",
+          "params": {
+            "hinge": "right"
+          },
+          "type": "door",
+          "wall": "storage.wall-4",
+          "offset": 18,
+          "width": 80,
+          "height": 211,
+          "asset": "door-basic",
+          "tags": [
+            "the door"
+          ],
+          "leadsTo": {
+            "room": "hallway",
+            "opening": "hallway.storage-door"
+          }
+        },
+        {
+          "id": "storage.window",
+          "type": "window",
+          "wall": "storage.wall-0",
+          "offset": 85,
+          "width": 120,
+          "height": 110,
+          "sill": 112,
+          "asset": "window-basic",
+          "params": {
+            "frameMaterial": "aluminium-grey",
+            "sillBoard": false
+          },
+          "tags": [
+            "the window"
+          ]
+        }
+      ],
+      "items": [
+        {
+          "id": "storage.desk",
+          "asset": "old-house-desk-oak-drawers",
+          "name": "Desk (oak drawers, from the old house)",
+          "tags": [
+            "desk",
+            "work desk"
+          ],
+          "against": {
+            "wall": "storage.wall-0",
+            "offset": 71
+          }
+        },
+        {
+          "id": "storage.kallax-west-low",
+          "asset": "ikea-kallax-112x147",
+          "name": "Kallax 4x3 west wall (low)",
+          "tags": [
+            "kallax"
+          ],
+          "description": "one of the 4 Kallax 4x3 we already have",
+          "params": {
+            "cols": 4,
+            "rows": 3,
+            "handles": "knob",
+            "inserts": [
+              [
+                "drawers",
+                "drawers",
+                "drawers",
+                "drawers"
+              ],
+              [
+                "box",
+                "box",
+                "box",
+                "box"
+              ],
+              [
+                "box",
+                "box",
+                "box",
+                "box"
+              ]
+            ],
+            "boxColors": [
+              [],
+              [
+                "black",
+                "white",
+                "black",
+                "white"
+              ],
+              [
+                "white",
+                "black",
+                "white",
+                "black"
+              ]
+            ]
+          },
+          "against": {
+            "wall": "storage.wall-5",
+            "offset": 114.5
+          }
+        },
+        {
+          "id": "storage.kallax-west-high",
+          "asset": "ikea-kallax-112x147",
+          "name": "Kallax 4x3 west wall (top)",
+          "tags": [
+            "kallax"
+          ],
+          "description": "one of the 4 Kallax 4x3 we already have",
+          "params": {
+            "cols": 4,
+            "rows": 3,
+            "handles": "knob",
+            "seed": "storage.kallax-west-high",
+            "inserts": [
+              [
+                "",
+                "",
+                "",
+                ""
+              ],
+              [
+                "",
+                "",
+                "",
+                ""
+              ],
+              [
+                "drawers",
+                "drawers",
+                "drawers",
+                "drawers"
+              ]
+            ],
+            "contents": [
+              [
+                "random",
+                "random",
+                "random",
+                "random"
+              ],
+              [
+                "random",
+                "random",
+                "random",
+                "random"
+              ],
+              [
+                "",
+                "",
+                "",
+                ""
+              ]
+            ]
+          },
+          "against": {
+            "wall": "storage.wall-5",
+            "offset": 114.5,
+            "elevation": 112
+          }
+        },
+        {
+          "id": "storage.kallax-east-north-low",
+          "asset": "ikea-kallax-112x147",
+          "name": "Kallax 4x3 east wall, window end (low)",
+          "tags": [
+            "kallax"
+          ],
+          "description": "NEW: buy (IKEA Kallax 112x147, same as ours)",
+          "params": {
+            "cols": 4,
+            "rows": 3,
+            "handles": "knob",
+            "inserts": [
+              [
+                "drawers",
+                "drawers",
+                "drawers",
+                "drawers"
+              ],
+              [
+                "box",
+                "box",
+                "box",
+                "box"
+              ],
+              [
+                "box",
+                "box",
+                "box",
+                "box"
+              ]
+            ],
+            "boxColors": [
+              [],
+              [
+                "black",
+                "white",
+                "black",
+                "white"
+              ],
+              [
+                "white",
+                "black",
+                "white",
+                "black"
+              ]
+            ]
+          },
+          "against": {
+            "wall": "storage.wall-1",
+            "offset": 0
+          }
+        },
+        {
+          "id": "storage.kallax-east-north-high",
+          "asset": "ikea-kallax-112x147",
+          "name": "Kallax 4x3 east wall, window end (top)",
+          "tags": [
+            "kallax"
+          ],
+          "description": "NEW: buy (IKEA Kallax 112x147, same as ours)",
+          "params": {
+            "cols": 4,
+            "rows": 3,
+            "handles": "knob",
+            "seed": "storage.kallax-east-north-high",
+            "inserts": [
+              [
+                "",
+                "",
+                "",
+                ""
+              ],
+              [
+                "",
+                "",
+                "",
+                ""
+              ],
+              [
+                "drawers",
+                "drawers",
+                "drawers",
+                "drawers"
+              ]
+            ],
+            "contents": [
+              [
+                "random",
+                "random",
+                "random",
+                "random"
+              ],
+              [
+                "random",
+                "random",
+                "random",
+                "random"
+              ],
+              [
+                "",
+                "",
+                "",
+                ""
+              ]
+            ]
+          },
+          "against": {
+            "wall": "storage.wall-1",
+            "offset": 0,
+            "elevation": 112
+          }
+        },
+        {
+          "id": "storage.kallax-east-low",
+          "asset": "ikea-kallax-112x147",
+          "name": "Kallax 4x3 east wall, hallway end (low)",
+          "tags": [
+            "kallax"
+          ],
+          "description": "one of the 4 Kallax 4x3 we already have",
+          "params": {
+            "cols": 4,
+            "rows": 3,
+            "handles": "knob",
+            "inserts": [
+              [
+                "drawers",
+                "drawers",
+                "drawers",
+                "drawers"
+              ],
+              [
+                "box",
+                "box",
+                "box",
+                "box"
+              ],
+              [
+                "box",
+                "box",
+                "box",
+                "box"
+              ]
+            ],
+            "boxColors": [
+              [],
+              [
+                "black",
+                "white",
+                "black",
+                "white"
+              ],
+              [
+                "white",
+                "black",
+                "white",
+                "black"
+              ]
+            ]
+          },
+          "against": {
+            "wall": "storage.wall-1",
+            "offset": 170
+          }
+        },
+        {
+          "id": "storage.kallax-east-high",
+          "asset": "ikea-kallax-112x147",
+          "name": "Kallax 4x3 east wall, hallway end (top)",
+          "tags": [
+            "kallax"
+          ],
+          "description": "one of the 4 Kallax 4x3 we already have",
+          "params": {
+            "cols": 4,
+            "rows": 3,
+            "handles": "knob",
+            "seed": "storage.kallax-east-high",
+            "inserts": [
+              [
+                "",
+                "",
+                "",
+                ""
+              ],
+              [
+                "",
+                "",
+                "",
+                ""
+              ],
+              [
+                "drawers",
+                "drawers",
+                "drawers",
+                "drawers"
+              ]
+            ],
+            "contents": [
+              [
+                "random",
+                "random",
+                "random",
+                "random"
+              ],
+              [
+                "random",
+                "random",
+                "random",
+                "random"
+              ],
+              [
+                "",
+                "",
+                "",
+                ""
+              ]
+            ]
+          },
+          "against": {
+            "wall": "storage.wall-1",
+            "offset": 170,
+            "elevation": 112
+          }
+        },
+        {
+          "id": "storage.ironing-board",
+          "asset": "ironing-board",
+          "name": "Ironing board",
+          "tags": [
+            "ironing board"
+          ],
+          "position": [
+            878,
+            0,
+            169.5
+          ],
+          "rotation": 0
+        },
+        {
+          "id": "storage.hallway-shelving",
+          "asset": "diy-plywood-shelving",
+          "name": "DIY shelving on the hallway wall (stops short of the corner so the east Kallax stays reachable)",
+          "tags": [
+            "shelving"
+          ],
+          "against": {
+            "wall": "storage.wall-2",
+            "offset": 80
+          },
+          "params": {
+            "width": 120,
+            "height": 224,
+            "depth": 30,
+            "sections": 2,
+            "shelves": 5
+          }
+        },
+        {
+          "id": "storage.top-south",
+          "asset": "box",
+          "name": "Top shelf along the hallway wall (suitcases)",
+          "tags": [
+            "shelf"
+          ],
+          "params": {
+            "width": 200,
+            "height": 1.8,
+            "depth": 52,
+            "material": "birch-ply"
+          },
+          "against": {
+            "wall": "storage.wall-2",
+            "offset": 0,
+            "elevation": 224
+          }
+        },
+        {
+          "id": "storage.top-east",
+          "asset": "box",
+          "name": "Top shelf over the east Kallax (suitcases)",
+          "tags": [
+            "shelf"
+          ],
+          "params": {
+            "width": 265,
+            "height": 1.8,
+            "depth": 52,
+            "material": "birch-ply"
+          },
+          "against": {
+            "wall": "storage.wall-1",
+            "offset": 0,
+            "elevation": 224
+          }
+        },
+        {
+          "id": "storage.suitcase-1",
+          "asset": "suitcase",
+          "name": "Large suitcase",
+          "tags": [
+            "suitcase"
+          ],
+          "params": {
+            "color": "#2f4a6d"
+          },
+          "against": {
+            "wall": "storage.wall-2",
+            "offset": 60,
+            "elevation": 225.8
+          }
+        },
+        {
+          "id": "storage.suitcase-2",
+          "asset": "suitcase",
+          "name": "Large suitcase",
+          "tags": [
+            "suitcase"
+          ],
+          "params": {
+            "color": "#4a4d52"
+          },
+          "against": {
+            "wall": "storage.wall-1",
+            "offset": 180,
+            "elevation": 225.8
+          }
+        },
+        {
+          "id": "storage.stuff-east-top",
+          "asset": "stuff",
+          "params": {
+            "width": 170,
+            "depth": 48,
+            "height": 44,
+            "seed": "storage.stuff-east-top"
+          },
+          "against": {
+            "wall": "storage.wall-1",
+            "offset": 2,
+            "elevation": 225.8
+          }
+        },
+        {
+          "id": "storage.stuff-south-top",
+          "asset": "stuff",
+          "params": {
+            "width": 58,
+            "depth": 48,
+            "height": 44,
+            "seed": "storage.stuff-south-top"
+          },
+          "against": {
+            "wall": "storage.wall-2",
+            "offset": 141,
+            "elevation": 225.8
+          }
+        },
+        {
+          "id": "storage.stuff-west-top",
+          "asset": "stuff",
+          "params": {
+            "width": 145,
+            "depth": 38,
+            "height": 44,
+            "seed": "storage.stuff-west-top"
+          },
+          "against": {
+            "wall": "storage.wall-5",
+            "offset": 115.5,
+            "elevation": 224
+          }
+        },
+        {
+          "id": "storage.entry-shelf",
+          "asset": "box",
+          "name": "Shelf over the door",
+          "tags": [
+            "shelf"
+          ],
+          "params": {
+            "width": 98,
+            "height": 1.8,
+            "depth": 30,
+            "material": "birch-ply"
+          },
+          "against": {
+            "wall": "storage.wall-4",
+            "offset": 1.5,
+            "elevation": 224
+          }
+        },
+        {
+          "id": "storage.stuff-entry",
+          "asset": "stuff",
+          "params": {
+            "width": 94,
+            "depth": 28,
+            "height": 44,
+            "seed": "storage.stuff-entry"
+          },
+          "against": {
+            "wall": "storage.wall-4",
+            "offset": 3.5,
+            "elevation": 225.8
+          }
+        },
+        {
+          "id": "storage.ceiling-light",
+          "asset": "surface-light",
+          "name": "Ceiling light",
+          "tags": [
+            "light"
+          ],
+          "position": [
+            747,
+            277,
+            165.5
+          ],
+          "params": {
+            "diameter": 40,
+            "intensity": 20000
+          }
+        }
+      ],
+      "assumptions": [
+        {
+          "path": "footprint",
+          "note": "measured (notes): 3.01 x 3.17 m with a 1.01 x 0.555 corner cut out for the door alcove (2.00 and 2.615 are the sides without the corner; the 2.00 is the corrected value on the notes)"
+        },
+        {
+          "path": "openings[storage.window]",
+          "note": "top 55 below the ceiling (Mark's 55 cm rule, assumed for every outside window); ~120 x 110, about centred on the north wall (photos 160749-51); not measured"
+        },
+        {
+          "path": "openings[storage.door]",
+          "note": "standard 80 door in the alcove, hinged on its west jamb, opens into the room against the west wall (photos 160757-58)"
+        }
+      ]
+    },
+    {
+      "id": "bathroom",
+      "name": "Bathroom",
+      "tags": [
+        "bathroom",
+        "family bathroom",
+        "guest bathroom",
+        "main bathroom",
+        "laundry",
+        "bath",
+        "toilet"
+      ],
+      "footprint": [
+        [
+          578,
+          496
+        ],
+        [
+          802,
+          496
+        ],
+        [
+          802,
+          684
+        ],
+        [
+          578,
+          684
+        ]
+      ],
+      "ceilingHeight": 238,
+      "northAngle": 0,
+      "floor": {
+        "material": "tiles-dark-grey"
+      },
+      "ceiling": {
+        "material": "white-paint"
+      },
+      "wallMaterial": "white-paint",
+      "walls": [
+        {
+          "id": "bathroom.wall-0",
+          "edge": 0,
+          "tags": [
+            "door wall",
+            "hallway wall",
+            "tiled wall"
+          ],
+          "material": "tiles-dark-grey"
+        },
+        {
+          "id": "bathroom.wall-1",
+          "edge": 1,
+          "tags": [
+            "vanity wall",
+            "washer wall",
+            "mirror wall"
+          ]
+        },
+        {
+          "id": "bathroom.wall-2",
+          "edge": 2,
+          "tags": [
+            "toilet wall",
+            "far wall",
+            "ledge wall"
+          ],
+          "material": "plaster-grey"
+        },
+        {
+          "id": "bathroom.wall-3",
+          "edge": 3,
+          "tags": [
+            "bath wall",
+            "shower wall",
+            "tiled wall"
+          ],
+          "material": "tiles-dark-grey"
+        }
+      ],
+      "openings": [
+        {
+          "id": "bathroom.door",
+          "type": "door",
+          "wall": "bathroom.wall-0",
+          "offset": 72,
+          "width": 80,
+          "height": 211,
+          "tags": [
+            "bathroom door"
+          ],
+          "leadsTo": {
+            "room": "hallway",
+            "opening": "hallway.bathroom-door"
+          }
+        }
+      ],
+      "items": [
+        {
+          "id": "bathroom.vanity",
+          "asset": "bathroom-vanity",
+          "name": "Vanity with mirror",
+          "tags": [
+            "vanity",
+            "sink",
+            "mirror"
+          ],
+          "against": {
+            "wall": "bathroom.wall-1",
+            "offset": 0
+          },
+          "params": {
+            "width": 80,
+            "mirrorBottom": 98
+          },
+          "builtIn": true
+        },
+        {
+          "id": "bathroom.washer-dryer",
+          "asset": "washer-dryer-column",
+          "name": "Washer + dryer cabinet",
+          "tags": [
+            "washing machine",
+            "dryer",
+            "laundry"
+          ],
+          "against": {
+            "wall": "bathroom.wall-1",
+            "offset": 80
+          },
+          "params": {
+            "width": 65,
+            "height": 236,
+            "doors": "pair"
+          },
+          "builtIn": true
+        },
+        {
+          "id": "bathroom.toilet",
+          "asset": "toilet-wall-hung",
+          "name": "Toilet",
+          "tags": [
+            "toilet",
+            "wc"
+          ],
+          "against": {
+            "wall": "bathroom.wall-2",
+            "offset": 66
+          },
+          "params": {
+            "ledgeWidth": 96,
+            "ledgeHeight": 115,
+            "ledgeDepth": 18
+          },
+          "allowOverlap": [
+            "bathroom.bathtub"
+          ],
+          "builtIn": true
+        },
+        {
+          "id": "bathroom.ledge",
+          "asset": "box",
+          "name": "Tiled ledge",
+          "tags": [
+            "ledge",
+            "shelf",
+            "install wall"
+          ],
+          "params": {
+            "width": 62,
+            "height": 115,
+            "depth": 18,
+            "material": "tiles-dark-grey"
+          },
+          "against": {
+            "wall": "bathroom.wall-2",
+            "offset": 162
+          },
+          "allowOverlap": [
+            "bathroom.bathtub"
+          ],
+          "builtIn": true
+        },
+        {
+          "id": "bathroom.ledge-east",
+          "asset": "box",
+          "name": "Tiled ledge (behind the column)",
+          "tags": [
+            "ledge",
+            "shelf",
+            "install wall"
+          ],
+          "params": {
+            "width": 66,
+            "height": 115,
+            "depth": 18,
+            "material": "tiles-dark-grey"
+          },
+          "against": {
+            "wall": "bathroom.wall-2",
+            "offset": 0
+          },
+          "builtIn": true
+        },
+        {
+          "id": "bathroom.wall-cabinet",
+          "asset": "box",
+          "name": "Dark wall cabinets",
+          "tags": [
+            "wall cabinet",
+            "toilet cabinet",
+            "storage"
+          ],
+          "params": {
+            "width": 224,
+            "height": 60,
+            "depth": 30,
+            "color": "#3a3b3e"
+          },
+          "against": {
+            "wall": "bathroom.wall-2",
+            "offset": 0,
+            "elevation": 178
+          },
+          "builtIn": true
+        },
+        {
+          "id": "bathroom.mirror-light",
+          "asset": "surface-light",
+          "name": "Light over the mirror",
+          "tags": [
+            "light",
+            "mirror light"
+          ],
+          "position": [
+            788,
+            226,
+            536
+          ],
+          "params": {
+            "diameter": 10,
+            "height": 3,
+            "intensity": 9000
+          },
+          "builtIn": true
+        },
+        {
+          "id": "bathroom.bathtub",
+          "asset": "bathtub",
+          "name": "Bathtub",
+          "tags": [
+            "bathtub",
+            "bath",
+            "shower"
+          ],
+          "against": {
+            "wall": "bathroom.wall-3",
+            "offset": 18
+          },
+          "params": {
+            "length": 170,
+            "width": 70,
+            "mixerSide": "right"
+          },
+          "builtIn": true
+        }
+      ],
+      "assumptions": [
+        {
+          "path": "footprint",
+          "note": "NOT measured: ~224 x 188. Width from the fittings in a row along the far wall (bath 70, ~16 cm, toilet, washer column 62) with the toilet straight ahead through the door; depth = bath 170 + ledge 18 (the bath's end touches the door wall, photo 160816). West wall = the kitchen wall (+10); the door is at x 650-730 in the hallway's south wall, so the bath is just west of it (hidden from the doorway) and the vanity just east of it"
+        },
+        {
+          "path": "ceilingHeight",
+          "note": "lowered ceiling (238) assumed"
+        },
+        {
+          "path": "items[bathroom.bathtub]",
+          "note": "170 x 70 along the west wall, end against the far-wall ledge: length not measured"
+        },
+        {
+          "path": "items[bathroom.washer-dryer]",
+          "note": "on the east wall right after the vanity (which starts at the door wall), facing west, ~25 cm clear of the far-wall ledge so its doors open past the toilet (Mark + video 41-44 s at 6 fps); a pair of doors opening from the centre to both sides (Mark, from the video), with a storage door on top"
+        },
+        {
+          "path": "items[bathroom.ledge]",
+          "note": "tiled ledge ~115 high along the far wall (photos 160813-14, video 43-47 s); size estimated"
+        },
+        {
+          "path": "items[bathroom.wall-cabinet]",
+          "note": "dark handleless wall cabinets over the ledge up to the ceiling (video 43.5-44.5 s); size estimated"
+        }
+      ]
+    },
+    {
+      "id": "bedroom",
+      "name": "Master bedroom",
+      "tags": [
+        "master bedroom",
+        "bedroom",
+        "main bedroom",
+        "our bedroom"
+      ],
+      "footprint": [
+        [
+          918,
+          14
+        ],
+        [
+          1226,
+          14
+        ],
+        [
+          1226,
+          420
+        ],
+        [
+          1058,
+          420
+        ],
+        [
+          1058,
+          545
+        ],
+        [
+          870,
+          545
+        ],
+        [
+          870,
+          524
+        ],
+        [
+          833,
+          524
+        ],
+        [
+          833,
+          342.5
+        ],
+        [
+          912,
+          342.5
+        ],
+        [
+          912,
+          390
+        ],
+        [
+          918,
+          390
+        ]
+      ],
+      "ceilingHeight": 277,
+      "northAngle": 0,
+      "floor": {
+        "material": "laminate-oak"
+      },
+      "ceiling": {
+        "material": "white-paint"
+      },
+      "wallMaterial": "white-paint",
+      "walls": [
+        {
+          "id": "bedroom.wall-0",
+          "edge": 0,
+          "tags": [
+            "window wall"
+          ],
+          "thickness": 25
+        },
+        {
+          "id": "bedroom.wall-1",
+          "edge": 1,
+          "tags": [
+            "headboard wall",
+            "bed wall"
+          ]
+        },
+        {
+          "id": "bedroom.wall-2",
+          "edge": 2,
+          "tags": [
+            "closet wall",
+            "mamad wall",
+            "crib corner"
+          ],
+          "thickness": 25
+        },
+        {
+          "id": "bedroom.wall-3",
+          "edge": 3,
+          "tags": [
+            "closet door wall",
+            "mamad wall"
+          ],
+          "thickness": 25
+        },
+        {
+          "id": "bedroom.wall-4",
+          "edge": 4,
+          "tags": [
+            "bathroom door wall",
+            "en-suite wall"
+          ]
+        },
+        {
+          "id": "bedroom.wall-5",
+          "edge": 5,
+          "tags": [
+            "little wall",
+            "switch wall"
+          ]
+        },
+        {
+          "id": "bedroom.wall-6",
+          "edge": 6,
+          "tags": [
+            "little wall",
+            "switch wall"
+          ]
+        },
+        {
+          "id": "bedroom.wall-7",
+          "edge": 7,
+          "tags": [
+            "hallway wall",
+            "door wall",
+            "entry wall",
+            "vanity wall"
+          ]
+        },
+        {
+          "id": "bedroom.wall-8",
+          "edge": 8,
+          "tags": [
+            "shoe rack wall",
+            "recess",
+            "bedroom side cabin"
+          ]
+        },
+        {
+          "id": "bedroom.wall-9",
+          "edge": 9,
+          "tags": [
+            "recess",
+            "pier",
+            "switch wall"
+          ]
+        },
+        {
+          "id": "bedroom.wall-10",
+          "edge": 10,
+          "tags": [
+            "pier"
+          ]
+        },
+        {
+          "id": "bedroom.wall-11",
+          "edge": 11,
+          "tags": [
+            "storage room wall",
+            "west wall"
+          ],
+          "thickness": 20
+        }
+      ],
+      "openings": [
+        {
+          "id": "bedroom.door",
+          "type": "door",
+          "wall": "bedroom.wall-7",
+          "offset": 63.5,
+          "width": 80,
+          "height": 211,
+          "tags": [
+            "bedroom door"
+          ],
+          "leadsTo": {
+            "room": "hallway",
+            "opening": "hallway.bedroom-door"
+          }
+        },
+        {
+          "id": "bedroom.window",
+          "type": "window",
+          "wall": "bedroom.wall-0",
+          "offset": 42,
+          "width": 105,
+          "height": 125,
+          "sill": 97,
+          "asset": "window-basic",
+          "params": {
+            "frameMaterial": "aluminium-grey",
+            "sillBoard": false
+          },
+          "tags": [
+            "the window",
+            "bedroom window"
+          ]
+        },
+        {
+          "id": "bedroom.closet-door",
+          "params": {
+            "hinge": "right"
+          },
+          "type": "door",
+          "wall": "bedroom.wall-3",
+          "offset": 28,
+          "width": 80,
+          "height": 211,
+          "asset": "door-basic",
+          "name": "Walk-in closet door",
+          "tags": [
+            "closet door",
+            "mamad door"
+          ],
+          "leadsTo": {
+            "room": "closet",
+            "opening": "closet.door"
+          }
+        },
+        {
+          "id": "bedroom.ensuite-pane",
+          "type": "opening",
+          "wall": "bedroom.wall-4",
+          "offset": 80,
+          "width": 60,
+          "height": 238,
+          "name": "Frosted glass panel (en-suite)",
+          "tags": [
+            "glass panel",
+            "frosted glass"
+          ]
+        },
+        {
+          "id": "bedroom.ensuite-door",
+          "params": {
+            "hinge": "left",
+            "swing": "out",
+            "leaf": "frosted-glass"
+          },
+          "type": "door",
+          "wall": "bedroom.wall-4",
+          "offset": 10,
+          "width": 70,
+          "height": 205,
+          "asset": "door-basic",
+          "name": "En-suite door (frosted glass)",
+          "tags": [
+            "bathroom door",
+            "en-suite door",
+            "glass door"
+          ],
+          "leadsTo": {
+            "room": "ensuite",
+            "opening": "ensuite.door"
+          }
+        },
+        {
+          "id": "bedroom.closet-window",
+          "type": "window",
+          "wall": "bedroom.wall-2",
+          "offset": 16,
+          "width": 70,
+          "height": 80,
+          "sill": 110,
+          "asset": "window-basic",
+          "params": {
+            "frameMaterial": "aluminium-grey",
+            "sillBoard": false
+          },
+          "name": "Window into the closet (mamad window)",
+          "tags": [
+            "mamad window",
+            "closet window",
+            "inner window"
+          ]
+        }
+      ],
+      "items": [
+        {
+          "id": "bedroom.vanity",
+          "asset": "bathroom-vanity",
+          "name": "Vanity with mirror (entry)",
+          "tags": [
+            "vanity",
+            "sink",
+            "mirror"
+          ],
+          "against": {
+            "wall": "bedroom.wall-7",
+            "offset": 0
+          },
+          "params": {
+            "width": 50
+          },
+          "builtIn": true
+        },
+        {
+          "id": "bedroom.mirror-light",
+          "asset": "surface-light",
+          "name": "Light over the mirror",
+          "tags": [
+            "light",
+            "mirror light"
+          ],
+          "position": [
+            841,
+            228,
+            499
+          ],
+          "params": {
+            "diameter": 10,
+            "height": 3,
+            "intensity": 8000
+          },
+          "builtIn": true
+        }
+      ],
+      "assumptions": [
+        {
+          "path": "items[bedroom.vanity]",
+          "note": "the en-suite's vanity + mirror stand in the entry, on the door wall between the bedroom door and a little wall with the light switches (Mark; video 57-59 s, photos 160859(0), 160900); ~50 wide, little wall ~48 x 21 not measured"
+        },
+        {
+          "path": "footprint",
+          "note": "bedroom measured 3.08 x 4.06 (notes); the entry (door from the hallway, shoe-rack recess, closet and en-suite doors) is from the photos/video, not measured"
+        },
+        {
+          "path": "walls[bedroom.wall-8]",
+          "note": "shoe-rack recess right inside the door, ~80 wide (notes 'bedroom side cabin 80 x …', depth not written; ~48 here) — photos 160820-23, 160857-58"
+        },
+        {
+          "path": "openings[bedroom.window]",
+          "note": "~105 x 125 from the photos; top 55 below the ceiling (assumed, like the living room)"
+        },
+        {
+          "path": "openings[bedroom.closet-window]",
+          "note": "the walk-in closet (mamad) window looks into the bedroom above the crib corner; size from the photo"
+        },
+        {
+          "path": "items",
+          "note": "the white wardrobe, bed, crib and nightstands are the owner's (they stand on the floor) — none of it stays"
+        }
+      ]
+    },
+    {
+      "id": "closet",
+      "name": "Walk-in closet (mamad)",
+      "tags": [
+        "walk-in closet",
+        "closet",
+        "mamad",
+        "safe room",
+        "shelter",
+        "dressing room",
+        "wardrobe room"
+      ],
+      "footprint": [
+        [
+          1083,
+          445
+        ],
+        [
+          1226,
+          445
+        ],
+        [
+          1226,
+          720
+        ],
+        [
+          1083,
+          720
+        ]
+      ],
+      "ceilingHeight": 277,
+      "northAngle": 0,
+      "floor": {
+        "material": "laminate-oak"
+      },
+      "ceiling": {
+        "material": "white-paint"
+      },
+      "wallMaterial": "white-paint",
+      "walls": [
+        {
+          "id": "closet.wall-0",
+          "edge": 0,
+          "tags": [
+            "window wall",
+            "bedroom wall"
+          ],
+          "thickness": 25
+        },
+        {
+          "id": "closet.wall-1",
+          "edge": 1,
+          "tags": [
+            "shelving wall",
+            "long wall"
+          ],
+          "thickness": 25
+        },
+        {
+          "id": "closet.wall-2",
+          "edge": 2,
+          "tags": [
+            "end wall",
+            "mirror wall"
+          ],
+          "thickness": 25
+        },
+        {
+          "id": "closet.wall-3",
+          "edge": 3,
+          "tags": [
+            "door wall",
+            "hanging wall"
+          ],
+          "thickness": 25
+        }
+      ],
+      "openings": [
+        {
+          "id": "closet.door",
+          "type": "door",
+          "wall": "closet.wall-3",
+          "offset": 192,
+          "width": 80,
+          "height": 211,
+          "tags": [
+            "closet door",
+            "mamad door"
+          ],
+          "leadsTo": {
+            "room": "bedroom",
+            "opening": "bedroom.closet-door"
+          }
+        },
+        {
+          "id": "closet.window",
+          "type": "window",
+          "wall": "closet.wall-0",
+          "offset": 57,
+          "width": 70,
+          "height": 80,
+          "sill": 110,
+          "name": "Window into the bedroom",
+          "tags": [
+            "mamad window",
+            "closet window"
+          ]
+        }
+      ],
+      "items": [
+        {
+          "id": "closet.ceiling-light",
+          "asset": "surface-light",
+          "name": "Ceiling light",
+          "tags": [
+            "light",
+            "ceiling light"
+          ],
+          "position": [
+            1155,
+            277,
+            560
+          ],
+          "params": {
+            "diameter": 30,
+            "intensity": 16000
+          },
+          "builtIn": true
+        },
+        {
+          "id": "closet.system-east",
+          "asset": "closet-system",
+          "name": "Closet system (long wall)",
+          "tags": [
+            "closet system",
+            "shelves",
+            "rails",
+            "drawers",
+            "built-in"
+          ],
+          "against": {
+            "wall": "closet.wall-1",
+            "offset": 0
+          },
+          "params": {
+            "height": 277,
+            "depth": 40,
+            "sections": [
+              {
+                "w": 64,
+                "kind": "drawers"
+              },
+              {
+                "w": 64,
+                "kind": "drawers"
+              },
+              {
+                "w": 64,
+                "kind": "drawers"
+              },
+              {
+                "w": 64,
+                "kind": "hang"
+              }
+            ]
+          },
+          "builtIn": true
+        },
+        {
+          "id": "closet.system-west",
+          "asset": "closet-system",
+          "name": "Closet system (door wall)",
+          "tags": [
+            "closet system",
+            "rails",
+            "built-in"
+          ],
+          "against": {
+            "wall": "closet.wall-3",
+            "offset": 0
+          },
+          "params": {
+            "height": 277,
+            "depth": 40,
+            "sections": [
+              {
+                "w": 95,
+                "kind": "hang"
+              },
+              {
+                "w": 86,
+                "kind": "hang"
+              }
+            ]
+          },
+          "builtIn": true
+        }
+      ],
+      "assumptions": [
+        {
+          "path": "footprint",
+          "note": "NOT measured: ~1.43 x 2.75 m — long and narrow (video), kept inside the flat's rectangular outline (Mark: nothing sticks out): east wall in line with the bedroom's, south wall on the front-door wall line; mamad = thick concrete walls (25)"
+        },
+        {
+          "path": "items",
+          "note": "closet system stays (Mark): east wall = top shelf + rail over 2-drawer units, door wall = top shelf + one long rail (photos 160841-50); widths not measured"
+        }
+      ]
+    },
+    {
+      "id": "ensuite",
+      "name": "En-suite bathroom",
+      "tags": [
+        "en-suite",
+        "master bathroom",
+        "bedroom bathroom",
+        "shower room",
+        "parents bathroom"
+      ],
+      "footprint": [
+        [
+          918,
+          555
+        ],
+        [
+          1058,
+          555
+        ],
+        [
+          1058,
+          720
+        ],
+        [
+          918,
+          720
+        ]
+      ],
+      "ceilingHeight": 238,
+      "northAngle": 0,
+      "floor": {
+        "material": "tiles-dark-grey"
+      },
+      "ceiling": {
+        "material": "white-paint"
+      },
+      "wallMaterial": "tiles-dark-grey",
+      "walls": [
+        {
+          "id": "ensuite.wall-0",
+          "edge": 0,
+          "tags": [
+            "door wall",
+            "glass wall"
+          ]
+        },
+        {
+          "id": "ensuite.wall-1",
+          "edge": 1,
+          "tags": [
+            "mamad wall",
+            "tiled wall"
+          ],
+          "thickness": 25
+        },
+        {
+          "id": "ensuite.wall-2",
+          "edge": 2,
+          "tags": [
+            "shower wall",
+            "tiled wall"
+          ]
+        },
+        {
+          "id": "ensuite.wall-3",
+          "edge": 3,
+          "tags": [
+            "toilet wall",
+            "ledge wall",
+            "tiled wall"
+          ]
+        }
+      ],
+      "openings": [
+        {
+          "id": "ensuite.pane",
+          "type": "window",
+          "wall": "ensuite.wall-0",
+          "offset": 0,
+          "width": 60,
+          "height": 238,
+          "sill": 0,
+          "asset": "window-basic",
+          "params": {
+            "frameMaterial": "aluminium-grey",
+            "sillBoard": false,
+            "glass": "frosted"
+          },
+          "name": "Frosted glass panel",
+          "tags": [
+            "glass panel",
+            "frosted glass"
+          ]
+        },
+        {
+          "id": "ensuite.door",
+          "type": "door",
+          "wall": "ensuite.wall-0",
+          "offset": 60,
+          "width": 70,
+          "height": 205,
+          "tags": [
+            "en-suite door"
+          ],
+          "leadsTo": {
+            "room": "bedroom",
+            "opening": "bedroom.ensuite-door"
+          }
+        }
+      ],
+      "items": [
+        {
+          "id": "ensuite.toilet",
+          "asset": "toilet-wall-hung",
+          "name": "Toilet",
+          "tags": [
+            "toilet",
+            "wc"
+          ],
+          "against": {
+            "wall": "ensuite.wall-3",
+            "offset": 95
+          },
+          "params": {
+            "ledgeWidth": 60,
+            "ledgeHeight": 115,
+            "ledgeDepth": 20
+          },
+          "allowOverlap": [
+            "ensuite.ledge"
+          ],
+          "builtIn": true
+        },
+        {
+          "id": "ensuite.ledge",
+          "asset": "box",
+          "name": "Tiled ledge",
+          "tags": [
+            "ledge",
+            "shelf",
+            "install wall"
+          ],
+          "params": {
+            "width": 165,
+            "height": 115,
+            "depth": 19.5,
+            "material": "tiles-dark-grey"
+          },
+          "against": {
+            "wall": "ensuite.wall-3",
+            "offset": 0
+          },
+          "allowOverlap": [
+            "ensuite.toilet",
+            "ensuite.shower"
+          ],
+          "builtIn": true
+        },
+        {
+          "id": "ensuite.ceiling-light",
+          "asset": "surface-light",
+          "name": "LED ceiling panel",
+          "tags": [
+            "light",
+            "ceiling light",
+            "led panel"
+          ],
+          "position": [
+            960,
+            238,
+            610
+          ],
+          "params": {
+            "diameter": 28,
+            "height": 2,
+            "intensity": 14000
+          },
+          "builtIn": true
+        },
+        {
+          "id": "ensuite.shower",
+          "asset": "shower-enclosure",
+          "name": "Shower",
+          "tags": [
+            "shower",
+            "rain shower"
+          ],
+          "against": {
+            "wall": "ensuite.wall-2",
+            "offset": 0
+          },
+          "params": {
+            "width": 140,
+            "depth": 90,
+            "glass": "clear",
+            "doorSide": "left",
+            "sidePanel": false
+          },
+          "allowOverlap": [
+            "ensuite.ledge"
+          ],
+          "builtIn": true
+        }
+      ],
+      "assumptions": [
+        {
+          "path": "footprint",
+          "note": "NOT measured: ~1.4 x 1.65 m, south wall on the front-door wall line (Mark: the flat's outline is a rectangle, nothing sticks out). From the video: frosted glass panel + glass door from the bedroom entry, toilet on the west wall under a tiled ledge, glass shower at the end (photos 160901-05, video 55-76 s); the vanity is outside, in the entry"
+        },
+        {
+          "path": "ceilingHeight",
+          "note": "lowered ceiling (238) assumed"
+        }
+      ]
+    }
+  ],
+  "layout": {
+    "entry": "living.front-door"
+  }
+}
