@@ -61,13 +61,15 @@ const shadeMaterial = new MeshBasicMaterial({
 });
 
 /** Skirting boards and soft corner darkening for one room (room-local; the parent group places the room). */
-export function RoomTrim({ room, walls, bundle, showCeiling, shade }: {
+export function RoomTrim({ room, walls, bundle, showCeiling, shade, daylight }: {
   room: Room;
   walls: WallInfo[];
   bundle: Bundle | null;
   showCeiling: boolean;
   /** strength of the corner darkening (lower when screen-space AO already darkens corners) */
   shade: number;
+  /** the room's daylight (see roomDaylight) */
+  daylight: number;
 }) {
   const skirting = useMemo(() => skirtingGeometry(room, walls), [room, walls]);
   const corners = useMemo(() => {
@@ -79,7 +81,7 @@ export function RoomTrim({ room, walls, bundle, showCeiling, shade }: {
     corners.floor?.dispose();
     corners.ceiling?.dispose();
   }, [skirting, corners]);
-  const material = skirting ? getMaterial(bundle, skirtingRuns(room, walls)[0].material) : null;
+  const material = skirting ? getMaterial(bundle, skirtingRuns(room, walls)[0].material, undefined, false, daylight) : null;
   return (
     <>
       {skirting && material && <mesh geometry={skirting} material={material} castShadow={false} receiveShadow raycast={noRaycast} />}

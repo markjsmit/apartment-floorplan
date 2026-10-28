@@ -31,10 +31,12 @@ type Props = {
   /** the lights of the room it stands in: lamp parts glow, and double-clicking one switches the room's lights */
   roomId: string;
   lightsOn: boolean;
+  /** daylight reaching the room (see roomDaylight) */
+  daylight: number;
 };
 
 /** A placed asset (furniture item or door/window): parts animate between states; click selects, double-click cycles. */
-export function PartsView({ id, kind, asset, parts, stateId, position, rotationDeg, selectWhole, roomId, lightsOn }: Props) {
+export function PartsView({ id, kind, asset, parts, stateId, position, rotationDeg, selectWhole, roomId, lightsOn, daylight }: Props) {
   const select = useStore((s) => s.select);
   const cycleState = useStore((s) => s.cycleState);
   const toggleRoomLights = useStore((s) => s.toggleRoomLights);
@@ -68,6 +70,7 @@ export function PartsView({ id, kind, asset, parts, stateId, position, rotationD
           pose={partTransform(p, state?.parts[p.id])}
           interactive={interactive(p.id)}
           lightsOn={lightsOn}
+          daylight={daylight}
           registerAsPart={!selectWhole}
           onClick={onClick(p.id)}
           onDoubleClick={onDoubleClick(p.id)}
@@ -77,9 +80,10 @@ export function PartsView({ id, kind, asset, parts, stateId, position, rotationD
   );
 }
 
-function PartMesh({ ownerId, kind, part, pose, interactive, lightsOn, registerAsPart, onClick, onDoubleClick }: {
+function PartMesh({ ownerId, kind, part, pose, interactive, lightsOn, daylight, registerAsPart, onClick, onDoubleClick }: {
   ownerId: string;
   lightsOn: boolean;
+  daylight: number;
   kind: SelectionKind;
   part: Part;
   pose: ReturnType<typeof partTransform>;
@@ -111,7 +115,7 @@ function PartMesh({ ownerId, kind, part, pose, interactive, lightsOn, registerAs
   });
 
   if (!part.geometry) return null;
-  const base = getMaterial(bundle, part.material ?? (part.glass ? 'glass' : undefined), part.color, part.glass);
+  const base = getMaterial(bundle, part.material ?? (part.glass ? 'glass' : undefined), part.color, part.glass, daylight);
   const material = part.emit ? emissive(base, part.emit.color, lightsOn) : base;
   return (
     <mesh

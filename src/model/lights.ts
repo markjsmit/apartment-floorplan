@@ -1,6 +1,6 @@
 import type { Part, Placement, Room, Vec3 } from './schema';
 import type { PlacedItem } from './placement';
-import { polygonCentroid } from './geometry';
+import { polygonCentroid, signedArea } from './geometry';
 import { toWorld } from './layout';
 
 // Room lights: every room has its ceiling light(s). Lamp items (parts with `emit: point`) are the room's lights;
@@ -57,4 +57,22 @@ export function assignLampSlots(lamps: Lamp[], isOn: (room: string) => boolean, 
 /** Room lights follow the sun (on after dark) unless switched by hand (💡 / double-clicking a lamp). */
 export function roomLightOn(overrides: Record<string, boolean>, roomId: string, sunDown: boolean): boolean {
   return overrides[roomId] ?? sunDown;
+}
+
+/**
+ * How much daylight reaches a room's walls indirectly (0.2..1, in steps of 0.1): from its glazing (windows, glass
+ * sliding doors) and, weaker, open doorways into other rooms, per m² of floor. A windowless bathroom is dim in the
+ * day unless its light is on; the living room with its balcony doors is fully lit. Scales the sky/bounce fill only.
+ */
+export function roomDaylight(room: Room): number {
+  const area = (o: { width: number; height: number }) => (o.width * o.height) / 10000;
+  let glazed = 0;
+  let open = 0;
+  for (const o of room.openings) {
+    if (o.type === 'window' || o.asset === 'sliding-door') glazed += area(o);
+    else if (o.type === 'opening') open += area(o);
+  }
+  const floor = Math.abs(signedArea(room.footprint)) / 10000;
+  const k = 0.2 + (4 * (glazed + 0.15 * open)) / Math.max(1, floor);
+  return Math.round(Math.min(1, Math.max(0.2, k)) * 10) / 10;
 }

@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { RoomSchema, type Part } from '../src/model/schema';
-import { assignLampSlots, DEFAULT_LAMP, roomLamps, roomLightOn, type Lamp } from '../src/model/lights';
+import { assignLampSlots, DEFAULT_LAMP, roomDaylight, roomLamps, roomLightOn, type Lamp } from '../src/model/lights';
 import type { PlacedItem } from '../src/model/placement';
 import { useStore } from '../src/app/store';
 
@@ -55,5 +55,16 @@ describe('room lights', () => {
     expect(useStore.getState().roomLights).toEqual({ living: true });
     useStore.getState().toggleRoomLights(true, 'bedroom');
     expect(useStore.getState().roomLights).toEqual({ living: true, bedroom: false });
+  });
+});
+
+describe('roomDaylight', () => {
+  it('is dim without windows and full with big glazing', () => {
+    expect(roomDaylight(room('bath'))).toBe(0.2);
+    const living = RoomSchema.parse({ ...room('living'), openings: [{ id: 'living.door', type: 'door', wall: 'living.wall-0', offset: 50, width: 280, height: 222, asset: 'sliding-door' }] });
+    expect(roomDaylight(living)).toBe(1);
+    // a small window in a 12 m² room: in between
+    const bed = RoomSchema.parse({ ...room('bed'), openings: [{ id: 'bed.win', type: 'window', wall: 'bed.wall-0', offset: 50, width: 100, height: 120, sill: 90 }] });
+    expect(roomDaylight(bed)).toBeCloseTo(0.6);
   });
 });
