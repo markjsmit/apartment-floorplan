@@ -65,19 +65,27 @@
             "id": "living.ceiling-kitchen",
             "footprint": [
               [
-                418,
-                300
+                415,
+                0
+              ],
+              [
+                585,
+                0
+              ],
+              [
+                585,
+                486
               ],
               [
                 568,
-                300
+                486
               ],
               [
                 568,
                 720
               ],
               [
-                418,
+                415,
                 720
               ]
             ],
@@ -86,6 +94,33 @@
               "lowered ceiling",
               "soffit",
               "AC"
+            ]
+          },
+          {
+            "id": "living.ceiling-entrance",
+            "footprint": [
+              [
+                0,
+                680
+              ],
+              [
+                415,
+                680
+              ],
+              [
+                415,
+                720
+              ],
+              [
+                0,
+                720
+              ]
+            ],
+            "height": 215,
+            "tags": [
+              "lowered ceiling",
+              "bulkhead",
+              "entrance"
             ]
           }
         ]
@@ -172,8 +207,8 @@
           "wall": "living.wall-0",
           "offset": 415,
           "width": 120,
-          "height": 97,
-          "sill": 125,
+          "height": 125,
+          "sill": 97,
           "asset": "window-basic",
           "params": {
             "frameMaterial": "aluminium-grey",
@@ -400,7 +435,7 @@
             "air conditioning"
           ],
           "position": [
-            417.4,
+            414.4,
             245,
             680
           ],
@@ -423,17 +458,17 @@
             "air conditioning"
           ],
           "position": [
-            493,
+            415,
             245,
-            300
+            165
           ],
           "params": {
-            "width": 150,
+            "width": 170,
             "height": 14,
             "depth": 1.2,
             "color": "#9c9c98"
           },
-          "rotation": 180,
+          "rotation": 270,
           "builtIn": true
         },
         {
@@ -473,7 +508,11 @@
         },
         {
           "path": "openings[living.sofa-window]",
-          "note": "top 55 below the ceiling (measured); sill 125 from the photos"
+          "note": "top 55 below the ceiling (measured); ~120 x 125, sill ~97 scaled from the balcony door in the photos"
+        },
+        {
+          "path": "ceiling.lowered[living.ceiling-entrance]",
+          "note": "bulkhead over the front door and counter, underside ~215 (door head), ~40 deep: from the photos, not measured"
         },
         {
           "path": "openings[living.front-door]",
@@ -594,6 +633,19 @@
           "name": "Open end (railing)",
           "tags": [
             "railing"
+          ]
+        },
+        {
+          "id": "balcony.sofa-window",
+          "type": "window",
+          "wall": "balcony.wall-2",
+          "offset": 50,
+          "width": 120,
+          "height": 125,
+          "sill": 97,
+          "name": "Sofa window (from outside)",
+          "tags": [
+            "window"
           ]
         },
         {
@@ -735,14 +787,22 @@
         ],
         [
           685,
+          385
+        ],
+        [
+          697,
+          385
+        ],
+        [
+          697,
           342.5
         ],
         [
-          908,
+          812,
           342.5
         ],
         [
-          908,
+          812,
           524
         ],
         [
@@ -772,37 +832,56 @@
           "id": "hallway.wall-1",
           "edge": 1,
           "tags": [
-            "door alcove"
+            "poster wall",
+            "door alcove",
+            "little wall"
           ]
         },
         {
           "id": "hallway.wall-2",
           "edge": 2,
           "tags": [
-            "poster wall",
-            "storage room wall",
-            "dresser wall"
+            "fin",
+            "little wall"
           ]
         },
         {
           "id": "hallway.wall-3",
           "edge": 3,
           "tags": [
-            "end wall",
-            "bedroom door wall",
-            "shoe rack wall"
+            "niche",
+            "little wall"
           ]
         },
         {
           "id": "hallway.wall-4",
           "edge": 4,
           "tags": [
-            "bathroom wall"
+            "dresser wall",
+            "niche",
+            "storage room wall",
+            "storage area"
           ]
         },
         {
           "id": "hallway.wall-5",
           "edge": 5,
+          "tags": [
+            "end wall",
+            "bedroom door wall"
+          ]
+        },
+        {
+          "id": "hallway.wall-6",
+          "edge": 6,
+          "tags": [
+            "bathroom wall",
+            "block wall"
+          ]
+        },
+        {
+          "id": "hallway.wall-7",
+          "edge": 7,
           "tags": [
             "living room side"
           ],
@@ -831,8 +910,8 @@
         {
           "id": "hallway.bedroom-door",
           "type": "door",
-          "wall": "hallway.wall-3",
-          "offset": 93.5,
+          "wall": "hallway.wall-5",
+          "offset": 45,
           "width": 80,
           "height": 211,
           "asset": "door-basic",
@@ -849,8 +928,8 @@
         {
           "id": "hallway.bathroom-door",
           "type": "door",
-          "wall": "hallway.wall-4",
-          "offset": 106,
+          "wall": "hallway.wall-6",
+          "offset": 10,
           "width": 80,
           "height": 211,
           "asset": "door-basic",
@@ -866,7 +945,7 @@
         {
           "id": "hallway.opening-living",
           "type": "opening",
-          "wall": "hallway.wall-5",
+          "wall": "hallway.wall-7",
           "offset": 38,
           "width": 209,
           "height": 238,
@@ -900,8 +979,8 @@
             "material": "white-paint"
           },
           "against": {
-            "wall": "hallway.wall-4",
-            "offset": 199
+            "wall": "hallway.wall-6",
+            "offset": 103
           },
           "builtIn": true
         }
@@ -909,7 +988,7 @@
       "assumptions": [
         {
           "path": "footprint",
-          "note": "168 wide from the pillar line to the bathroom wall (notes '1.68 m' — read as the hallway width), runs from the kitchen to the master bedroom door along the storage room (its 3.01 + walls). The door alcove in front of the storage room door is the 98 x 65 corner cut out of that room"
+          "note": "168 wide from the pillar line to the bathroom wall (notes '1.68 m' — read as the hallway width; Mark doesn't remember). The door alcove in front of the storage room door is the 98 x 65 corner cut out of that room"
         },
         {
           "path": "items[hallway.block]",
@@ -921,7 +1000,15 @@
         },
         {
           "path": "openings[hallway.bedroom-door]",
-          "note": "standard 80 door in the end wall; the shoe-rack corner is next to it"
+          "note": "standard 80 door at the north end of the end wall (photos 160740, 160921-24, video 25-27 s)"
+        },
+        {
+          "path": "walls[hallway.wall-2]",
+          "note": "the alcove's east wall runs on ~40 cm past the storage room wall as a ~12 cm fin (the 'little wall'); the dresser niche behind it is ~115 x 42 (photos 160817-18, 160922-24, video 26.5-28 s): not measured"
+        },
+        {
+          "path": "walls[hallway.wall-5]",
+          "note": "end wall at x 812: the 123 block, a switch strip, the bathroom door and ~10 cm of wall (photos 160921-22); hallway length not measured"
         }
       ]
     },
@@ -1876,11 +1963,11 @@
           534
         ],
         [
-          820,
+          812,
           534
         ],
         [
-          820,
+          812,
           764
         ],
         [
@@ -2017,12 +2104,59 @@
           ],
           "against": {
             "wall": "bathroom.wall-2",
-            "offset": 72
+            "offset": 64,
+            "gap": 18
           },
           "params": {
             "length": 170,
             "width": 70,
             "mixerSide": "right"
+          },
+          "builtIn": true
+        },
+        {
+          "id": "bathroom.ledge",
+          "asset": "box",
+          "name": "Tiled ledge",
+          "tags": [
+            "ledge",
+            "shelf",
+            "install wall"
+          ],
+          "params": {
+            "width": 174,
+            "height": 115,
+            "depth": 18,
+            "material": "tiles-dark-grey"
+          },
+          "against": {
+            "wall": "bathroom.wall-2",
+            "offset": 60
+          },
+          "allowOverlap": [
+            "bathroom.bathtub"
+          ],
+          "builtIn": true
+        },
+        {
+          "id": "bathroom.wall-cabinet",
+          "asset": "box",
+          "name": "Wall cabinet over the toilet",
+          "tags": [
+            "wall cabinet",
+            "toilet cabinet",
+            "storage"
+          ],
+          "params": {
+            "width": 105,
+            "height": 58,
+            "depth": 30,
+            "color": "#3a3b3e"
+          },
+          "against": {
+            "wall": "bathroom.wall-2",
+            "offset": 0,
+            "elevation": 180
           },
           "builtIn": true
         }
@@ -2035,6 +2169,14 @@
         {
           "path": "ceilingHeight",
           "note": "lowered ceiling (238) assumed"
+        },
+        {
+          "path": "items[bathroom.ledge]",
+          "note": "tiled ledge ~115 high along the toilet + bath wall (photos 160813-14, video 43-47 s); size estimated"
+        },
+        {
+          "path": "items[bathroom.wall-cabinet]",
+          "note": "dark handleless wall cabinet over the toilet, ~105 x 58 up to the ceiling (video 43.5 s, photo 160806); size estimated"
         }
       ]
     },
@@ -2069,8 +2211,24 @@
           545
         ],
         [
-          918,
+          822,
           545
+        ],
+        [
+          822,
+          342.5
+        ],
+        [
+          902,
+          342.5
+        ],
+        [
+          902,
+          390
+        ],
+        [
+          918,
+          390
         ]
       ],
       "ceilingHeight": 277,
@@ -2131,8 +2289,43 @@
           "edge": 5,
           "tags": [
             "hallway wall",
-            "door wall"
+            "door wall",
+            "entry wall"
           ]
+        },
+        {
+          "id": "bedroom.wall-6",
+          "edge": 6,
+          "tags": [
+            "shoe rack wall",
+            "recess",
+            "bedroom side cabin"
+          ]
+        },
+        {
+          "id": "bedroom.wall-7",
+          "edge": 7,
+          "tags": [
+            "recess",
+            "pier",
+            "switch wall"
+          ]
+        },
+        {
+          "id": "bedroom.wall-8",
+          "edge": 8,
+          "tags": [
+            "pier"
+          ]
+        },
+        {
+          "id": "bedroom.wall-9",
+          "edge": 9,
+          "tags": [
+            "storage room wall",
+            "west wall"
+          ],
+          "thickness": 20
         }
       ],
       "openings": [
@@ -2140,7 +2333,7 @@
           "id": "bedroom.door",
           "type": "door",
           "wall": "bedroom.wall-5",
-          "offset": 29,
+          "offset": 77.5,
           "width": 80,
           "height": 211,
           "tags": [
@@ -2231,7 +2424,11 @@
       "assumptions": [
         {
           "path": "footprint",
-          "note": "bedroom measured 3.08 x 4.06 (notes); the small entry corner with the closet and en-suite doors is from the video, not measured"
+          "note": "bedroom measured 3.08 x 4.06 (notes); the entry (door from the hallway, shoe-rack recess, closet and en-suite doors) is from the photos/video, not measured"
+        },
+        {
+          "path": "walls[bedroom.wall-6]",
+          "note": "shoe-rack recess right inside the door, ~80 wide (notes 'bedroom side cabin 80 x …', depth not written; ~48 here) — photos 160820-23, 160857-58"
         },
         {
           "path": "openings[bedroom.window]",
