@@ -70,7 +70,7 @@ export function App() {
       <Banner />
       {touch && <TouchControls />}
       {!mobile && !touch && (
-        <div className="help">↑↓ walk · ←→ turn · W A S D walk + step sideways · two-finger swipe / E C look · middle-click mouse look ·click select · double-click change state · M measure · L lights · Esc deselect</div>
+        <div className="help">↑↓ walk · ←→ turn · W A S D walk + step sideways · two-finger swipe / E C look · middle-click mouse look ·click select · double-click change state · M measure (F angled) · L lights · Esc deselect</div>
       )}
       {!bundle && <div className="loading">Loading…</div>}
     </div>

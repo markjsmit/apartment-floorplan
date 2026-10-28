@@ -2,7 +2,7 @@ import { currentMeasurement, formatCm, useMeasure, type MeasurePoint } from './m
 import { labelOf } from './labels';
 import { useStore } from './store';
 
-const AXIS_NAME = { x: 'along x', y: 'height', z: 'along z', free: 'point to point' };
+const AXIS_NAME = { x: 'along x', y: 'height', z: 'along z', free: 'angled, point to point' };
 
 /** Steps and result of the measuring tool, with a mode switch and buttons to flip the last point, start over, or leave. */
 export function MeasurePanel() {
@@ -15,8 +15,8 @@ export function MeasurePanel() {
     <div className="measure-panel">
       <strong>📏 Measure</strong>
       <span className="measure-modes">
-        <button className={mode === 'axis' ? 'on' : ''} onClick={() => setMode('axis')} title="Straight out from the first surface, along one room axis">⟂ Straight out</button>
-        <button className={mode === 'free' ? 'on' : ''} onClick={() => setMode('free')} title="Straight line between the two clicked spots (e.g. two spots on a wall or the floor)">↗ Point to point</button>
+        <button className={mode === 'axis' ? 'on' : ''} onClick={() => setMode('axis')} title="Straight out from the first surface, along one room axis (F switches)">⟂ Straight out</button>
+        <button className={mode === 'free' ? 'on' : ''} onClick={() => setMode('free')} title="Angled: straight line between the two clicked spots, at any angle (F switches)">↗ Angled (F)</button>
       </span>
       {points.length === 0 && <span>Click the first {mode === 'free' ? 'spot' : 'surface'}</span>}
       {points.length === 1 && <span>From <b>{name(points[0])}</b> — now click the second {mode === 'free' ? 'spot' : 'surface'}</span>}

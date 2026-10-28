@@ -26,12 +26,14 @@ export function Measure() {
   // points belong to one room (this component is keyed by room)
   useEffect(() => useMeasure.getState().reset(), []);
 
-  // M toggles, Esc leaves
+  // M toggles, F switches straight out ↔ angled (point to point), Esc leaves
   useEffect(() => {
     const key = (e: KeyboardEvent) => {
       if (ignoresKeys(e.target as HTMLInputElement) || e.metaKey || e.ctrlKey) return;
-      if (e.code === 'KeyM') useMeasure.getState().toggle();
-      if (e.key === 'Escape') useMeasure.getState().stop();
+      const m = useMeasure.getState();
+      if (e.code === 'KeyM') m.toggle();
+      if (e.code === 'KeyF' && m.active) m.setMode(m.mode === 'free' ? 'axis' : 'free');
+      if (e.key === 'Escape') m.stop();
     };
     window.addEventListener('keydown', key);
     return () => window.removeEventListener('keydown', key);

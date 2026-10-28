@@ -16,7 +16,7 @@ Spec: `docs/superpowers/specs/2026-10-23-apartment-designer-design.md`.
    `distance` cm), person, time of day and the view-only furniture states. "What I'm looking at" = `lookingAt`;
    "this" = `selection` if set, else `lookingAt`. **`measurement`** (when Mark uses 📏 Measure): `from`/`to` surfaces
    (id, name), `axis` (x, y = height, z) and `distanceCm`, measured straight out from the first surface along one
-   axis — or `axis: "free"` = straight line between the two clicked spots (Point-to-point mode, or two spots on one wall/floor). `.ui-state/events.log` has recent clicks/tab switches.
+   axis — or `axis: "free"` = straight line between the two clicked spots (Angled mode — F key or button — or two spots on one wall/floor). `.ui-state/events.log` has recent clicks/tab switches.
 3. **Edit the version Mark has open** (`version` in ui-state → file in `house/`). Never edit Current while he's
    looking at the AI suggestion, or the other way round.
 4. If `house/current.json` still has the placeholder `meta.location` (assumed), ask Mark which city — it drives sun angles.
