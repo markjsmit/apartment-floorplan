@@ -1,0 +1,355 @@
+{
+  "id": "ikea-tjusig-bench",
+  "name": "IKEA TJUSIG bench with shoe storage, white (old house)",
+  "tags": [
+    "tjusig",
+    "ikea",
+    "bench",
+    "shoe rack",
+    "shoes",
+    "old house",
+    "white"
+  ],
+  "description": "81 x 34 x 50 cm (W x D x H): white frame and seat, two levels of steel tubes for shoes (front tube lower than the back one). Mark's own, from the old house (photo 20261028_233858).",
+  "product": {
+    "vendor": "IKEA",
+    "name": "TJUSIG bench with shoe storage, white, 81x34x50 cm"
+  },
+  "source": {
+    "kind": "parts",
+    "license": "self-made",
+    "notes": "Outer size: Mark (81 x 34) + IKEA (height 50). Tube heights and slats estimated from sources/old house/20261028_233858.jpg; about 17 cm between the tube levels."
+  },
+  "parts": [
+    {
+      "id": "top",
+      "tags": [
+        "top",
+        "seat"
+      ],
+      "geometry": {
+        "type": "box",
+        "size": [
+          81,
+          2.5,
+          34
+        ]
+      },
+      "position": [
+        0,
+        48.75,
+        17.0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "material": "white-laminate"
+    },
+    {
+      "id": "leg-l-front",
+      "tags": [
+        "leg",
+        "frame"
+      ],
+      "geometry": {
+        "type": "box",
+        "size": [
+          4.5,
+          47.5,
+          4.5
+        ]
+      },
+      "position": [
+        -38.25,
+        23.75,
+        31.75
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "material": "white-laminate"
+    },
+    {
+      "id": "leg-l-back",
+      "tags": [
+        "leg",
+        "frame"
+      ],
+      "geometry": {
+        "type": "box",
+        "size": [
+          4.5,
+          47.5,
+          4.5
+        ]
+      },
+      "position": [
+        -38.25,
+        23.75,
+        2.25
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "material": "white-laminate"
+    },
+    {
+      "id": "slat-l-low",
+      "tags": [
+        "frame",
+        "slat"
+      ],
+      "geometry": {
+        "type": "box",
+        "size": [
+          2.2,
+          4.5,
+          25.0
+        ]
+      },
+      "position": [
+        -38.25,
+        9,
+        17.0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "material": "white-laminate"
+    },
+    {
+      "id": "slat-l-high",
+      "tags": [
+        "frame",
+        "slat"
+      ],
+      "geometry": {
+        "type": "box",
+        "size": [
+          2.2,
+          4.5,
+          25.0
+        ]
+      },
+      "position": [
+        -38.25,
+        28,
+        17.0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "material": "white-laminate"
+    },
+    {
+      "id": "leg-r-front",
+      "tags": [
+        "leg",
+        "frame"
+      ],
+      "geometry": {
+        "type": "box",
+        "size": [
+          4.5,
+          47.5,
+          4.5
+        ]
+      },
+      "position": [
+        38.25,
+        23.75,
+        31.75
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "material": "white-laminate"
+    },
+    {
+      "id": "leg-r-back",
+      "tags": [
+        "leg",
+        "frame"
+      ],
+      "geometry": {
+        "type": "box",
+        "size": [
+          4.5,
+          47.5,
+          4.5
+        ]
+      },
+      "position": [
+        38.25,
+        23.75,
+        2.25
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "material": "white-laminate"
+    },
+    {
+      "id": "slat-r-low",
+      "tags": [
+        "frame",
+        "slat"
+      ],
+      "geometry": {
+        "type": "box",
+        "size": [
+          2.2,
+          4.5,
+          25.0
+        ]
+      },
+      "position": [
+        38.25,
+        9,
+        17.0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "material": "white-laminate"
+    },
+    {
+      "id": "slat-r-high",
+      "tags": [
+        "frame",
+        "slat"
+      ],
+      "geometry": {
+        "type": "box",
+        "size": [
+          2.2,
+          4.5,
+          25.0
+        ]
+      },
+      "position": [
+        38.25,
+        28,
+        17.0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "material": "white-laminate"
+    },
+    {
+      "id": "tube-low-front",
+      "tags": [
+        "tube",
+        "shoe rail"
+      ],
+      "geometry": {
+        "type": "cylinder",
+        "radius": 0.8,
+        "height": 72.0,
+        "segments": 16
+      },
+      "position": [
+        0,
+        6,
+        28
+      ],
+      "rotation": [
+        0,
+        0,
+        90
+      ],
+      "material": "stainless"
+    },
+    {
+      "id": "tube-low-back",
+      "tags": [
+        "tube",
+        "shoe rail"
+      ],
+      "geometry": {
+        "type": "cylinder",
+        "radius": 0.8,
+        "height": 72.0,
+        "segments": 16
+      },
+      "position": [
+        0,
+        14,
+        8
+      ],
+      "rotation": [
+        0,
+        0,
+        90
+      ],
+      "material": "stainless"
+    },
+    {
+      "id": "tube-high-front",
+      "tags": [
+        "tube",
+        "shoe rail"
+      ],
+      "geometry": {
+        "type": "cylinder",
+        "radius": 0.8,
+        "height": 72.0,
+        "segments": 16
+      },
+      "position": [
+        0,
+        25,
+        28
+      ],
+      "rotation": [
+        0,
+        0,
+        90
+      ],
+      "material": "stainless"
+    },
+    {
+      "id": "tube-high-back",
+      "tags": [
+        "tube",
+        "shoe rail"
+      ],
+      "geometry": {
+        "type": "cylinder",
+        "radius": 0.8,
+        "height": 72.0,
+        "segments": 16
+      },
+      "position": [
+        0,
+        33,
+        8
+      ],
+      "rotation": [
+        0,
+        0,
+        90
+      ],
+      "material": "stainless"
+    }
+  ]
+}

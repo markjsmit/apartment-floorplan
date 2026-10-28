@@ -1,3 +1,4 @@
+import { Euler, Quaternion, Vector3 } from 'three';
 import type { Geometry, Part, Vec2, Vec3 } from '../schema';
 import { rng } from './stuff';
 
@@ -17,6 +18,17 @@ const ell = (id: string, tags: string[], size: Vec3, position: Vec3, rotation: V
   part(id, tags, { type: 'ellipsoid', size, segments: 14 }, position, rotation, color, material);
 const box = (id: string, tags: string[], size: Vec3, position: Vec3, rotation: Vec3, color: string, material?: string) =>
   part(id, tags, { type: 'box', size }, position, rotation, color, material);
+
+const DEG = Math.PI / 180;
+/** Turn a group of parts by `rotation` (degrees, about the item origin) and then move it by `move`. */
+function turn(parts: Part[], rotation: Vec3, move: Vec3 = [0, 0, 0]): Part[] {
+  const q = new Quaternion().setFromEuler(new Euler(rotation[0] * DEG, rotation[1] * DEG, rotation[2] * DEG));
+  return parts.map((p) => {
+    const pos = new Vector3(...p.position).applyQuaternion(q).add(new Vector3(...move));
+    const e = new Euler().setFromQuaternion(q.clone().multiply(new Quaternion().setFromEuler(new Euler(p.rotation[0] * DEG, p.rotation[1] * DEG, p.rotation[2] * DEG))));
+    return { ...p, position: [pos.x, pos.y, pos.z], rotation: [e.x / DEG, e.y / DEG, e.z / DEG] };
+  });
+}
 
 // Rounded rectangle w x h around (0, 0): bottom corners radius rb, top corners rt (a backpack's top is round).
 function roundedRect(w: number, h: number, rb: number, rt: number): Vec2[] {
@@ -45,6 +57,7 @@ export function backpack(params: Record<string, unknown>): Part[] {
   const color = String(params.color ?? '#3b3f46');
   const accent = String(params.accent ?? DARK);
   const pose = String(params.pose ?? 'slumped');
+  const flap = params.flap ? String(params.flap) : null; // a lid / top panel in another colour
   const rand = rng(String(params.seed ?? 'backpack'));
   const j = (amount: number) => (rand() - 0.5) * 2 * amount; // jitter ±amount
   const tags = ['bag', 'backpack'];
@@ -56,6 +69,7 @@ export function backpack(params: Record<string, unknown>): Part[] {
     const flat: Vec3 = [-90, 0, -90];
     return [
       pad('body', tags, W, L, T, 4.5, 6, 13, [0, T / 2, W / 2], flat, color),
+      ...(flap ? [pad('flap', [...tags, 'flap'], W + 1, L * 0.42, 4, 1.8, 5, 13, [L * 0.26, T - 0.8, W / 2], [-90 + j(3), 0, -90], flap)] : []),
       pad('pocket', [...tags, 'pocket'], W * 0.7, L * 0.42, 5, 2.2, 4, 5, [-L * 0.16, T + 1.5, W / 2 + j(1.5)], flat, color),
       box('zip', [...tags, 'zip'], [L * 0.7, 0.6, 1.2], [L * 0.05, T - 0.3, W / 2 - W * 0.36], [0, j(3), 0], DARK),
       strap('handle', [7, 1.2, 3], [L / 2 + 1.5, T * 0.55, W / 2], [0, 0, 25]),
@@ -159,18 +173,23 @@ export function hookRail(params: Record<string, unknown>) {
 }
 
 /**
- * A pair of ice skates side by side, toes towards +z. Params: kind = figure (white boots, silver blade with toe pick,
- * heel block) | hockey (black boots, red accents, plastic blade holder, tendon guard), seed (each skate a bit skewed).
+ * A pair of ice skates, toes towards +z. Params: kind = figure (white boots, silver blade with toe pick, heel block) |
+ * hockey (black boots, red accents, plastic blade holder, tendon guard), seed (each skate a bit skewed), pose =
+ * standing (side by side, ~20 wide) | lying (each on its side, blades together in the middle, boots out: ~56 wide,
+ * ~10 high; `slope` degrees front-down, e.g. on a shoe rack's sloped tubes).
  */
 export function iceSkates(params: Record<string, unknown>): Part[] {
   const hockey = String(params.kind ?? 'figure') === 'hockey';
   const rand = rng(String(params.seed ?? 'skates'));
   const j = (a: number) => (rand() - 0.5) * 2 * a;
+  const lying = String(params.pose ?? 'standing') === 'lying';
+  const slope = num(params.slope, 0);
   const parts: Part[] = [];
   const boot = hockey ? '#1c1c1f' : '#f2f0ec';
   const accent = hockey ? '#c0262d' : '#d9d6cf';
   for (const [s, side] of [['l', -1], ['r', 1]] as const) {
-    const x = side * 5.3 + j(0.8), yaw = j(7), L = 28;
+    const start = parts.length;
+    const x = lying ? 0 : side * 5.3 + j(0.8), yaw = j(7), L = 28;
     const t = (z: number): Vec3 => [x + Math.sin((yaw * Math.PI) / 180) * (z - L / 2), 0, z]; // along the skate
     const at = (z: number, y: number): Vec3 => { const p = t(z); return [p[0], y, p[2]]; };
     const r: Vec3 = [0, yaw, 0];
@@ -192,6 +211,8 @@ export function iceSkates(params: Record<string, unknown>): Part[] {
       parts.push(ell(`${s}-ankle`, [...tags, 'boot'], [8.8, 17, 12], at(6.5, 20), r, boot, LEATHER));
       parts.push(box(`${s}-laces`, [...tags, 'laces'], [2.6, 15, 0.6], at(11.5, 19), [-14, yaw, 0], accent));
     }
+    // lying: tip the skate onto its side, boot outwards (left skate to -x), resting on the boot's side (~4.5 cm)
+    if (lying) parts.splice(start, parts.length - start, ...turn(parts.slice(start), [0, 0, -side * 90], [side * 0.5, 4.6, 0]));
   }
-  return parts;
+  return slope ? turn(parts, [slope, 0, 0]) : parts;
 }

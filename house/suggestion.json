@@ -2,7 +2,7 @@
   "meta": {
     "name": "AI suggestion",
     "kind": "suggestion",
-    "note": "Skating corner in the window corner of the left wall: Kallax 2x2 with skates + gym bags, backpacks on top, hooks with the two red skate bags above; no pegboard, no shelf, no aisle doors",
+    "note": "Skating corner in the window corner of the left wall: our TJUSIG shoe bench (figure skates on the tubes, backpacks on top), hooks with the two red skate bags above (hockey skates stay in theirs); no pegboard, no shelf, no aisle doors",
     "location": {
       "lat": 32.0853,
       "lon": 34.7818,
@@ -1557,6 +1557,20 @@
       ],
       "items": [
         {
+          "id": "storage.shoe-bench",
+          "asset": "ikea-tjusig-bench",
+          "name": "Shoe bench (TJUSIG, from the old house)",
+          "tags": [
+            "shoe rack",
+            "bench",
+            "tjusig"
+          ],
+          "against": {
+            "wall": "storage.wall-5",
+            "offset": 180.5
+          }
+        },
+        {
           "id": "storage.wall-bed",
           "asset": "diy-wall-bed-desk",
           "name": "Wall bed 90x190 + fold-down desk",
@@ -2261,118 +2275,45 @@
           }
         },
         {
-          "id": "storage.kallax-skates",
-          "asset": "ikea-kallax-77x77",
-          "name": "Kallax 2x2 for the skating stuff",
-          "tags": [
-            "skating kallax",
-            "skate storage"
-          ],
-          "against": {
-            "wall": "storage.wall-5",
-            "offset": 184.5
-          },
-          "params": {
-            "cols": 2,
-            "rows": 2,
-            "handles": "knob",
-            "seed": "storage.kallax-skates"
-          }
-        },
-        {
           "id": "storage.figure-skates",
           "asset": "ice-skates",
-          "name": "Figure skates",
+          "name": "Figure skates (on the shoe rack)",
           "tags": [
             "skates",
             "figure skates"
           ],
           "against": {
             "wall": "storage.wall-5",
-            "offset": 193.8,
-            "elevation": 40.16666666666667,
-            "gap": 4
-          },
-          "params": {
-            "kind": "figure",
-            "seed": "fig"
-          }
-        },
-        {
-          "id": "storage.hockey-skates",
-          "asset": "ice-skates",
-          "name": "Hockey skates",
-          "tags": [
-            "skates",
-            "hockey skates"
-          ],
-          "against": {
-            "wall": "storage.wall-5",
-            "offset": 229.5,
-            "elevation": 40.16666666666667,
+            "offset": 193.0,
+            "elevation": 34.6,
             "gap": 5
           },
           "params": {
-            "kind": "hockey",
-            "seed": "hockey"
-          }
-        },
-        {
-          "id": "storage.gym-bag-1",
-          "asset": "backpack",
-          "name": "Gym bag (in the Kallax)",
-          "tags": [
-            "gym bag"
-          ],
-          "against": {
-            "wall": "storage.wall-5",
-            "offset": 188.3,
-            "elevation": 3.3333333333333335,
-            "gap": 2
-          },
-          "params": {
-            "pose": "stuffed",
-            "color": "#2e3a52",
-            "seed": "gb1"
-          }
-        },
-        {
-          "id": "storage.gym-bag-2",
-          "asset": "backpack",
-          "name": "Gym bag 2 (in the Kallax)",
-          "tags": [
-            "gym bag"
-          ],
-          "against": {
-            "wall": "storage.wall-5",
-            "offset": 225.5,
-            "elevation": 3.3333333333333335,
-            "gap": 2
-          },
-          "params": {
-            "pose": "stuffed",
-            "color": "#2b2b2e",
-            "accent": "#6b6f76",
-            "seed": "gb2"
+            "kind": "figure",
+            "seed": "fig",
+            "pose": "lying",
+            "slope": 21.8
           }
         },
         {
           "id": "storage.backpack-1",
           "asset": "backpack",
-          "name": "Backpack (dropped on top)",
+          "name": "Mark's backpack (cream canvas)",
           "tags": [
             "backpack"
           ],
           "against": {
             "wall": "storage.wall-5",
-            "offset": 184.5,
-            "elevation": 77,
-            "gap": 1
+            "offset": 210.5,
+            "elevation": 50,
+            "gap": 2
           },
           "params": {
-            "pose": "slumped",
-            "color": "#3f4a3c",
-            "seed": "bp1"
+            "pose": "lying",
+            "color": "#d6cfae",
+            "flap": "#2f3d50",
+            "accent": "#c49a68",
+            "seed": "bp-real"
           }
         },
         {
@@ -2384,20 +2325,20 @@
           ],
           "against": {
             "wall": "storage.wall-5",
-            "offset": 211.5,
-            "elevation": 77,
-            "gap": 3
+            "offset": 181.5,
+            "elevation": 50,
+            "gap": 1
           },
           "params": {
-            "pose": "lying",
-            "color": "#5a5e66",
-            "seed": "bp2"
+            "pose": "slumped",
+            "color": "#3f4a3c",
+            "seed": "bp1"
           }
         },
         {
           "id": "storage.skate-hooks",
           "asset": "hook-rail",
-          "name": "Hooks for the skate bags",
+          "name": "Hooks for the skate bags (hockey skates live in their bag)",
           "tags": [
             "hooks",
             "skate hooks"
