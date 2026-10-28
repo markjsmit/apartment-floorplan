@@ -1919,7 +1919,10 @@
             "elevation": 90,
             "standoff": 2.5,
             "rods": 10
-          }
+          },
+          "allowOverlap": [
+            "storage.drying-rack-high"
+          ]
         },
         {
           "id": "storage.drying-rack-high",
