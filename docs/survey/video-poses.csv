@@ -1,0 +1,428 @@
+t,x,z,yaw,room,visible
+0.00,250,360,-140,living,"kitchen: island hob (foreground), counter+sink on S wall, tall units/oven at left, lowered ceiling + AC grille over kitchen"
+0.25,250,360,-144,living,"counter+sink, wall cabinet, oven column, kitchen soffit (interp)"
+0.50,250,360,-148,living,"counter+sink, wall cabinet, oven column, kitchen soffit"
+0.75,250,360,-154,living,"counter, grey backsplash, upper shelf (interp)"
+1.00,250,360,-160,living,"counter, grey backsplash, upper shelf"
+1.25,250,360,-171,living,"counter W end, switches, front-door E jamb (interp)"
+1.50,250,360,178,living,"counter W end, switches, front-door E jamb"
+1.75,250,360,172,living,front door (x110-210) face-on (interp)
+2.00,250,360,166,living,front door (x110-210) face-on
+2.25,250,360,157,living,"SW corner: grey wall W of door, bar cabinet (interp)"
+2.50,250,360,148,living,"SW corner: grey wall W of door, bar cabinet"
+2.75,250,360,142,living,"SW corner, bookcases on TV/dining wall (interp)"
+3.00,250,360,135,living,"SW corner, bookcases on TV/dining wall"
+3.25,250,360,128,living,"bookcase, New Yorker frame (W wall) (interp)"
+3.50,250,360,122,living,"bookcase, New Yorker frame (W wall)"
+3.75,250,360,118,living,"bookcase, New Yorker frame (W wall) (interp)"
+4.00,250,360,115,living,"bookcase, W wall (interp)"
+4.25,250,360,112,living,"bookcase, W wall (interp)"
+4.50,250,360,108,living,"bookcase, W wall"
+4.75,250,360,103,living,"Frida frame, drawer chest (W wall) (interp)"
+5.00,250,360,98,living,"Frida frame, drawer chest (W wall)"
+5.25,250,360,92,living,TV on W wall (interp)
+5.50,250,360,85,living,TV on W wall
+5.75,250,355,75,living,TV + tall window at NW corner (z5-155) (interp)
+6.00,250,350,65,living,TV + tall window at NW corner (z5-155)
+6.25,250,345,58,living,"tall window, NW corner (interp)"
+6.50,250,340,52,living,"tall window, NW corner"
+6.75,250,335,46,living,"NW corner, balcony door W end (x70) (interp)"
+7.00,250,330,40,living,"NW corner, balcony door W end (x70)"
+7.25,251,325,36,living,"NW corner, balcony door W end (x70) (interp)"
+7.50,252,320,32,living,"balcony door (x70-350) face-on, balcony beyond (interp)"
+7.75,254,315,29,living,"balcony door (x70-350) face-on, balcony beyond (interp)"
+8.00,255,310,25,living,"balcony door (x70-350) face-on, balcony beyond"
+8.25,256,305,22,living,"balcony door (x70-350) face-on, balcony beyond (interp)"
+8.50,258,300,18,living,"balcony door, balcony furniture (interp)"
+8.75,259,295,15,living,"balcony door, balcony furniture (interp)"
+9.00,260,290,12,living,"balcony door, balcony furniture"
+9.25,265,280,9,living,"balcony door, balcony furniture (interp)"
+9.50,270,270,6,living,balcony door E half (interp)
+9.75,275,260,3,living,balcony door E half (interp)
+10.00,280,250,0,living,balcony door E half
+10.25,285,235,-2,living,balcony door E half (interp)
+10.50,290,220,-4,living,balcony door E leaf close (interp)
+10.75,295,205,-6,living,balcony door E leaf close (interp)
+11.00,300,190,-8,living,balcony door E leaf close
+11.25,308,175,-11,living,"door E jamb (x350), balcony E end (interp)"
+11.50,315,160,-14,living,"door E jamb (x350), balcony E end"
+11.75,318,150,-16,living,"looking out door E end: railing, laundry, stone fin (interp)"
+12.00,320,140,-18,living,"looking out door E end: railing, laundry, stone fin"
+12.25,322,138,-20,living,"looking out door E end: railing, laundry, stone fin (interp)"
+12.50,325,135,-23,living,stone fin outside door E jamb = balcony E end; pier x350-415 (interp)
+12.75,328,132,-26,living,stone fin outside door E jamb = balcony E end; pier x350-415 (interp)
+13.00,330,130,-28,living,stone fin outside door E jamb = balcony E end; pier x350-415
+13.25,335,130,-33,living,"pier (wave picture), sofa window W jamb (interp)"
+13.50,340,130,-38,living,"pier (wave picture), sofa window W jamb"
+13.75,345,130,-43,living,"sofa window (x415-535) under NE soffit, book rack (interp)"
+14.00,350,130,-48,living,"sofa window (x415-535) under NE soffit, book rack"
+14.25,350,132,-55,living,"sofa window + NE corner, sofa wall (interp)"
+14.50,350,135,-62,living,"sofa window + NE corner, sofa wall"
+14.75,348,138,-74,living,sofa wall (rock picture) face-on (interp)
+15.00,345,140,-85,living,sofa wall (rock picture) face-on
+15.25,345,140,-90,living,"sofa wall, sofa (interp)"
+15.50,345,140,-95,living,"sofa wall, sofa"
+15.75,345,142,-100,living,"sofa wall S end, hallway mouth beyond (interp)"
+16.00,345,145,-105,living,"sofa wall S end, hallway mouth beyond"
+16.25,345,148,-110,living,"hallway mouth: lit bathroom door, hallway block (interp)"
+16.50,345,150,-115,living,"hallway mouth: lit bathroom door, hallway block"
+16.75,345,150,-120,living,"pillar N face (map), hallway mouth (interp)"
+17.00,345,150,-125,living,"pillar N face (map), hallway mouth"
+17.25,345,152,-134,living,"pillar W end, kitchen beyond (interp)"
+17.50,345,155,-142,living,"pillar W end, kitchen beyond"
+17.75,342,158,-160,living,"island + rocking chair, front door far (interp)"
+18.00,340,160,-178,living,"island + rocking chair, front door far"
+18.25,338,162,166,living,"dining table, bar cabinet, bookcases (interp)"
+18.50,335,165,150,living,"dining table, bar cabinet, bookcases"
+18.75,332,168,138,living,"bookcases, Frida, chest (interp)"
+19.00,330,170,125,living,"bookcases, Frida, chest"
+19.25,330,170,116,living,TV face-on (interp)
+19.50,330,170,108,living,TV face-on
+19.75,330,170,104,living,TV (interp)
+20.00,330,170,100,living,TV
+20.25,330,172,105,living,"chest + bookcase, TV (interp)"
+20.50,330,175,110,living,"chest + bookcase, TV"
+20.75,330,180,119,living,"bookcase, Frida frame, dining (interp)"
+21.00,330,185,128,living,"bookcase, Frida frame, dining"
+21.25,330,192,135,living,"dining table, bar, New Yorker (interp)"
+21.50,330,200,142,living,"dining table, bar, New Yorker"
+21.75,330,210,150,living,"front door face-on, dining table (interp)"
+22.00,330,220,158,living,"front door face-on, dining table"
+22.25,330,235,165,living,"counter W end + front door, island W end (interp)"
+22.50,330,250,172,living,"counter W end + front door, island W end"
+22.75,332,270,-179,living,"island long side, counter (interp)"
+23.00,335,290,-170,living,"island long side, counter"
+23.25,342,310,-150,living,"tall units (fridge) at left, kitchen soffit (interp)"
+23.50,350,330,-130,living,"tall units (fridge) at left, kitchen soffit"
+23.75,365,350,-115,living,"fridge face-on, oven column, island NE corner (interp)"
+24.00,380,370,-100,living,"fridge face-on, oven column, island NE corner"
+24.25,405,382,-96,living,"tall units + hallway mouth, hallway to bedroom door (interp)"
+24.50,430,395,-93,living,"tall units + hallway mouth, hallway to bedroom door"
+24.75,455,400,-92,living,"pantry column, hallway, side table (interp)"
+25.00,480,405,-90,living,"pantry column, hallway, side table"
+25.25,505,408,-88,living,"tile/laminate threshold ~x585, pantry N side flush with block (interp)"
+25.50,530,410,-87,living,"tile/laminate threshold ~x585, pantry N side flush with block"
+25.75,550,411,-84,hallway,"block (S), poster wall edge (N), bedroom door at end (interp)"
+26.00,570,412,-82,hallway,"block (S), poster wall edge (N), bedroom door at end"
+26.25,585,412,-79,hallway,"poster on alcove E side wall (x685), dresser, bedroom door (interp)"
+26.50,600,412,-76,hallway,"poster on alcove E side wall (x685), dresser, bedroom door"
+26.75,610,411,-69,hallway,"poster wall face-on, convex corner (685,342.5), dresser (interp)"
+27.00,620,410,-62,hallway,"poster wall face-on, convex corner (685,342.5), dresser"
+27.25,630,402,-48,hallway,storage door opening appears left of poster wall
+27.50,638,392,-30,hallway,storage door (x600-680) + alcove side wall
+27.75,639,381,-19,hallway,storage door face-on in alcove back wall (z277) (interp)
+28.00,640,370,-8,hallway,storage door face-on in alcove back wall (z277)
+28.25,640,352,-5,hallway,"in alcove, through door: dresser under window (interp)"
+28.50,640,335,-2,hallway,"in alcove, through door: dresser under window"
+28.75,640,320,-1,hallway,"alcove, door jamb, storage window ahead-right (interp)"
+29.00,640,305,0,hallway,"alcove, door jamb, storage window ahead-right"
+29.25,641,295,2,hallway,"doorway: window (x720-840), dresser (interp)"
+29.50,642,285,3,hallway,"doorway: window (x720-840), dresser"
+29.75,644,274,4,storage,"door leaf open against W wall, wardrobe, window (interp)"
+30.00,645,262,6,storage,"door leaf open against W wall, wardrobe, window"
+30.25,646,256,7,storage,wardrobe left of window (interp)
+30.50,648,250,8,storage,wardrobe left of window
+30.75,648,249,8,storage,wardrobe left of window (interp)
+31.00,649,248,9,storage,wardrobe + play kitchen (N wall W part) (interp)
+31.25,650,246,10,storage,wardrobe + play kitchen (N wall W part) (interp)
+31.50,650,245,10,storage,wardrobe + play kitchen (N wall W part)
+31.75,650,244,9,storage,wardrobe + play kitchen (N wall W part) (interp)
+32.00,651,244,8,storage,"wardrobe, window W jamb (interp)"
+32.25,652,243,6,storage,"wardrobe, window W jamb (interp)"
+32.50,652,242,5,storage,"wardrobe, window W jamb"
+32.75,654,241,-2,storage,window + dresser face-on (interp)
+33.00,655,240,-8,storage,window + dresser face-on
+33.25,656,240,-15,storage,"window E jamb, frames, kallax (interp)"
+33.50,658,240,-22,storage,"window E jamb, frames, kallax"
+33.75,659,240,-30,storage,"NE corner, black kallax (interp)"
+34.00,660,240,-38,storage,"NE corner, black kallax"
+34.25,661,240,-45,storage,"kallax, E wall (interp)"
+34.50,662,240,-52,storage,"kallax, E wall"
+34.75,664,240,-65,storage,"E wall (bee sticker), bed (interp)"
+35.00,665,240,-78,storage,"E wall (bee sticker), bed"
+35.25,665,240,-85,storage,"E wall, bed (interp)"
+35.50,665,240,-92,storage,"E wall, bed"
+35.75,665,240,-100,storage,bed + tall kallax at SE (interp)
+36.00,665,240,-108,storage,bed + tall kallax at SE
+36.25,665,240,-115,storage,"kallax, desk on S wall (interp)"
+36.50,665,240,-122,storage,"kallax, desk on S wall"
+36.75,665,240,-128,storage,desk on S wall (x700-898) (interp)
+37.00,665,240,-135,storage,desk on S wall (x700-898)
+37.25,665,242,-142,storage,"desk, S wall (interp)"
+37.50,665,245,-150,storage,"desk, S wall"
+37.75,662,248,-159,storage,"S wall W end, alcove corner (695,332.5->267) (interp)"
+38.00,660,250,-168,storage,"S wall W end, alcove corner (695,332.5->267)"
+38.25,655,254,-175,storage,"door jamb, hallway beyond (interp)"
+38.50,650,258,178,storage,"door jamb, hallway beyond"
+38.75,648,266,-170,hallway,through door: bathroom door + hallway block (interp)
+39.00,645,275,-158,hallway,through door: bathroom door + hallway block
+39.25,658,312,-160,hallway,"block (glossy 2-door, x586-709), bathroom door (interp)"
+39.50,670,350,-162,hallway,"block (glossy 2-door, x586-709), bathroom door"
+39.75,688,390,-165,hallway,"bathroom door frame, switch strip (interp)"
+40.00,705,430,-168,hallway,"bathroom door frame, switch strip"
+40.25,722,462,-172,hallway,"into bathroom: vanity left, washer column (interp)"
+40.50,740,495,-175,hallway,"into bathroom: vanity left, washer column"
+40.75,748,512,-176,bathroom,"vanity + mirror on E wall, washer/dryer column, toilet (interp)"
+41.00,755,530,-178,bathroom,"vanity + mirror on E wall, washer/dryer column, toilet"
+41.25,756,540,-176,bathroom,"vanity, washer/dryer column (interp)"
+41.50,758,550,-175,bathroom,"vanity, washer/dryer column"
+41.75,756,558,-162,bathroom,vanity + mirror (interp)
+42.00,755,565,-150,bathroom,vanity + mirror
+42.25,755,568,-145,bathroom,vanity + mirror (interp)
+42.50,755,570,-140,bathroom,vanity + mirror
+42.75,755,572,-150,bathroom,"vanity, washer column, toilet (interp)"
+43.00,755,575,-160,bathroom,"vanity, washer column, toilet"
+43.25,752,578,-168,bathroom,"toilet on S wall, ledge + dark upper cabinets (interp)"
+43.50,750,580,-175,bathroom,"toilet on S wall, ledge + dark upper cabinets"
+43.75,748,582,-178,bathroom,"toilet, tiled installation wall with shelf ledge (interp)"
+44.00,745,585,178,bathroom,"toilet, tiled installation wall with shelf ledge"
+44.25,742,585,174,bathroom,toilet + bath start (interp)
+44.50,740,585,170,bathroom,toilet + bath start
+44.75,738,585,160,bathroom,"bath, ledge along S wall (interp)"
+45.00,735,585,150,bathroom,"bath, ledge along S wall"
+45.25,732,585,140,bathroom,"bath W end, tiled corner (interp)"
+45.50,730,585,130,bathroom,"bath W end, tiled corner"
+45.75,730,585,124,bathroom,"tiled W wall, towel (interp)"
+46.00,730,585,118,bathroom,"tiled W wall, towel"
+46.25,730,585,125,bathroom,bath W end (interp)
+46.50,730,585,132,bathroom,bath W end
+46.75,732,585,145,bathroom,"ledge, toilet (interp)"
+47.00,735,585,158,bathroom,"ledge, toilet"
+47.25,738,582,174,bathroom,"washer/dryer column, toilet (interp)"
+47.50,740,580,-170,bathroom,"washer/dryer column, toilet"
+47.75,742,578,-155,bathroom,vanity (interp)
+48.00,745,575,-140,bathroom,vanity
+48.25,748,572,-122,bathroom,mirror face-on (interp)
+48.50,750,570,-105,bathroom,mirror face-on
+48.75,755,550,-62,hallway,"bathroom door leaf (dark), turning (interp)"
+49.00,760,530,-20,hallway,"bathroom door leaf (dark), turning"
+49.25,770,510,-60,hallway,"bedroom door open, crib"
+49.50,790,495,-75,hallway,"bedroom door (end wall x908), shoe rack left"
+49.75,810,488,-72,hallway,"bedroom door, crib, shoe rack (interp)"
+50.00,830,480,-70,hallway,"bedroom door, crib, shoe rack"
+50.25,845,475,-58,hallway,shoe rack + hats left of bedroom door (interp)
+50.50,860,470,-45,hallway,shoe rack + hats left of bedroom door
+50.75,868,466,-35,hallway,"shoe rack, hats (interp)"
+51.00,875,462,-25,hallway,"shoe rack, hats"
+51.25,876,461,-20,hallway,"shoe rack, hats (interp)"
+51.50,878,460,-15,hallway,shoe rack face (interp)
+51.75,879,459,-10,hallway,shoe rack face (interp)
+52.00,880,458,-5,hallway,shoe rack face
+52.25,881,457,-1,hallway,shoe rack face (interp)
+52.50,881,456,4,hallway,"shoe rack, door jamb right (interp)"
+52.75,882,455,8,hallway,"shoe rack, door jamb right"
+53.00,925,470,10,bedroom-entry,hats on shoe-rack niche wall (north side of entry passage)
+53.25,933,472,0,bedroom-entry,hats on shoe-rack niche wall (north side of entry passage) (interp)
+53.50,942,473,-10,bedroom-entry,thin stub-wall end; main bedroom beyond (interp)
+53.75,950,475,-20,bedroom-entry,thin stub-wall end; main bedroom beyond
+54.00,955,476,-32,bedroom-entry,bed headboard on east wall; crib (interp)
+54.25,960,478,-45,bedroom-entry,bed headboard on east wall; crib
+54.50,965,480,-70,bedroom-entry,crib under mamad window; mamad NW corner
+54.75,975,485,-100,bedroom-entry,"mamad door, leaf open outwards"
+55.00,978,488,-115,bedroom-entry,mamad leaf (towels) + frosted en-suite door beyond (interp)
+55.25,980,490,-130,bedroom-entry,mamad leaf (towels) + frosted en-suite door beyond
+55.50,982,495,-145,bedroom-entry,"frosted en-suite door closed, toilet ghost (interp)"
+55.75,985,500,-160,bedroom-entry,"frosted en-suite door closed, toilet ghost"
+56.00,990,505,-175,bedroom-entry,en-suite door opened inwards (hinge east); wet room tiles
+56.25,988,510,178,bedroom-entry,frosted leaf close (interp)
+56.50,985,515,170,bedroom-entry,frosted leaf close
+56.75,982,517,160,bedroom-entry,frosted leaf close (interp)
+57.00,978,518,150,bedroom-entry,"frosted door left, switches, vanity right (west wall) (interp)"
+57.25,975,520,140,bedroom-entry,"frosted door left, switches, vanity right (west wall)"
+57.50,973,520,132,bedroom-entry,"frosted door left, switches, vanity right (west wall) (interp)"
+57.75,972,520,123,bedroom-entry,vanity + mirror (interp)
+58.00,970,520,115,bedroom-entry,vanity + mirror
+58.25,969,527,108,bedroom-entry,vanity + mirror (interp)
+58.50,969,533,102,bedroom-entry,vanity mirror reflects en-suite door + mamad leaf (interp)
+58.75,968,540,95,bedroom-entry,vanity mirror reflects en-suite door + mamad leaf
+59.00,968,540,95,bedroom-entry,vanity mirror reflects en-suite door + mamad leaf (interp)
+59.25,968,540,95,bedroom-entry,vanity mirror reflects en-suite door + mamad leaf (interp)
+59.50,968,540,95,bedroom-entry,vanity; open bedroom door leaf at its north side (interp)
+59.75,968,540,95,bedroom-entry,vanity; open bedroom door leaf at its north side (interp)
+60.00,968,540,95,bedroom-entry,vanity; open bedroom door leaf at its north side (interp)
+60.25,968,540,95,bedroom-entry,vanity; open bedroom door leaf at its north side
+60.50,972,545,120,bedroom-entry,"vanity, frosted panel"
+60.75,981,558,142,bedroom-entry,frosted door (interp)
+61.00,990,570,165,bedroom-entry,frosted door
+61.25,992,590,172,ensuite,"shower glass ahead, mixer on south wall, toilet right (interp)"
+61.50,995,610,-180,ensuite,"shower glass ahead, mixer on south wall, toilet right"
+61.75,995,612,177,ensuite,"shower glass ahead, mixer on south wall, toilet right (interp)"
+62.00,995,613,173,ensuite,"toilet + ledge, shower glass (interp)"
+62.25,995,615,170,ensuite,"toilet + ledge, shower glass"
+62.50,995,616,152,ensuite,ledge + towel rail on west wall (interp)
+62.75,995,618,135,ensuite,ledge + towel rail on west wall
+63.00,995,618,118,ensuite,"flush plate, toilet roll on ledge (interp)"
+63.25,995,618,100,ensuite,"flush plate, toilet roll on ledge"
+63.50,995,618,83,ensuite,"flush plate, toilet roll on ledge (interp)"
+63.75,995,618,67,ensuite,"ledge north end, frosted door from inside (interp)"
+64.00,995,618,50,ensuite,"ledge north end, frosted door from inside"
+64.25,995,618,80,ensuite,ledge (interp)
+64.50,995,618,110,ensuite,ledge
+64.75,995,619,130,ensuite,mixer + ledge (interp)
+65.00,995,620,150,ensuite,mixer + ledge
+65.25,995,625,165,ensuite,opening shower glass door (interp)
+65.50,995,630,-180,ensuite,opening shower glass door
+65.75,994,645,175,ensuite,opening shower glass door (interp)
+66.00,992,660,170,ensuite,"shower: tiled walls, ceiling corner (interp)"
+66.25,991,675,165,ensuite,"shower: tiled walls, ceiling corner (interp)"
+66.50,990,690,160,ensuite,"shower: tiled walls, ceiling corner"
+66.75,990,692,150,ensuite,"shower: tiled walls, ceiling corner (interp)"
+67.00,990,695,140,ensuite,ceiling-mounted rain head (interp)
+67.25,990,698,130,ensuite,ceiling-mounted rain head (interp)
+67.50,990,700,120,ensuite,ceiling-mounted rain head
+67.75,990,700,125,ensuite,ceiling-mounted rain head (interp)
+68.00,990,700,130,ensuite,"ledge continues inside shower, towel rail (interp)"
+68.25,990,700,135,ensuite,"ledge continues inside shower, towel rail (interp)"
+68.50,990,700,140,ensuite,"ledge continues inside shower, towel rail"
+68.75,992,683,150,ensuite,"ledge continues inside shower, towel rail (interp)"
+69.00,993,667,160,ensuite,backing out (interp)
+69.25,995,650,170,ensuite,backing out
+69.50,1000,615,-180,ensuite,shower glass with mixer behind; toilet right
+69.75,1000,615,-180,ensuite,shower glass with mixer behind; toilet right (interp)
+70.00,1000,616,-179,ensuite,shower glass with mixer behind; toilet right (interp)
+70.25,1000,616,-179,ensuite,shower glass with mixer behind; toilet right (interp)
+70.50,1000,617,-178,ensuite,shower glass with mixer behind; toilet right (interp)
+70.75,1000,617,-178,ensuite,shower glass with mixer behind; toilet right (interp)
+71.00,1000,618,-177,ensuite,"shower glass, reflections (interp)"
+71.25,1000,618,-177,ensuite,"shower glass, reflections (interp)"
+71.50,1000,619,-176,ensuite,"shower glass, reflections (interp)"
+71.75,1000,619,-176,ensuite,"shower glass, reflections (interp)"
+72.00,1000,620,-175,ensuite,"shower glass, reflections (interp)"
+72.25,1000,620,-175,ensuite,"shower glass, reflections"
+72.50,998,633,-177,ensuite,"shower glass, reflections (interp)"
+72.75,997,647,-178,ensuite,approaching shower (interp)
+73.00,995,660,-180,ensuite,approaching shower
+73.25,992,680,-180,ensuite,rain head (interp)
+73.50,990,700,-180,ensuite,rain head
+73.75,990,701,175,ensuite,rain head (interp)
+74.00,990,702,170,ensuite,mixer (interp)
+74.25,990,704,165,ensuite,mixer (interp)
+74.50,990,705,160,ensuite,mixer
+74.75,990,705,150,ensuite,mixer (interp)
+75.00,990,705,140,ensuite,SW corner: mixer wall + ledge (interp)
+75.25,990,705,130,ensuite,SW corner: mixer wall + ledge
+75.50,990,705,120,ensuite,"glass partition, toilet beyond (interp)"
+75.75,990,705,110,ensuite,"glass partition, toilet beyond"
+76.00,992,700,83,ensuite,"glass partition, toilet beyond (interp)"
+76.25,993,695,57,ensuite,"shower door, looking back (interp)"
+76.50,995,690,30,ensuite,"shower door, looking back"
+76.75,998,670,15,ensuite,exiting (interp)
+77.00,1000,650,0,ensuite,exiting
+77.25,1000,625,-5,bedroom-entry,frosted door frame (interp)
+77.50,1000,600,-10,bedroom-entry,frosted door frame
+77.75,1000,580,-15,bedroom-entry,towel on mamad leaf (interp)
+78.00,1000,560,-20,bedroom-entry,towel on mamad leaf
+78.25,995,540,10,bedroom-entry,"main bedroom: window, wardrobe, bed"
+78.50,997,533,-3,bedroom-entry,"main bedroom: window, wardrobe, bed (interp)"
+78.75,998,527,-17,bedroom-entry,"bed, crib (interp)"
+79.00,1000,520,-30,bedroom-entry,"bed, crib"
+79.25,1005,510,-55,bedroom-entry,wall then mamad doorway (interp)
+79.50,1010,500,-80,bedroom-entry,wall then mamad doorway
+79.75,1025,495,-95,bedroom-entry,mamad interior through door: closet system long wall (interp)
+80.00,1040,490,-110,bedroom-entry,mamad interior through door: closet system long wall
+80.25,1045,490,-112,bedroom-entry,mamad interior through door: closet system long wall (interp)
+80.50,1050,490,-115,bedroom-entry,mamad interior (interp)
+80.75,1055,490,-118,bedroom-entry,mamad interior (interp)
+81.00,1060,490,-120,bedroom-entry,mamad interior
+81.25,1066,490,-122,bedroom-entry,mamad interior (interp)
+81.50,1072,490,-125,closet,in mamad doorway (interp)
+81.75,1079,490,-128,closet,in mamad doorway (interp)
+82.00,1085,490,-130,closet,in mamad doorway
+82.25,1092,490,-140,closet,hanging rail + drawers (interp)
+82.50,1100,490,-150,closet,hanging rail + drawers
+82.75,1105,485,-105,closet,mamad steel window close on north wall (interp)
+83.00,1110,480,-60,closet,mamad steel window close on north wall
+83.25,1113,483,-77,closet,mamad steel window close on north wall (interp)
+83.50,1117,487,-93,closet,hanging rail (interp)
+83.75,1120,490,-110,closet,hanging rail
+84.00,1125,495,-130,closet,"drawers, garment bag (interp)"
+84.25,1130,500,-150,closet,"drawers, garment bag"
+84.50,1135,505,-160,closet,long wall system (interp)
+84.75,1140,510,-170,closet,long wall system
+85.00,1150,530,-180,closet,mirror on south end wall reflects north-wall window
+85.25,1150,530,173,closet,mirror on south end wall reflects north-wall window (interp)
+85.50,1150,530,167,closet,mirror + west-wall hanging (interp)
+85.75,1150,530,160,closet,mirror + west-wall hanging
+86.00,1145,530,120,closet,west (door) wall hanging + shelf
+86.25,1142,525,100,closet,belt rack (interp)
+86.50,1140,520,80,closet,belt rack
+86.75,1135,512,70,closet,plain wall (interp)
+87.00,1130,505,60,closet,plain wall
+87.25,1120,496,75,closet,"out through mamad door: towel leaf, far bedroom door, shoe rack (interp)"
+87.50,1110,488,90,closet,"out through mamad door: towel leaf, far bedroom door, shoe rack"
+87.75,1090,488,85,bedroom-entry,"door jamb, switch (interp)"
+88.00,1070,488,80,bedroom-entry,"door jamb, switch"
+88.25,1060,488,73,bedroom-entry,"door jamb, switch (interp)"
+88.50,1050,488,67,bedroom-entry,wall with switch (interp)
+88.75,1040,488,60,bedroom-entry,wall with switch
+89.00,1030,490,53,bedroom-entry,wall with switch (interp)
+89.25,1020,493,47,bedroom-entry,"shoe rack niche, stub end, main-room west wall w/ switch (interp)"
+89.50,1010,495,40,bedroom-entry,"shoe rack niche, stub end, main-room west wall w/ switch"
+89.75,1000,490,52,bedroom-entry,"shoe rack, bedroom door frame (interp)"
+90.00,990,485,65,bedroom-entry,"shoe rack, bedroom door frame"
+90.25,980,480,75,bedroom-entry,"bedroom door, hallway beyond (interp)"
+90.50,970,476,85,bedroom-entry,"bedroom door, hallway beyond"
+90.75,965,476,88,bedroom-entry,"hallway: dresser right, Heli (interp)"
+91.00,960,476,90,bedroom-entry,"hallway: dresser right, Heli"
+91.25,951,476,91,bedroom-entry,"hallway: dresser right, Heli (interp)"
+91.50,942,476,92,bedroom-entry,in bedroom doorway; bathroom door left (interp)
+91.75,934,476,94,bedroom-entry,in bedroom doorway; bathroom door left (interp)
+92.00,925,476,95,bedroom-entry,in bedroom doorway; bathroom door left
+92.25,916,480,100,bedroom-entry,in bedroom doorway; bathroom door left (interp)
+92.50,908,483,105,hallway,"bathroom door (closed), glossy hallway block (interp)"
+92.75,899,486,110,hallway,"bathroom door (closed), glossy hallway block (interp)"
+93.00,890,490,115,hallway,"bathroom door (closed), glossy hallway block"
+93.25,845,495,138,hallway,"bathroom door leaf, hinge west (interp)"
+93.50,800,500,160,hallway,"bathroom door leaf, hinge west"
+93.75,792,505,167,hallway,"bathroom door leaf, hinge west (interp)"
+94.00,783,510,173,hallway,"bathroom: washer column, toilet, ledge, bath (interp)"
+94.25,775,515,-180,hallway,"bathroom: washer column, toilet, ledge, bath"
+94.50,773,525,177,hallway,"bathroom: washer column, toilet, ledge, bath (interp)"
+94.75,772,535,173,bathroom,"washer column open, toilet (interp)"
+95.00,770,545,170,bathroom,"washer column open, toilet"
+95.25,770,558,-150,bathroom,vanity + mirror on east wall (interp)
+95.50,770,570,-110,bathroom,vanity + mirror on east wall
+95.75,770,570,-113,bathroom,vanity + mirror on east wall (interp)
+96.00,770,570,-117,bathroom,mirror reflects bath wall (interp)
+96.25,770,570,-120,bathroom,mirror reflects bath wall
+96.50,768,570,-135,bathroom,washer column door open (interp)
+96.75,765,570,-150,bathroom,washer column door open
+97.00,762,570,-165,bathroom,"full-width ledge + flush plate, top bulkhead (interp)"
+97.25,760,570,-180,bathroom,"full-width ledge + flush plate, top bulkhead"
+97.50,760,570,165,bathroom,"ledge over bath, bulkhead end (interp)"
+97.75,760,570,150,bathroom,"ledge over bath, bulkhead end"
+98.00,760,570,130,bathroom,tiled west wall over bath (interp)
+98.25,760,570,110,bathroom,tiled west wall over bath
+98.50,760,565,85,bathroom,"towel, mixer (interp)"
+98.75,760,560,60,bathroom,"towel, mixer"
+99.00,765,540,20,bathroom,door jamb exiting
+99.25,762,520,25,hallway,hallway wall (interp)
+99.50,760,500,30,hallway,hallway wall
+99.75,720,420,50,hallway,living room through hallway mouth
+100.00,705,380,45,hallway,storage door open on right; balcony door (interp)
+100.25,690,340,40,hallway,storage door open on right; balcony door
+100.50,677,337,40,hallway,storage door open on right; balcony door (interp)
+100.75,663,333,40,hallway,hallway lowered-ceiling edge; balcony door; tall window (interp)
+101.00,650,330,40,hallway,hallway lowered-ceiling edge; balcony door; tall window
+101.25,640,332,47,hallway,hallway lowered-ceiling edge; balcony door; tall window (interp)
+101.50,630,333,53,hallway,pillar with picture (interp)
+101.75,620,335,60,hallway,pillar with picture
+102.00,613,340,62,hallway,pillar with picture (interp)
+102.25,607,345,63,living,"pillar, person by pillar (interp)"
+102.50,600,350,65,living,"pillar, person by pillar"
+102.75,599,349,59,living,"pillar, person by pillar (interp)"
+103.00,598,348,52,living,"pillar, balcony door (interp)"
+103.25,596,346,46,living,"pillar, balcony door (interp)"
+103.50,595,345,40,living,"pillar, balcony door"
+103.75,594,340,35,living,"balcony door, sofa (interp)"
+104.00,592,335,30,living,"balcony door, sofa"
+104.25,591,332,25,living,"balcony door, sofa (interp)"
+104.50,591,328,20,living,sofa window + ceiling step above it (interp)
+104.75,590,325,15,living,sofa window + ceiling step above it
+105.00,590,323,13,living,sofa window + ceiling step above it (interp)
+105.25,590,322,12,living,sofa window (interp)
+105.50,590,320,10,living,sofa window
+105.75,590,320,9,living,sofa window (interp)
+106.00,590,320,8,living,"sofa window, sofa-wall end at right (interp)"
+106.25,590,320,6,living,"sofa window, sofa-wall end at right (interp)"
+106.50,590,320,5,living,"sofa window, sofa-wall end at right"

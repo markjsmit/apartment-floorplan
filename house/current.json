@@ -472,6 +472,72 @@
           "builtIn": true
         },
         {
+          "id": "living.kitchen-spot-1",
+          "asset": "surface-light",
+          "name": "Kitchen downlight 1",
+          "tags": [
+            "light",
+            "downlight",
+            "spot",
+            "kitchen light"
+          ],
+          "position": [
+            492,
+            238,
+            400
+          ],
+          "params": {
+            "diameter": 9,
+            "height": 1,
+            "intensity": 6000
+          },
+          "builtIn": true
+        },
+        {
+          "id": "living.kitchen-spot-2",
+          "asset": "surface-light",
+          "name": "Kitchen downlight 2",
+          "tags": [
+            "light",
+            "downlight",
+            "spot",
+            "kitchen light"
+          ],
+          "position": [
+            492,
+            238,
+            530
+          ],
+          "params": {
+            "diameter": 9,
+            "height": 1,
+            "intensity": 6000
+          },
+          "builtIn": true
+        },
+        {
+          "id": "living.kitchen-spot-3",
+          "asset": "surface-light",
+          "name": "Kitchen downlight 3",
+          "tags": [
+            "light",
+            "downlight",
+            "spot",
+            "kitchen light"
+          ],
+          "position": [
+            492,
+            238,
+            660
+          ],
+          "params": {
+            "diameter": 9,
+            "height": 1,
+            "intensity": 6000
+          },
+          "builtIn": true
+        },
+        {
           "id": "living.track-light",
           "asset": "track-light",
           "name": "Track light",
@@ -509,6 +575,10 @@
         {
           "path": "openings[living.sofa-window]",
           "note": "top 55 below the ceiling (measured); ~120 x 125, sill ~97 scaled from the balcony door in the photos"
+        },
+        {
+          "path": "items[living.kitchen-spot-1]",
+          "note": "3 recessed downlights in the kitchen soffit (photo 160651); spacing estimated"
         },
         {
           "path": "ceiling.lowered[living.ceiling-entrance]",
