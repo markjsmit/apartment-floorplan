@@ -1,12 +1,30 @@
 {
   "id": "door-basic",
   "name": "Interior door",
-  "tags": ["door", "interior door"],
-  "description": "Frame + leaf sized to its opening. Hinge on the left (seen from inside the room), swings into the room.",
-  "source": { "kind": "procedural", "generator": "door", "license": "self-made" },
-  "states": [
-    { "id": "closed", "name": "Closed", "parts": {} },
-    { "id": "open", "name": "Open", "parts": { "leaf": { "rotation": [0, -90, 0] }, "handle-in": { "rotation": [0, -90, 0] }, "handle-out": { "rotation": [0, -90, 0] } } }
+  "tags": [
+    "door",
+    "interior door"
   ],
-  "interactions": [{ "part": "leaf", "action": "cycleStates" }]
+  "description": "Frame + leaf sized to its opening. params: hinge left | right (seen from inside the room that has the door), swing in (into that room) | out.",
+  "source": {
+    "kind": "procedural",
+    "generator": "door",
+    "license": "self-made"
+  },
+  "interactions": [
+    {
+      "part": "leaf",
+      "action": "cycleStates"
+    }
+  ],
+  "params": {
+    "hinge": {
+      "default": "left",
+      "description": "left | right, seen from inside the room"
+    },
+    "swing": {
+      "default": "in",
+      "description": "in | out of the room"
+    }
+  }
 }

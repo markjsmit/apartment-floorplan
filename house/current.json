@@ -966,6 +966,10 @@
         },
         {
           "id": "hallway.bedroom-door",
+          "params": {
+            "hinge": "right",
+            "swing": "out"
+          },
           "type": "door",
           "wall": "hallway.wall-5",
           "offset": 45,
@@ -984,6 +988,10 @@
         },
         {
           "id": "hallway.bathroom-door",
+          "params": {
+            "hinge": "right",
+            "swing": "out"
+          },
           "type": "door",
           "wall": "hallway.wall-6",
           "offset": 10,
@@ -1171,6 +1179,9 @@
       "openings": [
         {
           "id": "storage.door",
+          "params": {
+            "hinge": "right"
+          },
           "type": "door",
           "wall": "storage.wall-4",
           "offset": 15,
@@ -2421,6 +2432,9 @@
         },
         {
           "id": "bedroom.closet-door",
+          "params": {
+            "hinge": "right"
+          },
           "type": "door",
           "wall": "bedroom.wall-3",
           "offset": 28,
@@ -2439,6 +2453,9 @@
         },
         {
           "id": "bedroom.ensuite-door",
+          "params": {
+            "hinge": "left"
+          },
           "type": "door",
           "wall": "bedroom.wall-4",
           "offset": 38,

@@ -7,7 +7,7 @@ import { group } from './group';
 import { suitcase } from './suitcase';
 import { stuff } from './stuff';
 import { ledStrip, surfaceLight } from './lights';
-import { door, doorStates, windowParts } from './openings';
+import { door, doorOpenAngle, doorStates, windowParts } from './openings';
 import { kitchenCounter, kitchenIsland, kitchenTall, kitchenWallCabinet, plainBox, slidingDoor, trackLight } from './builtins';
 import { bathroomVanity, bathtub, closetSystem, showerEnclosure, toiletWallHung, washerDryerColumn } from './bathroom';
 
@@ -37,7 +37,7 @@ export const generators: Record<string, Generator> = {
   group: (params) => group(params, generators),
   door: (params) => {
     const parts = door(params);
-    return { parts, states: doorStates(parts) };
+    return { parts, states: doorStates(parts, doorOpenAngle(params)) };
   },
   window: windowParts,
   'sliding-door': slidingDoor,

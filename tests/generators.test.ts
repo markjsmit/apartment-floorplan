@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest';
 import { generators } from '../src/model/generators';
 import { assetSize, openingParams } from '../src/model/assets';
 import { FurnitureAssetSchema, type Part } from '../src/model/schema';
-import { door, doorStates, windowParts } from '../src/model/generators/openings';
+import { door, doorOpenAngle, doorStates, windowParts } from '../src/model/generators/openings';
 
 describe('door generator', () => {
   const parts = door({ width: 83, height: 211, wallThickness: 10 });
@@ -31,6 +31,20 @@ describe('door generator', () => {
     const open = doorStates(parts)[1];
     for (const id of ['leaf', 'handle-in', 'handle-in-rose', 'handle-out-key-rose']) expect(open.parts[id]?.rotation).toEqual([0, -90, 0]);
     expect(open.parts['jamb-left']).toBeUndefined();
+  });
+
+  it('can hinge on the right and/or swing out of the room', () => {
+    const leaf = (params: Record<string, unknown>) => door({ width: 83, height: 211, wallThickness: 10, ...params }).find((p) => p.id === 'leaf')!;
+    expect(leaf({}).pivot![0]).toBeLessThan(0);
+    expect(leaf({ hinge: 'right' }).pivot![0]).toBeGreaterThan(0);
+    expect(leaf({ swing: 'out' }).pivot![2]).toBeCloseTo(-10);
+    const opened = (params: Record<string, unknown>) => {
+      const ps = door({ width: 83, height: 211, wallThickness: 10, ...params });
+      return assetSize(ps, doorStates(ps, doorOpenAngle(params))[1]);
+    };
+    expect(opened({ hinge: 'right' }).max[2]).toBeGreaterThan(70); // still into the room
+    expect(opened({ swing: 'out' }).min[2]).toBeLessThan(-70); // out into the room next door
+    expect(opened({ hinge: 'right', swing: 'out' }).min[2]).toBeLessThan(-70);
   });
 });
 

@@ -97,7 +97,7 @@ export function Lighting({ room, mobile }: { room: HouseFrame; mobile: boolean }
       {/* bounced daylight; rooms are closed boxes so this stands in for light coming off the floor and walls */}
       <hemisphereLight args={['#f3f6fa', '#e6e3dc', 1.7 * daylight + 0.45 * Math.min(1, daylight * 4) + 0.1]} />
       <ambientLight intensity={0.3 * daylight + 0.04} />
-      <RoomLamps slots={mobile ? 2 : 6} sunDown={!dir} />
+      <RoomLamps slots={mobile ? 2 : 6} />
       <Environment resolution={64} environmentIntensity={0.45 * daylight + 0.06}>
         <Lightformer form="rect" intensity={2} position={[0, 5, 0]} scale={[10, 10, 1]} rotation={[Math.PI / 2, 0, 0]} />
         <Lightformer form="rect" intensity={0.6} position={[5, 1, 0]} scale={[10, 3, 1]} rotation={[0, -Math.PI / 2, 0]} color="#ffeedd" />
@@ -115,7 +115,7 @@ const IDENTITY = { x: 0, z: 0, rotationDeg: 0 };
  * The room lights: a fixed pool of point lights (dark when unused) given to the lit lamps of the open room first,
  * then the nearest. Fixed, because adding or removing a light makes three.js recompile every shader (a stutter).
  */
-function RoomLamps({ slots, sunDown }: { slots: number; sunDown: boolean }) {
+function RoomLamps({ slots }: { slots: number }) {
   const house = useStore(currentHouse);
   const layout = useStore(currentLayout);
   const bundle = useStore((s) => s.bundle);
@@ -130,8 +130,8 @@ function RoomLamps({ slots, sunDown }: { slots: number; sunDown: boolean }) {
   const lit = useMemo(() => {
     const own = lamps.filter((l) => l.room === roomId);
     const from: [number, number] = own.length ? [own[0].position[0], own[0].position[2]] : [0, 0];
-    return assignLampSlots(lamps, (r) => roomLightOn(overrides, r, sunDown), roomId, from, slots);
-  }, [lamps, overrides, sunDown, roomId, slots]);
+    return assignLampSlots(lamps, (r) => roomLightOn(overrides, r), roomId, from, slots);
+  }, [lamps, overrides, roomId, slots]);
   return (
     <>
       {Array.from({ length: slots }, (_, i) => {

@@ -54,9 +54,9 @@ export function assignLampSlots(lamps: Lamp[], isOn: (room: string) => boolean, 
     .slice(0, slots);
 }
 
-/** Room lights follow the sun (on after dark) unless switched by hand (💡 / double-clicking a lamp). */
-export function roomLightOn(overrides: Record<string, boolean>, roomId: string, sunDown: boolean): boolean {
-  return overrides[roomId] ?? sunDown;
+/** Room lights are on (Mark: on by default) unless switched off by hand (💡 / L / double-clicking a lamp). */
+export function roomLightOn(overrides: Record<string, boolean>, roomId: string): boolean {
+  return overrides[roomId] ?? true;
 }
 
 /**

@@ -20,7 +20,27 @@ function dims(params: Record<string, unknown>) {
   };
 }
 
+/**
+ * Door frame + leaf. `hinge`: left | right, seen from the room the door belongs to; `swing`: in (into that room) | out.
+ * Built hinged left, swinging in, then mirrored.
+ */
 export function door(params: Record<string, unknown>): Part[] {
+  const parts = doorLeftIn(params);
+  const { t } = dims(params);
+  const mx = params.hinge === 'right' ? -1 : 1;
+  const mz = params.swing === 'out' ? -1 : 1;
+  if (mx === 1 && mz === 1) return parts;
+  // mirror x about the opening's centre and/or z about the middle of the wall (z = -t/2)
+  const flip = (v: Vec3): Vec3 => [v[0] * mx, v[1], mz === 1 ? v[2] : -t - v[2]];
+  return parts.map((p) => ({ ...p, position: flip(p.position), pivot: p.pivot && flip(p.pivot) }));
+}
+
+/** Which way the leaf turns to open (degrees about y), for a door generated with these params. */
+export function doorOpenAngle(params: Record<string, unknown>): number {
+  return -90 * (params.hinge === 'right' ? -1 : 1) * (params.swing === 'out' ? -1 : 1);
+}
+
+function doorLeftIn(params: Record<string, unknown>): Part[] {
   const { W, H, t } = dims(params);
   const F = 4; // frame (jamb) width
   const leafW = W - 2 * F - 0.6;
@@ -79,8 +99,8 @@ export function windowParts(params: Record<string, unknown>): Part[] {
   return parts;
 }
 
-/** Closed / open (90° into the room) for a door: everything hung on the hinge (leaf, handles, roses) swings. */
-export function doorStates(parts: Part[]): AssetState[] {
-  const swing = Object.fromEntries(parts.filter((p) => p.pivot).map((p) => [p.id, { rotation: [0, -90, 0] as Vec3 }]));
+/** Closed / open (90° the way the door swings) for a door: everything hung on the hinge (leaf, handles, roses) swings. */
+export function doorStates(parts: Part[], angle = -90): AssetState[] {
+  const swing = Object.fromEntries(parts.filter((p) => p.pivot).map((p) => [p.id, { rotation: [0, angle, 0] as Vec3 }]));
   return [{ id: 'closed', name: 'Closed', parts: {} }, { id: 'open', name: 'Open', parts: swing }];
 }

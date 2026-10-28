@@ -42,11 +42,10 @@ describe('assignLampSlots', () => {
 });
 
 describe('room lights', () => {
-  it('follow the sun unless switched by hand', () => {
-    expect(roomLightOn({}, 'a', true)).toBe(true);
-    expect(roomLightOn({}, 'a', false)).toBe(false);
-    expect(roomLightOn({ a: true }, 'a', false)).toBe(true);
-    expect(roomLightOn({ a: false }, 'a', true)).toBe(false);
+  it('are on unless switched off by hand', () => {
+    expect(roomLightOn({}, 'a')).toBe(true);
+    expect(roomLightOn({ a: true }, 'a')).toBe(true);
+    expect(roomLightOn({ a: false }, 'a')).toBe(false);
   });
 
   it('toggle per room in the store (view-only)', () => {
