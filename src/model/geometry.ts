@@ -163,3 +163,19 @@ export function facing(yawDeg: number, northAngle: number): { bearing: number; c
   const bearing = (Math.round(Math.atan2(e, n) / DEG) + 360) % 360;
   return { bearing, compass: WINDS[Math.round(bearing / 45) % 8] };
 }
+
+/**
+ * How far wall i's box runs past its start / end corner (cm). At an inside corner of the room it runs on into the
+ * neighbouring wall (its thickness, 5 mm short of its outer face) so the corner has no light leak; at an outside
+ * corner (the room turns outwards, e.g. round a door alcove) it stops at the corner, or it would stick into the room.
+ */
+export function wallOverrun(walls: WallInfo[], i: number): { start: number; end: number } {
+  const w = walls[i];
+  const prev = walls[(i + walls.length - 1) % walls.length];
+  const next = walls[(i + 1) % walls.length];
+  const dot = (a: Vec2, b: Vec2) => a[0] * b[0] + a[1] * b[1];
+  // inside corner: the next wall heads into the room, the previous one comes out of it
+  const endInside = dot(next.dir, w.inward) > 1e-6;
+  const startInside = dot(prev.dir, w.inward) < -1e-6;
+  return { start: startInside ? prev.thickness - 0.5 : 0, end: endInside ? next.thickness - 0.5 : 0 };
+}

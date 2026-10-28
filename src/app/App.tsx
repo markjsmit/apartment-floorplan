@@ -36,6 +36,7 @@ export function App() {
           ...(u.view ? { view: u.view } : {}),
           ...(u.person ? { person: u.person } : {}),
           ...(u.time !== undefined ? { timeOfDay: u.time } : {}),
+          ...(u.itemStates ? { itemStates: u.itemStates } : {}),
           // cam= in a link is in the room's own coordinates
           ...(u.camera ? { camera: poseFromRoom({ house: composeHouse(b, u.roomVersions) }, u.roomId, u.camera) } : {}),
         });

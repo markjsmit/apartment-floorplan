@@ -2,7 +2,7 @@ import { useMemo } from 'react';
 import { DoubleSide } from 'three';
 import type { ThreeEvent } from '@react-three/fiber';
 import type { Placement, Room } from '../model/schema';
-import { resolveWalls, roomBounds, wallSegments } from '../model/geometry';
+import { resolveWalls, roomBounds, wallOverrun, wallSegments } from '../model/geometry';
 import { placeRoomItems, upAtCeiling } from '../model/placement';
 import { initialState, openingParams, resolveAsset } from '../model/assets';
 import { useStore } from '../app/store';
@@ -92,18 +92,15 @@ export function RoomView({ room, placement, hiddenAssets, showCeiling, shade }: 
 
       {walls.map((w, i) => {
         const t = w.thickness;
-        // the neighbouring walls of this room, which the end pieces run into
-        const prevT = walls[(i + walls.length - 1) % walls.length].thickness;
-        const nextT = walls[(i + 1) % walls.length].thickness;
+        const over = wallOverrun(walls, i);
         const yaw = Math.atan2(-w.dir[1], w.dir[0]);
         return (
           <group key={w.id} ref={registerObject(w.id)} userData={{ selectable: { kind: 'wall', id: w.id, part: null } }} onClick={pick({ kind: 'wall', id: w.id, part: null })}>
             {wallSegments(w, room.openings, room.ceilingHeight).map((r0) => {
-              // run the end pieces past the corners into the neighbouring wall (no light leaks), stopping 5 mm short
-              // of its outside: the end face must not poke into the room next door and flicker on its wall
+              // run the end pieces past inside corners into the neighbouring wall (no light leaks; see wallOverrun)
               const r = {
-                u0: r0.u0 === 0 ? -(prevT - 0.5) : r0.u0,
-                u1: r0.u1 >= w.length - 0.01 ? w.length + (nextT - 0.5) : r0.u1,
+                u0: r0.u0 === 0 ? -over.start : r0.u0,
+                u1: r0.u1 >= w.length - 0.01 ? w.length + over.end : r0.u1,
                 // and past the floor/ceiling planes, so their edges never show a crack
                 y0: r0.y0 <= 0 ? -5 : r0.y0,
                 y1: r0.y1 >= room.ceilingHeight - 0.01 ? room.ceilingHeight + 20 : r0.y1,

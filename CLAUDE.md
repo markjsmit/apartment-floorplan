@@ -34,7 +34,7 @@ Ids: items/openings by id, walls `<room>.wall-<n>` (or their stored id), `<room>
 
 ## Seeing what he sees
 
-`npm run -s snap -- <room> [version] [--cam x,z,yaw,pitch] [--top] [--person heli] [--time 9.5]` → prints a PNG
+`npm run -s snap -- <room> [version] [--cam x,z,yaw,pitch] [--top] [--person heli] [--time 9.5] [--states storage.door:open]` → prints a PNG
 path; read it. Use it to check your own edits and to brainstorm ("from the door it looks like…").
 `--cam` is in that room's own coordinates (like ui-state): yaw 0 looks towards the room's -z, positive yaw turns
 left. Doesn't touch Mark's ui-state.

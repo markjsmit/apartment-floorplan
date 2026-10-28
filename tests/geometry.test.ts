@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { RoomSchema, ItemSchema, OpeningSchema } from '../src/model/schema';
 import {
-  compassOf, facing, pointInPolygon, resolveItemTransform, resolveWalls, roomBounds, wallSegments,
+  compassOf, facing, pointInPolygon, resolveItemTransform, resolveWalls, roomBounds, wallOverrun, wallSegments,
 } from '../src/model/geometry';
 
 const square = (northAngle = 0) =>
@@ -118,5 +118,21 @@ describe('facing', () => {
     expect(facing(-45, 0)).toEqual({ bearing: 45, compass: 'north-east' });
     // north points to +x: looking down -z is then west
     expect(facing(0, 90).compass).toBe('west');
+  });
+});
+
+describe('wallOverrun', () => {
+  it('runs walls on into the neighbour at inside corners only', () => {
+    // a room with an outside corner at (100,50): an L-shape
+    const room = RoomSchema.parse({
+      id: 'l', name: 'L', footprint: [[0, 0], [200, 0], [200, 100], [100, 100], [100, 50], [0, 50]], ceilingHeight: 250,
+      floor: { material: 'x' }, ceiling: { material: 'x' },
+    });
+    const walls = resolveWalls(room);
+    // wall 0 (top): both corners are inside corners
+    expect(wallOverrun(walls, 0)).toEqual({ start: 9.5, end: 9.5 });
+    // wall 3 runs from (100,100) up to (100,50): its end is the outside corner, so it stops there
+    expect(wallOverrun(walls, 3)).toEqual({ start: 9.5, end: 0 });
+    expect(wallOverrun(walls, 4).start).toBe(0);
   });
 });

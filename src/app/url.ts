@@ -17,6 +17,8 @@ export type UrlState = {
   /** opening to start at (the house's entry door) */
   spawnAt?: string;
   noreport: boolean;
+  /** furniture/door states to start with, e.g. `states=storage.door:open` (snapshots) */
+  itemStates?: Record<string, string>;
 };
 
 type BundleLike = {
@@ -62,7 +64,9 @@ export function parseUrlState(search: string, bundle: BundleLike): UrlState {
   const person = p === 'mark' || p === 'heli' ? p : undefined;
   const t = Number(q.get('time'));
   const time = q.has('time') && Number.isFinite(t) ? t : undefined;
-  return { roomId, versionId, roomVersions, camera, view, person, time, spawnAt, noreport: q.get('noreport') === '1' };
+  const states = Object.fromEntries((q.get('states') ?? '').split(',').map((s) => s.split(':')).filter((p) => p.length === 2 && p[0] && p[1]));
+  const itemStates = Object.keys(states).length ? states : undefined;
+  return { roomId, versionId, roomVersions, camera, view, person, time, spawnAt, noreport: q.get('noreport') === '1', itemStates };
 }
 
 const round1 = (n: number) => Math.round(n * 10) / 10;

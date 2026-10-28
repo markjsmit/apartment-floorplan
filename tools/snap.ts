@@ -1,4 +1,4 @@
-// npm run snap -- <room> [version] [--cam x,z,yaw,pitch] [--top] [--person heli] [--time 9.5] [--size 1280x800] [--out file.png]
+// npm run snap -- <room> [version] [--cam x,z,yaw,pitch] [--top] [--person heli] [--time 9.5] [--size 1280x800] [--states id:state,...] [--out file.png]
 // Renders the viewer headless and saves a PNG Claude can look at. Uses the running dev server on :5180,
 // or starts a temporary one on :5181. Never reports UI state (noreport=1), so Mark's selection stays untouched.
 import fs from 'node:fs';
@@ -8,7 +8,7 @@ import { chromium } from 'playwright';
 import { ROOT } from './load-files';
 
 const args = process.argv.slice(2);
-const VALUE_FLAGS = ['--cam', '--person', '--time', '--size', '--out'];
+const VALUE_FLAGS = ['--cam', '--person', '--time', '--size', '--out', '--states'];
 const flag = (n: string) => {
   const i = args.indexOf(`--${n}`);
   return i >= 0 ? args[i + 1] : undefined;
@@ -16,7 +16,7 @@ const flag = (n: string) => {
 const positional = args.filter((a, i) => !a.startsWith('--') && !VALUE_FLAGS.includes(args[i - 1]));
 const [room, version = 'current'] = positional;
 if (!room) {
-  console.log('usage: npm run snap -- <room> [version] [--cam x,z,yaw,pitch] [--top] [--person heli] [--time 9.5] [--size 1280x800] [--out file.png]');
+  console.log('usage: npm run snap -- <room> [version] [--cam x,z,yaw,pitch] [--top] [--person heli] [--time 9.5] [--size 1280x800] [--states id:state,...] [--out file.png]');
   process.exit(1);
 }
 
@@ -55,6 +55,7 @@ if (flag('cam')) q.set('cam', flag('cam')!);
 if (args.includes('--top')) q.set('view', 'top');
 if (flag('person')) q.set('person', flag('person')!);
 if (flag('time')) q.set('time', flag('time')!);
+if (flag('states')) q.set('states', flag('states')!);
 if (args.includes('--no-ao')) q.set('ao', '0');
 const [w, h] = (flag('size') ?? '1280x800').split('x').map(Number);
 
