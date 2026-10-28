@@ -72,7 +72,7 @@ current/suggestion ones do.
 
 **Room** (`house/*.json` → `rooms[]`): `id`, `name`, `tags`, `footprint` ([x, z] polygon, any winding; rectangles
 are `[[0,0],[W,0],[W,D],[0,D]]`), `ceilingHeight`, `northAngle` (direction of north, degrees clockwise from -z;
-0 → edge 0 of a rectangle is the north wall), `floor.material`, `ceiling.material`, `wallMaterial`,
+0 → edge 0 of a rectangle is the north wall), `floor.material`, `ceiling.material`, `ceiling.lowered[]` (`{id, footprint, height, tags}`: soffits / lowered parts — part of the ceiling, not items), `wallMaterial`,
 `walls[]` (optional per edge: `{id, edge, tags, material, thickness}`), `openings[]`, `items[]`, `assumptions[]`.
 Walls are auto-derived from the footprint: wall n runs from footprint[n] to footprint[n+1]; compass tags
 ("north wall") are added automatically.
