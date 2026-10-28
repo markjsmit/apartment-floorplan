@@ -123,9 +123,13 @@ export function initialState(asset: FurnitureAsset, item: Pick<Item, 'state'>, u
   return asset.states[0].id;
 }
 
-export function nextState(asset: FurnitureAsset, current: string): string {
-  const i = asset.states.findIndex((s) => s.id === current);
-  return asset.states[(i + 1) % asset.states.length].id;
+/** The state after `current`; when double-clicking a part whose interaction lists `states`, only through those. */
+export function nextState(asset: FurnitureAsset, current: string, part?: string): string {
+  const only = part ? asset.interactions.find((x) => x.part === part && x.states?.length)?.states : undefined;
+  const ids = only?.filter((id) => asset.states.some((s) => s.id === id)) ?? asset.states.map((s) => s.id);
+  if (!ids.length) return current;
+  const i = ids.indexOf(current);
+  return ids[(i + 1) % ids.length];
 }
 
 export function interactivePart(asset: FurnitureAsset, partId: string): boolean {

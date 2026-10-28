@@ -35,7 +35,8 @@ type Props = {
   daylight: number;
 };
 
-/** A placed asset (furniture item or door/window): parts animate between states; click selects, double-click cycles. */
+/** A placed asset (furniture item or door/window): parts animate between states. Click selects (a big piece's section
+ *  first, a second click the whole), double-click changes the state the clicked part belongs to. */
 export function PartsView({ id, kind, asset, parts, stateId, position, rotationDeg, selectWhole, roomId, lightsOn, daylight }: Props) {
   const select = useStore((s) => s.select);
   const cycleState = useStore((s) => s.cycleState);
@@ -43,20 +44,29 @@ export function PartsView({ id, kind, asset, parts, stateId, position, rotationD
   const state = findState(asset, stateId);
   const lamp = (part: string) => !!parts.find((p) => p.id === part)?.emit;
   // a lamp's glowing part is a light switch; anything else with an interaction changes state
-  const act = (part: string) => (lamp(part) ? toggleRoomLights(lightsOn, roomId) : cycleState(id));
+  const act = (part: string) => (lamp(part) ? toggleRoomLights(lightsOn, roomId) : cycleState(id, part));
   const interactive = (part: string) => interactivePart(asset, part) || lamp(part);
+  const sectionOf = (part: string) => parts.find((p) => p.id === part)?.section ?? null;
 
   const onClick = (part: string) => (e: ThreeEvent<MouseEvent>) => {
     e.stopPropagation();
     if (e.delta > CLICK_SLOP) return;
     const action = clickAction({ phone: isPhone(), interactive: interactive(part) });
-    if (action === 'select') select({ kind, id, part });
+    if (action === 'select') {
+      const section = sectionOf(part);
+      const sel = useStore.getState().selection;
+      // first click: the section; clicking the selected section again selects the whole piece
+      const again = sel?.id === id && sel.part === section;
+      select({ kind, id, part: section && !again ? section : null });
+    }
     if (action === 'cycle') act(part);
   };
   const onDoubleClick = (part: string) => (e: ThreeEvent<MouseEvent>) => {
     e.stopPropagation();
     // phones already changed state on the first tap
-    if (!isPhone() && interactive(part)) act(part);
+    if (isPhone()) return;
+    if (sectionOf(part)) select({ kind, id, part: sectionOf(part) });
+    if (interactive(part)) act(part);
   };
 
   return (
@@ -132,7 +142,7 @@ function PartMesh({ ownerId, kind, part, pose, interactive, lightsOn, daylight, 
       onDoubleClick={onDoubleClick}
       onPointerOver={interactive ? (e) => { e.stopPropagation(); document.body.style.cursor = 'pointer'; } : undefined}
       onPointerOut={interactive ? () => { document.body.style.cursor = ''; } : undefined}
-      userData={{ selectable: { kind, id: ownerId, part: part.id } }}
+      userData={{ selectable: { kind, id: ownerId, part: part.section ?? part.id } }}
     >
       {part.label && <Label label={part.label} faceZ={faceDepth(part) / 2} />}
       {/* point lamps are lit by the room's light pool (Lighting / RoomLamps), not here */}

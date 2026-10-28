@@ -278,14 +278,13 @@
       ],
       "items": [
         {
-          "id": "living.tall-units",
+          "id": "living.fridge-niche",
           "asset": "kitchen-tall",
-          "name": "Tall kitchen units",
+          "name": "Fridge niche",
           "tags": [
-            "tall units",
-            "pantry",
-            "oven",
-            "fridge niche"
+            "fridge",
+            "fridge niche",
+            "tall units"
           ],
           "against": {
             "wall": "living.wall-3",
@@ -298,19 +297,62 @@
               {
                 "w": 100,
                 "kind": "fridge"
-              },
+              }
+            ]
+          },
+          "builtIn": true
+        },
+        {
+          "id": "living.oven-column",
+          "asset": "kitchen-tall",
+          "name": "Oven column",
+          "tags": [
+            "oven",
+            "oven column",
+            "tall units"
+          ],
+          "against": {
+            "wall": "living.wall-3",
+            "offset": 138
+          },
+          "params": {
+            "height": 238,
+            "depth": 59.5,
+            "columns": [
               {
                 "w": 60,
                 "kind": "oven",
                 "handle": "left"
-              },
-              {
-                "w": 36,
-                "kind": "pantry",
-                "handle": "left"
               }
             ]
           },
+          "allowOverlap": [
+            "living.counter"
+          ],
+          "builtIn": true
+        },
+        {
+          "id": "living.counter-column",
+          "asset": "kitchen-wall-cabinet",
+          "name": "Cabinet column on the counter",
+          "tags": [
+            "side cabinet",
+            "counter column",
+            "tall units"
+          ],
+          "against": {
+            "wall": "living.wall-3",
+            "offset": 198,
+            "elevation": 90
+          },
+          "params": {
+            "width": 36,
+            "height": 148,
+            "depth": 59.5
+          },
+          "allowOverlap": [
+            "living.counter"
+          ],
           "builtIn": true
         },
         {
@@ -347,12 +389,21 @@
           ],
           "against": {
             "wall": "living.wall-4",
-            "offset": 62
+            "offset": 0
           },
+          "allowOverlap": [
+            "living.oven-column",
+            "living.counter-column"
+          ],
           "params": {
-            "length": 248,
-            "sinkCenter": 100,
+            "length": 310,
+            "sinkCenter": 162,
             "modules": [
+              {
+                "w": 62,
+                "kind": "door",
+                "handle": "left"
+              },
               {
                 "w": 60,
                 "kind": "drawers"
@@ -375,25 +426,6 @@
                 "kind": "panel"
               }
             ]
-          },
-          "builtIn": true
-        },
-        {
-          "id": "living.wall-cabinet",
-          "asset": "kitchen-wall-cabinet",
-          "name": "Wall cabinet",
-          "tags": [
-            "upper cabinet",
-            "wall cabinet"
-          ],
-          "against": {
-            "wall": "living.wall-4",
-            "offset": 62,
-            "elevation": 140
-          },
-          "params": {
-            "width": 60,
-            "height": 75
           },
           "builtIn": true
         },
@@ -717,8 +749,8 @@
           "note": "140 from the dining corner (notes, the label is upside down; photo 160730 agrees); width 100 / height 213 assumed"
         },
         {
-          "path": "items[living.tall-units]",
-          "note": "from the glossy block south: fridge niche 100 (side-by-side fridge ~91), oven 60, narrow door 36 (photos 160651, 160731-33, video 24.5-25.5 s); widths estimated. The notes' 1.68 m = pillar to the start of the fridge run (z 356 -> 524)"
+          "path": "items[living.fridge-niche]",
+          "note": "tall-unit wall from the glossy block south: fridge niche 100 (side-by-side fridge ~91), oven column 60, cabinet column on the counter 36 (Mark: the wall cabinet doesn't exist as such; ad photo ...57de2); widths provisional (photos 160651, 160731-33, video 24.5-25.5 s); widths estimated. The notes' 1.68 m = pillar to the start of the fridge run (z 356 -> 524)"
         },
         {
           "path": "items[living.block]",

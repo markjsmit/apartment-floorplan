@@ -140,8 +140,10 @@ export function wallBedDesk(params: Record<string, unknown>): Generated {
   const t = 1.8;
   const material = String(params.material ?? 'wood-oak-light');
   const mattressColor = String(params.mattressColor ?? '#e8e6e1');
+  // three sections (first click selects one): the storage base, the bed (housing + bed), the desk
+  const sectionOf = (tags: string[]) => (tags[0] === 'desk' ? 'desk' : tags[0] === 'base' || tags[0] === 'pillow' ? 'base' : 'bed');
   const part = (id: string, tags: string[], size: Vec3, position: Vec3, extra: Partial<Part> = {}): Part => ({
-    id, tags, geometry: { type: 'box', size }, position, rotation: [0, 0, 0], material, castShadow: true, glass: false, ...extra,
+    id, tags, geometry: { type: 'box', size }, position, rotation: [0, 0, 0], material, castShadow: true, glass: false, section: sectionOf(tags), ...extra,
   });
   const BW = W + 2 * t; // base outer width
   const parts: Part[] = [];
@@ -221,7 +223,11 @@ export function wallBedDesk(params: Record<string, unknown>): Generated {
     bed[id] = { position: turn(foldedLeg), rotation: [90, 0, 0] };
   }
 
-  const interactions = ['bed-board', 'mattress', 'desk-top'].map((p) => ({ part: p, action: 'cycleStates' as const }));
+  // double-click the bed: down <-> up; double-click the desk: out <-> folded
+  const interactions = [
+    ...['bed-board', 'mattress'].map((p) => ({ part: p, action: 'cycleStates' as const, states: ['bed', 'folded'] })),
+    { part: 'desk-top', action: 'cycleStates' as const, states: ['desk', 'folded'] },
+  ];
   return {
     parts,
     states: [

@@ -55,7 +55,8 @@ type Actions = {
   setVersion: (id: string, roomId?: string) => boolean;
   select: (s: Selection | null) => void;
   selectById: (id: string) => boolean;
-  cycleState: (id: string) => void;
+  /** next state of an item/door; `part` = the double-clicked part (its interaction may limit the states) */
+  cycleState: (id: string, part?: string) => void;
   /** switch a room's lights (default: the open room) to the opposite of `currentlyOn` */
   toggleRoomLights: (currentlyOn: boolean, roomId?: string) => void;
   setPerson: (p: Person) => void;
@@ -171,7 +172,7 @@ export const useStore = create<State & Actions>((set, get) => ({
     set({ selection: { kind: found.kind, id, part: null } });
     return true;
   },
-  cycleState: (id) => {
+  cycleState: (id, part) => {
     const { bundle, itemStates } = get();
     const house = currentHouse(get());
     if (!bundle || !house) return;
@@ -183,7 +184,7 @@ export const useStore = create<State & Actions>((set, get) => ({
     const params = found.kind === 'item' ? resolveParams(raw, found.item) : found.kind === 'opening' ? openingParams(raw, found.opening) : {};
     const asset = resolveAsset(raw, params);
     const current = initialState(asset, ref, itemStates[id]);
-    set({ itemStates: { ...itemStates, [id]: nextState(asset, current) } });
+    set({ itemStates: { ...itemStates, [id]: nextState(asset, current, part) } });
   },
   toggleRoomLights: (currentlyOn, roomId) => {
     const room = roomId ?? get().roomId;

@@ -83,3 +83,18 @@ describe('states', () => {
     expect(interactivePart(wallBed, 'frame')).toBe(false);
   });
 });
+
+describe('part interactions with states', () => {
+  it('cycle only through their own states', () => {
+    const a = FurnitureAssetSchema.parse({
+      id: 'wb', name: 'wb', source: { kind: 'parts', license: 'self-made' }, parts: [{ id: 'desk' }, { id: 'bed' }],
+      states: [{ id: 'desk' }, { id: 'folded' }, { id: 'bed' }].map((x) => ({ ...x, name: x.id, parts: {} })),
+      interactions: [{ part: 'desk', action: 'cycleStates', states: ['desk', 'folded'] }, { part: 'bed', action: 'cycleStates', states: ['bed', 'folded'] }],
+    });
+    expect(nextState(a, 'folded', 'desk')).toBe('desk');
+    expect(nextState(a, 'desk', 'desk')).toBe('folded');
+    expect(nextState(a, 'desk', 'bed')).toBe('bed'); // not in the bed's list: its first state
+    expect(nextState(a, 'bed', 'bed')).toBe('folded');
+    expect(nextState(a, 'desk')).toBe('folded'); // no part: all states
+  });
+});

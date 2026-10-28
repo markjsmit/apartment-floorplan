@@ -158,6 +158,8 @@ export const PartSchema = z.object({
   color: z.string().optional(),
   castShadow: z.boolean().default(true),
   glass: z.boolean().default(false),
+  // big pieces come in sections (a wall bed: base, bed, desk): the first click selects the section, the second the whole
+  section: z.string().optional(),
   // text tag on the part's front (+z) face, e.g. a label on a box or drawer; offset = [x, y] from the face centre (cm)
   label: z
     .object({ text: z.string(), size: z.number().default(2.4), offset: Vec2Schema.default([0, 0]), color: z.string().default('#2b2b2b') })
@@ -212,7 +214,8 @@ export const FurnitureAssetSchema = z.object({
   parts: z.array(PartSchema).default([]),
   states: z.array(AssetStateSchema).min(1).default([{ id: 'default', name: 'Default', parts: {} }]),
   defaultState: z.string().optional(),
-  interactions: z.array(z.object({ part: z.string(), action: z.literal('cycleStates') })).default([]),
+  // double-clicking `part` cycles the states (only through `states` when given, e.g. a wall bed's desk: desk <-> folded)
+  interactions: z.array(z.object({ part: z.string(), action: z.literal('cycleStates'), states: z.array(z.string()).optional() })).default([]),
 });
 export type FurnitureAsset = z.infer<typeof FurnitureAssetSchema>;
 

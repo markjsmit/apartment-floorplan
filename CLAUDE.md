@@ -92,7 +92,9 @@ thickness between them — that usually means a measurement is off: tell Mark wh
 width, height, sill, asset?: door-basic|window-basic, state?, tags}`. Door/window frames are generated to fit.
 
 **Item**: `{id, asset, params, name, tags, against: {wall, offset, gap?, elevation?} | position: [x,y,z] + rotation,
-state?, selectWhole (default true), assumptions}`. Prefer `against` for anything standing at a wall: back on the
+state?, selectWhole (default true), assumptions}`. Big pieces have part `section`s (a wall bed: base / bed /
+desk): Mark's first click selects the section (ui-state `selection.part` = section name), a second click the whole; an
+interaction's `states` limits what double-clicking that part cycles through. Prefer `against` for anything standing at a wall: back on the
 wall, front facing the room, `offset` from the wall's start corner to the item's nearest edge.
 Item local space: origin back-centre on the floor, +z out of the front.
 

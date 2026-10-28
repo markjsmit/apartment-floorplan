@@ -38,7 +38,11 @@ function SelectionOutline() {
       if (!selection) return setObjs({ strong: [], soft: [] });
       const whole = sceneObjects.get(selection.id);
       const part = selection.part ? sceneObjects.get(`${selection.id}#${selection.part}`) : undefined;
-      const meshes = meshesOf(whole ?? part);
+      // a section (or part) of a big piece: just its meshes
+      const inSection = selection.part && whole
+        ? meshesOf(whole).filter((m) => (m.userData.selectable as { part?: string } | undefined)?.part === selection.part)
+        : [];
+      const meshes = inSection.length ? inSection : meshesOf(part ?? whole);
       const strong = selection.kind === 'item' || selection.kind === 'opening';
       setObjs(strong ? { strong: meshes, soft: [] } : { strong: [], soft: meshes });
     });
