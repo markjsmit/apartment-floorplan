@@ -833,14 +833,14 @@
       "footprint": [
         [
           0,
-          -265
+          -207
         ],
         [
-          410,
-          -265
+          535,
+          -207
         ],
         [
-          410,
+          535,
           -20
         ],
         [
@@ -871,10 +871,9 @@
           "id": "balcony.wall-1",
           "edge": 1,
           "tags": [
-            "side wall",
-            "stone wall"
-          ],
-          "material": "plaster"
+            "railing",
+            "glass railing"
+          ]
         },
         {
           "id": "balcony.wall-2",
@@ -900,7 +899,7 @@
           "type": "opening",
           "wall": "balcony.wall-0",
           "offset": 0,
-          "width": 410,
+          "width": 535,
           "height": 270,
           "name": "Open side (railing)",
           "tags": [
@@ -913,7 +912,7 @@
           "type": "opening",
           "wall": "balcony.wall-3",
           "offset": 0,
-          "width": 245,
+          "width": 187,
           "height": 270,
           "name": "Open end (railing)",
           "tags": [
@@ -921,10 +920,23 @@
           ]
         },
         {
+          "id": "balcony.railing-east",
+          "type": "opening",
+          "wall": "balcony.wall-1",
+          "offset": 0,
+          "width": 187,
+          "height": 270,
+          "name": "Open end in front of the sofa window (railing)",
+          "tags": [
+            "railing",
+            "sofa window"
+          ]
+        },
+        {
           "id": "balcony.door",
           "type": "door",
           "wall": "balcony.wall-2",
-          "offset": 60,
+          "offset": 185,
           "width": 280,
           "height": 222,
           "name": "Balcony door",
@@ -935,6 +947,23 @@
           "leadsTo": {
             "room": "living",
             "opening": "living.balcony-door"
+          }
+        },
+        {
+          "id": "balcony.sofa-window",
+          "type": "opening",
+          "wall": "balcony.wall-2",
+          "offset": 0,
+          "width": 120,
+          "height": 125,
+          "sill": 97,
+          "name": "Sofa window (from outside)",
+          "tags": [
+            "sofa window"
+          ],
+          "leadsTo": {
+            "room": "living",
+            "opening": "living.sofa-window"
           }
         }
       ],
@@ -948,12 +977,12 @@
             "handrail"
           ],
           "position": [
-            205.0,
+            267.5,
             106,
-            -265
+            -207
           ],
           "params": {
-            "width": 410,
+            "width": 535,
             "height": 4,
             "depth": 5,
             "material": "aluminium-grey"
@@ -971,10 +1000,10 @@
           "position": [
             0,
             106,
-            -142.5
+            -113.5
           ],
           "params": {
-            "width": 245,
+            "width": 187,
             "height": 4,
             "depth": 5,
             "material": "aluminium-grey"
@@ -994,12 +1023,12 @@
             "glass"
           ],
           "position": [
-            205.0,
+            267.5,
             5,
-            -264
+            -206
           ],
           "params": {
-            "width": 410,
+            "width": 535,
             "height": 100,
             "depth": 1.2,
             "material": "glass"
@@ -1017,10 +1046,10 @@
           "position": [
             1,
             5,
-            -142.5
+            -113.5
           ],
           "params": {
-            "width": 245,
+            "width": 187,
             "height": 100,
             "depth": 1.2,
             "material": "glass"
@@ -1030,12 +1059,62 @@
             "balcony.rail-glass-north"
           ],
           "builtIn": true
+        },
+        {
+          "id": "balcony.rail-east",
+          "asset": "box",
+          "name": "Railing east end (top rail)",
+          "tags": [
+            "railing",
+            "handrail"
+          ],
+          "position": [
+            535,
+            106,
+            -113.5
+          ],
+          "params": {
+            "width": 187,
+            "height": 4,
+            "depth": 5,
+            "material": "aluminium-grey"
+          },
+          "rotation": -90,
+          "allowOverlap": [
+            "balcony.rail-north"
+          ],
+          "builtIn": true
+        },
+        {
+          "id": "balcony.rail-glass-east",
+          "asset": "box",
+          "name": "Glass railing (east end)",
+          "tags": [
+            "railing",
+            "glass"
+          ],
+          "position": [
+            534,
+            5,
+            -113.5
+          ],
+          "params": {
+            "width": 187,
+            "height": 100,
+            "depth": 1.2,
+            "material": "glass"
+          },
+          "rotation": -90,
+          "allowOverlap": [
+            "balcony.rail-glass-north"
+          ],
+          "builtIn": true
         }
       ],
       "assumptions": [
         {
           "path": "footprint",
-          "note": "NOT measured: Mark remembers ~10 m2; it ends at the stone side wall right after the door (photos 160716-18; the sofa window looks past it, 160714) -> ~410 wide (stone wall just west of the sofa window), ~245 deep (Mark: wider and less deep than 370 x 270). Glass railing on the north and west"
+          "note": "NOT measured: Mark remembers ~10 m2; it runs from the west end of the living room to the far (east) edge of the sofa window, no side wall — glass railing on the north, west and east -> 535 wide (x 0-535), so ~187 deep for 10 m2"
         }
       ]
     },
