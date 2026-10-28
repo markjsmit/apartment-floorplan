@@ -26,7 +26,7 @@ export function openingParams(
  */
 export function resolveAsset(asset: FurnitureAsset, params: Record<string, unknown>): FurnitureAsset {
   const gen = asset.source.kind === 'procedural' && asset.source.generator ? generators[asset.source.generator] : undefined;
-  if (!gen) return asset;
+  if (!gen) return withSections(asset);
   let out: ReturnType<typeof gen>;
   try {
     out = gen(params);
@@ -35,13 +35,31 @@ export function resolveAsset(asset: FurnitureAsset, params: Record<string, unkno
     out = [];
   }
   const g = Array.isArray(out) ? { parts: out } : out;
-  return {
+  return withSections({
     ...asset,
     source: { ...asset.source, generator: undefined },
     parts: [...g.parts, ...asset.parts],
     states: g.states?.length ? g.states : asset.states,
     interactions: [...asset.interactions, ...(g.interactions ?? [])],
-  };
+  });
+}
+
+/**
+ * Sections for pieces that don't name their own: every group of parts that moves together between states (a door leaf
+ * with its handle, a drawer with its front) is a section named after its first part, the rest is "body". So a click
+ * selects a shower's door or its frame before the whole. Pieces where nothing moves stay one piece.
+ */
+export function withSections(asset: FurnitureAsset): FurnitureAsset {
+  if (asset.parts.some((p) => p.section) || asset.states.length < 2) return asset;
+  const signature = (id: string) => JSON.stringify(asset.states.map((st) => st.parts[id] ?? null));
+  const still = JSON.stringify(asset.states.map(() => null));
+  const names = new Map<string, string>();
+  for (const p of asset.parts) {
+    const sig = signature(p.id);
+    if (sig !== still && !names.has(sig)) names.set(sig, p.id);
+  }
+  if (!names.size) return asset;
+  return { ...asset, parts: asset.parts.map((p) => ({ ...p, section: names.get(signature(p.id)) ?? 'body' })) };
 }
 
 /** The generator's complaint about these params, if any. */

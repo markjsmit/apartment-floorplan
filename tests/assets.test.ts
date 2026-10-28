@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { FurnitureAssetSchema, ItemSchema } from '../src/model/schema';
-import {
+import { withSections,
   assetSize, initialState, interactivePart, nextState, partTransform, resolveParams, resolveParts,
 } from '../src/model/assets';
 
@@ -96,5 +96,24 @@ describe('part interactions with states', () => {
     expect(nextState(a, 'desk', 'bed')).toBe('bed'); // not in the bed's list: its first state
     expect(nextState(a, 'bed', 'bed')).toBe('folded');
     expect(nextState(a, 'desk')).toBe('folded'); // no part: all states
+  });
+});
+
+describe('withSections', () => {
+  it('makes each group of parts that moves together a section, the rest "body"', () => {
+    const a = withSections(FurnitureAssetSchema.parse({
+      id: 'sh', name: 'sh', source: { kind: 'parts', license: 'self-made' },
+      parts: [{ id: 'frame' }, { id: 'door' }, { id: 'door-handle' }],
+      states: [
+        { id: 'closed', name: 'closed', parts: {} },
+        { id: 'open', name: 'open', parts: { door: { rotation: [0, 90, 0] }, 'door-handle': { rotation: [0, 90, 0] } } },
+      ],
+    }));
+    expect(a.parts.map((p) => p.section)).toEqual(['body', 'door', 'door']);
+  });
+
+  it('leaves pieces alone that name their own sections or never move', () => {
+    const still = FurnitureAssetSchema.parse({ id: 's', name: 's', source: { kind: 'parts', license: 'self-made' }, parts: [{ id: 'a' }] });
+    expect(withSections(still).parts[0].section).toBeUndefined();
   });
 });

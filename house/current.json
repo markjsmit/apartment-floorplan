@@ -3249,7 +3249,7 @@
             "width": 140,
             "depth": 90,
             "glass": "clear",
-            "doorSide": "right",
+            "doorSide": "left",
             "sidePanel": false
           },
           "allowOverlap": [

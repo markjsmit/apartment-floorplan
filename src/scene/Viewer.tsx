@@ -51,7 +51,8 @@ function SelectionOutline() {
   return (
     <>
       <Outline selection={objs.strong} selectionLayer={10} visibleEdgeColor={0x39ff14} hiddenEdgeColor={0x1f8f0b} edgeStrength={10} blur={false} xRay />
-      <Outline selection={objs.soft} selectionLayer={11} visibleEdgeColor={0x9fffb0} hiddenEdgeColor={0x9fffb0} edgeStrength={2.5} blur xRay={false} />
+      {/* walls / floors / ceilings: as clear as furniture (the soft halo got lost against white walls) */}
+      <Outline selection={objs.soft} selectionLayer={11} visibleEdgeColor={0x39ff14} hiddenEdgeColor={0x39ff14} edgeStrength={7} blur={false} xRay />
     </>
   );
 }
