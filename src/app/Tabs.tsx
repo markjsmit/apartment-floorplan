@@ -35,7 +35,7 @@ export function Tabs({ showVersions }: { showVersions: boolean }) {
                 title={v.meta.note ?? ''}
                 onClick={() => setVersion(id)}
               >
-                {kind === 'suggestion' ? '✨ ' : kind === 'saved' ? '📌 ' : ''}
+                {kind === 'suggestion' ? '✨ ' : kind === 'saved' ? '📌 ' : kind === 'empty' ? '⬜ ' : ''}
                 {v.meta.name}
               </button>
             );

@@ -57,6 +57,8 @@ export const ItemSchema = z
     selectWhole: z.boolean().default(true),
     // ids of items this one is meant to sit inside / interlock with (no overlap warning), e.g. a shelf tongue in a KALLAX cube
     allowOverlap: z.array(z.string()).default([]),
+    // installed and stays when the flat is handed over (kitchen, bathroom fixtures, closets): kept in the Empty version
+    builtIn: z.boolean().default(false),
     assumptions,
   })
   .refine((i) => (i.position === undefined) !== (i.against === undefined), {
@@ -97,7 +99,7 @@ export type Room = z.infer<typeof RoomSchema>;
 
 export const HouseMetaSchema = z.object({
   name: z.string(),
-  kind: z.enum(['current', 'suggestion', 'saved']),
+  kind: z.enum(['current', 'suggestion', 'saved', 'empty']),
   createdAt: z.string().optional(),
   note: z.string().optional(),
   location: z.object({ lat: z.number(), lon: z.number(), label: z.string().optional() }).optional(),

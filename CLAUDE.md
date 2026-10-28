@@ -51,6 +51,8 @@ breaks or changes (furniture no longer fits, a window now blocked, walkway < ~70
 ## Versions (tabs in row 2)
 
 Files: `house/current.json`, `house/suggestion.json` (the "AI suggestion" tab; absent = no tab), `house/saved/<slug>.json`.
+**Empty** (`empty`) is always there for every room, derived from Current (not a file): only items with `builtIn: true`
+(what stays when the flat is handed over). Start from it with `--from empty` (suggest/save).
 Files are whole houses, but **versions are per room**: the tab row shows only the versions for the open room, and
 switching changes only that room (every other room keeps its own choice, default Current). A version is offered for a
 room when its `meta.rooms` lists it, or (no `meta.rooms`) when its copy of the room differs from Current's.

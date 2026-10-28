@@ -4,11 +4,12 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { makeSuggestion, markPromoted, promote, suggestionChanges, savedId, versionIdFromPath, versionPath, type RawHouse } from '../src/model/versions';
+import { EMPTY_ID, emptyVersion, makeSuggestion, markPromoted, promote, suggestionChanges, savedId, versionIdFromPath, versionPath, type RawHouse } from '../src/model/versions';
 
 const root = fileURLToPath(new URL('..', import.meta.url));
 const abs = (rel: string) => path.join(root, rel);
-const read = (id: string): RawHouse => JSON.parse(fs.readFileSync(abs(versionPath(id)), 'utf8'));
+const read = (id: string): RawHouse =>
+  id === EMPTY_ID ? emptyVersion(read('current')) : JSON.parse(fs.readFileSync(abs(versionPath(id)), 'utf8'));
 const write = (id: string, h: RawHouse) => {
   fs.mkdirSync(path.dirname(abs(versionPath(id))), { recursive: true });
   fs.writeFileSync(abs(versionPath(id)), JSON.stringify(h, null, 2) + '\n');
@@ -43,7 +44,7 @@ const positional = args.filter((a, i) => !a.startsWith('--') && !VALUE_FLAGS.inc
 
 function list() {
   const ids: string[] = [];
-  if (exists('current')) ids.push('current');
+  if (exists('current')) ids.push('current', EMPTY_ID);
   if (exists('suggestion')) ids.push('suggestion');
   const savedDir = abs('house/saved');
   if (fs.existsSync(savedDir)) {

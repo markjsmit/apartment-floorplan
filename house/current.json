@@ -273,7 +273,8 @@
                 "handle": "left"
               }
             ]
-          }
+          },
+          "builtIn": true
         },
         {
           "id": "living.counter",
@@ -314,7 +315,8 @@
                 "kind": "panel"
               }
             ]
-          }
+          },
+          "builtIn": true
         },
         {
           "id": "living.wall-cabinet",
@@ -332,7 +334,8 @@
           "params": {
             "width": 60,
             "height": 75
-          }
+          },
+          "builtIn": true
         },
         {
           "id": "living.island",
@@ -362,7 +365,8 @@
                 "kind": "drawers"
               }
             ]
-          }
+          },
+          "builtIn": true
         },
         {
           "id": "living.pillar",
@@ -383,7 +387,8 @@
             "height": 277,
             "depth": 17,
             "material": "white-paint"
-          }
+          },
+          "builtIn": true
         },
         {
           "id": "living.ac-vent-kitchen",
@@ -405,7 +410,8 @@
             "depth": 230,
             "color": "#9c9c98"
           },
-          "rotation": 180
+          "rotation": 180,
+          "builtIn": true
         },
         {
           "id": "living.ac-vent-living",
@@ -427,7 +433,8 @@
             "depth": 1.2,
             "color": "#9c9c98"
           },
-          "rotation": 180
+          "rotation": 180,
+          "builtIn": true
         },
         {
           "id": "living.track-light",
@@ -447,7 +454,8 @@
           "params": {
             "length": 220,
             "spots": 3
-          }
+          },
+          "builtIn": true
         }
       ],
       "assumptions": [
@@ -625,7 +633,8 @@
             "height": 4,
             "depth": 5,
             "material": "aluminium-grey"
-          }
+          },
+          "builtIn": true
         },
         {
           "id": "balcony.rail-west",
@@ -649,7 +658,8 @@
           "rotation": 90,
           "allowOverlap": [
             "balcony.rail-north"
-          ]
+          ],
+          "builtIn": true
         },
         {
           "id": "balcony.rail-glass-north",
@@ -669,7 +679,8 @@
             "height": 100,
             "depth": 1.2,
             "material": "glass-frosted"
-          }
+          },
+          "builtIn": true
         },
         {
           "id": "balcony.rail-glass-west",
@@ -693,7 +704,8 @@
           "rotation": 90,
           "allowOverlap": [
             "balcony.rail-glass-north"
-          ]
+          ],
+          "builtIn": true
         }
       ],
       "assumptions": [
@@ -890,7 +902,8 @@
           "against": {
             "wall": "hallway.wall-4",
             "offset": 199
-          }
+          },
+          "builtIn": true
         }
       ],
       "assumptions": [
@@ -1954,7 +1967,8 @@
           },
           "params": {
             "width": 80
-          }
+          },
+          "builtIn": true
         },
         {
           "id": "bathroom.washer-dryer",
@@ -1972,7 +1986,8 @@
           "params": {
             "width": 65,
             "height": 220
-          }
+          },
+          "builtIn": true
         },
         {
           "id": "bathroom.toilet",
@@ -1988,7 +2003,8 @@
           },
           "params": {
             "ledgeWidth": 60
-          }
+          },
+          "builtIn": true
         },
         {
           "id": "bathroom.bathtub",
@@ -2007,7 +2023,8 @@
             "length": 170,
             "width": 70,
             "mixerSide": "right"
-          }
+          },
+          "builtIn": true
         }
       ],
       "assumptions": [
@@ -2376,7 +2393,8 @@
                 "kind": "hang"
               }
             ]
-          }
+          },
+          "builtIn": true
         },
         {
           "id": "closet.system-west",
@@ -2404,7 +2422,8 @@
                 "kind": "hang2"
               }
             ]
-          }
+          },
+          "builtIn": true
         }
       ],
       "assumptions": [
@@ -2524,7 +2543,8 @@
           },
           "params": {
             "width": 70
-          }
+          },
+          "builtIn": true
         },
         {
           "id": "ensuite.toilet",
@@ -2540,7 +2560,8 @@
           },
           "params": {
             "ledgeWidth": 60
-          }
+          },
+          "builtIn": true
         },
         {
           "id": "ensuite.shower",
@@ -2560,7 +2581,8 @@
             "glass": "clear",
             "doorSide": "right",
             "sidePanel": false
-          }
+          },
+          "builtIn": true
         }
       ],
       "assumptions": [

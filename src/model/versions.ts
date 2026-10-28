@@ -9,6 +9,19 @@ export function versionIdFromPath(rel: string): string {
   return p;
 }
 
+/** The always-there "Empty" version: derived from Current, never a file. */
+export const EMPTY_ID = 'empty';
+
+/** Current as the flat is handed over: every room with only its built-ins (`builtIn` items), offered for every room. */
+export function emptyVersion<H extends { meta: object; rooms: { id: string; items?: unknown[] }[] }>(current: H): H {
+  const { baseRoomHashes: _drop, ...meta } = current.meta as Record<string, unknown>;
+  return {
+    ...current,
+    meta: { ...meta, name: 'Empty', kind: 'empty', note: 'Only what stays: walls, floors and built-ins', rooms: current.rooms.map((r) => r.id) },
+    rooms: current.rooms.map((r) => ({ ...r, items: (r.items ?? []).filter((i) => (i as { builtIn?: boolean }).builtIn === true) })),
+  };
+}
+
 export function versionPath(id: string): string {
   return `house/${id}.json`;
 }

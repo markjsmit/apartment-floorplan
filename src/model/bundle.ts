@@ -3,7 +3,7 @@ import {
   FurnitureAssetSchema, HouseSchema, TextureAssetSchema,
   type FurnitureAsset, type House, type TextureAsset,
 } from './schema';
-import { versionIdFromPath } from './versions';
+import { EMPTY_ID, emptyVersion, versionIdFromPath } from './versions';
 
 // Everything the viewer needs, as one JSON document: served by the dev server, emitted as bundle.json for the static site.
 
@@ -39,6 +39,7 @@ function formatZod(err: ZodError): string {
 }
 
 function versionRank(id: string): string {
+  if (id === EMPTY_ID) return '!';
   if (id === 'current') return '0';
   if (id === 'suggestion') return '1';
   return `2${id}`;
@@ -70,6 +71,13 @@ export function buildBundle(files: RawFile[], site: SiteConfig): Bundle {
       else b.textures[c.key] = { ...r.data, baseUrl: `lib/textures/${c.key}/` };
     }
   }
+  return withEmpty(b);
+}
+
+/** Adds the derived Empty version (from Current) and sorts the version order. */
+function withEmpty(b: Bundle): Bundle {
+  delete b.versions[EMPTY_ID];
+  if (b.versions.current) b.versions[EMPTY_ID] = emptyVersion(b.versions.current);
   b.versionOrder = sortVersions(Object.keys(b.versions));
   return b;
 }
@@ -92,6 +100,5 @@ export function mergeBundle(prev: Bundle | null, next: Bundle): Bundle {
     if (e.kind === 'furniture' && prev.furniture[e.key]) merged.furniture[e.key] = prev.furniture[e.key];
     if (e.kind === 'texture' && prev.textures[e.key]) merged.textures[e.key] = prev.textures[e.key];
   }
-  merged.versionOrder = sortVersions(Object.keys(merged.versions));
-  return merged;
+  return withEmpty(merged);
 }

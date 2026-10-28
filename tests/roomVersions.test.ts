@@ -47,9 +47,10 @@ describe('composeHouse', () => {
 
 describe('versionsForRoom', () => {
   it('offers Current plus versions about the room or that changed it', () => {
-    expect(versionsForRoom(bundle, 'bedroom')).toEqual(['current', 'suggestion']);
-    expect(versionsForRoom(bundle, 'storage')).toEqual(['current', 'saved/storage-a']);
-    expect(versionsForRoom(bundle, 'hall')).toEqual(['current']);
+    // Empty is always there, right after Current
+    expect(versionsForRoom(bundle, 'bedroom')).toEqual(['current', 'empty', 'suggestion']);
+    expect(versionsForRoom(bundle, 'storage')).toEqual(['current', 'empty', 'saved/storage-a']);
+    expect(versionsForRoom(bundle, 'hall')).toEqual(['current', 'empty']);
   });
 
   it('meta.rooms wins over a changed room', () => {

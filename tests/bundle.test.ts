@@ -21,7 +21,7 @@ describe('buildBundle', () => {
   it('loads versions, furniture and textures', () => {
     const b = buildBundle(files([room()]), { publicUrl: '' });
     expect(b.errors).toEqual([]);
-    expect(b.versionOrder).toEqual(['current']);
+    expect(b.versionOrder).toEqual(['empty', 'current']);
     expect(Object.keys(b.furniture)).toEqual(['box']);
     expect(b.textures.wood.baseUrl).toBe('lib/textures/wood/');
   });
@@ -39,13 +39,34 @@ describe('buildBundle', () => {
   });
 });
 
+describe('Empty version', () => {
+  it('is Current with only the built-ins, offered for every room', () => {
+    const items = [
+      { id: 'r.kitchen', asset: 'box', position: [50, 0, 50], builtIn: true },
+      { id: 'r.sofa', asset: 'box', position: [150, 0, 150] },
+    ];
+    const b = buildBundle(files([room({ items })]), { publicUrl: '' });
+    expect(b.errors).toEqual([]);
+    const empty = b.versions.empty;
+    expect(empty.meta.kind).toBe('empty');
+    expect(empty.meta.rooms).toEqual(['r']);
+    expect(empty.rooms[0].items.map((i) => i.id)).toEqual(['r.kitchen']);
+    expect(b.versions.current.rooms[0].items).toHaveLength(2);
+  });
+
+  it('is absent without Current', () => {
+    const b = buildBundle([{ path: 'house/saved/x.json', json: { meta: { name: 'X', kind: 'saved' }, rooms: [] } }], { publicUrl: '' });
+    expect(b.versions.empty).toBeUndefined();
+  });
+});
+
 describe('mergeBundle', () => {
   it('keeps previous file on error', () => {
     const good = buildBundle(files([room()]), { publicUrl: '' });
     const broken = buildBundle([tex('wood'), tex('paint'), boxAsset, { path: 'house/current.json', parseError: 'oops' }], { publicUrl: '' });
     const merged = mergeBundle(good, broken);
     expect(merged.versions.current.rooms[0].id).toBe('r');
-    expect(merged.versionOrder).toEqual(['current']);
+    expect(merged.versionOrder).toEqual(['empty', 'current']);
     expect(merged.errors).toHaveLength(1);
   });
 });
