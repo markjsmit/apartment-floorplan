@@ -131,6 +131,25 @@ export function RoomView({ room, placement, hiddenAssets, showCeiling, shade }: 
 
       <RoomTrim room={room} walls={walls} bundle={bundle} showCeiling={showCeiling} shade={shade} daylight={daylight} />
 
+      {/* floor through doorways: each room covers its half of the wall's thickness (the whole of it when nothing's
+          on the other side), so you never look down through the gap between two rooms */}
+      {room.openings.filter((o) => o.type !== 'window' && o.sill <= 0.5).map((o) => {
+        const w = walls.find((x) => x.id === o.wall);
+        if (!w) return null;
+        const depth = o.leadsTo ? w.thickness / 2 + 0.2 : w.thickness;
+        const u = o.offset + o.width / 2;
+        return (
+          <mesh
+            key={`${o.id}-threshold`}
+            geometry={boxWithCmUV(o.width, 0.2, depth)}
+            material={getMaterial(bundle, room.floor.material, undefined, false, daylight)}
+            position={[w.start[0] + w.dir[0] * u - w.inward[0] * (depth / 2), -0.1, w.start[1] + w.dir[1] * u - w.inward[1] * (depth / 2)]}
+            rotation={[0, Math.atan2(-w.dir[1], w.dir[0]), 0]}
+            receiveShadow
+          />
+        );
+      })}
+
       {bundle && room.openings.map((o) => {
         const raw = o.asset ? bundle.furniture[o.asset] : undefined;
         const w = walls.find((x) => x.id === o.wall);
