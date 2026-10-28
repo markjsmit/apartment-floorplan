@@ -1213,7 +1213,7 @@
         },
         {
           "path": "openings[hallway.bedroom-door]",
-          "note": "standard 80 door at the north end of the end wall (photos 160740, 160921-24, video 25-27 s)"
+          "note": "standard 80 door at the south end of the end wall, hinged south, opens into the bedroom (photos 160740, 160921-24, video 25-27 s)"
         },
         {
           "path": "walls[hallway.wall-2]",
@@ -2157,7 +2157,7 @@
         },
         {
           "path": "openings[storage.door]",
-          "note": "standard 80 door in the alcove, hinge on the left, swings in against the left (sofa) wall"
+          "note": "standard 80 door in the alcove, hinged on its west jamb, opens into the room against the west wall (photos 160757-58)"
         }
       ]
     },
