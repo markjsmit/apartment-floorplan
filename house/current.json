@@ -1010,22 +1010,30 @@
         ],
         [
           688,
-          385
+          380.5
         ],
         [
           700,
-          385
+          380.5
         ],
         [
           700,
           342.5
         ],
         [
-          812,
+          823,
           342.5
         ],
         [
-          812,
+          823,
+          486
+        ],
+        [
+          631,
+          486
+        ],
+        [
+          631,
           445
         ],
         [
@@ -1083,7 +1091,8 @@
             "dresser wall",
             "niche",
             "storage room wall",
-            "storage area"
+            "storage area",
+            "hallway cabin"
           ]
         },
         {
@@ -1098,13 +1107,30 @@
           "id": "hallway.wall-6",
           "edge": 6,
           "tags": [
-            "bathroom wall",
-            "block wall"
+            "bathroom wall"
           ]
         },
         {
           "id": "hallway.wall-7",
           "edge": 7,
+          "tags": [
+            "glossy block",
+            "block side"
+          ],
+          "material": "white-gloss"
+        },
+        {
+          "id": "hallway.wall-8",
+          "edge": 8,
+          "tags": [
+            "glossy block",
+            "block face"
+          ],
+          "material": "white-gloss"
+        },
+        {
+          "id": "hallway.wall-9",
+          "edge": 9,
           "tags": [
             "living room side"
           ],
@@ -1138,7 +1164,7 @@
           },
           "type": "door",
           "wall": "hallway.wall-5",
-          "offset": 11,
+          "offset": 38,
           "width": 80,
           "height": 211,
           "asset": "door-basic",
@@ -1160,7 +1186,7 @@
           },
           "type": "door",
           "wall": "hallway.wall-6",
-          "offset": 82,
+          "offset": 93,
           "width": 80,
           "height": 211,
           "asset": "door-basic",
@@ -1176,7 +1202,7 @@
         {
           "id": "hallway.opening-living",
           "type": "opening",
-          "wall": "hallway.wall-7",
+          "wall": "hallway.wall-9",
           "offset": 0,
           "width": 158,
           "height": 238,
@@ -1192,29 +1218,6 @@
         }
       ],
       "items": [
-        {
-          "id": "hallway.block-face",
-          "asset": "box",
-          "name": "Glossy block (hallway face)",
-          "tags": [
-            "hallway cabin",
-            "block",
-            "glossy cabinet"
-          ],
-          "position": [
-            609,
-            0,
-            444.6
-          ],
-          "params": {
-            "width": 44,
-            "height": 238,
-            "depth": 1,
-            "material": "white-gloss"
-          },
-          "rotation": 180,
-          "builtIn": true
-        },
         {
           "id": "hallway.ceiling-light",
           "asset": "surface-light",
@@ -1239,7 +1242,7 @@
       "assumptions": [
         {
           "path": "footprint",
-          "note": "south wall on z 445 (the notes' 1.68 m from the sofa wall's end; ad photo ...57de2), so the hallway is as wide as its 158 opening to the living room (the sofa wall's 277 + the storage room wall's 10 cm end) (photos 160740, 160803, video 39-40 s). The door alcove in front of the storage room door is the 98 x 65 corner cut out of that room"
+          "note": "mouth 158 wide (the notes' 1.68 m from the sofa wall's end to the glossy block, ad photo ...57de2); east of the block (x 631) the hallway widens to z 486, where the bathroom door is (photos 160740, 160803, video 39-40 s). The door alcove in front of the storage room door is the 98 x 65 corner cut out of that room"
         },
         {
           "path": "ceilingHeight",
@@ -1250,12 +1253,12 @@
           "note": "standard 80 door at the south end of the end wall, hinged south, opens into the bedroom (photos 160740, 160921-24, video 25-27 s)"
         },
         {
-          "path": "walls[hallway.wall-2]",
-          "note": "the alcove's east wall runs on ~40 cm past the storage room wall as a ~12 cm fin (the 'little wall'); the dresser niche behind it is ~112 x 42 (photos 160817-18, 160922-24, video 26.5-28 s): not measured"
+          "path": "walls[hallway.wall-4]",
+          "note": "the dresser niche = the notes' 'hallway cabin 123 x 38' (Mark): 123 wide from the fin to the end wall, 38 deep; the bedroom door's north jamb is at the niche's depth (the dresser touches its frame, photos 160740, 160922)"
         },
         {
           "path": "walls[hallway.wall-5]",
-          "note": "end wall at x 812: along the south side the block, a switch strip, the bathroom door and ~80 cm of wall (photos 160740, 160803, 160921-22); hallway length not measured"
+          "note": "end wall at x 823 (fin 700 + niche 123): along the south side the glossy block, a switch strip, the bathroom door (x 650-730) and ~90 cm of wall"
         }
       ]
     },
@@ -2210,19 +2213,19 @@
       "footprint": [
         [
           578,
-          455
+          496
         ],
         [
           802,
-          455
+          496
         ],
         [
           802,
-          643
+          684
         ],
         [
           578,
-          643
+          684
         ]
       ],
       "ceilingHeight": 238,
@@ -2432,7 +2435,7 @@
           "position": [
             788,
             226,
-            495
+            536
           ],
           "params": {
             "diameter": 10,
@@ -2528,19 +2531,19 @@
           524
         ],
         [
-          822,
+          833,
           524
         ],
         [
-          822,
+          833,
           342.5
         ],
         [
-          902,
+          912,
           342.5
         ],
         [
-          902,
+          912,
           390
         ],
         [
@@ -2667,7 +2670,7 @@
           "id": "bedroom.door",
           "type": "door",
           "wall": "bedroom.wall-7",
-          "offset": 90.5,
+          "offset": 63.5,
           "width": 80,
           "height": 211,
           "tags": [
@@ -2803,7 +2806,7 @@
             "mirror light"
           ],
           "position": [
-            830,
+            841,
             228,
             499
           ],
