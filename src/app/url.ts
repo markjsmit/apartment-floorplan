@@ -51,6 +51,8 @@ export function parseUrlState(search: string, bundle: BundleLike): UrlState {
     const [room, vid] = [pair.slice(0, i), pair.slice(i + 1)];
     if (i > 0 && vid !== baseId && hasRoom(bundle, vid, room)) roomVersions[room] = vid;
   }
+  // version=empty (the house as it's handed over) applies to every room, not just the linked one
+  if (v === 'empty' && bundle.versions.empty) for (const r of rooms) if (!(r.id in roomVersions)) roomVersions[r.id] = 'empty';
   if (roomId && v && v !== baseId && hasRoom(bundle, v, roomId)) roomVersions[roomId] = v;
   else if (roomId && v === baseId) delete roomVersions[roomId];
   const versionId = (roomId && roomVersions[roomId]) || baseId;
