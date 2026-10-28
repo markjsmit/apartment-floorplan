@@ -3082,11 +3082,18 @@
       "openings": [
         {
           "id": "ensuite.pane",
-          "type": "opening",
+          "type": "window",
           "wall": "ensuite.wall-0",
           "offset": 0,
           "width": 60,
           "height": 238,
+          "sill": 0,
+          "asset": "window-basic",
+          "params": {
+            "frameMaterial": "aluminium-grey",
+            "sillBoard": false,
+            "glass": "frosted"
+          },
           "name": "Frosted glass panel",
           "tags": [
             "glass panel",
@@ -3110,26 +3117,6 @@
         }
       ],
       "items": [
-        {
-          "id": "ensuite.glass-pane",
-          "asset": "box",
-          "name": "Frosted glass panel",
-          "tags": [
-            "glass panel",
-            "frosted glass"
-          ],
-          "params": {
-            "width": 60,
-            "height": 238,
-            "depth": 1.5,
-            "material": "glass-frosted"
-          },
-          "against": {
-            "wall": "ensuite.wall-0",
-            "offset": 0
-          },
-          "builtIn": true
-        },
         {
           "id": "ensuite.toilet",
           "asset": "toilet-wall-hung",

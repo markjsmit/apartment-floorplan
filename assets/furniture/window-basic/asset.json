@@ -1,11 +1,27 @@
 {
   "id": "window-basic",
   "name": "Window",
-  "tags": ["window"],
+  "tags": [
+    "window"
+  ],
   "description": "Frame, single glass pane and an inside window sill, sized to its opening.",
-  "source": { "kind": "procedural", "generator": "window", "license": "self-made" },
+  "source": {
+    "kind": "procedural",
+    "generator": "window",
+    "license": "self-made"
+  },
   "params": {
-    "frameMaterial": { "default": "white-laminate", "description": "texture id for the frame, e.g. aluminium-grey" },
-    "sillBoard": { "default": true, "description": "false = no inside sill board (plastered reveal)" }
+    "frameMaterial": {
+      "default": "white-laminate",
+      "description": "texture id for the frame, e.g. aluminium-grey"
+    },
+    "sillBoard": {
+      "default": true,
+      "description": "false = no inside sill board (plastered reveal)"
+    },
+    "glass": {
+      "default": "clear",
+      "description": "clear | frosted"
+    }
   }
 }

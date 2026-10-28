@@ -95,7 +95,7 @@ export function windowParts(params: Record<string, unknown>): Part[] {
     box({ id: 'frame-right', tags: ['frame'], size: [F, H, depth], position: [W / 2 - F / 2, H / 2, zc], material: frame }),
     box({ id: 'frame-top', tags: ['frame'], size: [W - 2 * F, F, depth], position: [0, H - F / 2, zc], material: frame }),
     box({ id: 'frame-bottom', tags: ['frame'], size: [W - 2 * F, F, depth], position: [0, F / 2, zc], material: frame }),
-    box({ id: 'glass', tags: ['glass', 'pane'], size: [W - 2 * F, H - 2 * F, 0.6], position: [0, H / 2, zc], material: 'glass', glass: true }),
+    box({ id: 'glass', tags: ['glass', 'pane'], size: [W - 2 * F, H - 2 * F, 0.6], position: [0, H / 2, zc], material: params.glass === 'frosted' ? 'glass-frosted' : 'glass', glass: true }),
   ];
   if (params.sillBoard !== false) {
     parts.push(box({ id: 'sill', tags: ['window sill', 'sill'], size: [W, 2, t / 2 + 6], position: [0, -1, (-t / 2 + 6) / 2], material: 'white-laminate' }));
