@@ -19,6 +19,13 @@ describe('roomStorage', () => {
     expect(s.tops).toBeLessThan(190);
   });
 
+  it('does not count a cube that opens onto a shelf stack (no double counting)', () => {
+    const k = kallax('k', { wall: 'r.wall-0', offset: 100 });
+    const shelf = { id: 's', asset: 'box', params: { width: 77, depth: 40, height: 1.8 }, position: [138.5, 70, 39], rotation: 0 };
+    const s = roomStorage(room([k, shelf]), furniture);
+    expect(s.kallaxLostCubes).toBe(4);
+  });
+
   it('does not count cubes that face another piece of furniture', () => {
     // two 2x2 face to face, 5 cm apart
     const a = { id: 'a', asset: 'ikea-kallax-112x147', params: { cols: 2, rows: 2 }, position: [150, 0, 100], rotation: 0 };
@@ -33,7 +40,9 @@ describe('roomStorage', () => {
     const open = roomStorage(room([shelf('s1', 70), shelf('s2', 110)]), furniture);
     // floor→70 + 40 (70→110) + 60 (capped) over 80 x 40
     expect(open.shelves).toBeCloseTo((80 * 40 * (70 + 38.2 + 60)) / 1000, -1);
-    const wall = { id: 'w', asset: 'box', params: { width: 100, depth: 39, height: 224 }, position: [50, 0, 40], rotation: 0 };
-    expect(roomStorage(room([shelf('s1', 70), wall]), furniture).shelves).toBeLessThan(open.shelves / 2);
+    // a wall-to-wall shelf with a wall-to-wall cabinet 80 deep in front: more than an arm's length from anywhere you can stand
+    const long = { id: 'l', asset: 'box', params: { width: 300, depth: 40, height: 1.8 }, against: { wall: 'r.wall-0', offset: 0, elevation: 70 } };
+    const cabinet = { id: 'c', asset: 'box', params: { width: 300, depth: 80, height: 224 }, position: [150, 0, 40], rotation: 0 };
+    expect(roomStorage(room([long, cabinet]), furniture).shelves).toBe(0);
   });
 });
