@@ -47,11 +47,21 @@ export function resolveAsset(asset: FurnitureAsset, params: Record<string, unkno
 /**
  * Sections for pieces that don't name their own: every group of parts that moves together between states (a door leaf
  * with its handle, a drawer with its front) is a section named after its first part, the rest is "body". So a click
- * selects a shower's door or its frame before the whole. Pieces where nothing moves stay one piece.
+ * selects a shower's door or its frame before the whole. Pieces where nothing moves stay one piece. When several groups
+ * move (a cabinet's doors), each also opens on its own (`open`), so double-clicking one door opens just that door.
  */
 export function withSections(asset: FurnitureAsset): FurnitureAsset {
   if (asset.parts.some((p) => p.section) || asset.states.length < 2) return asset;
-  const signature = (id: string) => JSON.stringify(asset.states.map((st) => st.parts[id] ?? null));
+  // how a part moves in each state: a shift (not the absolute position, which differs per part) + its turn/visibility
+  const signature = (id: string) => {
+    const part = asset.parts.find((p) => p.id === id)!;
+    return JSON.stringify(asset.states.map((st) => {
+      const o = st.parts[id];
+      if (!o) return null;
+      const shift = o.position?.map((v, k) => Math.round((v - part.position[k]) * 10) / 10);
+      return { shift, rotation: o.rotation, visible: o.visible, material: o.material };
+    }));
+  };
   const still = JSON.stringify(asset.states.map(() => null));
   const names = new Map<string, string>();
   for (const p of asset.parts) {
@@ -59,7 +69,16 @@ export function withSections(asset: FurnitureAsset): FurnitureAsset {
     if (sig !== still && !names.has(sig)) names.set(sig, p.id);
   }
   if (!names.size) return asset;
-  return { ...asset, parts: asset.parts.map((p) => ({ ...p, section: names.get(signature(p.id)) ?? 'body' })) };
+  // with several of them (a cabinet's doors, a Kallax's drawers) each also opens on its own: its pose in the other state
+  const alone = names.size > 1 && asset.states.length === 2;
+  const other = asset.states[1];
+  return {
+    ...asset,
+    parts: asset.parts.map((p) => {
+      const section = names.get(signature(p.id));
+      return { ...p, section: section ?? 'body', ...(alone && section && other.parts[p.id] ? { open: other.parts[p.id] } : {}) };
+    }),
+  };
 }
 
 /** The generator's complaint about these params, if any. */
@@ -93,7 +112,7 @@ export function partTransform(part: Part, override?: PartOverride): PartPose {
     const p = new Vector3(...base).sub(pivot).applyMatrix4(delta).add(pivot);
     position = [p.x, p.y, p.z];
   }
-  return { position, rotationDeg, visible: override?.visible ?? true, material: override?.material ?? part.material };
+  return { position, rotationDeg, visible: override?.visible ?? !part.hidden, material: override?.material ?? part.material };
 }
 
 function eulerOf(deg: Vec3): Euler {

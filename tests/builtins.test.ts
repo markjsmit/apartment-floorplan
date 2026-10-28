@@ -43,11 +43,21 @@ describe('built-in generators', () => {
     expect(inNiche).toEqual([]);
   });
 
-  it('wall cabinet flap swings up and out', () => {
-    const g = kitchenWallCabinet({ width: 60, height: 75 });
-    const open = assetSize(g.parts, g.states.find((s) => s.id === 'open'));
-    expect(open.max[2]).toBeGreaterThan(35 + 40);
-    expect(g.interactions.some((i) => i.part === 'flap')).toBe(true);
+  it('wall cabinet flap lifts straight up in front, each front on its own', () => {
+    const g = kitchenWallCabinet({ width: 60, height: 148, depth: 59.5, niche: 40, top: 53 });
+    const flap = g.parts.find((p) => p.id === 'flap')!;
+    expect(flap.section).toBe('flap');
+    expect(flap.open?.position?.[1]).toBeGreaterThan(flap.position[1] + 40);
+    expect(flap.open?.position?.[2]).toBeGreaterThan(flap.position[2]);
+    expect(g.parts.find((p) => p.id === 'top-door')?.section).toBe('top-door');
+  });
+
+  it('every kitchen drawer and door opens on its own', () => {
+    const parts = kitchenCounter({ length: 120, modules: [{ w: 60, kind: 'drawers' }, { w: 60, kind: 'doors' }] });
+    const fronts = parts.filter((p) => p.tags.includes('drawer') || p.tags.includes('door'));
+    expect(fronts.length).toBe(5);
+    expect(new Set(fronts.map((p) => p.section)).size).toBe(5);
+    expect(fronts.every((p) => p.open)).toBe(true);
   });
 
   it('sliding door fills its opening and the sliding panel moves left when open', () => {

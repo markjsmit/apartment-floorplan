@@ -41,11 +41,20 @@ export function PartsView({ id, kind, asset, parts, stateId, position, rotationD
   const select = useStore((s) => s.select);
   const cycleState = useStore((s) => s.cycleState);
   const toggleRoomLights = useStore((s) => s.toggleRoomLights);
+  const toggleSection = useStore((s) => s.toggleSection);
+  const itemStates = useStore((s) => s.itemStates);
   const state = findState(asset, stateId);
+  const sectionOpen = (p: Part) => !!p.section && itemStates[`${id}#${p.section}`] === 'open';
   const lamp = (part: string) => !!parts.find((p) => p.id === part)?.emit;
   // a lamp's glowing part is a light switch; anything else with an interaction changes state
-  const act = (part: string) => (lamp(part) ? toggleRoomLights(lightsOn, roomId) : cycleState(id, part));
-  const interactive = (part: string) => interactivePart(asset, part) || lamp(part);
+  const opensAlone = (part: string) => parts.find((p) => p.id === part)?.open && sectionOf(part);
+  const act = (part: string) => {
+    if (lamp(part)) return toggleRoomLights(lightsOn, roomId);
+    const alone = opensAlone(part);
+    if (alone) return toggleSection(id, alone);
+    cycleState(id, part);
+  };
+  const interactive = (part: string) => interactivePart(asset, part) || lamp(part) || !!opensAlone(part);
   const sectionOf = (part: string) => parts.find((p) => p.id === part)?.section ?? null;
 
   const onClick = (part: string) => (e: ThreeEvent<MouseEvent>) => {
@@ -77,7 +86,7 @@ export function PartsView({ id, kind, asset, parts, stateId, position, rotationD
           ownerId={id}
           kind={kind}
           part={p}
-          pose={partTransform(p, state?.parts[p.id])}
+          pose={partTransform(p, state?.parts[p.id] ?? (sectionOpen(p) ? p.open : undefined))}
           interactive={interactive(p.id)}
           lightsOn={lightsOn}
           daylight={daylight}

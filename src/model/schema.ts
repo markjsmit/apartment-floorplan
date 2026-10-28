@@ -160,6 +160,11 @@ export const PartSchema = z.object({
   glass: z.boolean().default(false),
   // big pieces come in sections (a wall bed: base, bed, desk): the first click selects the section, the second the whole
   section: z.string().optional(),
+  // a section that opens on its own (a drawer, a cabinet door): its pose when Mark double-clicks it open, independent of
+  // the item's state (so every drawer opens by itself)
+  open: z.lazy(() => PartOverrideSchema).optional(),
+  // drawn only when open / in a state that shows it (a gas flame)
+  hidden: z.boolean().optional(),
   // text tag on the part's front (+z) face, e.g. a label on a box or drawer; offset = [x, y] from the face centre (cm)
   label: z
     .object({ text: z.string(), size: z.number().default(2.4), offset: Vec2Schema.default([0, 0]), color: z.string().default('#2b2b2b') })

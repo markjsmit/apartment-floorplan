@@ -112,6 +112,32 @@ describe('withSections', () => {
     expect(a.parts.map((p) => p.section)).toEqual(['body', 'door', 'door']);
   });
 
+  it('lets each of several moving groups open on its own', () => {
+    const a = withSections(FurnitureAssetSchema.parse({
+      id: 'cab', name: 'cab', source: { kind: 'parts', license: 'self-made' },
+      parts: [{ id: 'body' }, { id: 'door-l' }, { id: 'door-r' }],
+      states: [
+        { id: 'closed', name: 'closed', parts: {} },
+        { id: 'open', name: 'open', parts: { 'door-l': { rotation: [0, -90, 0] }, 'door-r': { rotation: [0, 90, 0] } } },
+      ],
+    }));
+    expect(a.parts.find((p) => p.id === 'door-l')?.open).toEqual({ rotation: [0, -90, 0] });
+    expect(a.parts.find((p) => p.id === 'body')?.open).toBeUndefined();
+  });
+
+  it('keeps parts that slide together (different positions, same shift) in one section', () => {
+    const a = withSections(FurnitureAssetSchema.parse({
+      id: 'sl', name: 'sl', source: { kind: 'parts', license: 'self-made' },
+      parts: [{ id: 'frame' }, { id: 'glass', position: [50, 100, 0] }, { id: 'handle', position: [10, 105, 3] }],
+      states: [
+        { id: 'closed', name: 'closed', parts: {} },
+        { id: 'open', name: 'open', parts: { glass: { position: [-50, 100, 0] }, handle: { position: [-90, 105, 3] } } },
+      ],
+    }));
+    expect(a.parts.map((p) => p.section)).toEqual(['body', 'glass', 'glass']);
+    expect(a.parts.find((p) => p.id === 'glass')?.open).toBeUndefined(); // one moving group: the whole item's state
+  });
+
   it('leaves pieces alone that name their own sections or never move', () => {
     const still = FurnitureAssetSchema.parse({ id: 's', name: 's', source: { kind: 'parts', license: 'self-made' }, parts: [{ id: 'a' }] });
     expect(withSections(still).parts[0].section).toBeUndefined();

@@ -45,7 +45,19 @@ function modules(raw: unknown, total: number): Module[] {
   return Array.from({ length: n }, () => ({ w: total / n, kind: 'door' }));
 }
 
-/** Fronts (doors / drawers / appliance panels) for one module, x0 = left edge, between y0 and y1, front face at z. */
+const OPEN_DEG = 100; // how far a cabinet door swings open
+const PULL = 40; // how far a drawer pulls out
+
+/** A front with its handle that opens on its own (double-click): one section, `open` = its pose when open. */
+function opening(parts: Part[], section: string, open: (p: Part) => PartOverride, pivot?: Vec3): Part[] {
+  return parts.map((p) => ({ ...p, section, pivot: pivot ?? p.pivot, open: open(p) }));
+}
+
+/**
+ * Fronts (doors / drawers / appliance panels) for one module, x0 = left edge, between y0 and y1, front face at z.
+ * Every drawer and door opens on its own: drawers pull out, doors swing on the hinge side, `lift` fronts (a lift-up
+ * door) rise straight up in front of what's above.
+ */
 function fronts(prefix: string, m: Module, x0: number, y0: number, y1: number, z: number, horizontalHandles: boolean): Part[] {
   const out: Part[] = [];
   const w = m.w - 2 * GAP;
@@ -53,32 +65,56 @@ function fronts(prefix: string, m: Module, x0: number, y0: number, y1: number, z
   const zc = z - FRONT_T / 2;
   const bar = (id: string, cx: number, cy: number, len: number, vertical = false) =>
     box(id, ['handle'], vertical ? [1.2, len, 1.6] : [len, 1.2, 1.6], [cx, cy, z + 0.8], { material: HANDLE });
+  const pull = (p: Part): PartOverride => ({ position: [p.position[0], p.position[1], p.position[2] + PULL] });
+  const swing = (deg: number) => (): PartOverride => ({ rotation: [0, deg, 0] });
   const h = y1 - y0;
   if (m.kind === 'drawers' || m.kind === 'drawers2' || m.kind === 'drawers3' || m.kind === 'drawers4') {
     const n = m.kind === 'drawers' ? 3 : Number(m.kind.slice(-1));
     const fh = (h - (n + 1) * GAP) / n;
     for (let i = 0; i < n; i++) {
       const top = y1 - GAP - i * (fh + GAP);
-      out.push(box(`${prefix}-drawer-${i + 1}`, ['drawer', 'front'], [w, fh, FRONT_T], [xc, top - fh / 2, zc], { material: 'white-gloss' }));
-      out.push(bar(`${prefix}-drawer-${i + 1}-handle`, xc, top - 4, w - 12));
+      const id = `${prefix}-drawer-${i + 1}`;
+      out.push(...opening([
+        box(id, ['drawer', 'front'], [w, fh, FRONT_T], [xc, top - fh / 2, zc], { material: 'white-gloss' }),
+        bar(`${id}-handle`, xc, top - 4, w - 12),
+      ], id, pull));
     }
   } else if (m.kind === 'doors' || m.kind === 'sink') {
     const dw = (m.w - 3 * GAP) / 2;
     for (const [i, side] of [[0, 'l'], [1, 'r']] as const) {
       const cx = x0 + GAP + dw / 2 + i * (dw + GAP);
-      out.push(box(`${prefix}-door-${side}`, ['door', 'front'], [dw, h - 2 * GAP, FRONT_T], [cx, y0 + h / 2, zc], { material: 'white-gloss' }));
-      out.push(horizontalHandles ? bar(`${prefix}-door-${side}-handle`, cx, y1 - 5, dw - 10) : bar(`${prefix}-door-${side}-handle`, i === 0 ? cx + dw / 2 - 4 : cx - dw / 2 + 4, y1 - 25, 30, true));
+      const id = `${prefix}-door-${side}`;
+      const hingeX = i === 0 ? cx - dw / 2 : cx + dw / 2;
+      out.push(...opening([
+        box(id, ['door', 'front'], [dw, h - 2 * GAP, FRONT_T], [cx, y0 + h / 2, zc], { material: 'white-gloss' }),
+        horizontalHandles ? bar(`${id}-handle`, cx, y1 - 5, dw - 10) : bar(`${id}-handle`, i === 0 ? cx + dw / 2 - 4 : cx - dw / 2 + 4, y1 - 25, 30, true),
+      ], id, swing(i === 0 ? -OPEN_DEG : OPEN_DEG), [hingeX, y0 + h / 2, z]));
     }
   } else if (m.kind === 'dishwasher') {
-    out.push(box(`${prefix}-dishwasher`, ['dishwasher', 'appliance', 'front'], [w, h - 2 * GAP, FRONT_T], [xc, y0 + h / 2, zc], { material: 'white-gloss' }));
-    out.push(bar(`${prefix}-dishwasher-handle`, xc, y1 - 5, w - 12));
+    const id = `${prefix}-dishwasher`;
+    // the dishwasher door folds down
+    out.push(...opening([
+      box(id, ['dishwasher', 'appliance', 'front'], [w, h - 2 * GAP, FRONT_T], [xc, y0 + h / 2, zc], { material: 'white-gloss' }),
+      bar(`${id}-handle`, xc, y1 - 5, w - 12),
+    ], id, () => ({ rotation: [85, 0, 0] }), [xc, y0 + GAP, z]));
   } else if (m.kind === 'panel' || m.kind === 'open') {
     if (m.kind === 'panel') out.push(box(`${prefix}-panel`, ['front'], [w, h - 2 * GAP, FRONT_T], [xc, y0 + h / 2, zc], { material: 'white-gloss' }));
+  } else if (m.kind === 'lift') {
+    // lift-up door: rises straight up, a little in front of what's above
+    const id = `${prefix}-door`;
+    const rise = (h - 2 * GAP) * 0.85;
+    out.push(...opening([
+      box(id, ['door', 'front', 'lift-up'], [w, h - 2 * GAP, FRONT_T], [xc, y0 + h / 2, zc], { material: 'white-gloss' }),
+      bar(`${id}-handle`, xc, y0 + 5, w - 12),
+    ], id, (p) => ({ position: [p.position[0], p.position[1] + rise, p.position[2] + 3] })));
   } else {
     // single door, hinge on the side opposite the handle
-    out.push(box(`${prefix}-door`, ['door', 'front'], [w, h - 2 * GAP, FRONT_T], [xc, y0 + h / 2, zc], { material: 'white-gloss' }));
+    const id = `${prefix}-door`;
     const right = (m.handle ?? 'right') === 'right';
-    out.push(horizontalHandles ? bar(`${prefix}-door-handle`, xc, y1 - 5, w - 12) : bar(`${prefix}-door-handle`, right ? x0 + m.w - 4 : x0 + 4, y0 + Math.min(h / 2, 110), Math.min(h * 0.6, 90), true));
+    out.push(...opening([
+      box(id, ['door', 'front'], [w, h - 2 * GAP, FRONT_T], [xc, y0 + h / 2, zc], { material: 'white-gloss' }),
+      horizontalHandles ? bar(`${id}-handle`, xc, y1 - 5, w - 12) : bar(`${id}-handle`, right ? x0 + m.w - 4 : x0 + 4, y0 + Math.min(h / 2, 110), Math.min(h * 0.6, 90), true),
+    ], id, swing(right ? -OPEN_DEG : OPEN_DEG), [right ? x0 + GAP : x0 + m.w - GAP, y0 + h / 2, z]));
   }
   return out;
 }
@@ -131,7 +167,11 @@ function hob(x: number, y: number, z: number): Part[] {
   const burners: [number, number, number][] = [[-26, -11, 4], [-26, 11, 3.2], [0, 0, 6], [26, -11, 3.2], [26, 11, 4]];
   burners.forEach(([bx, bz, r], i) => parts.push(cyl(`hob-burner-${i + 1}`, ['hob', 'burner'], r, 1.4, [x + bx, y + 1.2, z + bz], { color: '#2a2a2c' })));
   for (let i = 0; i < 5; i++) parts.push(cyl(`hob-knob-${i + 1}`, ['hob', 'knob'], 1.8, 2, [x - 24 + i * 12, y + 1.6, z + 22], { material: 'stainless' }));
-  return parts;
+  // gas flames, lit by double-clicking the hob (a knob)
+  burners.forEach(([bx, bz, r], i) => parts.push({
+    ...cyl(`hob-flame-${i + 1}`, ['hob', 'flame'], r + 0.8, 1.6, [x + bx, y + 2.6, z + bz], { color: '#4f8cff' }), hidden: true, castShadow: false,
+  }));
+  return parts.map((p) => ({ ...p, section: 'hob', open: p.tags.includes('flame') ? { visible: true } : p.tags.includes('knob') ? {} : undefined }));
 }
 
 /**
@@ -189,8 +229,8 @@ export function kitchenTall(params: Record<string, unknown>): Part[] {
       parts.push(
         box(`${p}-side-l`, ['fridge niche', 'side panel'], [1.8, nicheH, D], [x0 + 0.9, nicheH / 2, D / 2], { material: 'white-gloss' }),
         box(`${p}-side-r`, ['fridge niche', 'side panel'], [1.8, nicheH, D], [x0 + c.w - 0.9, nicheH / 2, D / 2], { material: 'white-gloss' }),
-        carcass(`${p}-bridge`, x0, c.w, nicheH, H),
-        ...fronts(`${p}-top`, { w: c.w, kind: 'doors' }, x0, nicheH, H, D, true),
+        // the bridge cabinet over the niche (left out when a separate top row covers it)
+        ...(H - nicheH >= 5 ? [carcass(`${p}-bridge`, x0, c.w, nicheH, H), ...fronts(`${p}-top`, { w: c.w, kind: 'doors' }, x0, nicheH, H, D, true)] : []),
       );
     } else if (c.kind === 'oven') {
       const ovenY = 70, microY = 130, shelfY = 168, shelfTop = 182;
@@ -206,18 +246,20 @@ export function kitchenTall(params: Record<string, unknown>): Part[] {
         box(`${p}-oven-panel`, ['oven'], [c.w - 2, 7, 0.4], [xc, microY - 5, D + 0.2], { material: 'stainless', castShadow: false }),
         ...(params.microwave === false
           // no microwave: one cabinet door over the oven up to the top row
-          ? fronts(`${p}-mid`, { w: c.w, kind: 'door', handle: c.handle }, x0, microY, topY, D, true)
+          ? fronts(`${p}-mid`, { w: c.w, kind: 'lift' }, x0, microY, topY, D, true)
           : [
             box(`${p}-microwave`, ['microwave', 'appliance'], [c.w - 2, shelfY - microY - 1, FRONT_T], [xc, (microY + shelfY) / 2, D - FRONT_T / 2], { material: 'glass-black' }),
             box(`${p}-microwave-trim`, ['microwave'], [12, shelfY - microY - 5, 0.4], [x0 + c.w - 9, (microY + shelfY) / 2, D + 0.2], { material: 'stainless', castShadow: false }),
           ]),
-        ...fronts(`${p}-top`, { w: c.w, kind: 'door', handle: c.handle }, x0, params.microwave === false ? topY : shelfTop, H, D, true),
+        ...(H - (params.microwave === false ? topY : shelfTop) >= 5
+          ? fronts(`${p}-top`, { w: c.w, kind: 'door', handle: c.handle }, x0, params.microwave === false ? topY : shelfTop, H, D, true)
+          : []),
       );
     } else {
       parts.push(
         carcass(`${p}-carcass`, x0, c.w, PLINTH, H),
-        ...fronts(`${p}-tall`, { w: c.w, kind: 'door', handle: c.handle }, x0, PLINTH, topY, D, false),
-        ...fronts(`${p}-top`, { w: c.w, kind: 'door', handle: c.handle }, x0, topY, H, D, true),
+        ...fronts(`${p}-tall`, { w: c.w, kind: 'door', handle: c.handle }, x0, PLINTH, Math.min(topY, H), D, false),
+        ...(H - topY >= 5 ? fronts(`${p}-top`, { w: c.w, kind: 'door', handle: c.handle }, x0, topY, H, D, true) : []),
       );
     }
     x0 += c.w;
@@ -236,14 +278,20 @@ export function kitchenWallCabinet(params: Record<string, unknown>): WithStates 
   const d = num(params.depth, 35);
   const niche = num(params.niche, 0);
   const top = num(params.top, 0);
+  const tilt = params.lift === 'tilt';
   const f0 = niche; // flap from here...
   const f1 = h - top; // ...to here
-  const pivot: Vec3 = [0, f1, d];
   const parts: Part[] = [
     box('carcass', ['cabinet'], [w, h, d - FRONT_T], [0, h / 2, (d - FRONT_T) / 2], { material: 'white-laminate' }),
     box('shelf', ['shelf'], [w - 3.6, 1.8, d - 6], [0, (f0 + f1) / 2, (d - 6) / 2 + 1], { material: 'white-laminate' }),
-    box('flap', ['flap', 'door', 'front'], [w - 0.4, f1 - f0 - 0.4, FRONT_T], [0, (f0 + f1) / 2, d - FRONT_T / 2], { material: 'white-gloss', pivot }),
-    box('flap-handle', ['flap', 'handle'], [w - 12, 1.2, 1.6], [0, f0 + 4, d + 0.8], { material: HANDLE, pivot }),
+    // lift-up flap: tilts up about its top edge (lift: tilt) or rises straight up, a little in front of what's above
+    ...opening([
+      box('flap', ['flap', 'door', 'front'], [w - 0.4, f1 - f0 - 0.4, FRONT_T], [0, (f0 + f1) / 2, d - FRONT_T / 2], { material: 'white-gloss' }),
+      box('flap-handle', ['flap', 'handle'], [w - 12, 1.2, 1.6], [0, f0 + 4, d + 0.8], { material: HANDLE }),
+    ], 'flap', tilt
+      ? () => ({ rotation: [-100, 0, 0] })
+      : (p) => ({ position: [p.position[0], p.position[1] + (top > 0 ? top * 0.9 : (f1 - f0) * 0.85), p.position[2] + 3] }),
+    tilt ? [0, f1, d] : undefined),
   ];
   if (niche > 0) {
     // the open niche: a dark-ish back so it reads as a hollow, a bottom board on the counter
@@ -253,19 +301,21 @@ export function kitchenWallCabinet(params: Record<string, unknown>): WithStates 
       box('niche-side-l', ['cabinet'], [1.8, niche, d - FRONT_T], [-w / 2 + 0.9, niche / 2, (d - FRONT_T) / 2], { material: 'white-laminate' }),
       box('niche-side-r', ['cabinet'], [1.8, niche, d - FRONT_T], [w / 2 - 0.9, niche / 2, (d - FRONT_T) / 2], { material: 'white-laminate' }),
     );
+    // its own lift-up door: rises straight up in front of the flap (the appliance garage, ad photo a5770c1f)
+    if (params.nicheDoor === true) {
+      parts.push(...opening([
+        box('niche-door', ['door', 'front', 'lift-up'], [w - 0.4, niche - 0.6, FRONT_T], [0, niche / 2, d - FRONT_T / 2], { material: 'white-gloss' }),
+        box('niche-handle', ['handle'], [w - 12, 1.2, 1.6], [0, niche - 4, d + 0.8], { material: HANDLE }),
+      ], 'niche-door', (p) => ({ position: [p.position[0], p.position[1] + niche * 0.9, p.position[2] + 3] })));
+    }
   }
   if (top > 0) {
-    parts.push(
+    parts.push(...opening([
       box('top-door', ['door', 'front'], [w - 0.4, top - 0.4, FRONT_T], [0, h - top / 2, d - FRONT_T / 2], { material: 'white-gloss' }),
       box('top-handle', ['handle'], [w - 12, 1.2, 1.6], [0, h - top + 4, d + 0.8], { material: HANDLE }),
-    );
+    ], 'top-door', () => ({ rotation: [-100, 0, 0] }), [0, h, d]));
   }
-  const open: Record<string, PartOverride> = { flap: { rotation: [-105, 0, 0] }, 'flap-handle': { rotation: [-105, 0, 0] } };
-  const states: AssetState[] = [
-    { id: 'closed', name: 'Closed', parts: {} },
-    { id: 'open', name: 'Open', parts: open },
-  ];
-  return { parts, states, interactions: [{ part: 'flap', action: 'cycleStates' }, { part: 'flap-handle', action: 'cycleStates' }] };
+  return { parts, states: [], interactions: [] };
 }
 
 /**

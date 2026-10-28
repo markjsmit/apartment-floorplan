@@ -278,6 +278,27 @@
       ],
       "items": [
         {
+          "id": "living.block",
+          "asset": "box",
+          "name": "Glossy column",
+          "tags": [
+            "glossy column",
+            "block",
+            "built-in"
+          ],
+          "params": {
+            "width": 24,
+            "height": 185,
+            "depth": 59.5,
+            "material": "white-gloss"
+          },
+          "against": {
+            "wall": "living.wall-3",
+            "offset": 0
+          },
+          "builtIn": true
+        },
+        {
           "id": "living.fridge-niche",
           "asset": "kitchen-tall",
           "name": "Fridge niche",
@@ -291,8 +312,9 @@
             "offset": 24
           },
           "params": {
-            "height": 238,
+            "height": 185,
             "depth": 59.5,
+            "fridgeNiche": 185,
             "columns": [
               {
                 "w": 99,
@@ -316,9 +338,10 @@
             "offset": 123
           },
           "params": {
-            "height": 238,
+            "height": 185,
             "depth": 59.5,
             "microwave": false,
+            "topDoors": 185,
             "columns": [
               {
                 "w": 60,
@@ -351,10 +374,11 @@
           },
           "params": {
             "width": 60,
-            "height": 148,
+            "height": 95,
             "depth": 59.5,
-            "niche": 40,
-            "top": 53
+            "niche": 39,
+            "nicheDoor": true,
+            "lift": "tilt"
           },
           "allowOverlap": [
             "living.counter"
@@ -362,25 +386,44 @@
           "builtIn": true
         },
         {
-          "id": "living.block",
-          "asset": "box",
-          "name": "Glossy block (hallway cabin)",
+          "id": "living.top-left",
+          "asset": "kitchen-wall-cabinet",
+          "name": "Top cabinet over the fridge",
           "tags": [
-            "hallway cabin",
-            "block",
-            "glossy cabinet",
-            "unknown",
-            "built-in"
+            "top cabinet",
+            "tall units"
           ],
-          "params": {
-            "width": 24,
-            "height": 238,
-            "depth": 59.5,
-            "material": "white-gloss"
-          },
           "against": {
             "wall": "living.wall-3",
-            "offset": 0
+            "offset": 0,
+            "elevation": 185
+          },
+          "params": {
+            "width": 123,
+            "height": 53,
+            "depth": 59.5,
+            "lift": "tilt"
+          },
+          "builtIn": true
+        },
+        {
+          "id": "living.top-right",
+          "asset": "kitchen-wall-cabinet",
+          "name": "Top cabinet over the oven",
+          "tags": [
+            "top cabinet",
+            "tall units"
+          ],
+          "against": {
+            "wall": "living.wall-3",
+            "offset": 123,
+            "elevation": 185
+          },
+          "params": {
+            "width": 152,
+            "height": 53,
+            "depth": 59.5,
+            "lift": "tilt"
           },
           "builtIn": true
         },
@@ -759,7 +802,7 @@
         },
         {
           "path": "items[living.block]",
-          "note": "the 123 x 38 block (notes 'hallway cabin'): west face flush with the tall units, north face on the hallway line z 445 (video 24.5-25.5 s, photo 160802: the tile/laminate seam runs under it); unknown if it opens"
+          "note": "glossy handleless column, 24 wide on the kitchen side (ad photo ...57de2); the hallway side is a glossy cabinet (hallway.cabinet)"
         },
         {
           "path": "items[living.island]",
@@ -1032,16 +1075,8 @@
           486
         ],
         [
-          631,
-          486
-        ],
-        [
-          631,
-          445
-        ],
-        [
           586,
-          445
+          486
         ]
       ],
       "ceilingHeight": 238,
@@ -1110,30 +1145,13 @@
           "id": "hallway.wall-6",
           "edge": 6,
           "tags": [
-            "bathroom wall"
+            "bathroom wall",
+            "cabinet wall"
           ]
         },
         {
           "id": "hallway.wall-7",
           "edge": 7,
-          "tags": [
-            "glossy block",
-            "block side"
-          ],
-          "material": "white-gloss"
-        },
-        {
-          "id": "hallway.wall-8",
-          "edge": 8,
-          "tags": [
-            "glossy block",
-            "block face"
-          ],
-          "material": "white-gloss"
-        },
-        {
-          "id": "hallway.wall-9",
-          "edge": 9,
           "tags": [
             "living room side"
           ],
@@ -1205,8 +1223,8 @@
         {
           "id": "hallway.opening-living",
           "type": "opening",
-          "wall": "hallway.wall-9",
-          "offset": 0,
+          "wall": "hallway.wall-7",
+          "offset": 41,
           "width": 158,
           "height": 238,
           "name": "Opening to the living room",
@@ -1221,6 +1239,33 @@
         }
       ],
       "items": [
+        {
+          "id": "hallway.cabinet",
+          "asset": "kitchen-tall",
+          "name": "Glossy hallway cabinet",
+          "tags": [
+            "hallway cabinet",
+            "glossy block",
+            "cabinet",
+            "built-in"
+          ],
+          "against": {
+            "wall": "hallway.wall-6",
+            "offset": 192
+          },
+          "params": {
+            "height": 238,
+            "depth": 38,
+            "columns": [
+              {
+                "w": 45,
+                "kind": "pantry",
+                "handle": "right"
+              }
+            ]
+          },
+          "builtIn": true
+        },
         {
           "id": "hallway.ceiling-light",
           "asset": "surface-light",

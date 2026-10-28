@@ -30,6 +30,14 @@
     "top": {
       "default": 0,
       "description": "fixed top door above the flap (cm)"
+    },
+    "lift": {
+      "default": "up",
+      "description": "flap: up (rises straight up in front) | tilt (tilts up about its top)"
+    },
+    "nicheDoor": {
+      "default": false,
+      "description": "a lift-up door in front of the niche"
     }
   }
 }

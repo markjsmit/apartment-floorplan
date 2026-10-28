@@ -55,6 +55,8 @@ type Actions = {
   setVersion: (id: string, roomId?: string) => boolean;
   select: (s: Selection | null) => void;
   selectById: (id: string) => boolean;
+  /** open / close one section of an item on its own (a drawer): itemStates[`${id}#${section}`] = 'open' */
+  toggleSection: (id: string, section: string) => void;
   /** next state of an item/door; `part` = the double-clicked part (its interaction may limit the states) */
   cycleState: (id: string, part?: string) => void;
   /** switch a room's lights (default: the open room) to the opposite of `currentlyOn` */
@@ -171,6 +173,14 @@ export const useStore = create<State & Actions>((set, get) => ({
     // one house: no teleport, the outline shows through walls
     set({ selection: { kind: found.kind, id, part: null } });
     return true;
+  },
+  toggleSection: (id, section) => {
+    const key = `${id}#${section}`;
+    const { itemStates } = get();
+    const next = { ...itemStates };
+    if (next[key] === 'open') delete next[key];
+    else next[key] = 'open';
+    set({ itemStates: next });
   },
   cycleState: (id, part) => {
     const { bundle, itemStates } = get();
