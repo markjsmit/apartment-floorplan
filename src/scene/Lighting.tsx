@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useRef } from 'react';
+import { useFrame, useThree } from '@react-three/fiber';
 import { Environment, Lightformer, Sky } from '@react-three/drei';
 import { Color, type DirectionalLight, type Material } from 'three';
 import type { Sky as SkyMesh } from 'three-stdlib';
@@ -62,6 +63,24 @@ export function Lighting({ room, mobile }: { room: HouseFrame; mobile: boolean }
     cam.updateProjectionMatrix();
   }, [cx, cz, radius, dist]);
 
+  // The sun's shadow map is only redrawn when something that casts changes (sun, house, a door or bed moving, the plan
+  // view hiding the ceiling), not every frame: that's every shadow caster drawn a second time, a big cost on phones.
+  const gl = useThree((s) => s.gl);
+  const house = useStore(currentHouse);
+  const itemStates = useStore((s) => s.itemStates);
+  const view = useStore((s) => s.view);
+  const shadowFrames = useRef(0);
+  useEffect(() => {
+    gl.shadowMap.autoUpdate = false;
+    // a few frames: parts ease into a new state over ~0.3 s and textures/meshes mount a moment after a reload
+    shadowFrames.current = 45;
+  }, [gl, house, itemStates, view, sunPos[0], sunPos[1], sunPos[2]]);
+  useFrame(() => {
+    if (shadowFrames.current <= 0) return;
+    gl.shadowMap.needsUpdate = true;
+    shadowFrames.current--;
+  });
+
   return (
     <>
       <Sky ref={skyRef} distance={15000} sunPosition={dir ? [dir[0], Math.max(dir[1], 0.02), dir[2]] : [0, -1, 0]} turbidity={6} rayleigh={1.5} />
@@ -76,10 +95,10 @@ export function Lighting({ room, mobile }: { room: HouseFrame; mobile: boolean }
         shadow-normalBias={1.5}
       />
       {/* bounced daylight; rooms are closed boxes so this stands in for light coming off the floor and walls */}
-      <hemisphereLight args={['#f3f6fa', '#e9e1d4', 2.6 * daylight + 0.1]} />
-      <ambientLight intensity={0.5 * daylight + 0.04} />
+      <hemisphereLight args={['#f3f6fa', '#e6e3dc', 1.7 * daylight + 0.45 * Math.min(1, daylight * 4) + 0.1]} />
+      <ambientLight intensity={0.3 * daylight + 0.04} />
       <RoomLamps slots={mobile ? 2 : 6} sunDown={!dir} />
-      <Environment resolution={64} environmentIntensity={0.6 * daylight + 0.06}>
+      <Environment resolution={64} environmentIntensity={0.45 * daylight + 0.06}>
         <Lightformer form="rect" intensity={2} position={[0, 5, 0]} scale={[10, 10, 1]} rotation={[Math.PI / 2, 0, 0]} />
         <Lightformer form="rect" intensity={0.6} position={[5, 1, 0]} scale={[10, 3, 1]} rotation={[0, -Math.PI / 2, 0]} color="#ffeedd" />
         <Lightformer form="rect" intensity={0.4} position={[-5, 1, 0]} scale={[10, 3, 1]} rotation={[0, Math.PI / 2, 0]} />

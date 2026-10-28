@@ -296,7 +296,7 @@ export function trackLight(params: Record<string, unknown>): Part[] {
     const x = -L / 2 + (L / (n + 1)) * (i + 1);
     parts.push(
       cyl(`spot-${i + 1}-stem`, ['spot'], 0.8, 8, [x, H - 7, 1.75], { color }),
-      { ...cyl(`spot-${i + 1}`, ['spot', 'light'], 4, 11, [x, H - 14, 3], { color, rotation: [25, 0, 0] }), emit: { color: '#ffe6c4', intensity: 9000, kind: 'point' } },
+      { ...cyl(`spot-${i + 1}`, ['spot', 'light'], 4, 11, [x, H - 14, 3], { color, rotation: [25, 0, 0] }), emit: { color: '#ffe6c4', intensity: 13000, kind: 'point' } },
     );
   }
   return parts;

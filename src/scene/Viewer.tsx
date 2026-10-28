@@ -14,7 +14,7 @@ import { Measure } from './Measure';
 import { sceneObjects } from './registry';
 
 declare global {
-  interface Window { __sceneReady?: boolean }
+  interface Window { __sceneReady?: boolean; __renderer?: unknown }
 }
 
 function meshesOf(obj: Object3D | undefined): Mesh[] {
@@ -103,7 +103,10 @@ export function Viewer() {
         dpr={[1, mobile ? 1.5 : 2]}
         camera={{ fov: 70, near: 2, far: 30000, position: [0, 170, 0] }}
         gl={{ antialias: true, preserveDrawingBuffer: true }}
-        onCreated={({ gl }) => { gl.toneMappingExposure = 1.15; }}
+        onCreated={({ gl }) => {
+          // dev only: lets tools read renderer.info (draw calls, textures) for the phone performance check
+          if (import.meta.env.DEV) window.__renderer = gl;
+        }}
         events={crosshairEvents}
         onPointerMissed={(e) => e.type === 'click' && select(null)}
       >
