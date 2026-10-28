@@ -45,7 +45,7 @@ type Tower = { x: [number, number]; z: [number, number]; top: number; url: strin
 const GROUND = -8500;
 const TOWERS: Tower[] = [
   // the residential tower just north-west of the balcony (fills the balcony door in 20261027_160703)
-  { x: [-3300, -200], z: [-6200, -4200], top: 3200, url: stoneUrl, tile: [800, 600], roughness: 0.85, metalness: 0 },
+  { x: [-3900, -800], z: [-6400, -4400], top: 3200, url: stoneUrl, tile: [800, 600], roughness: 0.85, metalness: 0 },
   // the glass office tower to the west (tall window, 20261027_160659 / 160723)
   { x: [-7200, -4600], z: [-2600, 900], top: 9500, url: glassUrl, tile: [600, 700], roughness: 0.3, metalness: 0.3 },
 ];
