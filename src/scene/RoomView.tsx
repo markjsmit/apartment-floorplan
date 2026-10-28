@@ -3,11 +3,11 @@ import { DoubleSide } from 'three';
 import type { ThreeEvent } from '@react-three/fiber';
 import type { Placement, Room } from '../model/schema';
 import { resolveWalls, roomBounds, wallSegments } from '../model/geometry';
-import { placeRoomItems } from '../model/placement';
+import { placeRoomItems, upAtCeiling } from '../model/placement';
 import { initialState, openingParams, resolveAsset } from '../model/assets';
 import { useStore } from '../app/store';
 import type { Selection } from '../model/lookup';
-import { boxWithCmUV, footprintGeometry } from './cmGeometry';
+import { boxWithCmUV, footprintGeometry, prismGeometry } from './cmGeometry';
 import { getMaterial } from './materials';
 import { registerObject } from './registry';
 import { PartsView } from './PartsView';
@@ -59,6 +59,21 @@ export function RoomView({ room, placement, hiddenAssets, showCeiling }: {
         userData={{ selectable: { kind: 'ceiling', id: `${room.id}.ceiling`, part: null } }}
         onClick={showCeiling ? pick({ kind: 'ceiling', id: `${room.id}.ceiling`, part: null }) : undefined}
       />
+      {/* lowered parts of the ceiling: a block from the ceiling down to their underside (part of the ceiling) */}
+      {room.ceiling.lowered.map((z, i) => (
+        <mesh
+          key={z.id ?? i}
+          geometry={prismGeometry(z.footprint, room.ceilingHeight - z.height + 1)}
+          rotation={[Math.PI / 2, 0, 0]}
+          position={[0, room.ceilingHeight + 1, 0]}
+          material={getMaterial(bundle, room.ceiling.material)}
+          visible={showCeiling}
+          castShadow
+          receiveShadow
+          userData={{ selectable: { kind: 'ceiling', id: `${room.id}.ceiling`, part: null } }}
+          onClick={showCeiling ? pick({ kind: 'ceiling', id: `${room.id}.ceiling`, part: null }) : undefined}
+        />
+      ))}
 
       {/* invisible slab over the room: blocks sunlight from above (the ceiling is hidden in top-down view) */}
       <mesh position={[(bounds.minX + bounds.maxX) / 2, room.ceilingHeight + 13.5, (bounds.minZ + bounds.maxZ) / 2]} castShadow>
@@ -68,16 +83,20 @@ export function RoomView({ room, placement, hiddenAssets, showCeiling }: {
         <meshBasicMaterial colorWrite={false} depthWrite={false} shadowSide={DoubleSide} />
       </mesh>
 
-      {walls.map((w) => {
+      {walls.map((w, i) => {
         const t = w.thickness;
+        // the neighbouring walls of this room, which the end pieces run into
+        const prevT = walls[(i + walls.length - 1) % walls.length].thickness;
+        const nextT = walls[(i + 1) % walls.length].thickness;
         const yaw = Math.atan2(-w.dir[1], w.dir[0]);
         return (
           <group key={w.id} ref={registerObject(w.id)} userData={{ selectable: { kind: 'wall', id: w.id, part: null } }} onClick={pick({ kind: 'wall', id: w.id, part: null })}>
             {wallSegments(w, room.openings, room.ceilingHeight).map((r0) => {
-              // run the end pieces past the corners so neighbouring walls overlap (no light leaks)
+              // run the end pieces past the corners into the neighbouring wall (no light leaks), stopping 5 mm short
+              // of its outside: the end face must not poke into the room next door and flicker on its wall
               const r = {
-                u0: r0.u0 === 0 ? -t : r0.u0,
-                u1: r0.u1 >= w.length - 0.01 ? w.length + t : r0.u1,
+                u0: r0.u0 === 0 ? -(prevT - 0.5) : r0.u0,
+                u1: r0.u1 >= w.length - 0.01 ? w.length + (nextT - 0.5) : r0.u1,
                 // and past the floor/ceiling planes, so their edges never show a crack
                 y0: r0.y0 <= 0 ? -5 : r0.y0,
                 y1: r0.y1 >= room.ceilingHeight - 0.01 ? room.ceilingHeight + 20 : r0.y1,
@@ -125,7 +144,7 @@ export function RoomView({ room, placement, hiddenAssets, showCeiling }: {
         );
       })}
 
-      {placed.map((p) => (
+      {placed.filter((p) => showCeiling || !upAtCeiling(p, room.ceilingHeight)).map((p) => (
         <PartsView
           key={p.item.id}
           id={p.item.id}

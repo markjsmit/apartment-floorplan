@@ -59,7 +59,36 @@
         "material": "tiles-porcelain-60"
       },
       "ceiling": {
-        "material": "white-paint"
+        "material": "white-paint",
+        "lowered": [
+          {
+            "id": "living.ceiling-kitchen",
+            "footprint": [
+              [
+                418,
+                300
+              ],
+              [
+                568,
+                300
+              ],
+              [
+                568,
+                720
+              ],
+              [
+                418,
+                720
+              ]
+            ],
+            "height": 238,
+            "tags": [
+              "lowered ceiling",
+              "soffit",
+              "AC"
+            ]
+          }
+        ]
       },
       "wallMaterial": "white-paint",
       "walls": [
@@ -354,33 +383,7 @@
             "height": 277,
             "depth": 17,
             "material": "white-paint"
-          },
-          "allowOverlap": [
-            "living.soffit-kitchen"
-          ]
-        },
-        {
-          "id": "living.soffit-kitchen",
-          "asset": "box",
-          "name": "Kitchen soffit (AC)",
-          "tags": [
-            "soffit",
-            "dropped ceiling",
-            "lowered ceiling",
-            "AC"
-          ],
-          "position": [
-            493,
-            238,
-            720
-          ],
-          "params": {
-            "width": 150,
-            "height": 39,
-            "depth": 420,
-            "material": "white-paint"
-          },
-          "rotation": 180
+          }
         },
         {
           "id": "living.ac-vent-kitchen",
@@ -481,7 +484,7 @@
           "note": "116 x 17 (notes), 394 from the TV wall; grey plaster now painted white like every wall"
         },
         {
-          "path": "items[living.soffit-kitchen]",
+          "path": "ceiling.lowered[living.ceiling-kitchen]",
           "note": "lowered ceiling at 238 (notes) over the tall units and the hallway mouth; extent from the photos"
         }
       ]
@@ -782,7 +785,6 @@
           "id": "hallway.wall-4",
           "edge": 4,
           "tags": [
-            "cabinet wall",
             "bathroom wall"
           ]
         },
@@ -869,69 +871,25 @@
       ],
       "items": [
         {
-          "id": "hallway.cabinet",
-          "asset": "kitchen-tall",
-          "name": "Hallway cabinet (glossy)",
+          "id": "hallway.block",
+          "asset": "box",
+          "name": "Built-in block (unknown)",
           "tags": [
-            "hallway cabinet",
-            "hallway closet",
-            "glossy cabinet",
+            "hallway cabin",
+            "hallway block",
+            "unknown",
             "built-in",
-            "cabinet"
+            "sticking out"
           ],
+          "params": {
+            "width": 123,
+            "height": 238,
+            "depth": 38,
+            "material": "white-paint"
+          },
           "against": {
             "wall": "hallway.wall-4",
             "offset": 199
-          },
-          "params": {
-            "height": 238,
-            "depth": 38,
-            "topDoors": 185,
-            "columns": [
-              {
-                "w": 61.5,
-                "kind": "pantry",
-                "handle": "right"
-              },
-              {
-                "w": 61.5,
-                "kind": "pantry",
-                "handle": "left"
-              }
-            ]
-          }
-        },
-        {
-          "id": "hallway.cabinet-bedroom-side",
-          "asset": "kitchen-tall",
-          "name": "Hallway cabinet, bedroom side",
-          "tags": [
-            "bedroom side cabinet",
-            "hallway cabinet",
-            "glossy cabinet",
-            "built-in",
-            "cabinet"
-          ],
-          "against": {
-            "wall": "hallway.wall-4",
-            "offset": 8
-          },
-          "params": {
-            "height": 238,
-            "depth": 38,
-            "topDoors": 185,
-            "columns": [
-              {
-                "w": 40,
-                "kind": "pantry",
-                "handle": "right"
-              },
-              {
-                "w": 40,
-                "kind": "pantry",
-                "handle": "left"
-              }
-            ]
           }
         }
       ],
@@ -941,12 +899,8 @@
           "note": "168 wide from the pillar line to the bathroom wall (notes '1.68 m' — read as the hallway width), runs from the kitchen to the master bedroom door along the storage room (its 3.01 + walls). The door alcove in front of the storage room door is the 98 x 65 corner cut out of that room"
         },
         {
-          "path": "items[hallway.cabinet]",
-          "note": "123 x 38 (notes 'hallway cabin'); height up to the lowered ceiling, door split from the photos"
-        },
-        {
-          "path": "items[hallway.cabinet-bedroom-side]",
-          "note": "80 wide (notes 'bedroom side cabin 80 cm x …' — depth not written, 38 assumed); position next to the bedroom door is a guess"
+          "path": "items[hallway.block]",
+          "note": "123 x 38 (notes 'hallway cabin'), right after the fridge (video 0:25). Mark: no knobs seen, unknown if it opens; height up to the lowered ceiling assumed"
         },
         {
           "path": "ceilingHeight",

@@ -94,6 +94,9 @@ export function describeSelection(
   const rows: [string, string][] = [
     ['Id', sel.id], ['Room', room.name], ['Finish', bundle.textures[surface.material]?.name ?? surface.material],
   ];
-  if (found.kind === 'ceiling') rows.push(['Height', `${cm(room.ceilingHeight)} cm`]);
+  if (found.kind === 'ceiling') {
+    rows.push(['Height', `${cm(room.ceilingHeight)} cm`]);
+    for (const z of room.ceiling.lowered) rows.push(['Lowered', `${cm(z.height)} cm${z.tags.length ? ` (${z.tags[0]})` : ''}`]);
+  }
   return { title: found.kind === 'floor' ? 'Floor' : 'Ceiling', kind: found.kind, tags: [], rows, assumptions: assumptionsFor(room.assumptions, sel.id) };
 }

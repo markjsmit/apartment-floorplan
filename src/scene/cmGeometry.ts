@@ -1,4 +1,4 @@
-import { BoxGeometry, BufferGeometry, CylinderGeometry, PlaneGeometry, Shape, ShapeGeometry } from 'three';
+import { BoxGeometry, BufferGeometry, CylinderGeometry, ExtrudeGeometry, PlaneGeometry, Shape, ShapeGeometry } from 'three';
 import type { Geometry, Vec2 } from '../model/schema';
 
 // All geometry gets UVs in centimetres, so a texture's repeat = 1 / tileSize gives true real-world scale.
@@ -57,5 +57,13 @@ export function footprintGeometry(footprint: Vec2[], flipZ: boolean): BufferGeom
   return cached(`fp:${flipZ}:${JSON.stringify(footprint)}`, () => {
     const shape = new Shape(footprint.map(([x, z]) => ({ x, y: flipZ ? -z : z }) as never));
     return new ShapeGeometry(shape);
+  });
+}
+
+/** A footprint extruded `depth` cm along +z of the XY plane (points mapped like footprintGeometry, flipZ off); UVs are cm. */
+export function prismGeometry(footprint: Vec2[], depth: number): BufferGeometry {
+  return cached(`prism:${depth}:${JSON.stringify(footprint)}`, () => {
+    const shape = new Shape(footprint.map(([x, z]) => ({ x, y: z }) as never));
+    return new ExtrudeGeometry(shape, { depth, bevelEnabled: false });
   });
 }

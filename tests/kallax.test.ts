@@ -114,7 +114,7 @@ describe('kallax inserts', () => {
     const a = asset('kallax', { cols: 2, rows: 2, inserts: 'door-left' });
     const room = {
       id: 'r', name: 'r', tags: [], footprint: [[0, 0], [300, 0], [300, 300], [0, 300]] as [number, number][], ceilingHeight: 260,
-      northAngle: 0, floor: { material: 'x' }, ceiling: { material: 'x' }, wallMaterial: 'x', walls: [], openings: [], items: [], assumptions: [],
+      northAngle: 0, floor: { material: 'x' }, ceiling: { material: 'x', lowered: [] }, wallMaterial: 'x', walls: [], openings: [], items: [], assumptions: [],
     };
     const item = ItemSchema.parse({ id: 'r.k', asset: a.id, against: { wall: 'r.wall-0', offset: 10 } });
     const walls = resolveWalls(room);

@@ -75,3 +75,10 @@ export function quadsOverlap(a: Vec2[], b: Vec2[]): boolean {
   }
   return true;
 }
+
+/** Things up at the ceiling (lamps, vents): hidden in the plan view, where they'd cover the room below. */
+export function upAtCeiling(p: Pick<PlacedItem, 'size' | 'position'>, ceilingHeight: number): boolean {
+  const bottom = p.position[1] + p.size.min[1];
+  const top = p.position[1] + p.size.max[1];
+  return bottom >= 200 && top >= ceilingHeight - 2;
+}

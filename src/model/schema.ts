@@ -66,6 +66,18 @@ export type Item = z.infer<typeof ItemSchema>;
 
 export const SurfaceSchema = z.object({ material: z.string() });
 
+/** A lower part of the ceiling (a soffit over the kitchen, a boxed-in duct): its outline in room coords and the
+ *  height of its underside. Part of the ceiling, so it's hidden in the plan view like the ceiling. */
+export const LoweredCeilingSchema = z.object({
+  id: z.string().optional(),
+  footprint: z.array(Vec2Schema).min(3),
+  height: z.number().positive(),
+  tags,
+});
+export type LoweredCeiling = z.infer<typeof LoweredCeilingSchema>;
+
+export const CeilingSchema = SurfaceSchema.extend({ lowered: z.array(LoweredCeilingSchema).default([]) });
+
 export const RoomSchema = z.object({
   id: z.string(),
   name: z.string(),
@@ -74,7 +86,7 @@ export const RoomSchema = z.object({
   ceilingHeight: z.number().positive(),
   northAngle: z.number().default(0),
   floor: SurfaceSchema,
-  ceiling: SurfaceSchema,
+  ceiling: CeilingSchema,
   wallMaterial: z.string().default('white-paint'),
   walls: z.array(WallSchema).default([]),
   openings: z.array(OpeningSchema).default([]),
