@@ -32,7 +32,7 @@ export function Measure() {
       if (ignoresKeys(e.target as HTMLInputElement) || e.metaKey || e.ctrlKey) return;
       const m = useMeasure.getState();
       if (e.code === 'KeyM') m.toggle();
-      if (e.code === 'KeyF' && m.active) m.setMode(m.mode === 'free' ? 'axis' : 'free');
+      if (e.code === 'KeyF' && m.active) m.toggleAngled();
       if (e.key === 'Escape') m.stop();
     };
     window.addEventListener('keydown', key);

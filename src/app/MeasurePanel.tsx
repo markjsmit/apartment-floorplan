@@ -6,7 +6,7 @@ const AXIS_NAME = { x: 'along x', y: 'height', z: 'along z', free: 'angled, poin
 
 /** Steps and result of the measuring tool, with a mode switch and buttons to flip the last point, start over, or leave. */
 export function MeasurePanel() {
-  const { active, mode, points, flipLast, reset, stop, setMode } = useMeasure();
+  const { active, mode, points, flipLast, reset, stop, setMode, toggleAngled } = useMeasure();
   const s = useStore();
   if (!active) return null;
   const m = currentMeasurement(points, mode);
@@ -16,7 +16,7 @@ export function MeasurePanel() {
       <strong>📏 Measure</strong>
       <span className="measure-modes">
         <button className={mode === 'axis' ? 'on' : ''} onClick={() => setMode('axis')} title="Straight out from the first surface, along one room axis (F switches)">⟂ Straight out</button>
-        <button className={mode === 'free' ? 'on' : ''} onClick={() => setMode('free')} title="Angled: straight line between the two clicked spots, at any angle (F switches)">↗ Angled (F)</button>
+        <button className={mode === 'free' ? 'on' : ''} onClick={toggleAngled} title="Angled: straight line between the two clicked spots, at any angle (click or F again to turn off)">↗ Angled (F)</button>
       </span>
       {points.length === 0 && <span>Click the first {mode === 'free' ? 'spot' : 'surface'}</span>}
       {points.length === 1 && <span>From <b>{name(points[0])}</b> — now click the second {mode === 'free' ? 'spot' : 'surface'}</span>}

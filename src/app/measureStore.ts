@@ -22,14 +22,17 @@ type MeasureState = {
   flipLast: () => void;
   reset: () => void;
   setMode: (mode: MeasureMode) => void;
+  /** angled (point to point) on ↔ off */
+  toggleAngled: () => void;
 };
 
 export const useMeasure = create<MeasureState>((set, get) => ({
   active: false,
   mode: 'axis',
   points: [],
-  toggle: () => set({ active: !get().active, points: [] }),
-  stop: () => set({ active: false, points: [] }),
+  // leaving the tool also turns angled off: it always starts straight out
+  toggle: () => set({ active: !get().active, points: [], mode: 'axis' }),
+  stop: () => set({ active: false, points: [], mode: 'axis' }),
   // a third click starts a new measurement
   add: (p) => set({ points: get().points.length >= 2 ? [p] : [...get().points, p] }),
   flipLast: () => {
@@ -42,6 +45,7 @@ export const useMeasure = create<MeasureState>((set, get) => ({
   },
   reset: () => set({ points: [] }),
   setMode: (mode) => set({ mode }),
+  toggleAngled: () => set({ mode: get().mode === 'free' ? 'axis' : 'free' }),
 }));
 
 export function currentMeasurement(points: MeasurePoint[], mode: MeasureMode = useMeasure.getState().mode): Measurement | null {

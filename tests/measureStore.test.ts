@@ -13,4 +13,17 @@ describe('measure store', () => {
     expect(useMeasure.getState().points[0].point).toEqual([60, 219.75, 20]);
     expect(useMeasure.getState().points[0].flipped).toBe(false);
   });
+
+  it('turns angled on and off again, and closing the tool turns it off', () => {
+    const s = useMeasure.getState();
+    s.stop();
+    s.toggle();
+    useMeasure.getState().toggleAngled();
+    expect(useMeasure.getState().mode).toBe('free');
+    useMeasure.getState().toggleAngled();
+    expect(useMeasure.getState().mode).toBe('axis');
+    useMeasure.getState().toggleAngled();
+    useMeasure.getState().stop();
+    expect(useMeasure.getState().mode).toBe('axis');
+  });
 });
