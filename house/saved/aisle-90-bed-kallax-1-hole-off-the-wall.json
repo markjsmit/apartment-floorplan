@@ -1,6 +1,6 @@
 {
   "meta": {
-    "name": "Aisle 90 (7,620 L)",
+    "name": "Aisle 90 (7,460 L)",
     "kind": "saved",
     "note": "90x190 wall bed; the Kallax 4x3s stand one hole further from the hallway wall (block ends at the alcove corner); 55 cm shelves straight against the walls at the end, wall to wall, in front of no cube: every Kallax hole is usable; 4x3s on both sides of the island (the block ends exactly at the alcove corner).",
     "location": {
@@ -2173,40 +2173,6 @@
           "params": {
             "diameter": 22,
             "intensity": 9000
-          }
-        },
-        {
-          "id": "storage.entry-shelf",
-          "asset": "box",
-          "name": "Shelf over the door",
-          "tags": [
-            "shelf"
-          ],
-          "params": {
-            "width": 98,
-            "height": 1.8,
-            "depth": 30,
-            "material": "birch-ply"
-          },
-          "against": {
-            "wall": "storage.wall-4",
-            "offset": 1.5,
-            "elevation": 224
-          }
-        },
-        {
-          "id": "storage.stuff-entry",
-          "asset": "stuff",
-          "params": {
-            "width": 94,
-            "depth": 28,
-            "height": 44,
-            "seed": "storage.stuff-entry"
-          },
-          "against": {
-            "wall": "storage.wall-4",
-            "offset": 3.5,
-            "elevation": 225.8
           }
         },
         {

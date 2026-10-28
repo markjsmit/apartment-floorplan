@@ -1,6 +1,6 @@
 {
   "meta": {
-    "name": "Walls 140 (4,500 L)",
+    "name": "Walls 140 (4,340 L)",
     "kind": "saved",
     "note": "Only the 4 Kallax we have: one stack on the west wall, one on the east wall next to the 140 wall bed; Kallax 2x4 + 2x2 on the hallway wall; open middle.",
     "location": {
@@ -1984,43 +1984,9 @@
           }
         },
         {
-          "id": "storage.entry-shelf",
-          "asset": "box",
-          "name": "Shelf over the door",
-          "tags": [
-            "shelf"
-          ],
-          "params": {
-            "width": 98,
-            "height": 1.8,
-            "depth": 30,
-            "material": "birch-ply"
-          },
-          "against": {
-            "wall": "storage.wall-4",
-            "offset": 1.5,
-            "elevation": 224
-          }
-        },
-        {
-          "id": "storage.stuff-entry",
-          "asset": "stuff",
-          "params": {
-            "width": 94,
-            "depth": 28,
-            "height": 44,
-            "seed": "storage.stuff-entry"
-          },
-          "against": {
-            "wall": "storage.wall-4",
-            "offset": 3.5,
-            "elevation": 225.8
-          }
-        },
-        {
           "id": "storage.top-west",
           "asset": "box",
-          "name": "Top shelf along the west wall (joins the door shelf to the Kallax)",
+          "name": "Top shelf along the west wall",
           "tags": [
             "shelf"
           ],

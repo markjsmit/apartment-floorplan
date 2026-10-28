@@ -1,6 +1,6 @@
 {
   "meta": {
-    "name": "Aisle 140 (5,810 L)",
+    "name": "Aisle 140 (5,660 L)",
     "kind": "saved",
     "note": "140 wall bed on the east wall; Kallax aisle: our 4 Kallax 4x3 + 2 new Kallax 3x3 on the door side (inner one sticks out 1 hole, so nothing faces the alcove wall); 20 cm off the hallway wall; wall shelves at the end of the aisle; top as in the original Kallax room: suitcase board at the front with a little wall, a hole in the middle, a shelf at the end.",
     "location": {
@@ -2241,40 +2241,6 @@
           "params": {
             "diameter": 22,
             "intensity": 9000
-          }
-        },
-        {
-          "id": "storage.entry-shelf",
-          "asset": "box",
-          "name": "Shelf over the door",
-          "tags": [
-            "shelf"
-          ],
-          "params": {
-            "width": 98,
-            "height": 1.8,
-            "depth": 30,
-            "material": "birch-ply"
-          },
-          "against": {
-            "wall": "storage.wall-4",
-            "offset": 1.5,
-            "elevation": 224
-          }
-        },
-        {
-          "id": "storage.stuff-entry",
-          "asset": "stuff",
-          "params": {
-            "width": 94,
-            "depth": 28,
-            "height": 44,
-            "seed": "storage.stuff-entry"
-          },
-          "against": {
-            "wall": "storage.wall-4",
-            "offset": 3.5,
-            "elevation": 225.8
           }
         },
         {

@@ -1481,14 +1481,75 @@
       ],
       "items": [
         {
-          "id": "storage.kallax-west-low",
-          "asset": "ikea-kallax-112x147",
-          "name": "Kallax 4x3 by the door (tools, low)",
+          "id": "storage.wall-bed",
+          "asset": "diy-wall-bed-desk",
+          "name": "Wall bed 90x190 + fold-down desk",
           "tags": [
-            "tool kallax",
-            "west kallax",
-            "by the door"
+            "wall bed",
+            "guest bed",
+            "murphy bed",
+            "desk"
           ],
+          "description": "for the spare 90x190 mattress",
+          "against": {
+            "wall": "storage.wall-1",
+            "offset": 2
+          },
+          "state": "folded",
+          "params": {
+            "bedWidth": 90,
+            "bedLength": 190,
+            "baseDepth": 39,
+            "baseHeight": 30,
+            "hinge": 31.8,
+            "housing": true,
+            "housingHeight": 224,
+            "topDepth": 39,
+            "deskWidth": 90,
+            "deskOffset": 0
+          }
+        },
+        {
+          "id": "storage.stuff-bed-top",
+          "asset": "stuff",
+          "params": {
+            "width": 90,
+            "depth": 38,
+            "height": 44,
+            "seed": "storage.stuff-bed-top"
+          },
+          "against": {
+            "wall": "storage.wall-1",
+            "offset": 3.8,
+            "elevation": 225.8
+          }
+        },
+        {
+          "id": "storage.aisle-doors",
+          "asset": "diy-aisle-doors",
+          "name": "Aisle doors (pair, open inwards)",
+          "tags": [
+            "aisle doors",
+            "doors"
+          ],
+          "position": [
+            819,
+            0,
+            130
+          ],
+          "rotation": 180,
+          "params": {
+            "width": 80
+          }
+        },
+        {
+          "id": "storage.kallax-east-low",
+          "asset": "ikea-kallax-112x147",
+          "name": "Kallax 4x3 east wall (low)",
+          "tags": [
+            "kallax"
+          ],
+          "description": "one of the 4 Kallax 4x3 we already have",
           "params": {
             "cols": 4,
             "rows": 3,
@@ -1513,26 +1574,6 @@
                 "box"
               ]
             ],
-            "labels": [
-              [
-                "Screwdrivers / Bits",
-                "Screws / Nails",
-                "Wall plugs / Hooks",
-                "Pliers / Wrenches"
-              ],
-              [
-                "Power tools",
-                "Drill",
-                "Sanding",
-                "Glue & tape"
-              ],
-              [
-                "Paint",
-                "Plumbing",
-                "Electrical",
-                "Spare parts"
-              ]
-            ],
             "boxColors": [
               [],
               [
@@ -1550,22 +1591,23 @@
             ]
           },
           "against": {
-            "wall": "storage.wall-5",
-            "offset": 85
+            "wall": "storage.wall-1",
+            "offset": 114.5
           }
         },
         {
-          "id": "storage.kallax-west-high",
+          "id": "storage.kallax-east-high",
           "asset": "ikea-kallax-112x147",
-          "name": "Kallax 4x3 by the door (tools, top)",
+          "name": "Kallax 4x3 east wall (top)",
           "tags": [
-            "tool kallax",
-            "west kallax"
+            "kallax"
           ],
+          "description": "one of the 4 Kallax 4x3 we already have",
           "params": {
             "cols": 4,
             "rows": 3,
             "handles": "knob",
+            "seed": "storage.kallax-east-high",
             "inserts": [
               [
                 "",
@@ -1605,40 +1647,34 @@
                 "",
                 ""
               ]
-            ],
-            "labels": [
-              [],
-              [],
-              [
-                "Hex keys / Measuring",
-                "Cable ties / Velcro",
-                "Medicine / First aid",
-                "Candles / Lighters"
-              ]
-            ],
-            "seed": "west"
+            ]
           },
           "against": {
-            "wall": "storage.wall-5",
-            "offset": 85,
+            "wall": "storage.wall-1",
+            "offset": 114.5,
             "elevation": 112
           }
         },
         {
-          "id": "storage.kallax-window",
+          "id": "storage.kallax-mid-east-low",
           "asset": "ikea-kallax-112x147",
-          "name": "Kallax 4x2 under the window (electronics)",
+          "name": "Kallax 4x3 middle, faces the aisle (low)",
           "tags": [
-            "window kallax",
-            "low kallax",
-            "electronics"
+            "kallax"
           ],
+          "description": "one of the 4 Kallax 4x3 we already have",
           "params": {
             "cols": 4,
-            "rows": 2,
+            "rows": 3,
             "handles": "knob",
             "inserts": [
               [
+                "drawers",
+                "drawers",
+                "drawers",
+                "drawers"
+              ],
+              [
                 "box",
                 "box",
                 "box",
@@ -1649,23 +1685,10 @@
                 "box",
                 "box",
                 "box"
-              ]
-            ],
-            "labels": [
-              [
-                "Networking",
-                "Extension cords",
-                "Lamps & bulbs",
-                "Speakers"
-              ],
-              [
-                "Old laptops",
-                "Consoles",
-                "Device boxes",
-                "Cables (big)"
               ]
             ],
             "boxColors": [
+              [],
               [
                 "black",
                 "white",
@@ -1680,10 +1703,487 @@
               ]
             ]
           },
-          "against": {
-            "wall": "storage.wall-0",
-            "offset": 109
+          "position": [
+            740,
+            0,
+            203.5
+          ],
+          "rotation": 90
+        },
+        {
+          "id": "storage.kallax-mid-east-high",
+          "asset": "ikea-kallax-112x147",
+          "name": "Kallax 4x3 middle, faces the aisle (top)",
+          "tags": [
+            "kallax"
+          ],
+          "description": "one of the 4 Kallax 4x3 we already have",
+          "params": {
+            "cols": 4,
+            "rows": 3,
+            "handles": "knob",
+            "seed": "storage.kallax-mid-east-high",
+            "inserts": [
+              [
+                "",
+                "",
+                "",
+                ""
+              ],
+              [
+                "",
+                "",
+                "",
+                ""
+              ],
+              [
+                "drawers",
+                "drawers",
+                "drawers",
+                "drawers"
+              ]
+            ],
+            "contents": [
+              [
+                "random",
+                "random",
+                "random",
+                "random"
+              ],
+              [
+                "random",
+                "random",
+                "random",
+                "random"
+              ],
+              [
+                "",
+                "",
+                "",
+                ""
+              ]
+            ]
+          },
+          "position": [
+            740,
+            112,
+            203.5
+          ],
+          "rotation": 90
+        },
+        {
+          "id": "storage.kallax-mid-west-low",
+          "asset": "ikea-kallax-112x147",
+          "name": "Kallax 4x3 middle, faces the door side (low)",
+          "tags": [
+            "kallax"
+          ],
+          "description": "NEW: buy (IKEA Kallax 112x147, same as ours)",
+          "params": {
+            "cols": 4,
+            "rows": 3,
+            "handles": "knob",
+            "inserts": [
+              [
+                "drawers",
+                "drawers",
+                "drawers",
+                "drawers"
+              ],
+              [
+                "box",
+                "box",
+                "box",
+                "box"
+              ],
+              [
+                "box",
+                "box",
+                "box",
+                "box"
+              ]
+            ],
+            "boxColors": [
+              [],
+              [
+                "black",
+                "white",
+                "black",
+                "white"
+              ],
+              [
+                "white",
+                "black",
+                "white",
+                "black"
+              ]
+            ]
+          },
+          "position": [
+            739.5,
+            0,
+            203.5
+          ],
+          "rotation": -90
+        },
+        {
+          "id": "storage.kallax-mid-west-high",
+          "asset": "ikea-kallax-112x147",
+          "name": "Kallax 4x3 middle, faces the door side (top)",
+          "tags": [
+            "kallax"
+          ],
+          "description": "NEW: buy (IKEA Kallax 112x147, same as ours)",
+          "params": {
+            "cols": 4,
+            "rows": 3,
+            "handles": "knob",
+            "seed": "storage.kallax-mid-west-high",
+            "inserts": [
+              [
+                "",
+                "",
+                "",
+                ""
+              ],
+              [
+                "",
+                "",
+                "",
+                ""
+              ],
+              [
+                "drawers",
+                "drawers",
+                "drawers",
+                "drawers"
+              ]
+            ],
+            "contents": [
+              [
+                "random",
+                "random",
+                "random",
+                "random"
+              ],
+              [
+                "random",
+                "random",
+                "random",
+                "random"
+              ],
+              [
+                "",
+                "",
+                "",
+                ""
+              ]
+            ]
+          },
+          "position": [
+            739.5,
+            112,
+            203.5
+          ],
+          "rotation": -90
+        },
+        {
+          "id": "storage.kallax-divider",
+          "asset": "box",
+          "name": "Divider between the back-to-back Kallax",
+          "tags": [
+            "shelf"
+          ],
+          "params": {
+            "width": 147,
+            "height": 224,
+            "depth": 0.5,
+            "material": "white-paint"
+          },
+          "position": [
+            739.5,
+            0,
+            203.5
+          ],
+          "rotation": 90
+        },
+        {
+          "id": "storage.drying-racks",
+          "asset": "diy-drying-rack",
+          "name": "Drying racks (hip height + 175, fold out together)",
+          "tags": [
+            "drying rack",
+            "laundry"
+          ],
+          "position": [
+            739.75,
+            0,
+            130
+          ],
+          "rotation": 180,
+          "params": {
+            "width": 74,
+            "levels": [
+              {
+                "elevation": 90,
+                "length": 65,
+                "standoff": 2.5
+              },
+              {
+                "elevation": 175,
+                "length": 65
+              }
+            ]
           }
+        },
+        {
+          "id": "storage.wall-shelf-1",
+          "asset": "box",
+          "name": "Shelf straight against the walls at the end (55 deep, wall to wall, on cleats)",
+          "tags": [
+            "shelf"
+          ],
+          "params": {
+            "width": 200,
+            "height": 1.8,
+            "depth": 55.5,
+            "material": "birch-ply"
+          },
+          "against": {
+            "wall": "storage.wall-2",
+            "offset": 0,
+            "elevation": 74.25
+          }
+        },
+        {
+          "id": "storage.wall-shelf-2",
+          "asset": "box",
+          "name": "Shelf straight against the walls at the end (55 deep, wall to wall, on cleats)",
+          "tags": [
+            "shelf"
+          ],
+          "params": {
+            "width": 200,
+            "height": 1.8,
+            "depth": 55.5,
+            "material": "birch-ply"
+          },
+          "against": {
+            "wall": "storage.wall-2",
+            "offset": 0,
+            "elevation": 116.25
+          }
+        },
+        {
+          "id": "storage.wall-shelf-3",
+          "asset": "box",
+          "name": "Shelf straight against the walls at the end (55 deep, wall to wall, on cleats)",
+          "tags": [
+            "shelf"
+          ],
+          "params": {
+            "width": 200,
+            "height": 1.8,
+            "depth": 55.5,
+            "material": "birch-ply"
+          },
+          "against": {
+            "wall": "storage.wall-2",
+            "offset": 0,
+            "elevation": 151.25
+          }
+        },
+        {
+          "id": "storage.wall-shelf-4",
+          "asset": "box",
+          "name": "Shelf straight against the walls at the end (55 deep, wall to wall, on cleats)",
+          "tags": [
+            "shelf"
+          ],
+          "params": {
+            "width": 200,
+            "height": 1.8,
+            "depth": 55.5,
+            "material": "birch-ply"
+          },
+          "against": {
+            "wall": "storage.wall-2",
+            "offset": 0,
+            "elevation": 186.25
+          }
+        },
+        {
+          "id": "storage.top-front",
+          "asset": "box",
+          "name": "Top board at the front (suitcases, 58 deep)",
+          "tags": [
+            "shelf"
+          ],
+          "params": {
+            "width": 197.5,
+            "height": 1.8,
+            "depth": 58,
+            "material": "birch-ply"
+          },
+          "position": [
+            799.25,
+            224,
+            130
+          ],
+          "rotation": 0
+        },
+        {
+          "id": "storage.top-front-wall",
+          "asset": "box",
+          "name": "Little wall behind the suitcase board (to the ceiling)",
+          "tags": [
+            "shelf"
+          ],
+          "params": {
+            "width": 197.5,
+            "height": 51.2,
+            "depth": 1.8,
+            "material": "birch-ply"
+          },
+          "position": [
+            799.25,
+            225.8,
+            186.2
+          ],
+          "rotation": 0
+        },
+        {
+          "id": "storage.top-end",
+          "asset": "box",
+          "name": "Top shelf at the end against the wall (connects the Kallax tops)",
+          "tags": [
+            "shelf"
+          ],
+          "params": {
+            "width": 197.5,
+            "height": 1.8,
+            "depth": 90.5,
+            "material": "birch-ply"
+          },
+          "position": [
+            799.25,
+            224,
+            242
+          ],
+          "rotation": 0
+        },
+        {
+          "id": "storage.suitcase-1",
+          "asset": "suitcase",
+          "name": "Large suitcase",
+          "tags": [
+            "suitcase"
+          ],
+          "params": {
+            "color": "#2f4a6d"
+          },
+          "position": [
+            739.75,
+            225.8,
+            186
+          ],
+          "rotation": 180
+        },
+        {
+          "id": "storage.suitcase-2",
+          "asset": "suitcase",
+          "name": "Large suitcase",
+          "tags": [
+            "suitcase"
+          ],
+          "params": {
+            "color": "#4a4d52"
+          },
+          "position": [
+            819,
+            225.8,
+            186
+          ],
+          "rotation": 180
+        },
+        {
+          "id": "storage.stuff-mid-top",
+          "asset": "stuff",
+          "params": {
+            "width": 76.5,
+            "depth": 52,
+            "height": 44,
+            "seed": "storage.stuff-mid-top"
+          },
+          "position": [
+            739.75,
+            224,
+            189
+          ],
+          "rotation": 0
+        },
+        {
+          "id": "storage.stuff-east-top",
+          "asset": "stuff",
+          "params": {
+            "width": 37,
+            "depth": 52,
+            "height": 44,
+            "seed": "storage.stuff-east-top"
+          },
+          "position": [
+            878.5,
+            224,
+            189
+          ],
+          "rotation": 0
+        },
+        {
+          "id": "storage.stuff-end-top",
+          "asset": "stuff",
+          "params": {
+            "width": 194.5,
+            "depth": 88.5,
+            "height": 44,
+            "seed": "storage.stuff-end-top"
+          },
+          "position": [
+            799.25,
+            225.8,
+            332.5
+          ],
+          "rotation": 180
+        },
+        {
+          "id": "storage.aisle-light",
+          "asset": "surface-light",
+          "name": "Aisle light (under the suitcase board)",
+          "tags": [
+            "light"
+          ],
+          "position": [
+            819,
+            224,
+            159
+          ],
+          "params": {
+            "diameter": 22,
+            "intensity": 9000
+          }
+        },
+        {
+          "id": "storage.ironing-board",
+          "asset": "ironing-board",
+          "name": "Ironing board",
+          "tags": [
+            "ironing board"
+          ],
+          "position": [
+            878,
+            0,
+            115.5
+          ],
+          "rotation": 0
         },
         {
           "id": "storage.pegboard",
@@ -1694,11 +2194,11 @@
             "tools wall"
           ],
           "against": {
-            "wall": "storage.wall-0",
-            "offset": 43
+            "wall": "storage.wall-5",
+            "offset": 161.5
           },
           "params": {
-            "width": 60,
+            "width": 90,
             "ceiling": 277,
             "boards": [
               {
@@ -1722,540 +2222,16 @@
           }
         },
         {
-          "id": "storage.kallax-corner-low",
-          "asset": "ikea-kallax-112x147",
-          "name": "Kallax 2x3 window corner (chargers, low)",
-          "tags": [
-            "corner kallax"
-          ],
-          "params": {
-            "cols": 2,
-            "rows": 3,
-            "handles": "knob",
-            "inserts": [
-              [
-                "drawers",
-                "drawers"
-              ],
-              [
-                "box",
-                "box"
-              ],
-              [
-                "box",
-                "box"
-              ]
-            ],
-            "labels": [
-              [
-                "Power banks / Chargers",
-                "USB-C / USB-A"
-              ],
-              [
-                "HDMI / Adapters",
-                "SD cards / USB sticks"
-              ],
-              [
-                "Printer stuff",
-                "Photo / Camera"
-              ]
-            ],
-            "boxColors": [
-              [],
-              [
-                "white",
-                "black"
-              ],
-              [
-                "black",
-                "white"
-              ]
-            ]
-          },
-          "against": {
-            "wall": "storage.wall-1",
-            "offset": 14.5
-          }
-        },
-        {
-          "id": "storage.kallax-corner-high",
-          "asset": "ikea-kallax-112x147",
-          "name": "Kallax 2x3 window corner (top)",
-          "tags": [
-            "corner kallax"
-          ],
-          "params": {
-            "cols": 2,
-            "rows": 3,
-            "handles": "knob",
-            "inserts": [
-              [
-                "",
-                ""
-              ],
-              [
-                "",
-                ""
-              ],
-              [
-                "drawers",
-                "drawers"
-              ]
-            ],
-            "contents": [
-              [
-                "random",
-                "random"
-              ],
-              [
-                "random",
-                "random"
-              ],
-              [
-                "",
-                ""
-              ]
-            ],
-            "labels": [
-              [],
-              [],
-              [
-                "Light bulbs",
-                "Fuses / Tape"
-              ]
-            ],
-            "seed": "corner"
-          },
-          "against": {
-            "wall": "storage.wall-1",
-            "offset": 14.5,
-            "elevation": 112
-          }
-        },
-        {
-          "id": "storage.ironing-board",
-          "asset": "ironing-board",
-          "name": "Ironing board",
-          "tags": [
-            "ironing board"
-          ],
-          "position": [
-            879,
-            0,
-            111
-          ]
-        },
-        {
-          "id": "storage.wall-bed",
-          "asset": "diy-wall-bed-desk",
-          "name": "Wall bed 140x190 + fold-down desk",
-          "tags": [
-            "wall bed",
-            "guest bed",
-            "murphy bed",
-            "desk",
-            "work desk"
-          ],
-          "against": {
-            "wall": "storage.wall-1",
-            "offset": 107.5
-          },
-          "params": {
-            "bedWidth": 140,
-            "bedLength": 190,
-            "baseDepth": 39,
-            "baseHeight": 30,
-            "hinge": 31.8,
-            "housing": true,
-            "housingHeight": 224,
-            "topDepth": 39,
-            "deskWidth": 90,
-            "deskOffset": 0
-          }
-        },
-        {
-          "id": "storage.desk-chair",
-          "asset": "old-house-office-chair",
-          "name": "Desk chair (from the old house)",
-          "tags": [
-            "desk chair",
-            "office chair"
-          ],
-          "position": [
-            735,
-            0,
-            195
-          ],
-          "rotation": 90,
-          "allowOverlap": [
-            "storage.wall-bed"
-          ]
-        },
-        {
-          "id": "storage.kallax-south-low",
-          "asset": "ikea-kallax-112x147",
-          "name": "Kallax 4x3 hallway wall (household, low)",
-          "tags": [
-            "household kallax",
-            "south kallax"
-          ],
-          "params": {
-            "cols": 4,
-            "rows": 3,
-            "handles": "knob",
-            "inserts": [
-              [
-                "drawers",
-                "drawers",
-                "drawers",
-                "drawers"
-              ],
-              [
-                "box",
-                "box",
-                "box",
-                "box"
-              ],
-              [
-                "box",
-                "box",
-                "box",
-                "box"
-              ]
-            ],
-            "labels": [
-              [
-                "Stationery / Tape",
-                "Sewing / Repairs",
-                "Documents / Manuals",
-                "Keys / Spare keys"
-              ],
-              [
-                "Towels",
-                "Bedding (guests)",
-                "Winter",
-                "Bags"
-              ],
-              [
-                "Shoes",
-                "Cleaning",
-                "Sports",
-                "Travel"
-              ]
-            ],
-            "boxColors": [
-              [],
-              [
-                "white",
-                "black",
-                "white",
-                "black"
-              ],
-              [
-                "black",
-                "white",
-                "black",
-                "white"
-              ]
-            ]
-          },
-          "against": {
-            "wall": "storage.wall-2",
-            "offset": 46
-          }
-        },
-        {
-          "id": "storage.kallax-south-high",
-          "asset": "ikea-kallax-112x147",
-          "name": "Kallax 4x3 hallway wall (household, top)",
-          "tags": [
-            "household kallax",
-            "south kallax"
-          ],
-          "params": {
-            "cols": 4,
-            "rows": 3,
-            "handles": "knob",
-            "inserts": [
-              [
-                "",
-                "",
-                "",
-                ""
-              ],
-              [
-                "",
-                "",
-                "",
-                ""
-              ],
-              [
-                "drawers",
-                "drawers",
-                "drawers",
-                "drawers"
-              ]
-            ],
-            "contents": [
-              [
-                "random",
-                "random",
-                "random",
-                "random"
-              ],
-              [
-                "random",
-                "random",
-                "random",
-                "random"
-              ],
-              [
-                "",
-                "",
-                "",
-                ""
-              ]
-            ],
-            "labels": [
-              [],
-              [],
-              [
-                "Gift wrap / Cards",
-                "Travel kit / Toiletries",
-                "Batteries AA / AAA",
-                "Batteries other / Remotes"
-              ]
-            ],
-            "seed": "south"
-          },
-          "against": {
-            "wall": "storage.wall-2",
-            "offset": 46,
-            "elevation": 112
-          }
-        },
-        {
-          "id": "storage.kallax-column-low",
-          "asset": "ikea-kallax-112x147",
-          "name": "Kallax 1x3 column (low)",
-          "tags": [
-            "column kallax"
-          ],
-          "params": {
-            "cols": 1,
-            "rows": 3,
-            "handles": "knob",
-            "inserts": [
-              [
-                "drawers"
-              ],
-              [
-                "box"
-              ],
-              [
-                "box"
-              ]
-            ],
-            "labels": [
-              [
-                "Sunglasses / Watches"
-              ],
-              [
-                "Gloves / Scarves"
-              ],
-              [
-                "Swimwear"
-              ]
-            ],
-            "boxColors": [
-              [],
-              [
-                "black"
-              ],
-              [
-                "white"
-              ]
-            ]
-          },
-          "against": {
-            "wall": "storage.wall-2",
-            "offset": 2
-          }
-        },
-        {
-          "id": "storage.kallax-column-high",
-          "asset": "ikea-kallax-112x147",
-          "name": "Kallax 1x3 column (top)",
-          "tags": [
-            "column kallax"
-          ],
-          "params": {
-            "cols": 1,
-            "rows": 3,
-            "handles": "knob",
-            "contents": [
-              [
-                "random"
-              ],
-              [
-                "random"
-              ],
-              [
-                "random"
-              ]
-            ],
-            "seed": "column"
-          },
-          "against": {
-            "wall": "storage.wall-2",
-            "offset": 2,
-            "elevation": 112
-          }
-        },
-        {
-          "id": "storage.suitcase-1",
-          "asset": "suitcase",
-          "name": "Large suitcase",
-          "tags": [
-            "suitcase"
-          ],
-          "params": {
-            "color": "#2f4a6d"
-          },
-          "position": [
-            600,
-            224,
-            70
-          ],
-          "rotation": 90
-        },
-        {
-          "id": "storage.suitcase-2",
-          "asset": "suitcase",
-          "name": "Large suitcase",
-          "tags": [
-            "suitcase"
-          ],
-          "params": {
-            "color": "#4a4d52"
-          },
-          "position": [
-            778,
-            224,
-            332.5
-          ],
-          "rotation": 180
-        },
-        {
-          "id": "storage.stuff-west-top",
-          "asset": "stuff",
-          "params": {
-            "width": 60,
-            "depth": 38,
-            "height": 44,
-            "seed": "west-top"
-          },
-          "position": [
-            598,
-            224,
-            150
-          ],
-          "rotation": 90
-        },
-        {
-          "id": "storage.stuff-bed-top",
-          "asset": "stuff",
-          "params": {
-            "width": 140,
-            "depth": 38,
-            "height": 44,
-            "seed": "bed-top"
-          },
-          "against": {
-            "wall": "storage.wall-1",
-            "offset": 109.3,
-            "elevation": 225.8
-          }
-        },
-        {
-          "id": "storage.stuff-corner-top",
-          "asset": "stuff",
-          "params": {
-            "width": 75,
-            "depth": 38,
-            "height": 44,
-            "seed": "corner-top"
-          },
-          "against": {
-            "wall": "storage.wall-1",
-            "offset": 15.5,
-            "elevation": 224
-          }
-        },
-        {
-          "id": "storage.stuff-column-top",
-          "asset": "stuff",
-          "params": {
-            "width": 40,
-            "depth": 38,
-            "height": 44,
-            "seed": "column-top"
-          },
-          "against": {
-            "wall": "storage.wall-2",
-            "offset": 3,
-            "elevation": 224
-          }
-        },
-        {
-          "id": "storage.entry-shelf",
-          "asset": "box",
-          "name": "Shelf over the door",
-          "tags": [
-            "entry shelf",
-            "shelf over the door"
-          ],
-          "position": [
-            646,
-            224,
-            267
-          ],
-          "params": {
-            "width": 98,
-            "height": 1.8,
-            "depth": 30,
-            "material": "wood-oak-light"
-          },
-          "rotation": 180
-        },
-        {
-          "id": "storage.stuff-entry",
-          "asset": "stuff",
-          "params": {
-            "width": 94,
-            "depth": 28,
-            "height": 44,
-            "seed": "entry"
-          },
-          "position": [
-            646,
-            225.8,
-            267
-          ],
-          "rotation": 180
-        },
-        {
           "id": "storage.ceiling-light",
           "asset": "surface-light",
           "name": "Ceiling light",
           "tags": [
-            "light",
-            "ceiling light"
+            "light"
           ],
           "position": [
             748,
             277,
-            174
+            70.5
           ],
           "params": {
             "diameter": 40,

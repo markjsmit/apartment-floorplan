@@ -1,6 +1,6 @@
 {
   "meta": {
-    "name": "Desk + 90 bed (4,880 L)",
+    "name": "Desk + 90 bed (4,730 L)",
     "kind": "saved",
     "note": "100 cm desk under the window + 90x190 wall bed on the west wall (folds down beside the desk, its own desk stays folded); Kallax 2x4 in the window corner (faces the bed side); 2 Kallax stacks on the east wall; Kallax 2x4 + 2x2 on the hallway wall.",
     "location": {
@@ -2111,43 +2111,9 @@
           }
         },
         {
-          "id": "storage.entry-shelf",
-          "asset": "box",
-          "name": "Shelf over the door",
-          "tags": [
-            "shelf"
-          ],
-          "params": {
-            "width": 98,
-            "height": 1.8,
-            "depth": 30,
-            "material": "birch-ply"
-          },
-          "against": {
-            "wall": "storage.wall-4",
-            "offset": 1.5,
-            "elevation": 224
-          }
-        },
-        {
-          "id": "storage.stuff-entry",
-          "asset": "stuff",
-          "params": {
-            "width": 94,
-            "depth": 28,
-            "height": 44,
-            "seed": "storage.stuff-entry"
-          },
-          "against": {
-            "wall": "storage.wall-4",
-            "offset": 3.5,
-            "elevation": 225.8
-          }
-        },
-        {
           "id": "storage.top-west",
           "asset": "box",
-          "name": "Top shelf along the west wall (joins the door shelf to the Kallax)",
+          "name": "Top shelf along the west wall",
           "tags": [
             "shelf"
           ],

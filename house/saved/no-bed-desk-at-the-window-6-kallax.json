@@ -1,6 +1,6 @@
 {
   "meta": {
-    "name": "Desk, no bed (5,500 L)",
+    "name": "Desk, no bed (5,350 L)",
     "kind": "saved",
     "note": "No bed: a 100 cm desk under the window (all Kallax reachable); Kallax stacks on the west wall and twice on the east wall (own 4 + 2 new); Kallax 2x4 + 2x2 on the hallway wall; big open middle (room for the 90x190 mattress on the floor).",
     "location": {
@@ -2133,43 +2133,9 @@
           }
         },
         {
-          "id": "storage.entry-shelf",
-          "asset": "box",
-          "name": "Shelf over the door",
-          "tags": [
-            "shelf"
-          ],
-          "params": {
-            "width": 98,
-            "height": 1.8,
-            "depth": 30,
-            "material": "birch-ply"
-          },
-          "against": {
-            "wall": "storage.wall-4",
-            "offset": 1.5,
-            "elevation": 224
-          }
-        },
-        {
-          "id": "storage.stuff-entry",
-          "asset": "stuff",
-          "params": {
-            "width": 94,
-            "depth": 28,
-            "height": 44,
-            "seed": "storage.stuff-entry"
-          },
-          "against": {
-            "wall": "storage.wall-4",
-            "offset": 3.5,
-            "elevation": 225.8
-          }
-        },
-        {
           "id": "storage.top-west",
           "asset": "box",
-          "name": "Top shelf along the west wall (joins the door shelf to the Kallax)",
+          "name": "Top shelf along the west wall",
           "tags": [
             "shelf"
           ],
