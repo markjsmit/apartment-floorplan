@@ -514,6 +514,12 @@ const highwayU = (v: number) => HIGHWAY.u + HIGHWAY.slope * (v - HIGHWAY.v);
 const HOME = { u: [-30 + EDGE, 66 - EDGE], v: [-60 + EDGE, 60 - EDGE] };
 /** The park east and north-east */
 const PARK = { u: [-110 + EDGE, 256], v: [60 + EDGE, 205 - EDGE] };
+/** West of the west street: the office towers (3D); the low-rise rest of the city is the aerial photo. */
+const inOffices = (u: number, v: number) => v < -60 - EDGE;
+/** The low-rise city and the park are aerial photos on the ground (groundCanvas with photos). */
+const PHOTO_GROUND = true;
+/** The streets round our block and the park, drawn and furnished in 3D; the others come with the aerial photo. */
+const FRAME_ROADS = new Set(['ns60', 'ns-60', 'ew-30', 'ew66']);
 const inPark = (u: number, v: number, pad = 0) => u > PARK.u[0] - pad && u < PARK.u[1] + pad && v > PARK.v[0] - pad && v < PARK.v[1] + pad;
 /** Open lawns in the park (u, v, radius m) and its paths (polylines) */
 const LAWNS: [number, number, number][] = [[20, 110, 22], [120, 150, 26], [-60, 130, 18], [190, 95, 20]];
@@ -670,7 +676,9 @@ export function buildCity(): City {
       if (mu > HOME.u[0] && mu < HOME.u[1] && mv > HOME.v[0] && mv < HOME.v[1]) continue;
       if (inPark(mu, mv)) continue;
       // west of the west street: offices; north: villas and small blocks (2-4 storeys); the rest 4-7
-      const zone = mv < -60 ? 'office' : mu > 66 ? 'villa' : 'mid';
+      const zone: 'office' | 'villa' | 'mid' = mv < -60 ? 'office' : mu > 66 ? 'villa' : 'mid';
+      // the low-rise neighbourhood is the aerial photo on the ground (looks real from 85 m up; boxes looked like toys)
+      if (PHOTO_GROUND && zone !== 'office') continue;
       const alongU = u1 - u0 > v1 - v0;
       const L = alongU ? u1 - u0 : v1 - v0;
       const D = alongU ? v1 - v0 : u1 - u0;
@@ -730,6 +738,7 @@ export function buildCity(): City {
       const tv = v + (rand() - 0.5) * 6;
       if (Math.hypot(tu, tv) > 225 || rand() < 0.45) continue;
       if (inPark(tu, tv, 2) || (tu > HOME.u[0] - 1 && tu < HOME.u[1] + 1 && tv > HOME.v[0] - 1 && tv < HOME.v[1] + 1)) continue;
+      if (PHOTO_GROUND && !inOffices(tu, tv)) continue; // elsewhere the aerial photo has its own trees
       if (onRoad(tu, tv) || inLot(tu, tv) || inHighway(tu, tv, 4)) continue;
       const [x, z] = grid(tu, tv);
       if (!clear(x, z, 500)) continue;
@@ -748,8 +757,9 @@ export function buildCity(): City {
     const t = Math.max(0, Math.min(1, ((u - au) * (bu - au) + (v - av) * (bv - av)) / l2));
     return Math.hypot(u - au - t * (bu - au), v - av - t * (bv - av)) < w;
   }));
+  // (the park is the aerial photo; only along its west edge a row of 3D trees, so the street has some depth)
   for (let u = PARK.u[0] + 2; u < PARK.u[1]; u += 7) {
-    for (let v = PARK.v[0] + 2; v < PARK.v[1] - 1; v += 7) {
+    for (let v = PARK.v[0] + 2; v < (PHOTO_GROUND ? PARK.v[0] - 1 : PARK.v[1] - 1); v += 7) {
       const tu = u + (rand() - 0.5) * 6;
       const tv = v + (rand() - 0.5) * 6;
       if (Math.hypot(tu, tv) > 240 || rand() < 0.12) continue;
@@ -759,7 +769,7 @@ export function buildCity(): City {
     }
   }
   // home block: the garden round our tower and between the towers (lawns, trees), the plaza in front
-  for (let k = 0; k < 70; k++) {
+  for (let k = 0; k < (PHOTO_GROUND ? 0 : 70); k++) {
     const u = HOME.u[0] + 2 + rand() * (HOME.u[1] - HOME.u[0] - 4);
     const v = HOME.v[0] + 2 + rand() * (HOME.v[1] - HOME.v[0] - 4);
     const [x, z] = grid(u, v);
@@ -775,13 +785,14 @@ export function buildCity(): City {
     const uvOf = (a: number, off: number): [number, number] => (ew ? [at + off, a] : [a, at + off]);
     const rot = ew ? 0 : -90 * DEG;
     const crossings = (ew ? ROADS_NS : ROADS_EW).map((r) => r.at);
+    if (PHOTO_GROUND && !FRAME_ROADS.has(`${ew ? 'ew' : 'ns'}${at}`)) return; // the others are in the aerial photo
     for (let a = from + 10; a < to - 10; a += 8 + rand() * 4) {
       if (crossings.some((c) => Math.abs(c - a) < 12)) continue;
       for (const side of [-1, 1]) {
         const [tu, tv] = uvOf(a, side * (EDGE - 1.2));
         if (Math.hypot(tu, tv) > 240 || inHighway(tu, tv, 4)) continue;
         const [tx, tz] = p(a, side * (EDGE - 1.2));
-        if (free(tx, tz, 300) && rand() < 0.85) addTree(tu, tv, 240 + rand() * 180, 650 + rand() * 350);
+        if (!PHOTO_GROUND && free(tx, tz, 300) && rand() < 0.85) addTree(tu, tv, 240 + rand() * 180, 650 + rand() * 350);
         const parked = at === 60 ? 0.92 : 0.6;
         if (rand() < parked) {
           const [cu, cv] = uvOf(a + (rand() - 0.5) * 3, side * (ROAD / 2 - 1.1));
@@ -821,7 +832,10 @@ function roofQuad(m: Mesh, corners: [number, number][], y: number, col: number[]
 // ---------------------------------------------------------------------------------------------------------------
 // the ground, painted: 2048 px over 512 x 512 m of the city grid (4 px a metre), north (U+) up
 
-export function groundCanvas(plan: Plan): HTMLCanvasElement {
+/** Aerial photos for the ground (AI-generated, see assets/outside/source.json) and how many metres one covers. */
+export type GroundPhotos = { city: CanvasImageSource; park: CanvasImageSource; cityTile: number; parkTile: number };
+
+export function groundCanvas(plan: Plan, photos?: GroundPhotos): HTMLCanvasElement {
   const N = 2048;
   const K = N / (2 * GROUND_HALF);
   const c = document.createElement('canvas');
@@ -852,10 +866,21 @@ export function groundCanvas(plan: Plan): HTMLCanvasElement {
     g.fill();
   };
   const r = rng(5);
-  // base: city ground between things (paving / dust)
+  // base: city ground between things (paving / dust); with photos the low-rise neighbourhood seen from above
   g.fillStyle = '#a09a8b';
   g.fillRect(0, 0, N, N);
+  const tile = (img: CanvasImageSource, m: number, u0: number, u1: number, v0: number, v1: number) => {
+    g.save();
+    g.beginPath();
+    g.rect(X(v0), Y(u1), (v1 - v0) * K, (u1 - u0) * K);
+    g.clip();
+    for (let u = u0; u < u1; u += m) for (let v = v0; v < v1; v += m) g.drawImage(img, X(v), Y(u + m), m * K, m * K);
+    g.restore();
+  };
+  if (photos) tile(photos.city, photos.cityTile, -GROUND_HALF, GROUND_HALF, -GROUND_HALF, GROUND_HALF);
   // lots: gardens (green, mottled), paved yards
+  // the office district keeps its painted lots and paving
+  if (photos) rectUV(-GROUND_HALF, GROUND_HALF, -GROUND_HALF, -60 - EDGE, '#a09a8b');
   for (const l of plan.lots) {
     rectUV(l.u - l.d / 2 + 0.5, l.u + l.d / 2 - 0.5, l.v - l.w / 2 + 0.5, l.v + l.w / 2 - 0.5, l.kind === 'garden' ? '#66703f' : l.kind === 'parking' ? '#57585a' : '#aaa393');
     if (l.kind === 'parking') {
@@ -865,9 +890,10 @@ export function groundCanvas(plan: Plan): HTMLCanvasElement {
   }
   // the home block: plaza (light stone) round the towers, lawns in the garden, the driveway down to the car park
   rectUV(HOME.u[0], HOME.u[1], HOME.v[0], HOME.v[1], '#bdb6a6');
-  rectUV(HOME.u[0] + 3, HOME.u[1] - 3, 17, HOME.v[1] - 3, '#62803c');
-  rectUV(16, HOME.u[1] - 3, -14, 17, '#62803c');
-  rectUV(-16, 16, HOME.v[0] + 3, -15, '#62803c');
+  const lawn = (u0: number, u1: number, v0: number, v1: number) => (photos ? tile(photos.park, photos.parkTile * 0.6, u0, u1, v0, v1) : rectUV(u0, u1, v0, v1, '#62803c'));
+  lawn(HOME.u[0] + 3, HOME.u[1] - 3, 17, HOME.v[1] - 3);
+  lawn(16, HOME.u[1] - 3, -14, 17);
+  lawn(-16, 16, HOME.v[0] + 3, -15);
   rectUV(HOME.u[0], -13, -6, 6, '#48494a');
   g.strokeStyle = '#e8e4d8';
   g.lineWidth = 0.4 * K;
@@ -877,7 +903,9 @@ export function groundCanvas(plan: Plan): HTMLCanvasElement {
     g.lineTo(X(k + 2), Y(-17));
     g.stroke();
   }
-  // the park: under the canopy shady ground and leaf litter, the lawns, the paths
+  // the park: the aerial photo, or under the canopy shady ground and leaf litter, the lawns, the paths
+  if (photos) tile(photos.park, photos.parkTile, PARK.u[0], PARK.u[1], PARK.v[0], PARK.v[1]);
+  else {
   rectUV(PARK.u[0], PARK.u[1], PARK.v[0], PARK.v[1], '#4d5a33');
   for (let k = 0; k < 900; k++) {
     blob(PARK.u[0] + r() * (PARK.u[1] - PARK.u[0]), PARK.v[0] + r() * (PARK.v[1] - PARK.v[0]), 2 + r() * 5, ['#45522d', '#5a6638', '#62683d', '#3d4828'][Math.floor(r() * 4)]);
@@ -898,6 +926,7 @@ export function groundCanvas(plan: Plan): HTMLCanvasElement {
   // playground by the first lawn
   blob(4, 100, 6, '#a9564a');
   blob(4, 100, 3, '#d4c294');
+  }
 
   // streets: pavements, kerbs, asphalt, markings, crossings
   const street = (ew: boolean, at: number, from: number, to: number) => {
@@ -911,15 +940,19 @@ export function groundCanvas(plan: Plan): HTMLCanvasElement {
       rectUV(from, to, at - ROAD / 2, at + ROAD / 2, '#4d4e51');
     }
   };
-  for (const s of ROADS_EW) street(true, s.at, s.from, s.to);
-  for (const s of ROADS_NS) street(false, s.at, s.from, s.to);
-  for (const s of ROADS_EW) for (let v = s.from; v < s.to; v += 9) rectUV(s.at - 0.07, s.at + 0.07, v, v + 4.5, '#e2e0d8');
-  for (const s of ROADS_NS) for (let u = s.from; u < s.to; u += 9) rectUV(u, u + 4.5, s.at - 0.07, s.at + 0.07, '#e2e0d8');
+  // with photos only the streets round our block / the park / the offices (the rest are in the photo)
+  const drawn = (ew: boolean, at: number) => !photos || FRAME_ROADS.has(`${ew ? 'ew' : 'ns'}${at}`);
+  const roadsEW = ROADS_EW.filter((s) => drawn(true, s.at));
+  const roadsNS = ROADS_NS.filter((s) => drawn(false, s.at));
+  for (const s of roadsEW) street(true, s.at, s.from, s.to);
+  for (const s of roadsNS) street(false, s.at, s.from, s.to);
+  for (const s of roadsEW) for (let v = s.from; v < s.to; v += 9) rectUV(s.at - 0.07, s.at + 0.07, v, v + 4.5, '#e2e0d8');
+  for (const s of roadsNS) for (let u = s.from; u < s.to; u += 9) rectUV(u, u + 4.5, s.at - 0.07, s.at + 0.07, '#e2e0d8');
   // parking bays along the park street
   for (let u = -256; u < 256; u += 5.5) for (const side of [-1, 1]) rectUV(u, u + 0.12, 60 + side * (ROAD / 2 - 2.2) - 1.1, 60 + side * (ROAD / 2 - 2.2) + 1.1, '#cfcdc6');
   // zebra crossings next to every crossing
-  for (const a of ROADS_EW) {
-    for (const b of ROADS_NS) {
+  for (const a of roadsEW) {
+    for (const b of roadsNS) {
       if (b.at < a.from || b.at > a.to) continue;
       for (let k = -ROAD / 2 + 0.4; k < ROAD / 2; k += 1) {
         rectUV(a.at + EDGE + 0.5, a.at + EDGE + 3.5, b.at + k, b.at + k + 0.5, '#e6e5de');

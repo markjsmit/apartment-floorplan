@@ -10,6 +10,8 @@ import fillUrl from '../../assets/outside/city-fill.jpg?url';
 import fillAlphaUrl from '../../assets/outside/city-fill-alpha.jpg?url';
 import atlasUrl from '../../assets/outside/facade-atlas.jpg?url';
 import atlasAlphaUrl from '../../assets/outside/facade-atlas-alpha.jpg?url';
+import groundCityUrl from '../../assets/outside/ground-city.jpg?url';
+import groundParkUrl from '../../assets/outside/ground-park.jpg?url';
 import { buildCity, grid, GROUND_HALF, GROUND_Y, groundCanvas, windowCanvas } from './outsideCity';
 
 // The view from the 27th floor (assets/outside/source.json). Far away: a panorama stitched from Mark's balcony pan
@@ -106,6 +108,17 @@ export function Outside({ northAngle, daylight }: { northAngle: number; daylight
     const groundTex = new CanvasTexture(groundCanvas(c.plan));
     groundTex.colorSpace = SRGBColorSpace;
     groundTex.anisotropy = 8;
+    // repaint with the aerial photos once they're in (the painted plan shows until then)
+    const img = (url: string) => new Promise<HTMLImageElement>((ok, fail) => {
+      const i = new Image();
+      i.onload = () => ok(i);
+      i.onerror = fail;
+      i.src = url;
+    });
+    Promise.all([img(groundCityUrl), img(groundParkUrl)]).then(([city, park]) => {
+      groundTex.image = groundCanvas(c.plan, { city, park, cityTile: 260, parkTile: 150 });
+      groundTex.needsUpdate = true;
+    }).catch(() => {});
     const ground = new MeshBasicMaterial({ map: groundTex, transparent: true, depthWrite: false, fog: false });
     haze(ground, seam, true);
     // the painted ground: a square of the city grid round our tower
