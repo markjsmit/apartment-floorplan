@@ -472,19 +472,102 @@
           "builtIn": true
         },
         {
+          "id": "living.sofa-spot-1",
+          "asset": "surface-light",
+          "name": "Downlight over the sofa 1",
+          "tags": [
+            "light",
+            "downlight",
+            "spot"
+          ],
+          "position": [
+            492,
+            238,
+            140
+          ],
+          "params": {
+            "diameter": 9,
+            "height": 1,
+            "intensity": 6000
+          },
+          "builtIn": true
+        },
+        {
+          "id": "living.sofa-spot-2",
+          "asset": "surface-light",
+          "name": "Downlight over the sofa 2",
+          "tags": [
+            "light",
+            "downlight",
+            "spot"
+          ],
+          "position": [
+            492,
+            238,
+            172
+          ],
+          "params": {
+            "diameter": 9,
+            "height": 1,
+            "intensity": 6000
+          },
+          "builtIn": true
+        },
+        {
+          "id": "living.sofa-spot-3",
+          "asset": "surface-light",
+          "name": "Downlight over the sofa 3",
+          "tags": [
+            "light",
+            "downlight",
+            "spot"
+          ],
+          "position": [
+            495,
+            238,
+            234
+          ],
+          "params": {
+            "diameter": 9,
+            "height": 1,
+            "intensity": 6000
+          },
+          "builtIn": true
+        },
+        {
+          "id": "living.sofa-spot-4",
+          "asset": "surface-light",
+          "name": "Downlight over the sofa 4",
+          "tags": [
+            "light",
+            "downlight",
+            "spot"
+          ],
+          "position": [
+            495,
+            238,
+            264
+          ],
+          "params": {
+            "diameter": 9,
+            "height": 1,
+            "intensity": 6000
+          },
+          "builtIn": true
+        },
+        {
           "id": "living.kitchen-spot-1",
           "asset": "surface-light",
           "name": "Kitchen downlight 1",
           "tags": [
             "light",
             "downlight",
-            "spot",
-            "kitchen light"
+            "spot"
           ],
           "position": [
-            492,
+            445,
             238,
-            400
+            600
           ],
           "params": {
             "diameter": 9,
@@ -500,13 +583,12 @@
           "tags": [
             "light",
             "downlight",
-            "spot",
-            "kitchen light"
+            "spot"
           ],
           "position": [
-            492,
+            445,
             238,
-            530
+            633
           ],
           "params": {
             "diameter": 9,
@@ -522,13 +604,12 @@
           "tags": [
             "light",
             "downlight",
-            "spot",
-            "kitchen light"
+            "spot"
           ],
           "position": [
-            492,
+            445,
             238,
-            660
+            663
           ],
           "params": {
             "diameter": 9,
@@ -540,20 +621,42 @@
         {
           "id": "living.track-light",
           "asset": "track-light",
-          "name": "Track light",
+          "name": "Track light (sofa side)",
           "tags": [
             "light",
             "track light",
             "spots"
           ],
           "position": [
-            223,
+            215,
             255,
-            480
+            270
           ],
           "rotation": 270,
           "params": {
-            "length": 220,
+            "length": 100,
+            "spots": 2
+          },
+          "builtIn": true
+        },
+        {
+          "id": "living.track-light-dining",
+          "asset": "track-light",
+          "name": "Track light (dining)",
+          "tags": [
+            "light",
+            "track light",
+            "spots",
+            "dining"
+          ],
+          "position": [
+            150,
+            255,
+            580
+          ],
+          "rotation": 270,
+          "params": {
+            "length": 120,
             "spots": 3
           },
           "builtIn": true
@@ -578,7 +681,7 @@
         },
         {
           "path": "items[living.kitchen-spot-1]",
-          "note": "3 recessed downlights in the kitchen soffit (photo 160651); spacing estimated"
+          "note": "lights from the light survey: 2 pairs of downlights in the soffit over the sofa, 3 over the kitchen, 2 track rails (sofa side, dining); positions ±30-50 cm"
         },
         {
           "path": "ceiling.lowered[living.ceiling-entrance]",
@@ -1990,7 +2093,7 @@
           "position": [
             748,
             277,
-            140
+            174
           ],
           "params": {
             "diameter": 40,
@@ -2206,6 +2309,26 @@
             "wall": "bathroom.wall-2",
             "offset": 68,
             "elevation": 180
+          },
+          "builtIn": true
+        },
+        {
+          "id": "bathroom.mirror-light",
+          "asset": "surface-light",
+          "name": "Light over the mirror",
+          "tags": [
+            "light",
+            "mirror light"
+          ],
+          "position": [
+            846,
+            226,
+            659
+          ],
+          "params": {
+            "diameter": 10,
+            "height": 3,
+            "intensity": 9000
           },
           "builtIn": true
         },
@@ -2858,6 +2981,27 @@
           },
           "params": {
             "ledgeWidth": 60
+          },
+          "builtIn": true
+        },
+        {
+          "id": "ensuite.ceiling-light",
+          "asset": "surface-light",
+          "name": "LED ceiling panel",
+          "tags": [
+            "light",
+            "ceiling light",
+            "led panel"
+          ],
+          "position": [
+            950,
+            238,
+            705
+          ],
+          "params": {
+            "diameter": 28,
+            "height": 2,
+            "intensity": 14000
           },
           "builtIn": true
         },
