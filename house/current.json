@@ -38,11 +38,11 @@
         ],
         [
           585,
-          486
+          445
         ],
         [
           568,
-          486
+          445
         ],
         [
           568,
@@ -74,11 +74,11 @@
               ],
               [
                 585,
-                486
+                445
               ],
               [
                 568,
-                486
+                445
               ],
               [
                 568,
@@ -227,7 +227,7 @@
           "type": "opening",
           "wall": "living.wall-1",
           "offset": 287,
-          "width": 199,
+          "width": 158,
           "height": 238,
           "name": "Opening to the hallway",
           "tags": [
@@ -288,14 +288,14 @@
           ],
           "against": {
             "wall": "living.wall-3",
-            "offset": 38
+            "offset": 24
           },
           "params": {
             "height": 238,
             "depth": 59.5,
             "columns": [
               {
-                "w": 100,
+                "w": 99,
                 "kind": "fridge"
               }
             ]
@@ -313,7 +313,7 @@
           ],
           "against": {
             "wall": "living.wall-3",
-            "offset": 138
+            "offset": 123
           },
           "params": {
             "height": 238,
@@ -323,12 +323,14 @@
                 "w": 60,
                 "kind": "oven",
                 "handle": "left"
+              },
+              {
+                "w": 32,
+                "kind": "pantry",
+                "handle": "left"
               }
             ]
           },
-          "allowOverlap": [
-            "living.counter"
-          ],
           "builtIn": true
         },
         {
@@ -338,17 +340,18 @@
           "tags": [
             "side cabinet",
             "counter column",
-            "tall units"
+            "tall units",
+            "appliance garage"
           ],
           "against": {
-            "wall": "living.wall-4",
-            "offset": 0,
+            "wall": "living.wall-3",
+            "offset": 215,
             "elevation": 90
           },
           "params": {
             "width": 60,
-            "height": 125,
-            "depth": 35
+            "height": 148,
+            "depth": 59.5
           },
           "allowOverlap": [
             "living.counter"
@@ -367,7 +370,7 @@
             "built-in"
           ],
           "params": {
-            "width": 38,
+            "width": 24,
             "height": 238,
             "depth": 59.5,
             "material": "white-gloss"
@@ -392,7 +395,6 @@
             "offset": 0
           },
           "allowOverlap": [
-            "living.oven-column",
             "living.counter-column"
           ],
           "params": {
@@ -726,7 +728,7 @@
         },
         {
           "path": "openings[living.hallway-opening]",
-          "note": "the hallway mouth from the storage room wall's end (sofa wall 277 + 10) to the glossy block (199 wide), split by the pillar; top = the lowered ceiling (238)"
+          "note": "the hallway mouth from the storage room wall's end (sofa wall 277 + 10) to the glossy block (158 wide = the notes' 1.68 m from the sofa wall's end at 277 to the glossy column at 445), split by the pillar; top = the lowered ceiling (238)"
         },
         {
           "path": "openings[living.tall-window]",
@@ -750,11 +752,11 @@
         },
         {
           "path": "items[living.fridge-niche]",
-          "note": "tall-unit wall from the glossy block south: fridge niche 100 (side-by-side fridge ~91), oven column 60, cabinet column on the counter 36 (Mark: the wall cabinet doesn't exist as such; ad photo ...57de2); widths provisional (photos 160651, 160731-33, video 24.5-25.5 s); widths estimated. The notes' 1.68 m = pillar to the start of the fridge run (z 356 -> 524)"
+          "note": "tall-unit wall from the glossy column (445) south, fitted on ad photo ...57de2: glossy 24, fridge niche 99, oven 60, narrow door 32, cabinet column on the counter 60 (appliance garage, countertop to ceiling); widths ±5 (photos 160651, 160731-33, video 24.5-25.5 s); widths estimated. The notes' 1.68 m = pillar to the start of the fridge run (z 356 -> 524)"
         },
         {
           "path": "items[living.block]",
-          "note": "the 123 x 38 block (notes 'hallway cabin'): west face flush with the tall units, north face on the hallway line z 486 (video 24.5-25.5 s, photo 160802: the tile/laminate seam runs under it); unknown if it opens"
+          "note": "the 123 x 38 block (notes 'hallway cabin'): west face flush with the tall units, north face on the hallway line z 445 (video 24.5-25.5 s, photo 160802: the tile/laminate seam runs under it); unknown if it opens"
         },
         {
           "path": "items[living.island]",
@@ -1024,11 +1026,11 @@
         ],
         [
           812,
-          486
+          445
         ],
         [
           586,
-          486
+          445
         ]
       ],
       "ceilingHeight": 238,
@@ -1136,7 +1138,7 @@
           },
           "type": "door",
           "wall": "hallway.wall-5",
-          "offset": 51.5,
+          "offset": 11,
           "width": 80,
           "height": 211,
           "asset": "door-basic",
@@ -1176,7 +1178,7 @@
           "type": "opening",
           "wall": "hallway.wall-7",
           "offset": 0,
-          "width": 199,
+          "width": 158,
           "height": 238,
           "name": "Opening to the living room",
           "tags": [
@@ -1202,7 +1204,7 @@
           "position": [
             609,
             0,
-            485.6
+            444.6
           ],
           "params": {
             "width": 44,
@@ -1237,7 +1239,7 @@
       "assumptions": [
         {
           "path": "footprint",
-          "note": "south wall on z 486, in line with the glossy block's face, so the hallway is as wide as its 199 opening to the living room (the sofa wall's 277 + the storage room wall's 10 cm end) (photos 160740, 160803, video 39-40 s). The door alcove in front of the storage room door is the 98 x 65 corner cut out of that room"
+          "note": "south wall on z 445 (the notes' 1.68 m from the sofa wall's end; ad photo ...57de2), so the hallway is as wide as its 158 opening to the living room (the sofa wall's 277 + the storage room wall's 10 cm end) (photos 160740, 160803, video 39-40 s). The door alcove in front of the storage room door is the 98 x 65 corner cut out of that room"
         },
         {
           "path": "ceilingHeight",
@@ -2208,19 +2210,19 @@
       "footprint": [
         [
           578,
-          496
+          455
         ],
         [
           802,
-          496
+          455
         ],
         [
           802,
-          684
+          643
         ],
         [
           578,
-          684
+          643
         ]
       ],
       "ceilingHeight": 238,
@@ -2430,7 +2432,7 @@
           "position": [
             788,
             226,
-            536
+            495
           ],
           "params": {
             "diameter": 10,
@@ -2665,7 +2667,7 @@
           "id": "bedroom.door",
           "type": "door",
           "wall": "bedroom.wall-7",
-          "offset": 50,
+          "offset": 90.5,
           "width": 80,
           "height": 211,
           "tags": [
@@ -2950,6 +2952,25 @@
         }
       ],
       "items": [
+        {
+          "id": "closet.ceiling-light",
+          "asset": "surface-light",
+          "name": "Ceiling light",
+          "tags": [
+            "light",
+            "ceiling light"
+          ],
+          "position": [
+            1155,
+            277,
+            560
+          ],
+          "params": {
+            "diameter": 30,
+            "intensity": 16000
+          },
+          "builtIn": true
+        },
         {
           "id": "closet.system-east",
           "asset": "closet-system",
