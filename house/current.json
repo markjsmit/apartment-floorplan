@@ -402,7 +402,8 @@
             "width": 123,
             "height": 53,
             "depth": 59.5,
-            "lift": "hinged"
+            "lift": "tilt",
+            "tiltDeg": 88
           },
           "builtIn": true
         },
@@ -423,7 +424,8 @@
             "width": 152,
             "height": 53,
             "depth": 59.5,
-            "lift": "hinged"
+            "lift": "tilt",
+            "tiltDeg": 88
           },
           "builtIn": true
         },
@@ -494,6 +496,7 @@
           "params": {
             "length": 170,
             "depth": 100,
+            "overhang": 38,
             "hobCenter": 125,
             "modules": [
               {

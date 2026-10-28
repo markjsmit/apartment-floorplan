@@ -45,6 +45,26 @@ function modules(raw: unknown, total: number): Module[] {
   return Array.from({ length: n }, () => ({ w: total / n, kind: 'door' }));
 }
 
+/**
+ * A cabinet body you can look into when its fronts open: sides, back, top and bottom boards (1.8 cm) around an empty
+ * inside, plus `shelves` evenly spaced shelves. x0 = left edge, y0..y1 heights, d deep from the back (z = 0).
+ */
+function hollow(id: string, x0: number, w: number, y0: number, y1: number, d: number, shelves = 0): Part[] {
+  const t = 1.8;
+  const xc = x0 + w / 2;
+  const h = y1 - y0;
+  const board = (pid: string, size: Vec3, pos: Vec3) => box(pid, ['cabinet'], size, pos, { material: 'white-laminate' });
+  const out = [
+    board(`${id}-side-l`, [t, h, d], [x0 + t / 2, y0 + h / 2, d / 2]),
+    board(`${id}-side-r`, [t, h, d], [x0 + w - t / 2, y0 + h / 2, d / 2]),
+    board(`${id}-back`, [w - 2 * t, h, 0.8], [xc, y0 + h / 2, 0.4]),
+    board(`${id}-top`, [w - 2 * t, t, d], [xc, y1 - t / 2, d / 2]),
+    board(`${id}-bottom`, [w - 2 * t, t, d], [xc, y0 + t / 2, d / 2]),
+  ];
+  for (let i = 1; i <= shelves; i++) out.push(board(`${id}-shelf-${i}`, [w - 2 * t, t, d - 2], [xc, y0 + (h * i) / (shelves + 1), (d - 2) / 2]));
+  return out;
+}
+
 const OPEN_DEG = 100; // how far a cabinet door swings open
 const PULL = 40; // how far a drawer pulls out
 
@@ -149,7 +169,7 @@ export function kitchenCounter(params: Record<string, unknown>): Part[] {
   const x0 = -L / 2;
   const parts: Part[] = [
     box('plinth', ['plinth'], [L, PLINTH, 1.6], [0, PLINTH / 2, carcD - 4], { material: 'white-gloss' }),
-    box('carcass', ['cabinet'], [L, H - T - PLINTH, carcD], [0, PLINTH + (H - T - PLINTH) / 2, carcD / 2], { material: 'white-laminate' }),
+    ...hollow('carcass', -L / 2, L, PLINTH, H - T, carcD, 1),
     box('worktop', ['worktop', 'countertop', 'counter'], [L, T, D], [0, H - T / 2, D / 2], { material: str(params.worktop, 'quartz-cream') }),
   ];
   let x = x0;
@@ -199,13 +219,15 @@ export function kitchenIsland(params: Record<string, unknown>): Part[] {
   const top = str(params.worktop, 'quartz-cream');
   const inner = L - 2 * T;
   const frontZ = D - 2;
+  const over = num(params.overhang, 0);
   const parts: Part[] = [
     box('top', ['worktop', 'countertop', 'island top'], [L, T, D], [0, H - T / 2, D / 2], { material: top }),
     box('end-left', ['waterfall', 'end panel'], [T, H - T, D], [-L / 2 + T / 2, (H - T) / 2, D / 2], { material: top }),
     box('end-right', ['waterfall', 'end panel'], [T, H - T, D], [L / 2 - T / 2, (H - T) / 2, D / 2], { material: top }),
-    box('back', ['back panel'], [inner, H - T - PLINTH, 2], [0, PLINTH + (H - T - PLINTH) / 2, 3], { material: 'white-gloss' }),
-    box('carcass', ['cabinet'], [inner, H - T - PLINTH, frontZ - FRONT_T - 4], [0, PLINTH + (H - T - PLINTH) / 2, 4 + (frontZ - FRONT_T - 4) / 2], { material: 'white-laminate' }),
-    box('plinth', ['plinth'], [inner, PLINTH, D - 14], [0, PLINTH / 2, D / 2], { color: '#3a3836', castShadow: false }),
+    // the back: a closed panel, or (overhang) an open knee space under the top for stools, closed further in
+    box('back', ['back panel'], [inner, H - T - PLINTH, 2], [0, PLINTH + (H - T - PLINTH) / 2, 3 + over], { material: 'white-gloss' }),
+    ...hollow('carcass', -inner / 2, inner, PLINTH, H - T, frontZ - FRONT_T - 4 - over).map((p) => ({ ...p, position: [p.position[0], p.position[1], p.position[2] + 4 + over] as Vec3 })),
+    box('plinth', ['plinth'], [inner, PLINTH, D - 14 - over], [0, PLINTH / 2, over + (D - over) / 2], { color: '#3a3836', castShadow: false }),
   ];
   let x = -inner / 2;
   for (const [i, m] of modules(params.modules, inner).entries()) {
@@ -231,8 +253,8 @@ export function kitchenTall(params: Record<string, unknown>): Part[] {
   const L = cols.reduce((s, c) => s + c.w, 0);
   const parts: Part[] = [];
   let x0 = -L / 2;
-  const carcass = (id: string, x: number, w: number, y0: number, y1: number, d = carcD) =>
-    box(id, ['cabinet'], [w, y1 - y0, d], [x + w / 2, (y0 + y1) / 2, d / 2], { material: 'white-laminate' });
+  const carcass = (id: string, x: number, w: number, y0: number, y1: number, d = carcD, shelves = Math.max(0, Math.round((y1 - y0) / 40) - 1)) =>
+    hollow(id, x, w, y0, y1, d, shelves);
   cols.forEach((c, i) => {
     const p = `c${i + 1}`;
     const xc = x0 + c.w / 2;
@@ -243,16 +265,19 @@ export function kitchenTall(params: Record<string, unknown>): Part[] {
         box(`${p}-side-l`, ['fridge niche', 'side panel'], [1.8, nicheH, D], [x0 + 0.9, nicheH / 2, D / 2], { material: 'white-gloss' }),
         box(`${p}-side-r`, ['fridge niche', 'side panel'], [1.8, nicheH, D], [x0 + c.w - 0.9, nicheH / 2, D / 2], { material: 'white-gloss' }),
         // the bridge cabinet over the niche (left out when a separate top row covers it)
-        ...(H - nicheH >= 5 ? [carcass(`${p}-bridge`, x0, c.w, nicheH, H), ...fronts(`${p}-top`, { w: c.w, kind: 'doors' }, x0, nicheH, H, D, true)] : []),
+        ...(H - nicheH >= 5 ? [...carcass(`${p}-bridge`, x0, c.w, nicheH, H), ...fronts(`${p}-top`, { w: c.w, kind: 'doors' }, x0, nicheH, H, D, true)] : []),
       );
     } else if (c.kind === 'oven') {
       const ovenY = 70, microY = 130, shelfY = 168, shelfTop = 182;
       parts.push(
-        carcass(`${p}-carcass-low`, x0, c.w, PLINTH, shelfY),
-        carcass(`${p}-carcass-back`, x0, c.w, shelfY, shelfTop, 30),
+        // drawers below, the oven itself (a solid appliance), a cupboard with a shelf over it
+        ...carcass(`${p}-carcass-low`, x0, c.w, PLINTH, ovenY, carcD, 0),
+        box(`${p}-oven-body`, ['oven', 'appliance'], [c.w - 3.6, microY - ovenY, carcD - 1], [xc, (ovenY + microY) / 2, (carcD - 1) / 2], { color: '#2b2b2d' }),
+        ...carcass(`${p}-carcass-mid`, x0, c.w, microY, shelfY, carcD, params.microwave === false ? 1 : 0),
+        ...carcass(`${p}-carcass-back`, x0, c.w, shelfY, shelfTop, 30, 0),
         box(`${p}-shelf-l`, ['cabinet'], [1.8, shelfTop - shelfY, carcD], [x0 + 0.9, (shelfY + shelfTop) / 2, carcD / 2], { material: 'white-laminate' }),
         box(`${p}-shelf-r`, ['cabinet'], [1.8, shelfTop - shelfY, carcD], [x0 + c.w - 0.9, (shelfY + shelfTop) / 2, carcD / 2], { material: 'white-laminate' }),
-        carcass(`${p}-carcass-top`, x0, c.w, shelfTop, H),
+        ...carcass(`${p}-carcass-top`, x0, c.w, shelfTop, H),
         ...fronts(`${p}-low`, { w: c.w, kind: 'drawers2' }, x0, PLINTH, ovenY, D, true),
         box(`${p}-oven`, ['oven', 'appliance'], [c.w - 2, microY - ovenY - 1, FRONT_T], [xc, (ovenY + microY) / 2, D - FRONT_T / 2], { material: 'glass-black' }),
         box(`${p}-oven-handle`, ['oven', 'handle'], [c.w - 14, 1.6, 2.5], [xc, microY - 6, D + 1.2], { material: 'stainless' }),
@@ -270,7 +295,7 @@ export function kitchenTall(params: Record<string, unknown>): Part[] {
       );
     } else {
       parts.push(
-        carcass(`${p}-carcass`, x0, c.w, PLINTH, H),
+        ...carcass(`${p}-carcass`, x0, c.w, PLINTH, H),
         ...fronts(`${p}-tall`, { w: c.w, kind: 'door', handle: c.handle }, x0, PLINTH, Math.min(topY, H), D, false),
         ...(H - topY >= 5 ? fronts(`${p}-top`, { w: c.w, kind: 'door', handle: c.handle }, x0, topY, H, D, true) : []),
       );
@@ -296,8 +321,7 @@ export function kitchenWallCabinet(params: Record<string, unknown>): WithStates 
   const f0 = niche; // flap from here...
   const f1 = h - top; // ...to here
   const parts: Part[] = [
-    box('carcass', ['cabinet'], [w, h, d - FRONT_T], [0, h / 2, (d - FRONT_T) / 2], { material: 'white-laminate' }),
-    box('shelf', ['shelf'], [w - 3.6, 1.8, d - 6], [0, (f0 + f1) / 2, (d - 6) / 2 + 1], { material: 'white-laminate' }),
+    ...hollow('carcass', -w / 2, w, f0, h, d - FRONT_T, Math.max(1, Math.round((h - f0) / 40) - 1)),
     // the front: a pair of side-hinged doors (lift: hinged, the top row under the ceiling), a flap that tilts up about
     // its top edge (lift: tilt) or one that rises straight up, a little in front of what's above (lift: up)
     ...(hinged
@@ -306,14 +330,13 @@ export function kitchenWallCabinet(params: Record<string, unknown>): WithStates 
         box('flap', ['flap', 'door', 'front'], [w - 0.4, f1 - f0 - 0.4, FRONT_T], [0, (f0 + f1) / 2, d - FRONT_T / 2], { material: 'white-gloss' }),
         box('flap-handle', ['flap', 'handle'], [w - 12, 1.2, 1.6], [0, f0 + 4, d + 0.8], { material: HANDLE }),
       ], 'flap', tilt
-        ? () => ({ rotation: [-100, 0, 0] })
+        ? () => ({ rotation: [-num(params.tiltDeg, 100), 0, 0] })
         : (p) => ({ position: [p.position[0], p.position[1] + (top > 0 ? top * 0.9 : (f1 - f0) * 0.85), p.position[2] + 3] }),
       tilt ? [0, f1, d] : undefined)),
   ];
   if (niche > 0) {
     // the open niche: a dark-ish back so it reads as a hollow, a bottom board on the counter
     parts.push(box('niche-back', ['niche'], [w - 3.6, niche - 1.8, 0.6], [0, niche / 2, 1.2], { color: '#d8d6d0', castShadow: false }));
-    parts[0] = box('carcass', ['cabinet'], [w, h - niche, d - FRONT_T], [0, niche + (h - niche) / 2, (d - FRONT_T) / 2], { material: 'white-laminate' });
     parts.push(
       box('niche-side-l', ['cabinet'], [1.8, niche, d - FRONT_T], [-w / 2 + 0.9, niche / 2, (d - FRONT_T) / 2], { material: 'white-laminate' }),
       box('niche-side-r', ['cabinet'], [1.8, niche, d - FRONT_T], [w / 2 - 0.9, niche / 2, (d - FRONT_T) / 2], { material: 'white-laminate' }),

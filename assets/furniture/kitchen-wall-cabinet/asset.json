@@ -38,6 +38,10 @@
     "nicheDoor": {
       "default": false,
       "description": "a lift-up door in front of the niche"
+    },
+    "tiltDeg": {
+      "default": 100,
+      "description": "lift: tilt — how far the flap tilts up (degrees; ~88 under a ceiling)"
     }
   }
 }

@@ -1,15 +1,43 @@
 {
   "id": "kitchen-island",
   "name": "Kitchen island",
-  "tags": ["kitchen", "island", "worktop", "hob", "built-in"],
+  "tags": [
+    "kitchen",
+    "island",
+    "worktop",
+    "hob",
+    "built-in"
+  ],
   "description": "Island with quartz waterfall ends, drawers on the front (+z), closed panel on the back, optional 75 cm gas hob.",
-  "source": { "kind": "procedural", "generator": "kitchen-island", "license": "self-made" },
+  "source": {
+    "kind": "procedural",
+    "generator": "kitchen-island",
+    "license": "self-made"
+  },
   "params": {
-    "length": { "default": 170 },
-    "depth": { "default": 100 },
-    "height": { "default": 90 },
-    "modules": { "default": [], "description": "front between the end panels, left→right: [{w, kind}]" },
-    "hobCenter": { "default": null, "description": "cm from the left end; null = no hob" },
-    "worktop": { "default": "quartz-cream" }
+    "length": {
+      "default": 170
+    },
+    "depth": {
+      "default": 100
+    },
+    "height": {
+      "default": 90
+    },
+    "modules": {
+      "default": [],
+      "description": "front between the end panels, left→right: [{w, kind}]"
+    },
+    "hobCenter": {
+      "default": null,
+      "description": "cm from the left end; null = no hob"
+    },
+    "worktop": {
+      "default": "quartz-cream"
+    },
+    "overhang": {
+      "default": 0,
+      "description": "open knee space under the top at the back (cm), for stools"
+    }
   }
 }
