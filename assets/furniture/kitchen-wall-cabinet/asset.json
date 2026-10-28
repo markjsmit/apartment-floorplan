@@ -1,12 +1,35 @@
 {
   "id": "kitchen-wall-cabinet",
   "name": "Kitchen wall cabinet (lift-up)",
-  "tags": ["kitchen", "wall cabinet", "upper cabinet", "built-in"],
+  "tags": [
+    "kitchen",
+    "wall cabinet",
+    "upper cabinet",
+    "built-in"
+  ],
   "description": "Wall cabinet with a lift-up flap; double-click the flap to open. Hang it with against.elevation.",
-  "source": { "kind": "procedural", "generator": "kitchen-wall-cabinet", "license": "self-made" },
+  "source": {
+    "kind": "procedural",
+    "generator": "kitchen-wall-cabinet",
+    "license": "self-made"
+  },
   "params": {
-    "width": { "default": 60 },
-    "height": { "default": 70 },
-    "depth": { "default": 35 }
+    "width": {
+      "default": 60
+    },
+    "height": {
+      "default": 70
+    },
+    "depth": {
+      "default": 35
+    },
+    "niche": {
+      "default": 0,
+      "description": "open space at the bottom (cm)"
+    },
+    "top": {
+      "default": 0,
+      "description": "fixed top door above the flap (cm)"
+    }
   }
 }

@@ -318,6 +318,7 @@
           "params": {
             "height": 238,
             "depth": 59.5,
+            "microwave": false,
             "columns": [
               {
                 "w": 60,
@@ -351,7 +352,9 @@
           "params": {
             "width": 60,
             "height": 148,
-            "depth": 59.5
+            "depth": 59.5,
+            "niche": 40,
+            "top": 53
           },
           "allowOverlap": [
             "living.counter"
@@ -752,7 +755,7 @@
         },
         {
           "path": "items[living.fridge-niche]",
-          "note": "tall-unit wall from the glossy column (445) south, fitted on ad photo ...57de2: glossy 24, fridge niche 99, oven 60, narrow door 32, cabinet column on the counter 60 (appliance garage, countertop to ceiling); widths ±5 (photos 160651, 160731-33, video 24.5-25.5 s); widths estimated. The notes' 1.68 m = pillar to the start of the fridge run (z 356 -> 524)"
+          "note": "tall-unit wall from the glossy column (445) south, fitted on ad photo ...57de2: glossy 24, fridge niche 99, oven 60, narrow door 32, cabinet column on the counter 60 (open appliance niche ~40 on the counter, a lift-up flap cabinet, a top door in line with the top row — ad photo a5770c1f); oven column: 2 drawers, oven, a cabinet door above it, no microwave; widths ±5 (photos 160651, 160731-33, video 24.5-25.5 s); widths estimated. The notes' 1.68 m = pillar to the start of the fridge run (z 356 -> 524)"
         },
         {
           "path": "items[living.block]",

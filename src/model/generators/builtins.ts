@@ -204,9 +204,14 @@ export function kitchenTall(params: Record<string, unknown>): Part[] {
         box(`${p}-oven`, ['oven', 'appliance'], [c.w - 2, microY - ovenY - 1, FRONT_T], [xc, (ovenY + microY) / 2, D - FRONT_T / 2], { material: 'glass-black' }),
         box(`${p}-oven-handle`, ['oven', 'handle'], [c.w - 14, 1.6, 2.5], [xc, microY - 6, D + 1.2], { material: 'stainless' }),
         box(`${p}-oven-panel`, ['oven'], [c.w - 2, 7, 0.4], [xc, microY - 5, D + 0.2], { material: 'stainless', castShadow: false }),
-        box(`${p}-microwave`, ['microwave', 'appliance'], [c.w - 2, shelfY - microY - 1, FRONT_T], [xc, (microY + shelfY) / 2, D - FRONT_T / 2], { material: 'glass-black' }),
-        box(`${p}-microwave-trim`, ['microwave'], [12, shelfY - microY - 5, 0.4], [x0 + c.w - 9, (microY + shelfY) / 2, D + 0.2], { material: 'stainless', castShadow: false }),
-        ...fronts(`${p}-top`, { w: c.w, kind: 'door', handle: c.handle }, x0, shelfTop, H, D, true),
+        ...(params.microwave === false
+          // no microwave: one cabinet door over the oven up to the top row
+          ? fronts(`${p}-mid`, { w: c.w, kind: 'door', handle: c.handle }, x0, microY, topY, D, true)
+          : [
+            box(`${p}-microwave`, ['microwave', 'appliance'], [c.w - 2, shelfY - microY - 1, FRONT_T], [xc, (microY + shelfY) / 2, D - FRONT_T / 2], { material: 'glass-black' }),
+            box(`${p}-microwave-trim`, ['microwave'], [12, shelfY - microY - 5, 0.4], [x0 + c.w - 9, (microY + shelfY) / 2, D + 0.2], { material: 'stainless', castShadow: false }),
+          ]),
+        ...fronts(`${p}-top`, { w: c.w, kind: 'door', handle: c.handle }, x0, params.microwave === false ? topY : shelfTop, H, D, true),
       );
     } else {
       parts.push(
@@ -220,18 +225,41 @@ export function kitchenTall(params: Record<string, unknown>): Part[] {
   return parts;
 }
 
-/** Wall cabinet with a lift-up flap. params: width, height, depth (35). Double-click the flap to open. */
+/**
+ * Wall cabinet with a lift-up flap. params: width, height, depth (35), niche (0: an open space at the bottom, e.g. an
+ * appliance garage on the counter), top (0: a fixed top door above the flap, in line with the tall units' top row).
+ * Double-click the flap to open.
+ */
 export function kitchenWallCabinet(params: Record<string, unknown>): WithStates {
   const w = num(params.width, 60);
   const h = num(params.height, 70);
   const d = num(params.depth, 35);
-  const pivot: Vec3 = [0, h, d];
+  const niche = num(params.niche, 0);
+  const top = num(params.top, 0);
+  const f0 = niche; // flap from here...
+  const f1 = h - top; // ...to here
+  const pivot: Vec3 = [0, f1, d];
   const parts: Part[] = [
     box('carcass', ['cabinet'], [w, h, d - FRONT_T], [0, h / 2, (d - FRONT_T) / 2], { material: 'white-laminate' }),
-    box('shelf', ['shelf'], [w - 3.6, 1.8, d - 6], [0, h / 2, (d - 6) / 2 + 1], { material: 'white-laminate' }),
-    box('flap', ['flap', 'door', 'front'], [w - 0.4, h - 0.4, FRONT_T], [0, h / 2, d - FRONT_T / 2], { material: 'white-gloss', pivot }),
-    box('flap-handle', ['flap', 'handle'], [w - 12, 1.2, 1.6], [0, 4, d + 0.8], { material: HANDLE, pivot }),
+    box('shelf', ['shelf'], [w - 3.6, 1.8, d - 6], [0, (f0 + f1) / 2, (d - 6) / 2 + 1], { material: 'white-laminate' }),
+    box('flap', ['flap', 'door', 'front'], [w - 0.4, f1 - f0 - 0.4, FRONT_T], [0, (f0 + f1) / 2, d - FRONT_T / 2], { material: 'white-gloss', pivot }),
+    box('flap-handle', ['flap', 'handle'], [w - 12, 1.2, 1.6], [0, f0 + 4, d + 0.8], { material: HANDLE, pivot }),
   ];
+  if (niche > 0) {
+    // the open niche: a dark-ish back so it reads as a hollow, a bottom board on the counter
+    parts.push(box('niche-back', ['niche'], [w - 3.6, niche - 1.8, 0.6], [0, niche / 2, 1.2], { color: '#d8d6d0', castShadow: false }));
+    parts[0] = box('carcass', ['cabinet'], [w, h - niche, d - FRONT_T], [0, niche + (h - niche) / 2, (d - FRONT_T) / 2], { material: 'white-laminate' });
+    parts.push(
+      box('niche-side-l', ['cabinet'], [1.8, niche, d - FRONT_T], [-w / 2 + 0.9, niche / 2, (d - FRONT_T) / 2], { material: 'white-laminate' }),
+      box('niche-side-r', ['cabinet'], [1.8, niche, d - FRONT_T], [w / 2 - 0.9, niche / 2, (d - FRONT_T) / 2], { material: 'white-laminate' }),
+    );
+  }
+  if (top > 0) {
+    parts.push(
+      box('top-door', ['door', 'front'], [w - 0.4, top - 0.4, FRONT_T], [0, h - top / 2, d - FRONT_T / 2], { material: 'white-gloss' }),
+      box('top-handle', ['handle'], [w - 12, 1.2, 1.6], [0, h - top + 4, d + 0.8], { material: HANDLE }),
+    );
+  }
   const open: Record<string, PartOverride> = { flap: { rotation: [-105, 0, 0] }, 'flap-handle': { rotation: [-105, 0, 0] } };
   const states: AssetState[] = [
     { id: 'closed', name: 'Closed', parts: {} },
