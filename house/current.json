@@ -548,14 +548,14 @@
       "footprint": [
         [
           0,
-          -290
+          -265
         ],
         [
-          370,
-          -290
+          410,
+          -265
         ],
         [
-          370,
+          410,
           -20
         ],
         [
@@ -615,7 +615,7 @@
           "type": "opening",
           "wall": "balcony.wall-0",
           "offset": 0,
-          "width": 370,
+          "width": 410,
           "height": 270,
           "name": "Open side (railing)",
           "tags": [
@@ -628,7 +628,7 @@
           "type": "opening",
           "wall": "balcony.wall-3",
           "offset": 0,
-          "width": 270,
+          "width": 245,
           "height": 270,
           "name": "Open end (railing)",
           "tags": [
@@ -639,7 +639,7 @@
           "id": "balcony.door",
           "type": "door",
           "wall": "balcony.wall-2",
-          "offset": 20,
+          "offset": 60,
           "width": 280,
           "height": 222,
           "name": "Balcony door",
@@ -663,12 +663,12 @@
             "handrail"
           ],
           "position": [
-            185.0,
+            205.0,
             106,
-            -290
+            -265
           ],
           "params": {
-            "width": 370,
+            "width": 410,
             "height": 4,
             "depth": 5,
             "material": "aluminium-grey"
@@ -686,10 +686,10 @@
           "position": [
             0,
             106,
-            -155.0
+            -142.5
           ],
           "params": {
-            "width": 270,
+            "width": 245,
             "height": 4,
             "depth": 5,
             "material": "aluminium-grey"
@@ -709,12 +709,12 @@
             "glass"
           ],
           "position": [
-            185.0,
+            205.0,
             5,
-            -289
+            -264
           ],
           "params": {
-            "width": 370,
+            "width": 410,
             "height": 100,
             "depth": 1.2,
             "material": "glass"
@@ -732,10 +732,10 @@
           "position": [
             1,
             5,
-            -155.0
+            -142.5
           ],
           "params": {
-            "width": 270,
+            "width": 245,
             "height": 100,
             "depth": 1.2,
             "material": "glass"
@@ -750,7 +750,7 @@
       "assumptions": [
         {
           "path": "footprint",
-          "note": "NOT measured: Mark remembers ~10 m2; it ends at the stone side wall right after the door (photos 160716-18; the sofa window looks past it, 160714) -> 370 wide, so ~270 deep. Glass railing on the north and west"
+          "note": "NOT measured: Mark remembers ~10 m2; it ends at the stone side wall right after the door (photos 160716-18; the sofa window looks past it, 160714) -> ~410 wide (stone wall just west of the sofa window), ~245 deep (Mark: wider and less deep than 370 x 270). Glass railing on the north and west"
         }
       ]
     },
