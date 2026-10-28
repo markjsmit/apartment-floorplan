@@ -33,7 +33,7 @@
     },
     "lift": {
       "default": "up",
-      "description": "flap: up (rises straight up in front) | tilt (tilts up about its top)"
+      "description": "flap: up (rises straight up in front) | tilt (tilts up about its top) | hinged (a pair of side-hinged doors)"
     },
     "nicheDoor": {
       "default": false,

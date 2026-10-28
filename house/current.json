@@ -378,7 +378,7 @@
             "depth": 59.5,
             "niche": 39,
             "nicheDoor": true,
-            "lift": "tilt"
+            "lift": "up"
           },
           "allowOverlap": [
             "living.counter"
@@ -402,7 +402,7 @@
             "width": 123,
             "height": 53,
             "depth": 59.5,
-            "lift": "tilt"
+            "lift": "hinged"
           },
           "builtIn": true
         },
@@ -423,7 +423,7 @@
             "width": 152,
             "height": 53,
             "depth": 59.5,
-            "lift": "tilt"
+            "lift": "hinged"
           },
           "builtIn": true
         },
@@ -1251,16 +1251,45 @@
           ],
           "against": {
             "wall": "hallway.wall-6",
-            "offset": 192
+            "offset": 201
           },
           "params": {
             "height": 238,
             "depth": 38,
+            "topDoors": 238,
             "columns": [
               {
-                "w": 45,
+                "w": 36,
                 "kind": "pantry",
-                "handle": "right"
+                "handle": "none"
+              }
+            ]
+          },
+          "builtIn": true
+        },
+        {
+          "id": "hallway.cabinet-door-side",
+          "asset": "kitchen-tall",
+          "name": "Glossy hallway cabinet (by the bathroom door)",
+          "tags": [
+            "hallway cabinet",
+            "glossy block",
+            "cabinet",
+            "built-in"
+          ],
+          "against": {
+            "wall": "hallway.wall-6",
+            "offset": 173
+          },
+          "params": {
+            "height": 238,
+            "depth": 38,
+            "topDoors": 55,
+            "columns": [
+              {
+                "w": 28,
+                "kind": "pantry",
+                "handle": "none"
               }
             ]
           },

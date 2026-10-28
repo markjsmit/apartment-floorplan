@@ -108,12 +108,13 @@ function fronts(prefix: string, m: Module, x0: number, y0: number, y1: number, z
       bar(`${id}-handle`, xc, y0 + 5, w - 12),
     ], id, (p) => ({ position: [p.position[0], p.position[1] + rise, p.position[2] + 3] })));
   } else {
-    // single door, hinge on the side opposite the handle
+    // single door, hinge on the side opposite the handle (handle: none = a handleless push-to-open door, hinged left)
     const id = `${prefix}-door`;
-    const right = (m.handle ?? 'right') === 'right';
+    const none = m.handle === 'none';
+    const right = (m.handle ?? 'right') === 'right' || none;
     out.push(...opening([
       box(id, ['door', 'front'], [w, h - 2 * GAP, FRONT_T], [xc, y0 + h / 2, zc], { material: 'white-gloss' }),
-      horizontalHandles ? bar(`${id}-handle`, xc, y1 - 5, w - 12) : bar(`${id}-handle`, right ? x0 + m.w - 4 : x0 + 4, y0 + Math.min(h / 2, 110), Math.min(h * 0.6, 90), true),
+      ...(none ? [] : [horizontalHandles ? bar(`${id}-handle`, xc, y1 - 5, w - 12) : bar(`${id}-handle`, right ? x0 + m.w - 4 : x0 + 4, y0 + Math.min(h / 2, 110), Math.min(h * 0.6, 90), true)]),
     ], id, swing(right ? -OPEN_DEG : OPEN_DEG), [right ? x0 + GAP : x0 + m.w - GAP, y0 + h / 2, z]));
   }
   return out;
@@ -163,9 +164,21 @@ export function kitchenCounter(params: Record<string, unknown>): Part[] {
 /** Gas hob (black glass, cast-iron grates, 5 burners) centred at (x, z) on a worktop at height y. */
 function hob(x: number, y: number, z: number): Part[] {
   const parts: Part[] = [box('hob', ['hob', 'cooktop', 'stove'], [75, 0.6, 51], [x, y + 0.3, z], { material: 'glass-black' })];
-  for (const [i, gx] of [-25, 0, 25].entries()) parts.push(box(`hob-grate-${i + 1}`, ['hob', 'grate'], [23, 1.6, 45], [x + gx, y + 1.4, z], { material: 'metal-black' }));
+  // cast-iron pan supports: an open frame of bars per section (not solid plates), the burners show through
+  for (const [i, gx] of [-25, 0, 25].entries()) {
+    const g = `hob-grate-${i + 1}`;
+    const bar = (id: string, size: Vec3, dx: number, dz: number) => box(id, ['hob', 'grate'], size, [x + gx + dx, y + 2, z + dz], { material: 'metal-black' });
+    parts.push(
+      bar(`${g}-n`, [23, 1.2, 1.2], 0, -21.9), bar(`${g}-s`, [23, 1.2, 1.2], 0, 21.9),
+      bar(`${g}-w`, [1.2, 1.2, 45], -10.9, 0), bar(`${g}-e`, [1.2, 1.2, 45], 10.9, 0),
+      bar(`${g}-x`, [23, 1.2, 1.2], 0, 0), bar(`${g}-z`, [1.2, 1.2, 45], 0, 0),
+    );
+  }
   const burners: [number, number, number][] = [[-26, -11, 4], [-26, 11, 3.2], [0, 0, 6], [26, -11, 3.2], [26, 11, 4]];
-  burners.forEach(([bx, bz, r], i) => parts.push(cyl(`hob-burner-${i + 1}`, ['hob', 'burner'], r, 1.4, [x + bx, y + 1.2, z + bz], { color: '#2a2a2c' })));
+  burners.forEach(([bx, bz, r], i) => parts.push(
+    cyl(`hob-burner-${i + 1}`, ['hob', 'burner'], r, 1.4, [x + bx, y + 1.2, z + bz], { material: 'stainless' }),
+    cyl(`hob-cap-${i + 1}`, ['hob', 'burner'], r * 0.6, 0.6, [x + bx, y + 2.1, z + bz], { color: '#1e1e20' }),
+  ));
   for (let i = 0; i < 5; i++) parts.push(cyl(`hob-knob-${i + 1}`, ['hob', 'knob'], 1.8, 2, [x - 24 + i * 12, y + 1.6, z + 22], { material: 'stainless' }));
   // gas flames, lit by double-clicking the hob (a knob)
   burners.forEach(([bx, bz, r], i) => parts.push({
@@ -279,19 +292,23 @@ export function kitchenWallCabinet(params: Record<string, unknown>): WithStates 
   const niche = num(params.niche, 0);
   const top = num(params.top, 0);
   const tilt = params.lift === 'tilt';
+  const hinged = params.lift === 'hinged';
   const f0 = niche; // flap from here...
   const f1 = h - top; // ...to here
   const parts: Part[] = [
     box('carcass', ['cabinet'], [w, h, d - FRONT_T], [0, h / 2, (d - FRONT_T) / 2], { material: 'white-laminate' }),
     box('shelf', ['shelf'], [w - 3.6, 1.8, d - 6], [0, (f0 + f1) / 2, (d - 6) / 2 + 1], { material: 'white-laminate' }),
-    // lift-up flap: tilts up about its top edge (lift: tilt) or rises straight up, a little in front of what's above
-    ...opening([
-      box('flap', ['flap', 'door', 'front'], [w - 0.4, f1 - f0 - 0.4, FRONT_T], [0, (f0 + f1) / 2, d - FRONT_T / 2], { material: 'white-gloss' }),
-      box('flap-handle', ['flap', 'handle'], [w - 12, 1.2, 1.6], [0, f0 + 4, d + 0.8], { material: HANDLE }),
-    ], 'flap', tilt
-      ? () => ({ rotation: [-100, 0, 0] })
-      : (p) => ({ position: [p.position[0], p.position[1] + (top > 0 ? top * 0.9 : (f1 - f0) * 0.85), p.position[2] + 3] }),
-    tilt ? [0, f1, d] : undefined),
+    // the front: a pair of side-hinged doors (lift: hinged, the top row under the ceiling), a flap that tilts up about
+    // its top edge (lift: tilt) or one that rises straight up, a little in front of what's above (lift: up)
+    ...(hinged
+      ? fronts('flap', { w, kind: 'doors' }, -w / 2, f0, f1, d, true)
+      : opening([
+        box('flap', ['flap', 'door', 'front'], [w - 0.4, f1 - f0 - 0.4, FRONT_T], [0, (f0 + f1) / 2, d - FRONT_T / 2], { material: 'white-gloss' }),
+        box('flap-handle', ['flap', 'handle'], [w - 12, 1.2, 1.6], [0, f0 + 4, d + 0.8], { material: HANDLE }),
+      ], 'flap', tilt
+        ? () => ({ rotation: [-100, 0, 0] })
+        : (p) => ({ position: [p.position[0], p.position[1] + (top > 0 ? top * 0.9 : (f1 - f0) * 0.85), p.position[2] + 3] }),
+      tilt ? [0, f1, d] : undefined)),
   ];
   if (niche > 0) {
     // the open niche: a dark-ish back so it reads as a hollow, a bottom board on the counter
