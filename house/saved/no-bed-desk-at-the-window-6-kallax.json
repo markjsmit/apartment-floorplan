@@ -2174,6 +2174,41 @@
           }
         },
         {
+          "id": "storage.top-west",
+          "asset": "box",
+          "name": "Top shelf along the west wall (joins the door shelf to the Kallax)",
+          "tags": [
+            "shelf"
+          ],
+          "params": {
+            "width": 84.5,
+            "height": 1.8,
+            "depth": 39,
+            "material": "birch-ply"
+          },
+          "against": {
+            "wall": "storage.wall-5",
+            "offset": 30,
+            "elevation": 224
+          }
+        },
+        {
+          "id": "storage.stuff-west-shelf",
+          "asset": "stuff",
+          "params": {
+            "width": 79,
+            "depth": 36,
+            "height": 44,
+            "kind": "boxes",
+            "seed": "west-shelf"
+          },
+          "against": {
+            "wall": "storage.wall-5",
+            "offset": 32,
+            "elevation": 225.8
+          }
+        },
+        {
           "id": "storage.ceiling-light",
           "asset": "surface-light",
           "name": "Ceiling light",
