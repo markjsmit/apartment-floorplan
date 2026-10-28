@@ -2,7 +2,7 @@
   "meta": {
     "name": "Aisle + 90 bed, Kallax 1 hole off the wall",
     "kind": "saved",
-    "note": "90x190 wall bed; the Kallax 4x3s stand one hole further from the hallway wall (block ends at the alcove corner); 55 cm shelves straight against the walls at the end, wall to wall, in front of no cube: every Kallax hole is usable; the 3x3 door side lines up with the south end, so the inner 4x3 sticks out 1 hole at the bed end (open at the back).",
+    "note": "90x190 wall bed; the Kallax 4x3s stand one hole further from the hallway wall (block ends at the alcove corner); 55 cm shelves straight against the walls at the end, wall to wall, in front of no cube: every Kallax hole is usable; 4x3s on both sides of the island (the block ends exactly at the alcove corner).",
     "location": {
       "lat": 32.0853,
       "lon": 34.7818,
@@ -1759,17 +1759,18 @@
         {
           "id": "storage.kallax-mid-west-low",
           "asset": "ikea-kallax-112x147",
-          "name": "Kallax 3x3 middle, faces the door side (low)",
+          "name": "Kallax 4x3 middle, faces the door side (low)",
           "tags": [
             "kallax"
           ],
-          "description": "NEW: buy (IKEA Kallax 3x3, 112x112)",
+          "description": "NEW: buy (IKEA Kallax 112x147, same as ours)",
           "params": {
-            "cols": 3,
+            "cols": 4,
             "rows": 3,
             "handles": "knob",
             "inserts": [
               [
+                "drawers",
                 "drawers",
                 "drawers",
                 "drawers"
@@ -1777,9 +1778,11 @@
               [
                 "box",
                 "box",
+                "box",
                 "box"
               ],
               [
+                "box",
                 "box",
                 "box",
                 "box"
@@ -1790,32 +1793,34 @@
               [
                 "black",
                 "white",
-                "black"
+                "black",
+                "white"
               ],
               [
                 "white",
                 "black",
-                "white"
+                "white",
+                "black"
               ]
             ]
           },
           "position": [
             739.5,
             0,
-            221
+            203.5
           ],
           "rotation": -90
         },
         {
           "id": "storage.kallax-mid-west-high",
           "asset": "ikea-kallax-112x147",
-          "name": "Kallax 3x3 middle, faces the door side (top)",
+          "name": "Kallax 4x3 middle, faces the door side (top)",
           "tags": [
             "kallax"
           ],
-          "description": "NEW: buy (IKEA Kallax 3x3, 112x112)",
+          "description": "NEW: buy (IKEA Kallax 112x147, same as ours)",
           "params": {
-            "cols": 3,
+            "cols": 4,
             "rows": 3,
             "handles": "knob",
             "seed": "storage.kallax-mid-west-high",
@@ -1823,14 +1828,17 @@
               [
                 "",
                 "",
+                "",
                 ""
               ],
               [
                 "",
                 "",
+                "",
                 ""
               ],
               [
+                "drawers",
                 "drawers",
                 "drawers",
                 "drawers"
@@ -1840,14 +1848,17 @@
               [
                 "random",
                 "random",
+                "random",
                 "random"
               ],
               [
                 "random",
                 "random",
+                "random",
                 "random"
               ],
               [
+                "",
                 "",
                 "",
                 ""
@@ -1857,19 +1868,19 @@
           "position": [
             739.5,
             112,
-            221
+            203.5
           ],
           "rotation": -90
         },
         {
           "id": "storage.kallax-divider",
           "asset": "box",
-          "name": "Divider between the back-to-back Kallax (along the 3x3; the aisle column it does not cover stays open at the back)",
+          "name": "Divider between the back-to-back Kallax",
           "tags": [
             "shelf"
           ],
           "params": {
-            "width": 112,
+            "width": 147,
             "height": 224,
             "depth": 0.5,
             "material": "white-paint"
@@ -1877,7 +1888,7 @@
           "position": [
             739.5,
             0,
-            221
+            203.5
           ],
           "rotation": 90
         },
