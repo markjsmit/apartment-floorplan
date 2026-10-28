@@ -1,14 +1,11 @@
 {
   "id": "white-paint",
   "name": "White matte paint",
-  "tags": [
-    "paint",
-    "white",
-    "wall",
-    "ceiling"
-  ],
+  "tags": ["paint", "white", "wall", "ceiling"],
+  "maps": { "color": "color.jpg", "normal": "normal.jpg", "roughness": "roughness.jpg" },
+  "tileSize": [100, 100],
   "fallbackColor": "#f3f1ec",
-  "roughness": 0.92,
-  "source": "self-made (plain colour)",
+  "roughness": 1,
+  "source": "surface (fine roller / orange-peel bumps) from ambientCG PaintedPlaster017 (https://ambientcg.com/a/PaintedPlaster017), normal softened, colour flattened to the warm white of the walls in Mark's photos; roughness map holds absolute values (0.82-0.95)",
   "license": "CC0"
 }

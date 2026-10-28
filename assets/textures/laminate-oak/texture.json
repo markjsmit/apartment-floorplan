@@ -3,9 +3,9 @@
   "name": "Oak laminate (wide planks)",
   "tags": ["wood", "floor", "laminate", "oak", "planks"],
   "maps": { "color": "color.jpg", "normal": "normal.jpg", "roughness": "roughness.jpg" },
-  "tileSize": [310, 310],
-  "fallbackColor": "#846344",
-  "roughness": 0.55,
-  "source": "ambientCG WoodFloor064 (https://ambientcg.com/a/WoodFloor064), rotated 90° so planks run along z (north-south at northAngle 0), desaturated and toned to the floor in Mark's photo (sources/new house). ~19.5 cm planks.",
+  "tileSize": [190, 190],
+  "fallbackColor": "#927556",
+  "roughness": 1,
+  "source": "ambientCG WoodFloor040 (https://ambientcg.com/a/WoodFloor040, 190 x 190 cm, ~19 cm planks running along z = north-south at northAngle 0), toned to the natural oak laminate in the survey photos (sources/new house full, e.g. 20261027_160745); roughness map holds absolute values (satin, 0.38-0.6)",
   "license": "CC0"
 }

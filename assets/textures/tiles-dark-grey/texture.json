@@ -2,9 +2,10 @@
   "id": "tiles-dark-grey",
   "name": "Dark anthracite tiles 30x60",
   "tags": ["tiles", "dark grey", "anthracite", "bathroom", "30x60", "wall"],
-  "tileSize": [60, 30],
-  "fallbackColor": "#3c3d40",
-  "roughness": 0.4,
-  "source": "self-made (plain colour, anthracite 30x60 bathroom tiles laid landscape)",
+  "maps": { "color": "color.jpg", "normal": "normal.jpg", "roughness": "roughness.jpg" },
+  "tileSize": [120, 60],
+  "fallbackColor": "#3e3f42",
+  "roughness": 1,
+  "source": "self-made: 2 x 2 anthracite tiles of 60 x 30 cm laid landscape, stacked, 3 mm lighter grout (as in the bathroom photos 20261027_160814/15), surface variation from ambientCG Concrete034 (https://ambientcg.com/a/Concrete034); roughness map holds absolute values (satin tile 0.32, grout 0.85)",
   "license": "CC0"
 }

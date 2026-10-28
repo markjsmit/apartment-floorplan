@@ -1,9 +1,11 @@
 {
   "id": "quartz-cream",
-  "name": "Cream quartz worktop",
-  "tags": ["quartz", "stone", "worktop", "countertop", "cream", "kitchen"],
-  "fallbackColor": "#e8e3da",
-  "roughness": 0.25,
-  "source": "self-made (plain colour)",
+  "name": "White quartz worktop",
+  "tags": ["quartz", "stone", "worktop", "countertop", "white", "cream", "kitchen"],
+  "maps": { "color": "color.jpg" },
+  "tileSize": [60, 60],
+  "fallbackColor": "#ecebe6",
+  "roughness": 0.22,
+  "source": "self-made (generated fine grey speckle on warm white, like the kitchen counter and island in the survey photos)",
   "license": "CC0"
 }
