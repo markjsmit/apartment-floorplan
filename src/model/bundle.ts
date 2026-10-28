@@ -38,11 +38,11 @@ function formatZod(err: ZodError): string {
   return err.issues.map((i) => `${i.path.join('.') || '(root)'}: ${i.message}`).join('; ');
 }
 
-function versionRank(id: string): string {
+function versionRank(id: string, archived = false): string {
   if (id === EMPTY_ID) return '!';
   if (id === 'current') return '0';
   if (id === 'suggestion') return '1';
-  return `2${id}`;
+  return `${archived ? 3 : 2}${id}`;
 }
 
 export function buildBundle(files: RawFile[], site: SiteConfig): Bundle {
@@ -78,12 +78,13 @@ export function buildBundle(files: RawFile[], site: SiteConfig): Bundle {
 function withEmpty(b: Bundle): Bundle {
   delete b.versions[EMPTY_ID];
   if (b.versions.current) b.versions[EMPTY_ID] = emptyVersion(b.versions.current);
-  b.versionOrder = sortVersions(Object.keys(b.versions));
+  b.versionOrder = sortVersions(b.versions);
   return b;
 }
 
-function sortVersions(ids: string[]): string[] {
-  return [...ids].sort((a, b) => (versionRank(a) < versionRank(b) ? -1 : 1));
+function sortVersions(versions: Bundle['versions']): string[] {
+  const rank = (id: string) => versionRank(id, versions[id].meta.archived);
+  return Object.keys(versions).sort((a, b) => (rank(a) < rank(b) ? -1 : 1));
 }
 
 /** For files that failed to load in `next`, keep what `prev` had, so a half-saved edit doesn't blank the view. */

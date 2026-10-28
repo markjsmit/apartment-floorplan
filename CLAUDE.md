@@ -68,7 +68,8 @@ npm run -s versions -- drop-suggestion
 `npm run -s ui -- goto <room> suggestion` (sets that room's version). Promote reports conflicts (rooms Current also
 changed); ask Mark before `--force`. ui-state `version` = the open room's version, `roomVersions` = all non-Current
 choices. Links: `?room=X&version=V` (V for room X) `&rv=room:ver,…` (other rooms). Saved-version links never change;
-current/suggestion ones do.
+current/suggestion ones do. `meta.archived: true` on a saved version = an old one kept only for reference: ❌ instead of
+📌, sorted to the end of the tab row.
 
 ## Data model (cm, Y up, degrees)
 

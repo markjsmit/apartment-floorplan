@@ -106,6 +106,8 @@ export const HouseMetaSchema = z.object({
   baseRoomHashes: z.record(z.string()).optional(),
   /** the rooms this version is about (e.g. a saved snapshot of one room's design); shown as a tab only there */
   rooms: z.array(z.string()).optional(),
+  /** an old version kept only for reference: ❌ in the tab row, sorted to the end */
+  archived: z.boolean().optional(),
 });
 export type HouseMeta = z.infer<typeof HouseMetaSchema>;
 

@@ -33,6 +33,13 @@ describe('buildBundle', () => {
     expect(b.errors[0].message).toMatch(/rooms\.0\./);
   });
 
+  it('puts archived saved versions last', () => {
+    const saved = (slug: string, archived?: boolean): RawFile =>
+      ({ path: `house/saved/${slug}.json`, json: { meta: { name: slug, kind: 'saved', ...(archived ? { archived } : {}) }, rooms: [room()] } });
+    const b = buildBundle([...files([room()]), saved('a-old', true), saved('b-new')], { publicUrl: '' });
+    expect(b.versionOrder).toEqual(['empty', 'current', 'saved/b-new', 'saved/a-old']);
+  });
+
   it('reports invalid JSON text', () => {
     const b = buildBundle([{ path: 'house/current.json', parseError: 'Unexpected token' }], { publicUrl: '' });
     expect(b.errors[0].message).toMatch(/Unexpected token/);
