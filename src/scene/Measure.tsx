@@ -12,7 +12,8 @@ const CLICK_SLOP = 6;
 const DOUBLE_CLICK_MS = 350;
 
 /**
- * Measuring mode: click a surface, click another → distance along one axis. Double-clicking a surface moves
+ * Measuring mode: click a surface, click another → distance along one axis (or, in point-to-point mode or for
+ * two spots on the same wall/floor, the straight line between them). Double-clicking a surface moves
  * that point to the other side of the board (e.g. from the underside of a shelf top to its top, to measure
  * up to the ceiling). Clicks here never select or toggle furniture.
  */
@@ -20,6 +21,7 @@ export function Measure() {
   const { camera, scene, gl } = useThree();
   const active = useMeasure((s) => s.active);
   const points = useMeasure((s) => s.points);
+  const mode = useMeasure((s) => s.mode);
 
   // points belong to one room (this component is keyed by room)
   useEffect(() => useMeasure.getState().reset(), []);
@@ -97,8 +99,8 @@ export function Measure() {
   }, [active, camera, scene, gl]);
 
   if (!active || points.length === 0) return null;
-  const m = currentMeasurement(points);
-  // the line runs along one axis: from the first point to the second surface's level
+  const m = currentMeasurement(points, mode);
+  // axis mode: the line runs from the first point to the second surface's level; free: spot to spot
   const ends: Vec3[] = m ? [m.from, m.to] : [points[0].point];
   const mid: Vec3 | null = m ? [(m.from[0] + m.to[0]) / 2, (m.from[1] + m.to[1]) / 2, (m.from[2] + m.to[2]) / 2] : null;
   return (

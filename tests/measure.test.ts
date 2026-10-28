@@ -44,6 +44,23 @@ describe('measureBetween (snapped to one axis)', () => {
   });
 });
 
+describe('measureBetween (point to point)', () => {
+  it('measures the straight line between two spots in free mode', () => {
+    // one spot on the floor, one on the wall: 30 across, 40 up
+    const m = measureBetween({ point: [100, 0, 50], normal: [0, 1, 0] }, { point: [130, 40, 50], normal: [-1, 0, 0] }, 'free');
+    expect(m.axis).toBe('free');
+    expect(m.distance).toBeCloseTo(50);
+    expect(m.to).toEqual([130, 40, 50]);
+  });
+
+  it('falls back to point to point for two spots on the same wall', () => {
+    const wall = { normal: [0, 0, 1] as [number, number, number], roomSurface: true };
+    const m = measureBetween({ ...wall, point: [20, 100, 0] }, { ...wall, point: [140, 100, 0] });
+    expect(m.axis).toBe('free');
+    expect(m.distance).toBeCloseTo(120);
+  });
+});
+
 describe('oppositeFace', () => {
   it('moves a point on the underside of a board to its top side', () => {
     // top board of a kallax: 1.5 cm... here 4.25 cm thick, y from 219.75 to 224

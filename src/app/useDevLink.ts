@@ -10,7 +10,7 @@ import { roomLightsState } from '../scene/useLightsOn';
 
 type StoreState = ReturnType<typeof useStore.getState>;
 
-/** The measuring tool's last result: along one room axis, from the first clicked surface. */
+/** The measuring tool's last result: along one room axis from the first clicked surface, or point to point (`axis: 'free'`). */
 function measurementState(s: StoreState) {
   const { active, points } = useMeasure.getState();
   const m = currentMeasurement(points);

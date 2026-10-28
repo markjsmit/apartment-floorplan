@@ -2,20 +2,24 @@ import { currentMeasurement, formatCm, useMeasure, type MeasurePoint } from './m
 import { labelOf } from './labels';
 import { useStore } from './store';
 
-const AXIS_NAME = { x: 'along x', y: 'height', z: 'along z' };
+const AXIS_NAME = { x: 'along x', y: 'height', z: 'along z', free: 'point to point' };
 
-/** Steps and result of the measuring tool, with buttons to flip the last point, start over, or leave. */
+/** Steps and result of the measuring tool, with a mode switch and buttons to flip the last point, start over, or leave. */
 export function MeasurePanel() {
-  const { active, points, flipLast, reset, stop } = useMeasure();
+  const { active, mode, points, flipLast, reset, stop, setMode } = useMeasure();
   const s = useStore();
   if (!active) return null;
-  const m = currentMeasurement(points);
+  const m = currentMeasurement(points, mode);
   const name = (p: MeasurePoint) => `${p.flipped ? 'other side of ' : ''}${p.target ? labelOf(s, p.target).name : 'surface'}`;
   return (
     <div className="measure-panel">
       <strong>📏 Measure</strong>
-      {points.length === 0 && <span>Click the first surface</span>}
-      {points.length === 1 && <span>From <b>{name(points[0])}</b> — now click the second surface</span>}
+      <span className="measure-modes">
+        <button className={mode === 'axis' ? 'on' : ''} onClick={() => setMode('axis')} title="Straight out from the first surface, along one room axis">⟂ Straight out</button>
+        <button className={mode === 'free' ? 'on' : ''} onClick={() => setMode('free')} title="Straight line between the two clicked spots (e.g. two spots on a wall or the floor)">↗ Point to point</button>
+      </span>
+      {points.length === 0 && <span>Click the first {mode === 'free' ? 'spot' : 'surface'}</span>}
+      {points.length === 1 && <span>From <b>{name(points[0])}</b> — now click the second {mode === 'free' ? 'spot' : 'surface'}</span>}
       {m && (
         <span>
           <b>{name(points[0])}</b> → <b>{name(points[1])}</b>: <b className="big">{formatCm(m.distance)}</b> ({AXIS_NAME[m.axis]})

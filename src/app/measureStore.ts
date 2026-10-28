@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import { measureBetween, type Measurement, type SurfacePoint } from '../model/measure';
+import { measureBetween, type MeasureMode, type Measurement, type SurfacePoint } from '../model/measure';
 import type { Selection } from '../model/lookup';
 
 // Kept apart from the main store: measuring is a tool mode, not part of the house view state.
@@ -13,6 +13,7 @@ export type MeasurePoint = SurfacePoint & {
 
 type MeasureState = {
   active: boolean;
+  mode: MeasureMode;
   points: MeasurePoint[];
   toggle: () => void;
   stop: () => void;
@@ -20,10 +21,12 @@ type MeasureState = {
   /** move the last clicked point to the other side of its board */
   flipLast: () => void;
   reset: () => void;
+  setMode: (mode: MeasureMode) => void;
 };
 
 export const useMeasure = create<MeasureState>((set, get) => ({
   active: false,
+  mode: 'axis',
   points: [],
   toggle: () => set({ active: !get().active, points: [] }),
   stop: () => set({ active: false, points: [] }),
@@ -38,10 +41,11 @@ export const useMeasure = create<MeasureState>((set, get) => ({
     set({ points });
   },
   reset: () => set({ points: [] }),
+  setMode: (mode) => set({ mode }),
 }));
 
-export function currentMeasurement(points: MeasurePoint[]): Measurement | null {
-  return points.length === 2 ? measureBetween(points[0], points[1]) : null;
+export function currentMeasurement(points: MeasurePoint[], mode: MeasureMode = useMeasure.getState().mode): Measurement | null {
+  return points.length === 2 ? measureBetween(points[0], points[1], mode) : null;
 }
 
 export function formatCm(cm: number): string {
