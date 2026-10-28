@@ -126,8 +126,12 @@ function eulerOf(deg: Vec3): Euler {
 function halfExtents(part: Part): Vec3 | null {
   const g = part.geometry;
   if (!g) return null;
-  if (g.type === 'box') return [g.size[0] / 2, g.size[1] / 2, g.size[2] / 2];
+  if (g.type === 'box' || g.type === 'ellipsoid') return [g.size[0] / 2, g.size[1] / 2, g.size[2] / 2];
   if (g.type === 'cylinder') return [g.radius, g.height / 2, g.radius];
+  if (g.type === 'prism') {
+    const ext = (i: 0 | 1) => Math.max(...g.points.map((p) => Math.abs(p[i]))) + g.bevel;
+    return [ext(0), ext(1), g.depth / 2];
+  }
   return [g.size[0] / 2, g.size[1] / 2, 0.5];
 }
 

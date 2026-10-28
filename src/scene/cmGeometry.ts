@@ -1,4 +1,4 @@
-import { BoxGeometry, BufferGeometry, CylinderGeometry, ExtrudeGeometry, PlaneGeometry, Shape, ShapeGeometry } from 'three';
+import { BoxGeometry, BufferGeometry, CylinderGeometry, ExtrudeGeometry, PlaneGeometry, Shape, ShapeGeometry, SphereGeometry } from 'three';
 import type { Geometry, Vec2 } from '../model/schema';
 
 // All geometry gets UVs in centimetres, so a texture's repeat = 1 / tileSize gives true real-world scale.
@@ -42,6 +42,23 @@ export function partGeometry(g: Geometry): BufferGeometry {
       const uv = geo.getAttribute('uv');
       for (let i = 0; i < uv.count; i++) uv.setXY(i, uv.getX(i) * 2 * Math.PI * g.radius, uv.getY(i) * g.height);
       return geo;
+    });
+  }
+  if (g.type === 'ellipsoid') {
+    return cached(`ell:${g.size}:${g.segments}`, () => {
+      const [w, h, d] = g.size;
+      const geo = new SphereGeometry(0.5, g.segments * 2, g.segments).scale(w, h, d);
+      const uv = geo.getAttribute('uv');
+      for (let i = 0; i < uv.count; i++) uv.setXY(i, uv.getX(i) * Math.PI * (w + d) / 2, uv.getY(i) * h);
+      return geo;
+    });
+  }
+  if (g.type === 'prism') {
+    return cached(`prism-part:${g.depth}:${g.bevel}:${JSON.stringify(g.points)}`, () => {
+      const shape = new Shape(g.points.map(([x, y]) => ({ x, y }) as never));
+      const b = g.bevel;
+      const geo = new ExtrudeGeometry(shape, { depth: g.depth - 2 * b, bevelEnabled: b > 0, bevelSize: b, bevelThickness: b, bevelSegments: 3, curveSegments: 8 });
+      return geo.translate(0, 0, -(g.depth - 2 * b) / 2);
     });
   }
   return cached(`plane:${g.size}`, () => {

@@ -1,0 +1,26 @@
+{
+  "id": "ice-skates",
+  "name": "Ice skates (pair)",
+  "tags": [
+    "ice skates",
+    "skates",
+    "skating"
+  ],
+  "description": "A pair of ice skates side by side, toes towards +z, ~29 long, ~20 wide, 26-30 tall: fits a Kallax cube (33 x 33 x 37 inside). kind: figure (white boots, toe pick, heel) | hockey (black, red accents, blade holder).",
+  "source": {
+    "kind": "procedural",
+    "generator": "ice-skates",
+    "license": "self-made",
+    "notes": "Generic adult sizes."
+  },
+  "params": {
+    "kind": {
+      "default": "figure",
+      "description": "figure | hockey"
+    },
+    "seed": {
+      "default": "skates",
+      "description": "varies how they stand"
+    }
+  }
+}

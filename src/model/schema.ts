@@ -143,6 +143,10 @@ export const GeometrySchema = z.discriminatedUnion('type', [
     segments: z.number().int().default(24),
   }),
   z.object({ type: z.literal('plane'), size: Vec2Schema }),
+  // squashed sphere: soft, fabric-like shapes (bags, cushions); size = full width/height/depth
+  z.object({ type: z.literal('ellipsoid'), size: Vec3Schema, segments: z.number().int().default(16) }),
+  // flat outline in x/y (around 0, 0) pushed out `depth` along z (centred), with soft rounded edges of `bevel` cm
+  z.object({ type: z.literal('prism'), points: z.array(Vec2Schema).min(3), depth: z.number().positive(), bevel: z.number().min(0).default(0) }),
 ]);
 export type Geometry = z.infer<typeof GeometrySchema>;
 
@@ -151,7 +155,7 @@ export const PartSchema = z.object({
   tags,
   geometry: GeometrySchema.optional(),
   gltfNode: z.string().optional(),
-  // Position of the part's geometry centre (box/cylinder) in item-local space.
+  // Position of the part's geometry centre (box/cylinder/ellipsoid) in item-local space.
   position: Vec3Schema.default([0, 0, 0]),
   rotation: Vec3Schema.default([0, 0, 0]),
   // Hinge point in item-local space; state rotations turn around it.

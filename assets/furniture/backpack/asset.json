@@ -1,0 +1,35 @@
+{
+  "id": "backpack",
+  "name": "Backpack / gym bag (soft)",
+  "tags": [
+    "backpack",
+    "bag",
+    "gym bag",
+    "workout bag"
+  ],
+  "description": "Soft fabric backpack (~30 x 42 x 17 cm, a 20-25 L gym/day pack) built from lumpy ellipsoids. pose: slumped (standing, leaning back on a wall), lying (dropped flat), stuffed (pushed into a Kallax cube).",
+  "source": {
+    "kind": "procedural",
+    "generator": "backpack",
+    "license": "self-made",
+    "notes": "Generic size and colours; placeholders for Mark and Heli's own bags."
+  },
+  "params": {
+    "pose": {
+      "default": "slumped",
+      "description": "slumped | lying | stuffed"
+    },
+    "color": {
+      "default": "#3b3f46",
+      "description": "#hex"
+    },
+    "accent": {
+      "default": "#232326",
+      "description": "#hex straps/handle"
+    },
+    "seed": {
+      "default": "backpack",
+      "description": "varies the lumps"
+    }
+  }
+}

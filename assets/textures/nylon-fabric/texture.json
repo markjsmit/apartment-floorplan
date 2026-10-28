@@ -1,0 +1,24 @@
+{
+  "id": "nylon-fabric",
+  "name": "Nylon / polyester bag fabric (tintable)",
+  "tags": [
+    "fabric",
+    "nylon",
+    "polyester",
+    "bag"
+  ],
+  "maps": {
+    "color": "color.jpg",
+    "normal": "normal.jpg",
+    "roughness": "roughness.jpg",
+    "ao": "ao.jpg"
+  },
+  "tileSize": [
+    20,
+    20
+  ],
+  "fallbackColor": "#e6e6e6",
+  "roughness": 0.75,
+  "source": "ambientCG Fabric082A (https://ambientcg.com/a/Fabric082A); colour map brightened to near-white so a part colour tints it",
+  "license": "CC0"
+}

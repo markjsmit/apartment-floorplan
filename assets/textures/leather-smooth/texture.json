@@ -1,0 +1,22 @@
+{
+  "id": "leather-smooth",
+  "name": "Smooth leather (tintable)",
+  "tags": [
+    "leather",
+    "boot",
+    "smooth"
+  ],
+  "maps": {
+    "color": "color.jpg",
+    "normal": "normal.jpg",
+    "roughness": "roughness.jpg"
+  },
+  "tileSize": [
+    25,
+    25
+  ],
+  "fallbackColor": "#e6e6e6",
+  "roughness": 0.5,
+  "source": "ambientCG Leather025 (https://ambientcg.com/a/Leather025); colour map brightened to near-white so a part colour tints it",
+  "license": "CC0"
+}
