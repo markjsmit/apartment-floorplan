@@ -7,7 +7,7 @@
     "clothes rack",
     "diy"
   ],
-  "description": "Cabinet-side-mounted fold-down clothes drying rack (aluminium rods in a frame, hinged along one edge). fold \"up\": stored standing up flat against the panel; fold \"down\": stored hanging down. standoff holds it off the panel so a lower rack can be stored in front of an upper one (open the front one first). How it is held up when out is not modelled. Typical sizes 60-80 wide, 40-100 out; generic planning model. Double-click to fold out / in.",
+  "description": "Cabinet-side-mounted fold-down clothes drying rack (aluminium rods in a frame, hinged along one edge). fold \"up\": stored standing up flat against the panel; fold \"down\": stored hanging down. standoff holds it off the panel so a lower rack can be stored in front of an upper one (open the front one first). How it is held up when out is not modelled. Typical sizes 60-80 wide, 40-100 out; generic planning model. Double-click to fold out / in (with `levels`, all racks at once).",
   "source": {
     "kind": "procedural",
     "generator": "drying-rack",
@@ -38,6 +38,10 @@
     "standoff": {
       "default": 0,
       "description": "cm off the panel (store a lower rack in front of an upper one)"
+    },
+    "levels": {
+      "default": null,
+      "description": "several racks on one panel that fold out/in together: [{elevation, length, standoff?, fold?, rods?}]"
     }
   },
   "defaultState": "folded"

@@ -1,6 +1,6 @@
 {
   "meta": {
-    "name": "Aisle + 90 bed + Kallax on the island end (7,450 L)",
+    "name": "Aisle 90 + end (7,450 L)",
     "kind": "saved",
     "note": "90x190 wall bed flush against the window wall; Kallax aisle 33 cm off the hallway wall with 33 cm shelves straight against the walls there, wall to wall; 4x3s on both sides of the island, lined up (door-side cubes that face the alcove wall given up); Kallax 2x4 + 2x2 with its back against the north end of the island (~4 cm from the bed when it is down); Kallax 1x4 + 1x2 between the bed and the east Kallax; back top shelf over 1 more hole.",
     "location": {
@@ -1912,9 +1912,9 @@
           "rotation": 90
         },
         {
-          "id": "storage.drying-rack-low",
+          "id": "storage.drying-racks",
           "asset": "diy-drying-rack",
-          "name": "Drying rack, low (hip height)",
+          "name": "Drying racks (hip height + 175, fold out together)",
           "tags": [
             "drying rack",
             "laundry"
@@ -1927,34 +1927,17 @@
           "rotation": -90,
           "params": {
             "width": 36,
-            "length": 55,
-            "elevation": 90,
-            "standoff": 2.5,
-            "rods": 6
-          },
-          "allowOverlap": [
-            "storage.drying-rack-high"
-          ]
-        },
-        {
-          "id": "storage.drying-rack-high",
-          "asset": "diy-drying-rack",
-          "name": "Drying rack, high (175)",
-          "tags": [
-            "drying rack",
-            "laundry"
-          ],
-          "position": [
-            701.5,
-            0,
-            133
-          ],
-          "rotation": -90,
-          "params": {
-            "width": 36,
-            "length": 55,
-            "elevation": 175,
-            "rods": 6
+            "levels": [
+              {
+                "elevation": 90,
+                "length": 55,
+                "standoff": 2.5
+              },
+              {
+                "elevation": 175,
+                "length": 55
+              }
+            ]
           }
         },
         {
