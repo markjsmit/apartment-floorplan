@@ -226,8 +226,8 @@
           "id": "living.hallway-opening",
           "type": "opening",
           "wall": "living.wall-1",
-          "offset": 277,
-          "width": 209,
+          "offset": 287,
+          "width": 199,
           "height": 238,
           "name": "Opening to the hallway",
           "tags": [
@@ -694,7 +694,7 @@
         },
         {
           "path": "openings[living.hallway-opening]",
-          "note": "the hallway mouth from the sofa wall's end to the tall units (209 wide), split by the pillar; top = the lowered ceiling (238)"
+          "note": "the hallway mouth from the storage room wall's end (sofa wall 277 + 10) to the glossy block (199 wide), split by the pillar; top = the lowered ceiling (238)"
         },
         {
           "path": "openings[living.tall-window]",
@@ -968,11 +968,11 @@
       "footprint": [
         [
           586,
-          277
+          287
         ],
         [
           688,
-          277
+          287
         ],
         [
           688,
@@ -1144,7 +1144,7 @@
           "type": "opening",
           "wall": "hallway.wall-7",
           "offset": 0,
-          "width": 209,
+          "width": 199,
           "height": 238,
           "name": "Opening to the living room",
           "tags": [
@@ -1205,7 +1205,7 @@
       "assumptions": [
         {
           "path": "footprint",
-          "note": "south wall on z 486, in line with the glossy block's face, so the hallway is as wide as its 209 opening to the living room (photos 160740, 160803, video 39-40 s). The door alcove in front of the storage room door is the 98 x 65 corner cut out of that room"
+          "note": "south wall on z 486, in line with the glossy block's face, so the hallway is as wide as its 199 opening to the living room (the sofa wall's 277 + the storage room wall's 10 cm end) (photos 160740, 160803, video 39-40 s). The door alcove in front of the storage room door is the 98 x 65 corner cut out of that room"
         },
         {
           "path": "ceilingHeight",
@@ -1256,11 +1256,11 @@
         ],
         [
           698,
-          267
+          277
         ],
         [
           597,
-          267
+          277
         ]
       ],
       "ceilingHeight": 277,
@@ -2149,7 +2149,7 @@
       "assumptions": [
         {
           "path": "footprint",
-          "note": "measured (notes): 3.01 x 3.17 m with a 1.01 x 0.655 corner cut out for the door alcove (2.00 and 2.515 are the sides without the corner; the 2.00 is the corrected value on the notes)"
+          "note": "measured (notes): 3.01 x 3.17 m with a 1.01 x 0.555 corner cut out for the door alcove (2.00 and 2.615 are the sides without the corner; the 2.00 is the corrected value on the notes)"
         },
         {
           "path": "openings[storage.window]",
