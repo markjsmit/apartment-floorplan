@@ -1,5 +1,13 @@
 import { describe, expect, it } from 'vitest';
-import { moveKeyFor, ignoresKeys, touchLook } from '../src/scene/input';
+import { moveKeyFor, ignoresKeys, mouseLook, touchLook } from '../src/scene/input';
+
+describe('mouseLook', () => {
+  it('aims like a game: mouse right turns right, mouse up looks up', () => {
+    expect(mouseLook(10, 0).yaw).toBeLessThan(0); // yaw positive = left
+    expect(mouseLook(0, -10).pitch).toBeGreaterThan(0);
+    expect(mouseLook(0, 0)).toEqual({ yaw: -0, pitch: -0 });
+  });
+});
 
 describe('moveKeyFor', () => {
   it('uses the physical key, so WASD works on a Hebrew keyboard layout too', () => {

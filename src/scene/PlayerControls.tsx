@@ -9,7 +9,7 @@ import { buildHouseColliders, resolveHousePosition, roomAt } from '../model/hous
 import { toWorld, type Layout } from '../model/layout';
 import { findById } from '../model/lookup';
 import { EYE_HEIGHT, useStore } from '../app/store';
-import { held, ignoresKeys, lookDelta, moveKeyFor, touchLook } from './input';
+import { held, ignoresKeys, lookDelta, mouseLook, moveKeyFor, touchLook } from './input';
 import { selectableFromHit } from './selectable';
 
 const CENTER = new Vector2(0, 0);
@@ -23,7 +23,7 @@ const MAX_PITCH = 80;
 
 
 /** Arrows walk and turn (old style); W/S walk, A/D step sideways (modern, look with the trackpad); E/C pitch;
- *  trackpad and touch drags look around. Walks through the whole house (house coordinates): open doorways
+ *  trackpad and touch drags look around; a middle click toggles mouse-look. Walks through the whole house (house coordinates): open doorways
  *  let you through, and the active room follows where you are. Always mounted; drives the camera only in
  *  first-person view. */
 export function PlayerControls({ house, layout, driveCamera }: { house: House; layout: Layout; driveCamera: boolean }) {
@@ -176,6 +176,36 @@ export function PlayerControls({ house, layout, driveCamera }: { house: House; l
       window.removeEventListener('pointercancel', pup);
     };
   }, [gl]);
+
+  // regular mouse: a middle click toggles mouse-look (pointer lock); clicks then aim with the crosshair, Esc also leaves
+  useEffect(() => {
+    const el = gl.domElement;
+    const locked = () => document.pointerLockElement === el;
+    const mdown = (e: MouseEvent) => {
+      if (e.button !== 1) return;
+      e.preventDefault(); // no auto-scroll
+      if (locked()) document.exitPointerLock();
+      else if (driveCamera) el.requestPointerLock();
+    };
+    const mmove = (e: MouseEvent) => {
+      if (!locked()) return;
+      const look = mouseLook(e.movementX, e.movementY);
+      lookDelta.yaw += look.yaw;
+      lookDelta.pitch += look.pitch;
+    };
+    const change = () => {
+      if (locked()) useStore.getState().toast('Mouse look on — middle-click or Esc to stop.');
+    };
+    if (!driveCamera && locked()) document.exitPointerLock();
+    el.addEventListener('mousedown', mdown);
+    window.addEventListener('mousemove', mmove);
+    document.addEventListener('pointerlockchange', change);
+    return () => {
+      el.removeEventListener('mousedown', mdown);
+      window.removeEventListener('mousemove', mmove);
+      document.removeEventListener('pointerlockchange', change);
+    };
+  }, [gl, driveCamera]);
 
   // what's under the crosshair (screen centre), so Mark can say "this" without clicking
   const raycaster = useMemo(() => new Raycaster(), []);

@@ -24,6 +24,13 @@ export function ignoresKeys(el: { tagName: string; type?: string } | null): bool
 
 // degrees per pixel of finger movement
 const TOUCH_SPEED = 0.25;
+// degrees per pixel of mouse movement in mouse-look (middle click)
+const MOUSE_SPEED = 0.15;
+
+/** Look change for mouse-look: you aim like in a game (mouse right = turn right, mouse up = look up). */
+export function mouseLook(dx: number, dy: number): { yaw: number; pitch: number } {
+  return { yaw: -dx * MOUSE_SPEED, pitch: -dy * MOUSE_SPEED };
+}
 
 /** Look change for a touch drag: you drag the world (swipe right = view turns left), like a photo viewer. */
 export function touchLook(dx: number, dy: number): { yaw: number; pitch: number } {

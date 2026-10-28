@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from 'react';
-import { Canvas, useThree } from '@react-three/fiber';
+import { Canvas, events as pointerEvents, useThree, type RootState } from '@react-three/fiber';
 import { EffectComposer, N8AO, Outline } from '@react-three/postprocessing';
 import { PCFSoftShadowMap, PerspectiveCamera, type Mesh, type Object3D } from 'three';
 import { currentHouse, currentLayout, useStore } from '../app/store';
@@ -51,6 +51,19 @@ function SelectionOutline() {
   );
 }
 
+/** In mouse-look (pointer lock) the cursor is hidden: clicks hit what's under the crosshair (screen centre). */
+const crosshairEvents: typeof pointerEvents = (store) => {
+  const base = pointerEvents(store);
+  return {
+    ...base,
+    compute(event, state: RootState) {
+      if (document.pointerLockElement !== state.gl.domElement) return base.compute?.(event, state);
+      state.pointer.set(0, 0);
+      state.raycaster.setFromCamera(state.pointer, state.camera);
+    },
+  };
+};
+
 /** Keep at least ~75° horizontal view on portrait phones (a fixed vertical fov feels like a keyhole there). */
 function FovFit() {
   const camera = useThree((s) => s.camera);
@@ -90,6 +103,7 @@ export function Viewer() {
         camera={{ fov: 70, near: 2, far: 30000, position: [0, 170, 0] }}
         gl={{ antialias: true, preserveDrawingBuffer: true }}
         onCreated={({ gl }) => { gl.toneMappingExposure = 1.15; }}
+        events={crosshairEvents}
         onPointerMissed={(e) => e.type === 'click' && select(null)}
       >
         <FovFit />

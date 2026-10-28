@@ -43,7 +43,10 @@ export function Measure() {
     const raycaster = new Raycaster();
     const pick = (clientX: number, clientY: number): MeasurePoint | null => {
       const rect = gl.domElement.getBoundingClientRect();
-      const ndc = new Vector2(((clientX - rect.left) / rect.width) * 2 - 1, -((clientY - rect.top) / rect.height) * 2 + 1);
+      // mouse-look: aim with the crosshair
+      const ndc = document.pointerLockElement === gl.domElement
+        ? new Vector2(0, 0)
+        : new Vector2(((clientX - rect.left) / rect.width) * 2 - 1, -((clientY - rect.top) / rect.height) * 2 + 1);
       raycaster.setFromCamera(ndc, camera);
       const hit = raycaster.intersectObjects(scene.children, true).find((h) => {
         const m = (h.object as Mesh).material as Material | undefined;
