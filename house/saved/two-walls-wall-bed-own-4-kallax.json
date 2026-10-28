@@ -1,8 +1,8 @@
 {
   "meta": {
-    "name": "Two walls + wall bed (own 4 Kallax)",
+    "name": "Two walls + wall bed",
     "kind": "saved",
-    "note": "Only the 4 Kallax we have: one stack on the west wall, one on the east wall next to the 140 wall bed; DIY shelves on the hallway wall; open middle.",
+    "note": "Only the 4 Kallax we have: one stack on the west wall, one on the east wall next to the 140 wall bed; Kallax 3x4 + 2x2 on the hallway wall; open middle.",
     "location": {
       "lat": 32.0853,
       "lon": 34.7818,
@@ -1767,22 +1767,91 @@
           "rotation": 0
         },
         {
-          "id": "storage.hallway-shelving",
-          "asset": "diy-plywood-shelving",
-          "name": "DIY shelving on the hallway wall (stops short of the corner so the east Kallax stays reachable)",
+          "id": "storage.kallax-hallway-low",
+          "asset": "ikea-kallax-112x147",
+          "name": "Kallax 3x4 on the hallway wall (standing)",
           "tags": [
-            "shelving"
+            "kallax"
           ],
+          "description": "NEW: buy (IKEA Kallax 112x147, same as ours, standing)",
           "against": {
             "wall": "storage.wall-2",
-            "offset": 80
+            "offset": 88
           },
           "params": {
-            "width": 120,
-            "height": 224,
-            "depth": 30,
-            "sections": 2,
-            "shelves": 5
+            "cols": 3,
+            "rows": 4,
+            "handles": "knob",
+            "inserts": [
+              [
+                "drawers",
+                "drawers",
+                "drawers"
+              ],
+              [
+                "box",
+                "box",
+                "box"
+              ],
+              [
+                "box",
+                "box",
+                "box"
+              ],
+              [
+                "box",
+                "box",
+                "box"
+              ]
+            ],
+            "boxColors": [
+              [],
+              [
+                "black",
+                "white",
+                "black"
+              ],
+              [
+                "white",
+                "black",
+                "white"
+              ],
+              [
+                "black",
+                "white",
+                "black"
+              ]
+            ]
+          }
+        },
+        {
+          "id": "storage.kallax-hallway-high",
+          "asset": "ikea-kallax-112x147",
+          "name": "Kallax 2x2 on top",
+          "tags": [
+            "kallax"
+          ],
+          "description": "NEW: buy (IKEA Kallax 77x77)",
+          "against": {
+            "wall": "storage.wall-2",
+            "offset": 123,
+            "elevation": 147
+          },
+          "params": {
+            "cols": 2,
+            "rows": 2,
+            "handles": "knob",
+            "seed": "hallway",
+            "contents": [
+              [
+                "random",
+                "random"
+              ],
+              [
+                "random",
+                "random"
+              ]
+            ]
           }
         },
         {
