@@ -21,14 +21,14 @@ type Door = { parts: Part[]; open: Record<string, PartOverride> };
  * White gloss door between x0..x1 / y0..y1, front face at z, hinged on its left or right edge, swinging out (+z).
  * handle: knob | bar (vertical) | none, at height y on the edge opposite the hinge. Every part turns about the hinge.
  */
-function hingedDoor(id: string, x0: number, x1: number, y0: number, y1: number, z: number, hinge: 'left' | 'right', handle: { kind: string; y: number; len?: number }): Door {
+function hingedDoor(id: string, x0: number, x1: number, y0: number, y1: number, z: number, hinge: 'left' | 'right', handle: { kind: string; y: number; len?: number }, openDeg = OPEN): Door {
   const left = hinge === 'left';
   const pivot: Vec3 = [left ? x0 : x1, (y0 + y1) / 2, z];
   const parts: Part[] = [box(id, ['door', 'front'], [x1 - x0, y1 - y0, FRONT_T], [(x0 + x1) / 2, (y0 + y1) / 2, z - FRONT_T / 2], { material: 'white-gloss', pivot })];
   const hx = left ? x1 - 4 : x0 + 4;
   if (handle.kind === 'knob') parts.push(box(`${id}-knob`, ['handle', 'knob'], [2.2, 2.2, 2.2], [hx, handle.y, z + 1.1], { material: HANDLE, pivot }));
   else if (handle.kind === 'bar') parts.push(box(`${id}-handle`, ['handle'], [1.2, handle.len ?? 20, 1.6], [hx, handle.y, z + 0.8], { material: HANDLE, pivot }));
-  const rotation: Vec3 = [0, left ? -OPEN : OPEN, 0];
+  const rotation: Vec3 = [0, left ? -openDeg : openDeg, 0];
   return { parts, open: Object.fromEntries(parts.map((p) => [p.id, { rotation }])) };
 }
 
@@ -315,7 +315,7 @@ function machine(prefix: string, w: number, d: number, y0: number, z0: number, d
  * Tall built-in white cabinet with a stacked washing machine (floor) and tumble dryer (on a shelf on top of it), two
  * tall doors in front of them and a storage door above. params: width (65), depth (62), height (220),
  * doors: pair (default) | stacked (one full-width door over the washer and one from the dryer up to the top, both
- * hinged on the `hinge` side: left | right, seen from the front).
+ * hinged on the `hinge` side: left | right, seen from the front; lowOpen = how far the lower door opens, degrees).
  * Double-click a door to open all doors (the round machine doors show behind them).
  */
 export function washerDryerColumn(params: Record<string, unknown>): WithStates {
@@ -339,7 +339,8 @@ export function washerDryerColumn(params: Record<string, unknown>): WithStates {
   const tallTop = storage ? topY + 1.8 - GAP / 2 : H - GAP;
   const side = params.hinge === 'right' ? 'right' : 'left';
   const doors = params.doors === 'stacked' ? [
-    hingedDoor('door-low', x0 + GAP, x1 - GAP, 1, 87.5 - GAP / 2, D, side, { kind: 'none', y: 0 }),
+    // the lower door can be stopped short (lowOpen degrees) where something stands in its way (a toilet)
+    hingedDoor('door-low', x0 + GAP, x1 - GAP, 1, 87.5 - GAP / 2, D, side, { kind: 'none', y: 0 }, num(params.lowOpen, OPEN)),
     hingedDoor('door-high', x0 + GAP, x1 - GAP, 87.5 + GAP / 2, H - GAP, D, side, { kind: 'none', y: 0 }),
   ] : [
     hingedDoor('door-l', x0 + GAP, -GAP / 2, 1, tallTop, D, 'left', { kind: 'bar', y: 115, len: 30 }),

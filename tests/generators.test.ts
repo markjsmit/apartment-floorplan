@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { generators } from '../src/model/generators';
-import { assetSize, openingParams } from '../src/model/assets';
+import { assetSize, openingParams, partTransform } from '../src/model/assets';
 import { FurnitureAssetSchema, type Part } from '../src/model/schema';
 import { door, doorOpenAngle, doorStates, windowParts } from '../src/model/generators/openings';
 
@@ -29,7 +29,15 @@ describe('door generator', () => {
   });
   it('swings the handles and roses with the leaf', () => {
     const open = doorStates(parts)[1];
-    for (const id of ['leaf', 'handle-in', 'handle-in-rose', 'handle-out-key-rose']) expect(open.parts[id]?.rotation).toEqual([0, -90, 0]);
+    for (const id of ['leaf', 'handle-in']) expect(open.parts[id]?.rotation?.map((v) => Math.round(v))).toEqual([0, -90, 0]);
+    // the roses (cylinders tilted 90° about x) keep their tilt and stay on the leaf: none of them drops to the floor
+    const leaf = partTransform(parts.find((p) => p.id === 'leaf')!, open.parts.leaf);
+    for (const id of ['handle-in-rose', 'handle-out-key-rose', 'handle-in-neck']) {
+      const p = parts.find((x) => x.id === id)!;
+      const pose = partTransform(p, open.parts[id]);
+      expect(Math.abs(pose.position[1] - p.position[1])).toBeLessThan(0.01);
+      expect(Math.hypot(pose.position[0] - leaf.position[0], pose.position[2] - leaf.position[2])).toBeLessThan(45);
+    }
     expect(open.parts['jamb-left']).toBeUndefined();
   });
 

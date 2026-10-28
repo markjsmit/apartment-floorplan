@@ -1,3 +1,4 @@
+import { Euler, Matrix4 } from 'three';
 import type { AssetState, Part, Vec3 } from '../schema';
 
 // Opening-local space: origin at the bottom-centre of the opening on the wall's room-side surface,
@@ -103,8 +104,17 @@ export function windowParts(params: Record<string, unknown>): Part[] {
   return parts;
 }
 
+const DEG = Math.PI / 180;
+
+/** `angle` about the vertical (the hinge) on top of the part's own tilt (the roses are cylinders turned 90° about x). */
+function swungRotation(own: Vec3, angle: number): Vec3 {
+  const m = new Matrix4().makeRotationY(angle * DEG).multiply(new Matrix4().makeRotationFromEuler(new Euler(own[0] * DEG, own[1] * DEG, own[2] * DEG)));
+  const e = new Euler().setFromRotationMatrix(m);
+  return [e.x / DEG, e.y / DEG, e.z / DEG];
+}
+
 /** Closed / open (90° the way the door swings) for a door: everything hung on the hinge (leaf, handles, roses) swings. */
 export function doorStates(parts: Part[], angle = -90): AssetState[] {
-  const swing = Object.fromEntries(parts.filter((p) => p.pivot).map((p) => [p.id, { rotation: [0, angle, 0] as Vec3 }]));
+  const swing = Object.fromEntries(parts.filter((p) => p.pivot).map((p) => [p.id, { rotation: swungRotation(p.rotation, angle) }]));
   return [{ id: 'closed', name: 'Closed', parts: {} }, { id: 'open', name: 'Open', parts: swing }];
 }

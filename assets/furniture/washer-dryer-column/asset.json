@@ -33,6 +33,10 @@
     "hinge": {
       "default": "left",
       "description": "stacked doors: hinge side seen from the front"
+    },
+    "lowOpen": {
+      "default": 100,
+      "description": "stacked doors: degrees the lower door opens (less when something is in the way)"
     }
   }
 }
