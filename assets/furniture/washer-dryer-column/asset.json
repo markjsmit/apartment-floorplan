@@ -1,12 +1,38 @@
 {
   "id": "washer-dryer-column",
   "name": "Washer/dryer column",
-  "tags": ["laundry", "washing machine", "washer", "dryer", "tumble dryer", "cabinet", "built-in"],
+  "tags": [
+    "laundry",
+    "washing machine",
+    "washer",
+    "dryer",
+    "tumble dryer",
+    "cabinet",
+    "built-in"
+  ],
   "description": "Tall built-in white cabinet with a front-loading washing machine on the floor and a tumble dryer stacked on a shelf above it (each 60 x 85, standard sizes), behind two tall doors, plus a storage compartment with its own door above 176. Double-click a door to open the doors.",
-  "source": { "kind": "procedural", "generator": "washer-dryer-column", "license": "self-made" },
+  "source": {
+    "kind": "procedural",
+    "generator": "washer-dryer-column",
+    "license": "self-made"
+  },
   "params": {
-    "width": { "default": 65 },
-    "depth": { "default": 62 },
-    "height": { "default": 220 }
+    "width": {
+      "default": 65
+    },
+    "depth": {
+      "default": 62
+    },
+    "height": {
+      "default": 220
+    },
+    "doors": {
+      "default": "pair",
+      "description": "pair (two tall doors + a top door) | stacked (lower + upper full-width door)"
+    },
+    "hinge": {
+      "default": "left",
+      "description": "stacked doors: hinge side seen from the front"
+    }
   }
 }

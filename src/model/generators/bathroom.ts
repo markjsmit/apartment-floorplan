@@ -313,7 +313,9 @@ function machine(prefix: string, w: number, d: number, y0: number, z0: number, d
 
 /**
  * Tall built-in white cabinet with a stacked washing machine (floor) and tumble dryer (on a shelf on top of it), two
- * tall doors in front of them and a storage door above. params: width (65), depth (62), height (220).
+ * tall doors in front of them and a storage door above. params: width (65), depth (62), height (220),
+ * doors: pair (default) | stacked (one full-width door over the washer and one from the dryer up to the top, both
+ * hinged on the `hinge` side: left | right, seen from the front).
  * Double-click a door to open all doors (the round machine doors show behind them).
  */
 export function washerDryerColumn(params: Record<string, unknown>): WithStates {
@@ -335,11 +337,15 @@ export function washerDryerColumn(params: Record<string, unknown>): WithStates {
   ];
   if (storage) parts.push(box('storage-shelf', ['shelf'], [W - 3.6, 1.8, carcD - 1], [0, topY + 0.9, (carcD - 1) / 2 + 0.8], { material: 'white-laminate' }));
   const tallTop = storage ? topY + 1.8 - GAP / 2 : H - GAP;
-  const doors = [
+  const side = params.hinge === 'right' ? 'right' : 'left';
+  const doors = params.doors === 'stacked' ? [
+    hingedDoor('door-low', x0 + GAP, x1 - GAP, 1, 87.5 - GAP / 2, D, side, { kind: 'none', y: 0 }),
+    hingedDoor('door-high', x0 + GAP, x1 - GAP, 87.5 + GAP / 2, H - GAP, D, side, { kind: 'none', y: 0 }),
+  ] : [
     hingedDoor('door-l', x0 + GAP, -GAP / 2, 1, tallTop, D, 'left', { kind: 'bar', y: 115, len: 30 }),
     hingedDoor('door-r', GAP / 2, x1 - GAP, 1, tallTop, D, 'right', { kind: 'bar', y: 115, len: 30 }),
   ];
-  if (storage) doors.push(hingedDoor('door-top', x0 + GAP, x1 - GAP, tallTop + GAP, H - GAP, D, 'left', { kind: 'knob', y: tallTop + 6 }));
+  if (storage && params.doors !== 'stacked') doors.push(hingedDoor('door-top', x0 + GAP, x1 - GAP, tallTop + GAP, H - GAP, D, 'left', { kind: 'knob', y: tallTop + 6 }));
   const doorParts = doors.flatMap((d) => d.parts);
   parts.push(...doorParts);
   return {

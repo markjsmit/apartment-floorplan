@@ -2130,7 +2130,7 @@
       ],
       "footprint": [
         [
-          578,
+          636,
           534
         ],
         [
@@ -2139,11 +2139,11 @@
         ],
         [
           860,
-          764
+          722
         ],
         [
-          578,
-          764
+          636,
+          722
         ]
       ],
       "ceilingHeight": 238,
@@ -2161,8 +2161,10 @@
           "edge": 0,
           "tags": [
             "door wall",
-            "hallway wall"
-          ]
+            "hallway wall",
+            "tiled wall"
+          ],
+          "material": "tiles-dark-grey"
         },
         {
           "id": "bathroom.wall-1",
@@ -2199,7 +2201,7 @@
           "id": "bathroom.door",
           "type": "door",
           "wall": "bathroom.wall-0",
-          "offset": 144,
+          "offset": 86,
           "width": 80,
           "height": 211,
           "tags": [
@@ -2223,10 +2225,11 @@
           ],
           "against": {
             "wall": "bathroom.wall-1",
-            "offset": 85
+            "offset": 43
           },
           "params": {
-            "width": 80
+            "width": 80,
+            "mirrorBottom": 98
           },
           "builtIn": true
         },
@@ -2241,11 +2244,13 @@
           ],
           "against": {
             "wall": "bathroom.wall-1",
-            "offset": 165
+            "offset": 123
           },
           "params": {
             "width": 65,
-            "height": 230
+            "height": 236,
+            "doors": "stacked",
+            "hinge": "left"
           },
           "builtIn": true
         },
@@ -2259,11 +2264,16 @@
           ],
           "against": {
             "wall": "bathroom.wall-2",
-            "offset": 70
+            "offset": 62
           },
           "params": {
-            "ledgeWidth": 60
+            "ledgeWidth": 100,
+            "ledgeHeight": 115,
+            "ledgeDepth": 18
           },
+          "allowOverlap": [
+            "bathroom.bathtub"
+          ],
           "builtIn": true
         },
         {
@@ -2276,14 +2286,14 @@
             "install wall"
           ],
           "params": {
-            "width": 152,
+            "width": 62,
             "height": 115,
             "depth": 18,
             "material": "tiles-dark-grey"
           },
           "against": {
             "wall": "bathroom.wall-2",
-            "offset": 130
+            "offset": 162
           },
           "allowOverlap": [
             "bathroom.bathtub"
@@ -2300,15 +2310,15 @@
             "storage"
           ],
           "params": {
-            "width": 214,
-            "height": 58,
+            "width": 162,
+            "height": 60,
             "depth": 30,
             "color": "#3a3b3e"
           },
           "against": {
             "wall": "bathroom.wall-2",
-            "offset": 68,
-            "elevation": 180
+            "offset": 62,
+            "elevation": 178
           },
           "builtIn": true
         },
@@ -2323,7 +2333,7 @@
           "position": [
             846,
             226,
-            659
+            617
           ],
           "params": {
             "diameter": 10,
@@ -2356,7 +2366,7 @@
       "assumptions": [
         {
           "path": "footprint",
-          "note": "NOT measured: ~2.8 x 2.3 m. Width from the fittings in a row along the far wall (bath 70 + toilet + washer column 60) with the toilet straight ahead through the door; the vanity sits past the door's left jamb, so the room reaches ~50 cm east of the hallway end"
+          "note": "NOT measured: ~224 x 188. Width from the fittings in a row along the far wall (bath 70, ~16 cm, toilet, washer column 62) with the toilet straight ahead through the door; depth = bath 170 + ledge 18 (the bath's end touches the door wall, photo 160816). The vanity sits past the door's left jamb, so the room reaches ~50 cm east of the hallway end. ~58 cm between the kitchen wall and the bath wall is unexplained"
         },
         {
           "path": "ceilingHeight",
