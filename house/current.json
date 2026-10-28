@@ -2777,16 +2777,16 @@
           445
         ],
         [
-          1236,
+          1226,
           445
         ],
         [
-          1236,
-          735
+          1226,
+          720
         ],
         [
           1083,
-          735
+          720
         ]
       ],
       "ceilingHeight": 277,
@@ -2841,7 +2841,7 @@
           "id": "closet.door",
           "type": "door",
           "wall": "closet.wall-3",
-          "offset": 207,
+          "offset": 192,
           "width": 80,
           "height": 211,
           "tags": [
@@ -2889,19 +2889,19 @@
             "depth": 40,
             "sections": [
               {
-                "w": 70,
+                "w": 64,
                 "kind": "drawers"
               },
               {
-                "w": 70,
+                "w": 64,
                 "kind": "drawers"
               },
               {
-                "w": 70,
+                "w": 64,
                 "kind": "drawers"
               },
               {
-                "w": 65,
+                "w": 64,
                 "kind": "hang"
               }
             ]
@@ -2926,11 +2926,11 @@
             "depth": 40,
             "sections": [
               {
-                "w": 100,
+                "w": 95,
                 "kind": "hang"
               },
               {
-                "w": 95,
+                "w": 86,
                 "kind": "hang"
               }
             ]
@@ -2941,7 +2941,7 @@
       "assumptions": [
         {
           "path": "footprint",
-          "note": "NOT measured: ~1.5 x 2.9 m from the video (long, narrow, mirror at the far end); mamad = thick concrete walls (25)"
+          "note": "NOT measured: ~1.43 x 2.75 m — long and narrow (video), kept inside the flat's rectangular outline (Mark: nothing sticks out): east wall in line with the bedroom's, south wall on the front-door wall line; mamad = thick concrete walls (25)"
         },
         {
           "path": "items",
@@ -2970,11 +2970,11 @@
         ],
         [
           1058,
-          790
+          720
         ],
         [
           918,
-          790
+          720
         ]
       ],
       "ceilingHeight": 238,
@@ -3083,7 +3083,7 @@
           ],
           "against": {
             "wall": "ensuite.wall-3",
-            "offset": 120
+            "offset": 95
           },
           "params": {
             "ledgeWidth": 60,
@@ -3105,7 +3105,7 @@
             "install wall"
           ],
           "params": {
-            "width": 235,
+            "width": 165,
             "height": 115,
             "depth": 19.5,
             "material": "tiles-dark-grey"
@@ -3130,9 +3130,9 @@
             "led panel"
           ],
           "position": [
-            950,
+            960,
             238,
-            705
+            610
           ],
           "params": {
             "diameter": 28,
@@ -3169,7 +3169,7 @@
       "assumptions": [
         {
           "path": "footprint",
-          "note": "NOT measured: ~1.4 x 2.35 m from the video: frosted glass panel + glass door from the bedroom entry, toilet on the west wall under a tiled ledge, glass shower at the end (photos 160901-05, video 55-76 s); the vanity is outside, in the entry"
+          "note": "NOT measured: ~1.4 x 1.65 m, south wall on the front-door wall line (Mark: the flat's outline is a rectangle, nothing sticks out). From the video: frosted glass panel + glass door from the bedroom entry, toilet on the west wall under a tiled ledge, glass shower at the end (photos 160901-05, video 55-76 s); the vanity is outside, in the entry"
         },
         {
           "path": "ceilingHeight",
