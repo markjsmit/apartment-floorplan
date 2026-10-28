@@ -1,0 +1,29 @@
+{
+  "id": "corner-cabinet",
+  "name": "Triangular corner cabinet (design)",
+  "tags": [
+    "cabinet",
+    "corner",
+    "closet",
+    "storage",
+    "design"
+  ],
+  "description": "Triangular corner cabinet with one door on the diagonal; origin at the right-angle corner, legs along -x and -z.",
+  "source": {
+    "kind": "procedural",
+    "generator": "corner-cabinet",
+    "license": "self-made",
+    "notes": "src/model/generators/decor.ts"
+  },
+  "params": {
+    "legX": {
+      "default": 75
+    },
+    "legZ": {
+      "default": 75
+    },
+    "height": {
+      "default": 200
+    }
+  }
+}

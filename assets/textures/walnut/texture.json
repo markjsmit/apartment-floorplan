@@ -1,0 +1,23 @@
+{
+  "id": "walnut",
+  "name": "Walnut",
+  "tags": [
+    "wood",
+    "walnut",
+    "dark",
+    "veneer"
+  ],
+  "maps": {
+    "color": "color.jpg",
+    "normal": "normal.jpg",
+    "roughness": "roughness.jpg"
+  },
+  "tileSize": [
+    90,
+    45
+  ],
+  "fallbackColor": "#6b4428",
+  "roughness": 0.55,
+  "source": "ambientCG Wood066 (https://ambientcg.com/a/Wood066)",
+  "license": "CC0"
+}

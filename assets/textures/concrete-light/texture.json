@@ -1,0 +1,22 @@
+{
+  "id": "concrete-light",
+  "name": "Light concrete (pots)",
+  "tags": [
+    "concrete",
+    "cement",
+    "pot"
+  ],
+  "maps": {
+    "color": "color.jpg",
+    "normal": "normal.jpg",
+    "roughness": "roughness.jpg"
+  },
+  "tileSize": [
+    110,
+    55
+  ],
+  "fallbackColor": "#cfcbc4",
+  "roughness": 0.85,
+  "source": "ambientCG Concrete034 (https://ambientcg.com/a/Concrete034)",
+  "license": "CC0"
+}

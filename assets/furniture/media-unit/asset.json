@@ -1,0 +1,35 @@
+{
+  "id": "media-unit",
+  "name": "TV unit / sideboard (design)",
+  "tags": [
+    "tv unit",
+    "media console",
+    "sideboard",
+    "tv bench",
+    "design"
+  ],
+  "description": "Low media unit / sideboard with door, drawer or open modules; optional fluted fronts and rounded ends.",
+  "source": {
+    "kind": "procedural",
+    "generator": "media-unit",
+    "license": "self-made",
+    "notes": "Simple stand-in geometry for trying out styles (src/model/generators/decor.ts); the real product + link is in the item name/description."
+  },
+  "params": {
+    "width": {
+      "default": 180
+    },
+    "depth": {
+      "default": 42
+    },
+    "height": {
+      "default": 50
+    },
+    "legHeight": {
+      "default": 10
+    },
+    "modules": {
+      "default": "door,drawer,drawer,door"
+    }
+  }
+}

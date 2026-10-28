@@ -1,0 +1,24 @@
+{
+  "id": "rattan-weave",
+  "name": "Natural rattan weave",
+  "tags": [
+    "rattan",
+    "wicker",
+    "cane",
+    "woven"
+  ],
+  "maps": {
+    "color": "color.jpg",
+    "normal": "normal.jpg",
+    "roughness": "roughness.jpg",
+    "ao": "ao.jpg"
+  },
+  "tileSize": [
+    20,
+    20
+  ],
+  "fallbackColor": "#c9a77b",
+  "roughness": 0.75,
+  "source": "ambientCG Wicker005 (https://ambientcg.com/a/Wicker005)",
+  "license": "CC0"
+}

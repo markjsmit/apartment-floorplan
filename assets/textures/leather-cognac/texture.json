@@ -1,0 +1,22 @@
+{
+  "id": "leather-cognac",
+  "name": "Cognac leather",
+  "tags": [
+    "leather",
+    "cognac",
+    "brown"
+  ],
+  "maps": {
+    "color": "color.jpg",
+    "normal": "normal.jpg",
+    "roughness": "roughness.jpg"
+  },
+  "tileSize": [
+    45,
+    45
+  ],
+  "fallbackColor": "#6b3f26",
+  "roughness": 0.5,
+  "source": "ambientCG Leather030 (https://ambientcg.com/a/Leather030)",
+  "license": "CC0"
+}

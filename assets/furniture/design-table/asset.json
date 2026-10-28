@@ -1,0 +1,33 @@
+{
+  "id": "design-table",
+  "name": "Dining table (design)",
+  "tags": [
+    "table",
+    "dining table",
+    "design"
+  ],
+  "description": "Dining / side table for design ideas: round, oval or rectangular top on legs, tapered legs, a pedestal/tulip base or trestle ends. Sizes come from the product it stands for (see the item name).",
+  "source": {
+    "kind": "procedural",
+    "generator": "design-table",
+    "license": "self-made",
+    "notes": "Simple stand-in geometry for trying out styles (src/model/generators/decor.ts); the real product + link is in the item name/description."
+  },
+  "params": {
+    "shape": {
+      "default": "rect"
+    },
+    "width": {
+      "default": 160
+    },
+    "depth": {
+      "default": 90
+    },
+    "height": {
+      "default": 75
+    },
+    "base": {
+      "default": "legs"
+    }
+  }
+}

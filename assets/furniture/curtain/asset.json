@@ -1,0 +1,31 @@
+{
+  "id": "curtain",
+  "name": "Curtains (design)",
+  "tags": [
+    "curtain",
+    "curtains",
+    "drapes",
+    "design"
+  ],
+  "description": "Curtain panels on a rail (sheer/linen); `open` = how far they are pushed to the sides.",
+  "source": {
+    "kind": "procedural",
+    "generator": "curtain",
+    "license": "self-made",
+    "notes": "Simple stand-in geometry for trying out styles (src/model/generators/decor.ts); the real product + link is in the item name/description."
+  },
+  "params": {
+    "width": {
+      "default": 300
+    },
+    "height": {
+      "default": 260
+    },
+    "panels": {
+      "default": 2
+    },
+    "open": {
+      "default": 0.7
+    }
+  }
+}

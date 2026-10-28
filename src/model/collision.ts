@@ -11,6 +11,8 @@ export type PlacedBounds = Bounds & { position: Vec3; rotationDeg: number; parts
 
 // Anything whose bottom is above this (cm) is treated as wall-mounted and doesn't block walking.
 const OVERHEAD = 150;
+// Anything whose top is this low (cm) is walked on, not into: rugs, mats.
+export const WALK_ON = 3;
 const DEG = Math.PI / 180;
 
 /** Rooms are isolated for now, so every wall is solid (doors don't lead anywhere yet). */
@@ -34,7 +36,7 @@ export function buildColliders(walls: WallInfo[], items: PlacedBounds[]): Collid
 
 /** The boxes you'd bump into below head height, minus those whose footprint lies inside another one. */
 function blockingBoxes(boxes: Bounds[], elevation: number): Bounds[] {
-  const low = boxes.filter((b) => elevation + b.min[1] <= OVERHEAD && b.max[0] > b.min[0] && b.max[2] > b.min[2]);
+  const low = boxes.filter((b) => elevation + b.min[1] <= OVERHEAD && elevation + b.max[1] > WALK_ON && b.max[0] > b.min[0] && b.max[2] > b.min[2]);
   const within = (a: Bounds, b: Bounds) =>
     a.min[0] >= b.min[0] - 0.5 && a.max[0] <= b.max[0] + 0.5 && a.min[2] >= b.min[2] - 0.5 && a.max[2] <= b.max[2] + 0.5;
   // keep the first of two identical footprints

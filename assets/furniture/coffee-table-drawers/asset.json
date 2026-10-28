@@ -1,0 +1,38 @@
+{
+  "id": "coffee-table-drawers",
+  "name": "Coffee table with drawers (design)",
+  "tags": [
+    "coffee table",
+    "table",
+    "drawers",
+    "living room",
+    "design"
+  ],
+  "description": "Low coffee table with drawers on the sofa side (double-click a drawer to pull it out) — for remotes etc.",
+  "source": {
+    "kind": "procedural",
+    "generator": "coffee-table",
+    "license": "self-made",
+    "notes": "Simple stand-in geometry for trying out styles (src/model/generators/decor.ts); the real product + link is in the item name/description."
+  },
+  "params": {
+    "shape": {
+      "default": "rect"
+    },
+    "width": {
+      "default": 110
+    },
+    "depth": {
+      "default": 60
+    },
+    "height": {
+      "default": 40
+    },
+    "drawers": {
+      "default": 2
+    },
+    "base": {
+      "default": "legs"
+    }
+  }
+}

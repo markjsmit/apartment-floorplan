@@ -1,0 +1,23 @@
+{
+  "id": "travertine",
+  "name": "Travertine (light)",
+  "tags": [
+    "stone",
+    "travertine",
+    "marble"
+  ],
+  "maps": {
+    "color": "color.jpg",
+    "normal": "normal.jpg",
+    "roughness": "roughness.jpg",
+    "ao": "ao.jpg"
+  },
+  "tileSize": [
+    120,
+    120
+  ],
+  "fallbackColor": "#e2d6c1",
+  "roughness": 0.45,
+  "source": "ambientCG Travertine009 (https://ambientcg.com/a/Travertine009)",
+  "license": "CC0"
+}

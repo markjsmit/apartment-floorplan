@@ -1,0 +1,24 @@
+{
+  "id": "jute",
+  "name": "Jute / sisal weave (rug)",
+  "tags": [
+    "jute",
+    "sisal",
+    "rug",
+    "woven"
+  ],
+  "maps": {
+    "color": "color.jpg",
+    "normal": "normal.jpg",
+    "roughness": "roughness.jpg",
+    "ao": "ao.jpg"
+  },
+  "tileSize": [
+    60,
+    60
+  ],
+  "fallbackColor": "#c8b48e",
+  "roughness": 0.95,
+  "source": "ambientCG Carpet016 (https://ambientcg.com/a/Carpet016)",
+  "license": "CC0"
+}

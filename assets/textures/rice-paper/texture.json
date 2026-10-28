@@ -1,0 +1,22 @@
+{
+  "id": "rice-paper",
+  "name": "Rice paper (lamp shades)",
+  "tags": [
+    "paper",
+    "rice paper",
+    "lamp"
+  ],
+  "maps": {
+    "color": "color.jpg",
+    "normal": "normal.jpg",
+    "roughness": "roughness.jpg"
+  },
+  "tileSize": [
+    50,
+    50
+  ],
+  "fallbackColor": "#efe3c9",
+  "roughness": 0.9,
+  "source": "ambientCG Paper006 (https://ambientcg.com/a/Paper006)",
+  "license": "CC0"
+}

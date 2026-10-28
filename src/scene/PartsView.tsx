@@ -1,7 +1,7 @@
-import { useRef } from 'react';
+import { Suspense, useMemo, useRef } from 'react';
 import { useFrame, type ThreeEvent } from '@react-three/fiber';
-import { Text } from '@react-three/drei';
-import { Color, Euler, Quaternion, Vector3, type Material, type Mesh, type MeshStandardMaterial } from 'three';
+import { Text, useGLTF } from '@react-three/drei';
+import { Box3, Color, Euler, Quaternion, Vector3, type Material, type Mesh, type MeshStandardMaterial, type Object3D } from 'three';
 import type { FurnitureAsset, Part, Vec3 } from '../model/schema';
 import { findState, interactivePart, partTransform } from '../model/assets';
 import { useStore } from '../app/store';
@@ -10,6 +10,7 @@ import { partGeometry } from './cmGeometry';
 import { getMaterial } from './materials';
 import { registerObject } from './registry';
 import { clickAction, isPhone } from './clickAction';
+import { libUrl } from '../data/client';
 import labelFont from '../../assets/fonts/inter-latin-600-normal.woff?url';
 import { RectAreaLightUniformsLib } from 'three/examples/jsm/lights/RectAreaLightUniformsLib.js';
 
@@ -112,7 +113,7 @@ function PartMesh({ ownerId, kind, part, pose, interactive, lightsOn, daylight, 
   onDoubleClick: (e: ThreeEvent<MouseEvent>) => void;
 }) {
   const bundle = useStore((s) => s.bundle);
-  const ref = useRef<Mesh | null>(null);
+  const ref = useRef<Object3D | null>(null);
   const target = useRef({ pos: new Vector3(), quat: new Quaternion() });
   target.current.pos.set(...pose.position);
   target.current.quat.setFromEuler(new Euler(pose.rotationDeg[0] * DEG, pose.rotationDeg[1] * DEG, pose.rotationDeg[2] * DEG));
@@ -134,6 +135,26 @@ function PartMesh({ ownerId, kind, part, pose, interactive, lightsOn, daylight, 
   });
 
   if (!part.geometry) return null;
+  const selectable = { selectable: { kind, id: ownerId, part: part.section ?? part.id } };
+  if (part.geometry.type === 'model') {
+    const g = part.geometry;
+    return (
+      <group
+        ref={(m) => {
+          ref.current = m;
+          if (registerAsPart) registerObject(`${ownerId}#${part.id}`)(m);
+        }}
+        visible={pose.visible}
+        onClick={onClick}
+        onDoubleClick={onDoubleClick}
+        userData={selectable}
+      >
+        <Suspense fallback={null}>
+          <ModelInstance file={g.file} size={g.size} castShadow={part.castShadow} />
+        </Suspense>
+      </group>
+    );
+  }
   const base = getMaterial(bundle, part.material ?? (part.glass ? 'glass' : undefined), part.color, part.glass, daylight);
   const material = part.emit ? emissive(base, part.emit.color, lightsOn) : base;
   return (
@@ -151,7 +172,7 @@ function PartMesh({ ownerId, kind, part, pose, interactive, lightsOn, daylight, 
       onDoubleClick={onDoubleClick}
       onPointerOver={interactive ? (e) => { e.stopPropagation(); document.body.style.cursor = 'pointer'; } : undefined}
       onPointerOut={interactive ? () => { document.body.style.cursor = ''; } : undefined}
-      userData={{ selectable: { kind, id: ownerId, part: part.section ?? part.id } }}
+      userData={selectable}
     >
       {part.label && <Label label={part.label} faceZ={faceDepth(part) / 2} />}
       {/* point lamps are lit by the room's light pool (Lighting / RoomLamps), not here */}
@@ -169,6 +190,30 @@ function PartMesh({ ownerId, kind, part, pose, interactive, lightsOn, daylight, 
   );
 }
 
+/** A glTF model scaled uniformly to the box's height (or, with height 0, to fit its width/depth), centred in the box. */
+function ModelInstance({ file, size, castShadow }: { file: string; size: Vec3; castShadow: boolean }) {
+  const { scene } = useGLTF(libUrl('lib/', file));
+  const obj = useMemo(() => {
+    const c = scene.clone(true);
+    c.updateMatrixWorld(true);
+    const s = new Box3().setFromObject(c).getSize(new Vector3());
+    const k = size[1] > 0 && s.y > 0 ? size[1] / s.y : Math.min(size[0] / (s.x || 1), size[2] / (s.z || 1));
+    c.scale.multiplyScalar(k);
+    c.updateMatrixWorld(true);
+    const b = new Box3().setFromObject(c);
+    const centre = b.getCenter(new Vector3());
+    c.position.set(c.position.x - centre.x, c.position.y - b.min.y - size[1] / 2, c.position.z - centre.z);
+    c.traverse((o) => {
+      if ((o as Mesh).isMesh) {
+        o.castShadow = castShadow;
+        o.receiveShadow = true;
+      }
+    });
+    return c;
+  }, [scene, size[0], size[1], size[2], castShadow]);
+  return <primitive object={obj} />;
+}
+
 const noRaycast = () => null;
 
 const emissiveCache = new Map<string, Material>();
@@ -180,7 +225,9 @@ function emissive(base: Material, color: string, on: boolean): Material {
   if (!m) {
     const glow = (base as MeshStandardMaterial).clone();
     glow.emissive = new Color(on ? color : '#000000');
-    glow.emissiveIntensity = on ? 2.2 : 0;
+    // a textured shade (rice paper, rattan) glows through its texture instead of turning into a flat disc
+    glow.emissiveMap = glow.map ?? null;
+    glow.emissiveIntensity = on ? (glow.map ? 1.1 : 2.2) : 0;
     m = glow;
     emissiveCache.set(key, m);
   }

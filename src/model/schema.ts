@@ -147,6 +147,9 @@ export const GeometrySchema = z.discriminatedUnion('type', [
   z.object({ type: z.literal('ellipsoid'), size: Vec3Schema, segments: z.number().int().default(16) }),
   // flat outline in x/y (around 0, 0) pushed out `depth` along z (centred), with soft rounded edges of `bevel` cm
   z.object({ type: z.literal('prism'), points: z.array(Vec2Schema).min(3), depth: z.number().positive(), bevel: z.number().min(0).default(0) }),
+  // a glTF model (path under assets/, served as lib/<file>), scaled uniformly to `size`'s height (or, with height 0, to fit
+  // its width/depth) and centred in that box; position = the box centre like other geometry
+  z.object({ type: z.literal('model'), file: z.string(), size: Vec3Schema }),
 ]);
 export type Geometry = z.infer<typeof GeometrySchema>;
 

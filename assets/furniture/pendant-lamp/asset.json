@@ -1,0 +1,35 @@
+{
+  "id": "pendant-lamp",
+  "name": "Pendant lamp (design)",
+  "tags": [
+    "lamp",
+    "pendant",
+    "light",
+    "ceiling light",
+    "design"
+  ],
+  "description": "Pendant lamp(s) on a cord from the ceiling: globe, drum, dome, mushroom, paper lantern, cage or a linear bar; place with `position` at the floor point under it and set `ceiling` to the ceiling height there.",
+  "source": {
+    "kind": "procedural",
+    "generator": "pendant",
+    "license": "self-made",
+    "notes": "Simple stand-in geometry for trying out styles (src/model/generators/decor.ts); the real product + link is in the item name/description."
+  },
+  "params": {
+    "ceiling": {
+      "default": 277
+    },
+    "bottom": {
+      "default": 150
+    },
+    "shape": {
+      "default": "globe"
+    },
+    "diameter": {
+      "default": 40
+    },
+    "count": {
+      "default": 1
+    }
+  }
+}

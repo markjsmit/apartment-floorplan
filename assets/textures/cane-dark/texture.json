@@ -1,0 +1,24 @@
+{
+  "id": "cane-dark",
+  "name": "Dark cane / wicker weave",
+  "tags": [
+    "wicker",
+    "cane",
+    "rattan",
+    "dark"
+  ],
+  "maps": {
+    "color": "color.jpg",
+    "normal": "normal.jpg",
+    "roughness": "roughness.jpg",
+    "ao": "ao.jpg"
+  },
+  "tileSize": [
+    25,
+    25
+  ],
+  "fallbackColor": "#7b5b3d",
+  "roughness": 0.75,
+  "source": "ambientCG Wicker004 (https://ambientcg.com/a/Wicker004)",
+  "license": "CC0"
+}

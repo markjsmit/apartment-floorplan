@@ -1,0 +1,23 @@
+{
+  "id": "boucle",
+  "name": "Boucl\u00e9 (nubby off-white)",
+  "tags": [
+    "boucle",
+    "fabric",
+    "upholstery",
+    "cream"
+  ],
+  "maps": {
+    "color": "color.jpg",
+    "normal": "normal.jpg",
+    "roughness": "roughness.jpg"
+  },
+  "tileSize": [
+    25,
+    25
+  ],
+  "fallbackColor": "#ece8e0",
+  "roughness": 0.95,
+  "source": "ambientCG Fabric086 (https://ambientcg.com/a/Fabric086)",
+  "license": "CC0"
+}

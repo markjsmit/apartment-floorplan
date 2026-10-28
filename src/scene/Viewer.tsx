@@ -2,7 +2,7 @@ import { useEffect, useMemo, useState } from 'react';
 import { Canvas, events as pointerEvents, useThree, type RootState } from '@react-three/fiber';
 import { EffectComposer, N8AO, Outline, ToneMapping } from '@react-three/postprocessing';
 import { ToneMappingMode } from 'postprocessing';
-import { PCFSoftShadowMap, PerspectiveCamera, type Mesh, type Object3D } from 'three';
+import { DefaultLoadingManager, PCFSoftShadowMap, PerspectiveCamera, type Mesh, type Object3D } from 'three';
 import { currentHouse, currentLayout, useStore } from '../app/store';
 import { houseFrame } from '../model/layout';
 import { useIsMobile } from '../app/useIsMobile';
@@ -14,8 +14,12 @@ import { Measure } from './Measure';
 import { sceneObjects } from './registry';
 
 declare global {
-  interface Window { __sceneReady?: boolean; __renderer?: unknown }
+  interface Window { __sceneReady?: boolean; __renderer?: unknown; __loading?: boolean }
 }
+
+// models + textures still downloading (the snapshot tool waits for this)
+DefaultLoadingManager.onStart = () => (window.__loading = true);
+DefaultLoadingManager.onLoad = () => (window.__loading = false);
 
 function meshesOf(obj: Object3D | undefined): Mesh[] {
   const out: Mesh[] = [];

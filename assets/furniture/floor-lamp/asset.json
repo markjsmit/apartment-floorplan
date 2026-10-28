@@ -1,0 +1,25 @@
+{
+  "id": "floor-lamp",
+  "name": "Floor lamp (design)",
+  "tags": [
+    "lamp",
+    "floor lamp",
+    "light",
+    "design"
+  ],
+  "description": "Floor lamp with a drum, paper, globe or dome shade, an arc lamp, or a tripod.",
+  "source": {
+    "kind": "procedural",
+    "generator": "floor-lamp",
+    "license": "self-made",
+    "notes": "Simple stand-in geometry for trying out styles (src/model/generators/decor.ts); the real product + link is in the item name/description."
+  },
+  "params": {
+    "height": {
+      "default": 155
+    },
+    "shade": {
+      "default": "drum"
+    }
+  }
+}

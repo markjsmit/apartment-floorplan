@@ -1,0 +1,21 @@
+{
+  "id": "design-chair",
+  "name": "Dining chair (design)",
+  "tags": [
+    "chair",
+    "dining chair",
+    "design"
+  ],
+  "description": "Simple dining chair: wood, rattan/cane back, or a rounded bouclé tub chair.",
+  "source": {
+    "kind": "procedural",
+    "generator": "design-chair",
+    "license": "self-made",
+    "notes": "Simple stand-in geometry for trying out styles (src/model/generators/decor.ts); the real product + link is in the item name/description."
+  },
+  "params": {
+    "style": {
+      "default": "wood"
+    }
+  }
+}

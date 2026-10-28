@@ -3,6 +3,7 @@ import { generatorError, resolveAsset, resolveParams } from './assets';
 import { pointInPolygon, resolveWalls } from './geometry';
 import { footprintCorners, placeRoomItems, quadsOverlap } from './placement';
 import { computeLayout } from './layout';
+import { WALK_ON } from './collision';
 
 // Overlap/outside checks ignore this much (cm), so things touching each other or a wall are fine.
 const TOLERANCE = 1;
@@ -103,6 +104,8 @@ export function sanityCheck(bundle: Bundle): Issue[] {
           const ay = [a.position[1] + a.size.min[1], a.position[1] + a.size.max[1]];
           const by = [b.position[1] + b.size.min[1], b.position[1] + b.size.max[1]];
           if (ay[1] <= by[0] + TOLERANCE || by[1] <= ay[0] + TOLERANCE) continue;
+          // rugs and mats lie under things
+          if (ay[1] <= WALK_ON || by[1] <= WALK_ON) continue;
           if (a.item.allowOverlap.includes(b.item.id) || b.item.allowOverlap.includes(a.item.id)) continue;
           if (quadsOverlap(footprintCorners(a, TOLERANCE), footprintCorners(b, TOLERANCE))) {
             warn(`${where(a.item.id)}: overlaps ${b.item.id}`);

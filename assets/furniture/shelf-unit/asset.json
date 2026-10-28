@@ -1,0 +1,34 @@
+{
+  "id": "shelf-unit",
+  "name": "Open shelving (design)",
+  "tags": [
+    "shelf",
+    "bookcase",
+    "shelving",
+    "design"
+  ],
+  "description": "Open shelving with posts (black metal or wood) and wooden shelves, styled with a few books and vases.",
+  "source": {
+    "kind": "procedural",
+    "generator": "shelf-unit",
+    "license": "self-made",
+    "notes": "Simple stand-in geometry for trying out styles (src/model/generators/decor.ts); the real product + link is in the item name/description."
+  },
+  "params": {
+    "width": {
+      "default": 100
+    },
+    "depth": {
+      "default": 35
+    },
+    "height": {
+      "default": 180
+    },
+    "shelves": {
+      "default": 5
+    },
+    "frame": {
+      "default": "metal"
+    }
+  }
+}

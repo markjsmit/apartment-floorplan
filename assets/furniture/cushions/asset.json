@@ -1,0 +1,23 @@
+{
+  "id": "cushions",
+  "name": "Cushions + throw (design)",
+  "tags": [
+    "cushion",
+    "cushions",
+    "pillow",
+    "throw",
+    "design"
+  ],
+  "description": "A row of throw cushions (put on the sofa with elevation ~45), optional folded throw.",
+  "source": {
+    "kind": "procedural",
+    "generator": "cushions",
+    "license": "self-made",
+    "notes": "Simple stand-in geometry for trying out styles (src/model/generators/decor.ts); the real product + link is in the item name/description."
+  },
+  "params": {
+    "colors": {
+      "default": "#e8e0d0,#c9b79c"
+    }
+  }
+}

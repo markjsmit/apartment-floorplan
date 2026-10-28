@@ -10,7 +10,7 @@
     "chaise",
     "grey"
   ],
-  "description": "280 x 95 cm, chaise on the left (165 deep), seat 45, back 88. Dark grey woven fabric. Sizes estimated from photos of the old apartment — measure before relying on them.",
+  "description": "265 x 95 cm, chaise on the left (165 deep), seat 45, back 88. Dark grey woven fabric. Sizes estimated from photos of the old apartment — measure before relying on them. Width 265: Mark (29 Oct 2026, IKEA sofa, from memory); depth/chaise still estimated.",
   "source": {
     "kind": "parts",
     "notes": "Modelled from Mark's photos in sources/old house/ (living room photos 08, 13, 17).",
@@ -26,13 +26,13 @@
       "geometry": {
         "type": "box",
         "size": [
-          280,
+          265.0,
           36,
           95
         ]
       },
       "position": [
-        0,
+        0.0,
         22,
         47.5
       ],
@@ -55,13 +55,13 @@
       "geometry": {
         "type": "box",
         "size": [
-          95,
+          89.91,
           36,
           70
         ]
       },
       "position": [
-        -92.5,
+        -87.54,
         22,
         130
       ],
@@ -84,13 +84,13 @@
       "geometry": {
         "type": "box",
         "size": [
-          25,
+          23.66,
           58,
           95
         ]
       },
       "position": [
-        127.5,
+        120.67,
         33,
         47.5
       ],
@@ -113,13 +113,13 @@
       "geometry": {
         "type": "box",
         "size": [
-          255,
+          241.34,
           48,
           22
         ]
       },
       "position": [
-        -12.5,
+        -11.83,
         64,
         11
       ],
@@ -143,13 +143,13 @@
       "geometry": {
         "type": "box",
         "size": [
-          80,
+          75.71,
           10,
           73
         ]
       },
       "position": [
-        -5,
+        -4.73,
         45,
         58.5
       ],
@@ -173,13 +173,13 @@
       "geometry": {
         "type": "box",
         "size": [
-          80,
+          75.71,
           10,
           73
         ]
       },
       "position": [
-        75,
+        70.98,
         45,
         58.5
       ],
@@ -203,13 +203,13 @@
       "geometry": {
         "type": "box",
         "size": [
-          95,
+          89.91,
           10,
           143
         ]
       },
       "position": [
-        -92.5,
+        -87.54,
         45,
         93.5
       ],
@@ -232,13 +232,13 @@
       "geometry": {
         "type": "box",
         "size": [
-          91,
+          86.12,
           38,
           14
         ]
       },
       "position": [
-        -92.5,
+        -87.54,
         66,
         28
       ],
@@ -261,13 +261,13 @@
       "geometry": {
         "type": "box",
         "size": [
-          78,
+          73.82,
           38,
           14
         ]
       },
       "position": [
-        -5,
+        -4.73,
         66,
         28
       ],
@@ -290,13 +290,13 @@
       "geometry": {
         "type": "box",
         "size": [
-          78,
+          73.82,
           38,
           14
         ]
       },
       "position": [
-        75,
+        70.98,
         66,
         28
       ],
@@ -318,13 +318,13 @@
       "geometry": {
         "type": "box",
         "size": [
-          42,
+          39.75,
           42,
           12
         ]
       },
       "position": [
-        -115,
+        -108.84,
         70,
         40
       ],
@@ -346,13 +346,13 @@
       "geometry": {
         "type": "box",
         "size": [
-          42,
+          39.75,
           42,
           12
         ]
       },
       "position": [
-        -70,
+        -66.25,
         70,
         40
       ],
@@ -374,13 +374,13 @@
       "geometry": {
         "type": "box",
         "size": [
-          42,
+          39.75,
           42,
           12
         ]
       },
       "position": [
-        90,
+        85.18,
         70,
         40
       ],
@@ -406,7 +406,7 @@
         "segments": 24
       },
       "position": [
-        -136,
+        -128.71,
         2,
         4
       ],
@@ -431,7 +431,7 @@
         "segments": 24
       },
       "position": [
-        136,
+        128.71,
         2,
         4
       ],
@@ -456,7 +456,7 @@
         "segments": 24
       },
       "position": [
-        136,
+        128.71,
         2,
         91
       ],
@@ -481,7 +481,7 @@
         "segments": 24
       },
       "position": [
-        -136,
+        -128.71,
         2,
         161
       ],
@@ -506,7 +506,7 @@
         "segments": 24
       },
       "position": [
-        -49,
+        -46.38,
         2,
         161
       ],
@@ -519,5 +519,28 @@
       "castShadow": true,
       "glass": false
     }
-  ]
+  ],
+  "states": [
+    {
+      "id": "default",
+      "name": "Our cushions",
+      "parts": {}
+    },
+    {
+      "id": "covers",
+      "name": "New cushion covers (own cushions hidden; the design item draws them)",
+      "parts": {
+        "pillow-1": {
+          "visible": false
+        },
+        "pillow-2": {
+          "visible": false
+        },
+        "pillow-3": {
+          "visible": false
+        }
+      }
+    }
+  ],
+  "defaultState": "default"
 }

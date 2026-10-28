@@ -1,0 +1,27 @@
+{
+  "id": "tv-stand",
+  "name": "Swivel TV floor stand (design)",
+  "tags": [
+    "tv stand",
+    "tv",
+    "design"
+  ],
+  "description": "Free-standing swivel TV stand: base plate, column, bracket, glass shelf. Put the TV on it in state \"wall\".",
+  "source": {
+    "kind": "procedural",
+    "generator": "tv-stand",
+    "license": "self-made",
+    "notes": "src/model/generators/decor.ts"
+  },
+  "params": {
+    "width": {
+      "default": 89
+    },
+    "depth": {
+      "default": 52
+    },
+    "height": {
+      "default": 135
+    }
+  }
+}

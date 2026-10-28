@@ -1,0 +1,25 @@
+{
+  "id": "plant",
+  "name": "Plant (design)",
+  "tags": [
+    "plant",
+    "green",
+    "pot",
+    "design"
+  ],
+  "description": "Potted plant made of simple leaf shapes: olive tree, fiddle-leaf fig, bush, snake plant, palm, monstera, bird of paradise, trailing plant; optional plant stand.",
+  "source": {
+    "kind": "procedural",
+    "generator": "plant",
+    "license": "self-made",
+    "notes": "Simple stand-in geometry for trying out styles (src/model/generators/decor.ts); the real product + link is in the item name/description."
+  },
+  "params": {
+    "kind": {
+      "default": "bush"
+    },
+    "height": {
+      "default": 120
+    }
+  }
+}

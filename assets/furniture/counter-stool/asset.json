@@ -1,0 +1,32 @@
+{
+  "id": "counter-stool",
+  "name": "Counter stool (design)",
+  "tags": [
+    "stool",
+    "bar stool",
+    "counter stool",
+    "island",
+    "design"
+  ],
+  "description": "Counter-height stool for the 90 cm island (seat ~65). Optional backrest on the -z side; the sitter faces the item front (+z).",
+  "source": {
+    "kind": "procedural",
+    "generator": "stool",
+    "license": "self-made",
+    "notes": "Simple stand-in geometry for trying out styles (src/model/generators/decor.ts); the real product + link is in the item name/description."
+  },
+  "params": {
+    "seatHeight": {
+      "default": 65
+    },
+    "seatSize": {
+      "default": 40
+    },
+    "back": {
+      "default": 0
+    },
+    "base": {
+      "default": "four"
+    }
+  }
+}

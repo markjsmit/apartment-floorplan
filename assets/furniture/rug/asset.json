@@ -1,0 +1,30 @@
+{
+  "id": "rug",
+  "name": "Rug (design)",
+  "tags": [
+    "rug",
+    "carpet",
+    "design"
+  ],
+  "description": "Flat rug (1 cm): walk-on, never blocks walking. Rectangular or round, optional border or stripes.",
+  "source": {
+    "kind": "procedural",
+    "generator": "rug",
+    "license": "self-made",
+    "notes": "Simple stand-in geometry for trying out styles (src/model/generators/decor.ts); the real product + link is in the item name/description."
+  },
+  "params": {
+    "shape": {
+      "default": "rect"
+    },
+    "width": {
+      "default": 200
+    },
+    "depth": {
+      "default": 290
+    },
+    "color": {
+      "default": "#e8e0d0"
+    }
+  }
+}

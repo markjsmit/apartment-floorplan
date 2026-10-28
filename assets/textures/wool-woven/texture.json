@@ -1,0 +1,23 @@
+{
+  "id": "wool-woven",
+  "name": "Cream woven wool (rug)",
+  "tags": [
+    "wool",
+    "rug",
+    "woven",
+    "cream"
+  ],
+  "maps": {
+    "color": "color.jpg",
+    "normal": "normal.jpg",
+    "roughness": "roughness.jpg"
+  },
+  "tileSize": [
+    40,
+    40
+  ],
+  "fallbackColor": "#e9e2d3",
+  "roughness": 0.95,
+  "source": "ambientCG Carpet014 (https://ambientcg.com/a/Carpet014)",
+  "license": "CC0"
+}

@@ -1,0 +1,31 @@
+{
+  "id": "bench",
+  "name": "Bench (design)",
+  "tags": [
+    "bench",
+    "banquette",
+    "seat",
+    "design"
+  ],
+  "description": "Bench / banquette: legs, metal frame or a closed storage box, optional seat cushion and back cushion.",
+  "source": {
+    "kind": "procedural",
+    "generator": "bench",
+    "license": "self-made",
+    "notes": "Simple stand-in geometry for trying out styles (src/model/generators/decor.ts); the real product + link is in the item name/description."
+  },
+  "params": {
+    "width": {
+      "default": 140
+    },
+    "depth": {
+      "default": 40
+    },
+    "height": {
+      "default": 45
+    },
+    "legs": {
+      "default": "legs"
+    }
+  }
+}

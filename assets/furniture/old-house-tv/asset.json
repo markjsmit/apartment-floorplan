@@ -8,7 +8,7 @@
     "television",
     "screen"
   ],
-  "description": "65\" TV on its feet: 145 x 84 panel, 93 high with feet. Put it on the TV bench (elevation 50). Sizes estimated from photos of the old apartment — measure before relying on them.",
+  "description": "65\" TV on its feet: 145 x 84 panel, 93 high with feet. Put it on the TV bench (elevation 50). Sizes estimated from photos of the old apartment — measure before relying on them. State 'wall': feet off, panel flat against the wall/bracket (for wall mounts and swivel stands; use elevation = bottom of the panel minus 9).",
   "source": {
     "kind": "parts",
     "notes": "Modelled from Mark's photos in sources/old house/ (photo 13).",
@@ -124,5 +124,39 @@
       "castShadow": true,
       "glass": false
     }
-  ]
+  ],
+  "states": [
+    {
+      "id": "default",
+      "name": "On its feet",
+      "parts": {}
+    },
+    {
+      "id": "wall",
+      "name": "Wall-mounted / on a stand (no feet)",
+      "parts": {
+        "panel": {
+          "position": [
+            0,
+            51,
+            3.5
+          ]
+        },
+        "screen": {
+          "position": [
+            0,
+            51,
+            5.1
+          ]
+        },
+        "foot-left": {
+          "visible": false
+        },
+        "foot-right": {
+          "visible": false
+        }
+      }
+    }
+  ],
+  "defaultState": "default"
 }

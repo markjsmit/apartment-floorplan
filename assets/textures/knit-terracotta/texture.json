@@ -1,0 +1,24 @@
+{
+  "id": "knit-terracotta",
+  "name": "Chunky knit (terracotta)",
+  "tags": [
+    "knit",
+    "fabric",
+    "terracotta",
+    "throw"
+  ],
+  "maps": {
+    "color": "color.jpg",
+    "normal": "normal.jpg",
+    "roughness": "roughness.jpg",
+    "ao": "ao.jpg"
+  },
+  "tileSize": [
+    25,
+    25
+  ],
+  "fallbackColor": "#c06a42",
+  "roughness": 0.95,
+  "source": "ambientCG Fabric085 (https://ambientcg.com/a/Fabric085)",
+  "license": "CC0"
+}

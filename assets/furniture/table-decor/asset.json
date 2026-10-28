@@ -1,0 +1,24 @@
+{
+  "id": "table-decor",
+  "name": "Table decor (design)",
+  "tags": [
+    "decor",
+    "vase",
+    "candles",
+    "bowl",
+    "books",
+    "design"
+  ],
+  "description": "Small table-top decor: vase (with flowers or branches), bowl, candles on a tray, a stack of books.",
+  "source": {
+    "kind": "procedural",
+    "generator": "table-decor",
+    "license": "self-made",
+    "notes": "Simple stand-in geometry for trying out styles (src/model/generators/decor.ts); the real product + link is in the item name/description."
+  },
+  "params": {
+    "kind": {
+      "default": "vase"
+    }
+  }
+}

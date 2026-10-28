@@ -1,0 +1,24 @@
+{
+  "id": "linen-sage",
+  "name": "Linen weave (sage)",
+  "tags": [
+    "linen",
+    "fabric",
+    "sage",
+    "green"
+  ],
+  "maps": {
+    "color": "color.jpg",
+    "normal": "normal.jpg",
+    "roughness": "roughness.jpg",
+    "ao": "ao.jpg"
+  },
+  "tileSize": [
+    35,
+    35
+  ],
+  "fallbackColor": "#9aa68c",
+  "roughness": 0.95,
+  "source": "ambientCG Fabric066 (https://ambientcg.com/a/Fabric066)",
+  "license": "CC0"
+}

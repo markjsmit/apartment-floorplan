@@ -1,0 +1,27 @@
+{
+  "id": "wall-art",
+  "name": "Wall art / mirror (design)",
+  "tags": [
+    "art",
+    "print",
+    "picture",
+    "mirror",
+    "wall art",
+    "design"
+  ],
+  "description": "Framed abstract print (colour blocks), a framed mirror, or an arched mirror. Hang it with `against` + elevation, or lean it on the floor.",
+  "source": {
+    "kind": "procedural",
+    "generator": "wall-art",
+    "license": "self-made",
+    "notes": "Simple stand-in geometry for trying out styles (src/model/generators/decor.ts); the real product + link is in the item name/description."
+  },
+  "params": {
+    "width": {
+      "default": 60
+    },
+    "height": {
+      "default": 80
+    }
+  }
+}

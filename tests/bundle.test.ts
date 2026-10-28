@@ -118,6 +118,16 @@ describe('sanityCheck', () => {
     expect(msgs.join('\n')).toMatch(/r\.a.*overlaps.*r\.b/);
   });
 
+  it('lets things stand on a rug (anything under 3 cm high)', () => {
+    const mat: RawFile = { path: 'assets/furniture/mat/asset.json', json: { id: 'mat', name: 'Mat', source: { kind: 'parts' }, parts: [{ id: 'mat', geometry: { type: 'box', size: [200, 1, 200] }, position: [0, 0.5, 100] }] } };
+    const rooms = [room({ items: [
+      { id: 'r.rug', asset: 'mat', position: [150, 0, 50] },
+      { id: 'r.box', asset: 'box', position: [150, 0, 100] },
+    ] })];
+    const msgs = sanityCheck(buildBundle([...files(rooms), mat], { publicUrl: '' })).map((i) => i.message);
+    expect(msgs.join('\n')).not.toMatch(/overlaps/);
+  });
+
   it('skips overlaps an item allows (a shelf tongue inside a cube)', () => {
     const msgs = check([room({ items: [
       { id: 'r.a', asset: 'box', position: [150, 0, 100], allowOverlap: ['r.b'] },

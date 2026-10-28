@@ -67,6 +67,8 @@ try {
   page.on('console', (m) => m.type() === 'error' && errors.push(m.text()));
   await page.goto(`${base}?${q}`);
   await page.waitForFunction(() => window.__sceneReady === true, null, { timeout: 60000 });
+  // models and textures that are still downloading
+  await page.waitForFunction(() => !(window as { __loading?: boolean }).__loading, null, { timeout: 60000 });
   await page.waitForLoadState('networkidle');
   await page.waitForTimeout(800);
   const outDir = path.join(ROOT, '.snaps');
