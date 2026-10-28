@@ -1,8 +1,8 @@
 {
   "meta": {
-    "name": "Aisle + 90 bed + Kallax on the island end (6,750 L)",
+    "name": "Aisle + 90 bed + Kallax on the island end (7,450 L)",
     "kind": "saved",
-    "note": "90x190 wall bed flush against the window wall; Kallax aisle 20 cm off the hallway wall with the same end shelves as the 140 version (wall strip + aisle shelves); 4x3s on both sides of the island, lined up (door-side cubes that face the alcove wall given up); Kallax 2x4 + 2x2 with its back against the north end of the island; Kallax 1x4 + 1x2 against the east Kallax; ironing board beside the bed; back top shelf over 1 more hole.",
+    "note": "90x190 wall bed flush against the window wall; Kallax aisle 33 cm off the hallway wall with 33 cm shelves straight against the walls there, wall to wall; 4x3s on both sides of the island, lined up (door-side cubes that face the alcove wall given up); Kallax 2x4 + 2x2 with its back against the north end of the island (~4 cm from the bed when it is down); Kallax 1x4 + 1x2 between the bed and the east Kallax; back top shelf over 1 more hole.",
     "location": {
       "lat": 32.0853,
       "lon": 34.7818,
@@ -1539,7 +1539,7 @@
           "position": [
             817.25,
             0,
-            126.5
+            113.5
           ],
           "rotation": 180,
           "params": {
@@ -1596,7 +1596,7 @@
           },
           "against": {
             "wall": "storage.wall-1",
-            "offset": 150
+            "offset": 137
           }
         },
         {
@@ -1655,7 +1655,7 @@
           },
           "against": {
             "wall": "storage.wall-1",
-            "offset": 150,
+            "offset": 137,
             "elevation": 112
           }
         },
@@ -1710,7 +1710,7 @@
           "position": [
             740,
             0,
-            239
+            226
           ],
           "rotation": 90
         },
@@ -1771,7 +1771,7 @@
           "position": [
             740,
             112,
-            239
+            226
           ],
           "rotation": 90
         },
@@ -1826,7 +1826,7 @@
           "position": [
             739.5,
             0,
-            239
+            226
           ],
           "rotation": -90
         },
@@ -1887,7 +1887,7 @@
           "position": [
             739.5,
             112,
-            239
+            226
           ],
           "rotation": -90
         },
@@ -1907,7 +1907,7 @@
           "position": [
             739.5,
             0,
-            239
+            226
           ],
           "rotation": 90
         },
@@ -1922,7 +1922,7 @@
           "position": [
             701.5,
             0,
-            146
+            133
           ],
           "rotation": -90,
           "params": {
@@ -1944,7 +1944,7 @@
           "position": [
             701.5,
             0,
-            146
+            133
           ],
           "rotation": -90,
           "params": {
@@ -1957,14 +1957,14 @@
         {
           "id": "storage.kallax-column-low",
           "asset": "ikea-kallax-112x147",
-          "name": "Kallax 1x4 against the east Kallax",
+          "name": "Kallax 1x4 between bed and east Kallax",
           "tags": [
             "kallax"
           ],
           "description": "NEW: buy (IKEA Kallax 42x147)",
           "against": {
             "wall": "storage.wall-1",
-            "offset": 108
+            "offset": 94.3
           },
           "params": {
             "cols": 1,
@@ -2008,7 +2008,7 @@
           "description": "NEW: buy (IKEA Kallax 42x77)",
           "against": {
             "wall": "storage.wall-1",
-            "offset": 108,
+            "offset": 94.3,
             "elevation": 147
           },
           "params": {
@@ -2027,20 +2027,6 @@
           }
         },
         {
-          "id": "storage.ironing-board",
-          "asset": "ironing-board",
-          "name": "Ironing board",
-          "tags": [
-            "ironing board"
-          ],
-          "position": [
-            878,
-            0,
-            111.5
-          ],
-          "rotation": 0
-        },
-        {
           "id": "storage.kallax-end-low",
           "asset": "ikea-kallax-112x147",
           "name": "Kallax 2x4 standing, back against the island end",
@@ -2051,7 +2037,7 @@
           "position": [
             740,
             0,
-            165.5
+            152.5
           ],
           "rotation": 180,
           "params": {
@@ -2104,7 +2090,7 @@
           "position": [
             740,
             147,
-            165.5
+            152.5
           ],
           "rotation": 180,
           "params": {
@@ -2127,14 +2113,14 @@
         {
           "id": "storage.wall-shelf-1",
           "asset": "box",
-          "name": "Wall shelf behind the Kallax ends (20 deep)",
+          "name": "Shelf straight against the walls at the end (33 deep, wall to wall, on cleats)",
           "tags": [
             "shelf"
           ],
           "params": {
-            "width": 197.5,
+            "width": 200,
             "height": 1.8,
-            "depth": 20,
+            "depth": 33,
             "material": "birch-ply"
           },
           "against": {
@@ -2144,36 +2130,16 @@
           }
         },
         {
-          "id": "storage.aisle-shelf-1",
-          "asset": "box",
-          "name": "Aisle shelf (joins the wall shelf, rests on cleats on the Kallax sides)",
-          "tags": [
-            "shelf"
-          ],
-          "params": {
-            "width": 80,
-            "height": 1.8,
-            "depth": 38.5,
-            "material": "birch-ply"
-          },
-          "position": [
-            819,
-            74.25,
-            274
-          ],
-          "rotation": 0
-        },
-        {
           "id": "storage.wall-shelf-2",
           "asset": "box",
-          "name": "Wall shelf behind the Kallax ends (20 deep)",
+          "name": "Shelf straight against the walls at the end (33 deep, wall to wall, on cleats)",
           "tags": [
             "shelf"
           ],
           "params": {
-            "width": 197.5,
+            "width": 200,
             "height": 1.8,
-            "depth": 20,
+            "depth": 33,
             "material": "birch-ply"
           },
           "against": {
@@ -2183,36 +2149,16 @@
           }
         },
         {
-          "id": "storage.aisle-shelf-2",
-          "asset": "box",
-          "name": "Aisle shelf (joins the wall shelf, rests on cleats on the Kallax sides)",
-          "tags": [
-            "shelf"
-          ],
-          "params": {
-            "width": 80,
-            "height": 1.8,
-            "depth": 38.5,
-            "material": "birch-ply"
-          },
-          "position": [
-            819,
-            116.25,
-            274
-          ],
-          "rotation": 0
-        },
-        {
           "id": "storage.wall-shelf-3",
           "asset": "box",
-          "name": "Wall shelf behind the Kallax ends (20 deep)",
+          "name": "Shelf straight against the walls at the end (33 deep, wall to wall, on cleats)",
           "tags": [
             "shelf"
           ],
           "params": {
-            "width": 197.5,
+            "width": 200,
             "height": 1.8,
-            "depth": 20,
+            "depth": 33,
             "material": "birch-ply"
           },
           "against": {
@@ -2222,36 +2168,16 @@
           }
         },
         {
-          "id": "storage.aisle-shelf-3",
-          "asset": "box",
-          "name": "Aisle shelf (joins the wall shelf, rests on cleats on the Kallax sides)",
-          "tags": [
-            "shelf"
-          ],
-          "params": {
-            "width": 80,
-            "height": 1.8,
-            "depth": 38.5,
-            "material": "birch-ply"
-          },
-          "position": [
-            819,
-            151.25,
-            274
-          ],
-          "rotation": 0
-        },
-        {
           "id": "storage.wall-shelf-4",
           "asset": "box",
-          "name": "Wall shelf behind the Kallax ends (20 deep)",
+          "name": "Shelf straight against the walls at the end (33 deep, wall to wall, on cleats)",
           "tags": [
             "shelf"
           ],
           "params": {
-            "width": 197.5,
+            "width": 200,
             "height": 1.8,
-            "depth": 20,
+            "depth": 33,
             "material": "birch-ply"
           },
           "against": {
@@ -2259,26 +2185,6 @@
             "offset": 0,
             "elevation": 186.25
           }
-        },
-        {
-          "id": "storage.aisle-shelf-4",
-          "asset": "box",
-          "name": "Aisle shelf (joins the wall shelf, rests on cleats on the Kallax sides)",
-          "tags": [
-            "shelf"
-          ],
-          "params": {
-            "width": 80,
-            "height": 1.8,
-            "depth": 38.5,
-            "material": "birch-ply"
-          },
-          "position": [
-            819,
-            186.25,
-            274
-          ],
-          "rotation": 0
         },
         {
           "id": "storage.top-front",
@@ -2296,7 +2202,7 @@
           "position": [
             799.8,
             224,
-            126.5
+            113.5
           ],
           "rotation": 0
         },
@@ -2316,7 +2222,7 @@
           "position": [
             799.8,
             225.8,
-            182.7
+            169.7
           ],
           "rotation": 0
         },
@@ -2330,13 +2236,13 @@
           "params": {
             "width": 197.5,
             "height": 1.8,
-            "depth": 75,
+            "depth": 68,
             "material": "birch-ply"
           },
           "position": [
             799.25,
             224,
-            257.5
+            264.5
           ],
           "rotation": 0
         },
@@ -2353,7 +2259,7 @@
           "position": [
             740.3,
             225.8,
-            182.5
+            169.5
           ],
           "rotation": 180
         },
@@ -2370,7 +2276,7 @@
           "position": [
             819,
             225.8,
-            182.5
+            169.5
           ],
           "rotation": 180
         },
@@ -2379,14 +2285,14 @@
           "asset": "stuff",
           "params": {
             "width": 76.5,
-            "depth": 71,
+            "depth": 91,
             "height": 44,
             "seed": "storage.stuff-mid-top"
           },
           "position": [
             739.75,
             224,
-            185.5
+            172.5
           ],
           "rotation": 0
         },
@@ -2395,14 +2301,14 @@
           "asset": "stuff",
           "params": {
             "width": 37,
-            "depth": 71,
+            "depth": 91,
             "height": 44,
             "seed": "storage.stuff-east-top"
           },
           "position": [
             878.5,
             224,
-            185.5
+            172.5
           ],
           "rotation": 0
         },
@@ -2411,7 +2317,7 @@
           "asset": "stuff",
           "params": {
             "width": 194.5,
-            "depth": 73,
+            "depth": 66,
             "height": 44,
             "seed": "storage.stuff-end-top"
           },
@@ -2432,7 +2338,7 @@
           "position": [
             819,
             224,
-            178.5
+            165.5
           ],
           "params": {
             "diameter": 22,
@@ -2471,6 +2377,18 @@
             "wall": "storage.wall-4",
             "offset": 3.5,
             "elevation": 225.8
+          }
+        },
+        {
+          "id": "storage.ironing-board",
+          "asset": "ironing-board",
+          "name": "Ironing board",
+          "tags": [
+            "ironing board"
+          ],
+          "against": {
+            "wall": "storage.wall-5",
+            "offset": 83.5
           }
         },
         {
