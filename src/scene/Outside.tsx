@@ -1,121 +1,158 @@
 import { useEffect, useMemo, useRef } from 'react';
 import { useFrame } from '@react-three/fiber';
 import {
-  CircleGeometry, Color, CylinderGeometry, DoubleSide, MeshBasicMaterial, MeshStandardMaterial, MirroredRepeatWrapping,
-  RepeatWrapping, SRGBColorSpace, TextureLoader, type Group, type Texture,
+  BufferGeometry, CanvasTexture, Color, DoubleSide, Float32BufferAttribute, MeshBasicMaterial, RepeatWrapping,
+  SRGBColorSpace, TextureLoader, type Group, type Material, type Texture,
 } from 'three';
-import { boxWithCmUV } from './cmGeometry';
 import panoUrl from '../../assets/outside/city-pano.jpg?url';
 import panoAlphaUrl from '../../assets/outside/city-pano-alpha.jpg?url';
-import groundUrl from '../../assets/outside/city-ground.jpg?url';
-import stoneUrl from '../../assets/outside/facade-stone.jpg?url';
-import glassUrl from '../../assets/outside/facade-glass.jpg?url';
+import fillUrl from '../../assets/outside/city-fill.jpg?url';
+import fillAlphaUrl from '../../assets/outside/city-fill-alpha.jpg?url';
+import atlasUrl from '../../assets/outside/facade-atlas.jpg?url';
+import atlasAlphaUrl from '../../assets/outside/facade-atlas-alpha.jpg?url';
+import { buildCity, grid, GROUND_HALF, GROUND_Y, groundCanvas, windowCanvas } from './outsideCity';
 
-// The view from the 27th floor (assets/outside/source.json): a city panorama far away plus the rooftops below it,
-// drawn behind everything as a background that moves with the camera (no parallax, like the real horizon), and two
-// nearby towers as plain boxes in house space (procedural facades, placed after the survey photos). The panorama
-// covers 180° (west -> north -> east) and is mirrored for the south, which no window sees.
+// The view from the 27th floor (assets/outside/source.json). Far away: a panorama stitched from Mark's balcony pan
+// video, drawn behind everything as a background that moves with the camera (no parallax, like the real horizon):
+// bearings PANO_FROM..PANO_TO from the video (south-west over the business district, north to north-east over the
+// low-rise), the rest of the circle (east, south: behind the building) put together from other pieces of the video.
+// Near: the city in 3D in house space (outsideCity.ts) - the neighbour tower, our tower below the flat, the bases of
+// the nearest panorama towers, the low-rise blocks, the park and the streets - meeting the panorama at its bottom
+// edge (tan -0.42, ~205 m out), where the painted ground fades out over it.
 
 const R = 20000;
-// rows of the panorama are linear in tan(elevation): tan +0.2 at the top, 1304 rows per unit (see source.json); it
-// stops where the photos do (480 rows, ~ -9.5°), and the rooftops below are a ground disc meeting its bottom edge
-const TOP = R * 0.2;
-const BOTTOM = R * (0.2 - 480 / 1304);
-// the real ground is ~87 m under the eye; the disc is that ground scaled down (it moves with the eye, like the rest
-// of the background: walking a few metres hardly shifts roofs 90 m down), rooftop tile = 200 m
-const GROUND_BELOW_EYE = 8700;
-const GROUND_TILE = 20000 * (-BOTTOM / GROUND_BELOW_EYE);
-// what the far rooftops fade into at the seam (the panorama's bottom rows)
-const SEAM = new Color('#7e7d76');
+const PANO_FROM = -159.5;
+const PANO_TO = 40;
+// rows of both panoramas are linear in tan(elevation), from tan +0.6 at the top to -0.42 at the bottom
+const TOP = 0.6;
+const BOTTOM = -0.42;
 const DEG = Math.PI / 180;
+// the ground fades out from here to its edge (cm from the eye), over the panorama's bottom rows
+const FADE: [number, number] = [20500, 25000];
+// what the city hazes into towards the panorama's bottom edge (its rows there: low-rise in the towers' shade)
+const SEAM = new Color('#6d6b62');
 
 const loader = new TextureLoader();
-function load(url: string, color: boolean, wrap: typeof RepeatWrapping | typeof MirroredRepeatWrapping): Texture {
+function load(url: string, color: boolean): Texture {
   const t = loader.load(url);
-  t.wrapS = wrap;
-  t.wrapT = RepeatWrapping;
   if (color) t.colorSpace = SRGBColorSpace;
   t.anisotropy = 4;
   return t;
 }
 
-/** A nearby tower: a box from the ground (~85 m below the flat) up to `top`, facade photo tiled every `tile` cm. */
-type Tower = { x: [number, number]; z: [number, number]; top: number; url: string; tile: [number, number]; roughness: number; metalness: number };
+/** An open cylinder band inside out (seen from its centre) over bearings from..to (degrees, + = east). */
+function band(from: number, to: number, segments: number): BufferGeometry {
+  const pos: number[] = [];
+  const uv: number[] = [];
+  const idx: number[] = [];
+  for (let i = 0; i <= segments; i++) {
+    const b = (from + ((to - from) * i) / segments) * DEG;
+    const x = Math.sin(b) * R;
+    const z = -Math.cos(b) * R;
+    pos.push(x, BOTTOM * R, z, x, TOP * R, z);
+    uv.push(i / segments, 0, i / segments, 1);
+    if (i < segments) idx.push(2 * i, 2 * i + 2, 2 * i + 1, 2 * i + 1, 2 * i + 2, 2 * i + 3);
+  }
+  const g = new BufferGeometry();
+  g.setAttribute('position', new Float32BufferAttribute(pos, 3));
+  g.setAttribute('uv', new Float32BufferAttribute(uv, 2));
+  g.setIndex(idx);
+  return g;
+}
 
-const GROUND = -8500;
-const TOWERS: Tower[] = [
-  // the residential tower north of the balcony: fills the balcony door seen from the room (20261027_160701, 160703),
-  // and stands left of the north-east view from the balcony (160716-18)
-  { x: [-1500, 1000], z: [-5800, -3800], top: 3200, url: stoneUrl, tile: [800, 600], roughness: 0.85, metalness: 0 },
-  // the glass office tower to the west (tall window, 20261027_160659 / 160723)
-  { x: [-7200, -4600], z: [-2600, 900], top: 9500, url: glassUrl, tile: [600, 700], roughness: 0.3, metalness: 0.3 },
-];
+/** Things far out fade into the seam colour; the ground also into nothing at its edge (shader tweak, no fog). */
+function haze(m: Material, seam: { value: Color }, fadeOut: boolean) {
+  m.onBeforeCompile = (shader) => {
+    shader.uniforms.seam = seam;
+    // per fragment (the ground is one big quad: a distance per vertex would interpolate wrong)
+    shader.vertexShader = shader.vertexShader
+      .replace('#include <common>', '#include <common>\nvarying vec2 vWorldXZ;')
+      .replace('#include <project_vertex>', '#include <project_vertex>\nvWorldXZ = (modelMatrix * vec4(transformed, 1.0)).xz;');
+    shader.fragmentShader = shader.fragmentShader
+      .replace('#include <common>', '#include <common>\nvarying vec2 vWorldXZ;\nuniform vec3 seam;')
+      .replace('#include <opaque_fragment>', [
+        'float vDist = distance(vWorldXZ, cameraPosition.xz);',
+        'outgoingLight = mix(outgoingLight, seam, smoothstep(9000.0, 23000.0, vDist) * 0.55);',
+        fadeOut ? `diffuseColor.a *= 1.0 - smoothstep(${FADE[0].toFixed(1)}, ${FADE[1].toFixed(1)}, vDist);` : '',
+        '#include <opaque_fragment>',
+      ].join('\n'));
+  };
+}
 
 export function Outside({ northAngle, daylight }: { northAngle: number; daylight: number }) {
   const bg = useRef<Group>(null);
-  const { pano, cap, towers } = useMemo(() => {
-    const map = load(panoUrl, true, MirroredRepeatWrapping);
-    const alpha = load(panoAlphaUrl, false, MirroredRepeatWrapping);
-    map.repeat.set(2, 1);
-    alpha.repeat.set(2, 1);
+  const seam = useMemo(() => ({ value: SEAM.clone() }), []);
+  const m = useMemo(() => {
     // background: drawn first, never hides anything (no depth test), cut out along the skyline so the sky shows above
-    const pano = new MeshBasicMaterial({ map, alphaMap: alpha, alphaTest: 0.5, depthTest: false, depthWrite: false, side: DoubleSide, fog: false });
-    const groundMap = load(groundUrl, true, RepeatWrapping);
-    groundMap.wrapT = RepeatWrapping;
-    groundMap.anisotropy = 8;
-    groundMap.repeat.set((2 * R) / GROUND_TILE, (2 * R) / GROUND_TILE);
-    const cap = new MeshBasicMaterial({ map: groundMap, depthTest: false, depthWrite: false, side: DoubleSide, fog: false });
-    // haze: the further out (the nearer the horizon), the more the roofs fade into the panorama's bottom colour
-    cap.onBeforeCompile = (shader) => {
-      shader.uniforms.seam = { value: SEAM };
-      shader.vertexShader = shader.vertexShader
-        .replace('#include <common>', '#include <common>\nvarying float vRim;')
-        .replace('#include <begin_vertex>', `#include <begin_vertex>\nvRim = length(position.xy) / ${R.toFixed(1)};`);
-      shader.fragmentShader = shader.fragmentShader
-        .replace('#include <common>', '#include <common>\nvarying float vRim;\nuniform vec3 seam;')
-        .replace('#include <opaque_fragment>', 'outgoingLight = mix(outgoingLight, seam * diffuse, smoothstep(0.35, 1.0, vRim));\n#include <opaque_fragment>');
+    const bgMat = (url: string, alphaUrl: string) =>
+      new MeshBasicMaterial({ map: load(url, true), alphaMap: load(alphaUrl, false), alphaTest: 0.5, depthTest: false, depthWrite: false, side: DoubleSide, fog: false });
+    const pano = bgMat(panoUrl, panoAlphaUrl);
+    const fill = bgMat(fillUrl, fillAlphaUrl);
+    // the 3D city: photo facades (atlas) and the generated blocks (vertex colours over a window texture)
+    // (no haze on the photo facades: they carry the video's own, and must match the panorama where they meet it)
+    const towers = new MeshBasicMaterial({ map: load(atlasUrl, true), alphaMap: load(atlasAlphaUrl, false), alphaTest: 0.5, vertexColors: true, fog: false });
+    const winTex = new CanvasTexture(windowCanvas());
+    winTex.colorSpace = SRGBColorSpace;
+    winTex.wrapS = winTex.wrapT = RepeatWrapping;
+    winTex.anisotropy = 4;
+    const city = new MeshBasicMaterial({ map: winTex, vertexColors: true, side: DoubleSide, fog: false });
+    haze(city, seam, false);
+    // depth only: the panorama towers above their 3D bases hide what stands behind them
+    const ghosts = new MeshBasicMaterial({ colorWrite: false, side: DoubleSide });
+    return { pano, fill, towers, city, ghosts };
+  }, [seam]);
+  const geo = useMemo(() => {
+    const c = buildCity();
+    const groundTex = new CanvasTexture(groundCanvas(c.plan));
+    groundTex.colorSpace = SRGBColorSpace;
+    groundTex.anisotropy = 8;
+    const ground = new MeshBasicMaterial({ map: groundTex, transparent: true, depthWrite: false, fog: false });
+    haze(ground, seam, true);
+    // the painted ground: a square of the city grid round our tower
+    const corners = [grid(-GROUND_HALF, -GROUND_HALF), grid(-GROUND_HALF, GROUND_HALF), grid(GROUND_HALF, GROUND_HALF), grid(GROUND_HALF, -GROUND_HALF)];
+    const g = new BufferGeometry();
+    g.setAttribute('position', new Float32BufferAttribute(corners.flatMap(([x, z]) => [x, GROUND_Y, z]), 3));
+    g.setAttribute('uv', new Float32BufferAttribute([0, 0, 1, 0, 1, 1, 0, 1], 2));
+    g.setIndex([0, 1, 2, 0, 2, 3]);
+    return {
+      ...c, groundGeo: g, ground,
+      pano: band(PANO_FROM, PANO_TO, 96),
+      fill: band(PANO_TO, PANO_FROM + 360, 64),
     };
-    const towers = TOWERS.map((t) => {
-      const tex = load(t.url, true, RepeatWrapping);
-      tex.repeat.set(1 / t.tile[0], 1 / t.tile[1]);
-      return {
-        t,
-        geometry: boxWithCmUV(t.x[1] - t.x[0], t.top - GROUND, t.z[1] - t.z[0]),
-        material: new MeshStandardMaterial({ map: tex, roughness: t.roughness, metalness: t.metalness }),
-      };
-    });
-    return { pano, cap, towers };
-  }, []);
-  const cylinder = useMemo(() => new CylinderGeometry(R, R, TOP - BOTTOM, 96, 1, true, Math.PI / 2, Math.PI * 2), []);
-  const disc = useMemo(() => new CircleGeometry(R, 64), []);
+  }, [seam]);
+  useEffect(() => () => {
+    for (const g of [geo.towers, geo.city, geo.ghosts, geo.groundGeo, geo.pano, geo.fill]) g.dispose();
+    geo.ground.map?.dispose();
+    geo.ground.dispose();
+  }, [geo]);
 
-  // dim the city with the daylight (the photos are an overcast afternoon); at night only a faint glow is left
+  // dim the city with the daylight (the video is golden hour: cooled a little); at night only a faint glow is left
   useEffect(() => {
     const k = 0.1 + 0.9 * Math.min(1, daylight / 0.8);
-    pano.color = new Color(k, k * 0.99 + 0.01 * (1 - k), k * 0.97 + 0.05 * (1 - k));
-    cap.color = new Color(k, k, k);
-  }, [daylight, pano, cap]);
+    const tint = new Color(k * 0.94, k * 0.96 + 0.01 * (1 - k), k * 1.0 + 0.05 * (1 - k));
+    m.pano.color = tint;
+    m.fill.color = tint;
+    m.towers.color = new Color(k, k, k);
+    // the generated city a little warm, like the late-afternoon video round it
+    for (const mat of [m.city, geo.ground]) mat.color = new Color(k, k * 0.97, k * 0.92);
+    seam.value.copy(SEAM).multiplyScalar(k);
+  }, [daylight, m, geo, seam]);
 
   // the background stays centred on the eye: the horizon is always at eye height and never comes nearer
   useFrame(({ camera }) => bg.current?.position.copy(camera.position));
 
+  const none = () => null;
   return (
     <>
       <group ref={bg} rotation={[0, -northAngle * DEG, 0]}>
-        {/* mirrored on x so the panorama runs west -> north -> east seen from inside */}
-        <mesh geometry={cylinder} material={pano} position={[0, (TOP + BOTTOM) / 2, 0]} scale={[-1, 1, 1]} renderOrder={-1} frustumCulled={false} raycast={() => null} />
-        <mesh geometry={disc} material={cap} position={[0, BOTTOM, 0]} rotation={[-Math.PI / 2, 0, 0]} renderOrder={-1} frustumCulled={false} raycast={() => null} />
+        <mesh geometry={geo.pano} material={m.pano} renderOrder={-1} frustumCulled={false} raycast={none} />
+        <mesh geometry={geo.fill} material={m.fill} renderOrder={-1} frustumCulled={false} raycast={none} />
       </group>
       <group rotation={[0, -northAngle * DEG, 0]}>
-        {towers.map(({ t, geometry, material }, i) => (
-          <mesh
-            key={i}
-            geometry={geometry}
-            material={material}
-            position={[(t.x[0] + t.x[1]) / 2, (GROUND + t.top) / 2, (t.z[0] + t.z[1]) / 2]}
-            raycast={() => null}
-          />
-        ))}
+        <mesh geometry={geo.ghosts} material={m.ghosts} renderOrder={-0.5} raycast={none} />
+        <mesh geometry={geo.towers} material={m.towers} raycast={none} />
+        <mesh geometry={geo.city} material={m.city} raycast={none} />
+        <mesh geometry={geo.groundGeo} material={geo.ground} raycast={none} />
       </group>
     </>
   );
