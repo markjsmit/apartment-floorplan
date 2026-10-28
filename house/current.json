@@ -971,19 +971,19 @@
           277
         ],
         [
-          685,
+          688,
           277
         ],
         [
-          685,
+          688,
           385
         ],
         [
-          697,
+          700,
           385
         ],
         [
-          697,
+          700,
           342.5
         ],
         [
@@ -1217,7 +1217,7 @@
         },
         {
           "path": "walls[hallway.wall-2]",
-          "note": "the alcove's east wall runs on ~40 cm past the storage room wall as a ~12 cm fin (the 'little wall'); the dresser niche behind it is ~115 x 42 (photos 160817-18, 160922-24, video 26.5-28 s): not measured"
+          "note": "the alcove's east wall runs on ~40 cm past the storage room wall as a ~12 cm fin (the 'little wall'); the dresser niche behind it is ~112 x 42 (photos 160817-18, 160922-24, video 26.5-28 s): not measured"
         },
         {
           "path": "walls[hallway.wall-5]",
@@ -1251,11 +1251,11 @@
           332.5
         ],
         [
-          695,
+          698,
           332.5
         ],
         [
-          695,
+          698,
           267
         ],
         [
@@ -1332,7 +1332,7 @@
           },
           "type": "door",
           "wall": "storage.wall-4",
-          "offset": 15,
+          "offset": 18,
           "width": 80,
           "height": 211,
           "asset": "door-basic",
@@ -2149,7 +2149,7 @@
       "assumptions": [
         {
           "path": "footprint",
-          "note": "measured (notes): 3.01 x 3.17 m with a 0.98 x 0.65 corner cut out for the door alcove (2.03 and 2.515 are the sides without the corner)"
+          "note": "measured (notes): 3.01 x 3.17 m with a 1.01 x 0.655 corner cut out for the door alcove (2.00 and 2.515 are the sides without the corner; the 2.00 is the corrected value on the notes)"
         },
         {
           "path": "openings[storage.window]",
