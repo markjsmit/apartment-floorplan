@@ -2327,7 +2327,7 @@
             "width": 65,
             "height": 236,
             "doors": "stacked",
-            "hinge": "left"
+            "hinge": "right"
           },
           "builtIn": true
         },
@@ -2476,7 +2476,7 @@
         },
         {
           "path": "items[bathroom.washer-dryer]",
-          "note": "on the east wall right after the vanity (which starts at the door wall), facing west, ~25 cm clear of the far-wall ledge so its doors open past the toilet (Mark + video 41-44 s at 6 fps); stacked doors hinged on the vanity side"
+          "note": "on the east wall right after the vanity (which starts at the door wall), facing west, ~25 cm clear of the far-wall ledge so its doors open past the toilet (Mark + video 41-44 s at 6 fps); stacked doors hinged on the toilet side (photo 160812: hinges on the right, facing the column; 160811)"
         },
         {
           "path": "items[bathroom.ledge]",

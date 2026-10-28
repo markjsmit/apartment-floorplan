@@ -15,7 +15,8 @@ import { selectableFromHit } from './selectable';
 const CENTER = new Vector2(0, 0);
 
 const DEG = Math.PI / 180;
-const WALK = 140; // cm/s
+// cm/s: a bit quicker on desktop (keyboard), normal walking pace on phones
+const WALK = typeof window !== 'undefined' && window.matchMedia('(pointer: coarse)').matches ? 140 : 180;
 const TURN = 100; // deg/s
 const PITCH = 70; // deg/s
 const RADIUS = 20; // cm
