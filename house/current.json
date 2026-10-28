@@ -2031,11 +2031,11 @@
           534
         ],
         [
-          812,
+          860,
           534
         ],
         [
-          812,
+          860,
           764
         ],
         [
@@ -2066,24 +2066,26 @@
           "edge": 1,
           "tags": [
             "vanity wall",
-            "washer wall"
+            "washer wall",
+            "mirror wall"
           ]
         },
         {
           "id": "bathroom.wall-2",
           "edge": 2,
           "tags": [
-            "bath wall",
             "toilet wall",
-            "tiled wall"
+            "far wall",
+            "ledge wall"
           ],
-          "material": "tiles-dark-grey"
+          "material": "plaster-grey"
         },
         {
           "id": "bathroom.wall-3",
           "edge": 3,
           "tags": [
-            "bath end wall",
+            "bath wall",
+            "shower wall",
             "tiled wall"
           ],
           "material": "tiles-dark-grey"
@@ -2118,7 +2120,7 @@
           ],
           "against": {
             "wall": "bathroom.wall-1",
-            "offset": 6
+            "offset": 85
           },
           "params": {
             "width": 80
@@ -2136,11 +2138,11 @@
           ],
           "against": {
             "wall": "bathroom.wall-1",
-            "offset": 88
+            "offset": 165
           },
           "params": {
             "width": 65,
-            "height": 220
+            "height": 230
           },
           "builtIn": true
         },
@@ -2154,31 +2156,10 @@
           ],
           "against": {
             "wall": "bathroom.wall-2",
-            "offset": 0
+            "offset": 70
           },
           "params": {
             "ledgeWidth": 60
-          },
-          "builtIn": true
-        },
-        {
-          "id": "bathroom.bathtub",
-          "asset": "bathtub",
-          "name": "Bathtub",
-          "tags": [
-            "bathtub",
-            "bath",
-            "shower"
-          ],
-          "against": {
-            "wall": "bathroom.wall-2",
-            "offset": 64,
-            "gap": 18
-          },
-          "params": {
-            "length": 170,
-            "width": 70,
-            "mixerSide": "right"
           },
           "builtIn": true
         },
@@ -2192,14 +2173,14 @@
             "install wall"
           ],
           "params": {
-            "width": 174,
+            "width": 152,
             "height": 115,
             "depth": 18,
             "material": "tiles-dark-grey"
           },
           "against": {
             "wall": "bathroom.wall-2",
-            "offset": 60
+            "offset": 130
           },
           "allowOverlap": [
             "bathroom.bathtub"
@@ -2209,22 +2190,42 @@
         {
           "id": "bathroom.wall-cabinet",
           "asset": "box",
-          "name": "Wall cabinet over the toilet",
+          "name": "Dark wall cabinets",
           "tags": [
             "wall cabinet",
             "toilet cabinet",
             "storage"
           ],
           "params": {
-            "width": 105,
+            "width": 214,
             "height": 58,
             "depth": 30,
             "color": "#3a3b3e"
           },
           "against": {
             "wall": "bathroom.wall-2",
-            "offset": 0,
+            "offset": 68,
             "elevation": 180
+          },
+          "builtIn": true
+        },
+        {
+          "id": "bathroom.bathtub",
+          "asset": "bathtub",
+          "name": "Bathtub",
+          "tags": [
+            "bathtub",
+            "bath",
+            "shower"
+          ],
+          "against": {
+            "wall": "bathroom.wall-3",
+            "offset": 18
+          },
+          "params": {
+            "length": 170,
+            "width": 70,
+            "mixerSide": "right"
           },
           "builtIn": true
         }
@@ -2232,19 +2233,23 @@
       "assumptions": [
         {
           "path": "footprint",
-          "note": "NOT measured: ~2.4 x 2.3 m from the photos/video (door opposite the dresser, vanity + washer/dryer column on the left, toilet and bath on the far wall)"
+          "note": "NOT measured: ~2.8 x 2.3 m. Width from the fittings in a row along the far wall (bath 70 + toilet + washer column 60) with the toilet straight ahead through the door; the vanity sits past the door's left jamb, so the room reaches ~50 cm east of the hallway end"
         },
         {
           "path": "ceilingHeight",
           "note": "lowered ceiling (238) assumed"
         },
         {
+          "path": "items[bathroom.bathtub]",
+          "note": "170 x 70 along the west wall, end against the far-wall ledge: length not measured"
+        },
+        {
           "path": "items[bathroom.ledge]",
-          "note": "tiled ledge ~115 high along the toilet + bath wall (photos 160813-14, video 43-47 s); size estimated"
+          "note": "tiled ledge ~115 high along the far wall (photos 160813-14, video 43-47 s); size estimated"
         },
         {
           "path": "items[bathroom.wall-cabinet]",
-          "note": "dark handleless wall cabinet over the toilet, ~105 x 58 up to the ceiling (video 43.5 s, photo 160806); size estimated"
+          "note": "dark handleless wall cabinets over the ledge up to the ceiling (video 43.5-44.5 s); size estimated"
         }
       ]
     },
@@ -2279,8 +2284,16 @@
           545
         ],
         [
-          822,
+          870,
           545
+        ],
+        [
+          870,
+          524
+        ],
+        [
+          822,
+          524
         ],
         [
           822,
@@ -2356,14 +2369,28 @@
           "id": "bedroom.wall-5",
           "edge": 5,
           "tags": [
+            "jog"
+          ]
+        },
+        {
+          "id": "bedroom.wall-6",
+          "edge": 6,
+          "tags": [
+            "bathroom wall"
+          ]
+        },
+        {
+          "id": "bedroom.wall-7",
+          "edge": 7,
+          "tags": [
             "hallway wall",
             "door wall",
             "entry wall"
           ]
         },
         {
-          "id": "bedroom.wall-6",
-          "edge": 6,
+          "id": "bedroom.wall-8",
+          "edge": 8,
           "tags": [
             "shoe rack wall",
             "recess",
@@ -2371,8 +2398,8 @@
           ]
         },
         {
-          "id": "bedroom.wall-7",
-          "edge": 7,
+          "id": "bedroom.wall-9",
+          "edge": 9,
           "tags": [
             "recess",
             "pier",
@@ -2380,15 +2407,15 @@
           ]
         },
         {
-          "id": "bedroom.wall-8",
-          "edge": 8,
+          "id": "bedroom.wall-10",
+          "edge": 10,
           "tags": [
             "pier"
           ]
         },
         {
-          "id": "bedroom.wall-9",
-          "edge": 9,
+          "id": "bedroom.wall-11",
+          "edge": 11,
           "tags": [
             "storage room wall",
             "west wall"
@@ -2400,8 +2427,8 @@
         {
           "id": "bedroom.door",
           "type": "door",
-          "wall": "bedroom.wall-5",
-          "offset": 77.5,
+          "wall": "bedroom.wall-7",
+          "offset": 56.5,
           "width": 80,
           "height": 211,
           "tags": [
@@ -2501,7 +2528,7 @@
           "note": "bedroom measured 3.08 x 4.06 (notes); the entry (door from the hallway, shoe-rack recess, closet and en-suite doors) is from the photos/video, not measured"
         },
         {
-          "path": "walls[bedroom.wall-6]",
+          "path": "walls[bedroom.wall-8]",
           "note": "shoe-rack recess right inside the door, ~80 wide (notes 'bedroom side cabin 80 x …', depth not written; ~48 here) — photos 160820-23, 160857-58"
         },
         {
