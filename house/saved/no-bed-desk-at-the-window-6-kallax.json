@@ -2,7 +2,7 @@
   "meta": {
     "name": "No bed - desk at the window",
     "kind": "saved",
-    "note": "No bed: a 100 cm desk under the window (all Kallax reachable); Kallax stacks on the west wall and twice on the east wall (own 4 + 2 new); Kallax 3x4 + 2x2 on the hallway wall; big open middle (room for the 90x190 mattress on the floor).",
+    "note": "No bed: a 100 cm desk under the window (all Kallax reachable); Kallax stacks on the west wall and twice on the east wall (own 4 + 2 new); Kallax 2x4 + 2x2 on the hallway wall; big open middle (room for the 90x190 mattress on the floor).",
     "location": {
       "lat": 32.0853,
       "lon": 34.7818,
@@ -1939,37 +1939,33 @@
         {
           "id": "storage.kallax-hallway-low",
           "asset": "ikea-kallax-112x147",
-          "name": "Kallax 3x4 on the hallway wall (standing)",
+          "name": "Kallax 2x4 on the hallway wall (standing)",
           "tags": [
             "kallax"
           ],
-          "description": "NEW: buy (IKEA Kallax 112x147, same as ours, standing)",
+          "description": "NEW: buy (IKEA Kallax 77x147)",
           "against": {
             "wall": "storage.wall-2",
-            "offset": 88
+            "offset": 123
           },
           "params": {
-            "cols": 3,
+            "cols": 2,
             "rows": 4,
             "handles": "knob",
             "inserts": [
               [
                 "drawers",
-                "drawers",
                 "drawers"
               ],
               [
                 "box",
-                "box",
                 "box"
               ],
               [
                 "box",
-                "box",
                 "box"
               ],
               [
-                "box",
                 "box",
                 "box"
               ]
@@ -1978,18 +1974,15 @@
               [],
               [
                 "black",
-                "white",
-                "black"
-              ],
-              [
-                "white",
-                "black",
                 "white"
               ],
               [
-                "black",
                 "white",
                 "black"
+              ],
+              [
+                "black",
+                "white"
               ]
             ]
           }

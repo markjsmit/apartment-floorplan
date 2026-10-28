@@ -1863,7 +1863,7 @@
         {
           "id": "storage.kallax-divider",
           "asset": "box",
-          "name": "Divider between the back-to-back Kallax (along the 3x3; the last aisle column stays open at the back)",
+          "name": "Divider between the back-to-back Kallax (along the 3x3; the aisle column it does not cover stays open at the back)",
           "tags": [
             "shelf"
           ],

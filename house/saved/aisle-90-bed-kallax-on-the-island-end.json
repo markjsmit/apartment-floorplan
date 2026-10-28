@@ -2,7 +2,7 @@
   "meta": {
     "name": "Aisle + 90 bed + Kallax on the island end",
     "kind": "saved",
-    "note": "90x190 wall bed; the 3x3-door-side aisle; plus a Kallax 3x4 standing + 2x2 on top with its back against the north end of the island (faces the bed/window side); suitcase board moved forward over it.",
+    "note": "90x190 wall bed; the 3x3-door-side aisle; plus a Kallax 2x4 standing + 2x2 on top with its back against the north end of the island (same width as the island, faces the bed/window side); suitcase board moved forward over it.",
     "location": {
       "lat": 32.0853,
       "lon": 34.7818,
@@ -1884,39 +1884,35 @@
         {
           "id": "storage.kallax-end-low",
           "asset": "ikea-kallax-112x147",
-          "name": "Kallax 3x4 standing, back against the island end",
+          "name": "Kallax 2x4 standing, back against the island end",
           "tags": [
             "kallax"
           ],
-          "description": "NEW: buy (IKEA Kallax 112x147, same as ours, standing)",
+          "description": "NEW: buy (IKEA Kallax 77x147)",
           "position": [
-            723,
+            740,
             0,
             165.5
           ],
           "rotation": 180,
           "params": {
-            "cols": 3,
+            "cols": 2,
             "rows": 4,
             "handles": "knob",
             "inserts": [
               [
                 "drawers",
-                "drawers",
                 "drawers"
               ],
               [
                 "box",
-                "box",
                 "box"
               ],
               [
                 "box",
-                "box",
                 "box"
               ],
               [
-                "box",
                 "box",
                 "box"
               ]
@@ -1925,18 +1921,15 @@
               [],
               [
                 "white",
-                "black",
-                "white"
-              ],
-              [
-                "black",
-                "white",
                 "black"
               ],
               [
-                "white",
                 "black",
                 "white"
+              ],
+              [
+                "white",
+                "black"
               ]
             ]
           }
@@ -1950,7 +1943,7 @@
           ],
           "description": "NEW: buy (IKEA Kallax 77x77)",
           "position": [
-            740.5,
+            740,
             147,
             165.5
           ],
@@ -2208,13 +2201,13 @@
             "shelf"
           ],
           "params": {
-            "width": 231,
+            "width": 197.5,
             "height": 1.8,
             "depth": 58,
             "material": "birch-ply"
           },
           "position": [
-            782.5,
+            799.25,
             224,
             126.5
           ],
@@ -2228,13 +2221,13 @@
             "shelf"
           ],
           "params": {
-            "width": 231,
+            "width": 197.5,
             "height": 51.2,
             "depth": 1.8,
             "material": "birch-ply"
           },
           "position": [
-            782.5,
+            799.25,
             225.8,
             182.7
           ],
@@ -2271,7 +2264,7 @@
             "color": "#2f4a6d"
           },
           "position": [
-            723,
+            739.75,
             225.8,
             182.5
           ],

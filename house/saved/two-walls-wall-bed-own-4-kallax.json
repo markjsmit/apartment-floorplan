@@ -2,7 +2,7 @@
   "meta": {
     "name": "Two walls + wall bed",
     "kind": "saved",
-    "note": "Only the 4 Kallax we have: one stack on the west wall, one on the east wall next to the 140 wall bed; Kallax 3x4 + 2x2 on the hallway wall; open middle.",
+    "note": "Only the 4 Kallax we have: one stack on the west wall, one on the east wall next to the 140 wall bed; Kallax 2x4 + 2x2 on the hallway wall; open middle.",
     "location": {
       "lat": 32.0853,
       "lon": 34.7818,
@@ -1769,37 +1769,33 @@
         {
           "id": "storage.kallax-hallway-low",
           "asset": "ikea-kallax-112x147",
-          "name": "Kallax 3x4 on the hallway wall (standing)",
+          "name": "Kallax 2x4 on the hallway wall (standing)",
           "tags": [
             "kallax"
           ],
-          "description": "NEW: buy (IKEA Kallax 112x147, same as ours, standing)",
+          "description": "NEW: buy (IKEA Kallax 77x147)",
           "against": {
             "wall": "storage.wall-2",
-            "offset": 88
+            "offset": 123
           },
           "params": {
-            "cols": 3,
+            "cols": 2,
             "rows": 4,
             "handles": "knob",
             "inserts": [
               [
                 "drawers",
-                "drawers",
                 "drawers"
               ],
               [
                 "box",
-                "box",
                 "box"
               ],
               [
                 "box",
-                "box",
                 "box"
               ],
               [
-                "box",
                 "box",
                 "box"
               ]
@@ -1808,18 +1804,15 @@
               [],
               [
                 "black",
-                "white",
-                "black"
-              ],
-              [
-                "white",
-                "black",
                 "white"
               ],
               [
-                "black",
                 "white",
                 "black"
+              ],
+              [
+                "black",
+                "white"
               ]
             ]
           }
