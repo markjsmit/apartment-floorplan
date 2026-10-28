@@ -12,20 +12,25 @@ import { getMaterial } from './materials';
 import { registerObject } from './registry';
 import { PartsView } from './PartsView';
 import { clickAction, isPhone } from './clickAction';
+import { RoomTrim } from './Trim';
+import { useRoomLightsOn } from './useLightsOn';
 
 const CLICK_SLOP = 6;
 
 /** One room, drawn in its own coordinates and moved into house space by its placement. */
-export function RoomView({ room, placement, hiddenAssets, showCeiling }: {
+export function RoomView({ room, placement, hiddenAssets, showCeiling, shade }: {
   room: Room;
   placement: Placement;
   /** openings whose door leaf the room on the other side of the doorway draws */
   hiddenAssets: Set<string>;
   showCeiling: boolean;
+  /** corner darkening strength (see Trim) */
+  shade: number;
 }) {
   const bundle = useStore((s) => s.bundle);
   const itemStates = useStore((s) => s.itemStates);
   const select = useStore((s) => s.select);
+  const lightsOn = useRoomLightsOn(room.id);
   const walls = useMemo(() => resolveWalls(room), [room]);
   const bounds = roomBounds(room);
   const placed = useMemo(() => (bundle ? placeRoomItems(room, bundle.furniture, walls, itemStates) : []), [room, bundle, walls, itemStates]);
@@ -122,6 +127,8 @@ export function RoomView({ room, placement, hiddenAssets, showCeiling }: {
         );
       })}
 
+      <RoomTrim room={room} walls={walls} bundle={bundle} showCeiling={showCeiling} shade={shade} />
+
       {bundle && room.openings.map((o) => {
         const raw = o.asset ? bundle.furniture[o.asset] : undefined;
         const w = walls.find((x) => x.id === o.wall);
@@ -140,6 +147,8 @@ export function RoomView({ room, placement, hiddenAssets, showCeiling }: {
             position={[w.start[0] + w.dir[0] * u, o.sill, w.start[1] + w.dir[1] * u]}
             rotationDeg={(Math.atan2(w.inward[0], w.inward[1]) * 180) / Math.PI}
             selectWhole
+            roomId={room.id}
+            lightsOn={lightsOn}
           />
         );
       })}
@@ -155,6 +164,8 @@ export function RoomView({ room, placement, hiddenAssets, showCeiling }: {
           position={p.position}
           rotationDeg={p.rotationDeg}
           selectWhole={p.item.selectWhole}
+          roomId={room.id}
+          lightsOn={lightsOn}
         />
       ))}
     </group>

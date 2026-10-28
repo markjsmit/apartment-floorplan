@@ -1,4 +1,4 @@
-import type { Part, Vec3 } from '../schema';
+import type { AssetState, Part, Vec3 } from '../schema';
 
 // Opening-local space: origin at the bottom-centre of the opening on the wall's room-side surface,
 // +z into the room, the wall occupies z in [-wallThickness, 0].
@@ -39,8 +39,24 @@ export function door(params: Record<string, unknown>): Part[] {
     box({ id: 'casing-right-out', tags: ['frame', 'casing'], size: [7, H + 6, 1.5], position: [W / 2 - F + 3.5, (H + 6) / 2, -t - 0.75], material: 'white-paint' }),
     box({ id: 'casing-top-out', tags: ['frame', 'casing'], size: [W - 2 * F + 14, 7, 1.5], position: [0, H + 6 - 3.5, -t - 0.75], material: 'white-paint' }),
     box({ id: 'leaf', tags: ['door leaf', 'door'], size: [leafW, leafH, 4], position: [-W / 2 + F + 0.3 + leafW / 2, 0.5 + leafH / 2, -2], material: 'white-laminate', pivot: hinge }),
-    box({ id: 'handle-in', tags: ['handle'], size: [12, 2, 2], position: [handleX, 105, 2], material: 'metal-black', pivot: hinge }),
-    box({ id: 'handle-out', tags: ['handle'], size: [12, 2, 2], position: [handleX, 105, -6], material: 'metal-black', pivot: hinge }),
+    // stainless lever handles on round roses, and a key rose below (as on the doors in the survey photos)
+    ...lever('handle-in', handleX, 1, hinge),
+    ...lever('handle-out', handleX, -1, hinge),
+  ];
+}
+
+/** Lever handle on one face of the leaf (side 1 = room side, z = 0; -1 = the other face, z = -4). */
+function lever(id: string, x: number, side: 1 | -1, pivot: Vec3): Part[] {
+  const face = side === 1 ? 0 : -4;
+  const cyl = (pid: string, r: number, h: number, y: number, out: number): Part => ({
+    id: pid, tags: ['handle'], geometry: { type: 'cylinder', radius: r, height: h, segments: 20 }, position: [x, y, face + side * out],
+    rotation: [90, 0, 0], pivot, material: 'stainless', castShadow: false, glass: false,
+  });
+  return [
+    cyl(`${id}-rose`, 2.6, 0.9, 105, 0.45),
+    cyl(`${id}-neck`, 0.9, 4, 105, 2.5),
+    { id, tags: ['handle'], geometry: { type: 'box', size: [13, 1.8, 2] }, position: [x - 5, 105, face + side * 4.9], rotation: [0, 0, 0], pivot, material: 'stainless', castShadow: false, glass: false },
+    cyl(`${id}-key-rose`, 1.9, 0.8, 92, 0.4),
   ];
 }
 
@@ -61,4 +77,10 @@ export function windowParts(params: Record<string, unknown>): Part[] {
     parts.push(box({ id: 'sill', tags: ['window sill', 'sill'], size: [W, 2, t / 2 + 6], position: [0, -1, (-t / 2 + 6) / 2], material: 'white-laminate' }));
   }
   return parts;
+}
+
+/** Closed / open (90° into the room) for a door: everything hung on the hinge (leaf, handles, roses) swings. */
+export function doorStates(parts: Part[]): AssetState[] {
+  const swing = Object.fromEntries(parts.filter((p) => p.pivot).map((p) => [p.id, { rotation: [0, -90, 0] as Vec3 }]));
+  return [{ id: 'closed', name: 'Closed', parts: {} }, { id: 'open', name: 'Open', parts: swing }];
 }

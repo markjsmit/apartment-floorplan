@@ -26,6 +26,8 @@ type State = {
   selection: Selection | null;
   /** View-only furniture states (bed up/down) toggled by double-click; keyed by item/opening id. */
   itemStates: Record<string, string>;
+  /** View-only room lights switched by hand (💡, double-click a lamp); rooms not listed follow the sun (on after dark). */
+  roomLights: Record<string, boolean>;
   person: Person;
   view: View;
   timeOfDay: number;
@@ -54,6 +56,8 @@ type Actions = {
   select: (s: Selection | null) => void;
   selectById: (id: string) => boolean;
   cycleState: (id: string) => void;
+  /** switch a room's lights (default: the open room) to the opposite of `currentlyOn` */
+  toggleRoomLights: (currentlyOn: boolean, roomId?: string) => void;
   setPerson: (p: Person) => void;
   setView: (v: View) => void;
   setTime: (h: number) => void;
@@ -96,6 +100,7 @@ export const useStore = create<State & Actions>((set, get) => ({
   house: null,
   selection: null,
   itemStates: {},
+  roomLights: {},
   person: 'mark',
   view: 'first-person',
   timeOfDay: 14,
@@ -179,6 +184,10 @@ export const useStore = create<State & Actions>((set, get) => ({
     const asset = resolveAsset(raw, params);
     const current = initialState(asset, ref, itemStates[id]);
     set({ itemStates: { ...itemStates, [id]: nextState(asset, current) } });
+  },
+  toggleRoomLights: (currentlyOn, roomId) => {
+    const room = roomId ?? get().roomId;
+    if (room) set({ roomLights: { ...get().roomLights, [room]: !currentlyOn } });
   },
   setPerson: (person) => set({ person }),
   setView: (view) => set({ view }),

@@ -6,6 +6,7 @@ import { facing } from '../model/geometry';
 import { labelOf } from './labels';
 import { currentMeasurement, useMeasure } from './measureStore';
 import { claimActiveTab, createReporter, isActiveTab } from './uiState';
+import { roomLightsState } from '../scene/useLightsOn';
 
 type StoreState = ReturnType<typeof useStore.getState>;
 
@@ -52,6 +53,8 @@ function buildUiState(s: StoreState) {
     timeOfDay: s.timeOfDay,
     dayOfYear: s.dayOfYear,
     itemStates: s.itemStates,
+    // view-only: each room's lights (on after dark unless switched by hand with 💡 / a lamp)
+    roomLights: roomLightsState(s),
   };
 }
 
@@ -109,6 +112,7 @@ export function useDevLink() {
         if (JSON.stringify(prev.selection) !== JSON.stringify(state.selection)) reportEvent({ type: 'select', selection: state.selection });
         if (prev.room !== state.room || prev.version !== state.version) reportEvent({ type: 'tab', room: state.room, version: state.version });
         if (JSON.stringify(prev.itemStates) !== JSON.stringify(state.itemStates)) reportEvent({ type: 'state', itemStates: state.itemStates });
+        if (JSON.stringify(prev.roomLights) !== JSON.stringify(state.roomLights)) reportEvent({ type: 'lights', roomLights: state.roomLights });
       }
       prev = state;
     };

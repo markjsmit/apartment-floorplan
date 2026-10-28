@@ -1,20 +1,34 @@
 import { useEffect, useMemo, useRef } from 'react';
 import { Environment, Lightformer, Sky } from '@react-three/drei';
-import { Color, type DirectionalLight } from 'three';
+import { Color, type DirectionalLight, type Material } from 'three';
+import type { Sky as SkyMesh } from 'three-stdlib';
 import type { HouseFrame } from '../model/layout';
 import { polygonCentroid, roomBounds } from '../model/geometry';
-import { currentHouse, useStore } from '../app/store';
+import { currentHouse, currentLayout, useStore } from '../app/store';
+import { resolveWalls } from '../model/geometry';
+import { placeRoomItems } from '../model/placement';
+import { assignLampSlots, roomLamps, roomLightOn } from '../model/lights';
 import { sunDirection } from './sun';
+import { Outside } from './Outside';
 
 const DEFAULT_LOCATION = { lat: 50, lon: 10 };
 
-/** Sun through the windows (real solar position), soft fill for bounced light, a ceiling lamp at night. */
+/** Sun through the windows (real solar position), soft fill for bounced light, the room lights (💡). */
 /** `room` is the whole house frame (bounds, tallest ceiling, north, one lamp per room). */
 export function Lighting({ room, mobile }: { room: HouseFrame; mobile: boolean }) {
   const timeOfDay = useStore((s) => s.timeOfDay);
   const dayOfYear = useStore((s) => s.dayOfYear);
   const geo = useStore((s) => currentHouse(s)?.meta.location) ?? DEFAULT_LOCATION;
   const sunRef = useRef<DirectionalLight>(null);
+  const skyRef = useRef<SkyMesh>(null);
+  // the sky is the very back of the background (before the city panorama), never hiding anything
+  useEffect(() => {
+    const sky = skyRef.current;
+    if (!sky) return;
+    sky.renderOrder = -2;
+    sky.frustumCulled = false;
+    (sky.material as Material).depthTest = false;
+  }, []);
 
   const b = roomBounds(room);
   const [cx, cz] = polygonCentroid(room.footprint);
@@ -50,7 +64,7 @@ export function Lighting({ room, mobile }: { room: HouseFrame; mobile: boolean }
 
   return (
     <>
-      <Sky distance={15000} sunPosition={dir ? [dir[0], Math.max(dir[1], 0.02), dir[2]] : [0, -1, 0]} turbidity={6} rayleigh={1.5} />
+      <Sky ref={skyRef} distance={15000} sunPosition={dir ? [dir[0], Math.max(dir[1], 0.02), dir[2]] : [0, -1, 0]} turbidity={6} rayleigh={1.5} />
       <directionalLight
         ref={sunRef}
         position={sunPos}
@@ -62,21 +76,58 @@ export function Lighting({ room, mobile }: { room: HouseFrame; mobile: boolean }
         shadow-normalBias={1.5}
       />
       {/* bounced daylight; rooms are closed boxes so this stands in for light coming off the floor and walls */}
-      <hemisphereLight args={['#f4f7fb', '#d8cbb8', 1.7 * daylight + 0.1]} />
-      <ambientLight intensity={0.45 * daylight + 0.04} />
-      {!dir && room.lamps.map((l, i) => (
-        <pointLight key={i} position={l} intensity={30000} distance={0} decay={2} color="#ffd9a8" castShadow={!mobile && room.lamps.length === 1} />
-      ))}
-      <Environment resolution={64} environmentIntensity={0.35 * daylight + 0.05}>
+      <hemisphereLight args={['#f3f6fa', '#e9e1d4', 2.6 * daylight + 0.1]} />
+      <ambientLight intensity={0.5 * daylight + 0.04} />
+      <RoomLamps slots={mobile ? 2 : 6} sunDown={!dir} />
+      <Environment resolution={64} environmentIntensity={0.6 * daylight + 0.06}>
         <Lightformer form="rect" intensity={2} position={[0, 5, 0]} scale={[10, 10, 1]} rotation={[Math.PI / 2, 0, 0]} />
         <Lightformer form="rect" intensity={0.6} position={[5, 1, 0]} scale={[10, 3, 1]} rotation={[0, -Math.PI / 2, 0]} color="#ffeedd" />
         <Lightformer form="rect" intensity={0.4} position={[-5, 1, 0]} scale={[10, 3, 1]} rotation={[0, Math.PI / 2, 0]} />
       </Environment>
-      {/* ground outside, seen through the windows */}
-      <mesh rotation={[-Math.PI / 2, 0, 0]} position={[cx, -2, cz]} receiveShadow={false}>
-        <circleGeometry args={[12000, 32]} />
-        <meshStandardMaterial color="#7d8a6a" roughness={1} />
-      </mesh>
+      {/* the city outside the windows */}
+      <Outside northAngle={room.northAngle} daylight={dir ? daylight : 0} />
+    </>
+  );
+}
+
+const IDENTITY = { x: 0, z: 0, rotationDeg: 0 };
+
+/**
+ * The room lights: a fixed pool of point lights (dark when unused) given to the lit lamps of the open room first,
+ * then the nearest. Fixed, because adding or removing a light makes three.js recompile every shader (a stutter).
+ */
+function RoomLamps({ slots, sunDown }: { slots: number; sunDown: boolean }) {
+  const house = useStore(currentHouse);
+  const layout = useStore(currentLayout);
+  const bundle = useStore((s) => s.bundle);
+  const roomId = useStore((s) => s.roomId);
+  const overrides = useStore((s) => s.roomLights);
+  const lamps = useMemo(
+    () => (house && layout && bundle
+      ? house.rooms.flatMap((r) => roomLamps(r, placeRoomItems(r, bundle.furniture, resolveWalls(r)), layout.placements[r.id] ?? IDENTITY))
+      : []),
+    [house, layout, bundle],
+  );
+  const lit = useMemo(() => {
+    const own = lamps.filter((l) => l.room === roomId);
+    const from: [number, number] = own.length ? [own[0].position[0], own[0].position[2]] : [0, 0];
+    return assignLampSlots(lamps, (r) => roomLightOn(overrides, r, sunDown), roomId, from, slots);
+  }, [lamps, overrides, sunDown, roomId, slots]);
+  return (
+    <>
+      {Array.from({ length: slots }, (_, i) => {
+        const l = lit[i];
+        return (
+          <pointLight
+            key={i}
+            position={l?.position ?? [0, -1000, 0]}
+            intensity={l?.intensity ?? 0}
+            color={l?.color ?? '#ffffff'}
+            distance={0}
+            decay={2}
+          />
+        );
+      })}
     </>
   );
 }

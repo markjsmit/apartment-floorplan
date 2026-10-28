@@ -12,7 +12,6 @@ import { registerObject } from './registry';
 import { clickAction, isPhone } from './clickAction';
 import labelFont from '../../assets/fonts/inter-latin-600-normal.woff?url';
 import { RectAreaLightUniformsLib } from 'three/examples/jsm/lights/RectAreaLightUniformsLib.js';
-import { useLightsOn } from './useLightsOn';
 
 RectAreaLightUniformsLib.init();
 
@@ -29,25 +28,33 @@ type Props = {
   position: Vec3;
   rotationDeg: number;
   selectWhole: boolean;
+  /** the lights of the room it stands in: lamp parts glow, and double-clicking one switches the room's lights */
+  roomId: string;
+  lightsOn: boolean;
 };
 
 /** A placed asset (furniture item or door/window): parts animate between states; click selects, double-click cycles. */
-export function PartsView({ id, kind, asset, parts, stateId, position, rotationDeg, selectWhole }: Props) {
+export function PartsView({ id, kind, asset, parts, stateId, position, rotationDeg, selectWhole, roomId, lightsOn }: Props) {
   const select = useStore((s) => s.select);
   const cycleState = useStore((s) => s.cycleState);
+  const toggleRoomLights = useStore((s) => s.toggleRoomLights);
   const state = findState(asset, stateId);
+  const lamp = (part: string) => !!parts.find((p) => p.id === part)?.emit;
+  // a lamp's glowing part is a light switch; anything else with an interaction changes state
+  const act = (part: string) => (lamp(part) ? toggleRoomLights(lightsOn, roomId) : cycleState(id));
+  const interactive = (part: string) => interactivePart(asset, part) || lamp(part);
 
   const onClick = (part: string) => (e: ThreeEvent<MouseEvent>) => {
     e.stopPropagation();
     if (e.delta > CLICK_SLOP) return;
-    const action = clickAction({ phone: isPhone(), interactive: interactivePart(asset, part) });
+    const action = clickAction({ phone: isPhone(), interactive: interactive(part) });
     if (action === 'select') select({ kind, id, part });
-    if (action === 'cycle') cycleState(id);
+    if (action === 'cycle') act(part);
   };
   const onDoubleClick = (part: string) => (e: ThreeEvent<MouseEvent>) => {
     e.stopPropagation();
     // phones already changed state on the first tap
-    if (!isPhone() && interactivePart(asset, part)) cycleState(id);
+    if (!isPhone() && interactive(part)) act(part);
   };
 
   return (
@@ -59,7 +66,8 @@ export function PartsView({ id, kind, asset, parts, stateId, position, rotationD
           kind={kind}
           part={p}
           pose={partTransform(p, state?.parts[p.id])}
-          interactive={interactivePart(asset, p.id)}
+          interactive={interactive(p.id)}
+          lightsOn={lightsOn}
           registerAsPart={!selectWhole}
           onClick={onClick(p.id)}
           onDoubleClick={onDoubleClick(p.id)}
@@ -69,8 +77,9 @@ export function PartsView({ id, kind, asset, parts, stateId, position, rotationD
   );
 }
 
-function PartMesh({ ownerId, kind, part, pose, interactive, registerAsPart, onClick, onDoubleClick }: {
+function PartMesh({ ownerId, kind, part, pose, interactive, lightsOn, registerAsPart, onClick, onDoubleClick }: {
   ownerId: string;
+  lightsOn: boolean;
   kind: SelectionKind;
   part: Part;
   pose: ReturnType<typeof partTransform>;
@@ -80,7 +89,6 @@ function PartMesh({ ownerId, kind, part, pose, interactive, registerAsPart, onCl
   onDoubleClick: (e: ThreeEvent<MouseEvent>) => void;
 }) {
   const bundle = useStore((s) => s.bundle);
-  const lightsOn = useLightsOn();
   const ref = useRef<Mesh | null>(null);
   const target = useRef({ pos: new Vector3(), quat: new Quaternion() });
   target.current.pos.set(...pose.position);
@@ -123,13 +131,13 @@ function PartMesh({ ownerId, kind, part, pose, interactive, registerAsPart, onCl
       userData={{ selectable: { kind, id: ownerId, part: part.id } }}
     >
       {part.label && <Label label={part.label} faceZ={faceDepth(part) / 2} />}
-      {part.emit && lightsOn && part.emit.kind === 'point' && (
-        <pointLight position={[0, -faceHeight(part) / 2 - 2, 0]} intensity={part.emit.intensity} distance={0} decay={2} color={part.emit.color} />
-      )}
-      {part.emit && lightsOn && part.emit.kind === 'area' && part.geometry.type === 'box' && (
-        // soft light out of the bottom face (a rect area light shines along its -z; -90° about x points that down)
+      {/* point lamps are lit by the room's light pool (Lighting / RoomLamps), not here */}
+      {part.emit && part.emit.kind === 'area' && part.geometry.type === 'box' && (
+        // soft light out of the bottom face (a rect area light shines along its -z; -90° about x points that down);
+        // always mounted, dark when off: a changing number of lights would recompile every shader
         <rectAreaLight
-          args={[part.emit.color, part.emit.intensity, part.geometry.size[0], part.geometry.size[2]]}
+          args={[part.emit.color, 0, part.geometry.size[0], part.geometry.size[2]]}
+          intensity={lightsOn ? part.emit.intensity : 0}
           position={[0, -part.geometry.size[1] / 2 - 0.05, 0]}
           rotation={[-Math.PI / 2, 0, 0]}
         />
@@ -154,11 +162,6 @@ function emissive(base: Material, color: string, on: boolean): Material {
     emissiveCache.set(key, m);
   }
   return m;
-}
-
-function faceHeight(part: Part): number {
-  const g = part.geometry;
-  return g?.type === 'box' ? g.size[1] : g?.type === 'cylinder' ? g.height : 0;
 }
 
 function faceDepth(part: Part): number {

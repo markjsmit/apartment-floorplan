@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import { Canvas, events as pointerEvents, useThree, type RootState } from '@react-three/fiber';
-import { EffectComposer, N8AO, Outline } from '@react-three/postprocessing';
+import { EffectComposer, N8AO, Outline, ToneMapping } from '@react-three/postprocessing';
+import { ToneMappingMode } from 'postprocessing';
 import { PCFSoftShadowMap, PerspectiveCamera, type Mesh, type Object3D } from 'three';
 import { currentHouse, currentLayout, useStore } from '../app/store';
 import { houseFrame } from '../model/layout';
@@ -111,7 +112,7 @@ export function Viewer() {
           <>
             {/* the whole house in one space: every room at its placement */}
             {house.rooms.map((r) => (
-              <RoomView key={r.id} room={r} placement={layout.placements[r.id]} hiddenAssets={layout.hiddenAssets} showCeiling={view === 'first-person'} />
+              <RoomView key={r.id} room={r} placement={layout.placements[r.id]} hiddenAssets={layout.hiddenAssets} showCeiling={view === 'first-person'} shade={ao ? 0.2 : 0.34} />
             ))}
             <Lighting room={frame} mobile={mobile} />
             <PlayerControls house={house} layout={layout} driveCamera={view === 'first-person'} />
@@ -122,6 +123,9 @@ export function Viewer() {
         <EffectComposer multisampling={mobile ? 0 : 4} autoClear={false}>
           {ao ? <N8AO aoRadius={40} distanceFalloff={1} intensity={2.2} quality="medium" halfRes /> : <></>}
           <SelectionOutline />
+          {/* the composer switches the renderer's own tone mapping off, so it happens here: Khronos PBR Neutral keeps
+              white walls white and colours true (ACES/AgX grey and shift them) */}
+          <ToneMapping mode={ToneMappingMode.NEUTRAL} />
         </EffectComposer>
       </Canvas>
     </div>

@@ -30,7 +30,9 @@ export function plainBox(params: Record<string, unknown>): Part[] {
   const w = num(params.width, 100);
   const h = num(params.height, 100);
   const d = num(params.depth, 100);
-  const extra: Extra = params.color ? { color: String(params.color) } : { material: str(params.material, 'white-paint') };
+  const material = str(params.material, 'white-paint');
+  // a glass box (balcony railing pane) is drawn see-through
+  const extra: Extra = params.color ? { color: String(params.color) } : { material, ...(material.startsWith('glass') ? { glass: true, castShadow: false } : {}) };
   return [box('box', [], [w, h, d], [0, h / 2, d / 2], extra)];
 }
 
@@ -283,7 +285,7 @@ export function slidingDoor(params: Record<string, unknown>): WithStates {
   };
 }
 
-/** Ceiling track with spots, hanging down from the item's top. params: length (along x), spots, color. */
+/** Ceiling track with spots (each a room light), hanging down from the item's top. params: length (along x), spots, color. */
 export function trackLight(params: Record<string, unknown>): Part[] {
   const L = num(params.length, 200);
   const n = Math.max(1, Math.round(num(params.spots, 3)));
@@ -294,7 +296,7 @@ export function trackLight(params: Record<string, unknown>): Part[] {
     const x = -L / 2 + (L / (n + 1)) * (i + 1);
     parts.push(
       cyl(`spot-${i + 1}-stem`, ['spot'], 0.8, 8, [x, H - 7, 1.75], { color }),
-      cyl(`spot-${i + 1}`, ['spot', 'light'], 4, 11, [x, H - 14, 3], { color, rotation: [25, 0, 0] }),
+      { ...cyl(`spot-${i + 1}`, ['spot', 'light'], 4, 11, [x, H - 14, 3], { color, rotation: [25, 0, 0] }), emit: { color: '#ffe6c4', intensity: 9000, kind: 'point' } },
     );
   }
   return parts;

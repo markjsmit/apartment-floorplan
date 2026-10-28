@@ -1,6 +1,9 @@
+import { useEffect } from 'react';
 import { shareUrl } from './url';
+import { ignoresKeys } from '../scene/input';
 import { useStore } from './store';
 import { useMeasure } from './measureStore';
+import { useRoomLightsOn } from '../scene/useLightsOn';
 
 const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
@@ -19,6 +22,16 @@ export function Toolbar() {
   const s = useStore();
   const measuring = useMeasure((m) => m.active);
   const toggleMeasure = useMeasure((m) => m.toggle);
+  const lightsOn = useRoomLightsOn(s.roomId);
+  // L switches the open room's lights
+  useEffect(() => {
+    const key = (e: KeyboardEvent) => {
+      if (ignoresKeys(e.target as HTMLInputElement) || e.metaKey || e.ctrlKey || e.code !== 'KeyL') return;
+      useStore.getState().toggleRoomLights(lightsOn);
+    };
+    window.addEventListener('keydown', key);
+    return () => window.removeEventListener('keydown', key);
+  }, [lightsOn]);
   const share = async () => {
     const url = shareUrl({ roomId: s.roomId, versionId: s.versionId, roomVersions: s.roomVersions }, s.bundle?.site.publicUrl ?? '', `${location.origin}${import.meta.env.BASE_URL}`);
     try {
@@ -50,6 +63,7 @@ export function Toolbar() {
         📅 {dayLabel(s.dayOfYear)}
         <input type="range" min={1} max={365} step={1} value={s.dayOfYear} onChange={(e) => s.setDay(Number(e.target.value))} />
       </label>
+      <button className={lightsOn ? 'on' : ''} onClick={() => s.toggleRoomLights(lightsOn)} title="This room's lights on/off (L) — or double-click a lamp">💡 Lights</button>
       <button className={measuring ? 'on' : ''} onClick={toggleMeasure} title="Measure between two surfaces (M)">📏 Measure</button>
       <button onClick={share}>🔗 Share</button>
     </div>
