@@ -2288,8 +2288,8 @@
             "laundry"
           ],
           "against": {
-            "wall": "bathroom.wall-1",
-            "offset": 123
+            "wall": "bathroom.wall-2",
+            "offset": 0
           },
           "params": {
             "width": 65,
@@ -2309,10 +2309,10 @@
           ],
           "against": {
             "wall": "bathroom.wall-2",
-            "offset": 62
+            "offset": 66
           },
           "params": {
-            "ledgeWidth": 100,
+            "ledgeWidth": 96,
             "ledgeHeight": 115,
             "ledgeDepth": 18
           },
@@ -2355,14 +2355,14 @@
             "storage"
           ],
           "params": {
-            "width": 162,
+            "width": 158,
             "height": 60,
             "depth": 30,
             "color": "#3a3b3e"
           },
           "against": {
             "wall": "bathroom.wall-2",
-            "offset": 62,
+            "offset": 66,
             "elevation": 178
           },
           "builtIn": true
@@ -2420,6 +2420,10 @@
         {
           "path": "items[bathroom.bathtub]",
           "note": "170 x 70 along the west wall, end against the far-wall ledge: length not measured"
+        },
+        {
+          "path": "items[bathroom.washer-dryer]",
+          "note": "column in the SE corner facing the door: the dryer's round door faces the doorway (photos 160804, 160806, video 43.5 s); stacked doors hinged on the vanity side; Mark: it's in use, not blocked by the toilet"
         },
         {
           "path": "items[bathroom.ledge]",
