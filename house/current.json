@@ -2270,7 +2270,7 @@
           ],
           "against": {
             "wall": "bathroom.wall-1",
-            "offset": 43
+            "offset": 0
           },
           "params": {
             "width": 80,
@@ -2288,8 +2288,8 @@
             "laundry"
           ],
           "against": {
-            "wall": "bathroom.wall-2",
-            "offset": 0
+            "wall": "bathroom.wall-1",
+            "offset": 80
           },
           "params": {
             "width": 65,
@@ -2346,6 +2346,27 @@
           "builtIn": true
         },
         {
+          "id": "bathroom.ledge-east",
+          "asset": "box",
+          "name": "Tiled ledge (behind the column)",
+          "tags": [
+            "ledge",
+            "shelf",
+            "install wall"
+          ],
+          "params": {
+            "width": 66,
+            "height": 115,
+            "depth": 18,
+            "material": "tiles-dark-grey"
+          },
+          "against": {
+            "wall": "bathroom.wall-2",
+            "offset": 0
+          },
+          "builtIn": true
+        },
+        {
           "id": "bathroom.wall-cabinet",
           "asset": "box",
           "name": "Dark wall cabinets",
@@ -2355,14 +2376,14 @@
             "storage"
           ],
           "params": {
-            "width": 158,
+            "width": 224,
             "height": 60,
             "depth": 30,
             "color": "#3a3b3e"
           },
           "against": {
             "wall": "bathroom.wall-2",
-            "offset": 66,
+            "offset": 0,
             "elevation": 178
           },
           "builtIn": true
@@ -2378,7 +2399,7 @@
           "position": [
             788,
             226,
-            579
+            536
           ],
           "params": {
             "diameter": 10,
@@ -2423,7 +2444,7 @@
         },
         {
           "path": "items[bathroom.washer-dryer]",
-          "note": "column in the SE corner facing the door: the dryer's round door faces the doorway (photos 160804, 160806, video 43.5 s); stacked doors hinged on the vanity side; Mark: it's in use, not blocked by the toilet"
+          "note": "on the east wall right after the vanity (which starts at the door wall), facing west, ~25 cm clear of the far-wall ledge so its doors open past the toilet (Mark + video 41-44 s at 6 fps); stacked doors hinged on the vanity side"
         },
         {
           "path": "items[bathroom.ledge]",
