@@ -1498,6 +1498,7 @@
             "wall": "storage.wall-1",
             "offset": 2
           },
+          "state": "folded",
           "params": {
             "bedWidth": 140,
             "bedLength": 190,
