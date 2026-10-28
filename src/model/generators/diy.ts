@@ -272,39 +272,36 @@ export function aisleDoors(params: Record<string, unknown>): Generated {
 }
 
 /**
- * Pull-down clothes drying rack screwed to a cabinet side: a frame of rods hinged along its bottom edge. Folded it stands
- * flat against the panel (bottom at `elevation`, `length` up); pulled down it sticks out horizontally, `length` from the
- * panel, held by two side chains. Params: width (60), length (50), elevation (hinge height, 150), rods (6).
+ * Fold-down clothes drying rack screwed to a cabinet side: a frame of rods hinged along one edge at `elevation`. fold "up"
+ * (default): stored standing up against the panel (elevation .. elevation + length), folded out it sticks out
+ * horizontally; fold "down": stored hanging down. `standoff` (cm) holds it off the panel, so a lower rack can be stored
+ * in front of an upper one (open the front one first). How it's held up when out is left open (no chains modelled).
+ * Params: width (60), length (50, how far it sticks out), elevation (hinge height, 150), rods (6), fold (up | down),
+ * standoff (0).
  */
 export function dryingRack(params: Record<string, unknown>): Generated {
   const W = num(params.width, 60);
   const L = num(params.length, 50);
   const y0 = num(params.elevation, 150);
   const n = Math.max(2, Math.round(num(params.rods, 6)));
-  const pivot: Vec3 = [0, y0, 1.5];
+  const dir = params.fold === 'down' ? -1 : 1;
+  const z = 1.5 + num(params.standoff, 0);
+  const pivot: Vec3 = [0, y0, z];
   const metal = { color: '#d8d9db', castShadow: true, glass: false };
   const p = (id: string, size: Vec3, position: Vec3, extra: Partial<Part> = {}): Part => ({
     id, tags: ['drying rack'], geometry: { type: 'box', size }, position, rotation: [0, 0, 0], section: 'rack', ...metal, ...extra,
   });
   const frame: Part[] = [
-    p('side-left', [1.6, L, 1.6], [-W / 2 + 0.8, y0 + L / 2, 1.5], { pivot }),
-    p('side-right', [1.6, L, 1.6], [W / 2 - 0.8, y0 + L / 2, 1.5], { pivot }),
-    p('front-bar', [W, 1.6, 1.6], [0, y0 + L - 0.8, 1.5], { pivot }),
-    ...Array.from({ length: n }, (_, i) => p(`rod-${i + 1}`, [W - 3.2, 0.8, 0.8], [0, y0 + ((i + 1) * (L - 1.6)) / (n + 1), 1.5], { pivot })),
+    p('side-left', [1.6, L, 1.6], [-W / 2 + 0.8, y0 + (dir * L) / 2, z], { pivot }),
+    p('side-right', [1.6, L, 1.6], [W / 2 - 0.8, y0 + (dir * L) / 2, z], { pivot }),
+    p('front-bar', [W, 1.6, 1.6], [0, y0 + dir * (L - 0.8), z], { pivot }),
+    ...Array.from({ length: n }, (_, i) => p(`rod-${i + 1}`, [W - 3.2, 0.8, 0.8], [0, y0 + (dir * ((i + 1) * (L - 1.6))) / (n + 1), z], { pivot })),
   ];
-  const parts: Part[] = [
-    p('mount-rail', [W, 3, 1.2], [0, y0 - 1.5, 0.6], { color: '#bfc1c4' }),
-    ...frame,
-    // side chains: only when pulled down, from the top of the panel to the frame's front corners
-    ...[-1, 1].map((side) => p(`chain-${side < 0 ? 'left' : 'right'}`, [0.4, Math.hypot(L, L), 0.4], [side * (W / 2 - 0.8), y0 + L / 2, L / 2 + 1.5],
-      { rotation: [-45, 0, 0], hidden: true, color: '#9a9c9f' })),
-  ];
-  const down: Record<string, PartOverride> = Object.fromEntries(frame.map((f) => [f.id, { rotation: [90, 0, 0] as Vec3 }]));
-  down['chain-left'] = { visible: true };
-  down['chain-right'] = { visible: true };
+  const parts: Part[] = [p('mount-rail', [W, 3, z - 0.3], [0, y0 - dir * 1.5, (z - 0.3) / 2], { color: '#bfc1c4' }), ...frame];
+  const out: Record<string, PartOverride> = Object.fromEntries(frame.map((f) => [f.id, { rotation: [dir * 90, 0, 0] as Vec3 }]));
   return {
     parts,
-    states: [{ id: 'folded', name: 'Folded up', parts: {} }, { id: 'down', name: 'Pulled down', parts: down }],
+    states: [{ id: 'folded', name: 'Folded', parts: {} }, { id: 'down', name: 'Out (horizontal)', parts: out }],
     interactions: frame.map((f) => ({ part: f.id, action: 'cycleStates' as const })),
   };
 }

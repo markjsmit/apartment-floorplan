@@ -1,8 +1,13 @@
 {
   "id": "diy-drying-rack",
-  "name": "Pull-down drying rack",
-  "tags": ["drying rack", "laundry", "clothes rack", "diy"],
-  "description": "Wall/cabinet-mounted fold-down clothes drying rack (aluminium rods in a frame, hinged along the bottom edge, two side chains). Folded it lies flat against the panel; pulled down it sticks out horizontally to hang clothes on. Typical sizes 60-80 wide, 40-60 out (e.g. the common Brabantia / IKEA-style pull-down airers); generic planning model. Double-click to pull down / fold up (the whole rack, chains included).",
+  "name": "Fold-down drying rack",
+  "tags": [
+    "drying rack",
+    "laundry",
+    "clothes rack",
+    "diy"
+  ],
+  "description": "Cabinet-side-mounted fold-down clothes drying rack (aluminium rods in a frame, hinged along one edge). fold \"up\": stored standing up flat against the panel; fold \"down\": stored hanging down. standoff holds it off the panel so a lower rack can be stored in front of an upper one (open the front one first). How it is held up when out is not modelled. Typical sizes 60-80 wide, 40-100 out; generic planning model. Double-click to fold out / in.",
   "source": {
     "kind": "procedural",
     "generator": "drying-rack",
@@ -10,10 +15,30 @@
     "license": "self-made"
   },
   "params": {
-    "width": { "default": 60, "description": "cm" },
-    "length": { "default": 50, "description": "cm out from the panel when pulled down" },
-    "elevation": { "default": 150, "description": "cm, hinge (bottom edge) height" },
-    "rods": { "default": 6, "description": "number of rods" }
+    "width": {
+      "default": 60,
+      "description": "cm"
+    },
+    "length": {
+      "default": 50,
+      "description": "cm out from the panel when pulled down"
+    },
+    "elevation": {
+      "default": 150,
+      "description": "cm, hinge (bottom edge) height"
+    },
+    "rods": {
+      "default": 6,
+      "description": "number of rods"
+    },
+    "fold": {
+      "default": "up",
+      "description": "up (stored standing up) | down (stored hanging down)"
+    },
+    "standoff": {
+      "default": 0,
+      "description": "cm off the panel (store a lower rack in front of an upper one)"
+    }
   },
   "defaultState": "folded"
 }

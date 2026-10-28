@@ -1912,9 +1912,9 @@
           "rotation": 90
         },
         {
-          "id": "storage.drying-rack",
+          "id": "storage.drying-rack-low",
           "asset": "diy-drying-rack",
-          "name": "Pull-down drying rack (on the Kallax)",
+          "name": "Drying rack, low (hip height)",
           "tags": [
             "drying rack",
             "laundry"
@@ -1927,9 +1927,31 @@
           "rotation": 180,
           "params": {
             "width": 74,
-            "length": 110,
-            "elevation": 120,
-            "rods": 12
+            "length": 45,
+            "elevation": 90,
+            "standoff": 2.5,
+            "rods": 5
+          }
+        },
+        {
+          "id": "storage.drying-rack-high",
+          "asset": "diy-drying-rack",
+          "name": "Drying rack, high (175)",
+          "tags": [
+            "drying rack",
+            "laundry"
+          ],
+          "position": [
+            739.75,
+            0,
+            130
+          ],
+          "rotation": 180,
+          "params": {
+            "width": 74,
+            "length": 65,
+            "elevation": 175,
+            "rods": 7
           }
         },
         {
