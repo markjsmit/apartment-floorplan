@@ -1560,6 +1560,21 @@
       ],
       "items": [
         {
+          "id": "storage.shoe-bench",
+          "asset": "ikea-tjusig-bench",
+          "name": "Shoe bench (TJUSIG, from the old house)",
+          "tags": [
+            "shoe rack",
+            "bench",
+            "tjusig"
+          ],
+          "against": {
+            "wall": "storage.wall-5",
+            "offset": 180.5,
+            "gap": 4.5
+          }
+        },
+        {
           "id": "storage.wall-bed",
           "asset": "diy-wall-bed-desk",
           "name": "Wall bed 90x190 + fold-down desk",
@@ -1601,24 +1616,6 @@
             "wall": "storage.wall-1",
             "offset": 3.8,
             "elevation": 225.8
-          }
-        },
-        {
-          "id": "storage.aisle-doors",
-          "asset": "diy-aisle-doors",
-          "name": "Aisle doors (pair, open inwards)",
-          "tags": [
-            "aisle doors",
-            "doors"
-          ],
-          "position": [
-            819,
-            0,
-            130
-          ],
-          "rotation": 180,
-          "params": {
-            "width": 80
           }
         },
         {
@@ -2265,25 +2262,38 @@
           "rotation": 0
         },
         {
+          "id": "storage.ceiling-light",
+          "asset": "surface-light",
+          "name": "Ceiling light",
+          "tags": [
+            "light"
+          ],
+          "position": [
+            748,
+            277,
+            70.5
+          ],
+          "params": {
+            "diameter": 40,
+            "intensity": 20000
+          }
+        },
+        {
           "id": "storage.pegboard",
           "asset": "diy-pegboard",
-          "name": "Pegboard on posts",
+          "name": "Pegboard on posts (above the shoe bench)",
           "tags": [
             "pegboard",
             "tools wall"
           ],
           "against": {
             "wall": "storage.wall-5",
-            "offset": 161.5
+            "offset": 180.5
           },
           "params": {
-            "width": 90,
+            "width": 81,
             "ceiling": 277,
             "boards": [
-              {
-                "elevation": 40,
-                "height": 50
-              },
               {
                 "elevation": 95,
                 "height": 50
@@ -2301,20 +2311,79 @@
           }
         },
         {
-          "id": "storage.ceiling-light",
-          "asset": "surface-light",
-          "name": "Ceiling light",
+          "id": "storage.skate-bag-1",
+          "asset": "skate-bag",
+          "name": "Skate bag (figure skates inside)",
           "tags": [
-            "light"
+            "skate bag"
           ],
-          "position": [
-            748,
-            277,
-            70.5
+          "against": {
+            "wall": "storage.wall-5",
+            "offset": 181,
+            "elevation": 50,
+            "gap": 6
+          }
+        },
+        {
+          "id": "storage.skate-bag-2",
+          "asset": "skate-bag",
+          "name": "Skate bag (hockey skates inside)",
+          "tags": [
+            "skate bag",
+            "hockey skates"
           ],
+          "against": {
+            "wall": "storage.wall-5",
+            "offset": 221,
+            "elevation": 50,
+            "gap": 6
+          },
           "params": {
-            "diameter": 40,
-            "intensity": 20000
+            "flip": true
+          }
+        },
+        {
+          "id": "storage.backpack-1",
+          "asset": "backpack",
+          "name": "Mark's backpack (cream canvas, under the bench)",
+          "tags": [
+            "backpack"
+          ],
+          "against": {
+            "wall": "storage.wall-5",
+            "offset": 187.5,
+            "elevation": 34.5,
+            "gap": 11
+          },
+          "params": {
+            "pose": "lying",
+            "inward": true,
+            "slope": 21.8,
+            "color": "#d6cfae",
+            "flap": "#2f3d50",
+            "accent": "#c49a68",
+            "seed": "bp-real"
+          }
+        },
+        {
+          "id": "storage.backpack-2",
+          "asset": "backpack",
+          "name": "Backpack 2 (under the bench)",
+          "tags": [
+            "backpack"
+          ],
+          "against": {
+            "wall": "storage.wall-5",
+            "offset": 221.5,
+            "elevation": 34.5,
+            "gap": 11
+          },
+          "params": {
+            "pose": "lying",
+            "inward": true,
+            "slope": 21.8,
+            "color": "#3f4a3c",
+            "seed": "bp2"
           }
         }
       ],

@@ -2,7 +2,7 @@
   "meta": {
     "name": "Aisle 90 + end (7,290 L)",
     "kind": "saved",
-    "note": "90x190 wall bed flush against the window wall; Kallax aisle 33 cm off the hallway wall with 33 cm shelves straight against the walls there, wall to wall; 4x3s on both sides of the island, lined up (door-side cubes that face the alcove wall given up); Kallax 2x4 + 2x2 with its back against the north end of the island (~4 cm from the bed when it is down); Kallax 1x4 + 1x2 between the bed and the east Kallax; back top shelf over 1 more hole.",
+    "note": "90x190 wall bed flush against the window wall; Kallax aisle 33 cm off the hallway wall with 33 cm shelves straight against the walls there, wall to wall; 4x3s on both sides of the island, lined up (door-side cubes that face the alcove wall given up); Kallax 2x4 + 2x2 with its back against the north end of the island (~4 cm from the bed when it is down); Kallax 1x4 + 1x2 between the bed and the east Kallax; back top shelf over 1 more hole; skating corner by the window: our TJUSIG shoe bench (skate bags on top, backpacks under it) with the pegboard above; no aisle doors.",
     "location": {
       "lat": 32.0853,
       "lon": 34.7818,
@@ -1529,24 +1529,6 @@
           }
         },
         {
-          "id": "storage.aisle-doors",
-          "asset": "diy-aisle-doors",
-          "name": "Aisle doors (pair, open inwards)",
-          "tags": [
-            "aisle doors",
-            "doors"
-          ],
-          "position": [
-            817.25,
-            0,
-            113.5
-          ],
-          "rotation": 180,
-          "params": {
-            "width": 77.5
-          }
-        },
-        {
           "id": "storage.kallax-east-low",
           "asset": "ikea-kallax-112x147",
           "name": "Kallax 4x3 east wall (low)",
@@ -2344,25 +2326,53 @@
           }
         },
         {
+          "id": "storage.ceiling-light",
+          "asset": "surface-light",
+          "name": "Ceiling light",
+          "tags": [
+            "light"
+          ],
+          "position": [
+            748,
+            277,
+            65.5
+          ],
+          "params": {
+            "diameter": 40,
+            "intensity": 20000
+          }
+        },
+        {
+          "id": "storage.shoe-bench",
+          "asset": "ikea-tjusig-bench",
+          "name": "Shoe bench (TJUSIG, from the old house)",
+          "tags": [
+            "shoe rack",
+            "bench",
+            "tjusig"
+          ],
+          "against": {
+            "wall": "storage.wall-5",
+            "offset": 180.5,
+            "gap": 4.5
+          }
+        },
+        {
           "id": "storage.pegboard",
           "asset": "diy-pegboard",
-          "name": "Pegboard on posts",
+          "name": "Pegboard on posts (above the shoe bench)",
           "tags": [
             "pegboard",
             "tools wall"
           ],
           "against": {
             "wall": "storage.wall-5",
-            "offset": 171.5
+            "offset": 180.5
           },
           "params": {
-            "width": 90,
+            "width": 81,
             "ceiling": 277,
             "boards": [
-              {
-                "elevation": 40,
-                "height": 50
-              },
               {
                 "elevation": 95,
                 "height": 50
@@ -2380,20 +2390,79 @@
           }
         },
         {
-          "id": "storage.ceiling-light",
-          "asset": "surface-light",
-          "name": "Ceiling light",
+          "id": "storage.skate-bag-1",
+          "asset": "skate-bag",
+          "name": "Skate bag (figure skates inside)",
           "tags": [
-            "light"
+            "skate bag"
           ],
-          "position": [
-            748,
-            277,
-            65.5
+          "against": {
+            "wall": "storage.wall-5",
+            "offset": 181,
+            "elevation": 50,
+            "gap": 6
+          }
+        },
+        {
+          "id": "storage.skate-bag-2",
+          "asset": "skate-bag",
+          "name": "Skate bag (hockey skates inside)",
+          "tags": [
+            "skate bag",
+            "hockey skates"
           ],
+          "against": {
+            "wall": "storage.wall-5",
+            "offset": 221,
+            "elevation": 50,
+            "gap": 6
+          },
           "params": {
-            "diameter": 40,
-            "intensity": 20000
+            "flip": true
+          }
+        },
+        {
+          "id": "storage.backpack-1",
+          "asset": "backpack",
+          "name": "Mark's backpack (cream canvas, under the bench)",
+          "tags": [
+            "backpack"
+          ],
+          "against": {
+            "wall": "storage.wall-5",
+            "offset": 187.5,
+            "elevation": 34.5,
+            "gap": 11
+          },
+          "params": {
+            "pose": "lying",
+            "inward": true,
+            "slope": 21.8,
+            "color": "#d6cfae",
+            "flap": "#2f3d50",
+            "accent": "#c49a68",
+            "seed": "bp-real"
+          }
+        },
+        {
+          "id": "storage.backpack-2",
+          "asset": "backpack",
+          "name": "Backpack 2 (under the bench)",
+          "tags": [
+            "backpack"
+          ],
+          "against": {
+            "wall": "storage.wall-5",
+            "offset": 221.5,
+            "elevation": 34.5,
+            "gap": 11
+          },
+          "params": {
+            "pose": "lying",
+            "inward": true,
+            "slope": 21.8,
+            "color": "#3f4a3c",
+            "seed": "bp2"
           }
         }
       ],
