@@ -1,6 +1,6 @@
 {
   "meta": {
-    "name": "Aisle + 90 bed, Kallax 1 hole off the wall",
+    "name": "Aisle + 90 bed, Kallax 1 hole off the wall (5,350 L)",
     "kind": "saved",
     "note": "90x190 wall bed; the Kallax 4x3s stand one hole further from the hallway wall (block ends at the alcove corner); 55 cm shelves straight against the walls at the end, wall to wall, in front of no cube: every Kallax hole is usable; 4x3s on both sides of the island (the block ends exactly at the alcove corner).",
     "location": {
@@ -1528,6 +1528,24 @@
           }
         },
         {
+          "id": "storage.aisle-doors",
+          "asset": "diy-aisle-doors",
+          "name": "Aisle doors (pair, open inwards)",
+          "tags": [
+            "aisle doors",
+            "doors"
+          ],
+          "position": [
+            819,
+            0,
+            130
+          ],
+          "rotation": 180,
+          "params": {
+            "width": 80
+          }
+        },
+        {
           "id": "storage.kallax-east-low",
           "asset": "ikea-kallax-112x147",
           "name": "Kallax 4x3 east wall (low)",
@@ -1893,6 +1911,27 @@
           "rotation": 90
         },
         {
+          "id": "storage.drying-rack",
+          "asset": "diy-drying-rack",
+          "name": "Pull-down drying rack (on the Kallax)",
+          "tags": [
+            "drying rack",
+            "laundry"
+          ],
+          "position": [
+            739.75,
+            0,
+            130
+          ],
+          "rotation": 180,
+          "params": {
+            "width": 74,
+            "length": 110,
+            "elevation": 120,
+            "rods": 12
+          }
+        },
+        {
           "id": "storage.wall-shelf-1",
           "asset": "box",
           "name": "Shelf straight against the walls at the end (55 deep, wall to wall, on cleats)",
@@ -2123,7 +2162,7 @@
             159
           ],
           "params": {
-            "diameter": 30,
+            "diameter": 22,
             "intensity": 9000
           }
         },

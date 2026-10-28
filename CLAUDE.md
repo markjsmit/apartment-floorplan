@@ -122,6 +122,10 @@ Ids are globally unique and room-prefixed: `bedroom.kallax-1`, `storage.door`.
 
 ## Other commands
 
+- `npm run -s storage -- [room] [--names]` — usable storage in litres per version (`src/model/storage.ts`: reachable
+  Kallax cubes, reachable shelf space + the floor under the lowest shelf, tops up to the ceiling, bed base). `--names`
+  writes "(… L)" behind the names of the saved versions about that room; rerun it after changing one.
+
 - `npx vitest run` — tests (model: schema, geometry, assets/states, collision, versions, bundle/sanity, url, sun).
 - `npm run build` — static site into `dist/`. `npm run release` — check + test + build + publish to `gh-pages`
   (needs a clean git tree; **only when Mark asks** — it publishes). Public URL is in `site.config.json`.

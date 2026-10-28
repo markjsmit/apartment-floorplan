@@ -1,0 +1,19 @@
+{
+  "id": "diy-drying-rack",
+  "name": "Pull-down drying rack",
+  "tags": ["drying rack", "laundry", "clothes rack", "diy"],
+  "description": "Wall/cabinet-mounted fold-down clothes drying rack (aluminium rods in a frame, hinged along the bottom edge, two side chains). Folded it lies flat against the panel; pulled down it sticks out horizontally to hang clothes on. Typical sizes 60-80 wide, 40-60 out (e.g. the common Brabantia / IKEA-style pull-down airers); generic planning model. Double-click to pull down / fold up (the whole rack, chains included).",
+  "source": {
+    "kind": "procedural",
+    "generator": "drying-rack",
+    "notes": "Generic dimensions, not a specific product.",
+    "license": "self-made"
+  },
+  "params": {
+    "width": { "default": 60, "description": "cm" },
+    "length": { "default": 50, "description": "cm out from the panel when pulled down" },
+    "elevation": { "default": 150, "description": "cm, hinge (bottom edge) height" },
+    "rods": { "default": 6, "description": "number of rods" }
+  },
+  "defaultState": "folded"
+}

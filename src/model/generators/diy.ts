@@ -238,3 +238,73 @@ export function wallBedDesk(params: Record<string, unknown>): Generated {
     interactions,
   };
 }
+
+/**
+ * A pair of doors closing off an aisle between two Kallax rows, hinged on the outer edges, both opening inwards (-z, into
+ * the aisle) so they lie along the Kallax fronts. Origin: centre of the doorway at floor level, front (+z) = room side.
+ * Params: width (80, the gap), height (222, floor gap 1 cm), board (1.8), material. Double-clicking either leaf opens both.
+ */
+export function aisleDoors(params: Record<string, unknown>): Generated {
+  const W = num(params.width, 80);
+  const H = num(params.height, 222);
+  const t = num(params.board, 1.8);
+  const material = String(params.material ?? 'white-paint');
+  const lw = W / 2 - 0.2;
+  const yc = 1 + H / 2;
+  const parts: Part[] = [];
+  const open: Record<string, PartOverride> = {};
+  for (const side of [-1, 1]) {
+    const s = side < 0 ? 'left' : 'right';
+    const pivot: Vec3 = [(side * W) / 2, yc, 0];
+    // one section for both leaves: double-clicking either opens / closes both (and walking follows the item's state)
+    const common = { rotation: [0, 0, 0] as Vec3, pivot, castShadow: true, glass: false, section: 'doors' };
+    parts.push({ id: `leaf-${s}`, tags: ['door', 'leaf'], geometry: { type: 'box', size: [lw, H, t] }, position: [(side * W) / 4, yc, t / 2], material, ...common });
+    parts.push({ id: `handle-${s}`, tags: ['door', 'handle'], geometry: { type: 'box', size: [1.6, 14, 2.2] }, position: [side * 4, 105, t + 1.1], color: '#b9bbbd', ...common });
+    // left turns +90 (free edge to -z), right -90
+    open[`leaf-${s}`] = { rotation: [0, -side * 90, 0] };
+    open[`handle-${s}`] = { rotation: [0, -side * 90, 0] };
+  }
+  return {
+    parts,
+    states: [{ id: 'closed', name: 'Closed', parts: {} }, { id: 'open', name: 'Open', parts: open }],
+    interactions: parts.map((p) => ({ part: p.id, action: 'cycleStates' as const })),
+  };
+}
+
+/**
+ * Pull-down clothes drying rack screwed to a cabinet side: a frame of rods hinged along its bottom edge. Folded it stands
+ * flat against the panel (bottom at `elevation`, `length` up); pulled down it sticks out horizontally, `length` from the
+ * panel, held by two side chains. Params: width (60), length (50), elevation (hinge height, 150), rods (6).
+ */
+export function dryingRack(params: Record<string, unknown>): Generated {
+  const W = num(params.width, 60);
+  const L = num(params.length, 50);
+  const y0 = num(params.elevation, 150);
+  const n = Math.max(2, Math.round(num(params.rods, 6)));
+  const pivot: Vec3 = [0, y0, 1.5];
+  const metal = { color: '#d8d9db', castShadow: true, glass: false };
+  const p = (id: string, size: Vec3, position: Vec3, extra: Partial<Part> = {}): Part => ({
+    id, tags: ['drying rack'], geometry: { type: 'box', size }, position, rotation: [0, 0, 0], section: 'rack', ...metal, ...extra,
+  });
+  const frame: Part[] = [
+    p('side-left', [1.6, L, 1.6], [-W / 2 + 0.8, y0 + L / 2, 1.5], { pivot }),
+    p('side-right', [1.6, L, 1.6], [W / 2 - 0.8, y0 + L / 2, 1.5], { pivot }),
+    p('front-bar', [W, 1.6, 1.6], [0, y0 + L - 0.8, 1.5], { pivot }),
+    ...Array.from({ length: n }, (_, i) => p(`rod-${i + 1}`, [W - 3.2, 0.8, 0.8], [0, y0 + ((i + 1) * (L - 1.6)) / (n + 1), 1.5], { pivot })),
+  ];
+  const parts: Part[] = [
+    p('mount-rail', [W, 3, 1.2], [0, y0 - 1.5, 0.6], { color: '#bfc1c4' }),
+    ...frame,
+    // side chains: only when pulled down, from the top of the panel to the frame's front corners
+    ...[-1, 1].map((side) => p(`chain-${side < 0 ? 'left' : 'right'}`, [0.4, Math.hypot(L, L), 0.4], [side * (W / 2 - 0.8), y0 + L / 2, L / 2 + 1.5],
+      { rotation: [-45, 0, 0], hidden: true, color: '#9a9c9f' })),
+  ];
+  const down: Record<string, PartOverride> = Object.fromEntries(frame.map((f) => [f.id, { rotation: [90, 0, 0] as Vec3 }]));
+  down['chain-left'] = { visible: true };
+  down['chain-right'] = { visible: true };
+  return {
+    parts,
+    states: [{ id: 'folded', name: 'Folded up', parts: {} }, { id: 'down', name: 'Pulled down', parts: down }],
+    interactions: frame.map((f) => ({ part: f.id, action: 'cycleStates' as const })),
+  };
+}

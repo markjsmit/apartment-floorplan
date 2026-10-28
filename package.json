@@ -11,6 +11,7 @@
     "check": "tsx tools/check.ts",
     "ui": "tsx tools/ui.ts",
     "snap": "tsx tools/snap.ts",
+    "storage": "tsx tools/storage.ts",
     "release": "tsx tools/release.ts",
     "versions": "tsx tools/version.ts"
   },

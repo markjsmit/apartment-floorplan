@@ -1,0 +1,19 @@
+{
+  "id": "diy-aisle-doors",
+  "name": "Aisle doors (DIY pair)",
+  "tags": ["door", "doors", "aisle", "diy"],
+  "description": "Two leaves that close off the aisle between two Kallax rows, floor to just under the top board. Hinged on the outer edges (screwed to the Kallax side panels or fronts), both open inwards into the aisle and lie along the Kallax. 18 mm white board, a bar handle on each leaf. Double-click either leaf: both open. Origin: centre of the doorway, front (+z) = the room side.",
+  "source": {
+    "kind": "procedural",
+    "generator": "aisle-doors",
+    "notes": "Self-made planning model: two boards of (width/2 - 0.2) x height x 1.8 with a 1 cm floor gap, hinges on the outside edges.",
+    "license": "self-made"
+  },
+  "params": {
+    "width": { "default": 80, "description": "cm, the gap between the Kallax rows" },
+    "height": { "default": 222, "description": "cm leaf height (floor gap 1 cm)" },
+    "board": { "default": 1.8, "description": "cm leaf thickness" },
+    "material": { "default": "white-paint", "description": "texture id" }
+  },
+  "defaultState": "closed"
+}

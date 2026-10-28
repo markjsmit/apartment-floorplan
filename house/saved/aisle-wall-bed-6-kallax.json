@@ -1,6 +1,6 @@
 {
   "meta": {
-    "name": "Aisle + wall bed (3x3 door side)",
+    "name": "Aisle + wall bed (3x3 door side) (5,610 L)",
     "kind": "saved",
     "note": "140 wall bed on the east wall; Kallax aisle: our 4 Kallax 4x3 + 2 new Kallax 3x3 on the door side (inner one sticks out 1 hole, so nothing faces the alcove wall); 20 cm off the hallway wall; wall shelves at the end of the aisle; top as in the original Kallax room: suitcase board at the front with a little wall, a hole in the middle, a shelf at the end.",
     "location": {
@@ -1527,6 +1527,24 @@
           }
         },
         {
+          "id": "storage.aisle-doors",
+          "asset": "diy-aisle-doors",
+          "name": "Aisle doors (pair, open inwards)",
+          "tags": [
+            "aisle doors",
+            "doors"
+          ],
+          "position": [
+            819,
+            0,
+            165.5
+          ],
+          "rotation": 180,
+          "params": {
+            "width": 80
+          }
+        },
+        {
           "id": "storage.kallax-east-low",
           "asset": "ikea-kallax-112x147",
           "name": "Kallax 4x3 east wall (low)",
@@ -1881,6 +1899,27 @@
           "rotation": 90
         },
         {
+          "id": "storage.drying-rack",
+          "asset": "diy-drying-rack",
+          "name": "Pull-down drying rack (on the Kallax)",
+          "tags": [
+            "drying rack",
+            "laundry"
+          ],
+          "position": [
+            739.75,
+            0,
+            165.5
+          ],
+          "rotation": 180,
+          "params": {
+            "width": 74,
+            "length": 118,
+            "elevation": 120,
+            "rods": 13
+          }
+        },
+        {
           "id": "storage.wall-shelf-1",
           "asset": "box",
           "name": "Wall shelf behind the Kallax ends (20 deep)",
@@ -2191,7 +2230,7 @@
             194.5
           ],
           "params": {
-            "diameter": 30,
+            "diameter": 22,
             "intensity": 9000
           }
         },
