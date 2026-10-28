@@ -1915,10 +1915,10 @@
           "rotation": 180,
           "params": {
             "width": 74,
-            "length": 65,
+            "length": 90,
             "elevation": 90,
             "standoff": 2.5,
-            "rods": 7
+            "rods": 10
           }
         },
         {
