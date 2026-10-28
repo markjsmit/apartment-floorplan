@@ -9,3 +9,7 @@ dist
 
 # private photos (people in them did not consent) — keep local only
 sources/
+
+# credentials (browser cookies etc.)
+*.local.txt
+*cookie*
