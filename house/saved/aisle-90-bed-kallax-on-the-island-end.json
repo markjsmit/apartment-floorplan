@@ -2,7 +2,7 @@
   "meta": {
     "name": "Aisle + 90 bed + Kallax on the island end",
     "kind": "saved",
-    "note": "90x190 wall bed flush against the window wall; the aisle (4x3s on both sides of the island, door-side cubes that face the alcove wall given up) 33 cm off the hallway wall with 33 cm shelves on the walls there; a Kallax 1x4 + 1x2 column between the bed and the east Kallax; a Kallax 2x4 standing + 2x2 on top with its back against the north end of the island (same width as the island, faces the bed/window side, ~4 cm from the bed when it is down); suitcase board moved forward over it.",
+    "note": "90x190 wall bed flush against the window wall; the Kallax aisle right up to the hallway wall (4x3s on both sides of the island, lined up; the door-side cubes that face the alcove wall are given up); a Kallax 2x4 + 2x2 with its back against the north end of the island (faces the bed/window side); a Kallax 1x4 + 1x2 column between the bed and the east wall Kallax gap; suitcase board over the island end.",
     "location": {
       "lat": 32.0853,
       "lon": 34.7818,
@@ -1577,7 +1577,7 @@
           },
           "against": {
             "wall": "storage.wall-1",
-            "offset": 137
+            "offset": 170
           }
         },
         {
@@ -1636,7 +1636,7 @@
           },
           "against": {
             "wall": "storage.wall-1",
-            "offset": 137,
+            "offset": 170,
             "elevation": 112
           }
         },
@@ -1691,7 +1691,7 @@
           "position": [
             740,
             0,
-            226
+            259
           ],
           "rotation": 90
         },
@@ -1752,7 +1752,7 @@
           "position": [
             740,
             112,
-            226
+            259
           ],
           "rotation": 90
         },
@@ -1807,7 +1807,7 @@
           "position": [
             739.5,
             0,
-            226
+            259
           ],
           "rotation": -90
         },
@@ -1868,7 +1868,7 @@
           "position": [
             739.5,
             112,
-            226
+            259
           ],
           "rotation": -90
         },
@@ -1888,7 +1888,7 @@
           "position": [
             739.5,
             0,
-            226
+            259
           ],
           "rotation": 90
         },
@@ -1975,7 +1975,7 @@
           "position": [
             740,
             0,
-            152.5
+            185.5
           ],
           "rotation": 180,
           "params": {
@@ -2028,7 +2028,7 @@
           "position": [
             740,
             147,
-            152.5
+            185.5
           ],
           "rotation": 180,
           "params": {
@@ -2049,82 +2049,6 @@
           }
         },
         {
-          "id": "storage.wall-shelf-1",
-          "asset": "box",
-          "name": "Shelf against the hallway wall (33 deep, wall to wall, on cleats)",
-          "tags": [
-            "shelf"
-          ],
-          "params": {
-            "width": 200,
-            "height": 1.8,
-            "depth": 33,
-            "material": "birch-ply"
-          },
-          "against": {
-            "wall": "storage.wall-2",
-            "offset": 0,
-            "elevation": 74.25
-          }
-        },
-        {
-          "id": "storage.wall-shelf-2",
-          "asset": "box",
-          "name": "Shelf against the hallway wall (33 deep, wall to wall, on cleats)",
-          "tags": [
-            "shelf"
-          ],
-          "params": {
-            "width": 200,
-            "height": 1.8,
-            "depth": 33,
-            "material": "birch-ply"
-          },
-          "against": {
-            "wall": "storage.wall-2",
-            "offset": 0,
-            "elevation": 116.25
-          }
-        },
-        {
-          "id": "storage.wall-shelf-3",
-          "asset": "box",
-          "name": "Shelf against the hallway wall (33 deep, wall to wall, on cleats)",
-          "tags": [
-            "shelf"
-          ],
-          "params": {
-            "width": 200,
-            "height": 1.8,
-            "depth": 33,
-            "material": "birch-ply"
-          },
-          "against": {
-            "wall": "storage.wall-2",
-            "offset": 0,
-            "elevation": 151.25
-          }
-        },
-        {
-          "id": "storage.wall-shelf-4",
-          "asset": "box",
-          "name": "Shelf against the hallway wall (33 deep, wall to wall, on cleats)",
-          "tags": [
-            "shelf"
-          ],
-          "params": {
-            "width": 200,
-            "height": 1.8,
-            "depth": 33,
-            "material": "birch-ply"
-          },
-          "against": {
-            "wall": "storage.wall-2",
-            "offset": 0,
-            "elevation": 186.25
-          }
-        },
-        {
           "id": "storage.top-front",
           "asset": "box",
           "name": "Top board at the front (suitcases, 58 deep)",
@@ -2140,7 +2064,7 @@
           "position": [
             799.25,
             224,
-            113.5
+            146.5
           ],
           "rotation": 0
         },
@@ -2160,7 +2084,7 @@
           "position": [
             799.25,
             225.8,
-            169.7
+            202.7
           ],
           "rotation": 0
         },
@@ -2174,13 +2098,13 @@
           "params": {
             "width": 197.5,
             "height": 1.8,
-            "depth": 33,
+            "depth": 75,
             "material": "birch-ply"
           },
           "position": [
             799.25,
             224,
-            299.5
+            257.5
           ],
           "rotation": 0
         },
@@ -2197,7 +2121,7 @@
           "position": [
             739.75,
             225.8,
-            169.5
+            202.5
           ],
           "rotation": 180
         },
@@ -2214,7 +2138,7 @@
           "position": [
             819,
             225.8,
-            169.5
+            202.5
           ],
           "rotation": 180
         },
@@ -2223,14 +2147,14 @@
           "asset": "stuff",
           "params": {
             "width": 76.5,
-            "depth": 126,
+            "depth": 51,
             "height": 44,
             "seed": "storage.stuff-mid-top"
           },
           "position": [
             739.75,
             224,
-            172.5
+            205.5
           ],
           "rotation": 0
         },
@@ -2239,14 +2163,14 @@
           "asset": "stuff",
           "params": {
             "width": 37,
-            "depth": 126,
+            "depth": 51,
             "height": 44,
             "seed": "storage.stuff-east-top"
           },
           "position": [
             878.5,
             224,
-            172.5
+            205.5
           ],
           "rotation": 0
         },
@@ -2255,7 +2179,7 @@
           "asset": "stuff",
           "params": {
             "width": 194.5,
-            "depth": 31,
+            "depth": 73,
             "height": 44,
             "seed": "storage.stuff-end-top"
           },
@@ -2276,7 +2200,7 @@
           "position": [
             819,
             224,
-            142.5
+            175.5
           ],
           "params": {
             "diameter": 30,
@@ -2324,10 +2248,12 @@
           "tags": [
             "ironing board"
           ],
-          "against": {
-            "wall": "storage.wall-5",
-            "offset": 83.5
-          }
+          "position": [
+            878,
+            0,
+            155.5
+          ],
+          "rotation": 0
         },
         {
           "id": "storage.pegboard",

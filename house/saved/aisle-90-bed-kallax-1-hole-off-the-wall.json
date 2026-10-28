@@ -2018,13 +2018,13 @@
           "params": {
             "width": 197.5,
             "height": 1.8,
-            "depth": 55.5,
+            "depth": 90.5,
             "material": "birch-ply"
           },
           "position": [
             799.25,
             224,
-            277
+            242
           ],
           "rotation": 0
         },
@@ -2067,7 +2067,7 @@
           "asset": "stuff",
           "params": {
             "width": 76.5,
-            "depth": 87,
+            "depth": 52,
             "height": 44,
             "seed": "storage.stuff-mid-top"
           },
@@ -2083,7 +2083,7 @@
           "asset": "stuff",
           "params": {
             "width": 37,
-            "depth": 87,
+            "depth": 52,
             "height": 44,
             "seed": "storage.stuff-east-top"
           },
@@ -2099,7 +2099,7 @@
           "asset": "stuff",
           "params": {
             "width": 194.5,
-            "depth": 53.5,
+            "depth": 88.5,
             "height": 44,
             "seed": "storage.stuff-end-top"
           },
