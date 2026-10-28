@@ -548,14 +548,14 @@
       "footprint": [
         [
           0,
-          -220
+          -290
         ],
         [
-          585,
-          -220
+          370,
+          -290
         ],
         [
-          585,
+          370,
           -20
         ],
         [
@@ -615,7 +615,7 @@
           "type": "opening",
           "wall": "balcony.wall-0",
           "offset": 0,
-          "width": 585,
+          "width": 370,
           "height": 270,
           "name": "Open side (railing)",
           "tags": [
@@ -628,7 +628,7 @@
           "type": "opening",
           "wall": "balcony.wall-3",
           "offset": 0,
-          "width": 200,
+          "width": 270,
           "height": 270,
           "name": "Open end (railing)",
           "tags": [
@@ -636,23 +636,10 @@
           ]
         },
         {
-          "id": "balcony.sofa-window",
-          "type": "window",
-          "wall": "balcony.wall-2",
-          "offset": 50,
-          "width": 120,
-          "height": 125,
-          "sill": 97,
-          "name": "Sofa window (from outside)",
-          "tags": [
-            "window"
-          ]
-        },
-        {
           "id": "balcony.door",
           "type": "door",
           "wall": "balcony.wall-2",
-          "offset": 235,
+          "offset": 20,
           "width": 280,
           "height": 222,
           "name": "Balcony door",
@@ -676,12 +663,12 @@
             "handrail"
           ],
           "position": [
-            292.5,
+            185.0,
             106,
-            -220
+            -290
           ],
           "params": {
-            "width": 585,
+            "width": 370,
             "height": 4,
             "depth": 5,
             "material": "aluminium-grey"
@@ -699,10 +686,10 @@
           "position": [
             0,
             106,
-            -120
+            -155.0
           ],
           "params": {
-            "width": 200,
+            "width": 270,
             "height": 4,
             "depth": 5,
             "material": "aluminium-grey"
@@ -722,15 +709,15 @@
             "glass"
           ],
           "position": [
-            292.5,
+            185.0,
             5,
-            -219
+            -289
           ],
           "params": {
-            "width": 585,
+            "width": 370,
             "height": 100,
             "depth": 1.2,
-            "material": "glass-frosted"
+            "material": "glass"
           },
           "builtIn": true
         },
@@ -745,13 +732,13 @@
           "position": [
             1,
             5,
-            -120
+            -155.0
           ],
           "params": {
-            "width": 200,
+            "width": 270,
             "height": 100,
             "depth": 1.2,
-            "material": "glass-frosted"
+            "material": "glass"
           },
           "rotation": 90,
           "allowOverlap": [
@@ -763,7 +750,7 @@
       "assumptions": [
         {
           "path": "footprint",
-          "note": "NOT measured: ~585 x 200 from the photos/video (balcony along the living room facade, glass railing on the open sides)"
+          "note": "NOT measured: Mark remembers ~10 m2; it ends at the stone side wall right after the door (photos 160716-18; the sofa window looks past it, 160714) -> 370 wide, so ~270 deep. Glass railing on the north and west"
         }
       ]
     },
