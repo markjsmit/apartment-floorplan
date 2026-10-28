@@ -7,17 +7,26 @@ import {
 import { boxWithCmUV } from './cmGeometry';
 import panoUrl from '../../assets/outside/city-pano.jpg?url';
 import panoAlphaUrl from '../../assets/outside/city-pano-alpha.jpg?url';
+import groundUrl from '../../assets/outside/city-ground.jpg?url';
 import stoneUrl from '../../assets/outside/facade-stone.jpg?url';
 import glassUrl from '../../assets/outside/facade-glass.jpg?url';
 
-// The view from the 27th floor (assets/outside/source.json): a city panorama far away, drawn behind everything as a
-// background that moves with the camera (no parallax, like the real horizon), and two nearby towers as plain boxes
-// in house space (procedural facades, placed after the survey photos). The panorama covers 180° (west -> north -> east) and is mirrored for the south, which no window sees.
+// The view from the 27th floor (assets/outside/source.json): a city panorama far away plus the rooftops below it,
+// drawn behind everything as a background that moves with the camera (no parallax, like the real horizon), and two
+// nearby towers as plain boxes in house space (procedural facades, placed after the survey photos). The panorama
+// covers 180° (west -> north -> east) and is mirrored for the south, which no window sees.
 
 const R = 20000;
-// rows of the panorama are linear in tan(elevation): tan +0.2 at the top, -0.585 at the bottom (see source.json)
+// rows of the panorama are linear in tan(elevation): tan +0.2 at the top, 1304 rows per unit (see source.json); it
+// stops where the photos do (480 rows, ~ -9.5°), and the rooftops below are a ground disc meeting its bottom edge
 const TOP = R * 0.2;
-const BOTTOM = -R * (1024 / 1304 - 0.2);
+const BOTTOM = R * (0.2 - 480 / 1304);
+// the real ground is ~87 m under the eye; the disc is that ground scaled down (it moves with the eye, like the rest
+// of the background: walking a few metres hardly shifts roofs 90 m down), rooftop tile = 200 m
+const GROUND_BELOW_EYE = 8700;
+const GROUND_TILE = 20000 * (-BOTTOM / GROUND_BELOW_EYE);
+// what the far rooftops fade into at the seam (the panorama's bottom rows)
+const SEAM = new Color('#7e7d76');
 const DEG = Math.PI / 180;
 
 const loader = new TextureLoader();
@@ -50,7 +59,21 @@ export function Outside({ northAngle, daylight }: { northAngle: number; daylight
     alpha.repeat.set(2, 1);
     // background: drawn first, never hides anything (no depth test), cut out along the skyline so the sky shows above
     const pano = new MeshBasicMaterial({ map, alphaMap: alpha, alphaTest: 0.5, depthTest: false, depthWrite: false, side: DoubleSide, fog: false });
-    const cap = new MeshBasicMaterial({ color: '#8e8a80', depthTest: false, depthWrite: false, side: DoubleSide, fog: false });
+    const groundMap = load(groundUrl, true, RepeatWrapping);
+    groundMap.wrapT = RepeatWrapping;
+    groundMap.anisotropy = 8;
+    groundMap.repeat.set((2 * R) / GROUND_TILE, (2 * R) / GROUND_TILE);
+    const cap = new MeshBasicMaterial({ map: groundMap, depthTest: false, depthWrite: false, side: DoubleSide, fog: false });
+    // haze: the further out (the nearer the horizon), the more the roofs fade into the panorama's bottom colour
+    cap.onBeforeCompile = (shader) => {
+      shader.uniforms.seam = { value: SEAM };
+      shader.vertexShader = shader.vertexShader
+        .replace('#include <common>', '#include <common>\nvarying float vRim;')
+        .replace('#include <begin_vertex>', `#include <begin_vertex>\nvRim = length(position.xy) / ${R.toFixed(1)};`);
+      shader.fragmentShader = shader.fragmentShader
+        .replace('#include <common>', '#include <common>\nvarying float vRim;\nuniform vec3 seam;')
+        .replace('#include <opaque_fragment>', 'outgoingLight = mix(outgoingLight, seam * diffuse, smoothstep(0.35, 1.0, vRim));\n#include <opaque_fragment>');
+    };
     const towers = TOWERS.map((t) => {
       const tex = load(t.url, true, RepeatWrapping);
       tex.repeat.set(1 / t.tile[0], 1 / t.tile[1]);
@@ -63,13 +86,13 @@ export function Outside({ northAngle, daylight }: { northAngle: number; daylight
     return { pano, cap, towers };
   }, []);
   const cylinder = useMemo(() => new CylinderGeometry(R, R, TOP - BOTTOM, 96, 1, true, Math.PI / 2, Math.PI * 2), []);
-  const disc = useMemo(() => new CircleGeometry(R, 48), []);
+  const disc = useMemo(() => new CircleGeometry(R, 64), []);
 
   // dim the city with the daylight (the photos are an overcast afternoon); at night only a faint glow is left
   useEffect(() => {
     const k = 0.1 + 0.9 * Math.min(1, daylight / 0.8);
     pano.color = new Color(k, k * 0.99 + 0.01 * (1 - k), k * 0.97 + 0.05 * (1 - k));
-    cap.color = new Color('#8e8a80').multiplyScalar(k);
+    cap.color = new Color(k, k, k);
   }, [daylight, pano, cap]);
 
   // the background stays centred on the eye: the horizon is always at eye height and never comes nearer

@@ -1,5 +1,5 @@
 {
-  "description": "The view from the flat (27th floor, Tel Aviv): city-pano.jpg = 180\u00b0 of city (west -> north -> east), rows linear in tan(elevation) with the horizon at row 261 of 1024 (tan +0.2 at the top, 1304 px per unit tan), built from crops of the survey photos 20261027_160717/160719/160720 (balcony); city-pano-alpha.jpg = its skyline mask; facade-stone.jpg / facade-glass.jpg = self-made procedural facades (CC0) for the two nearby towers seen in 160703/160717 and 160659/160723.",
+  "description": "The view from the flat (27th floor, Tel Aviv): city-pano.jpg = 180\u00b0 of city (west -> north -> east) down to the balcony railing (~ -9.5\u00b0), rows linear in tan(elevation): tan +0.2 at the top, 1304 px per unit tan (horizon at row 261), built from crops of the survey photos 20261027_160717/160719/160720 (balcony); city-pano-alpha.jpg = its skyline mask; city-ground.jpg = self-made procedural rooftops seen from above (200 x 200 m tile: flat light roofs, solar water heaters, street trees); facade-stone.jpg / facade-glass.jpg = self-made procedural facades for the two nearby towers seen in 160703/160717 and 160659/160723.",
   "source": "Mark's own photos (sources/new house full/around the house), cropped and blended by Claude",
-  "license": "Mark's own photos, used with permission in this repo"
+  "license": "Mark's own photos (used with permission in this repo); the procedural images are self-made, CC0"
 }
