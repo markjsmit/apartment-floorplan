@@ -21,7 +21,8 @@ function dims(params: Record<string, unknown>) {
 }
 
 /**
- * Door frame + leaf. `hinge`: left | right, seen from the room the door belongs to; `swing`: in (into that room) | out.
+ * Door frame + leaf. `hinge`: left | right, seen from the room the door belongs to; `swing`: in (into that room) | out;
+ * `leaf`: white (default) | frosted-glass.
  * Built hinged left, swinging in, then mirrored.
  */
 export function door(params: Record<string, unknown>): Part[] {
@@ -58,7 +59,10 @@ function doorLeftIn(params: Record<string, unknown>): Part[] {
     box({ id: 'casing-left-out', tags: ['frame', 'casing'], size: [7, H + 6, 1.5], position: [-W / 2 + F - 3.5, (H + 6) / 2, -t - 0.75], material: 'white-paint' }),
     box({ id: 'casing-right-out', tags: ['frame', 'casing'], size: [7, H + 6, 1.5], position: [W / 2 - F + 3.5, (H + 6) / 2, -t - 0.75], material: 'white-paint' }),
     box({ id: 'casing-top-out', tags: ['frame', 'casing'], size: [W - 2 * F + 14, 7, 1.5], position: [0, H + 6 - 3.5, -t - 0.75], material: 'white-paint' }),
-    box({ id: 'leaf', tags: ['door leaf', 'door'], size: [leafW, leafH, 4], position: [-W / 2 + F + 0.3 + leafW / 2, 0.5 + leafH / 2, -2], material: 'white-laminate', pivot: hinge }),
+    box({
+      id: 'leaf', tags: ['door leaf', 'door'], size: [leafW, leafH, 4], position: [-W / 2 + F + 0.3 + leafW / 2, 0.5 + leafH / 2, -2], pivot: hinge,
+      ...(params.leaf === 'frosted-glass' ? { material: 'glass-frosted', glass: true } : { material: 'white-laminate' }),
+    }),
     // stainless lever handles on round roses, and a key rose below (as on the doors in the survey photos)
     ...lever('handle-in', handleX, 1, hinge),
     ...lever('handle-out', handleX, -1, hinge),

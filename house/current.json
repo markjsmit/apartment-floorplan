@@ -2617,13 +2617,28 @@
           }
         },
         {
+          "id": "bedroom.ensuite-pane",
+          "type": "opening",
+          "wall": "bedroom.wall-4",
+          "offset": 80,
+          "width": 60,
+          "height": 238,
+          "name": "Frosted glass panel (en-suite)",
+          "tags": [
+            "glass panel",
+            "frosted glass"
+          ]
+        },
+        {
           "id": "bedroom.ensuite-door",
           "params": {
-            "hinge": "left"
+            "hinge": "left",
+            "swing": "out",
+            "leaf": "frosted-glass"
           },
           "type": "door",
           "wall": "bedroom.wall-4",
-          "offset": 38,
+          "offset": 10,
           "width": 70,
           "height": 205,
           "asset": "door-basic",
@@ -2659,8 +2674,51 @@
           ]
         }
       ],
-      "items": [],
+      "items": [
+        {
+          "id": "bedroom.vanity",
+          "asset": "bathroom-vanity",
+          "name": "Vanity with mirror (entry)",
+          "tags": [
+            "vanity",
+            "sink",
+            "mirror"
+          ],
+          "against": {
+            "wall": "bedroom.wall-7",
+            "offset": 0
+          },
+          "params": {
+            "width": 56
+          },
+          "builtIn": true
+        },
+        {
+          "id": "bedroom.mirror-light",
+          "asset": "surface-light",
+          "name": "Light over the mirror",
+          "tags": [
+            "light",
+            "mirror light"
+          ],
+          "position": [
+            830,
+            228,
+            496
+          ],
+          "params": {
+            "diameter": 10,
+            "height": 3,
+            "intensity": 8000
+          },
+          "builtIn": true
+        }
+      ],
       "assumptions": [
+        {
+          "path": "items[bedroom.vanity]",
+          "note": "the en-suite's vanity + mirror stand in the entry, on the door wall south of the bedroom door (photos 160859(0), 160900, video 57-60 s); ~56 wide"
+        },
         {
           "path": "footprint",
           "note": "bedroom measured 3.08 x 4.06 (notes); the entry (door from the hallway, shoe-rack recess, closet and en-suite doors) is from the photos/video, not measured"
@@ -2813,19 +2871,19 @@
             "depth": 40,
             "sections": [
               {
-                "w": 80,
-                "kind": "hang2"
-              },
-              {
-                "w": 75,
+                "w": 70,
                 "kind": "drawers"
               },
               {
-                "w": 60,
-                "kind": "shelves"
+                "w": 70,
+                "kind": "drawers"
               },
               {
-                "w": 60,
+                "w": 70,
+                "kind": "drawers"
+              },
+              {
+                "w": 65,
                 "kind": "hang"
               }
             ]
@@ -2855,7 +2913,7 @@
               },
               {
                 "w": 95,
-                "kind": "hang2"
+                "kind": "hang"
               }
             ]
           },
@@ -2869,7 +2927,7 @@
         },
         {
           "path": "items",
-          "note": "closet system stays (Mark); section widths from the photos, not measured"
+          "note": "closet system stays (Mark): east wall = top shelf + rail over 2-drawer units, door wall = top shelf + one long rail (photos 160841-50); widths not measured"
         }
       ]
     },
@@ -2909,24 +2967,23 @@
       "ceiling": {
         "material": "white-paint"
       },
-      "wallMaterial": "white-paint",
+      "wallMaterial": "tiles-dark-grey",
       "walls": [
         {
           "id": "ensuite.wall-0",
           "edge": 0,
           "tags": [
-            "door wall"
+            "door wall",
+            "glass wall"
           ]
         },
         {
           "id": "ensuite.wall-1",
           "edge": 1,
           "tags": [
-            "toilet wall",
-            "tiled wall",
-            "mamad wall"
+            "mamad wall",
+            "tiled wall"
           ],
-          "material": "tiles-dark-grey",
           "thickness": 25
         },
         {
@@ -2935,23 +2992,37 @@
           "tags": [
             "shower wall",
             "tiled wall"
-          ],
-          "material": "tiles-dark-grey"
+          ]
         },
         {
           "id": "ensuite.wall-3",
           "edge": 3,
           "tags": [
-            "vanity wall"
+            "toilet wall",
+            "ledge wall",
+            "tiled wall"
           ]
         }
       ],
       "openings": [
         {
+          "id": "ensuite.pane",
+          "type": "opening",
+          "wall": "ensuite.wall-0",
+          "offset": 0,
+          "width": 60,
+          "height": 238,
+          "name": "Frosted glass panel",
+          "tags": [
+            "glass panel",
+            "frosted glass"
+          ]
+        },
+        {
           "id": "ensuite.door",
           "type": "door",
           "wall": "ensuite.wall-0",
-          "offset": 32,
+          "offset": 60,
           "width": 70,
           "height": 205,
           "tags": [
@@ -2965,20 +3036,22 @@
       ],
       "items": [
         {
-          "id": "ensuite.vanity",
-          "asset": "bathroom-vanity",
-          "name": "Vanity with mirror",
+          "id": "ensuite.glass-pane",
+          "asset": "box",
+          "name": "Frosted glass panel",
           "tags": [
-            "vanity",
-            "sink",
-            "mirror"
+            "glass panel",
+            "frosted glass"
           ],
-          "against": {
-            "wall": "ensuite.wall-3",
-            "offset": 150
-          },
           "params": {
-            "width": 70
+            "width": 60,
+            "height": 238,
+            "depth": 1.5,
+            "material": "glass-frosted"
+          },
+          "against": {
+            "wall": "ensuite.wall-0",
+            "offset": 0
           },
           "builtIn": true
         },
@@ -2991,12 +3064,42 @@
             "wc"
           ],
           "against": {
-            "wall": "ensuite.wall-1",
-            "offset": 80
+            "wall": "ensuite.wall-3",
+            "offset": 120
           },
           "params": {
-            "ledgeWidth": 60
+            "ledgeWidth": 60,
+            "ledgeHeight": 115,
+            "ledgeDepth": 20
           },
+          "allowOverlap": [
+            "ensuite.ledge"
+          ],
+          "builtIn": true
+        },
+        {
+          "id": "ensuite.ledge",
+          "asset": "box",
+          "name": "Tiled ledge",
+          "tags": [
+            "ledge",
+            "shelf",
+            "install wall"
+          ],
+          "params": {
+            "width": 235,
+            "height": 115,
+            "depth": 19.5,
+            "material": "tiles-dark-grey"
+          },
+          "against": {
+            "wall": "ensuite.wall-3",
+            "offset": 0
+          },
+          "allowOverlap": [
+            "ensuite.toilet",
+            "ensuite.shower"
+          ],
           "builtIn": true
         },
         {
@@ -3039,13 +3142,16 @@
             "doorSide": "right",
             "sidePanel": false
           },
+          "allowOverlap": [
+            "ensuite.ledge"
+          ],
           "builtIn": true
         }
       ],
       "assumptions": [
         {
           "path": "footprint",
-          "note": "NOT measured: ~1.4 x 2.35 m from the video (vanity by the door, toilet on the left, glass shower at the end)"
+          "note": "NOT measured: ~1.4 x 2.35 m from the video: frosted glass panel + glass door from the bedroom entry, toilet on the west wall under a tiled ledge, glass shower at the end (photos 160901-05, video 55-76 s); the vanity is outside, in the entry"
         },
         {
           "path": "ceilingHeight",

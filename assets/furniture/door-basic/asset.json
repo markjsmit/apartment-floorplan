@@ -5,7 +5,7 @@
     "door",
     "interior door"
   ],
-  "description": "Frame + leaf sized to its opening. params: hinge left | right (seen from inside the room that has the door), swing in (into that room) | out.",
+  "description": "Frame + leaf sized to its opening. params: hinge left | right (seen from inside the room that has the door), swing in (into that room) | out, leaf white | frosted-glass.",
   "source": {
     "kind": "procedural",
     "generator": "door",
@@ -25,6 +25,10 @@
     "swing": {
       "default": "in",
       "description": "in | out of the room"
+    },
+    "leaf": {
+      "default": "white",
+      "description": "white | frosted-glass"
     }
   }
 }
