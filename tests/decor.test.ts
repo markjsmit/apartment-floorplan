@@ -4,7 +4,7 @@ import { RoomSchema } from '../src/model/schema';
 import { resolveWalls } from '../src/model/geometry';
 import { buildColliders, isFree } from '../src/model/collision';
 import {
-  coffeeTable, cornerCabinet, cushions, floorLamp, MODELS, pendant, plant, rug, stool, tallCabinet,
+  coffeeTable, cornerCabinet, cushions, floorLamp, MODELS, pendant, plant, rug, stool, tallCabinet, wallArt,
 } from '../src/model/generators/decor';
 import { stuffParts } from '../src/model/generators/stuff';
 
@@ -123,5 +123,14 @@ describe('entry + display furniture', () => {
     const top = coffeeTable({ width: 120, depth: 60 }).find((p) => p.id === 'top')!;
     expect(top.geometry).toMatchObject({ type: 'box' });
     expect((top.geometry as { radius?: number }).radius).toBeGreaterThan(0);
+  });
+
+  it('a magnet board holds photos with magnets, all on the board', () => {
+    const parts = wallArt({ width: 147, height: 77, photos: 16 });
+    expect(parts.filter((p) => p.id.startsWith('photo-') && !p.id.endsWith('-print'))).toHaveLength(16);
+    expect(parts.filter((p) => p.tags.includes('magnet'))).toHaveLength(16);
+    const s = size(parts);
+    expect(s.w).toBeLessThan(147 + 6);
+    expect(s.max[1]).toBeLessThan(77 + 6);
   });
 });

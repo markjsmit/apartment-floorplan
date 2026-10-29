@@ -2,7 +2,7 @@
   "meta": {
     "name": "Mid-century warm",
     "kind": "saved",
-    "note": "Mid-century · floating sofa facing the sofa wall: TV on a long walnut sideboard (~3.6 m); armchair by the window; open corner shelves at the pillar with the whisky + games; tulip table + our chairs; door corner = walnut wardrobe + tilt-out shoe cabinet. No rug, no curtains.",
+    "note": "Mid-century · floating sofa facing the sofa wall: TV on a long walnut sideboard (~3.6 m); no armchair; open corner shelves at the pillar with the whisky + games; tulip table + our chairs; door corner = walnut 3-door wardrobe (coats, shoes, devices) + tilt-out shoe cabinet. No rug, no curtains.",
     "location": {
       "lat": 32.0853,
       "lon": 34.7818,
@@ -900,24 +900,6 @@
           ]
         },
         {
-          "id": "living.armchair",
-          "asset": "old-house-armchair",
-          "name": "Our grey armchair (behind the chaise, by the window, ~5.3 m to the TV)",
-          "tags": [
-            "armchair"
-          ],
-          "params": {},
-          "position": [
-            18.6,
-            0,
-            271.7
-          ],
-          "rotation": 103.2,
-          "allowOverlap": [
-            "living.sofa"
-          ]
-        },
-        {
           "id": "living.floor-lamp",
           "asset": "floor-lamp",
           "name": "Vintage globe floor lamp, black (מנורת עמידה שחור דגם וינטג') — Betili (ביתילי) ₪763 (at the big window, TV-point outlet)",
@@ -984,7 +966,7 @@
           "position": [
             82,
             0,
-            410.0
+            370.0
           ],
           "rotation": 0
         },
@@ -999,7 +981,7 @@
           "position": [
             16.6,
             0,
-            404.6
+            364.6
           ],
           "rotation": 45.0,
           "allowOverlap": [
@@ -1017,7 +999,7 @@
           "position": [
             147.4,
             0,
-            404.6
+            364.6
           ],
           "rotation": -45.0,
           "allowOverlap": [
@@ -1035,7 +1017,7 @@
           "position": [
             16.6,
             0,
-            535.4
+            495.4
           ],
           "rotation": 135.0,
           "allowOverlap": [
@@ -1053,7 +1035,7 @@
           "position": [
             147.4,
             0,
-            535.4
+            495.4
           ],
           "rotation": -135.0,
           "allowOverlap": [
@@ -1077,7 +1059,7 @@
           "position": [
             82,
             0,
-            470
+            430
           ],
           "rotation": 0
         },
@@ -1099,7 +1081,7 @@
           "position": [
             82,
             75,
-            462
+            422
           ],
           "rotation": 0,
           "allowOverlap": [
@@ -1109,15 +1091,16 @@
         {
           "id": "living.wardrobe",
           "asset": "tall-cabinet",
-          "name": "Walnut 2-door wardrobe on legs, 100x55x195 (coats on a rail, shoes below)",
+          "name": "Walnut 3-door wardrobe on legs, 150x55x195: coats, shoes, kitchen devices",
           "tags": [
             "wardrobe",
             "coats",
             "shoes",
+            "kitchen devices",
             "entry"
           ],
           "params": {
-            "width": 100,
+            "width": 150,
             "depth": 55,
             "height": 195,
             "legHeight": 14,
@@ -1144,6 +1127,19 @@
                   {
                     "kind": "door",
                     "content": "coats"
+                  }
+                ]
+              },
+              {
+                "stack": [
+                  {
+                    "kind": "door",
+                    "h": 90,
+                    "content": "devices"
+                  },
+                  {
+                    "kind": "door",
+                    "content": "devices"
                   }
                 ]
               }
@@ -1219,20 +1215,26 @@
           ]
         },
         {
-          "id": "living.device-cabinet",
-          "asset": "old-house-tall-cabinet",
-          "name": "Our tall cabinet: kitchen devices (air fryer, mixer, ...)",
+          "id": "living.snake",
+          "asset": "plant",
+          "name": "Snake plant / Sansevieria (סנסיווריה ירוקה) L — Plant It ₪110 (in the corner)",
           "tags": [
-            "storage",
-            "kitchen devices"
+            "plant"
           ],
-          "params": {},
-          "against": {
-            "wall": "living.wall-4",
-            "offset": 508,
-            "elevation": 0,
-            "gap": 0
-          }
+          "params": {
+            "kind": "snake",
+            "height": 70,
+            "seed": "snake",
+            "spread": 26,
+            "potDiameter": 24,
+            "potColor": "#e9dcc4"
+          },
+          "position": [
+            26,
+            0,
+            685.0
+          ],
+          "rotation": 0
         },
         {
           "id": "living.stool-1",

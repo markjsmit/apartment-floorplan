@@ -2,7 +2,7 @@
   "meta": {
     "name": "Light industrial loft",
     "kind": "saved",
-    "note": "Light industrial · floating sofa: wall-mounted TV (~3.55 m); dining behind the sofa (bench against the sofa back, our chairs on the wall side), open black KALLAX with whisky + games under the sofa window; door corner = open black clamp-post rack + our mirror. No rug, no curtains.",
+    "note": "Light industrial · floating sofa: wall-mounted TV (~3.55 m); dining behind the sofa (bench against the sofa back, our chairs on the wall side), open black KALLAX under the sofa window; door corner hidden behind 2 stacked KALLAX as a divider (shoes + devices below behind an oak board, whisky + games + keys on top), little chair, black clamp-post coat rack, our mirror. No rug, no curtains.",
     "location": {
       "lat": 32.0853,
       "lon": 34.7818,
@@ -1029,76 +1029,138 @@
           }
         },
         {
-          "id": "living.storage-wall",
+          "id": "living.divider-low",
           "asset": "ikea-kallax",
-          "name": "KALLAX 4x4 storage wall: baskets + drawers — IKEA (or move our white KALLAX here)",
+          "name": "KALLAX 4x2 (bottom of the divider): shoes + kitchen devices, open to the door — IKEA",
           "tags": [
-            "storage",
-            "kallax"
+            "kallax",
+            "divider",
+            "shoes",
+            "kitchen devices"
           ],
           "params": {
             "cols": 4,
-            "rows": 4,
-            "color": "white",
-            "inserts": [
-              [
-                "",
-                "box",
-                "",
-                "box"
-              ],
-              [
-                "",
-                "",
-                "box",
-                ""
-              ],
-              [
-                "drawers",
-                "box",
-                "drawers",
-                "box"
-              ],
-              [
-                "box",
-                "box",
-                "box",
-                "box"
-              ]
-            ],
+            "rows": 2,
+            "color": "black-brown",
             "contents": [
-              [
-                "books",
-                "",
-                "boxes",
-                ""
-              ],
-              [
-                "books",
-                "books",
-                "",
-                "stuff"
-              ],
-              [
-                "",
-                "",
-                "",
-                ""
-              ],
-              [
-                "",
-                "",
-                "",
-                ""
-              ]
-            ]
+              "shoes shoes shoes shoes",
+              "devices devices shoes shoes"
+            ],
+            "seed": "ind-low"
           },
-          "against": {
-            "wall": "living.wall-5",
-            "offset": 120,
-            "elevation": 0,
-            "gap": 0
-          }
+          "position": [
+            73.5,
+            0,
+            560
+          ],
+          "rotation": 0
+        },
+        {
+          "id": "living.divider-board",
+          "asset": "wall-art",
+          "name": "Black steel sheet on the living-room side of the bottom KALLAX (hides the shoes): magnet board with our photos",
+          "tags": [
+            "divider",
+            "board",
+            "magnets",
+            "photos"
+          ],
+          "params": {
+            "width": 147,
+            "height": 77,
+            "photos": 16,
+            "frameColor": "#2b2b2d",
+            "seed": "fridge"
+          },
+          "position": [
+            73.5,
+            0,
+            560
+          ],
+          "rotation": 180,
+          "allowOverlap": [
+            "living.divider-low"
+          ]
+        },
+        {
+          "id": "living.divider-top",
+          "asset": "ikea-kallax",
+          "name": "KALLAX 4x2 on top (open both ways): our whisky + games on show, key bowl at hand height — IKEA",
+          "tags": [
+            "kallax",
+            "divider",
+            "display",
+            "drop zone",
+            "whisky",
+            "games"
+          ],
+          "params": {
+            "cols": 4,
+            "rows": 2,
+            "color": "black-brown",
+            "contents": [
+              "whisky games whisky games",
+              "games stuff - stuff"
+            ],
+            "seed": "ind-top"
+          },
+          "position": [
+            73.5,
+            77,
+            560
+          ],
+          "rotation": 0,
+          "allowOverlap": [
+            "living.divider-low"
+          ]
+        },
+        {
+          "id": "living.key-bowl",
+          "asset": "table-decor",
+          "name": "Key + wallet bowl",
+          "tags": [
+            "drop zone"
+          ],
+          "params": {
+            "kind": "bowl",
+            "color": "#c9a227",
+            "diameter": 18
+          },
+          "position": [
+            92,
+            78.5,
+            568
+          ],
+          "rotation": 0,
+          "allowOverlap": [
+            "living.divider-top"
+          ]
+        },
+        {
+          "id": "living.entry-chair",
+          "asset": "design-chair",
+          "name": "Little oak + black chair to sit on for shoes",
+          "tags": [
+            "dining chair"
+          ],
+          "params": {
+            "style": "wood",
+            "width": 42,
+            "depth": 45,
+            "seatMaterial": "wood-oak-light",
+            "legMaterial": "metal-black",
+            "legColor": "#1d1d1f",
+            "backHeight": 78
+          },
+          "position": [
+            5.5,
+            0,
+            640.0
+          ],
+          "rotation": 90,
+          "allowOverlap": [
+            "living.banquette"
+          ]
         },
         {
           "id": "living.entry-rack",
@@ -1139,31 +1201,15 @@
         {
           "id": "living.mirror",
           "asset": "old-house-floor-mirror",
-          "name": "Our black floor mirror (leaning, by the door)",
+          "name": "Our black floor mirror (leaning in the corner by the door)",
           "tags": [
             "mirror",
             "ours"
           ],
           "params": {},
           "against": {
-            "wall": "living.wall-5",
-            "offset": 50,
-            "elevation": 0,
-            "gap": 0
-          }
-        },
-        {
-          "id": "living.device-cabinet",
-          "asset": "old-house-tall-cabinet",
-          "name": "Our tall cabinet: kitchen devices (air fryer, mixer, ...)",
-          "tags": [
-            "storage",
-            "kitchen devices"
-          ],
-          "params": {},
-          "against": {
             "wall": "living.wall-4",
-            "offset": 508,
+            "offset": 516,
             "elevation": 0,
             "gap": 0
           }
@@ -1271,7 +1317,7 @@
         {
           "id": "living.eucalyptus",
           "asset": "plant",
-          "name": "Ours: trailing eucalyptus (gold pot) on the KALLAX",
+          "name": "Ours: trailing eucalyptus (gold pot) on the KALLAX divider",
           "tags": [
             "plant"
           ],
@@ -1285,12 +1331,12 @@
           },
           "position": [
             20,
-            147,
-            457.0
+            154,
+            565.0
           ],
           "rotation": 0,
           "allowOverlap": [
-            "living.storage-wall"
+            "living.divider-top"
           ]
         },
         {

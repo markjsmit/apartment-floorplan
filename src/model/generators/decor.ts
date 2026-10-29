@@ -585,6 +585,26 @@ export function wallArt(p: Record<string, unknown>): Part[] {
     parts.push({ id: 'mirror', tags: ['mirror'], geometry: { type: 'prism', points: pts(W - 5, H - 5), depth: 0.6, bevel: 0 }, position: [0, H / 2, t + 0.3], rotation: [0, 0, 0], material: 'mirror', castShadow: false, glass: false });
     return parts;
   }
+  if (p.photos) {
+    // magnet board (steel sheet / magnetic paint) with photos held by small round magnets, a bit crooked like real life
+    parts.push(box('board', ['board', 'magnet board'], [W, H, 0.8], [0, H / 2, 0.4], { material: str(p.boardMaterial, 'metal-black'), color: fc, radius: 0.3 }));
+    const rand = rng(String(p.seed ?? 'photos'));
+    const tones = ['#d8c3a5', '#8fa3b8', '#c98b6b', '#a9b89a', '#e8dccb', '#6f7f95', '#b39a7a', '#d9a7a0'];
+    const n = Math.round(num(p.photos, 12));
+    const cols = Math.max(1, Math.round(Math.sqrt((n * W) / H)));
+    const rows = Math.ceil(n / cols);
+    for (let i = 0; i < n; i++) {
+      const pw = rand() < 0.5 ? 10 : 15;
+      const ph = pw === 10 ? 15 : 10;
+      const cx = -W / 2 + ((i % cols) + 0.5) * (W / cols) + (rand() - 0.5) * 4;
+      const cy = H - (Math.floor(i / cols) + 0.5) * (H / rows) + (rand() - 0.5) * 4;
+      const tilt = (rand() - 0.5) * 10;
+      parts.push({ ...box(`photo-${i}`, ['photo'], [pw, ph, 0.2], [cx, cy, 0.95], { color: '#f4f1ea', radius: 0 }), rotation: [0, 0, tilt], castShadow: false });
+      parts.push({ ...box(`photo-${i}-print`, ['photo'], [pw - 1.2, ph - 1.2 - (pw === 10 ? 2 : 0), 0.1], [cx, cy + (pw === 10 ? 1 : 0), 1.1], { color: tones[Math.floor(rand() * tones.length)], radius: 0 }), rotation: [0, 0, tilt], castShadow: false });
+      parts.push({ ...cyl(`magnet-${i}`, ['magnet'], 1.1, 0.8, [cx + (rand() - 0.5) * 3, cy + ph / 2 - 1.5, 1.4], { color: ['#c8452c', '#2e5a8a', '#d9a43a', '#3d6b4a', '#f4f1ea'][Math.floor(rand() * 5)] }), rotation: [90, 0, 0] });
+    }
+    return parts;
+  }
   parts.push(box('frame', ['frame'], [W, H, t], [0, H / 2, t / 2], { color: fc }));
   if (p.mirror) {
     parts.push({ ...box('mirror', ['mirror'], [W - 5, H - 5, 0.5], [0, H / 2, t + 0.25], { material: 'mirror' }), castShadow: false });
