@@ -2,7 +2,7 @@
   "meta": {
     "name": "Urban jungle",
     "kind": "saved",
-    "note": "Urban jungle · sitting corner: TV square to the corner on an oak board closing the pillar corner (white broom closet behind it, door on the hallway side), sofa against the balcony wall in the corner, armchair mid-room = best TV seat; table for 6 north-south against a 1.3 m light grey AliExpress entry cabinet as the divider (open shoe strip, shoe doors, lit niches for keys, bags, whisky + games; oak board with art on the dining side); bench + coat hooks by the door.",
+    "note": "Urban jungle · sitting corner: TV square to the corner on an oak board closing the pillar corner (white broom closet behind it, door on the hallway side), sofa against the balcony wall in the corner, armchair mid-room = best TV seat; table for 6 north-south against a 1.3 m light grey AliExpress entry cabinet as the divider (open shoe strip, shoe doors, lit niches for keys, bags, whisky + games; art on its back on the dining side); bench + coat hooks by the door.",
     "location": {
       "lat": 32.0853,
       "lon": 34.7818,
@@ -1207,33 +1207,9 @@
           ]
         },
         {
-          "id": "living.divider-board",
-          "asset": "box",
-          "name": "Oak board on the dining side of the cabinet (art on it, the table end against it)",
-          "tags": [
-            "divider",
-            "board"
-          ],
-          "params": {
-            "width": 130,
-            "height": 180,
-            "depth": 1.8,
-            "material": "wood-oak-light"
-          },
-          "position": [
-            65,
-            0,
-            540
-          ],
-          "rotation": 180,
-          "allowOverlap": [
-            "living.divider"
-          ]
-        },
-        {
           "id": "living.art",
           "asset": "wall-art",
-          "name": "LLEEMPI sage-green botanical prints, set of 3, wood frames 12x16\" (30x40) — Amazon.com ₪124 (on the oak board, above the table end)",
+          "name": "LLEEMPI sage-green botanical prints, set of 3, wood frames 12x16\" (30x40) — Amazon.com ₪124 (on the back of the entry cabinet, above the table end)",
           "tags": [
             "art"
           ],
@@ -1246,11 +1222,11 @@
           "position": [
             65,
             88,
-            538
+            539.5
           ],
           "rotation": 180,
           "allowOverlap": [
-            "living.divider-board"
+            "living.divider"
           ]
         },
         {
@@ -1806,7 +1782,6 @@
             "living.divider",
             "living.divider-top-plant-1",
             "living.divider-top-plant-2",
-            "living.divider-board",
             "living.art",
             "living.dining-table",
             "living.chair-1",
@@ -1869,7 +1844,6 @@
             "living.divider",
             "living.divider-top-plant-1",
             "living.divider-top-plant-2",
-            "living.divider-board",
             "living.art",
             "living.dining-table",
             "living.chair-1",
