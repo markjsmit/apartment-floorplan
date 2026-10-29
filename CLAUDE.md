@@ -21,6 +21,9 @@ Spec: `docs/superpowers/specs/2026-10-23-apartment-designer-design.md`.
    looking at the AI suggestion, or the other way round.
 4. If `house/current.json` still has the placeholder `meta.location` (assumed), ask Mark which city — it drives sun angles.
 
+Mark can paste `<version>:<id>` (e.g. `current:living.passage-mirror`, `saved/urban-jungle:living.divider`): Cmd+C in
+the viewer with no text selected copies that for the selection (or what's under the crosshair). It names exactly what he means.
+
 ## Talking back through the UI
 
 ```
