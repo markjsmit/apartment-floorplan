@@ -1169,11 +1169,12 @@
           "position": [
             440,
             150,
-            339
+            337
           ],
           "rotation": 180,
           "allowOverlap": [
-            "living.pillar"
+            "living.pillar",
+            "living.pillar-cladding"
           ]
         },
         {
@@ -1798,6 +1799,29 @@
           "rotation": 180,
           "allowOverlap": [
             "living.counter"
+          ]
+        },
+        {
+          "id": "living.pillar-cladding",
+          "asset": "slat-panel",
+          "name": "Walnut slat cladding on the pillar (idea, ~2 cm)",
+          "tags": [
+            "pillar"
+          ],
+          "params": {
+            "width": 116,
+            "height": 277,
+            "depth": 2,
+            "material": "walnut"
+          },
+          "position": [
+            452,
+            0,
+            339
+          ],
+          "rotation": 180,
+          "allowOverlap": [
+            "living.pillar"
           ]
         }
       ],
