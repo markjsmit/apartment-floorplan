@@ -67,7 +67,7 @@ function top(id: string, shape: string, w: number, d: number, t: number, y: numb
   return box(id, ['top'], [w, t, d], [0, y, z], extra);
 }
 
-/** Dining / side table. params: shape (round | rect | oval), width, depth, height, base (legs | tapered | pedestal | tulip | trestle). */
+/** Dining / side table. params: shape (round | rect | oval), width, depth, height, base (legs | tapered | pedestal | tulip | trestle), extendable (rect: shows the split + runners). */
 export function designTable(p: Record<string, unknown>): Part[] {
   const shape = str(p.shape, 'rect');
   const W = num(p.width, shape === 'round' ? 110 : 160);
@@ -79,6 +79,11 @@ export function designTable(p: Record<string, unknown>): Part[] {
   const legLook = lookOf(p, 'leg', typeof p.material === 'string' ? p.material : 'wood-oak-light');
   const cz = D / 2;
   const parts: Part[] = [top('top', shape, W, D, T, H - T / 2, cz, topLook)];
+  if (p.extendable && shape === 'rect') {
+    // extendable (butterfly leaf folded inside): the split across the middle of the top, and the runner rails under it
+    parts.push({ ...box('split', ['top', 'extension'], [0.3, 0.2, D - 0.4], [0, H + 0.02, cz], { color: '#3a332c', radius: 0 }), castShadow: false });
+    for (const sz of [-1, 1]) parts.push(box(`runner-${sz > 0 ? 'b' : 'f'}`, ['extension', 'runner'], [W * 0.7, 3, 2], [0, H - T - 1.5, cz + sz * (D / 2 - 12)], { color: '#5a5c5e' }));
+  }
   const legH = H - T;
   if (base === 'pedestal' || base === 'tulip') {
     const r = Math.min(W, D) * (base === 'tulip' ? 0.09 : 0.12);
