@@ -878,9 +878,9 @@
             "height": 85,
             "material": "walnut",
             "legMaterial": "metal-black",
-            "top": "plant books games bowls",
+            "top": "plant books bowls -",
             "shelf": "books",
-            "colors": "#d9a43a,#2c6b6b,#b8613f",
+            "colors": "#d8d2c6,#8c877c,#3f3f3d",
             "seed": "mid-console"
           },
           "position": [
@@ -896,35 +896,37 @@
         {
           "id": "living.rug",
           "asset": "rug",
-          "name": "Mid-century rug 200 x 290, cream with mustard / teal / rust shapes",
+          "name": "Plain wool rug 250 x 360, sand with a thin border (under the couch front + the sideboard front legs)",
           "tags": [
             "rug"
           ],
           "params": {
-            "width": 200,
-            "depth": 290,
-            "color": "#efe8da",
+            "width": 360,
+            "depth": 250,
+            "color": "#e6dfd2",
             "material": "wool-woven",
-            "pattern": "geometric",
+            "pattern": "",
             "colors": "#d9a43a,#2c6b6b,#b8613f",
-            "seed": "mcm-rug"
+            "seed": "mcm-rug",
+            "borderColor": "#b9ae9a",
+            "border": 5
           },
           "position": [
-            290.0,
+            375.0,
             0,
-            30
+            45
           ],
           "rotation": 0
         },
         {
           "id": "living.cushions",
           "asset": "cushions",
-          "name": "Corduroy cushion covers: mustard, teal, rust",
+          "name": "Linen cushion covers: stone, warm grey, sand",
           "tags": [
             "cushions"
           ],
           "params": {
-            "colors": "#d9a43a,#2c6b6b,#b8613f",
+            "colors": "#d8d1c4,#8f8d84,#b8a991",
             "size": 43,
             "positions": [
               [
@@ -943,7 +945,7 @@
                 40
               ]
             ],
-            "material": "wool-woven"
+            "material": "linen-white"
           },
           "position": [
             135,
@@ -1024,7 +1026,7 @@
             "shelves": 6,
             "material": "white-laminate",
             "shelfMaterial": "walnut",
-            "contents": "games games whisky whisky games"
+            "contents": "books books whisky whisky books"
           },
           "position": [
             585,
@@ -1095,7 +1097,7 @@
         {
           "id": "living.art",
           "asset": "wall-art",
-          "name": "Big mid-century print (mustard, teal, rust shapes) behind the sofa",
+          "name": "Calm print (stone, grey, charcoal) behind the sofa",
           "tags": [
             "art"
           ],
@@ -1103,7 +1105,7 @@
             "width": 100,
             "height": 70,
             "frameColor": "#1d1d1f",
-            "art": "#d9a43a,#2c6b6b,#b8613f,#efe9df",
+            "art": "#e3ddd2,#8c877c,#3f3f3d",
             "seed": "mcm"
           },
           "against": {
@@ -1122,7 +1124,7 @@
           ],
           "params": {
             "kind": "bowl",
-            "color": "#d9a43a",
+            "color": "#d8d2c6",
             "diameter": 24
           },
           "position": [
@@ -1288,44 +1290,6 @@
           ]
         },
         {
-          "id": "living.entry-rack",
-          "asset": "closet-system",
-          "name": "Black clamp-post coat rack the full width from the side wall to the front door (138, floor-to-soffit, no drilling): our coats on hangers",
-          "tags": [
-            "entry",
-            "coats"
-          ],
-          "params": {
-            "height": 215,
-            "depth": 40,
-            "postMaterial": "metal-black",
-            "shelfMaterial": "wood-oak-light",
-            "sections": [
-              {
-                "w": 64,
-                "kind": "hang",
-                "coats": 3
-              },
-              {
-                "w": 65,
-                "kind": "hang",
-                "coats": 3
-              }
-            ]
-          },
-          "against": {
-            "wall": "living.wall-4",
-            "offset": 430,
-            "elevation": 0,
-            "gap": 0
-          },
-          "allowOverlap": [
-            "living.passage-kallax",
-            "living.passage-kallax-top",
-            "living.passage-closet"
-          ]
-        },
-        {
           "id": "living.passage-closet",
           "asset": "tall-cabinet",
           "name": "White closet 77 x 40 x 200 along the passage (as tall as the hall stand) with a full-length mirror door, push to open: shoe shelves inside",
@@ -1361,6 +1325,42 @@
             "elevation": 0,
             "gap": 0
           }
+        },
+        {
+          "id": "living.entry-rack",
+          "asset": "closet-system",
+          "name": "Black clamp-post coat rack the full width from the side wall to the front door (138, floor-to-soffit, no drilling): our coats on hangers",
+          "tags": [
+            "entry",
+            "coats"
+          ],
+          "params": {
+            "height": 215,
+            "depth": 40,
+            "postMaterial": "metal-black",
+            "shelfMaterial": "wood-oak-light",
+            "sections": [
+              {
+                "w": 64,
+                "kind": "hang",
+                "coats": 3
+              },
+              {
+                "w": 65,
+                "kind": "hang",
+                "coats": 3
+              }
+            ]
+          },
+          "against": {
+            "wall": "living.wall-4",
+            "offset": 430,
+            "elevation": 0,
+            "gap": 0
+          },
+          "allowOverlap": [
+            "living.passage-closet"
+          ]
         },
         {
           "id": "living.stool-1",

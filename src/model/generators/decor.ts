@@ -1166,6 +1166,8 @@ export function tallCabinet(p: Record<string, unknown>): WithStates {
         }
         // opening: doors swing on the hinge (the edge away from the handle), tilt flaps fold out, drawers slide out
         fronts.push(`${id}-front`);
+        if (f.mirror) fronts.push(`${id}-mirror`); // the glass is what you click on a mirror door
+        if (leaves === 2) fronts.push(`${id}-front-2`);
         for (let q = before; q < parts.length; q++) {
           const pt = parts[q];
           if (pt.tags.includes('led')) continue;

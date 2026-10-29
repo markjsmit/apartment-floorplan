@@ -896,13 +896,13 @@
         {
           "id": "living.rug",
           "asset": "rug",
-          "name": "Mid-century rug 200 x 290, cream with mustard / teal / rust shapes",
+          "name": "Mid-century rug 250 x 360, cream with mustard / teal / rust shapes (under the couch front + the sideboard front legs)",
           "tags": [
             "rug"
           ],
           "params": {
-            "width": 200,
-            "depth": 290,
+            "width": 360,
+            "depth": 250,
             "color": "#efe8da",
             "material": "wool-woven",
             "pattern": "geometric",
@@ -910,9 +910,9 @@
             "seed": "mcm-rug"
           },
           "position": [
-            290.0,
+            375.0,
             0,
-            30
+            45
           ],
           "rotation": 0
         },
