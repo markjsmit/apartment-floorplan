@@ -46,6 +46,25 @@ export function App() {
       .catch((e) => useStore.getState().setLoadError(e.message));
   }, []);
 
+  // Cmd/Ctrl+C with no text selected copies an id for what's selected (else what's under the crosshair): "<version>:<id>",
+  // e.g. "current:living.passage-mirror" - so Mark can paste exactly what he means into the chat
+  useEffect(() => {
+    const onCopy = (e: ClipboardEvent) => {
+      const text = window.getSelection()?.toString().trim();
+      const t = e.target as HTMLElement | null;
+      if (text || t?.closest('input, textarea, [contenteditable="true"]')) return;
+      const s = useStore.getState();
+      const id = s.selection?.id ?? s.lookingAt?.id;
+      if (!id || !e.clipboardData) return;
+      const ref = `${s.versionId}:${id}`;
+      e.clipboardData.setData('text/plain', ref);
+      e.preventDefault();
+      s.toast(`Copied ${ref}`);
+    };
+    document.addEventListener('copy', onCopy);
+    return () => document.removeEventListener('copy', onCopy);
+  }, []);
+
   // keep the address bar pointing at the open room + its version, + other rooms' choices (camera is only added for snapshots)
   useEffect(() => {
     if (!bundle) return;
