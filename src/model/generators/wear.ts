@@ -8,7 +8,8 @@ const part = (id: string, tags: string[], geometry: Part['geometry'], position: 
   id, tags, geometry, position, rotation: [0, 0, 0], castShadow: true, glass: false, ...extra,
 });
 const ell = (id: string, tags: string[], size: Vec3, position: Vec3, extra: Partial<Part> = {}) => part(id, tags, { type: 'ellipsoid', size, segments: 14 }, position, extra);
-const box = (id: string, tags: string[], size: Vec3, position: Vec3, extra: Partial<Part> = {}) => part(id, tags, { type: 'box', size }, position, extra);
+const box = (id: string, tags: string[], size: Vec3, position: Vec3, { radius, ...extra }: Partial<Part> & { radius?: number } = {}) =>
+  part(id, tags, { type: 'box', size, ...(radius ? { radius } : {}) }, position, extra);
 const cyl = (id: string, tags: string[], radius: number, height: number, position: Vec3, extra: Partial<Part> = {}) =>
   part(id, tags, { type: 'cylinder', radius, height, segments: 16 }, position, extra);
 
@@ -101,13 +102,14 @@ export function devicesRow(prefix: string, x: number, y: number, z0: number, wid
   return out;
 }
 
+// paper = label colour, ink = text colour, cap = the cap / cork top
 const WHISKY = [
-  { label: 'Lagavulin', color: '#8a4a1a', glass: '#2c3b2a' },
-  { label: 'Talisker', color: '#9a5a1e', glass: '#e8e2d6' },
-  { label: 'Glenfiddich', color: '#b06a22', glass: '#3a4a3a' },
-  { label: 'Laphroaig', color: '#8e5420', glass: '#2a3a2c' },
-  { label: 'Macallan', color: '#a86322', glass: '#e8e2d6' },
-  { label: 'Yamazaki', color: '#b8742c', glass: '#e8e2d6' },
+  { label: 'Lagavulin', color: '#8a4a1a', glass: '#2c3b2a', paper: '#efe6d2', ink: '#1f1f22', cap: '#1f1f22' },
+  { label: 'Talisker', color: '#9a5a1e', glass: '#e8e2d6', paper: '#f4efe6', ink: '#8a2a1e', cap: '#c9a227' },
+  { label: 'Glenfiddich', color: '#b06a22', glass: '#3a4a3a', paper: '#1f2a24', ink: '#d9b45a', cap: '#c9a227' },
+  { label: 'Laphroaig', color: '#8e5420', glass: '#2a3a2c', paper: '#f2f0ec', ink: '#2e5a3a', cap: '#2e5a3a' },
+  { label: 'Macallan', color: '#a86322', glass: '#e8e2d6', paper: '#e9dcc4', ink: '#5a1e1e', cap: '#3a2a1e' },
+  { label: 'Yamazaki', color: '#b8742c', glass: '#e8e2d6', paper: '#f4f1ea', ink: '#1f1f22', cap: '#c9a227' },
 ];
 
 /** Whisky bottles (round + square) and a couple of tumblers in a row, `width` wide, centred on x, back at z0. */
@@ -129,19 +131,31 @@ export function whiskyRow(prefix: string, x: number, y: number, z0: number, widt
     }
     const square = rand() < 0.35;
     const liquid = { color: w.color };
-    out.push(square
-      ? box(`${prefix}-b${i}`, ['bottle', 'whisky', 'contents'], [8, body, 8], [px, y + body / 2, pz], { ...liquid, label: { text: w.label, size: 1.1, offset: [0, 0], color: '#f4efe6' } })
-      : cyl(`${prefix}-b${i}`, ['bottle', 'whisky', 'contents'], 3.9, body, [px, y + body / 2, pz], liquid));
+    const lh = body * 0.48; // the paper label, a bit below the middle of the body
+    const ly = y + body * 0.45;
+    const text = { text: w.label, size: 0.85, offset: [0, 0] as [number, number], color: w.ink, bg: 'none' };
+    if (square) {
+      out.push({ ...box(`${prefix}-b${i}`, ['bottle', 'whisky', 'contents'], [8, body, 8], [px, y + body / 2, pz], liquid), geometry: { type: 'box', size: [8, body, 8], radius: 0.8 } });
+      out.push(box(`${prefix}-b${i}-label`, ['bottle', 'label', 'contents'], [6.4, lh, 0.15], [px, ly, pz + 4.05], { color: w.paper, label: text }));
+    } else {
+      out.push(cyl(`${prefix}-b${i}`, ['bottle', 'whisky', 'contents'], 3.9, body, [px, y + body / 2, pz], liquid));
+      out.push(cyl(`${prefix}-b${i}-label`, ['bottle', 'label', 'contents'], 3.95, lh, [px, ly, pz], { color: w.paper, label: { ...text, size: 0.75 } }));
+    }
+    out.push(cyl(`${prefix}-b${i}-band`, ['bottle', 'contents'], square ? 4.15 : 3.97, 0.6, [px, ly + lh / 2 + 1.2, pz], { color: w.ink }));
+    out.push(ell(`${prefix}-b${i}-shoulder`, ['bottle', 'contents'], [square ? 8 : 7.8, 3.4, square ? 8 : 7.8], [px, y + body, pz], liquid));
     out.push(cyl(`${prefix}-b${i}-neck`, ['bottle', 'contents'], 1.4, h - body - 2, [px, y + body + (h - body - 2) / 2, pz], { color: w.glass }));
-    out.push(cyl(`${prefix}-b${i}-cork`, ['bottle', 'contents'], 1.7, 2, [px, y + h - 1, pz], { color: '#3a2a1e' }));
+    out.push(cyl(`${prefix}-b${i}-cork`, ['bottle', 'contents'], 1.75, 2.4, [px, y + h - 1.2, pz], { color: w.cap }));
   }
   return out;
 }
 
+// c = lid colour, a = the art / band colour, ink = title colour
 const GAMES = [
-  { t: 'Catan', c: '#c8452c' }, { t: 'Ticket to Ride', c: '#2e5a8a' }, { t: 'Azul', c: '#e8e0cf' }, { t: 'Codenames', c: '#1f1f22' },
-  { t: 'Carcassonne', c: '#3d6b4a' }, { t: 'Dixit', c: '#d9a43a' }, { t: 'Wingspan', c: '#7fa3b8' }, { t: 'Pandemic', c: '#2c6b6b' },
-  { t: 'Splendor', c: '#6a4a8a' }, { t: 'Root', c: '#b8742c' },
+  { t: 'CATAN', c: '#c8452c', a: '#e9b44c', ink: '#fff6e0' }, { t: 'Ticket to Ride', c: '#2e5a8a', a: '#c8452c', ink: '#f4efe6' },
+  { t: 'AZUL', c: '#e8e0cf', a: '#2e6fb0', ink: '#1f3f6a' }, { t: 'CODENAMES', c: '#1f1f22', a: '#c8452c', ink: '#f4efe6' },
+  { t: 'Carcassonne', c: '#3d6b4a', a: '#d9c48a', ink: '#f4efe6' }, { t: 'DiXiT', c: '#d9a43a', a: '#6a4a8a', ink: '#3a1e4a' },
+  { t: 'Wingspan', c: '#7fa3b8', a: '#e8e0cf', ink: '#1f2a3a' }, { t: 'PANDEMIC', c: '#2c6b6b', a: '#c8452c', ink: '#f4efe6' },
+  { t: 'Splendor', c: '#6a4a8a', a: '#d9b45a', ink: '#f4efe6' }, { t: 'ROOT', c: '#b8742c', a: '#3d6b4a', ink: '#fff6e0' },
 ];
 
 /** Board-game boxes: a flat stack (big boxes) next to a few standing on edge like books. */
@@ -155,7 +169,20 @@ export function gameStack(prefix: string, x: number, y: number, z0: number, widt
     const g = pick();
     const h = 5 + rand() * 3;
     const s = big - i * 1.5;
-    out.push(box(`${prefix}-flat-${i}`, ['game', 'contents'], [s, h, s], [x + (rand() - 0.5), yy + h / 2, z0 + depth / 2], { color: g.c, label: { text: g.t, size: 1.4, offset: [0, 0], color: g.c === '#e8e0cf' ? '#2b2b2b' : '#f4efe6' } }));
+    const gx = x + (rand() - 0.5);
+    const gz = z0 + depth / 2;
+    // a cardboard base with the printed lid over most of it, the title + a band of art on the front, art on top
+    const lidH = h * 0.78;
+    out.push(box(`${prefix}-flat-${i}`, ['game', 'contents'], [s - 0.3, h, s - 0.3], [gx, yy + h / 2, gz], { color: '#e9e4d8', radius: 0.2 }));
+    out.push(box(`${prefix}-flat-${i}-lid`, ['game', 'lid', 'contents'], [s, lidH, s], [gx, yy + h - lidH / 2, gz], { color: g.c, radius: 0.3 }));
+    const size = Math.min(1.5, (s - 3) / (g.t.length * 0.62), lidH * 0.42);
+    out.push(box(`${prefix}-flat-${i}-band`, ['game', 'contents'], [s * 0.34, lidH * 0.62, 0.12], [gx - s * 0.3, yy + h - lidH / 2, gz + s / 2 + 0.06], { color: g.a, radius: 0 }));
+    out.push(box(`${prefix}-flat-${i}-title`, ['game', 'contents'], [s * 0.6, lidH * 0.7, 0.1], [gx + s * 0.16, yy + h - lidH / 2, gz + s / 2 + 0.05], { color: g.c, radius: 0, label: { text: g.t, size, offset: [0, 0], color: g.ink, bg: 'none' } }));
+    if (yy + h >= y + height - 12 || i === 3 || rand() < 0.4) {
+      // cover art on the top of the lid (seen from above): a frame and a picture
+      out.push(box(`${prefix}-flat-${i}-art`, ['game', 'contents'], [s * 0.72, 0.12, s * 0.5], [gx, yy + h + 0.06, gz + s * 0.08], { color: g.a, radius: 0 }));
+      out.push(cyl(`${prefix}-flat-${i}-art-2`, ['game', 'contents'], s * 0.12, 0.16, [gx - s * 0.12, yy + h + 0.1, gz + s * 0.05], { color: g.ink }));
+    }
     yy += h;
   }
   return out;

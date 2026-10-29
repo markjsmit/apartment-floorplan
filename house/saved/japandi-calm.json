@@ -793,7 +793,7 @@
         {
           "id": "living.tv-unit",
           "asset": "media-unit",
-          "name": "Scandinavian fluted TV unit 180 cm, oak — מזנון טלוויזיה בסגנון סקנדינבי — Rahiti (רהיטי) / Razco ₪699",
+          "name": "Scandinavian fluted TV unit 180 cm, oak — מזנון טלוויזיה בסגנון סקנדינבי — Rahiti (רהיטי) / Razco ₪699 (30 cm off the wall: the window and curtain stay free behind it)",
           "tags": [
             "tv unit"
           ],
@@ -809,24 +809,24 @@
           },
           "against": {
             "wall": "living.wall-5",
-            "offset": 385,
+            "offset": 465,
             "elevation": 0,
-            "gap": 0
+            "gap": 30
           }
         },
         {
           "id": "living.tv",
           "asset": "old-house-tv",
-          "name": "Our 65\" TV (~5.3 m from the sofa)",
+          "name": "Our 65\" TV, partly in front of the big window (~4.8 m from the sofa)",
           "tags": [
             "tv"
           ],
           "params": {},
           "against": {
             "wall": "living.wall-5",
-            "offset": 402.5,
+            "offset": 482.5,
             "elevation": 46,
-            "gap": 6
+            "gap": 36
           },
           "allowOverlap": [
             "living.tv-unit"
@@ -920,17 +920,17 @@
         {
           "id": "living.armchair",
           "asset": "old-house-armchair",
-          "name": "Our grey armchair (in front of the pillar, ~4.4 m to the TV)",
+          "name": "Our grey armchair forward, next to the pillar, turned to the sofa (guests look at us, not the TV)",
           "tags": [
             "armchair"
           ],
           "params": {},
           "position": [
-            494.3,
+            295.3,
             0,
-            296.5
+            321.6
           ],
-          "rotation": -96.1,
+          "rotation": 125.4,
           "allowOverlap": [
             "living.sofa"
           ]
@@ -952,7 +952,7 @@
           "position": [
             24,
             0,
-            356
+            273
           ],
           "rotation": 0
         },
@@ -1237,13 +1237,13 @@
             "kind": "tree",
             "height": 165,
             "seed": "olive",
-            "spread": 72,
+            "spread": 66,
             "model": "leafy-tree"
           },
           "position": [
             38,
             0,
-            4.0
+            5.0
           ],
           "rotation": 0
         },
@@ -1290,6 +1290,156 @@
           "rotation": 180,
           "allowOverlap": [
             "living.pillar"
+          ]
+        },
+        {
+          "id": "living.pillar-art",
+          "asset": "wall-art",
+          "name": "Framed sumi-e ink drawing 60x80 on the slats",
+          "tags": [
+            "art",
+            "pillar"
+          ],
+          "params": {
+            "width": 60,
+            "height": 80,
+            "frameColor": "#c49c68",
+            "art": "#efe9df,#1d1d1f,#6b6b6b",
+            "seed": "sumi"
+          },
+          "position": [
+            452,
+            100,
+            337
+          ],
+          "rotation": 180,
+          "allowOverlap": [
+            "living.pillar",
+            "living.pillar-cladding"
+          ]
+        },
+        {
+          "id": "living.pillar-planter",
+          "asset": "box",
+          "name": "Slim oak planter 100x12x14 at the top of the cladding",
+          "tags": [
+            "planter",
+            "pillar"
+          ],
+          "params": {
+            "width": 100,
+            "height": 12,
+            "depth": 14,
+            "material": "wood-oak-light"
+          },
+          "position": [
+            452,
+            200,
+            337
+          ],
+          "rotation": 180,
+          "allowOverlap": [
+            "living.pillar",
+            "living.pillar-cladding"
+          ]
+        },
+        {
+          "id": "living.pillar-plant-1",
+          "asset": "plant",
+          "name": "Faux trailing plant (pothos look) in the oak planter, hanging over the drawing",
+          "tags": [
+            "plant",
+            "faux"
+          ],
+          "params": {
+            "kind": "trailing",
+            "height": 60,
+            "spread": 10,
+            "potDiameter": 10,
+            "potMaterial": "wood-oak-light",
+            "drop": 9.5,
+            "seed": "jap-pillar-0"
+          },
+          "position": [
+            418,
+            212,
+            337
+          ],
+          "rotation": 180,
+          "allowOverlap": [
+            "living.pillar",
+            "living.pillar-cladding",
+            "living.pillar-planter",
+            "living.pillar-art",
+            "living.pillar-plant-1",
+            "living.pillar-plant-2",
+            "living.pillar-plant-3"
+          ]
+        },
+        {
+          "id": "living.pillar-plant-2",
+          "asset": "plant",
+          "name": "Faux trailing plant (pothos look) in the oak planter, hanging over the drawing",
+          "tags": [
+            "plant",
+            "faux"
+          ],
+          "params": {
+            "kind": "trailing",
+            "height": 85,
+            "spread": 10,
+            "potDiameter": 10,
+            "potMaterial": "wood-oak-light",
+            "drop": 9.5,
+            "seed": "jap-pillar-1"
+          },
+          "position": [
+            452,
+            212,
+            337
+          ],
+          "rotation": 180,
+          "allowOverlap": [
+            "living.pillar",
+            "living.pillar-cladding",
+            "living.pillar-planter",
+            "living.pillar-art",
+            "living.pillar-plant-1",
+            "living.pillar-plant-2",
+            "living.pillar-plant-3"
+          ]
+        },
+        {
+          "id": "living.pillar-plant-3",
+          "asset": "plant",
+          "name": "Faux trailing plant (pothos look) in the oak planter, hanging over the drawing",
+          "tags": [
+            "plant",
+            "faux"
+          ],
+          "params": {
+            "kind": "trailing",
+            "height": 60,
+            "spread": 10,
+            "potDiameter": 10,
+            "potMaterial": "wood-oak-light",
+            "drop": 9.5,
+            "seed": "jap-pillar-2"
+          },
+          "position": [
+            486,
+            212,
+            337
+          ],
+          "rotation": 180,
+          "allowOverlap": [
+            "living.pillar",
+            "living.pillar-cladding",
+            "living.pillar-planter",
+            "living.pillar-art",
+            "living.pillar-plant-1",
+            "living.pillar-plant-2",
+            "living.pillar-plant-3"
           ]
         },
         {
@@ -1353,6 +1503,11 @@
             "living.olive",
             "living.fig",
             "living.pillar-cladding",
+            "living.pillar-art",
+            "living.pillar-planter",
+            "living.pillar-plant-1",
+            "living.pillar-plant-2",
+            "living.pillar-plant-3",
             "living.art",
             "living.curtain-window"
           ]
@@ -1360,15 +1515,16 @@
         {
           "id": "living.curtain-window",
           "asset": "curtain",
-          "name": "Sheer linen curtains (big window)",
+          "name": "Sheer linen curtain (big window), one panel from the balcony-wall side",
           "tags": [
             "curtain"
           ],
           "params": {
             "width": 150,
             "height": 268,
-            "panels": 2,
-            "open": 0.8,
+            "panels": 1,
+            "side": "right",
+            "open": 0.75,
             "color": "#f3efe7"
           },
           "against": {
@@ -1399,6 +1555,11 @@
             "living.olive",
             "living.fig",
             "living.pillar-cladding",
+            "living.pillar-art",
+            "living.pillar-planter",
+            "living.pillar-plant-1",
+            "living.pillar-plant-2",
+            "living.pillar-plant-3",
             "living.art",
             "living.curtain-balcony"
           ]

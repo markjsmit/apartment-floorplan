@@ -800,7 +800,7 @@
         {
           "id": "living.broom-closet",
           "asset": "corner-closet",
-          "name": "Broom closet behind the oak board (white, like the walls): door on the hallway side, vacuum, mop, ironing board inside",
+          "name": "Broom closet behind the oak board (white, like the walls), its door flush with the pillar on the hallway side: vacuum, mop, ironing board inside",
           "tags": [
             "closet",
             "broom closet",
@@ -808,13 +808,14 @@
           ],
           "params": {
             "legX": 75,
-            "legZ": 52,
+            "legZ": 69,
+            "step": 17,
             "height": 238
           },
           "position": [
             585,
             0,
-            339
+            356
           ],
           "rotation": 0,
           "allowOverlap": [
@@ -1700,6 +1701,54 @@
           ]
         },
         {
+          "id": "living.kitchen-shelf",
+          "asset": "kitchen-shelf",
+          "name": "Oak kitchen shelf 100 (IKEA BERGSHULT-style, black brackets): pothos, pantry jars, herbs",
+          "tags": [
+            "kitchen",
+            "wall shelf"
+          ],
+          "params": {
+            "width": 100,
+            "contents": "plant jars herbs",
+            "colors": "#efe6d4",
+            "seed": "jun-k1"
+          },
+          "against": {
+            "wall": "living.wall-4",
+            "offset": 88,
+            "elevation": 148,
+            "gap": 0
+          },
+          "allowOverlap": [
+            "living.counter"
+          ]
+        },
+        {
+          "id": "living.kitchen-shelf-2",
+          "asset": "kitchen-shelf",
+          "name": "Oak kitchen shelf 70, higher: cups + a trailing plant",
+          "tags": [
+            "kitchen",
+            "wall shelf"
+          ],
+          "params": {
+            "width": 70,
+            "contents": "cups plant",
+            "colors": "#efe6d4,#8fa37e,#f2efe8",
+            "seed": "jun-k2"
+          },
+          "against": {
+            "wall": "living.wall-4",
+            "offset": 198,
+            "elevation": 185,
+            "gap": 0
+          },
+          "allowOverlap": [
+            "living.counter"
+          ]
+        },
+        {
           "id": "living.curtain-balcony",
           "asset": "curtain",
           "name": "Sheer linen curtains (balcony door)",
@@ -1756,6 +1805,8 @@
             "living.fig",
             "living.monstera",
             "living.herbs",
+            "living.kitchen-shelf",
+            "living.kitchen-shelf-2",
             "living.curtain-window"
           ]
         },
@@ -1817,6 +1868,8 @@
             "living.fig",
             "living.monstera",
             "living.herbs",
+            "living.kitchen-shelf",
+            "living.kitchen-shelf-2",
             "living.curtain-balcony"
           ]
         }

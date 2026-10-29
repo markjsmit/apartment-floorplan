@@ -175,9 +175,13 @@ export const PartSchema = z.object({
   open: z.lazy(() => PartOverrideSchema).optional(),
   // drawn only when open / in a state that shows it (a gas flame)
   hidden: z.boolean().optional(),
-  // text tag on the part's front (+z) face, e.g. a label on a box or drawer; offset = [x, y] from the face centre (cm)
+  // text tag on the part's front (+z) face, e.g. a label on a box or drawer; offset = [x, y] from the face centre (cm);
+  // bg = the paper tag's colour ('none' = text printed straight on the part), angle = turned in the face (90 = up a book spine)
   label: z
-    .object({ text: z.string(), size: z.number().default(2.4), offset: Vec2Schema.default([0, 0]), color: z.string().default('#2b2b2b') })
+    .object({
+      text: z.string(), size: z.number().default(2.4), offset: Vec2Schema.default([0, 0]), color: z.string().default('#2b2b2b'),
+      bg: z.string().optional(), angle: z.number().optional(),
+    })
     .optional(),
   // glowing part (lamp diffuser, LED strip): emissive when the room light is on, plus a light out of its bottom (-y) face:
   // area = soft rect light the size of the face (strips), point = a lamp (intensity like the ceiling lamp's ~30000)

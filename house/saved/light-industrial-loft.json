@@ -1059,7 +1059,7 @@
         {
           "id": "living.divider-board",
           "asset": "wall-art",
-          "name": "Black steel sheet on the living-room side over the first 4 rows (hides shoes, keys, bags): magnet board with our photos; only the top 2 rows are open both ways",
+          "name": "Black steel sheet on the living-room side over the first 4 rows (hides shoes, keys, bags): covered in our event photo magnets like our fridge now; only the top 2 rows are open both ways",
           "tags": [
             "divider",
             "board",
@@ -1069,7 +1069,8 @@
           "params": {
             "width": 147,
             "height": 149,
-            "photos": 26,
+            "photos": 200,
+            "photoTextures": 8,
             "frameColor": "#2b2b2d",
             "seed": "fridge"
           },
@@ -1376,6 +1377,56 @@
             "elevation": 125,
             "gap": 0
           }
+        },
+        {
+          "id": "living.kitchen-rail",
+          "asset": "kitchen-rail",
+          "name": "Black kitchen rail 120 (IKEA KUNGSFORS-style) with S-hooks: mugs, herbs, utensils, a tea towel",
+          "tags": [
+            "kitchen",
+            "rail"
+          ],
+          "params": {
+            "width": 120,
+            "color": "black",
+            "hang": "mug mug mug herbs ladle spatula towel",
+            "colors": "#f2efe8,#3a3a3a,#c8c2b6"
+          },
+          "against": {
+            "wall": "living.wall-4",
+            "offset": 68,
+            "elevation": 135,
+            "gap": 0
+          },
+          "allowOverlap": [
+            "living.counter"
+          ]
+        },
+        {
+          "id": "living.kitchen-shelf",
+          "asset": "kitchen-shelf",
+          "name": "Black steel kitchen shelf 90: pantry jars (rice, pasta, lentils ...) + oil bottles",
+          "tags": [
+            "kitchen",
+            "wall shelf"
+          ],
+          "params": {
+            "width": 90,
+            "material": "metal-black",
+            "thickness": 1.5,
+            "brackets": "black",
+            "contents": "jars jars bottles",
+            "seed": "ind-k"
+          },
+          "against": {
+            "wall": "living.wall-4",
+            "offset": 98,
+            "elevation": 172,
+            "gap": 0
+          },
+          "allowOverlap": [
+            "living.counter"
+          ]
         }
       ],
       "assumptions": [

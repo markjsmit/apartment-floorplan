@@ -2,7 +2,7 @@
   "meta": {
     "name": "Soft Mediterranean",
     "kind": "saved",
-    "note": "Soft Mediterranean · sofa in front of the big window straight across from the TV (~4.9 m), armchair in front of the pillar; bouclé banquette + round table; door corner = closet fully behind a linen curtain with a closed side (coats, shoes, devices, broom corner); arched mirror on the kitchen side of the pillar.",
+    "note": "Soft Mediterranean · sofa in front of the big window straight across from the TV (~4.9 m), armchair by the kitchen island, angled to the sofa; bouclé banquette + round table; door corner = closet fully behind a linen curtain with a closed side (coats, shoes, devices, broom corner); arched mirror on the kitchen side of the pillar.",
     "location": {
       "lat": 32.0853,
       "lon": 34.7818,
@@ -922,17 +922,17 @@
         {
           "id": "living.armchair",
           "asset": "old-house-armchair",
-          "name": "Our grey armchair in front of the pillar (~2 m to the TV)",
+          "name": "Our grey armchair near the kitchen island, back towards the sofa, angled to the sofa (a chat corner)",
           "tags": [
             "armchair"
           ],
           "params": {},
           "position": [
-            407.5,
+            259.2,
             0,
-            299.4
+            367.7
           ],
-          "rotation": 130.1,
+          "rotation": -140.3,
           "allowOverlap": [
             "living.sofa"
           ]
@@ -1215,6 +1215,8 @@
             "living.palm-1",
             "living.mirror",
             "living.art",
+            "living.kitchen-shelf",
+            "living.kitchen-shelf-2",
             "living.curtain-balcony",
             "living.curtain-window"
           ]
@@ -1382,6 +1384,61 @@
           }
         },
         {
+          "id": "living.kitchen-shelf",
+          "asset": "kitchen-shelf",
+          "name": "White plaster-look kitchen shelf 100 (hidden brackets): pantry jars + olive oil",
+          "tags": [
+            "kitchen",
+            "wall shelf"
+          ],
+          "params": {
+            "width": 100,
+            "material": "plaster",
+            "color": "#f1ece3",
+            "thickness": 4,
+            "brackets": "hidden",
+            "contents": "jars jars bottles",
+            "seed": "med-k1"
+          },
+          "against": {
+            "wall": "living.wall-4",
+            "offset": 88,
+            "elevation": 150,
+            "gap": 0
+          },
+          "allowOverlap": [
+            "living.counter"
+          ]
+        },
+        {
+          "id": "living.kitchen-shelf-2",
+          "asset": "kitchen-shelf",
+          "name": "White plaster-look kitchen shelf 100: plates on edge + terracotta bowls",
+          "tags": [
+            "kitchen",
+            "wall shelf"
+          ],
+          "params": {
+            "width": 100,
+            "material": "plaster",
+            "color": "#f1ece3",
+            "thickness": 4,
+            "brackets": "hidden",
+            "contents": "plates bowls -",
+            "colors": "#c8734a,#e9dcc4,#b8613f,#f4efe6",
+            "seed": "med-k2"
+          },
+          "against": {
+            "wall": "living.wall-4",
+            "offset": 88,
+            "elevation": 185,
+            "gap": 0
+          },
+          "allowOverlap": [
+            "living.counter"
+          ]
+        },
+        {
           "id": "living.curtain-balcony",
           "asset": "curtain",
           "name": "Sheer linen curtains (balcony door)",
@@ -1425,6 +1482,8 @@
             "living.palm-1",
             "living.mirror",
             "living.art",
+            "living.kitchen-shelf",
+            "living.kitchen-shelf-2",
             "living.curtain-window"
           ]
         },
@@ -1473,6 +1532,8 @@
             "living.palm-1",
             "living.mirror",
             "living.art",
+            "living.kitchen-shelf",
+            "living.kitchen-shelf-2",
             "living.curtain-balcony"
           ]
         }

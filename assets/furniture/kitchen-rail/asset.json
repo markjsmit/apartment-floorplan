@@ -1,0 +1,31 @@
+{
+  "id": "kitchen-rail",
+  "name": "Kitchen wall rail with hooks (design)",
+  "tags": [
+    "kitchen",
+    "design"
+  ],
+  "description": "Wall rail (IKEA HULTARP / KUNGSFORS style) with S-hooks: mugs, ladle, spatula, whisk, little herb buckets, a tea towel.",
+  "source": {
+    "kind": "procedural",
+    "generator": "kitchen-rail",
+    "license": "self-made",
+    "notes": "src/model/generators/decor.ts"
+  },
+  "params": {
+    "width": {
+      "default": 60
+    },
+    "color": {
+      "default": "stainless",
+      "description": "stainless | black | brass | #hex"
+    },
+    "hang": {
+      "default": "mug mug ladle spatula",
+      "description": "left→right: mug | ladle | spatula | whisk | herbs | towel"
+    },
+    "colors": {
+      "default": "#f2efe8,#3a3a3a,#c8c2b6"
+    }
+  }
+}

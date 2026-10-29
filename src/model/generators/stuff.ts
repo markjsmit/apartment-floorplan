@@ -12,6 +12,8 @@ export const STUFF_KINDS: StuffKind[] = ['books', 'boxes', 'bins', 'stuff'];
 const SHOW_KINDS: StuffKind[] = ['shoes', 'whisky', 'games', 'devices', 'keys', 'bags', 'cleaning'];
 
 const BOOK_COLORS = ['#7a2e2e', '#2e4a7a', '#3d6b4a', '#c9a227', '#ece6d6', '#3a3a3a', '#8a5a9e', '#d06a3a', '#5a8fa8'];
+const BOOK_TITLES = ['Dune', 'Sapiens', 'The Hobbit', 'Atomic Habits', 'Circe', 'Educated', 'Matilda', 'Ulysses', 'Kafka', 'Neverwhere', 'Klara', 'Shogun', 'Emma', 'Steppenwolf', 'Good Omens', 'The Road'];
+const LIGHT_BOOKS = ['#c9a227', '#ece6d6'];
 const CARDBOARD = ['#b48a5a', '#c49a68', '#a87d50'];
 
 const num = (v: unknown, d: number) => (v === undefined || v === null || v === '' || Number.isNaN(Number(v)) ? d : Number(v));
@@ -79,12 +81,34 @@ export function stuffParts(kind: StuffKind | 'random', prefix: string, width: nu
     const d = Math.max(4, depth - 2);
     if (k === 'books') {
       let x = x0 + 1;
-      for (let i = 0; x < x0 + w - 5; i++) {
+      // now and then a book stands face-out at the end of the row, showing its cover
+      const faceOut = w > 22 && height > 24 && rand() < 0.35;
+      const end = x0 + w - (faceOut ? 17 : 5);
+      for (let i = 0; x < end; i++) {
         const t = 2.2 + rand() * 2.6;
         const h = Math.min(height - 1.5, 19 + rand() * 11);
         const bd = Math.min(d, 14 + rand() * 9);
-        add(`${p}-book-${i}`, 'books', [t, h, bd], [x + t / 2, h / 2, depth - 1 - bd / 2], { color: pick(BOOK_COLORS) });
+        const color = pick(BOOK_COLORS);
+        const ink = LIGHT_BOOKS.includes(color) ? '#2b2b2b' : '#f4efe6';
+        const title = pick(BOOK_TITLES);
+        // the title up the spine (when it fits), gold bands at the top + bottom of some spines
+        const size = Math.min(t * 0.5, 1.3, (h - 5) / (title.length * 0.62));
+        const zf = depth - 1;
+        add(`${p}-book-${i}`, 'books', [t, h, bd], [x + t / 2, h / 2, zf - bd / 2], {
+          color, ...(size > 0.7 ? { label: { text: title, size, offset: [0, 0] as [number, number], color: ink, bg: 'none', angle: 90 } } : {}),
+        });
+        if (rand() < 0.5) for (const [k, yb] of [[0, 2.2], [1, h - 2.2]] as [number, number][]) add(`${p}-book-${i}-band-${k}`, 'books', [t - 0.3, 0.45, 0.1], [x + t / 2, yb, zf + 0.05], { color: '#c9a227' });
         x += t + 0.15;
+      }
+      if (faceOut) {
+        const color = pick(BOOK_COLORS);
+        const ink = LIGHT_BOOKS.includes(color) ? '#2b2b2b' : '#f4efe6';
+        const bh = Math.min(height - 2, 24);
+        const bw = 15.5;
+        const cx = x0 + w - bw / 2 - 1;
+        const cz = Math.max(3, depth - 9);
+        add(`${p}-cover`, 'books', [bw, bh, 2.2], [cx, bh / 2, cz], { color, rotation: [-8, 0, 0] as [number, number, number], label: { text: pick(BOOK_TITLES), size: 1.5, offset: [0, bh * 0.28] as [number, number], color: ink, bg: 'none' } });
+        add(`${p}-cover-art`, 'books', [bw * 0.7, bh * 0.4, 0.1], [cx, bh * 0.42, cz + 1.25], { color: pick(BOOK_COLORS.filter((c) => c !== color)), rotation: [-8, 0, 0] as [number, number, number] });
       }
     } else if (k === 'boxes') {
       const bw = Math.min(w - 1, 30), bd = Math.min(d, 30);

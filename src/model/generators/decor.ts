@@ -1,7 +1,7 @@
 import type { Part, Vec3 } from '../schema';
 import { box as sharpBox, cyl, num, str, type Extra, type WithStates } from './builtins';
 import { placeStuff, stuffKind, stuffParts } from './stuff';
-import { COAT_COLORS, cleaningSprays, coat, flatMop, ironingBoard, shoeRow, stickVacuum } from './wear';
+import { broom, COAT_COLORS, cleaningSprays, coat, flatMop, ironingBoard, shoeRow, stickVacuum } from './wear';
 import { rng } from './stuff';
 
 // Simple design furniture for trying out room styles: tables, stools, chairs, benches, media units, shelves, rugs,
@@ -106,47 +106,69 @@ export function designTable(p: Record<string, unknown>): Part[] {
 
 /** Coffee table with drawers. params: shape (rect | round | oval), width, depth, height, drawers (per long side, front), base (box | legs | tapered | metal-frame). */
 export function coffeeTable(p: Record<string, unknown>): Part[] {
+  // 3 tiers (Mark): slim drawers for the remotes right under the top, an open shelf for things on show, a deep drawer at
+  // the bottom (blankets, games). Fronts on +z (towards the sofa), they pull out on double-click.
   const shape = str(p.shape, 'rect');
   const W = num(p.width, 110);
   const D = shape === 'round' ? W : num(p.depth, 60);
   const H = num(p.height, 40);
-  const n = num(p.drawers, 2);
+  const n = Math.max(1, num(p.drawers, 2));
   const base = str(p.base, 'legs');
   const wood = look(p, '', 'wood-oak-light');
   const legLook = lookOf(p, 'leg', typeof p.material === 'string' ? p.material : 'wood-oak-light');
   const frontLook = lookOf(p, 'front', typeof p.material === 'string' ? p.material : 'wood-oak-light');
+  const pull = { color: str(p.pullColor, '#2a2a2a') };
   const cz = D / 2;
   const T = 3;
-  const bodyH = base === 'box' ? H - T : 14;
-  const bodyY = H - T - bodyH;
+  const round = shape !== 'rect';
+  // the cabinet under the top: a box (rect) or a drum (round / oval)
+  const r = Math.min(W, D) / 2 - 3;
+  const cw = round ? r * 2 : W - 4;
+  const cd = round ? r * 2 : D - 4;
+  const feet = 4;
+  const bandH = 7; // remote drawers
+  const bandY = H - T - bandH;
+  const lowTop = Math.max(feet + 10, bandY - Math.max(10, (H - T - feet) * 0.36)); // top of the bottom drawer box
   const parts: Part[] = [top('top', shape, W, D, T, H - T / 2, cz, wood)];
-  if (shape === 'rect') {
-    parts.push(box('body', ['body'], [W - 4, bodyH, D - 4], [0, bodyY + bodyH / 2, cz], wood));
-  } else {
-    parts.push(cyl('body', ['body'], Math.min(W, D) / 2 - 3, bodyH, [0, bodyY + bodyH / 2, cz], wood));
-  }
-  // drawer fronts on the +z side (towards the sofa), pull out on double-click
-  const fw = (shape === 'rect' ? W - 10 : Math.min(W, D) * 0.6) / Math.max(n, 1);
-  const fh = Math.min(bodyH - 3, 12);
-  const fz = shape === 'rect' ? D - 2 + 0.9 : cz + Math.min(W, D) / 2 - 3 + 0.9;
+  const slab = (id: string, tags: string[], h: number, y: number) => (round ? cyl(id, tags, r, h, [0, y + h / 2, cz], wood) : box(id, tags, [cw, h, cd], [0, y + h / 2, cz], wood));
+  parts.push(slab('band', ['body'], bandH, bandY));
+  parts.push(slab('low', ['body'], lowTop - feet, feet));
+  // the open shelf between them, held by corner posts
+  const posts: [number, number][] = round ? [[0, -r + 3], [r * 0.82, r * 0.5], [-r * 0.82, r * 0.5]] : [[-cw / 2 + 2, -cd / 2 + 2], [cw / 2 - 2, -cd / 2 + 2], [-cw / 2 + 2, cd / 2 - 2], [cw / 2 - 2, cd / 2 - 2]];
+  posts.forEach(([x, z], i) => {
+    const h = bandY - lowTop;
+    if (base === 'tapered') parts.push(cyl(`post-${i + 1}`, ['leg', 'post'], 1.6, h, [x, lowTop + h / 2, cz + z], legLook));
+    else parts.push(box(`post-${i + 1}`, ['leg', 'post'], base === 'metal-frame' ? [2.2, h, 2.2] : [3.5, h, 3.5], [x, lowTop + h / 2, cz + z], base === 'metal-frame' ? legLook : wood));
+  });
+  // feet: a recessed plinth (box) or short legs
+  if (base === 'box') parts.push(round ? cyl('plinth', ['plinth'], r - 4, feet, [0, feet / 2, cz], wood) : box('plinth', ['plinth'], [cw - 8, feet, cd - 8], [0, feet / 2, cz], wood));
+  else posts.forEach(([x, z], i) => parts.push(base === 'tapered' ? cyl(`leg-${i + 1}`, ['leg'], 1.8, feet, [x, feet / 2, cz + z], legLook) : box(`leg-${i + 1}`, ['leg'], [3, feet, 3], [x, feet / 2, cz + z], legLook)));
+  // on the open shelf: a couple of books and a small tray
+  const sy = lowTop;
+  parts.push(box('shelf-book-1', ['decor', 'books'], [24, 2.2, 17], [-cw * 0.2, sy + 1.1, cz - 1], { color: '#3a4a5a', radius: 0.3 }));
+  parts.push({ ...box('shelf-book-2', ['decor', 'books'], [21, 1.8, 15], [-cw * 0.2 + 1, sy + 3.1, cz - 1], { color: '#d9cdb8', radius: 0.3 }), rotation: [0, 6, 0] });
+  if (cw > 60) parts.push(box('shelf-tray', ['decor', 'tray'], [16, 1.6, 12], [cw * 0.22, sy + 0.8, cz], { color: '#2b2b2b', radius: 0.6 }));
+  // drawers: n slim remote drawers in the band, one deep drawer below
+  const fz = (round ? cz + r : cz + cd / 2) + 0.9;
+  const fw = (round ? r * 1.25 : cw - 6) / n;
+  const drawer = (id: string, x: number, y: number, w: number, h: number, inside: Part[]) => {
+    const out = 30;
+    const sec = { section: id };
+    parts.push({ ...box(id, ['drawer', 'front'], [w - 0.6, h, 1.8], [x, y, fz], frontLook), ...sec, open: { position: [x, y, fz + out] } });
+    parts.push({ ...box(`${id}-pull`, ['handle'], [Math.min(10, w * 0.35), 1.2, 1.2], [x, y, fz + 1.4], pull), ...sec, open: { position: [x, y, fz + 1.4 + out] } });
+    for (const pt of inside) parts.push({ ...pt, ...sec, open: { position: [pt.position[0], pt.position[1], pt.position[2] + out] } });
+  };
   for (let i = 0; i < n; i++) {
     const x = -((n - 1) * fw) / 2 + i * fw;
-    const y = bodyY + bodyH - fh / 2 - 1.5;
-    parts.push({ ...box(`drawer-${i + 1}`, ['drawer'], [fw - 0.6, fh, 1.8], [x, y, fz], frontLook), section: `drawer-${i + 1}`, open: { position: [x, y, fz + 30] } });
-    parts.push({ ...box(`pull-${i + 1}`, ['handle'], [8, 1.2, 1.2], [x, y, fz + 1.4], { color: str(p.pullColor, '#2a2a2a') }), section: `drawer-${i + 1}`, open: { position: [x, y, fz + 31.4] } });
+    const y = bandY + bandH / 2;
+    // the remotes inside (seen when it is open)
+    drawer(`drawer-${i + 1}`, x, y, fw, bandH - 1.5, [
+      box(`drawer-${i + 1}-remote-1`, ['remote'], [4.5, 1.6, 16], [x - fw * 0.18, bandY + 1.6, fz - 10], { color: '#1f1f22', radius: 0.6 }),
+      box(`drawer-${i + 1}-remote-2`, ['remote'], [4, 1.6, 14], [x + fw * 0.12, bandY + 1.6, fz - 10], { color: i % 2 ? '#2b2b2b' : '#e9e4d8', radius: 0.6 }),
+    ]);
   }
-  if (base !== 'box') {
-    const lh = bodyY;
-    const inset = shape === 'rect' ? 5 : Math.min(W, D) * 0.28;
-    const pts: [number, number][] = shape === 'rect'
-      ? [[-W / 2 + inset, -D / 2 + inset], [W / 2 - inset, -D / 2 + inset], [-W / 2 + inset, D / 2 - inset], [W / 2 - inset, D / 2 - inset]]
-      : [[0, -inset], [inset * 0.87, inset / 2], [-inset * 0.87, inset / 2]];
-    pts.forEach(([x, z], i) => {
-      if (base === 'tapered') parts.push(cyl(`leg-${i + 1}`, ['leg'], 2, lh, [x, lh / 2, cz + z], legLook));
-      else parts.push(box(`leg-${i + 1}`, ['leg'], base === 'metal-frame' ? [2.5, lh, 2.5] : [5, lh, 5], [x, lh / 2, cz + z], legLook));
-    });
-    if (base === 'metal-frame' && shape === 'rect') parts.push(box('shelf', ['shelf'], [W - 10, 2, D - 10], [0, 8, cz], wood));
-  }
+  const lowH = lowTop - feet;
+  drawer('drawer-low', 0, feet + lowH / 2, round ? r * 1.3 : cw - 6, lowH - 2, []);
   return parts;
 }
 
@@ -171,10 +193,35 @@ export function stool(p: Record<string, unknown>): Part[] {
     parts.push(cyl('foot', ['base'], S / 2 - 2, 2, [0, 1, cz], legLook));
     parts.push({ ...cyl('footrest', ['footrest'], S / 2 - 4, 1.2, [0, SH * 0.42, cz], legLook) });
   } else {
-    const o = S / 2 - 3;
-    [[-o, -o], [o, -o], [-o, o], [o, o]].forEach(([x, z], i) => parts.push(cyl(`leg-${i + 1}`, ['leg'], 1.6, SH - st, [x * 1.08, (SH - st) / 2, cz + z * 1.08], legLook)));
-    parts.push(box('footrest-f', ['footrest'], [S - 4, 2, 2], [0, SH * 0.36, cz + o], legLook));
-    parts.push(box('footrest-b', ['footrest'], [S - 4, 2, 2], [0, SH * 0.36, cz - o], legLook));
+    // 4 splayed legs that start under the seat (joined by an apron ring) and a rung between each pair as the footrest
+    const h = SH - st;
+    const rTop = seatShape === 'square' ? (S / 2 - 4) * Math.SQRT2 : S / 2 - 4.5;
+    const rBot = rTop + 4.5;
+    const at = (a: number, y: number): [number, number] => {
+      const r = rTop + (rBot - rTop) * (1 - y / h);
+      return [Math.cos(a) * r, Math.sin(a) * r];
+    };
+    const angles = [0, 1, 2, 3].map((k) => Math.PI / 4 + (k * Math.PI) / 2);
+    angles.forEach((a, i) => {
+      const [xt, zt] = at(a, h);
+      const [xb, zb] = at(a, 0);
+      const rx = (Math.atan2(zt - zb, h) * 180) / Math.PI;
+      const rz = (-Math.atan2(xt - xb, h) * 180) / Math.PI;
+      // a tilted round leg reaches past its end points by radius x sin(tilt): shorten it so it stands exactly on the floor
+      const tilt = Math.atan2(Math.hypot(xt - xb, zt - zb), h);
+      const len = (h - 2 * 1.6 * Math.sin(tilt)) / Math.cos(tilt);
+      parts.push({ ...cyl(`leg-${i + 1}`, ['leg'], 1.6, len, [(xt + xb) / 2, h / 2, cz + (zt + zb) / 2], legLook), rotation: [rx, 0, rz] });
+    });
+    parts.push(seatShape === 'square'
+      ? box('apron', ['frame'], [S - 5, 3, S - 5], [0, h - 1.5, cz], legLook)
+      : cyl('apron', ['frame'], rTop + 1.8, 3, [0, h - 1.5, cz], legLook));
+    const fy = SH * 0.36;
+    angles.forEach((a, i) => {
+      const [x1, z1] = at(a, fy);
+      const [x2, z2] = at(angles[(i + 1) % 4], fy);
+      const yaw = (Math.atan2(-(z2 - z1), x2 - x1) * 180) / Math.PI;
+      parts.push({ ...box(`footrest-${i + 1}`, ['footrest'], [Math.hypot(x2 - x1, z2 - z1), 1.8, 1.8], [(x1 + x2) / 2, fy, cz + (z1 + z2) / 2], legLook), rotation: [0, yaw, 0] });
+    });
   }
   if (back > 0) {
     // back sits on the -z side, so the sitter faces +z (the item's front)
@@ -194,6 +241,27 @@ export function designChair(p: Record<string, unknown>): Part[] {
   const legLook = lookOf(p, 'leg', 'wood-oak-light');
   const backLook = lookOf(p, 'back', typeof p.seatMaterial === 'string' ? p.seatMaterial : 'wood-oak-light', typeof p.seatColor === 'string' ? p.seatColor : undefined);
   const parts: Part[] = [];
+  if (style === 'shell') {
+    // Eames-style moulded shell (DSW): one curved shell (seat + back) on splayed wooden dowel legs with black wire braces
+    const shell = { ...seatLook, ...backLook };
+    parts.push(ell('seat', ['seat', 'shell'], [W, 7, D - 6], [0, SH - 3, D / 2 + 1], seatLook));
+    parts.push({ ...ell('back', ['back', 'shell'], [W - 1, BH - SH + 6, 9], [0, SH + (BH - SH) / 2 - 3, 7], shell), rotation: [-10, 0, 0] });
+    const lh = SH - 6;
+    const wire = { color: '#1d1d1f' };
+    const legs: [number, number, number, number][] = [[-W / 2 + 7, D / 2 - 6, -W / 2 + 2, D - 4], [W / 2 - 7, D / 2 - 6, W / 2 - 2, D - 4], [-W / 2 + 7, D / 2 - 2, -W / 2 + 2, 4], [W / 2 - 7, D / 2 - 2, W / 2 - 2, 4]];
+    legs.forEach(([xt, zt, xb, zb], i) => {
+      const len = Math.hypot(xt - xb, lh, zt - zb);
+      const rx = (Math.atan2(zt - zb, lh) * 180) / Math.PI;
+      const rz = (-Math.atan2(xt - xb, lh) * 180) / Math.PI;
+      parts.push({ ...cyl(`leg-${i + 1}`, ['leg'], 1.4, len, [(xt + xb) / 2, lh / 2, (zt + zb) / 2], legLook), rotation: [rx, 0, rz] });
+    });
+    // the wire base: side rods + a cross under the seat
+    parts.push(box('wire-l', ['wire'], [0.5, 0.5, D - 12], [-W / 2 + 4.5, lh * 0.42, D / 2 - 1], { ...wire, radius: 0 }));
+    parts.push(box('wire-r', ['wire'], [0.5, 0.5, D - 12], [W / 2 - 4.5, lh * 0.42, D / 2 - 1], { ...wire, radius: 0 }));
+    parts.push({ ...box('wire-x1', ['wire'], [W - 9, 0.5, 0.5], [0, lh * 0.62, D / 2 - 1], { ...wire, radius: 0 }), rotation: [0, 35, 0] });
+    parts.push({ ...box('wire-x2', ['wire'], [W - 9, 0.5, 0.5], [0, lh * 0.62, D / 2 - 1], { ...wire, radius: 0 }), rotation: [0, -35, 0] });
+    return parts;
+  }
   if (style === 'round') {
     // rounded tub chair (bouclé): soft seat + curved back as an ellipsoid shell
     parts.push(ell('seat', ['seat'], [W, 10, D - 4], [0, SH - 5, D / 2 + 2], seatLook));
@@ -524,12 +592,55 @@ export function plant(p: Record<string, unknown>): Part[] {
       parts.push({ ...ell(`frond-${i}`, ['leaves'], kind === 'palm' ? [len * 0.22, len, 1] : [len * 0.75, len * 0.9, 1.2], [Math.sin(ar) * out, yy, cz + Math.cos(ar) * out], { color: green(rand()) }), rotation: kind === 'palm' ? [lean * Math.cos(ar), 0, -lean * Math.sin(ar)] : [70 + rand() * 15, a, 0] });
     }
   } else if (kind === 'trailing') {
-    parts.push(ell('crown', ['leaves'], [pd * 1.2, pd * 0.5, pd * 1.2], [0, top + 2, cz], { color: green(0.5) }));
-    const n = 6;
+    // vines = chains of small leaves on a thin stem. Without `drop` they hang straight down around the pot (a shelf
+    // edge or a hook); with `drop` (cm from the pot centre to the edge in front, +z) they first run along the top
+    // (pot at the back of a cabinet) and then fall over the front edge, like a real pothos on a wardrobe.
+    const drop = num(p.drop, 0);
+    for (let i = 0; i < 10; i++) {
+      const a = rand() * Math.PI * 2;
+      const r = pd * (0.15 + rand() * 0.3);
+      const lf = ell(`crown-${i}`, ['leaves'], [5, 0.7, 4], [Math.cos(a) * r, top + 3 + rand() * 4, cz + Math.sin(a) * r], { color: green(rand()) });
+      lf.rotation = [-30 - rand() * 30, (-a * 180) / Math.PI + 90, 0];
+      parts.push(lf);
+    }
+    const n = 7;
+    const stem = { color: '#4f6b3a' };
     for (let i = 0; i < n; i++) {
-      const a = (i / n) * Math.PI * 2 + rand();
-      const len = foliageH * (0.6 + rand() * 0.6);
-      parts.push(ell(`vine-${i}`, ['leaves'], [6, len, 6], [Math.cos(a) * (pd / 2 + 2), top - len / 2 + 4, cz + Math.sin(a) * (pd / 2 + 2)], { color: green(rand()) }));
+      const len = foliageH * (0.5 + rand() * 0.7);
+      let x0: number, z0: number, ox: number, oz: number;
+      if (drop > 0) {
+        // along the top to the edge, fanning out a bit
+        x0 = (i - (n - 1) / 2) * (pd * 0.24) + (rand() - 0.5) * 3;
+        z0 = cz + drop + 0.5;
+        ox = 0;
+        oz = 1;
+        const run = drop - pd / 2;
+        const runX = (x0 * 0.5) / Math.max(run, 1);
+        parts.push({ ...cyl(`vine-${i}-run`, ['stem'], 0.25, Math.hypot(run, x0 * 0.5), [x0 * 0.75, 0.4, cz + pd / 2 + run / 2], stem), rotation: [90, 0, (Math.atan(runX) * 180) / Math.PI] });
+        for (let k = 1; k * 5 < run; k++) {
+          const lf = ell(`vine-${i}-top-${k}`, ['leaves'], [4.5, 0.6, 3.6], [x0 * 0.5 + (x0 * 0.5 * k * 5) / run + (k % 2 ? 1.6 : -1.6), 0.8, cz + pd / 2 + k * 5], { color: green(rand()) });
+          lf.rotation = [0, (k % 2 ? 30 : -30) + (rand() - 0.5) * 20, 0];
+          parts.push(lf);
+        }
+      } else {
+        const a = (i / n) * Math.PI * 2 + rand() * 0.6;
+        ox = Math.cos(a);
+        oz = Math.sin(a);
+        x0 = ox * (pd / 2 + 1);
+        z0 = cz + oz * (pd / 2 + 1);
+      }
+      const y0 = drop > 0 ? 0 : top;
+      // the hanging part: swaying a little, a leaf every ~4.5 cm on alternate sides, smaller towards the tip
+      parts.push(cyl(`vine-${i}-stem`, ['stem'], 0.22, len, [x0, y0 - len / 2, z0 + oz * 0.8], stem));
+      for (let k = 0; k * 4.5 < len; k++) {
+        const t = (k * 4.5) / len;
+        const side = k % 2 ? 1 : -1;
+        const sway = Math.sin(t * 3 + i) * 1.5;
+        const sz = 1 - t * 0.45;
+        const lf = ell(`vine-${i}-leaf-${k}`, ['leaves'], [5 * sz, 0.6, 4 * sz], [x0 + side * 1.6 * Math.abs(oz) + sway * Math.abs(oz) + (drop > 0 ? side * 1.6 : 0), y0 - k * 4.5 - 1, z0 + oz * 1.6 + side * 1.6 * Math.abs(ox)], { color: green(rand()) });
+        lf.rotation = [70 + rand() * 15, (Math.atan2(ox, oz) * 180) / Math.PI + side * 35, (rand() - 0.5) * 30];
+        parts.push(lf);
+      }
     }
   } else {
     // bushy: leaves on stems fanning out of the pot
@@ -558,7 +669,7 @@ export function curtain(p: Record<string, unknown>): Part[] {
   const parts: Part[] = [{ ...box('rail', ['rail'], [W + 10, 2.5, 2.5], [0, H - 1, 6], { color: str(p.railColor, '#2a2a2a') }), castShadow: false }];
   const pw = (W / panels) * (1 - open) + 25;
   for (let i = 0; i < panels; i++) {
-    const side = panels === 1 ? -1 : i < panels / 2 ? -1 : 1;
+    const side = panels === 1 ? (p.side === 'right' ? 1 : -1) : i < panels / 2 ? -1 : 1; // one panel: gathered left (default) or right
     const x = side * (W / 2 - pw / 2 + 5);
     const folds = Math.max(3, Math.round(pw / 9));
     for (let f = 0; f < folds; f++) {
@@ -591,22 +702,49 @@ export function wallArt(p: Record<string, unknown>): Part[] {
     return parts;
   }
   if (p.photos) {
-    // magnet board (steel sheet / magnetic paint) with photos held by small round magnets, a bit crooked like real life
+    // magnet board (steel sheet / a fridge door) covered in event photo magnets, the Israeli way: 10x15 photo-booth
+    // prints from weddings / bar mitzvahs (white border, a strip with the couple's names), packed edge to edge in rows,
+    // a bit crooked and overlapping. `photos` = how many (capped at what fits); `photoTextures` = n uses the real
+    // photos photo-magnet-1..n (13.8 x 6.8 cm prints) instead of a drawn venue + crowd.
     parts.push(box('board', ['board', 'magnet board'], [W, H, 0.8], [0, H / 2, 0.4], { material: str(p.boardMaterial, 'metal-black'), color: fc, radius: 0.3 }));
     const rand = rng(String(p.seed ?? 'photos'));
-    const tones = ['#d8c3a5', '#8fa3b8', '#c98b6b', '#a9b89a', '#e8dccb', '#6f7f95', '#b39a7a', '#d9a7a0'];
-    const n = Math.round(num(p.photos, 12));
-    const cols = Math.max(1, Math.round(Math.sqrt((n * W) / H)));
-    const rows = Math.ceil(n / cols);
-    for (let i = 0; i < n; i++) {
-      const pw = rand() < 0.5 ? 10 : 15;
-      const ph = pw === 10 ? 15 : 10;
-      const cx = -W / 2 + ((i % cols) + 0.5) * (W / cols) + (rand() - 0.5) * 4;
-      const cy = H - (Math.floor(i / cols) + 0.5) * (H / rows) + (rand() - 0.5) * 4;
-      const tilt = (rand() - 0.5) * 10;
-      parts.push({ ...box(`photo-${i}`, ['photo'], [pw, ph, 0.2], [cx, cy, 0.95], { color: '#f4f1ea', radius: 0 }), rotation: [0, 0, tilt], castShadow: false });
-      parts.push({ ...box(`photo-${i}-print`, ['photo'], [pw - 1.2, ph - 1.2 - (pw === 10 ? 2 : 0), 0.1], [cx, cy + (pw === 10 ? 1 : 0), 1.1], { color: tones[Math.floor(rand() * tones.length)], radius: 0 }), rotation: [0, 0, tilt], castShadow: false });
-      parts.push({ ...cyl(`magnet-${i}`, ['magnet'], 1.1, 0.8, [cx + (rand() - 0.5) * 3, cy + ph / 2 - 1.5, 1.4], { color: ['#c8452c', '#2e5a8a', '#d9a43a', '#3d6b4a', '#f4f1ea'][Math.floor(rand() * 5)] }), rotation: [90, 0, 0] });
+    const venues = ['#2a2230', '#3a2a24', '#1f2a3a', '#4a3a2a', '#2e2a3e', '#5a4632'];
+    const crowd = ['#c9a27a', '#8a6a5a', '#d8c3a5', '#6f5a7a', '#b0786a', '#e8dccb'];
+    const strips = ['#c8452c', '#2e5a8a', '#d9a43a', '#6a4a8a', '#1f1f22', '#3d6b4a', '#b0466a'];
+    const names = ['Noa & Itay', 'Shira & Tal', 'Bar Mitzvah Yoav', 'Maya & Omer', 'Lior 40', 'Dana & Roy', 'Bat Mitzvah Gali', 'Yael & Ben'];
+    const max = Math.round(num(p.photos, 40));
+    const rowH = 10.4;
+    let i = 0;
+    for (let ry = H - 1 - rowH / 2; ry - rowH / 2 > 0.5 && i < max; ry -= rowH - 0.4) {
+      let x = -W / 2 + 0.5 + rand() * 2;
+      while (i < max) {
+        const real = num(p.photoTextures, 0);
+        const pw = real > 0 || rand() < 0.8 ? 15 : 10; // mostly landscape 15x10, sometimes a square-ish 10x10
+        if (x + pw > W / 2 - 0.3) break;
+        const ph = 10;
+        const cx = x + pw / 2 + (rand() - 0.5) * 0.8;
+        const cy = ry + (rand() - 0.5) * 0.8;
+        const z = 0.85 + (i % 3) * 0.06; // neighbours overlap a little: keep them on slightly different layers
+        const tilt = (rand() - 0.5) * 4;
+        const rot: Vec3 = [0, 0, tilt];
+        const strip = real > 0 || rand() < 0.65;
+        const sh = strip ? 2.2 : 0;
+        const id = `photo-${i}`;
+        parts.push({ ...box(id, ['photo', 'magnet'], [pw, ph, 0.3], [cx, cy, z], { color: '#f4f1ea', radius: 0 }), rotation: rot, castShadow: false });
+        // the picture: a dark venue with a row of people across the lower half
+        const iw = pw - 1.2;
+        const ih = ph - 1.2 - sh;
+        const iy = cy + sh / 2;
+        if (real > 0) parts.push({ ...box(`${id}-print`, ['photo'], [iw, ih, 0.1], [cx, iy, z + 0.2], { material: `photo-magnet-${1 + Math.floor(rand() * real)}`, radius: 0 }), rotation: rot, castShadow: false });
+        else parts.push({ ...box(`${id}-print`, ['photo'], [iw, ih, 0.1], [cx, iy, z + 0.2], { color: venues[Math.floor(rand() * venues.length)], radius: 0 }), rotation: rot, castShadow: false });
+        if (!real) parts.push({ ...box(`${id}-people`, ['photo'], [iw * (0.6 + rand() * 0.35), ih * 0.45, 0.1], [cx + (rand() - 0.5) * 2, iy - ih * 0.2, z + 0.26], { color: crowd[Math.floor(rand() * crowd.length)], radius: 0 }), rotation: rot, castShadow: false });
+        if (strip) {
+          const name = names[Math.floor(rand() * names.length)];
+          parts.push({ ...box(`${id}-strip`, ['photo'], [pw - 1.2, sh - 0.4, 0.1], [cx, cy - ph / 2 + 0.6 + (sh - 0.4) / 2, z + 0.2], { color: strips[Math.floor(rand() * strips.length)], radius: 0 }), rotation: rot, castShadow: false, label: { text: name, size: 0.75, offset: [0, 0], color: '#f4f1ea', bg: 'none' } });
+        }
+        x += pw - 0.3;
+        i++;
+      }
     }
     return parts;
   }
@@ -634,8 +772,10 @@ export function wallArt(p: Record<string, unknown>): Part[] {
     const bh = (H - 14) * (0.25 + rand() * 0.35);
     const x = (rand() - 0.5) * (W - 14 - bw);
     const y = H / 2 + (rand() - 0.5) * (H - 14 - bh);
-    if (i % 2) parts.push({ ...cyl(`shape-${i}`, ['art'], Math.min(bw, bh) / 2, 0.3, [x, y, t + 0.5], { color: c }), rotation: [90, 0, 0], castShadow: false });
-    else parts.push({ ...box(`shape-${i}`, ['art'], [bw, bh, 0.3], [x, y, t + 0.5], { color: c }), castShadow: false });
+    // each shape on its own layer: overlapping shapes at the same depth flicker
+    const z = t + 0.55 + i * 0.15;
+    if (i % 2) parts.push({ ...cyl(`shape-${i}`, ['art'], Math.min(bw, bh) / 2, 0.1, [x, y, z], { color: c }), rotation: [90, 0, 0], castShadow: false });
+    else parts.push({ ...box(`shape-${i}`, ['art'], [bw, bh, 0.1], [x, y, z], { color: c, radius: 0 }), castShadow: false });
   });
   return parts;
 }
@@ -791,18 +931,20 @@ export function cornerCabinet(p: Record<string, unknown>): Part[] {
  * origin = the right-angle corner on the floor, the triangle runs `legX` along -x and `legZ` along -z (its diagonal is
  * the board, not part of this item). A door on the x leg (facing +z, hinge at the corner end), a fixed panel on the z
  * leg (facing +x), a lid. Inside: a broom closet (stick vacuum, mop, ironing board, sprays on a small shelf).
- * params: legX, legZ, height, doorHeight, material/color (white), handleColor.
+ * `step`: the diagonal starts that far behind the door line (x = -legX, z = -step), e.g. to bring the door flush with
+ * the far face of a pillar instead of leaving a corner. params: legX, legZ, step, height, doorHeight, material/color, handleColor.
  */
 export function cornerCloset(p: Record<string, unknown>): WithStates {
   const a = num(p.legX, 75);
   const b = num(p.legZ, 52);
   const H = num(p.height, 238);
   const dh = Math.min(H - 2, num(p.doorHeight, 210));
+  const step = Math.min(Math.max(0, num(p.step, 0)), b - 5);
   const T = 1.8;
   const body = look(p, '', 'white-laminate');
   const hc = { color: str(p.handleColor, '#2a2a2a') };
   const parts: Part[] = [
-    { id: 'lid', tags: ['body', 'lid'], geometry: { type: 'prism', points: [[a / 2, b / 2], [-a / 2, b / 2], [a / 2, -b / 2]], depth: T, bevel: 0 }, position: [-a / 2, H - T / 2, -b / 2], rotation: [90, 0, 0], castShadow: true, glass: false, ...body },
+    { id: 'lid', tags: ['body', 'lid'], geometry: { type: 'prism', points: [[a / 2, b / 2], [-a / 2, b / 2], ...(step > 0 ? [[-a / 2, b / 2 - step]] as [number, number][] : []), [a / 2, -b / 2]], depth: T, bevel: 0 }, position: [-a / 2, H - T / 2, -b / 2], rotation: [90, 0, 0], castShadow: true, glass: false, ...body },
     box('panel', ['body', 'panel'], [T, H, b], [-T / 2, H / 2, -b / 2], body),
     box('lintel', ['body', 'frame'], [a - T, H - dh, T], [-(a + T) / 2, (H + dh) / 2, -T / 2], body),
   ];
@@ -828,6 +970,31 @@ export function cornerCloset(p: Record<string, unknown>): WithStates {
   return { parts, states: [{ id: 'closed', name: 'Closed', parts: {} }, { id: 'open', name: 'Open', parts: opened }], interactions: [{ part: 'door', action: 'cycleStates' }, { part: 'handle', action: 'cycleStates' }] };
 }
 
+/**
+ * Open cleaning corner on a wall (no door, so nothing to hit in a tight corner): the stick vacuum hanging in its
+ * charging dock, a flat mop and a broom in wall clips, sprays + kitchen paper on a little shelf. Origin back-centre
+ * on the wall. params: width (~62), color (dock, clips, shelf).
+ */
+export function cleaningCorner(p: Record<string, unknown>): Part[] {
+  const W = Math.max(50, num(p.width, 62));
+  const c = { color: str(p.color, '#f2f0ec') };
+  const vx = -W / 2 + 14;
+  const bx = W / 2 - 14.5;
+  const parts: Part[] = [
+    box('dock', ['dock'], [9, 28, 1.4], [vx, 100, 0.7], c),
+    box('dock-arm', ['dock'], [6, 4, 9], [vx, 101, 5], c),
+    box('clip-rail', ['clips'], [W * 0.55, 3, 1.6], [W / 2 - W * 0.3, 112, 0.8], c),
+    cyl('clip-mop', ['clips'], 1.6, 3, [0, 112, 2.4], c),
+    cyl('clip-broom', ['clips'], 1.6, 3, [bx, 112, 2.4], c),
+    box('shelf', ['shelf'], [W - 24, 1.6, 15], [W / 2 - (W - 24) / 2 - 2, 150, 7.5], c),
+    ...stickVacuum('vac', vx, 3, 9, 112),
+    ...flatMop('mop', 0, 0, 22, 128, true),
+    ...broom('broom', bx, 0, 3, 120),
+    ...cleaningSprays('sprays', W / 2 - (W - 24) / 2 - 2, 150.8, 7),
+  ];
+  return parts;
+}
+
 type Front = { kind?: string; h?: number; fill?: string; content?: string; mirror?: boolean; material?: string; color?: string };
 
 /**
@@ -836,7 +1003,7 @@ type Front = { kind?: string; h?: number; fill?: string; content?: string; mirro
  * baskets | tray | shoes | whisky | games | books ...) — fronts without `h` share what is left; behind a door / tilt `content` =
  * coats (on a rail) | shoes (shelves of pairs) | any shelf contents kind, seen when it is opened (state "open"). params: width, depth, height, plinth (recessed base, 0 =
  * none) or legHeight (tapered legs instead), columns [{w, stack}], handles (bar | knob | none = push-to-open),
- * materials, light (LED strip under the top of each niche).
+ * materials, fluted (ribbed doors), light (LED strip under the top of each niche).
  */
 export function tallCabinet(p: Record<string, unknown>): WithStates {
   const W = num(p.width, 100);
@@ -900,6 +1067,8 @@ export function tallCabinet(p: Record<string, unknown>): WithStates {
       const fh = f.h ?? restH;
       const id = `c${ci + 1}-${k + 1}`;
       const kind = f.kind ?? 'door';
+      // two closed fronts on top of each other always have a fixed shelf behind the seam (doors follow the inside)
+      if (k > 0 && kind !== 'open' && (stack[k - 1].kind ?? 'door') !== 'open') parts.push(box(`${id}-shelf`, ['shelf', 'body'], [cw - T, T, D - 1], [cx, y, D / 2], body));
       if (kind === 'open') {
         parts.push(box(`${id}-floor`, ['shelf', 'niche'], [cw - T, T, D - 2], [cx, y + T / 2, D / 2], body));
         parts.push(box(`${id}-ceil`, ['shelf', 'niche'], [cw - T, T, D - 2], [cx, y + fh - T / 2, D / 2], body));
@@ -918,9 +1087,15 @@ export function tallCabinet(p: Record<string, unknown>): WithStates {
         if (f.content) inside(id, f.content, cx, cw, y + T, fh - T);
         const before = parts.length;
         parts.push({ ...box(`${id}-front`, ['front', kind], [cw - 0.6, fh - 0.6, T], [cx, y + fh / 2, fz], fl), section: id });
+        if (p.fluted && kind !== 'drawer') {
+          // vertical ribs over the front (fluted / reeded doors)
+          const n = Math.max(3, Math.round((cw - 2) / 3.4));
+          const r = (cw - 2) / n / 2;
+          for (let q = 0; q < n; q++) parts.push({ ...cyl(`${id}-rib-${q}`, ['front', 'rib'], r, fh - 3, [cx - (cw - 2) / 2 + (q + 0.5) * 2 * r, y + fh / 2, fz + T / 2 - r * 0.4], fl), section: id });
+        }
         if (f.mirror) parts.push({ ...box(`${id}-mirror`, ['mirror'], [cw - 10, fh - 14, 0.4], [cx, y + fh / 2, fz + T / 2 + 0.2], { material: 'mirror' }), section: id });
         if (handles !== 'none') {
-          const z = fz + T / 2 + 1;
+          const z = fz + T / 2 + 1 + (p.fluted ? 1.5 : 0);
           if (kind === 'door') {
             const len = Math.min(fh * 0.3, 30);
             const hy = Math.min(Math.max(105, y + 6 + len / 2), y + fh - 6 - len / 2);
@@ -1001,6 +1176,145 @@ export function tvArm(p: Record<string, unknown>): Part[] {
     box('tilt-head', ['head'], [5, 12, 3], [head[0], y, reach - 2.2], { ...c, radius: 0.8 }),
     box('vesa-plate', ['head', 'vesa'], [22, 22, 0.8], [head[0], y, reach - 0.4], { ...c, radius: 0.3 }),
   ];
+}
+
+/** A mug standing on y (handle to +x). */
+function mug(id: string, x: number, y: number, z: number, color: string, h = 9.5, r = 4): Part[] {
+  return [
+    { ...cyl(id, ['mug', 'kitchen'], r, h, [x, y + h / 2, z], { color }), castShadow: true },
+    box(`${id}-handle`, ['mug', 'kitchen'], [1.2, h * 0.55, 3.4], [x + r + 0.6, y + h * 0.5, z], { color, radius: 0.5 }),
+  ];
+}
+
+const PANTRY = [
+  { t: 'RICE', c: '#f2efe8' }, { t: 'PASTA', c: '#e9c46a' }, { t: 'LENTILS', c: '#c8642e' }, { t: 'COFFEE', c: '#3a2618' },
+  { t: 'OATS', c: '#d9c4a0' }, { t: 'SUGAR', c: '#f7f5f0' }, { t: 'BEANS', c: '#7a2e2e' }, { t: 'COUSCOUS', c: '#e3c27a' },
+];
+
+/** Things on a kitchen shelf, in a row `w` wide centred on x, standing on y, back of the shelf at z 0, `d` deep. */
+function shelfGroup(kind: string, id: string, x: number, y: number, w: number, d: number, rand: () => number, colors: string[]): Part[] {
+  const out: Part[] = [];
+  const zc = d / 2 + 0.5;
+  if (kind === 'cups') {
+    const n = Math.max(2, Math.floor(w / 11));
+    for (let i = 0; i < n; i++) out.push(...mug(`${id}-mug-${i}`, x - w / 2 + 5 + (i * (w - 10)) / Math.max(n - 1, 1), y, zc + (i % 2 ? 2 : -1), colors[i % colors.length]));
+  } else if (kind === 'jars') {
+    const n = Math.max(2, Math.floor(w / 13));
+    for (let i = 0; i < n; i++) {
+      const jx = x - w / 2 + 6.5 + (i * (w - 13)) / Math.max(n - 1, 1);
+      const p = PANTRY[Math.floor(rand() * PANTRY.length)];
+      const h = 15 + (i % 3) * 3;
+      const fill = h * (0.55 + rand() * 0.3);
+      out.push(cyl(`${id}-jar-${i}`, ['jar', 'pantry', 'glass'], 5.6, h, [jx, y + h / 2, zc], { material: 'glass', glass: true }));
+      out.push({ ...cyl(`${id}-jar-${i}-in`, ['jar', 'pantry'], 5.1, fill, [jx, y + 0.4 + fill / 2, zc], { color: p.c }), label: { text: p.t, size: 0.9, offset: [0, fill / 2 - 3], color: '#2b2b2b', bg: '#f4efe6' } });
+      out.push(cyl(`${id}-jar-${i}-lid`, ['jar', 'pantry'], 5.8, 2.2, [jx, y + h + 1.1, zc], { material: 'wood-oak-light' }));
+    }
+  } else if (kind === 'bottles') {
+    const n = Math.max(2, Math.floor(w / 9));
+    for (let i = 0; i < n; i++) {
+      const bx = x - w / 2 + 4.5 + (i * (w - 9)) / Math.max(n - 1, 1);
+      const h = 18 + (i % 2) * 5;
+      out.push(cyl(`${id}-bottle-${i}`, ['bottle', 'kitchen'], 3.4, h, [bx, y + h / 2, zc], { color: ['#6b7a2a', '#8a5a2a', '#3a4a2a'][i % 3], glass: true }));
+      out.push(cyl(`${id}-bottle-${i}-neck`, ['bottle', 'kitchen'], 1.2, 6, [bx, y + h + 3, zc], { color: '#4a5a2a', glass: true }));
+      out.push(cyl(`${id}-bottle-${i}-cap`, ['bottle', 'kitchen'], 1.4, 1.6, [bx, y + h + 6.8, zc], { color: '#1d1d1f' }));
+    }
+  } else if (kind === 'plates') {
+    // plates standing on edge against the wall, behind a little rail
+    for (let i = 0; i < 4; i++) out.push({ ...cyl(`${id}-plate-${i}`, ['plate', 'kitchen'], 12, 1.1, [x - 4.5 + i * 3, y + 12.2, 4 + i * 0.3], { color: colors[(i + 1) % colors.length] }), rotation: [80, 0, 0] });
+    out.push(box(`${id}-plate-rail`, ['rail'], [Math.min(w, 34), 1, 1], [x, y + 4, 9], { color: '#1d1d1f', radius: 0.3 }));
+  } else if (kind === 'bowls') {
+    for (let i = 0; i < 3; i++) out.push(cyl(`${id}-bowl-${i}`, ['bowl', 'kitchen'], 8 - i * 1.2, 4, [x, y + 2 + i * 3.4, zc], { color: colors[i % colors.length] }));
+  } else if (kind === 'teapot') {
+    out.push(ell(`${id}-pot`, ['teapot', 'kitchen'], [15, 11, 13], [x, y + 5.5, zc], { color: colors[0] }));
+    out.push({ ...box(`${id}-spout`, ['teapot', 'kitchen'], [7, 1.8, 1.8], [x + 9, y + 7, zc], { color: colors[0], radius: 0.8 }), rotation: [0, 0, 30] });
+    out.push(cyl(`${id}-knob`, ['teapot', 'kitchen'], 1.4, 2, [x, y + 12, zc], { color: '#1d1d1f' }));
+  } else if (kind === 'plant' || kind === 'herbs') {
+    const pd = kind === 'plant' ? 12 : 10;
+    const pl = plant(kind === 'plant'
+      ? { kind: 'trailing', height: 40, spread: pd, potDiameter: pd, potColor: colors[0], drop: d - pd / 2, seed: id }
+      : { kind: 'bush', height: 20, spread: 14, potDiameter: pd, potColor: '#c8734a', seed: id });
+    out.push(...pl.map((pt) => ({ ...pt, id: `${id}-${pt.id}`, position: [pt.position[0] + x, pt.position[1] + y, pt.position[2] + (kind === 'plant' ? 0.5 : zc - 7)] as Vec3 })));
+  }
+  return out;
+}
+
+/**
+ * Small floating kitchen wall shelf (IKEA BERGSHULT / BURHULT style: a board on brackets, screwed up in 10 minutes).
+ * Origin = back-centre of the shelf's underside on the wall. params: width, depth (20), thickness, material/color,
+ * brackets (black | brass | white | hidden), contents (space separated groups left→right: cups | jars | bottles |
+ * plates | bowls | teapot | plant | herbs | -), colors (comma separated, for cups / bowls / plates / pots).
+ */
+export function kitchenShelf(p: Record<string, unknown>): Part[] {
+  const W = num(p.width, 80);
+  const D = num(p.depth, 20);
+  const T = num(p.thickness, 2.5);
+  const wood = look(p, '', 'wood-oak-light');
+  const br = str(p.brackets, 'black');
+  const parts: Part[] = [box('board', ['shelf'], [W, T, D], [0, T / 2, D / 2], wood)];
+  if (br !== 'hidden') {
+    const c = { color: br === 'brass' ? '#b08d3c' : br === 'white' ? '#f2f0ec' : '#1d1d1f' };
+    for (const sx of [-1, 1]) {
+      const x = sx * (W / 2 - Math.min(12, W * 0.15));
+      parts.push(box(`bracket-${sx > 0 ? 'r' : 'l'}-v`, ['bracket'], [2, 14, 0.6], [x, -7, 0.3], { ...c, radius: 0.2 }));
+      parts.push(box(`bracket-${sx > 0 ? 'r' : 'l'}-h`, ['bracket'], [2, 0.6, D - 3], [x, -0.3, (D - 3) / 2], { ...c, radius: 0.2 }));
+    }
+  }
+  const groups = str(p.contents, 'cups jars').split(/\s+/).filter(Boolean);
+  const colors = str(p.colors, '#f2efe8,#c8c2b6,#3a3a3a').split(',').map((c) => c.trim());
+  const rand = rng(String(p.seed ?? 'kshelf'));
+  const gw = (W - 4) / Math.max(groups.length, 1);
+  groups.forEach((g, i) => {
+    if (g === '-') return;
+    parts.push(...shelfGroup(g, `g${i + 1}`, -W / 2 + 2 + gw * (i + 0.5), T, gw - 2, D, rand, colors));
+  });
+  return parts;
+}
+
+/**
+ * Kitchen wall rail (IKEA HULTARP / KUNGSFORS style) with S-hooks: mugs, utensils, little herb buckets or a tea towel.
+ * Origin = back-centre at the rail height. params: width, color (rail: stainless | black | brass), hang (space
+ * separated, left→right: mug | ladle | spatula | whisk | herbs | towel), colors.
+ */
+export function kitchenRail(p: Record<string, unknown>): Part[] {
+  const W = num(p.width, 60);
+  const rc = str(p.color, 'stainless');
+  const rail: Extra = rc === 'stainless' ? { material: 'stainless' } : { color: rc === 'black' ? '#1d1d1f' : rc === 'brass' ? '#b08d3c' : rc };
+  const parts: Part[] = [
+    { ...cyl('rail', ['rail'], 0.8, W, [0, 0, 3], rail), rotation: [0, 0, 90] },
+    cyl('end-l', ['rail'], 1.4, 3, [-W / 2 + 1, 0, 1.5], rail),
+    cyl('end-r', ['rail'], 1.4, 3, [W / 2 - 1, 0, 1.5], rail),
+  ];
+  for (const sx of [-1, 1]) parts[parts.length - (sx < 0 ? 2 : 1)] = { ...parts[parts.length - (sx < 0 ? 2 : 1)], rotation: [90, 0, 0] };
+  const hang = str(p.hang, 'mug mug ladle spatula').split(/\s+/).filter(Boolean);
+  const colors = str(p.colors, '#f2efe8,#3a3a3a,#c8c2b6').split(',').map((c) => c.trim());
+  const step = (W - 8) / Math.max(hang.length, 1);
+  hang.forEach((h, i) => {
+    const x = -W / 2 + 4 + step * (i + 0.5);
+    const id = `h${i + 1}`;
+    parts.push(box(`${id}-hook`, ['hook'], [0.4, 5, 0.4], [x, -2.2, 3.2], { ...rail, radius: 0 }));
+    if (h === 'mug') {
+      // hangs by its handle, upside down-ish
+      parts.push({ ...cyl(`${id}-mug`, ['mug', 'kitchen'], 4, 9.5, [x, -10, 6], { color: colors[i % colors.length] }), rotation: [0, 0, 8] });
+      parts.push(box(`${id}-mug-handle`, ['mug', 'kitchen'], [3.4, 1.2, 1.2], [x, -5, 3.6], { color: colors[i % colors.length], radius: 0.4 }));
+    } else if (h === 'ladle' || h === 'spatula' || h === 'whisk') {
+      const steel = { material: 'stainless' };
+      parts.push(box(`${id}-handle`, ['utensil', 'kitchen'], [1.4, 22, 0.6], [x, -15, 3.4], { ...(h === 'spatula' ? { color: '#1d1d1f' } : steel), radius: 0.3 }));
+      if (h === 'ladle') parts.push(ell(`${id}-head`, ['utensil', 'kitchen'], [8, 3.5, 8], [x, -27, 5], steel));
+      else if (h === 'spatula') parts.push(box(`${id}-head`, ['utensil', 'kitchen'], [7, 9, 0.5], [x, -30, 3.4], { color: '#1d1d1f', radius: 0.5 }));
+      else parts.push(ell(`${id}-head`, ['utensil', 'kitchen'], [5, 11, 5], [x, -31, 3.6], steel));
+    } else if (h === 'herbs') {
+      parts.push(cyl(`${id}-bucket`, ['herbs', 'kitchen'], 5, 9, [x, -10, 6], { ...rail }));
+      for (let k = 0; k < 7; k++) {
+        const a = (k / 7) * Math.PI * 2;
+        const lf = ell(`${id}-leaf-${k}`, ['leaves', 'herbs'], [3, 0.6, 4.5], [x + Math.cos(a) * 2.5, -3 + (k % 3), 6 + Math.sin(a) * 2.5], { color: k % 2 ? '#4f7a3a' : '#6b8f4a' });
+        lf.rotation = [-50, (-a * 180) / Math.PI, 0];
+        parts.push(lf);
+      }
+    } else if (h === 'towel') {
+      parts.push(box(`${id}-towel`, ['towel', 'kitchen'], [16, 28, 0.6], [x, -14, 4.2], { color: colors[i % colors.length], material: 'linen-white', radius: 0.3 }));
+    }
+  });
+  return parts;
 }
 
 /** Swivel TV floor stand (e.g. 89 x 52 base, column up to the bracket, small shelf). Put the TV on it with state "wall". params: width, depth, height (bracket top), shelf (height, 0 = none), color. */

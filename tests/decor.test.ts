@@ -4,7 +4,7 @@ import { RoomSchema } from '../src/model/schema';
 import { resolveWalls } from '../src/model/geometry';
 import { buildColliders, isFree } from '../src/model/collision';
 import {
-  coffeeTable, cornerCabinet, cornerCloset, cushions, floorLamp, MODELS, pendant, plant, rug, slatPanel, stool, tallCabinet, tvArm, wallArt,
+  coffeeTable, cornerCabinet, cornerCloset, cushions, floorLamp, kitchenRail, kitchenShelf, MODELS, pendant, plant, rug, slatPanel, stool, tallCabinet, tvArm, wallArt,
 } from '../src/model/generators/decor';
 import { closetSystem } from '../src/model/generators/bathroom';
 import { stuffParts } from '../src/model/generators/stuff';
@@ -12,10 +12,10 @@ import { stuffParts } from '../src/model/generators/stuff';
 const size = (parts: ReturnType<typeof plant>) => assetSize(parts, undefined);
 
 describe('design furniture', () => {
-  it('coffee table drawers sit on the front (+z) and pull out towards it', () => {
+  it('coffee table drawers (remotes on top, a deep one below an open shelf) sit on the front (+z) and pull out towards it', () => {
     const parts = coffeeTable({ width: 120, depth: 60, height: 40, drawers: 2 });
     const drawers = parts.filter((p) => p.tags.includes('drawer'));
-    expect(drawers).toHaveLength(2);
+    expect(drawers).toHaveLength(3); // 2 slim remote drawers under the top + the deep one at the bottom
     for (const d of drawers) {
       expect(d.position[2]).toBeGreaterThan(55);
       expect(d.open?.position?.[2]).toBeGreaterThan(d.position[2]);
@@ -23,8 +23,10 @@ describe('design furniture', () => {
     expect(size(parts).h).toBeCloseTo(40);
   });
 
-  it('a counter stool seat is at its seat height', () => {
-    expect(size(stool({ seatHeight: 65, seatSize: 36 })).h).toBeCloseTo(65);
+  it('a counter stool seat is at its seat height, its legs start under the seat', () => {
+    const parts = stool({ seatHeight: 65, seatSize: 36, base: 'four' });
+    for (const leg of parts.filter((p) => p.id.startsWith('leg-'))) expect(Math.hypot(leg.position[0], leg.position[2] - 22)).toBeLessThan(18);
+    expect(size(stool({ seatHeight: 65, seatSize: 36 })).h).toBeCloseTo(65, 0); // splayed legs: bounds treat them as boxes
   });
 
   it('a pendant hangs from the ceiling down to its shade bottom', () => {
@@ -126,10 +128,15 @@ describe('entry + display furniture', () => {
     expect((top.geometry as { radius?: number }).radius).toBeGreaterThan(0);
   });
 
-  it('a magnet board holds photos with magnets, all on the board', () => {
+  it('a magnet board is covered in photo magnets (real photos when asked), all on the board', () => {
     const parts = wallArt({ width: 147, height: 77, photos: 16 });
-    expect(parts.filter((p) => p.id.startsWith('photo-') && !p.id.endsWith('-print'))).toHaveLength(16);
     expect(parts.filter((p) => p.tags.includes('magnet'))).toHaveLength(16);
+    const full = wallArt({ width: 147, height: 77, photos: 500, photoTextures: 8 });
+    const magnets = full.filter((p) => p.tags.includes('magnet')).length;
+    expect(magnets).toBeGreaterThan(40); // packed edge to edge, capped by what fits
+    expect(magnets).toBeLessThan(80);
+    expect(full.some((p) => p.material === 'photo-magnet-1' || p.material === 'photo-magnet-2')).toBe(true);
+    expect(size(full).w).toBeLessThan(147 + 6);
     const s = size(parts);
     expect(s.w).toBeLessThan(147 + 6);
     expect(s.max[1]).toBeLessThan(77 + 6);
@@ -192,5 +199,23 @@ describe('entry + display furniture', () => {
     const parts = wallArt({ round: true, width: 60, height: 60 });
     expect(parts.some((p) => p.material === 'mirror')).toBe(true);
     expect(size(parts).w).toBeCloseTo(60, 0);
+  });
+
+  it('a kitchen shelf carries its groups on the board, within its width', () => {
+    const parts = kitchenShelf({ width: 100, depth: 20, contents: 'cups jars bottles', seed: 't' });
+    for (const tag of ['mug', 'jar', 'bottle']) expect(parts.some((p) => p.tags.includes(tag))).toBe(true);
+    const s = size(parts);
+    expect(s.w).toBeLessThanOrEqual(101);
+    expect(s.max[2]).toBeLessThanOrEqual(21);
+    // pantry jars carry a label with what is inside
+    expect(parts.some((p) => p.label && ['RICE', 'PASTA', 'LENTILS', 'COFFEE', 'OATS', 'SUGAR', 'BEANS', 'COUSCOUS'].includes(p.label.text))).toBe(true);
+  });
+
+  it('a kitchen rail hangs its things below the rail, close to the wall', () => {
+    const parts = kitchenRail({ width: 70, hang: 'mug ladle herbs towel' });
+    const hung = parts.filter((p) => ['mug', 'utensil', 'towel'].some((t) => p.tags.includes(t)));
+    expect(hung.length).toBeGreaterThan(3);
+    for (const p of hung) expect(p.position[1]).toBeLessThan(0);
+    expect(size(parts).max[2]).toBeLessThan(12);
   });
 });

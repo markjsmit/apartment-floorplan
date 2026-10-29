@@ -1,0 +1,19 @@
+{
+  "id": "photo-magnet-3",
+  "name": "Event photo magnet 3 (from our fridge)",
+  "tags": [
+    "photo",
+    "magnet"
+  ],
+  "maps": {
+    "color": "color.jpg"
+  },
+  "tileSize": [
+    13.8,
+    6.6
+  ],
+  "fallbackColor": "#4a3a3a",
+  "roughness": 0.45,
+  "source": "Self-made: a tiny, blurred crop of one of Mark's own fridge photo magnets (sources/old house photo, 96x48 px so nobody is recognisable)",
+  "license": "self-made"
+}

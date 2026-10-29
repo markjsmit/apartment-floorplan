@@ -239,16 +239,18 @@ function faceDepth(part: Part): number {
   return g?.type === 'box' ? g.size[2] : g?.type === 'cylinder' ? g.radius * 2 : 0;
 }
 
-/** Paper tag with text on the part's front face; a child of the part, so it moves with drawers and doors. */
+/** Paper tag with text (or just the text, bg 'none') on the part's front face; a child of the part, so it moves with drawers and doors. */
 function Label({ label, faceZ }: { label: NonNullable<Part['label']>; faceZ: number }) {
-  const { text, size, offset, color } = label;
+  const { text, size, offset, color, bg, angle } = label;
   const w = Math.max(size * 3, text.length * size * 0.58 + size);
   return (
-    <group position={[offset[0], offset[1], faceZ]}>
-      <mesh position={[0, 0, 0.03]} raycast={noRaycast}>
-        <planeGeometry args={[w, size * 1.7]} />
-        <meshStandardMaterial color="#f7f4ea" roughness={0.9} />
-      </mesh>
+    <group position={[offset[0], offset[1], faceZ]} rotation={[0, 0, ((angle ?? 0) * Math.PI) / 180]}>
+      {bg !== 'none' && (
+        <mesh position={[0, 0, 0.03]} raycast={noRaycast}>
+          <planeGeometry args={[w, size * 1.7]} />
+          <meshStandardMaterial color={bg ?? '#f7f4ea'} roughness={0.9} />
+        </mesh>
+      )}
       <Text position={[0, 0, 0.06]} fontSize={size} font={labelFont} color={color} anchorX="center" anchorY="middle" raycast={noRaycast}>
         {text}
       </Text>

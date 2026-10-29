@@ -1,0 +1,25 @@
+{
+  "id": "cleaning-corner",
+  "name": "Open cleaning corner (design)",
+  "tags": [
+    "cleaning",
+    "broom closet",
+    "vacuum",
+    "design"
+  ],
+  "description": "Stick vacuum in its wall charging dock, flat mop + broom in wall clips, sprays on a little shelf. No door, so it fits a tight corner where doors would hit each other.",
+  "source": {
+    "kind": "procedural",
+    "generator": "cleaning-corner",
+    "license": "self-made",
+    "notes": "src/model/generators/decor.ts"
+  },
+  "params": {
+    "width": {
+      "default": 62
+    },
+    "color": {
+      "default": "#f2f0ec"
+    }
+  }
+}

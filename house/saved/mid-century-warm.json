@@ -2,7 +2,7 @@
   "meta": {
     "name": "Mid-century warm",
     "kind": "saved",
-    "note": "Mid-century · floating sofa facing the sofa wall: TV on a long walnut sideboard (~3.6 m); no armchair; open round-back corner shelves on brass posts at the pillar (seen from room + hallway) with the whisky + games; tulip table + our chairs; door corner = walnut 3-door wardrobe (coats, shoes, broom closet, devices) + tilt-out shoe cabinet. No rug, no curtains.",
+    "note": "Mid-century · walnut on black legs with mustard / teal / rust accents, shell chairs · floating sofa facing the sofa wall: TV on a long walnut sideboard (~3.6 m); no armchair; open round-back corner shelves on black steel posts at the pillar (seen from room + hallway) with the whisky + games; tulip table + our chairs; door corner = walnut wardrobe on black legs with cream doors (coats, shoes, devices), a simple walnut chair to put shoes on (keys on a small shelf above), an open cleaning corner (vacuum dock, mop, broom); pothos trailing from the corner shelves. No rug, no curtains.",
     "location": {
       "lat": 32.0853,
       "lon": 34.7818,
@@ -776,7 +776,7 @@
         {
           "id": "living.sideboard",
           "asset": "media-unit",
-          "name": "Napoli TV console 180 cm, walnut, fluted doors on splayed legs (מזנון מודרני דגם נאפולי – אגוז) — Razco (רזקו), also on Rahiti ₪699 (TV on top)",
+          "name": "Walnut sideboard on black steel legs: open ends (vinyl, books), 2 fluted drawers, black pulls (TV on top)",
           "tags": [
             "sideboard",
             "tv unit"
@@ -786,11 +786,11 @@
             "depth": 40,
             "height": 55,
             "legHeight": 16,
-            "modules": "door,drawer,drawer,door",
+            "modules": "open,drawer,drawer,open",
             "fluted": true,
             "material": "walnut",
-            "legMaterial": "walnut",
-            "pullColor": "#c9a227"
+            "legMaterial": "metal-black",
+            "pullColor": "#1d1d1f"
           },
           "against": {
             "wall": "living.wall-1",
@@ -837,12 +837,12 @@
         {
           "id": "living.cushions",
           "asset": "cushions",
-          "name": "Topfinel corduroy cushion covers, set of 4 (rust, mustard, sage, cream), 45x45 — Amazon.com ₪62",
+          "name": "Corduroy cushion covers: mustard, teal, rust",
           "tags": [
             "cushions"
           ],
           "params": {
-            "colors": "#ffffff,#f0c66a,#ffffff",
+            "colors": "#d9a43a,#2c6b6b,#b8613f",
             "size": 43,
             "positions": [
               [
@@ -861,7 +861,7 @@
                 40
               ]
             ],
-            "material": "knit-terracotta"
+            "material": "wool-woven"
           },
           "position": [
             135,
@@ -876,7 +876,7 @@
         {
           "id": "living.coffee-table",
           "asset": "coffee-table-drawers",
-          "name": "Oslo coffee table with drawer, walnut (שולחן סלון מודרני דגם אוסלו – אגוז) — Razco (רזקו), also on Rahiti ₪499",
+          "name": "Walnut coffee table on a black steel frame: remote drawers, open shelf, deep drawer",
           "tags": [
             "coffee table",
             "drawers"
@@ -886,8 +886,10 @@
             "depth": 60,
             "height": 45,
             "drawers": 2,
-            "base": "tapered",
-            "material": "walnut"
+            "base": "metal-frame",
+            "material": "walnut",
+            "legMaterial": "metal-black",
+            "pullColor": "#1d1d1f"
           },
           "position": [
             330.0,
@@ -922,7 +924,7 @@
         {
           "id": "living.corner-shelves",
           "asset": "corner-cabinet",
-          "name": "Open walnut corner shelves on slim brass posts, no backs (seen from the room and the hallway), rounded at the back: our whisky + board games on show",
+          "name": "Open walnut corner shelves on slim black steel posts, no backs (seen from the room and the hallway), rounded at the back: our whisky + board games on show",
           "tags": [
             "shelves",
             "whisky",
@@ -933,7 +935,7 @@
             "open": true,
             "backs": false,
             "round": 35,
-            "postColor": "#b08d3c",
+            "postColor": "#1d1d1f",
             "legX": 75,
             "legZ": 76,
             "height": 200,
@@ -950,6 +952,62 @@
           "rotation": 0,
           "allowOverlap": [
             "living.pillar"
+          ]
+        },
+        {
+          "id": "living.shelf-plant-1",
+          "asset": "plant",
+          "name": "Pothos on top of the corner shelves, trailing over the back towards the hallway",
+          "tags": [
+            "plant"
+          ],
+          "params": {
+            "kind": "trailing",
+            "height": 70,
+            "spread": 18,
+            "potDiameter": 18,
+            "potColor": "#1d1d1f",
+            "drop": 18,
+            "seed": "mid-pothos-0"
+          },
+          "position": [
+            545.6,
+            198.5,
+            331.8
+          ],
+          "rotation": 50,
+          "allowOverlap": [
+            "living.corner-shelves",
+            "living.shelf-plant-1",
+            "living.shelf-plant-2"
+          ]
+        },
+        {
+          "id": "living.shelf-plant-2",
+          "asset": "plant",
+          "name": "Pothos on top of the corner shelves, trailing over the back towards the hallway",
+          "tags": [
+            "plant"
+          ],
+          "params": {
+            "kind": "trailing",
+            "height": 90,
+            "spread": 18,
+            "potDiameter": 18,
+            "potColor": "#1d1d1f",
+            "drop": 18,
+            "seed": "mid-pothos-1"
+          },
+          "position": [
+            555.5,
+            198.5,
+            315.0
+          ],
+          "rotation": 20,
+          "allowOverlap": [
+            "living.corner-shelves",
+            "living.shelf-plant-1",
+            "living.shelf-plant-2"
           ]
         },
         {
@@ -975,74 +1033,106 @@
         },
         {
           "id": "living.chair-1",
-          "asset": "old-house-dining-chair",
-          "name": "Our charcoal dining chair",
+          "asset": "design-chair",
+          "name": "Eames-style moulded shell chair (DSW look-alike) on wooden legs",
           "tags": [
             "dining chair"
           ],
-          "params": {},
+          "params": {
+            "style": "shell",
+            "seatMaterial": "none",
+            "seatColor": "#d9a43a",
+            "legMaterial": "walnut",
+            "width": 47,
+            "depth": 52
+          },
           "position": [
-            16.6,
+            17.6,
             0,
-            364.6
+            365.6
           ],
           "rotation": 45.0,
           "allowOverlap": [
-            "living.dining-table"
+            "living.dining-table",
+            "living.banquette"
           ]
         },
         {
           "id": "living.chair-2",
-          "asset": "old-house-dining-chair",
-          "name": "Our charcoal dining chair",
+          "asset": "design-chair",
+          "name": "Eames-style moulded shell chair (DSW look-alike) on wooden legs",
           "tags": [
             "dining chair"
           ],
-          "params": {},
+          "params": {
+            "style": "shell",
+            "seatMaterial": "none",
+            "seatColor": "#2c6b6b",
+            "legMaterial": "walnut",
+            "width": 47,
+            "depth": 52
+          },
           "position": [
-            147.4,
+            146.4,
             0,
-            364.6
+            365.6
           ],
           "rotation": -45.0,
           "allowOverlap": [
-            "living.dining-table"
+            "living.dining-table",
+            "living.banquette"
           ]
         },
         {
           "id": "living.chair-3",
-          "asset": "old-house-dining-chair",
-          "name": "Our charcoal dining chair",
+          "asset": "design-chair",
+          "name": "Eames-style moulded shell chair (DSW look-alike) on wooden legs",
           "tags": [
             "dining chair"
           ],
-          "params": {},
+          "params": {
+            "style": "shell",
+            "seatMaterial": "none",
+            "seatColor": "#f2efe8",
+            "legMaterial": "walnut",
+            "width": 47,
+            "depth": 52
+          },
           "position": [
-            16.6,
+            17.6,
             0,
-            495.4
+            494.4
           ],
           "rotation": 135.0,
           "allowOverlap": [
-            "living.dining-table"
+            "living.dining-table",
+            "living.banquette"
           ]
         },
         {
           "id": "living.chair-4",
-          "asset": "old-house-dining-chair",
-          "name": "Our charcoal dining chair",
+          "asset": "design-chair",
+          "name": "Eames-style moulded shell chair (DSW look-alike) on wooden legs",
           "tags": [
             "dining chair"
           ],
-          "params": {},
+          "params": {
+            "style": "shell",
+            "seatMaterial": "none",
+            "seatColor": "#b8613f",
+            "legMaterial": "walnut",
+            "width": 47,
+            "depth": 52
+          },
           "position": [
-            147.4,
+            146.4,
             0,
-            495.4
+            494.4
           ],
           "rotation": -135.0,
           "allowOverlap": [
-            "living.dining-table"
+            "living.dining-table",
+            "living.banquette"
           ]
         },
         {
@@ -1092,26 +1182,71 @@
           ]
         },
         {
+          "id": "living.art",
+          "asset": "wall-art",
+          "name": "Big mid-century print (mustard, teal, rust shapes) behind the sofa",
+          "tags": [
+            "art"
+          ],
+          "params": {
+            "width": 100,
+            "height": 70,
+            "frameColor": "#1d1d1f",
+            "art": "#d9a43a,#2c6b6b,#b8613f,#efe9df",
+            "seed": "mcm"
+          },
+          "against": {
+            "wall": "living.wall-5",
+            "offset": 385,
+            "elevation": 105,
+            "gap": 0
+          }
+        },
+        {
+          "id": "living.coffee-bowl",
+          "asset": "table-decor",
+          "name": "Mustard ceramic bowl on the coffee table",
+          "tags": [
+            "decor"
+          ],
+          "params": {
+            "kind": "bowl",
+            "color": "#d9a43a",
+            "diameter": 24
+          },
+          "position": [
+            300,
+            45,
+            110
+          ],
+          "rotation": 0,
+          "allowOverlap": [
+            "living.coffee-table",
+            "living.sofa"
+          ]
+        },
+        {
           "id": "living.wardrobe",
           "asset": "tall-cabinet",
-          "name": "Walnut 3-door wardrobe on legs, 150x55x195: coats, shoes, broom closet (vacuum, mop, ironing board) with kitchen devices above",
+          "name": "Walnut wardrobe 150x55x195 on black steel legs, cream doors + black knobs: coats | shoes + coats | kitchen devices on 2 shelves",
           "tags": [
             "wardrobe",
             "coats",
             "shoes",
             "kitchen devices",
-            "entry",
-            "broom closet"
+            "entry"
           ],
           "params": {
             "width": 150,
             "depth": 55,
             "height": 195,
-            "legHeight": 14,
-            "handles": "knob",
-            "handleColor": "#c9a227",
             "material": "walnut",
-            "frontMaterial": "walnut",
+            "legHeight": 16,
+            "legMaterial": "metal-black",
+            "handles": "knob",
+            "handleColor": "#1d1d1f",
+            "frontMaterial": "white-laminate",
+            "frontColor": "#efe8dc",
             "columns": [
               {
                 "stack": [
@@ -1125,7 +1260,7 @@
                 "stack": [
                   {
                     "kind": "door",
-                    "h": 60,
+                    "h": 50,
                     "content": "shoes"
                   },
                   {
@@ -1138,8 +1273,8 @@
                 "stack": [
                   {
                     "kind": "door",
-                    "h": 130,
-                    "content": "cleaning"
+                    "h": 95,
+                    "content": "devices"
                   },
                   {
                     "kind": "door",
@@ -1157,88 +1292,93 @@
           }
         },
         {
-          "id": "living.shoe-cabinet",
-          "asset": "tall-cabinet",
-          "name": "Walnut tilt-out shoe cabinet 75x30x100 (2 flaps, ~8 pairs); top = keys + wallet",
+          "id": "living.shoe-chair",
+          "asset": "design-chair",
+          "name": "Simple walnut chair on black steel legs by the door (sit to put shoes on)",
           "tags": [
-            "shoes",
-            "drop zone",
-            "entry"
+            "dining chair"
           ],
           "params": {
-            "width": 75,
-            "depth": 30,
-            "height": 100,
-            "legHeight": 14,
-            "handles": "bar",
-            "handleColor": "#c9a227",
-            "material": "walnut",
-            "frontMaterial": "walnut",
-            "columns": [
-              {
-                "stack": [
-                  {
-                    "kind": "tilt",
-                    "content": "shoes"
-                  },
-                  {
-                    "kind": "tilt",
-                    "content": "shoes"
-                  }
-                ]
-              }
-            ]
+            "style": "wood",
+            "width": 42,
+            "depth": 44,
+            "seatMaterial": "walnut",
+            "legMaterial": "metal-black",
+            "backHeight": 78
+          },
+          "position": [
+            100.0,
+            0,
+            716.0
+          ],
+          "rotation": 180,
+          "allowOverlap": [
+            "living.banquette"
+          ]
+        },
+        {
+          "id": "living.key-shelf",
+          "asset": "box",
+          "name": "Small walnut shelf above the chair: keys + wallet",
+          "tags": [
+            "drop zone",
+            "shelf"
+          ],
+          "params": {
+            "width": 50,
+            "height": 2.5,
+            "depth": 15,
+            "material": "walnut"
           },
           "against": {
             "wall": "living.wall-4",
-            "offset": 431,
-            "elevation": 0,
+            "offset": 443,
+            "elevation": 100,
             "gap": 0
           }
         },
         {
-          "id": "living.key-bowl",
-          "asset": "table-decor",
-          "name": "Brass key bowl",
+          "id": "living.keys",
+          "asset": "stuff",
+          "name": "Keys tray on the shelf",
           "tags": [
             "drop zone"
           ],
           "params": {
-            "kind": "bowl",
-            "color": "#c9a227",
-            "diameter": 18
+            "kind": "keys",
+            "width": 40,
+            "depth": 14,
+            "height": 10,
+            "seed": "mid-keys"
           },
           "position": [
-            112,
             100,
-            686
+            102.5,
+            719
           ],
-          "rotation": 0,
+          "rotation": 180,
           "allowOverlap": [
-            "living.shoe-cabinet"
+            "living.key-shelf"
           ]
         },
         {
-          "id": "living.snake",
-          "asset": "plant",
-          "name": "Snake plant / Sansevieria (סנסיווריה ירוקה) L — Plant It ₪110 (in the corner)",
+          "id": "living.cleaning-corner",
+          "asset": "cleaning-corner",
+          "name": "Cleaning corner behind the shoe cabinet: stick vacuum in its wall dock, mop + broom in clips, sprays on a shelf",
           "tags": [
-            "plant"
+            "cleaning",
+            "broom closet",
+            "vacuum"
           ],
           "params": {
-            "kind": "snake",
-            "height": 70,
-            "seed": "snake",
-            "spread": 26,
-            "potDiameter": 24,
-            "potColor": "#e9dcc4"
+            "width": 62
           },
-          "position": [
-            26,
-            0,
-            685.0
-          ],
-          "rotation": 0
+          "against": {
+            "wall": "living.wall-4",
+            "offset": 506,
+            "elevation": 0,
+            "gap": 0
+          }
         },
         {
           "id": "living.stool-1",
@@ -1380,6 +1520,56 @@
           "allowOverlap": [
             "living.pillar",
             "living.pillar-cladding"
+          ]
+        },
+        {
+          "id": "living.kitchen-shelf",
+          "asset": "kitchen-shelf",
+          "name": "Walnut kitchen shelf 110 on black brackets: mustard / teal / rust mugs + a teapot",
+          "tags": [
+            "kitchen",
+            "wall shelf"
+          ],
+          "params": {
+            "width": 110,
+            "material": "walnut",
+            "brackets": "black",
+            "contents": "cups teapot cups",
+            "colors": "#d9a43a,#2c6b6b,#b8613f,#f2efe8",
+            "seed": "mid-k"
+          },
+          "against": {
+            "wall": "living.wall-4",
+            "offset": 98,
+            "elevation": 160,
+            "gap": 0
+          },
+          "allowOverlap": [
+            "living.counter"
+          ]
+        },
+        {
+          "id": "living.kitchen-rail",
+          "asset": "kitchen-rail",
+          "name": "Black kitchen rail 70 (IKEA HULTARP-style): ladle, spatula, whisk, a mug",
+          "tags": [
+            "kitchen",
+            "rail"
+          ],
+          "params": {
+            "width": 70,
+            "color": "black",
+            "hang": "ladle spatula whisk mug",
+            "colors": "#d9a43a"
+          },
+          "against": {
+            "wall": "living.wall-4",
+            "offset": 118,
+            "elevation": 135,
+            "gap": 0
+          },
+          "allowOverlap": [
+            "living.counter"
           ]
         }
       ],

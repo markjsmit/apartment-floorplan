@@ -1,0 +1,40 @@
+{
+  "id": "kitchen-shelf",
+  "name": "Kitchen wall shelf (design)",
+  "tags": [
+    "kitchen",
+    "design"
+  ],
+  "description": "Small floating shelf on brackets (IKEA BERGSHULT / BURHULT style, easy to put up yourself) with things on it: cups, pantry jars (rice, pasta, lentils ...), bottles, plates on edge, bowls, a teapot, a trailing plant or herbs.",
+  "source": {
+    "kind": "procedural",
+    "generator": "kitchen-shelf",
+    "license": "self-made",
+    "notes": "src/model/generators/decor.ts"
+  },
+  "params": {
+    "width": {
+      "default": 80
+    },
+    "depth": {
+      "default": 20
+    },
+    "thickness": {
+      "default": 2.5
+    },
+    "brackets": {
+      "default": "black",
+      "description": "black | brass | white | hidden"
+    },
+    "contents": {
+      "default": "cups jars",
+      "description": "groups left→right: cups | jars | bottles | plates | bowls | teapot | plant | herbs | -"
+    },
+    "colors": {
+      "default": "#f2efe8,#c8c2b6,#3a3a3a"
+    },
+    "material": {
+      "default": "wood-oak-light"
+    }
+  }
+}
