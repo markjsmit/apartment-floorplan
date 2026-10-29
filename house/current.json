@@ -2732,6 +2732,22 @@
         ],
         [
           833,
+          468.5
+        ],
+        [
+          893,
+          468.5
+        ],
+        [
+          893,
+          460.5
+        ],
+        [
+          833,
+          460.5
+        ],
+        [
+          833,
           342.5
         ],
         [
@@ -2740,11 +2756,11 @@
         ],
         [
           912,
-          390
+          380.5
         ],
         [
           918,
-          390
+          380.5
         ]
       ],
       "ceilingHeight": 277,
@@ -2805,53 +2821,85 @@
           "id": "bedroom.wall-5",
           "edge": 5,
           "tags": [
-            "hallway wall",
-            "door wall",
-            "entry wall",
-            "vanity wall"
+            "vanity wall",
+            "west wall"
           ]
         },
         {
           "id": "bedroom.wall-6",
           "edge": 6,
           "tags": [
-            "shoe rack wall",
-            "recess",
-            "bedroom side cabin"
+            "fin",
+            "vanity side",
+            "little wall"
           ]
         },
         {
           "id": "bedroom.wall-7",
           "edge": 7,
           "tags": [
-            "recess",
-            "pier",
-            "switch wall"
+            "fin",
+            "fin end"
           ]
         },
         {
           "id": "bedroom.wall-8",
           "edge": 8,
           "tags": [
-            "pier"
+            "fin",
+            "door side",
+            "little wall"
           ]
         },
         {
           "id": "bedroom.wall-9",
           "edge": 9,
           "tags": [
-            "storage room wall",
             "west wall"
-          ],
-          "thickness": 20
+          ]
+        },
+        {
+          "id": "bedroom.wall-10",
+          "edge": 10,
+          "tags": [
+            "fin",
+            "vanity side",
+            "little wall"
+          ]
+        },
+        {
+          "id": "bedroom.wall-11",
+          "edge": 11,
+          "tags": [
+            "fin",
+            "fin end"
+          ]
+        },
+        {
+          "id": "bedroom.wall-12",
+          "edge": 12,
+          "tags": [
+            "fin",
+            "door side",
+            "little wall"
+          ]
+        },
+        {
+          "id": "bedroom.wall-13",
+          "edge": 13,
+          "tags": [
+            "hallway wall",
+            "door wall",
+            "entry wall"
+          ]
         }
       ],
       "openings": [
         {
           "id": "bedroom.door",
           "type": "door",
-          "wall": "bedroom.wall-5",
-          "offset": 84.5,
+          "wall": "bedroom.wall-9",
+          "offset": 0,
           "width": 80,
           "height": 211,
           "tags": [
@@ -2963,7 +3011,7 @@
         {
           "id": "bedroom.vanity",
           "asset": "bathroom-vanity",
-          "name": "Vanity with mirror (entry corner, 2 doors)",
+          "name": "Vanity with mirror (alcove between the fin and the en-suite wall, 2 doors)",
           "tags": [
             "vanity",
             "sink",
@@ -2974,7 +3022,7 @@
             "offset": 0
           },
           "params": {
-            "width": 77,
+            "width": 76,
             "depth": 46,
             "mirrorWidth": 72,
             "mirrorHeight": 88,
@@ -3006,15 +3054,15 @@
       "assumptions": [
         {
           "path": "items[bedroom.vanity]",
-          "note": "the en-suite's vanity (2 doors, integrated basin, ~77 x 46) + mirror (~72 x 88, bottom ~110) stand in the entry's south-west corner, back on the door wall, its south end at the en-suite wall; the 2 switch plates are on the en-suite wall beside it; the 'wall' next to it is the open bedroom door leaf (video 57-60 s, photos 160859(0), 160900; scale from Mark's reflection). Sizes estimated, not measured"
+          "note": "the en-suite's vanity (2 doors, integrated basin, ~76 x 46) + mirror (~72 x 88, bottom ~110) fill the alcove between a fin (~8 thick, ~60 out from the door wall, at the door's hinge jamb; the open door rests against it - Mark: a wall next to the sink, photo 160859(0)) and the en-suite wall; the 2 switch plates are on the en-suite wall. Fin + vanity sizes estimated (scale from Mark's reflection), not measured"
         },
         {
           "path": "footprint",
           "note": "bedroom measured 3.08 x 4.06 (notes); the entry (door from the hallway, shoe-rack recess, closet and en-suite doors) is from the photos/video, not measured"
         },
         {
-          "path": "walls[bedroom.wall-6]",
-          "note": "shoe-rack recess right inside the door, ~80 wide (notes 'bedroom side cabin 80 x ...'); its depth (pier end z ~390-405) not measured, ~48 here - measure it"
+          "path": "walls[bedroom.wall-10]",
+          "note": "shoe-rack recess right inside the door, ~80 wide (notes 'bedroom side cabin 80 x ...'), ~68 deep: the pier ends at z ~410 - from the hallway (photo 160821) it stands ~60% across the doorway. Not measured: measure it"
         },
         {
           "path": "openings[bedroom.window]",
