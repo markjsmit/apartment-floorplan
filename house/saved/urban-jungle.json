@@ -868,32 +868,6 @@
           ]
         },
         {
-          "id": "living.broom-closet-door",
-          "asset": "box",
-          "name": "Door to a small broom closet behind the board, opening to the hallway side (vacuum, mop, ironing board)",
-          "tags": [
-            "closet",
-            "storage",
-            "idea"
-          ],
-          "params": {
-            "width": 73,
-            "height": 213,
-            "depth": 2,
-            "material": "wood-oak-light"
-          },
-          "position": [
-            547.5,
-            0,
-            339
-          ],
-          "rotation": 0,
-          "allowOverlap": [
-            "living.pillar",
-            "living.corner-board"
-          ]
-        },
-        {
           "id": "living.sofa",
           "asset": "old-house-sofa-l",
           "name": "Our grey L-sofa (265), against the balcony wall in the corner (covers 30 cm of the sliding door's fixed end)",
@@ -1722,7 +1696,6 @@
             "living.tv-unit",
             "living.tv-arm",
             "living.tv",
-            "living.broom-closet-door",
             "living.sofa",
             "living.cushions",
             "living.coffee-table",
@@ -1783,7 +1756,6 @@
             "living.tv-unit",
             "living.tv-arm",
             "living.tv",
-            "living.broom-closet-door",
             "living.sofa",
             "living.cushions",
             "living.coffee-table",
