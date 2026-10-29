@@ -2,7 +2,7 @@
   "meta": {
     "name": "Light industrial loft",
     "kind": "saved",
-    "note": "Light industrial · floating sofa: wall-mounted TV (~3.55 m); dining behind the sofa (bench against the sofa back, our chairs on the wall side), open black KALLAX under the sofa window; door corner hidden behind 2 stacked KALLAX 4x3 (147x224) as a divider (shoes + devices below behind a steel magnet board with our photos, whisky + games + keys on top), shoe bench on the side wall, black clamp-post coat rack, black steel locker as broom closet, round mirror over the bench. No rug, no curtains.",
+    "note": "Light industrial · floating sofa: wall-mounted TV (~3.55 m); dining behind the sofa (bench against the sofa back, our chairs on the wall side), open black KALLAX under the sofa window; door corner hidden behind a 1.5 m light grey AliExpress entry cabinet as the divider (shoes, keys, bags, whisky, games, devices; our photo magnets on its steel-sheet back), shoe bench on the side wall, black clamp-post coat rack, black steel locker as broom closet, round mirror over the bench. No rug, no curtains.",
     "location": {
       "lat": 32.0853,
       "lon": 34.7818,
@@ -884,7 +884,7 @@
         {
           "id": "living.armchair",
           "asset": "old-house-armchair",
-          "name": "Our grey armchair parked diagonally in the corner of the KALLAX divider and the wall (drag it in when we need it)",
+          "name": "Our grey armchair parked diagonally in the corner of the entry cabinet and the wall (drag it in when we need it)",
           "tags": [
             "armchair"
           ],
@@ -1059,28 +1059,109 @@
           }
         },
         {
-          "id": "living.divider-low",
-          "asset": "ikea-kallax",
-          "name": "KALLAX 4x3 (bottom of the divider, 147x112): 2 rows of shoes with a shelf in each cube (16 pairs), a row of kitchen appliances; open to the door — IKEA",
+          "id": "living.divider",
+          "asset": "tall-cabinet",
+          "name": "Light grey entry cabinet 1.5 m as the divider that hides the door corner: open shoe strip, shoe doors, lit niches (keys, bags, whisky, games), kitchen devices behind the top doors — AliExpress (https://www.aliexpress.com/item/1005010339751353.html), 1.5 x 2.1 m, ~35 deep (estimate), ~₪1,346",
           "tags": [
-            "kallax",
+            "entry",
+            "shoe cabinet",
             "divider",
-            "shoes",
-            "kitchen devices"
+            "drop zone",
+            "display"
           ],
           "params": {
-            "cols": 4,
-            "rows": 3,
-            "color": "black-brown",
-            "contents": [
-              "devices devices devices devices",
-              "shoes shoes shoes shoes",
-              "shoes shoes shoes shoes"
-            ],
-            "seed": "ind-low"
+            "width": 150,
+            "depth": 35,
+            "height": 210,
+            "plinth": 0,
+            "handles": "none",
+            "light": true,
+            "material": "white-laminate",
+            "color": "#cfcbc4",
+            "frontMaterial": "white-laminate",
+            "frontColor": "#cfcbc4",
+            "columns": [
+              {
+                "w": 45.0,
+                "stack": [
+                  {
+                    "kind": "open",
+                    "h": 18,
+                    "fill": "shoes"
+                  },
+                  {
+                    "kind": "door",
+                    "h": 92,
+                    "content": "shoes"
+                  },
+                  {
+                    "kind": "open",
+                    "h": 34,
+                    "fill": "keys"
+                  },
+                  {
+                    "kind": "door",
+                    "content": "devices"
+                  }
+                ]
+              },
+              {
+                "w": 60,
+                "stack": [
+                  {
+                    "kind": "open",
+                    "h": 18,
+                    "fill": "shoes"
+                  },
+                  {
+                    "kind": "door",
+                    "h": 27,
+                    "content": "shoes"
+                  },
+                  {
+                    "kind": "open",
+                    "h": 70,
+                    "fill": "bags"
+                  },
+                  {
+                    "kind": "open",
+                    "h": 34,
+                    "fill": "whisky"
+                  },
+                  {
+                    "kind": "door",
+                    "content": "games"
+                  }
+                ]
+              },
+              {
+                "w": 45.0,
+                "stack": [
+                  {
+                    "kind": "open",
+                    "h": 18,
+                    "fill": "shoes"
+                  },
+                  {
+                    "kind": "door",
+                    "h": 92,
+                    "content": "shoes"
+                  },
+                  {
+                    "kind": "open",
+                    "h": 34,
+                    "fill": "games"
+                  },
+                  {
+                    "kind": "door",
+                    "content": "devices"
+                  }
+                ]
+              }
+            ]
           },
           "position": [
-            73.5,
+            75.0,
             0,
             530
           ],
@@ -1089,7 +1170,7 @@
         {
           "id": "living.divider-board",
           "asset": "wall-art",
-          "name": "Black steel sheet on the living-room side over the first 4 rows (hides shoes, keys, bags): with our event photo magnets scattered playfully over it; only the top 2 rows are open both ways",
+          "name": "Black steel sheet on the living-room side of the cabinet, with our event photo magnets scattered playfully over it",
           "tags": [
             "divider",
             "board",
@@ -1097,55 +1178,47 @@
             "photos"
           ],
           "params": {
-            "width": 147,
-            "height": 149,
-            "photos": 46,
+            "width": 150,
+            "height": 180,
+            "photos": 52,
             "scatter": true,
             "photoTextures": 8,
             "frameColor": "#2b2b2d",
             "seed": "fridge"
           },
           "position": [
-            73.5,
-            0,
+            75,
+            15,
             530
           ],
           "rotation": 180,
           "allowOverlap": [
-            "living.divider-low"
+            "living.divider"
           ]
         },
         {
-          "id": "living.divider-top",
-          "asset": "ikea-kallax",
-          "name": "KALLAX 4x3 on top (open both ways; screw the stack to the wall): a key cube each for Mark + Heli, everyday bags, then 2 rows of our games, whisky + books on show — IKEA",
+          "id": "living.eucalyptus",
+          "asset": "plant",
+          "name": "Ours: trailing eucalyptus (gold pot) on top of the entry cabinet",
           "tags": [
-            "kallax",
-            "divider",
-            "display",
-            "drop zone",
-            "whisky",
-            "games"
+            "plant"
           ],
           "params": {
-            "cols": 4,
-            "rows": 3,
-            "color": "black-brown",
-            "contents": [
-              "whisky games books whisky",
-              "games books whisky games",
-              "keys keys bags bags"
-            ],
-            "seed": "ind-top"
+            "kind": "trailing",
+            "height": 35,
+            "seed": "eucalyptus",
+            "spread": 26,
+            "potDiameter": 14,
+            "potColor": "#c9a227"
           },
           "position": [
-            73.5,
-            112,
-            530
+            20,
+            210,
+            535.0
           ],
           "rotation": 0,
           "allowOverlap": [
-            "living.divider-low"
+            "living.divider"
           ]
         },
         {
@@ -1333,31 +1406,6 @@
             10.0
           ],
           "rotation": 0
-        },
-        {
-          "id": "living.eucalyptus",
-          "asset": "plant",
-          "name": "Ours: trailing eucalyptus (gold pot) on the KALLAX divider",
-          "tags": [
-            "plant"
-          ],
-          "params": {
-            "kind": "trailing",
-            "height": 35,
-            "seed": "eucalyptus",
-            "spread": 26,
-            "potDiameter": 14,
-            "potColor": "#c9a227"
-          },
-          "position": [
-            20,
-            225,
-            535.0
-          ],
-          "rotation": 0,
-          "allowOverlap": [
-            "living.divider-top"
-          ]
         },
         {
           "id": "living.picture",

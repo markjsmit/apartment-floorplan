@@ -2,7 +2,7 @@
   "meta": {
     "name": "Urban jungle",
     "kind": "saved",
-    "note": "Urban jungle · sitting corner: TV square to the corner on an oak board closing the pillar corner (white broom closet behind it, door on the hallway side), sofa against the balcony wall in the corner, armchair mid-room = best TV seat; table for 6 north-south against a divider of 2 stacked KALLAX 4x3 (shoes, appliances, keys, bags behind an oak board with art; plants, games, whisky, books on top); bench + coat hooks by the door.",
+    "note": "Urban jungle · sitting corner: TV square to the corner on an oak board closing the pillar corner (white broom closet behind it, door on the hallway side), sofa against the balcony wall in the corner, armchair mid-room = best TV seat; table for 6 north-south against a 1.3 m light grey AliExpress entry cabinet as the divider (open shoe strip, shoe doors, lit niches for keys, bags, whisky + games; oak board with art on the dining side); bench + coat hooks by the door.",
     "location": {
       "lat": 32.0853,
       "lon": 34.7818,
@@ -1048,122 +1048,118 @@
           ]
         },
         {
-          "id": "living.divider-low",
-          "asset": "ikea-kallax",
-          "name": "KALLAX 4x3 white-oak (bottom of the divider): 2 rows of shoes with a shelf in each cube (16 pairs), a row of kitchen appliances; open to the door — IKEA",
+          "id": "living.divider",
+          "asset": "tall-cabinet",
+          "name": "Light grey entry cabinet 1.3 m as the divider by the front door: open shoe strip, shoe doors, lit niches (keys, bags, whisky, games), kitchen devices behind the top doors — AliExpress (https://www.aliexpress.com/item/1005010339751353.html), 1.3 x 2.1 m, ~35 deep (estimate), ~₪1,346",
           "tags": [
-            "kallax",
+            "entry",
+            "shoe cabinet",
             "divider",
-            "shoes",
-            "kitchen devices"
+            "drop zone",
+            "display"
           ],
           "params": {
-            "cols": 4,
-            "rows": 3,
-            "color": "white-oak",
-            "contents": [
-              "devices devices devices devices",
-              "shoes shoes shoes shoes",
-              "shoes shoes shoes shoes"
-            ],
-            "seed": "jun-low"
+            "width": 130,
+            "depth": 35,
+            "height": 210,
+            "plinth": 0,
+            "handles": "none",
+            "light": true,
+            "material": "white-laminate",
+            "color": "#cfcbc4",
+            "frontMaterial": "white-laminate",
+            "frontColor": "#cfcbc4",
+            "columns": [
+              {
+                "w": 35.0,
+                "stack": [
+                  {
+                    "kind": "open",
+                    "h": 18,
+                    "fill": "shoes"
+                  },
+                  {
+                    "kind": "door",
+                    "h": 92,
+                    "content": "shoes"
+                  },
+                  {
+                    "kind": "open",
+                    "h": 34,
+                    "fill": "keys"
+                  },
+                  {
+                    "kind": "door",
+                    "content": "devices"
+                  }
+                ]
+              },
+              {
+                "w": 60,
+                "stack": [
+                  {
+                    "kind": "open",
+                    "h": 18,
+                    "fill": "shoes"
+                  },
+                  {
+                    "kind": "door",
+                    "h": 27,
+                    "content": "shoes"
+                  },
+                  {
+                    "kind": "open",
+                    "h": 70,
+                    "fill": "bags"
+                  },
+                  {
+                    "kind": "open",
+                    "h": 34,
+                    "fill": "whisky"
+                  },
+                  {
+                    "kind": "door",
+                    "content": "games"
+                  }
+                ]
+              },
+              {
+                "w": 35.0,
+                "stack": [
+                  {
+                    "kind": "open",
+                    "h": 18,
+                    "fill": "shoes"
+                  },
+                  {
+                    "kind": "door",
+                    "h": 92,
+                    "content": "shoes"
+                  },
+                  {
+                    "kind": "open",
+                    "h": 34,
+                    "fill": "games"
+                  },
+                  {
+                    "kind": "door",
+                    "content": "devices"
+                  }
+                ]
+              }
+            ]
           },
           "position": [
-            73.5,
+            65.0,
             0,
             540
           ],
           "rotation": 0
         },
         {
-          "id": "living.divider-top",
-          "asset": "ikea-kallax",
-          "name": "KALLAX 4x3 white-oak on top (screw the stack to the wall): a key cube each for Mark + Heli, bags, then 2 rows open both ways with plants, games, whisky + books — IKEA",
-          "tags": [
-            "kallax",
-            "divider",
-            "display",
-            "drop zone",
-            "whisky",
-            "games"
-          ],
-          "params": {
-            "cols": 4,
-            "rows": 3,
-            "color": "white-oak",
-            "contents": [
-              "books games - whisky",
-              "games - whisky books",
-              "keys keys bags bags"
-            ],
-            "seed": "jun-top"
-          },
-          "position": [
-            73.5,
-            112,
-            540
-          ],
-          "rotation": 0,
-          "allowOverlap": [
-            "living.divider-low"
-          ]
-        },
-        {
-          "id": "living.divider-plant-1",
-          "asset": "plant",
-          "name": "Plant in the open top of the divider",
-          "tags": [
-            "plant"
-          ],
-          "params": {
-            "kind": "bush",
-            "height": 26,
-            "seed": "divider-plant-1",
-            "spread": 22,
-            "potDiameter": 14,
-            "potColor": "#efe6d4",
-            "model": "syngonium"
-          },
-          "position": [
-            57,
-            151,
-            549.0
-          ],
-          "rotation": 0,
-          "allowOverlap": [
-            "living.divider-top"
-          ]
-        },
-        {
-          "id": "living.divider-plant-2",
-          "asset": "plant",
-          "name": "Plant in the open top of the divider",
-          "tags": [
-            "plant"
-          ],
-          "params": {
-            "kind": "bush",
-            "height": 26,
-            "seed": "divider-plant-2",
-            "spread": 22,
-            "potDiameter": 14,
-            "potColor": "#efe6d4",
-            "model": "succulent"
-          },
-          "position": [
-            92,
-            188,
-            549.0
-          ],
-          "rotation": 0,
-          "allowOverlap": [
-            "living.divider-top"
-          ]
-        },
-        {
           "id": "living.divider-top-plant-1",
           "asset": "plant",
-          "name": "Trailing plant on top of the divider",
+          "name": "Trailing plant on top of the entry cabinet",
           "tags": [
             "plant"
           ],
@@ -1173,23 +1169,22 @@
             "seed": "divider-top-plant-1",
             "spread": 24,
             "potDiameter": 16,
-            "potColor": "#efe6d4",
-            "model": "syngonium"
+            "potColor": "#efe6d4"
           },
           "position": [
-            22,
-            225,
-            548.0
+            25,
+            210,
+            545.0
           ],
           "rotation": 0,
           "allowOverlap": [
-            "living.divider-top"
+            "living.divider"
           ]
         },
         {
           "id": "living.divider-top-plant-2",
           "asset": "plant",
-          "name": "Trailing plant on top of the divider",
+          "name": "Trailing plant on top of the entry cabinet",
           "tags": [
             "plant"
           ],
@@ -1202,38 +1197,37 @@
             "potColor": "#efe6d4"
           },
           "position": [
-            128,
-            225,
-            548.0
+            105,
+            210,
+            545.0
           ],
           "rotation": 0,
           "allowOverlap": [
-            "living.divider-top"
+            "living.divider"
           ]
         },
         {
           "id": "living.divider-board",
           "asset": "box",
-          "name": "Oak board on the dining side over the first 4 rows (hides shoes, appliances, keys, bags)",
+          "name": "Oak board on the dining side of the cabinet (art on it, the table end against it)",
           "tags": [
             "divider",
             "board"
           ],
           "params": {
-            "width": 147,
-            "height": 149,
+            "width": 130,
+            "height": 180,
             "depth": 1.8,
             "material": "wood-oak-light"
           },
           "position": [
-            73.5,
+            65,
             0,
             540
           ],
           "rotation": 180,
           "allowOverlap": [
-            "living.divider-low",
-            "living.divider-top"
+            "living.divider"
           ]
         },
         {
@@ -1250,7 +1244,7 @@
             "art": "#8fa37e,#efe8dc,#5f7a52"
           },
           "position": [
-            73.5,
+            65,
             88,
             538
           ],
@@ -1809,10 +1803,7 @@
             "living.coffee-table",
             "living.rug",
             "living.armchair",
-            "living.divider-low",
-            "living.divider-top",
-            "living.divider-plant-1",
-            "living.divider-plant-2",
+            "living.divider",
             "living.divider-top-plant-1",
             "living.divider-top-plant-2",
             "living.divider-board",
@@ -1875,10 +1866,7 @@
             "living.coffee-table",
             "living.rug",
             "living.armchair",
-            "living.divider-low",
-            "living.divider-top",
-            "living.divider-plant-1",
-            "living.divider-plant-2",
+            "living.divider",
             "living.divider-top-plant-1",
             "living.divider-top-plant-2",
             "living.divider-board",
