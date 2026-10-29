@@ -1437,7 +1437,7 @@ export function waterBar(p: Record<string, unknown>): Part[] {
 }
 
 /**
- * Entry hall stand (AliExpress, "cream white, shoe bench on the right", 80 x 30 x 200): on the left a door, a drawer,
+ * Entry hall stand (AliExpress, "cream white, shoe bench on the right", 80 or 100 x 30 x 200): on the left a door, a drawer,
  * a lit open niche and a lit glass display box in a gold frame on top; on the right a bench box with a door and a grey
  * seat cushion, open white slats above it with hooks (bag, umbrella) under a top cap. Gold bar handles. Origin
  * back-centre. params: width, depth, height, color, accentColor, cushionColor, niche (stuff kind), display (stuff kind).
@@ -1449,9 +1449,13 @@ export function hallStand(p: Record<string, unknown>): WithStates {
   const T = 1.8;
   const body = { color: str(p.color, '#f3efe6'), material: 'white-laminate' };
   const gold = { color: str(p.accentColor, '#c9a55a') };
-  const lw = W / 2;
-  const lx = -W / 4;
-  const rx = W / 4;
+  // the left column keeps its ~38-40 cm in every size; the bench part takes the rest (80 wide: 1 door, 3 slats;
+  // 100 wide: double doors, 4 slats)
+  const lw = Math.min(num(p.leftWidth, 40), W / 2);
+  const rw = W - lw;
+  const lx = -W / 2 + lw / 2;
+  const rx = -W / 2 + lw + rw / 2;
+  const mid = -W / 2 + lw;
   const parts: Part[] = [];
   const opened: Record<string, { rotation?: Vec3; position?: Vec3 }> = {};
   const fronts: string[] = [];
@@ -1459,7 +1463,7 @@ export function hallStand(p: Record<string, unknown>): WithStates {
   parts.push(
     box('l-back', ['body'], [lw, H - 6, T], [lx, 6 + (H - 6) / 2, T / 2], body),
     box('l-side-l', ['body'], [T, H - 6, D], [-W / 2 + T / 2, 6 + (H - 6) / 2, D / 2], body),
-    box('l-side-r', ['body'], [T, H - 6, D], [0 - T / 2, 6 + (H - 6) / 2, D / 2], body),
+    box('l-side-r', ['body'], [T, H - 6, D], [mid - T / 2, 6 + (H - 6) / 2, D / 2], body),
     box('plinth', ['plinth'], [W - 4, 6, D - 4], [0, 3, (D - 4) / 2], body),
   );
   const door = (id: string, x: number, w: number, y0: number, h: number, hinge: 'l' | 'r') => {
@@ -1495,7 +1499,7 @@ export function hallStand(p: Record<string, unknown>): WithStates {
     box('g-frame-t', ['frame'], [lw, fb, fb], [lx, H - 4 - fb / 2, D - fb / 2], gold),
     box('g-frame-b', ['frame'], [lw, fb, fb], [lx, gy + fb / 2, D - fb / 2], gold),
     box('g-frame-l', ['frame'], [fb, gh, fb], [-W / 2 + fb / 2, gy + gh / 2, D - fb / 2], gold),
-    box('g-frame-r', ['frame'], [fb, gh, fb], [-fb / 2, gy + gh / 2, D - fb / 2], gold),
+    box('g-frame-r', ['frame'], [fb, gh, fb], [mid - fb / 2, gy + gh / 2, D - fb / 2], gold),
     { ...box('g-glass', ['glass'], [lw - 2 * fb, gh - 2 * fb, 0.4], [lx, gy + gh / 2, D - 0.4], { material: 'glass', glass: true }), castShadow: false },
     box('g-shelf', ['shelf', 'glass'], [lw - 2 * T, 1, D - 3], [lx, gy + gh / 2, D / 2], { material: 'glass', glass: true }),
   );
@@ -1508,23 +1512,27 @@ export function hallStand(p: Record<string, unknown>): WithStates {
   // right: bench box with a door + seat cushion, slats above, hooks, top cap
   const bh = 44;
   parts.push(
-    box('r-bench', ['body', 'bench'], [lw, bh - 6, D], [rx, 6 + (bh - 6) / 2, D / 2], body),
-    { ...box('r-cushion', ['cushion', 'seat'], [lw - 1, 5, D - 1], [rx, bh + 2.5, D / 2], { material: 'fabric-grey', color: str(p.cushionColor, '#8e9094'), radius: 2 }) },
+    box('r-bench', ['body', 'bench'], [rw, bh - 6, D], [rx, 6 + (bh - 6) / 2, D / 2], body),
+    { ...box('r-cushion', ['cushion', 'seat'], [rw - 1, 5, D - 1], [rx, bh + 2.5, D / 2], { material: 'fabric-grey', color: str(p.cushionColor, '#8e9094'), radius: 2 }) },
   );
-  door('r-door', rx, lw, 6, bh - 6, 'r');
+  if (rw > 50) {
+    door('r-door', rx - rw / 4, rw / 2, 6, bh - 6, 'l');
+    door('r-door-2', rx + rw / 4, rw / 2, 6, bh - 6, 'r');
+  } else door('r-door', rx, rw, 6, bh - 6, 'r');
   const slatH = H - bh - 5 - 4;
-  for (let i = 0; i < 3; i++) {
-    const sx = rx - lw / 2 + 5 + (i * (lw - 10)) / 2;
+  const ns = rw > 50 ? 4 : 3;
+  for (let i = 0; i < ns; i++) {
+    const sx = rx - rw / 2 + 5 + (i * (rw - 10)) / (ns - 1);
     parts.push(box(`r-slat-${i + 1}`, ['slat'], [5, slatH, 2.2], [sx, bh + 5 + slatH / 2, 1.1], body));
     parts.push({ ...cyl(`r-hook-${i + 1}`, ['hook'], 0.5, 5, [sx, H - 26, 4], { color: '#b8b8b8' }), rotation: [70, 0, 0] });
   }
-  parts.push(box('r-cap', ['body'], [lw + 2, 3, D], [rx + 1, H - 1.5, D / 2], body));
+  parts.push(box('r-cap', ['body'], [rw + 2, 3, D], [rx + 1, H - 1.5, D / 2], body));
   parts.push(box('r-side', ['body'], [T, H - bh - 5, 4], [W / 2 - T / 2, bh + 5 + (H - bh - 5) / 2, 2], body));
   // a bag and an umbrella on the hooks
-  const bx = rx + lw / 2 - 10;
+  const bx = rx + rw / 2 - 10;
   parts.push({ ...box('bag', ['bag'], [16, 13, 6], [bx, H - 58, 7], { color: '#c98b6b', material: 'leather-cognac', radius: 1.5 }) });
   parts.push({ ...box('bag-strap', ['bag'], [0.6, 30, 0.4], [bx, H - 38, 5], { color: '#c9a55a' }) });
-  const ux = rx - lw / 2 + 6;
+  const ux = rx - rw / 2 + 6;
   parts.push({ ...cyl('umbrella', ['umbrella'], 2.6, 50, [ux, H - 56, 5], { color: '#d9cdb0' }) });
   parts.push({ ...cyl('umbrella-tip', ['umbrella'], 0.4, 8, [ux, H - 85, 5], { color: '#2a2a2a' }) });
   return {

@@ -2,7 +2,7 @@
   "meta": {
     "name": "Light industrial loft",
     "kind": "saved",
-    "note": "Light industrial · floating sofa: wall-mounted TV (~3.55 m); dining behind the sofa (bench against the sofa back, our chairs on the wall side), open black KALLAX under the sofa window; door corner: a cream-white AliExpress hall stand (80x30x200) with a shoe bench, hooks, a lit key niche + gold-framed glass display, whisky + games in the KALLAX under the sofa window, shoe bench on the side wall, black clamp-post coat rack, black steel locker as broom closet, round mirror over the bench. No rug, no curtains.",
+    "note": "Light industrial · floating sofa: wall-mounted TV (~3.55 m); dining behind the sofa (bench against the sofa back, our chairs on the wall side), open black KALLAX under the sofa window; door corner: a cream-white AliExpress hall stand (100x30x200) with a shoe bench, hooks, a lit key niche + gold-framed glass display, whisky + games in the KALLAX under the sofa window, shoe bench on the side wall, black clamp-post coat rack, black steel locker as broom closet, round mirror over the bench. No rug, no curtains.",
     "location": {
       "lat": 32.0853,
       "lon": 34.7818,
@@ -1061,7 +1061,7 @@
         {
           "id": "living.divider",
           "asset": "hall-stand",
-          "name": "Cream-white entry hall stand 80x30x200 with a shoe bench (AliExpress, https://www.aliexpress.com/item/1005010339751353.html, ~₪1,346): door + drawer + lit key niche + gold-framed glass display on the left; bench with a door, slats + hooks for a bag and umbrella on the right",
+          "name": "Cream-white entry hall stand 100x30x200 with a shoe bench (AliExpress, https://www.aliexpress.com/item/1005010339751353.html): door + drawer + lit key niche + gold-framed glass display on the left; bench with double doors, 4 slats + hooks for a bag and umbrella on the right",
           "tags": [
             "entry",
             "shoe cabinet",
@@ -1071,14 +1071,14 @@
             "divider"
           ],
           "params": {
-            "width": 80,
+            "width": 100,
             "depth": 30,
             "height": 200,
             "niche": "keys",
             "display": "books"
           },
           "position": [
-            40,
+            50,
             0,
             530
           ],
