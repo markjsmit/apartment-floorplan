@@ -6,7 +6,7 @@
     "speakers",
     "tv"
   ],
-  "description": "Our 2 Edifier bookshelf speakers (22 wide x 40 high x 28 deep, Mark) standing up on swivel wall arms either side of a wall-mounted TV, toed in and tilted down at the bed, nothing lower than `bottom` (Mark is 2 m tall: 217); draws the real cables: each speaker's leads down and along the wall to behind the TV, and the bundle from under the TV to a triple outlet. Origin back-centre on the floor under the TV's centre.",
+  "description": "Our 2 Edifier bookshelf speakers (22 wide x 40 high x 28 deep, Mark) standing up on swivel wall arms either side of a wall-mounted TV, toed in and tilted down at the bed, nothing lower than `bottom` (Mark is 2 m tall: 217); draws the real cables: each speaker's leads down and along the wall to behind the TV, and the bundle from under the TV to a triple outlet. Origin back-centre on the floor under the TV's centre. The wire between the speakers is 6 ft (183, Mark from memory), so the gap shrinks to what it reaches.",
   "source": {
     "kind": "procedural",
     "generator": "wall-speakers",
@@ -26,10 +26,10 @@
     },
     "gap": {
       "default": 25,
-      "description": "from the TV's side to the speaker (cm)"
+      "description": "from the TV's side to the speaker (cm); shrunk if the speaker wire can't reach"
     },
     "bottom": {
-      "default": 217,
+      "default": 205,
       "description": "lowest point of speakers + arms (cm)"
     },
     "tilt": {
@@ -42,6 +42,10 @@
     },
     "outletHeight": {
       "default": 30
+    },
+    "wireLength": {
+      "default": 183,
+      "description": "speaker wire between the two speakers (cm, 6 ft from Mark) - hard limit on how far apart they go"
     }
   }
 }

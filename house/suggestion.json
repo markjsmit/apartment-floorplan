@@ -4211,24 +4211,26 @@
         },
         {
           "id": "bedroom.makeup-desk",
-          "asset": "design-table",
-          "name": "Little makeup desk in the corner (under the closet window)",
+          "asset": "heli-makeup-desk",
+          "name": "Heli's makeup corner: L-shaped corner desk like hers (drawers under the side wing, tri-fold mirror) + a strong LED vanity light",
           "tags": [
             "makeup desk",
             "makeup corner",
-            "desk"
+            "corner desk",
+            "desk",
+            "vanity",
+            "heli"
           ],
-          "params": {
-            "shape": "rect",
-            "width": 70,
-            "depth": 40,
-            "height": 75,
-            "base": "legs"
-          },
           "against": {
             "wall": "bedroom.wall-2",
             "offset": 0
-          }
+          },
+          "assumptions": [
+            {
+              "path": "asset",
+              "note": "sizes estimated from the old-house video (Heli's real desk not measured); the outlet under it for the vanity light is assumed - bedroom outlets not surveyed"
+            }
+          ]
         },
         {
           "id": "bedroom.makeup-stool",
@@ -4246,7 +4248,7 @@
           },
           "against": {
             "wall": "bedroom.wall-2",
-            "offset": 15,
+            "offset": 46,
             "gap": 12
           },
           "allowOverlap": [
@@ -4270,28 +4272,107 @@
         {
           "id": "bedroom.wall-speakers",
           "asset": "wall-speakers",
-          "name": "Our Edifier speakers upright on swivel wall arms, 25 cm either side of the TV, bottom at 217, aimed down at the bed (+ the cables)",
+          "name": "Our Edifier speakers upright on swivel wall arms either side of the TV (~19 cm off it: as far as the 6 ft speaker wire reaches), bottom at 205 (Heli reaches the button), aimed down at the bed; cables in white covers",
           "tags": [
             "speakers",
             "tv",
-            "cables"
+            "cables",
+            "cable cover"
           ],
           "params": {
             "width": 94,
             "tvBottom": 110,
             "tvHeight": 55,
             "gap": 25,
-            "bottom": 217,
+            "bottom": 205,
             "tilt": 25,
             "toe": 20,
-            "outletHeight": 30
+            "outletHeight": 30,
+            "wireLength": 183
           },
           "against": {
             "wall": "bedroom.wall-1",
-            "offset": 61.9
+            "offset": 68.1
           },
           "allowOverlap": [
             "bedroom.tv"
+          ]
+        },
+        {
+          "id": "bedroom.laundry-closet",
+          "asset": "tall-cabinet",
+          "name": "Laundry closet in the recess, up to the ceiling: 2 dirty-clothes baskets behind doors, an open shelf with a hole over each to throw clothes in, clothes shelves behind doors above + a top cupboard",
+          "tags": [
+            "laundry closet",
+            "laundry",
+            "dirty clothes",
+            "baskets",
+            "clothes shelves",
+            "closet"
+          ],
+          "params": {
+            "width": 78,
+            "depth": 38,
+            "height": 276,
+            "plinth": 6,
+            "columns": [
+              {
+                "stack": [
+                  {
+                    "kind": "door",
+                    "h": 66,
+                    "content": "laundry"
+                  },
+                  {
+                    "kind": "open",
+                    "h": 34,
+                    "fill": "chute"
+                  },
+                  {
+                    "kind": "door",
+                    "content": "folded"
+                  },
+                  {
+                    "kind": "door",
+                    "h": 54,
+                    "content": "folded"
+                  }
+                ]
+              },
+              {
+                "stack": [
+                  {
+                    "kind": "door",
+                    "h": 66,
+                    "content": "laundry"
+                  },
+                  {
+                    "kind": "open",
+                    "h": 34,
+                    "fill": "chute"
+                  },
+                  {
+                    "kind": "door",
+                    "content": "folded"
+                  },
+                  {
+                    "kind": "door",
+                    "h": 54,
+                    "content": "folded"
+                  }
+                ]
+              }
+            ]
+          },
+          "against": {
+            "wall": "bedroom.wall-10",
+            "offset": 0.5
+          },
+          "assumptions": [
+            {
+              "path": "params.depth",
+              "note": "38 deep = flush with the pier (recess depth from the footprint, not measured)"
+            }
           ]
         }
       ],
@@ -4323,6 +4404,10 @@
         {
           "path": "items[bedroom.wall-speakers]",
           "note": "outlet under the TV on the east wall (~30 cm high) is assumed - the bedroom outlets were not surveyed"
+        },
+        {
+          "path": "items[bedroom.wall-speakers].params.wireLength",
+          "note": "speaker wire 6 ft (183) from Mark's memory, maybe a bit less - it sets how far apart the speakers can go"
         }
       ]
     },

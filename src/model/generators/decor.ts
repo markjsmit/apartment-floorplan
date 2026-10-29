@@ -1046,13 +1046,15 @@ export function cleaningCorner(p: Record<string, unknown>): Part[] {
   return parts;
 }
 
+const FOLDED_COLORS = ['#e9e6df', '#2c2e33', '#7d8794', '#b9a58c', '#9aa6b5', '#5b4f47', '#d8d2c8'];
+
 type Front = { kind?: string; h?: number; fill?: string; content?: string; mirror?: boolean; material?: string; color?: string; leaves?: number; glass?: boolean };
 
 /**
  * Tall cabinet: wardrobe, entry closet, shoe cabinet, locker. Columns side by side (left → right seen from the front),
  * each a stack of fronts from the bottom up: door | drawer | tilt (shoe flap, pull on top) | open (niche; fill =
- * baskets | tray | shoes | whisky | games | books ...) — fronts without `h` share what is left; behind a door / tilt `content` =
- * coats (on a rail) | shoes (shelves of pairs) | any shelf contents kind, seen when it is opened (state "open"). params: width, depth, height, plinth (recessed base, 0 =
+ * baskets | tray | chute (floor with a hole to drop laundry into the compartment below) | shoes | whisky | games | books ...) — fronts without `h` share what is left; behind a door / tilt `content` =
+ * coats (on a rail) | shoes (shelves of pairs) | laundry (a basket) | folded (shelves of folded clothes) | any shelf contents kind, seen when it is opened (state "open"). params: width, depth, height, plinth (recessed base, 0 =
  * none) or legHeight (tapered legs instead), columns [{w, stack}], handles (bar | knob | none = push-to-open),
  * materials, fluted (ribbed doors), light (LED strip under the top of each niche).
  */
@@ -1106,6 +1108,25 @@ export function tallCabinet(p: Record<string, unknown>): WithStates {
         if (l > 0) parts.push(box(`${id}-shelf-${l}`, ['shelf'], [cw - T, 1.2, D - 4], [cx, ly - 0.6, D / 2], { material: 'glass', glass: true }));
         parts.push(...placeStuff(stuffParts(picks[l % picks.length], `${id}-d${l}`, cw - 4, D - 6, h / levels - 3), 0, [cx, ly, 2]));
       }
+    } else if (kind === 'laundry') {
+      // a laundry basket with the dirty clothes in it (they go in through the hole of a chute niche above)
+      const [bw, bd, bh] = [cw - 6, D - 8, Math.min(h - 6, 62)];
+      parts.push(box(`${id}-basket`, ['basket', 'laundry'], [bw, bh, bd], [cx, y + bh / 2, D / 2 + 1], { material: 'rattan-weave', color: '#d8ccb6', radius: 1.5 }));
+      parts.push(box(`${id}-basket-rim`, ['basket', 'laundry'], [bw + 0.6, 2, bd + 0.6], [cx, y + bh - 1, D / 2 + 1], { color: '#cfc2aa', radius: 0.8 }));
+      parts.push(ell(`${id}-clothes`, ['laundry', 'clothes'], [bw - 5, 9, bd - 6], [cx, y + bh - 1, D / 2 + 1], { material: 'fabric-grey', color: '#8a8f99' }));
+    } else if (kind === 'folded') {
+      // shelves every ~32 cm with stacks of folded clothes
+      const levels = Math.max(1, Math.floor(h / 32));
+      const n = Math.max(1, Math.floor((cw - 4) / 26));
+      for (let l = 0; l < levels; l++) {
+        const ly = y + (l * h) / levels;
+        if (l > 0) parts.push(box(`${id}-shelf-${l}`, ['shelf'], [cw - T, T, D - 3], [cx, ly - T / 2, D / 2], body));
+        for (let q = 0; q < n; q++) {
+          const sh = 10 + ((l * 7 + q * 5 + ci0 * 3) % 4) * 3;
+          const c = FOLDED_COLORS[(l * 3 + q + ci0 * 2) % FOLDED_COLORS.length];
+          parts.push(box(`${id}-folded-${l}-${q + 1}`, ['clothes', 'folded'], [(cw - 4) / n - 3, sh, D - 10], [cx - (cw - 4) / 2 + ((q + 0.5) * (cw - 4)) / n, ly + sh / 2, D / 2 + 1], { material: 'fabric-grey', color: c, radius: 1.5 }));
+        }
+      }
     } else {
       const k = stuffKind(kind);
       if (k) parts.push(...placeStuff(stuffParts(k, id, cw - 3, D - 3, h - 3), 0, [cx, y, 1]));
@@ -1130,11 +1151,17 @@ export function tallCabinet(p: Record<string, unknown>): WithStates {
       // two closed fronts on top of each other always have a fixed shelf behind the seam (doors follow the inside)
       if (k > 0 && kind !== 'open' && (stack[k - 1].kind ?? 'door') !== 'open') parts.push(box(`${id}-shelf`, ['shelf', 'body'], [cw - T, T, D - 1], [cx, y, D / 2], body));
       if (kind === 'open') {
-        parts.push(box(`${id}-floor`, ['shelf', 'niche'], [cw - T, T, D - 2], [cx, y + T / 2, D / 2], body));
+        if (f.fill === 'chute') {
+          // laundry chute: the floor has a hole in the middle to drop dirty clothes into the basket below
+          const [hw, hd] = [Math.min(cw - 12, 24), Math.min(D - 14, 18)];
+          const [sw, sd] = [(cw - T - hw) / 2, (D - 2 - hd) / 2];
+          for (const sx of [-1, 1]) parts.push(box(`${id}-floor-${sx > 0 ? 'r' : 'l'}`, ['shelf', 'niche'], [sw, T, D - 2], [cx + sx * (hw / 2 + sw / 2), y + T / 2, D / 2], body));
+          for (const sz of [-1, 1]) parts.push(box(`${id}-floor-${sz > 0 ? 'f' : 'b'}`, ['shelf', 'niche'], [hw, T, sd], [cx, y + T / 2, D / 2 + sz * (hd / 2 + sd / 2)], body));
+        } else parts.push(box(`${id}-floor`, ['shelf', 'niche'], [cw - T, T, D - 2], [cx, y + T / 2, D / 2], body));
         parts.push(box(`${id}-ceil`, ['shelf', 'niche'], [cw - T, T, D - 2], [cx, y + fh - T / 2, D / 2], body));
         if (p.light) parts.push({ ...box(`${id}-led`, ['light', 'led'], [cw - 8, 0.5, 1.2], [cx, y + fh - T - 0.3, D - 5], { color: '#fff4e0' }), castShadow: false, emit: { color: '#ffd9a8', intensity: 4, kind: 'area' } });
         const bh = Math.min(fh - 10, 16);
-        if (f.fill && !['baskets', 'tray'].includes(f.fill)) inside(id, f.fill, cx, cw, y + T, fh - 2 * T);
+        if (f.fill && !['baskets', 'tray', 'chute'].includes(f.fill)) inside(id, f.fill, cx, cw, y + T, fh - 2 * T);
         if (f.fill === 'baskets') {
           for (const sx of [-1, 1]) parts.push(box(`${id}-basket-${sx > 0 ? 'r' : 'l'}`, ['basket'], [cw / 2 - 5, bh, D - 14], [cx + (sx * cw) / 4, y + T + bh / 2, D / 2], { material: 'rattan-weave', color: '#e9dcc4' }));
         } else if (f.fill === 'tray') {
@@ -1474,16 +1501,16 @@ export function tvGear(p: Record<string, unknown>): Part[] {
 /**
  * Our Edifier bookshelf speakers (22 wide x 40 high x 28 deep, standing up) on swivel wall arms either side of a
  * wall-mounted TV, `gap` cm out from its sides, toed in and tilted down at the bed; nothing lower than `bottom` (Mark is
- * 2 m: 217 so he never ducks). Draws the cables you'd really see: each speaker's leads drop from its arm and run along
- * the wall to behind the TV (the passive one's speaker wire, the active (left) one's power + audio + that wire), then
- * the bundle from under the TV down to a triple outlet (TV power, speaker power, the media box stuck behind the TV).
+ * 2 m; 205 agreed for these, where Heli (eye 151) still reaches the button), but never further apart than the `wireLength` speaker wire allows. Cables as Mark wires them: the active (left) speaker has one cable to the TV and one to
+ * the right speaker, in white paintable cable covers: one along the wall under the arms from speaker to speaker, one
+ * down from it to behind the TV, and one from under the TV down to the outlet (TV power + the left speaker's power).
  * Origin back-centre on the floor under the TV's centre.
  */
 export function wallSpeakers(p: Record<string, unknown>): Part[] {
   const W = num(p.width, 94);
   const tvBottom = num(p.tvBottom, 110);
   const tvTop = tvBottom + num(p.tvHeight, 55);
-  const gap = num(p.gap, 25);
+  const wire = num(p.wireLength, 183); // the speaker wire between them (6 ft): a hard limit on how far apart they can be
   const tilt = num(p.tilt, 25); // degrees, front down
   const toe = num(p.toe, 20); // degrees, turned in towards the middle
   const outlet = num(p.outletHeight, 30);
@@ -1491,7 +1518,10 @@ export function wallSpeakers(p: Record<string, unknown>): Part[] {
   const rad = (d: number) => (d * Math.PI) / 180;
   const reach = 19; // the arm holds the speaker's bottom centre this far off the wall, so it can turn freely
   // hinge height so the lowest point (the tilted front-bottom edge + the tray under it) stays at `bottom`
-  const H = num(p.bottom, 217) + (sd / 2) * Math.sin(rad(tilt)) + 1.5;
+  const H = num(p.bottom, 205) + (sd / 2) * Math.sin(rad(tilt)) + 1.5;
+  // the wire's route: lead down into the cover (7 down, 10 back), across, up into the other one; keep 5 cm for the terminals
+  const lead = Math.hypot(7, reach - 9);
+  const gap = Math.min(num(p.gap, 25), (wire - 5 - 2 * lead) / 2 - W / 2 - sw / 2);
   const cable = { color: '#111112' };
   const parts: Part[] = [];
   for (const sx of [-1, 1]) {
@@ -1516,27 +1546,41 @@ export function wallSpeakers(p: Record<string, unknown>): Part[] {
     parts.push({ ...place(box(`speaker-${k}-grille`, ['speaker'], [sw - 1.6, sh - 1.6, 0.4], [x0, yc, front + 0.1], { color: '#232325', radius: 0.3 })), castShadow: false });
     parts.push({ ...place(cyl(`speaker-${k}-woofer`, ['speaker'], 7.5, 0.2, [x0, yc - 6, front + 0.35], { color: '#1a1a1b' }), true), castShadow: false });
     parts.push({ ...place(cyl(`speaker-${k}-tweeter`, ['speaker'], 2.4, 0.2, [x0, yc + 12, front + 0.35], { color: '#1a1a1b' }), true), castShadow: false });
-    // leads: from the arm's wall plate straight down, then along the wall to behind the TV (1 on the passive side, 3 on the active)
-    const n = sx < 0 ? 3 : 1;
-    for (let i = 0; i < n; i++) {
-      const xi = x0 - sx * (1 + i * 1.1);
-      const yRun = tvTop - 8 - i * 1.6;
-      const top = H - 8;
-      parts.push(cyl(`cable-${k}-drop-${i + 1}`, ['cable'], 0.3, top - yRun, [xi, (top + yRun) / 2, 0.4], cable));
-      const tvEdge = (sx * W) / 2 - sx * 10; // ends 10 cm behind the TV
-      const len = Math.abs(xi - tvEdge);
-      parts.push({ ...cyl(`cable-${k}-run-${i + 1}`, ['cable'], 0.3, len, [(xi + tvEdge) / 2, yRun, 0.4], cable), rotation: [0, 0, 90] });
+    if (sx < 0) {
+      // the active one's power button + volume knob on its outer side, low at the front: the lowest spot, so Heli reaches them
+      const side = x0 - sw / 2 - 0.5;
+      parts.push(place(box('speaker-l-button', ['speaker', 'button'], [1, 2.4, 2.4], [side, H + 4, front - 4], { color: '#2a2a2c', radius: 0.5 })));
+      parts.push(place(box('speaker-l-knob', ['speaker', 'knob'], [1.4, 3.4, 3.4], [side - 0.2, H + 9.5, front - 4.5], { color: '#2a2a2c', radius: 1.2 })));
     }
   }
-  // under the TV: TV power, the speakers' power and the media box hang down to a triple outlet
+  // cable covers (white, paintable) with the cables inside; only their ends show
+  const cover = { color: '#f4f4f2', radius: 0.5 };
+  const xs = W / 2 + gap + sw / 2;
+  const yLink = H - 9.25; // right under the arm plates
+  parts.push(box('cover-link', ['cable', 'cable cover'], [2 * xs + 4, 2.5, 1.6], [0, yLink, 0.8], cover));
+  // each speaker's lead from under its back into the cover (the left one carries 2: to the TV and to the right speaker)
+  const [ly, lz] = [H - 1 - (yLink + 1.25), reach - 9]; // = 7, 10: `lead` above
+  for (const sx of [-1, 1]) {
+    const lean = (Math.atan2(lz, ly) * 180) / Math.PI;
+    parts.push({ ...cyl(`cable-${sx > 0 ? 'r' : 'l'}-lead`, ['cable'], sx < 0 ? 0.45 : 0.3, Math.hypot(ly, lz), [sx * xs, yLink + 1.25 + ly / 2, 1 + lz / 2], cable), rotation: [lean, 0, 0] });
+  }
+  const xd = -12; // down to behind the TV, just left of its bracket
+  const tvDropBottom = tvTop - 6;
+  parts.push(box('cover-to-tv', ['cable', 'cable cover'], [2.5, yLink - tvDropBottom, 1.6], [xd, (yLink + tvDropBottom) / 2, 0.8], cover));
+  // under the TV: TV power + the left speaker's power down to the outlet
   const ox = -W / 2 + 22;
-  for (const [i, dx, sag] of [[1, -1.4, 0.6], [2, 0, 1.4], [3, 1.4, 0.9]] as const) {
-    const top = tvBottom + 6;
-    const end = outlet + 3;
-    parts.push({ ...cyl(`cable-down-${i}`, ['cable'], 0.3, top - end, [ox + dx, (top + end) / 2, 0.4 + sag], cable), rotation: [sag * 0.5, 0, dx * 0.6] });
+  const coverTop = tvBottom + 6;
+  const coverEnd = outlet + 6;
+  parts.push(box('cover-down', ['cable', 'cable cover'], [3, coverTop - coverEnd, 1.6], [ox, (coverTop + coverEnd) / 2, 0.8], cover));
+  // the two plugs' cables from the cover's end
+  const plugTop = outlet + 2.25;
+  for (const sx of [-1, 1]) {
+    const [dx, dy] = [5.5, coverEnd - plugTop];
+    const tilt2 = (Math.atan2(dx, dy) * 180) / Math.PI;
+    parts.push({ ...cyl(`cable-down-${sx > 0 ? 2 : 1}`, ['cable'], 0.3, Math.hypot(dx, dy), [ox + sx * (0.8 + dx / 2), (coverEnd + plugTop) / 2, 1.6], cable), rotation: [0, 0, sx * tilt2] });
   }
   parts.push(box('outlet', ['outlet', 'socket'], [22, 8, 1.2], [ox, outlet, 0.6], { color: '#f4f4f2', radius: 0.4 }));
-  for (const dx of [-7, 0, 7]) {
+  for (const dx of [-7, 7]) {
     parts.push(box(`outlet-plug-${dx + 7}`, ['outlet', 'plug'], [3.5, 4.5, 3], [ox + dx * 0.9, outlet, 2.6], { color: '#1b1b1c', radius: 0.6 }));
   }
   return parts;
