@@ -1525,7 +1525,7 @@
           },
           "against": {
             "wall": "living.wall-5",
-            "offset": 30,
+            "offset": 2,
             "elevation": 168,
             "gap": 0
           }
