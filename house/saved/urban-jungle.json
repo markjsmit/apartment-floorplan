@@ -2,7 +2,7 @@
   "meta": {
     "name": "Urban jungle",
     "kind": "saved",
-    "note": "Urban jungle · sitting corner: TV at 45° in front of an oak board closing the pillar corner, sofa against the balcony wall in the corner, armchair mid-room = best TV seat; a tall rattan-door closet splits the entrance from the sitting area: doors to the entrance (coats, shoes, keys, devices), art + the table against its back; KALLAX with 8 pairs of shoes by the door.",
+    "note": "Urban jungle · sitting corner: TV at 45° in front of an oak board closing the pillar corner, sofa against the balcony wall in the corner, armchair mid-room = best TV seat; table for 6 north-south against a divider of 2 stacked KALLAX 4x3 (shoes, appliances, keys, bags behind an oak board with art; plants, games, whisky, books on top); bench + coat hooks by the door.",
     "location": {
       "lat": 32.0853,
       "lon": 34.7818,
@@ -959,95 +959,198 @@
           ]
         },
         {
-          "id": "living.entry-closet",
-          "asset": "tall-cabinet",
-          "name": "Tall closet as a room divider, 140x50x210 (close to the front door, clear of its swing), oak body + rattan doors: kitchen devices | shoes, key niche, coats (doors face the entrance; closed back to the dining)",
+          "id": "living.divider-low",
+          "asset": "ikea-kallax",
+          "name": "KALLAX 4x3 white-oak (bottom of the divider): 2 rows of shoes with a shelf in each cube (16 pairs), a row of kitchen appliances; open to the door — IKEA",
           "tags": [
-            "closet",
+            "kallax",
             "divider",
-            "entry",
-            "coats",
             "shoes",
-            "drop zone",
             "kitchen devices"
           ],
           "params": {
-            "width": 140,
-            "depth": 50,
-            "height": 210,
-            "plinth": 8,
-            "handles": "bar",
-            "handleColor": "#c49c68",
-            "light": true,
-            "material": "wood-oak-light",
-            "frontMaterial": "rattan-weave",
-            "frontColor": "#efe3cc",
-            "columns": [
-              {
-                "w": 45,
-                "stack": [
-                  {
-                    "kind": "door",
-                    "h": 100,
-                    "content": "devices"
-                  },
-                  {
-                    "kind": "door",
-                    "content": "devices"
-                  }
-                ]
-              },
-              {
-                "w": 47.5,
-                "stack": [
-                  {
-                    "kind": "door",
-                    "h": 70,
-                    "content": "shoes"
-                  },
-                  {
-                    "kind": "open",
-                    "h": 30,
-                    "fill": "baskets"
-                  },
-                  {
-                    "kind": "door",
-                    "content": "coats"
-                  }
-                ]
-              },
-              {
-                "w": 47.5,
-                "stack": [
-                  {
-                    "kind": "door",
-                    "h": 70,
-                    "content": "shoes"
-                  },
-                  {
-                    "kind": "open",
-                    "h": 30,
-                    "fill": "tray"
-                  },
-                  {
-                    "kind": "door",
-                    "content": "coats"
-                  }
-                ]
-              }
-            ]
+            "cols": 4,
+            "rows": 3,
+            "color": "white-oak",
+            "contents": [
+              "devices devices devices devices",
+              "shoes shoes shoes shoes",
+              "shoes shoes shoes shoes"
+            ],
+            "seed": "jun-low"
           },
           "position": [
-            70,
+            73.5,
             0,
-            600
+            540
           ],
           "rotation": 0
         },
         {
+          "id": "living.divider-top",
+          "asset": "ikea-kallax",
+          "name": "KALLAX 4x3 white-oak on top (screw the stack to the wall): a key cube each for Mark + Heli, bags, then 2 rows open both ways with plants, games, whisky + books — IKEA",
+          "tags": [
+            "kallax",
+            "divider",
+            "display",
+            "drop zone",
+            "whisky",
+            "games"
+          ],
+          "params": {
+            "cols": 4,
+            "rows": 3,
+            "color": "white-oak",
+            "contents": [
+              "books games - whisky",
+              "games - whisky books",
+              "keys keys bags bags"
+            ],
+            "seed": "jun-top"
+          },
+          "position": [
+            73.5,
+            112,
+            540
+          ],
+          "rotation": 0,
+          "allowOverlap": [
+            "living.divider-low"
+          ]
+        },
+        {
+          "id": "living.divider-plant-1",
+          "asset": "plant",
+          "name": "Plant in the open top of the divider",
+          "tags": [
+            "plant"
+          ],
+          "params": {
+            "kind": "bush",
+            "height": 26,
+            "seed": "divider-plant-1",
+            "spread": 22,
+            "potDiameter": 14,
+            "potColor": "#efe6d4",
+            "model": "syngonium"
+          },
+          "position": [
+            57,
+            151,
+            549.0
+          ],
+          "rotation": 0,
+          "allowOverlap": [
+            "living.divider-top"
+          ]
+        },
+        {
+          "id": "living.divider-plant-2",
+          "asset": "plant",
+          "name": "Plant in the open top of the divider",
+          "tags": [
+            "plant"
+          ],
+          "params": {
+            "kind": "bush",
+            "height": 26,
+            "seed": "divider-plant-2",
+            "spread": 22,
+            "potDiameter": 14,
+            "potColor": "#efe6d4",
+            "model": "succulent"
+          },
+          "position": [
+            92,
+            188,
+            549.0
+          ],
+          "rotation": 0,
+          "allowOverlap": [
+            "living.divider-top"
+          ]
+        },
+        {
+          "id": "living.divider-top-plant-1",
+          "asset": "plant",
+          "name": "Trailing plant on top of the divider",
+          "tags": [
+            "plant"
+          ],
+          "params": {
+            "kind": "trailing",
+            "height": 30,
+            "seed": "divider-top-plant-1",
+            "spread": 24,
+            "potDiameter": 16,
+            "potColor": "#efe6d4",
+            "model": "syngonium"
+          },
+          "position": [
+            22,
+            225,
+            548.0
+          ],
+          "rotation": 0,
+          "allowOverlap": [
+            "living.divider-top"
+          ]
+        },
+        {
+          "id": "living.divider-top-plant-2",
+          "asset": "plant",
+          "name": "Trailing plant on top of the divider",
+          "tags": [
+            "plant"
+          ],
+          "params": {
+            "kind": "trailing",
+            "height": 30,
+            "seed": "divider-top-plant-2",
+            "spread": 24,
+            "potDiameter": 16,
+            "potColor": "#efe6d4"
+          },
+          "position": [
+            128,
+            225,
+            548.0
+          ],
+          "rotation": 0,
+          "allowOverlap": [
+            "living.divider-top"
+          ]
+        },
+        {
+          "id": "living.divider-board",
+          "asset": "box",
+          "name": "Oak board on the dining side over the first 4 rows (hides shoes, appliances, keys, bags)",
+          "tags": [
+            "divider",
+            "board"
+          ],
+          "params": {
+            "width": 147,
+            "height": 149,
+            "depth": 1.8,
+            "material": "wood-oak-light"
+          },
+          "position": [
+            73.5,
+            0,
+            540
+          ],
+          "rotation": 180,
+          "allowOverlap": [
+            "living.divider-low",
+            "living.divider-top"
+          ]
+        },
+        {
           "id": "living.art",
           "asset": "wall-art",
-          "name": "LLEEMPI sage-green botanical prints, set of 3, wood frames 12x16\" (30x40) — Amazon.com ₪124 (on the back of the closet)",
+          "name": "LLEEMPI sage-green botanical prints, set of 3, wood frames 12x16\" (30x40) — Amazon.com ₪124 (on the oak board, above the table end)",
           "tags": [
             "art"
           ],
@@ -1058,19 +1161,19 @@
             "art": "#8fa37e,#efe8dc,#5f7a52"
           },
           "position": [
-            70,
-            110,
-            599
+            73.5,
+            88,
+            538
           ],
           "rotation": 180,
           "allowOverlap": [
-            "living.entry-closet"
+            "living.divider-board"
           ]
         },
         {
           "id": "living.dining-table",
           "asset": "design-table",
-          "name": "Table for 6, 180x90, white top + oak legs, running north-south",
+          "name": "Table for 6, 180x90, white top + oak legs, running north-south, its end against the divider",
           "tags": [
             "dining table"
           ],
@@ -1082,16 +1185,16 @@
             "legMaterial": "wood-oak-light"
           },
           "position": [
-            55,
+            40,
             0,
-            340
+            448
           ],
           "rotation": 90
         },
         {
           "id": "living.chair-1",
           "asset": "design-chair",
-          "name": "Rattan dining chair, woven rattan back + seat (natural wood colour) — Bar Chairs (barchairs.co.il) — same chair is \"Samoa\" at Million Kisot ₪140",
+          "name": "Rattan dining chair, woven rattan back + seat (natural wood colour) — Bar Chairs (barchairs.co.il) — same chair is \"Samoa\" at Million Kisot ₪140 (pushed in)",
           "tags": [
             "dining chair"
           ],
@@ -1106,9 +1209,9 @@
             "width": 44
           },
           "position": [
-            6.0,
+            20.0,
             0,
-            285.0
+            392.0
           ],
           "rotation": 90,
           "allowOverlap": [
@@ -1119,7 +1222,7 @@
         {
           "id": "living.chair-4",
           "asset": "design-chair",
-          "name": "Rattan dining chair, woven rattan back + seat (natural wood colour) — Bar Chairs (barchairs.co.il) — same chair is \"Samoa\" at Million Kisot ₪140",
+          "name": "Rattan dining chair, woven rattan back + seat (natural wood colour) — Bar Chairs (barchairs.co.il) — same chair is \"Samoa\" at Million Kisot ₪140 (pushed in)",
           "tags": [
             "dining chair"
           ],
@@ -1134,9 +1237,9 @@
             "width": 44
           },
           "position": [
-            194.0,
+            150.0,
             0,
-            285.0
+            392.0
           ],
           "rotation": -90,
           "allowOverlap": [
@@ -1147,7 +1250,7 @@
         {
           "id": "living.chair-2",
           "asset": "design-chair",
-          "name": "Rattan dining chair, woven rattan back + seat (natural wood colour) — Bar Chairs (barchairs.co.il) — same chair is \"Samoa\" at Million Kisot ₪140",
+          "name": "Rattan dining chair, woven rattan back + seat (natural wood colour) — Bar Chairs (barchairs.co.il) — same chair is \"Samoa\" at Million Kisot ₪140 (pushed in)",
           "tags": [
             "dining chair"
           ],
@@ -1162,9 +1265,9 @@
             "width": 44
           },
           "position": [
-            6.0,
+            20.0,
             0,
-            340.0
+            450.0
           ],
           "rotation": 90,
           "allowOverlap": [
@@ -1175,7 +1278,7 @@
         {
           "id": "living.chair-5",
           "asset": "design-chair",
-          "name": "Rattan dining chair, woven rattan back + seat (natural wood colour) — Bar Chairs (barchairs.co.il) — same chair is \"Samoa\" at Million Kisot ₪140",
+          "name": "Rattan dining chair, woven rattan back + seat (natural wood colour) — Bar Chairs (barchairs.co.il) — same chair is \"Samoa\" at Million Kisot ₪140 (pushed in)",
           "tags": [
             "dining chair"
           ],
@@ -1190,9 +1293,9 @@
             "width": 44
           },
           "position": [
-            194.0,
+            150.0,
             0,
-            340.0
+            450.0
           ],
           "rotation": -90,
           "allowOverlap": [
@@ -1203,7 +1306,7 @@
         {
           "id": "living.chair-3",
           "asset": "design-chair",
-          "name": "Rattan dining chair, woven rattan back + seat (natural wood colour) — Bar Chairs (barchairs.co.il) — same chair is \"Samoa\" at Million Kisot ₪140",
+          "name": "Rattan dining chair, woven rattan back + seat (natural wood colour) — Bar Chairs (barchairs.co.il) — same chair is \"Samoa\" at Million Kisot ₪140 (pushed in)",
           "tags": [
             "dining chair"
           ],
@@ -1218,9 +1321,9 @@
             "width": 44
           },
           "position": [
-            6.0,
+            20.0,
             0,
-            395.0
+            508.0
           ],
           "rotation": 90,
           "allowOverlap": [
@@ -1231,7 +1334,7 @@
         {
           "id": "living.chair-6",
           "asset": "design-chair",
-          "name": "Rattan dining chair, woven rattan back + seat (natural wood colour) — Bar Chairs (barchairs.co.il) — same chair is \"Samoa\" at Million Kisot ₪140",
+          "name": "Rattan dining chair, woven rattan back + seat (natural wood colour) — Bar Chairs (barchairs.co.il) — same chair is \"Samoa\" at Million Kisot ₪140 (pushed in)",
           "tags": [
             "dining chair"
           ],
@@ -1246,9 +1349,9 @@
             "width": 44
           },
           "position": [
-            194.0,
+            150.0,
             0,
-            395.0
+            508.0
           ],
           "rotation": -90,
           "allowOverlap": [
@@ -1272,9 +1375,9 @@
             "shadeMaterial": "rattan-weave"
           },
           "position": [
-            100,
+            85,
             0,
-            300
+            410
           ],
           "rotation": 0
         },
@@ -1294,9 +1397,9 @@
             "shadeMaterial": "rattan-weave"
           },
           "position": [
-            100,
+            85,
             0,
-            380
+            490
           ],
           "rotation": 0
         },
@@ -1316,9 +1419,9 @@
             "flowers": "#efe6d6"
           },
           "position": [
-            100,
+            85,
             75,
-            335
+            445
           ],
           "rotation": 0,
           "allowOverlap": [
@@ -1326,81 +1429,53 @@
           ]
         },
         {
-          "id": "living.closet-plant-1",
-          "asset": "plant",
-          "name": "Trailing plant on top of the closet",
+          "id": "living.shoe-bench",
+          "asset": "bench",
+          "name": "Rattan-top shoe bench 100x35 on the side wall: sit to put shoes on, everyday pairs below",
           "tags": [
-            "plant"
+            "bench",
+            "shoes",
+            "entry"
           ],
           "params": {
-            "kind": "trailing",
-            "height": 30,
-            "seed": "closet-plant-1",
-            "spread": 24,
-            "potDiameter": 16,
-            "potColor": "#efe6d4",
-            "model": "syngonium"
+            "width": 100,
+            "depth": 35,
+            "height": 46,
+            "legs": "legs",
+            "material": "wood-oak-light",
+            "cushionColor": "#e9dcc4",
+            "cushionMaterial": "rattan-weave",
+            "shoes": 3,
+            "seed": "jun-bench"
           },
-          "position": [
-            22,
-            210,
-            616.0
-          ],
-          "rotation": 0,
-          "allowOverlap": [
-            "living.entry-closet"
-          ]
+          "against": {
+            "wall": "living.wall-5",
+            "offset": 32,
+            "elevation": 0,
+            "gap": 0
+          }
         },
         {
-          "id": "living.closet-plant-2",
-          "asset": "plant",
-          "name": "Trailing plant on top of the closet",
+          "id": "living.coat-hooks",
+          "asset": "hook-rail",
+          "name": "Oak hook rail with our jackets, above the bench",
           "tags": [
-            "plant"
+            "hooks",
+            "coats",
+            "entry"
           ],
           "params": {
-            "kind": "trailing",
-            "height": 30,
-            "seed": "closet-plant-2",
-            "spread": 24,
-            "potDiameter": 16,
-            "potColor": "#efe6d4"
+            "width": 90,
+            "hooks": 5,
+            "bags": 0,
+            "coats": 3
           },
-          "position": [
-            70,
-            210,
-            616.0
-          ],
-          "rotation": 0,
-          "allowOverlap": [
-            "living.entry-closet"
-          ]
-        },
-        {
-          "id": "living.closet-plant-3",
-          "asset": "plant",
-          "name": "Trailing plant on top of the closet",
-          "tags": [
-            "plant"
-          ],
-          "params": {
-            "kind": "trailing",
-            "height": 30,
-            "seed": "closet-plant-3",
-            "spread": 24,
-            "potDiameter": 16,
-            "potColor": "#efe6d4",
-            "model": "syngonium"
-          },
-          "position": [
-            118,
-            210,
-            616.0
-          ],
-          "rotation": 0,
-          "allowOverlap": [
-            "living.entry-closet"
-          ]
+          "against": {
+            "wall": "living.wall-5",
+            "offset": 37,
+            "elevation": 168,
+            "gap": 0
+          }
         },
         {
           "id": "living.stool-1",
@@ -1573,7 +1648,13 @@
             "living.coffee-table",
             "living.rug",
             "living.armchair",
-            "living.entry-closet",
+            "living.divider-low",
+            "living.divider-top",
+            "living.divider-plant-1",
+            "living.divider-plant-2",
+            "living.divider-top-plant-1",
+            "living.divider-top-plant-2",
+            "living.divider-board",
             "living.art",
             "living.dining-table",
             "living.chair-1",
@@ -1585,9 +1666,8 @@
             "living.pendant",
             "living.pendant-2",
             "living.flowers",
-            "living.closet-plant-1",
-            "living.closet-plant-2",
-            "living.closet-plant-3",
+            "living.shoe-bench",
+            "living.coat-hooks",
             "living.stool-1",
             "living.stool-2",
             "living.strelitzia",
@@ -1626,7 +1706,13 @@
             "living.coffee-table",
             "living.rug",
             "living.armchair",
-            "living.entry-closet",
+            "living.divider-low",
+            "living.divider-top",
+            "living.divider-plant-1",
+            "living.divider-plant-2",
+            "living.divider-top-plant-1",
+            "living.divider-top-plant-2",
+            "living.divider-board",
             "living.art",
             "living.dining-table",
             "living.chair-1",
@@ -1638,9 +1724,8 @@
             "living.pendant",
             "living.pendant-2",
             "living.flowers",
-            "living.closet-plant-1",
-            "living.closet-plant-2",
-            "living.closet-plant-3",
+            "living.shoe-bench",
+            "living.coat-hooks",
             "living.stool-1",
             "living.stool-2",
             "living.strelitzia",
