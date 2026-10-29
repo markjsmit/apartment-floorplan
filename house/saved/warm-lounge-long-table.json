@@ -1,6 +1,6 @@
 {
   "meta": {
-    "name": "Mid-century living + jungle dining",
+    "name": "Warm lounge + long table",
     "kind": "saved",
     "note": "Mixed · living-room side of the pillar = mid-century (floating sofa facing the walnut sideboard + TV, coffee table, globe lamp, open round-back corner shelves, walnut slats + our clock on the pillar); entrance like the loft (cream hall stand with a shoe bench, white KALLAX column facing the room with whisky + games, white KALLAX along the passage, full-width coat rack); an extendable table for 6 north-south against the back of the hall stand like the urban jungle, rattan chairs + stools, oak kitchen shelves with plants.",
     "location": {
@@ -1456,16 +1456,15 @@
         {
           "id": "living.dining-table",
           "asset": "design-table",
-          "name": "Extendable table 180 (230 with the butterfly leaf) x 90, white top + oak legs, running north-south, its end against the back of the hall stand",
+          "name": "Extendable table 180 (230 with the leaf) x 80, white top + oak legs, running north-south, its end against the back of the hall stand",
           "tags": [
             "dining table",
             "extendable"
           ],
           "params": {
             "width": 180,
-            "depth": 90,
+            "depth": 80,
             "base": "legs",
-            "extendable": true,
             "material": "white-laminate",
             "legMaterial": "wood-oak-light"
           },
@@ -1525,7 +1524,7 @@
             "width": 44
           },
           "position": [
-            155.0,
+            145.0,
             0,
             427.0
           ],
@@ -1581,7 +1580,7 @@
             "width": 44
           },
           "position": [
-            155.0,
+            145.0,
             0,
             485.0
           ],
@@ -1637,7 +1636,7 @@
             "width": 44
           },
           "position": [
-            155.0,
+            145.0,
             0,
             543.0
           ],
@@ -1663,7 +1662,7 @@
             "shadeMaterial": "rattan-weave"
           },
           "position": [
-            90,
+            85,
             0,
             443
           ],
@@ -1685,7 +1684,7 @@
             "shadeMaterial": "rattan-weave"
           },
           "position": [
-            90,
+            85,
             0,
             523
           ],
@@ -1707,13 +1706,19 @@
             "flowers": "#efe6d6"
           },
           "position": [
-            90,
+            85,
             75,
-            478
+            474
           ],
           "rotation": 0,
           "allowOverlap": [
-            "living.dining-table"
+            "living.dining-table",
+            "living.chair-1",
+            "living.chair-2",
+            "living.chair-3",
+            "living.chair-4",
+            "living.chair-5",
+            "living.chair-6"
           ]
         },
         {
