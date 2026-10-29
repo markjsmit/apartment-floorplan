@@ -187,8 +187,10 @@ export function hookRail(params: Record<string, unknown>) {
   parts.push(...bagParts);
   // jackets on the hooks the bags leave free
   const coatColors = String(params.coatColors ?? '').split(',').map((c) => c.trim()).filter(Boolean);
+  // coats are wider than the hook spacing: like real ones they hang over each other, each a few cm further out (at the
+  // same depth they would cut through each other)
   xs.filter((x) => !onHooks.includes(x)).slice(0, Math.round(num(params.coats, 0))).forEach((x, i) =>
-    parts.push(...coat(`coat-${i + 1}`, x, 7, 9, coatColors[i % Math.max(coatColors.length, 1)] ?? COAT_COLORS[i % COAT_COLORS.length], false, num(params.coatLength, 72))));
+    parts.push(...coat(`coat-${i + 1}`, x, 7, 9 + i * 4, coatColors[i % Math.max(coatColors.length, 1)] ?? COAT_COLORS[i % COAT_COLORS.length], false, num(params.coatLength, 72) - i * 3)));
   const hidden = Object.fromEntries(bagParts.map((p) => [p.id, { visible: false }]));
   return {
     parts,

@@ -2,7 +2,7 @@
   "meta": {
     "name": "Urban jungle",
     "kind": "saved",
-    "note": "Urban jungle · sitting corner: TV square to the corner on an oak board closing the pillar corner (white broom closet behind it, door on the hallway side), sofa against the balcony wall in the corner, armchair mid-room = best TV seat; table for 6 north-south against a 1.3 m light grey AliExpress entry cabinet as the divider (open shoe strip, shoe doors, lit niches for keys, bags, whisky + games; art on its back on the dining side); bench + coat hooks by the door.",
+    "note": "Urban jungle · sitting corner: TV square to the corner on an oak board closing the pillar corner (white broom closet behind it, door on the hallway side), sofa against the balcony wall in the corner, armchair mid-room = best TV seat; table for 6 north-south against a 1.3 m light grey AliExpress entry cabinet as the divider (open shoe strip, shoe doors, lit niches for keys + bags; art on its back on the dining side); whisky + games on an oak shelf above the long table; bench + coat hooks by the door.",
     "location": {
       "lat": 32.0853,
       "lon": 34.7818,
@@ -1050,7 +1050,7 @@
         {
           "id": "living.divider",
           "asset": "tall-cabinet",
-          "name": "Light grey entry cabinet 1.3 m as the divider by the front door: open shoe strip, shoe doors, lit niches (keys, bags, whisky, games), kitchen devices behind the top doors — AliExpress (https://www.aliexpress.com/item/1005010339751353.html), 1.3 x 2.1 m, ~35 deep (estimate), ~₪1,346",
+          "name": "Light grey entry cabinet 1.3 m as the divider by the front door: shoes under the floating base, double shoe doors, a drawer, a lit key niche at hand height, kitchen devices behind the top doors, a black-framed glass column with lit shelves — AliExpress (https://www.aliexpress.com/item/1005010339751353.html), 1.3 x 2.1 m, 40 deep, ~₪1,346",
           "tags": [
             "entry",
             "shoe cabinet",
@@ -1060,90 +1060,59 @@
           ],
           "params": {
             "width": 130,
-            "depth": 35,
+            "depth": 40,
             "height": 210,
             "plinth": 0,
             "handles": "none",
             "light": true,
             "material": "white-laminate",
-            "color": "#cfcbc4",
+            "color": "#cdc8c0",
             "frontMaterial": "white-laminate",
-            "frontColor": "#cfcbc4",
+            "frontColor": "#cdc8c0",
             "columns": [
               {
-                "w": 35.0,
+                "w": 95,
                 "stack": [
                   {
                     "kind": "open",
-                    "h": 18,
+                    "h": 15,
                     "fill": "shoes"
                   },
                   {
                     "kind": "door",
-                    "h": 92,
+                    "leaves": 2,
+                    "h": 72,
                     "content": "shoes"
                   },
                   {
+                    "kind": "drawer",
+                    "h": 16
+                  },
+                  {
                     "kind": "open",
-                    "h": 34,
+                    "h": 40,
                     "fill": "keys"
                   },
                   {
                     "kind": "door",
+                    "leaves": 2,
                     "content": "devices"
                   }
                 ]
               },
               {
-                "w": 60,
+                "w": 35,
                 "stack": [
                   {
-                    "kind": "open",
-                    "h": 18,
-                    "fill": "shoes"
-                  },
-                  {
                     "kind": "door",
-                    "h": 27,
+                    "glass": true,
+                    "h": 103,
                     "content": "shoes"
                   },
                   {
-                    "kind": "open",
-                    "h": 70,
-                    "fill": "bags"
-                  },
-                  {
-                    "kind": "open",
-                    "h": 34,
-                    "fill": "whisky"
-                  },
-                  {
                     "kind": "door",
-                    "content": "games"
-                  }
-                ]
-              },
-              {
-                "w": 35.0,
-                "stack": [
-                  {
-                    "kind": "open",
-                    "h": 18,
-                    "fill": "shoes"
-                  },
-                  {
-                    "kind": "door",
-                    "h": 92,
-                    "content": "shoes"
-                  },
-                  {
-                    "kind": "open",
-                    "h": 34,
-                    "fill": "games"
-                  },
-                  {
-                    "kind": "door",
-                    "content": "devices"
+                    "glass": true,
+                    "content": "display"
                   }
                 ]
               }
@@ -1228,6 +1197,31 @@
           "allowOverlap": [
             "living.divider"
           ]
+        },
+        {
+          "id": "living.whisky-shelf",
+          "asset": "kitchen-shelf",
+          "name": "Oak display shelf 120 on black brackets above the long table: our whisky + tumblers and a stack of games",
+          "tags": [
+            "whisky",
+            "games",
+            "display",
+            "shelf"
+          ],
+          "params": {
+            "width": 120,
+            "depth": 25,
+            "material": "wood-oak-light",
+            "brackets": "black",
+            "contents": "whisky whisky games",
+            "seed": "jun-whisky"
+          },
+          "against": {
+            "wall": "living.wall-5",
+            "offset": 202,
+            "elevation": 150,
+            "gap": 0
+          }
         },
         {
           "id": "living.dining-table",
@@ -1531,7 +1525,7 @@
           },
           "against": {
             "wall": "living.wall-5",
-            "offset": 37,
+            "offset": 30,
             "elevation": 168,
             "gap": 0
           }
@@ -1783,6 +1777,7 @@
             "living.divider-top-plant-1",
             "living.divider-top-plant-2",
             "living.art",
+            "living.whisky-shelf",
             "living.dining-table",
             "living.chair-1",
             "living.chair-4",
@@ -1845,6 +1840,7 @@
             "living.divider-top-plant-1",
             "living.divider-top-plant-2",
             "living.art",
+            "living.whisky-shelf",
             "living.dining-table",
             "living.chair-1",
             "living.chair-4",

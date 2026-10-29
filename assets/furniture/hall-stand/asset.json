@@ -1,0 +1,44 @@
+{
+  "id": "hall-stand",
+  "name": "Entry hall stand with shoe bench (AliExpress)",
+  "tags": [
+    "entry",
+    "shoe cabinet",
+    "bench",
+    "hooks",
+    "design"
+  ],
+  "description": "AliExpress entry hall stand, cream white, 80 x 30 x 200 (seller photo S25e9602...): left a door, a drawer, a lit niche and a lit glass display box in a gold frame; right a shoe bench with a door and a grey cushion, open slats with hooks above. Gold bar handles. Double-click a door/drawer to open.",
+  "source": {
+    "kind": "procedural",
+    "generator": "hall-stand",
+    "license": "self-made",
+    "notes": "src/model/generators/decor.ts; https://www.aliexpress.com/item/1005010339751353.html"
+  },
+  "params": {
+    "width": {
+      "default": 80
+    },
+    "depth": {
+      "default": 30
+    },
+    "height": {
+      "default": 200
+    },
+    "color": {
+      "default": "#f3efe6"
+    },
+    "accentColor": {
+      "default": "#c9a55a"
+    },
+    "cushionColor": {
+      "default": "#8e9094"
+    },
+    "niche": {
+      "default": "keys"
+    },
+    "display": {
+      "default": "books"
+    }
+  }
+}

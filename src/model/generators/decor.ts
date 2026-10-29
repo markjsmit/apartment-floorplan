@@ -1,7 +1,7 @@
 import type { Part, Vec3 } from '../schema';
 import { box as sharpBox, cyl, num, str, type Extra, type WithStates } from './builtins';
 import { placeStuff, stuffKind, stuffParts } from './stuff';
-import { broom, COAT_COLORS, cleaningSprays, coat, flatMop, ironingBoard, shoeRow, stickVacuum } from './wear';
+import { broom, COAT_COLORS, cleaningSprays, coat, flatMop, gameStack, ironingBoard, shoeRow, stickVacuum, whiskyRow } from './wear';
 import { rng } from './stuff';
 
 // Simple design furniture for trying out room styles: tables, stools, chairs, benches, media units, shelves, rugs,
@@ -1013,7 +1013,7 @@ export function cleaningCorner(p: Record<string, unknown>): Part[] {
   return parts;
 }
 
-type Front = { kind?: string; h?: number; fill?: string; content?: string; mirror?: boolean; material?: string; color?: string };
+type Front = { kind?: string; h?: number; fill?: string; content?: string; mirror?: boolean; material?: string; color?: string; leaves?: number; glass?: boolean };
 
 /**
  * Tall cabinet: wardrobe, entry closet, shoe cabinet, locker. Columns side by side (left → right seen from the front),
@@ -1064,6 +1064,15 @@ export function tallCabinet(p: Record<string, unknown>): WithStates {
         if (l > 0) parts.push(box(`${id}-shelf-${l}`, ['shelf'], [cw - T, T, D - 4], [cx, ly - T / 2, D / 2], body));
         parts.push(...shoeRow(`${id}-shoes-${l}`, cx, ly, D - 2, cw, `${id}-${l}`));
       }
+    } else if (kind === 'display') {
+      // display shelves every ~30 cm (glass column): a few things on each, the odd bag
+      const levels = Math.max(1, Math.floor(h / 30));
+      const picks = ['stuff', 'bags', 'books', 'stuff'] as const;
+      for (let l = 0; l < levels; l++) {
+        const ly = y + (l * h) / levels;
+        if (l > 0) parts.push(box(`${id}-shelf-${l}`, ['shelf'], [cw - T, 1.2, D - 4], [cx, ly - 0.6, D / 2], { material: 'glass', glass: true }));
+        parts.push(...placeStuff(stuffParts(picks[l % picks.length], `${id}-d${l}`, cw - 4, D - 6, h / levels - 3), 0, [cx, ly, 2]));
+      }
     } else {
       const k = stuffKind(kind);
       if (k) parts.push(...placeStuff(stuffParts(k, id, cw - 3, D - 3, h - 3), 0, [cx, y, 1]));
@@ -1104,7 +1113,25 @@ export function tallCabinet(p: Record<string, unknown>): WithStates {
         const fz = D + T / 2;
         if (f.content) inside(id, f.content, cx, cw, y + T, fh - T);
         const before = parts.length;
-        parts.push({ ...box(`${id}-front`, ['front', kind], [cw - 0.6, fh - 0.6, T], [cx, y + fh / 2, fz], fl), section: id });
+        // a door can be a pair of leaves (double doors) and/or glass in a slim dark aluminium frame (lit display inside)
+        const leaves = kind === 'door' && f.leaves === 2 ? 2 : 1;
+        const lw = cw / leaves;
+        for (let l = 0; l < leaves; l++) {
+          const lx = cx - cw / 2 + lw * (l + 0.5);
+          const lid = l === 0 ? `${id}-front` : `${id}-front-${l + 1}`;
+          if (f.glass) {
+            const frame = { color: str(p.glassFrameColor, '#2a2a2c') };
+            const b = 2.2;
+            parts.push({ ...box(lid, ['front', kind, 'frame'], [lw - 0.6, b, T], [lx, y + fh - 0.3 - b / 2, fz], frame), section: id });
+            parts.push({ ...box(`${lid}-frame-b`, ['front', 'frame'], [lw - 0.6, b, T], [lx, y + 0.3 + b / 2, fz], frame), section: id });
+            for (const sx of [-1, 1]) parts.push({ ...box(`${lid}-frame-${sx > 0 ? 'r' : 'l'}`, ['front', 'frame'], [b, fh - 0.6, T], [lx + sx * (lw / 2 - 0.3 - b / 2), y + fh / 2, fz], frame), section: id });
+            parts.push({ ...box(`${lid}-glass`, ['front', 'glass'], [lw - 2 * b - 0.6, fh - 2 * b - 0.6, 0.5], [lx, y + fh / 2, fz], { material: 'glass', glass: true }), section: id, castShadow: false });
+          } else parts.push({ ...box(lid, ['front', kind], [lw - 0.6, fh - 0.6, T], [lx, y + fh / 2, fz], fl), section: id });
+        }
+        if (f.glass && p.light) {
+          // LED strips down the inside of the glass column
+          for (const sx of [-1, 1]) parts.push({ ...box(`${id}-led-${sx > 0 ? 'r' : 'l'}`, ['light', 'led'], [0.6, fh - 6, 0.8], [cx + sx * (cw / 2 - T - 0.5), y + fh / 2, D - 3], { color: '#fff4e0' }), castShadow: false, emit: { color: '#ffd9a8', intensity: 3, kind: 'area' } });
+        }
         if (p.fluted && kind !== 'drawer') {
           // vertical ribs over the front (fluted / reeded doors)
           const n = Math.max(3, Math.round((cw - 2) / 3.4));
@@ -1127,7 +1154,13 @@ export function tallCabinet(p: Record<string, unknown>): WithStates {
         fronts.push(`${id}-front`);
         for (let q = before; q < parts.length; q++) {
           const pt = parts[q];
-          if (kind === 'door') {
+          if (pt.tags.includes('led')) continue;
+          if (kind === 'door' && leaves === 2) {
+            // double doors: each leaf on its outer edge
+            const left = pt.position[0] < cx;
+            parts[q] = { ...pt, pivot: [cx + (left ? -cw / 2 : cw / 2), y + fh / 2, fz + T / 2] };
+            opened[pt.id] = { rotation: [pt.rotation[0], pt.rotation[1] + (left ? -100 : 100), pt.rotation[2]] };
+          } else if (kind === 'door') {
             const left = hx > 0; // handle right → hinge left
             parts[q] = { ...pt, pivot: [cx + (left ? -cw / 2 : cw / 2), y + fh / 2, fz + T / 2] };
             opened[pt.id] = { rotation: [pt.rotation[0], pt.rotation[1] + (left ? -100 : 100), pt.rotation[2]] };
@@ -1246,6 +1279,9 @@ function shelfGroup(kind: string, id: string, x: number, y: number, w: number, d
     out.push(ell(`${id}-pot`, ['teapot', 'kitchen'], [15, 11, 13], [x, y + 5.5, zc], { color: colors[0] }));
     out.push({ ...box(`${id}-spout`, ['teapot', 'kitchen'], [7, 1.8, 1.8], [x + 9, y + 7, zc], { color: colors[0], radius: 0.8 }), rotation: [0, 0, 30] });
     out.push(cyl(`${id}-knob`, ['teapot', 'kitchen'], 1.4, 2, [x, y + 12, zc], { color: '#1d1d1f' }));
+  } else if (kind === 'whisky' || kind === 'games') {
+    // display shelf: bottles with tumblers, or a stack of board games
+    out.push(...(kind === 'whisky' ? whiskyRow : gameStack)(id, x, y, 1, w, d - 1, 32));
   } else if (kind === 'plant' || kind === 'herbs') {
     const pd = kind === 'plant' ? 12 : 10;
     const pl = plant(kind === 'plant'
@@ -1260,7 +1296,7 @@ function shelfGroup(kind: string, id: string, x: number, y: number, w: number, d
  * Small floating kitchen wall shelf (IKEA BERGSHULT / BURHULT style: a board on brackets, screwed up in 10 minutes).
  * Origin = back-centre of the shelf's underside on the wall. params: width, depth (20), thickness, material/color,
  * brackets (black | brass | white | hidden), contents (space separated groups left→right: cups | jars | bottles |
- * plates | bowls | teapot | plant | herbs | -), colors (comma separated, for cups / bowls / plates / pots).
+ * plates | bowls | teapot | plant | herbs | whisky | games | -), colors (comma separated, for cups / bowls / plates / pots).
  */
 export function kitchenShelf(p: Record<string, unknown>): Part[] {
   const W = num(p.width, 80);
@@ -1398,6 +1434,104 @@ export function waterBar(p: Record<string, unknown>): Part[] {
     box('tray', ['tray'], [W - 4, 1.6, 11], [0, 3.3, D - 6.5], { color: '#5a5c5e', radius: 0.4 }),
     cyl('glass', ['glass'], 3.4, 10, [0, 9.1, D - 5.5], { material: 'glass', glass: true }),
   ];
+}
+
+/**
+ * Entry hall stand (AliExpress, "cream white, shoe bench on the right", 80 x 30 x 200): on the left a door, a drawer,
+ * a lit open niche and a lit glass display box in a gold frame on top; on the right a bench box with a door and a grey
+ * seat cushion, open white slats above it with hooks (bag, umbrella) under a top cap. Gold bar handles. Origin
+ * back-centre. params: width, depth, height, color, accentColor, cushionColor, niche (stuff kind), display (stuff kind).
+ */
+export function hallStand(p: Record<string, unknown>): WithStates {
+  const W = num(p.width, 80);
+  const D = num(p.depth, 30);
+  const H = num(p.height, 200);
+  const T = 1.8;
+  const body = { color: str(p.color, '#f3efe6'), material: 'white-laminate' };
+  const gold = { color: str(p.accentColor, '#c9a55a') };
+  const lw = W / 2;
+  const lx = -W / 4;
+  const rx = W / 4;
+  const parts: Part[] = [];
+  const opened: Record<string, { rotation?: Vec3; position?: Vec3 }> = {};
+  const fronts: string[] = [];
+  // left column carcass
+  parts.push(
+    box('l-back', ['body'], [lw, H - 6, T], [lx, 6 + (H - 6) / 2, T / 2], body),
+    box('l-side-l', ['body'], [T, H - 6, D], [-W / 2 + T / 2, 6 + (H - 6) / 2, D / 2], body),
+    box('l-side-r', ['body'], [T, H - 6, D], [0 - T / 2, 6 + (H - 6) / 2, D / 2], body),
+    box('plinth', ['plinth'], [W - 4, 6, D - 4], [0, 3, (D - 4) / 2], body),
+  );
+  const door = (id: string, x: number, w: number, y0: number, h: number, hinge: 'l' | 'r') => {
+    const pv: Vec3 = [x + (hinge === 'l' ? -w / 2 : w / 2), y0 + h / 2, D];
+    const ps: Part[] = [
+      box(`${id}`, ['door', 'front'], [w - 0.6, h - 0.6, T], [x, y0 + h / 2, D - T / 2 + T], body),
+      box(`${id}-handle`, ['handle'], [1.2, Math.min(18, h * 0.3), 1.4], [x + (hinge === 'l' ? w / 2 - 4 : -w / 2 + 4), y0 + h * 0.62, D + T + 0.8], gold),
+    ].map((pt) => ({ ...pt, section: id, pivot: pv }));
+    for (const pt of ps) opened[pt.id] = { rotation: [0, hinge === 'l' ? -100 : 100, 0] };
+    fronts.push(id);
+    parts.push(...ps);
+  };
+  // lower door, drawer, open lit niche, glass display box
+  door('l-door', lx, lw, 6, 64, 'l');
+  parts.push(box('l-shelf-1', ['shelf'], [lw - 2 * T, T, D - 2], [lx, 70 + T / 2, D / 2], body));
+  const dr = [box('l-drawer', ['drawer', 'front'], [lw - 0.6, 15, T], [lx, 78.5, D + T / 2], body), box('l-drawer-pull', ['handle'], [14, 1.2, 1.4], [lx, 83, D + T + 0.8], gold)].map((pt) => ({ ...pt, section: 'l-drawer' }));
+  for (const pt of dr) opened[pt.id] = { position: [pt.position[0], pt.position[1], pt.position[2] + 22] };
+  fronts.push('l-drawer');
+  parts.push(...dr);
+  const nicheY = 86;
+  const nicheH = 32;
+  parts.push(box('l-niche-floor', ['shelf'], [lw - 2 * T, T, D - 1], [lx, nicheY + T / 2, D / 2], body));
+  parts.push({ ...box('l-niche-led', ['light', 'led'], [lw - 8, 0.5, 1.2], [lx, nicheY + nicheH - 0.5, D - 4], { color: '#fff4e0' }), castShadow: false, emit: { color: '#ffd9a8', intensity: 4, kind: 'area' } });
+  const k1 = stuffKind(str(p.niche, 'keys'));
+  if (k1) parts.push(...placeStuff(stuffParts(k1, 'niche', lw - 6, D - 4, nicheH - 4), 0, [lx, nicheY + T, 2]));
+  const gy = nicheY + nicheH;
+  const gh = H - gy - 4;
+  parts.push(box('l-box-floor', ['shelf'], [lw - 2 * T, T, D - 1], [lx, gy + T / 2, D / 2], body));
+  parts.push(box('l-top', ['body'], [lw, T, D], [lx, H - 4 - T / 2, D / 2], body));
+  // the gold frame round the glass box front + glass sides, a glass shelf in the middle, LED under each level
+  const fb = 1.6;
+  parts.push(
+    box('g-frame-t', ['frame'], [lw, fb, fb], [lx, H - 4 - fb / 2, D - fb / 2], gold),
+    box('g-frame-b', ['frame'], [lw, fb, fb], [lx, gy + fb / 2, D - fb / 2], gold),
+    box('g-frame-l', ['frame'], [fb, gh, fb], [-W / 2 + fb / 2, gy + gh / 2, D - fb / 2], gold),
+    box('g-frame-r', ['frame'], [fb, gh, fb], [-fb / 2, gy + gh / 2, D - fb / 2], gold),
+    { ...box('g-glass', ['glass'], [lw - 2 * fb, gh - 2 * fb, 0.4], [lx, gy + gh / 2, D - 0.4], { material: 'glass', glass: true }), castShadow: false },
+    box('g-shelf', ['shelf', 'glass'], [lw - 2 * T, 1, D - 3], [lx, gy + gh / 2, D / 2], { material: 'glass', glass: true }),
+  );
+  for (const [i, yy] of [[1, gy + gh / 2 - 0.8], [2, H - 4 - T - 0.5]] as [number, number][]) parts.push({ ...box(`g-led-${i}`, ['light', 'led'], [lw - 8, 0.5, 1.2], [lx, yy, D - 4], { color: '#fff4e0' }), castShadow: false, emit: { color: '#ffd9a8', intensity: 4, kind: 'area' } });
+  const k2 = stuffKind(str(p.display, 'books'));
+  if (k2) {
+    parts.push(...placeStuff(stuffParts(k2, 'disp-1', lw - 6, D - 5, gh / 2 - 3), 0, [lx, gy + T, 2]));
+    parts.push(...placeStuff(stuffParts('stuff', 'disp-2', lw - 6, D - 5, gh / 2 - 4), 0, [lx, gy + gh / 2 + 0.5, 2]));
+  }
+  // right: bench box with a door + seat cushion, slats above, hooks, top cap
+  const bh = 44;
+  parts.push(
+    box('r-bench', ['body', 'bench'], [lw, bh - 6, D], [rx, 6 + (bh - 6) / 2, D / 2], body),
+    { ...box('r-cushion', ['cushion', 'seat'], [lw - 1, 5, D - 1], [rx, bh + 2.5, D / 2], { material: 'fabric-grey', color: str(p.cushionColor, '#8e9094'), radius: 2 }) },
+  );
+  door('r-door', rx, lw, 6, bh - 6, 'r');
+  const slatH = H - bh - 5 - 4;
+  for (let i = 0; i < 3; i++) {
+    const sx = rx - lw / 2 + 5 + (i * (lw - 10)) / 2;
+    parts.push(box(`r-slat-${i + 1}`, ['slat'], [5, slatH, 2.2], [sx, bh + 5 + slatH / 2, 1.1], body));
+    parts.push({ ...cyl(`r-hook-${i + 1}`, ['hook'], 0.5, 5, [sx, H - 26, 4], { color: '#b8b8b8' }), rotation: [70, 0, 0] });
+  }
+  parts.push(box('r-cap', ['body'], [lw + 2, 3, D], [rx + 1, H - 1.5, D / 2], body));
+  parts.push(box('r-side', ['body'], [T, H - bh - 5, 4], [W / 2 - T / 2, bh + 5 + (H - bh - 5) / 2, 2], body));
+  // a bag and an umbrella on the hooks
+  const bx = rx + lw / 2 - 10;
+  parts.push({ ...box('bag', ['bag'], [16, 13, 6], [bx, H - 58, 7], { color: '#c98b6b', material: 'leather-cognac', radius: 1.5 }) });
+  parts.push({ ...box('bag-strap', ['bag'], [0.6, 30, 0.4], [bx, H - 38, 5], { color: '#c9a55a' }) });
+  const ux = rx - lw / 2 + 6;
+  parts.push({ ...cyl('umbrella', ['umbrella'], 2.6, 50, [ux, H - 56, 5], { color: '#d9cdb0' }) });
+  parts.push({ ...cyl('umbrella-tip', ['umbrella'], 0.4, 8, [ux, H - 85, 5], { color: '#2a2a2a' }) });
+  return {
+    parts,
+    states: [{ id: 'closed', name: 'Closed', parts: {} }, { id: 'open', name: 'Open', parts: opened }],
+    interactions: fronts.map((part) => ({ part, action: 'cycleStates' as const })),
+  };
 }
 
 /** Swivel TV floor stand (e.g. 89 x 52 base, column up to the bracket, small shelf). Put the TV on it with state "wall". params: width, depth, height (bracket top), shelf (height, 0 = none), color. */
