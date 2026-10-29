@@ -1,0 +1,39 @@
+{
+  "id": "sofa-console",
+  "name": "Sofa console table (behind the sofa)",
+  "tags": [
+    "console",
+    "sofa table",
+    "design"
+  ],
+  "description": "Long slim table at the height of the sofa back with a lower shelf, slim metal legs; stands free behind a floating sofa (like the Temu/Amazon behind-couch tables).",
+  "source": {
+    "kind": "procedural",
+    "generator": "sofa-console",
+    "license": "self-made",
+    "notes": "src/model/generators/decor.ts"
+  },
+  "params": {
+    "width": {
+      "default": 180
+    },
+    "depth": {
+      "default": 25
+    },
+    "height": {
+      "default": 80
+    },
+    "material": {
+      "default": "walnut"
+    },
+    "legMaterial": {
+      "default": "metal-black"
+    },
+    "top": {
+      "default": "plant books bowls"
+    },
+    "shelf": {
+      "default": "books"
+    }
+  }
+}

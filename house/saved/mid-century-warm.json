@@ -2,7 +2,7 @@
   "meta": {
     "name": "Mid-century warm",
     "kind": "saved",
-    "note": "Mid-century · walnut on black legs with mustard / teal / rust accents, shell chairs · floating sofa facing the sofa wall: TV on a long walnut sideboard (~3.6 m); no armchair; open round-back corner shelves on black steel posts at the pillar (seen from room + hallway) with the whisky + games; tulip table + our chairs; door corner = walnut wardrobe on black legs with cream doors (coats, shoes, devices), a simple walnut chair to put shoes on (keys on a small shelf above), an open cleaning corner (vacuum dock, mop, broom); pothos trailing from the corner shelves. No rug, no curtains.",
+    "note": "Mid-century · walnut on black legs with mustard / teal / rust accents, shell chairs · floating sofa facing the sofa wall: TV on a long walnut sideboard (~3.6 m); no armchair; open round-back corner shelves on black steel posts at the pillar (seen from room + hallway) with the whisky + games; tulip table + our chairs; door corner = walnut wardrobe on black legs with cream doors (coats, shoes, devices), a simple walnut chair to put shoes on (keys on a small shelf above), an open cleaning corner (vacuum dock, mop, broom); pothos trailing from the corner shelves. No curtains; a geometric rug under the sofa front + a walnut sofa console behind the sofa.",
     "location": {
       "lat": 32.0853,
       "lon": 34.7818,
@@ -863,6 +863,58 @@
           ],
           "rotation": 90,
           "state": "covers"
+        },
+        {
+          "id": "living.sofa-console",
+          "asset": "sofa-console",
+          "name": "Walnut + black steel sofa console 200 x 25 x 85 right behind the sofa: plant, books, a game on top, books + a box below",
+          "tags": [
+            "console",
+            "sofa table"
+          ],
+          "params": {
+            "width": 200,
+            "depth": 25,
+            "height": 85,
+            "material": "walnut",
+            "legMaterial": "metal-black",
+            "top": "plant books games bowls",
+            "shelf": "books",
+            "colors": "#d9a43a,#2c6b6b,#b8613f",
+            "seed": "mid-console"
+          },
+          "position": [
+            134,
+            0,
+            172
+          ],
+          "rotation": -90,
+          "allowOverlap": [
+            "living.sofa"
+          ]
+        },
+        {
+          "id": "living.rug",
+          "asset": "rug",
+          "name": "Mid-century rug 200 x 290, cream with mustard / teal / rust shapes",
+          "tags": [
+            "rug"
+          ],
+          "params": {
+            "width": 200,
+            "depth": 290,
+            "color": "#efe8da",
+            "material": "wool-woven",
+            "pattern": "geometric",
+            "colors": "#d9a43a,#2c6b6b,#b8613f",
+            "seed": "mcm-rug"
+          },
+          "position": [
+            290.0,
+            0,
+            30
+          ],
+          "rotation": 0
         },
         {
           "id": "living.cushions",

@@ -406,6 +406,19 @@ export function rug(p: Record<string, unknown>): Part[] {
     parts.push({ ...box('border-w', ['rug'], [b, 1.2, D], [-W / 2 + b / 2, 0.6, D / 2], bc), castShadow: false });
     parts.push({ ...box('border-e', ['rug'], [b, 1.2, D], [W / 2 - b / 2, 0.6, D / 2], bc), castShadow: false });
   }
+  if (p.pattern === 'geometric' && shape === 'rect') {
+    // mid-century: a few big soft shapes (circles + bars) in the accent colours, each on its own layer
+    const cols = str(p.colors, '#d9a43a,#2c6b6b,#b8613f').split(',').map((x) => x.trim());
+    const rand = rng(String(p.seed ?? 'rug'));
+    for (let i = 0; i < 7; i++) {
+      const col = { material: mat, color: cols[i % cols.length] };
+      const y = 1.02 + i * 0.03;
+      const x = (rand() - 0.5) * (W - 50);
+      const z = 25 + rand() * (D - 50);
+      if (i % 2) parts.push({ ...cyl(`shape-${i}`, ['rug'], 14 + rand() * 18, 0.05, [x, y, z], col), castShadow: false });
+      else parts.push({ ...box(`shape-${i}`, ['rug'], [30 + rand() * 50, 0.05, 8 + rand() * 6], [x, y, z], { ...col, radius: 0 }), rotation: [0, (rand() - 0.5) * 60, 0], castShadow: false });
+    }
+  }
   if (p.pattern === 'stripes' && shape === 'rect') {
     for (let i = 1; i < 6; i++) parts.push({ ...box(`stripe-${i}`, ['rug'], [W - 20, 1.1, 3], [0, 0.55, (i * D) / 6], { material: mat, color: str(p.borderColor, '#b9ab93') }), castShadow: false });
   }
@@ -1541,6 +1554,36 @@ export function hallStand(p: Record<string, unknown>): WithStates {
     states: [{ id: 'closed', name: 'Closed', parts: {} }, { id: 'open', name: 'Open', parts: opened }],
     interactions: fronts.map((part) => ({ part, action: 'cycleStates' as const })),
   };
+}
+
+/**
+ * Sofa console (behind-the-sofa table): a long slim top at the height of the sofa back, a lower shelf, slim metal legs,
+ * free-standing behind a floating sofa. params: width, depth (~25), height, material/color (top + shelf), legMaterial,
+ * top (groups along the top, like a kitchen shelf: plant | books | games | bowls | whisky | -), shelf (stuff kind below).
+ */
+export function sofaConsole(p: Record<string, unknown>): Part[] {
+  const W = num(p.width, 180);
+  const D = num(p.depth, 25);
+  const H = num(p.height, 80);
+  const wood = look(p, '', 'walnut');
+  const leg = lookOf(p, 'leg', 'metal-black');
+  const T = 2.5;
+  const sh = Math.round(H * 0.25);
+  const parts: Part[] = [box('top', ['top'], [W, T, D], [0, H - T / 2, D / 2], wood), box('shelf', ['shelf'], [W - 6, 2, D - 4], [0, sh, D / 2], wood)];
+  for (const sx of [-1, 1]) for (const sz of [0, 1]) parts.push(box(`leg-${sx}-${sz}`, ['leg'], [2.2, H - T, 2.2], [sx * (W / 2 - 3), (H - T) / 2, 2 + sz * (D - 4)], { ...leg, radius: 0.3 }));
+  for (const sx of [-1, 1]) parts.push(box(`rail-${sx}`, ['rail'], [2.2, 2.2, D - 4], [sx * (W / 2 - 3), H - T - 5, D / 2], { ...leg, radius: 0.3 }));
+  const rand = rng(String(p.seed ?? 'console'));
+  const groups = str(p.top, 'plant books bowls').split(/\s+/).filter(Boolean);
+  const gw = (W - 6) / Math.max(groups.length, 1);
+  groups.forEach((g, i) => {
+    const x = -W / 2 + 3 + gw * (i + 0.5);
+    if (g === '-') return;
+    if (g === 'books') parts.push(...placeStuff(stuffParts('books', `top-${i}`, gw - 4, D - 2, 26), 0, [x, H, 1]));
+    else parts.push(...shelfGroup(g, `top-${i}`, x, H, gw - 4, D, rand, str(p.colors, '#d9a43a,#2c6b6b,#b8613f').split(',')));
+  });
+  const k = stuffKind(str(p.shelf, 'books'));
+  if (k) parts.push(...placeStuff(stuffParts(k, 'low', W - 10, D - 4, H - T - sh - 4), 0, [0, sh + 1, 2]));
+  return parts;
 }
 
 /** Swivel TV floor stand (e.g. 89 x 52 base, column up to the bracket, small shelf). Put the TV on it with state "wall". params: width, depth, height (bracket top), shelf (height, 0 = none), color. */

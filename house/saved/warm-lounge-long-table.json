@@ -865,6 +865,58 @@
           "state": "covers"
         },
         {
+          "id": "living.sofa-console",
+          "asset": "sofa-console",
+          "name": "Walnut + black steel sofa console 200 x 25 x 85 right behind the sofa: plant, books, a game on top, books + a box below",
+          "tags": [
+            "console",
+            "sofa table"
+          ],
+          "params": {
+            "width": 200,
+            "depth": 25,
+            "height": 85,
+            "material": "walnut",
+            "legMaterial": "metal-black",
+            "top": "plant books games bowls",
+            "shelf": "books",
+            "colors": "#d9a43a,#2c6b6b,#b8613f",
+            "seed": "mid-console"
+          },
+          "position": [
+            134,
+            0,
+            172
+          ],
+          "rotation": -90,
+          "allowOverlap": [
+            "living.sofa"
+          ]
+        },
+        {
+          "id": "living.rug",
+          "asset": "rug",
+          "name": "Mid-century rug 200 x 290, cream with mustard / teal / rust shapes",
+          "tags": [
+            "rug"
+          ],
+          "params": {
+            "width": 200,
+            "depth": 290,
+            "color": "#efe8da",
+            "material": "wool-woven",
+            "pattern": "geometric",
+            "colors": "#d9a43a,#2c6b6b,#b8613f",
+            "seed": "mcm-rug"
+          },
+          "position": [
+            290.0,
+            0,
+            30
+          ],
+          "rotation": 0
+        },
+        {
           "id": "living.cushions",
           "asset": "cushions",
           "name": "Corduroy cushion covers: mustard, teal, rust",
