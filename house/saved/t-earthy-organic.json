@@ -1,14 +1,14 @@
 {
   "meta": {
-    "name": "Charcoal + ember",
+    "name": "(T) Earthy organic",
     "kind": "saved",
-    "note": "Moodboard 1: our dark grey sofa with burnt orange, oak + thin black metal, a black arc lamp, a pale rug with a charcoal edge, oak slats on black felt on the pillar.",
+    "note": "Moodboard 2: walnut, sage, terracotta + jute, soft round shapes: a round walnut coffee table, a sage TV unit, a chrome arc lamp, a jute pouf, bouclé dining chairs, a terracotta plaster pillar.",
     "location": {
       "lat": 32.0853,
       "lon": 34.7818,
       "label": "Tel Aviv"
     },
-    "createdAt": "2026-10-29T18:00:04.666Z",
+    "createdAt": "2026-10-29T18:00:05.008Z",
     "rooms": [
       "living"
     ]
@@ -776,7 +776,7 @@
         {
           "id": "living.sideboard",
           "asset": "media-unit",
-          "name": "Walnut sideboard on black steel legs: open ends (vinyl, books), 2 fluted drawers, black pulls (TV on top)",
+          "name": "Sage green fluted TV unit on walnut legs, brass pulls",
           "tags": [
             "sideboard",
             "tv unit"
@@ -786,11 +786,12 @@
             "depth": 40,
             "height": 55,
             "legHeight": 16,
-            "modules": "drawer,door,door,drawer",
-            "fluted": false,
-            "material": "wood-oak-light",
-            "legMaterial": "metal-black",
-            "pullColor": "#1d1d1f"
+            "modules": "door,door,door,door",
+            "fluted": true,
+            "material": "white-laminate",
+            "legMaterial": "walnut",
+            "pullColor": "#b08d3c",
+            "color": "#7e8b74"
           },
           "against": {
             "wall": "living.wall-1",
@@ -876,8 +877,8 @@
             "width": 200,
             "depth": 25,
             "height": 85,
-            "material": "wood-oak-light",
-            "legMaterial": "metal-black",
+            "material": "walnut",
+            "legMaterial": "walnut",
             "top": "plant books bowls -",
             "shelf": "books",
             "colors": "#d8d2c6,#8c877c,#3f3f3d",
@@ -903,13 +904,13 @@
           "params": {
             "width": 360,
             "depth": 250,
-            "color": "#d9d4ca",
-            "material": "wool-woven",
+            "color": "#c9ad7f",
+            "material": "jute",
             "pattern": "",
             "colors": "#d9a43a,#2c6b6b,#b8613f",
             "seed": "mcm-rug",
-            "borderColor": "#3a3a3a",
-            "border": 4
+            "borderColor": "",
+            "border": 5
           },
           "position": [
             375,
@@ -921,12 +922,12 @@
         {
           "id": "living.cushions",
           "asset": "cushions",
-          "name": "Burnt orange + rust cushion covers, a rust throw",
+          "name": "Terracotta, sage + cream bouclé cushions, a sage knit throw",
           "tags": [
             "cushions"
           ],
           "params": {
-            "colors": "#c4551f,#9a3f1a,#d9d2c6",
+            "colors": "#b86a4c,#7d8a62,#e8dcc4",
             "size": 43,
             "positions": [
               [
@@ -945,8 +946,8 @@
                 40
               ]
             ],
-            "material": "wool-woven",
-            "throwColor": "#b84a1c"
+            "material": "boucle",
+            "throwColor": "#7d8a62"
           },
           "position": [
             175,
@@ -961,20 +962,21 @@
         {
           "id": "living.coffee-table",
           "asset": "coffee-table-drawers",
-          "name": "Walnut coffee table on a black steel frame: remote drawers, open shelf, deep drawer",
+          "name": "Round walnut drum coffee table (remote drawers, shelf, deep drawer)",
           "tags": [
             "coffee table",
             "drawers"
           ],
           "params": {
-            "width": 120,
-            "depth": 60,
+            "width": 90,
+            "depth": 90,
             "height": 45,
             "drawers": 2,
-            "base": "metal-frame",
-            "material": "wood-oak-light",
+            "base": "box",
+            "material": "walnut",
             "legMaterial": "metal-black",
-            "pullColor": "#1d1d1f"
+            "pullColor": "#1d1d1f",
+            "shape": "round"
           },
           "position": [
             370,
@@ -989,15 +991,16 @@
         {
           "id": "living.floor-lamp",
           "asset": "floor-lamp",
-          "name": "Black arc floor lamp with a linen shade (window corner, TV-point outlet)",
+          "name": "Vintage globe floor lamp, black (מנורת עמידה שחור דגם וינטג') — Betili (ביתילי) ₪763 (at the big window, TV-point outlet)",
           "tags": [
             "lamp"
           ],
           "params": {
             "height": 185,
             "shade": "arc",
-            "shadeColor": "#efe9de",
-            "baseColor": "#1d1d1f"
+            "shadeColor": "#d9d9d9",
+            "baseColor": "#cfcfcf",
+            "shadeMaterial": ""
           },
           "position": [
             22,
@@ -1020,13 +1023,13 @@
             "open": true,
             "backs": false,
             "round": 35,
-            "postColor": "#1d1d1f",
+            "postColor": "#6b4a32",
             "legX": 75,
             "legZ": 76,
             "height": 200,
             "shelves": 6,
             "material": "white-laminate",
-            "shelfMaterial": "wood-oak-light",
+            "shelfMaterial": "walnut",
             "contents": "books books whisky whisky books"
           },
           "position": [
@@ -1105,8 +1108,8 @@
           "params": {
             "width": 100,
             "height": 70,
-            "frameColor": "#1d1d1f",
-            "art": "#e9e4da,#3a3a3a,#c4551f",
+            "frameColor": "#3a2a1e",
+            "art": "#efe3c8,#c4551f,#4e6b3a",
             "seed": "mcm"
           },
           "against": {
@@ -1125,7 +1128,7 @@
           ],
           "params": {
             "kind": "bowl",
-            "color": "#2a2a2a",
+            "color": "#c98b6b",
             "diameter": 24
           },
           "position": [
@@ -1152,8 +1155,8 @@
             "seed": "fig",
             "spread": 60,
             "potDiameter": 32,
-            "potColor": "#2a2a2a",
-            "potMaterial": "concrete-light"
+            "potColor": "#b86a4c",
+            "potMaterial": "plaster"
           },
           "position": [
             38,
@@ -1196,7 +1199,7 @@
             "cols": 1,
             "rows": 5,
             "underframe": true,
-            "color": "black-brown",
+            "color": "white-oak",
             "contents": [
               "books",
               "whisky",
@@ -1389,8 +1392,8 @@
             "seatHeight": 65,
             "base": "four",
             "seatColor": "",
-            "seatMaterial": "wood-oak-light",
-            "legMaterial": "metal-black",
+            "seatMaterial": "walnut",
+            "legMaterial": "walnut",
             "back": 0
           },
           "position": [
@@ -1415,8 +1418,8 @@
             "seatHeight": 65,
             "base": "four",
             "seatColor": "",
-            "seatMaterial": "wood-oak-light",
-            "legMaterial": "metal-black",
+            "seatMaterial": "walnut",
+            "legMaterial": "walnut",
             "back": 0
           },
           "position": [
@@ -1513,8 +1516,8 @@
             "width": 180,
             "depth": 80,
             "base": "legs",
-            "material": "wood-oak-light",
-            "legMaterial": "metal-black"
+            "material": "walnut",
+            "legMaterial": "walnut"
           },
           "position": [
             45,
@@ -1534,13 +1537,13 @@
             "dining chair"
           ],
           "params": {
-            "style": "wood",
-            "seatColor": "#2f2f31",
-            "backColor": "#2f2f31",
+            "style": "round",
+            "seatColor": "#efe6d6",
+            "backColor": "#ffffff",
             "legColor": "",
-            "seatMaterial": "fabric-grey",
-            "backMaterial": "fabric-grey",
-            "legMaterial": "metal-black",
+            "seatMaterial": "boucle",
+            "backMaterial": "rattan-weave",
+            "legMaterial": "walnut",
             "width": 44
           },
           "position": [
@@ -1562,13 +1565,13 @@
             "dining chair"
           ],
           "params": {
-            "style": "wood",
-            "seatColor": "#2f2f31",
-            "backColor": "#2f2f31",
+            "style": "round",
+            "seatColor": "#efe6d6",
+            "backColor": "#ffffff",
             "legColor": "",
-            "seatMaterial": "fabric-grey",
-            "backMaterial": "fabric-grey",
-            "legMaterial": "metal-black",
+            "seatMaterial": "boucle",
+            "backMaterial": "rattan-weave",
+            "legMaterial": "walnut",
             "width": 44
           },
           "position": [
@@ -1590,13 +1593,13 @@
             "dining chair"
           ],
           "params": {
-            "style": "wood",
-            "seatColor": "#2f2f31",
-            "backColor": "#2f2f31",
+            "style": "round",
+            "seatColor": "#efe6d6",
+            "backColor": "#ffffff",
             "legColor": "",
-            "seatMaterial": "fabric-grey",
-            "backMaterial": "fabric-grey",
-            "legMaterial": "metal-black",
+            "seatMaterial": "boucle",
+            "backMaterial": "rattan-weave",
+            "legMaterial": "walnut",
             "width": 44
           },
           "position": [
@@ -1618,13 +1621,13 @@
             "dining chair"
           ],
           "params": {
-            "style": "wood",
-            "seatColor": "#2f2f31",
-            "backColor": "#2f2f31",
+            "style": "round",
+            "seatColor": "#efe6d6",
+            "backColor": "#ffffff",
             "legColor": "",
-            "seatMaterial": "fabric-grey",
-            "backMaterial": "fabric-grey",
-            "legMaterial": "metal-black",
+            "seatMaterial": "boucle",
+            "backMaterial": "rattan-weave",
+            "legMaterial": "walnut",
             "width": 44
           },
           "position": [
@@ -1646,13 +1649,13 @@
             "dining chair"
           ],
           "params": {
-            "style": "wood",
-            "seatColor": "#2f2f31",
-            "backColor": "#2f2f31",
+            "style": "round",
+            "seatColor": "#efe6d6",
+            "backColor": "#ffffff",
             "legColor": "",
-            "seatMaterial": "fabric-grey",
-            "backMaterial": "fabric-grey",
-            "legMaterial": "metal-black",
+            "seatMaterial": "boucle",
+            "backMaterial": "rattan-weave",
+            "legMaterial": "walnut",
             "width": 44
           },
           "position": [
@@ -1674,13 +1677,13 @@
             "dining chair"
           ],
           "params": {
-            "style": "wood",
-            "seatColor": "#2f2f31",
-            "backColor": "#2f2f31",
+            "style": "round",
+            "seatColor": "#efe6d6",
+            "backColor": "#ffffff",
             "legColor": "",
-            "seatMaterial": "fabric-grey",
-            "backMaterial": "fabric-grey",
-            "legMaterial": "metal-black",
+            "seatMaterial": "boucle",
+            "backMaterial": "rattan-weave",
+            "legMaterial": "walnut",
             "width": 44
           },
           "position": [
@@ -1704,10 +1707,10 @@
           "params": {
             "ceiling": 277,
             "bottom": 150,
-            "shape": "dome",
-            "diameter": 32,
-            "color": "#1d1d1f",
-            "shadeMaterial": ""
+            "shape": "drum",
+            "diameter": 40,
+            "color": "#efe6d6",
+            "shadeMaterial": "linen-white"
           },
           "position": [
             85,
@@ -1726,10 +1729,10 @@
           "params": {
             "ceiling": 277,
             "bottom": 150,
-            "shape": "dome",
-            "diameter": 32,
-            "color": "#1d1d1f",
-            "shadeMaterial": ""
+            "shape": "drum",
+            "diameter": 40,
+            "color": "#efe6d6",
+            "shadeMaterial": "linen-white"
           },
           "position": [
             85,
@@ -1808,16 +1811,17 @@
         },
         {
           "id": "living.pillar-cladding",
-          "asset": "slat-panel",
-          "name": "Oak slats on black felt on the pillar (ready-made acoustic panels)",
+          "asset": "box",
+          "name": "Terracotta lime-plaster finish on the pillar",
           "tags": [
             "pillar"
           ],
           "params": {
             "width": 116,
             "height": 277,
-            "depth": 2,
-            "material": "wood-oak-light"
+            "depth": 1.5,
+            "material": "plaster",
+            "color": "#b9714f"
           },
           "position": [
             452,
@@ -1827,6 +1831,202 @@
           "rotation": 180,
           "allowOverlap": [
             "living.pillar"
+          ]
+        },
+        {
+          "id": "living.pouf",
+          "asset": "counter-stool",
+          "name": "Chunky jute pouf by the coffee table",
+          "tags": [
+            "pouf",
+            "seat"
+          ],
+          "params": {
+            "seatHeight": 40,
+            "seatSize": 50,
+            "base": "drum",
+            "seatMaterial": "jute",
+            "legMaterial": "jute",
+            "back": 0
+          },
+          "position": [
+            440,
+            0,
+            225
+          ],
+          "rotation": 0,
+          "allowOverlap": [
+            "living.rug"
+          ]
+        },
+        {
+          "id": "living.curtain-balcony",
+          "asset": "curtain",
+          "name": "Sheer linen curtains (balcony door)",
+          "tags": [
+            "curtain"
+          ],
+          "params": {
+            "width": 330,
+            "height": 268,
+            "panels": 2,
+            "open": 0.75,
+            "color": "#efe6d6"
+          },
+          "against": {
+            "wall": "living.wall-0",
+            "offset": 40,
+            "gap": 4
+          },
+          "allowOverlap": [
+            "living.block",
+            "living.fridge-niche",
+            "living.oven-column",
+            "living.counter-column",
+            "living.top-left",
+            "living.top-right",
+            "living.counter",
+            "living.island",
+            "living.pillar",
+            "living.ac-vent-kitchen",
+            "living.ac-vent-living",
+            "living.sofa-spot-1",
+            "living.sofa-spot-2",
+            "living.sofa-spot-3",
+            "living.sofa-spot-4",
+            "living.kitchen-spot-1",
+            "living.kitchen-spot-2",
+            "living.kitchen-spot-3",
+            "living.track-light",
+            "living.track-light-dining",
+            "living.sideboard",
+            "living.tv",
+            "living.tv-gear",
+            "living.sofa",
+            "living.sofa-console",
+            "living.rug",
+            "living.cushions",
+            "living.coffee-table",
+            "living.floor-lamp",
+            "living.corner-shelves",
+            "living.shelf-plant-1",
+            "living.shelf-plant-2",
+            "living.art",
+            "living.coffee-bowl",
+            "living.fig",
+            "living.clock",
+            "living.display-column",
+            "living.divider",
+            "living.eucalyptus",
+            "living.passage-mirror",
+            "living.shoe-kallax",
+            "living.shoe-kallax-2",
+            "living.entry-rack",
+            "living.stool-1",
+            "living.stool-2",
+            "living.herbs",
+            "living.kitchen-shelf",
+            "living.kitchen-shelf-2",
+            "living.dining-table",
+            "living.chair-1",
+            "living.chair-4",
+            "living.chair-2",
+            "living.chair-5",
+            "living.chair-3",
+            "living.chair-6",
+            "living.pendant",
+            "living.pendant-2",
+            "living.flowers",
+            "living.fridge",
+            "living.tami4",
+            "living.pillar-cladding",
+            "living.pouf",
+            "living.curtain-window"
+          ]
+        },
+        {
+          "id": "living.curtain-window",
+          "asset": "curtain",
+          "name": "Sheer linen curtains (big window)",
+          "tags": [
+            "curtain"
+          ],
+          "params": {
+            "width": 150,
+            "height": 268,
+            "panels": 2,
+            "open": 0.8,
+            "color": "#efe6d6"
+          },
+          "against": {
+            "wall": "living.wall-5",
+            "offset": 552,
+            "gap": 4
+          },
+          "allowOverlap": [
+            "living.block",
+            "living.fridge-niche",
+            "living.oven-column",
+            "living.counter-column",
+            "living.top-left",
+            "living.top-right",
+            "living.counter",
+            "living.island",
+            "living.pillar",
+            "living.ac-vent-kitchen",
+            "living.ac-vent-living",
+            "living.sofa-spot-1",
+            "living.sofa-spot-2",
+            "living.sofa-spot-3",
+            "living.sofa-spot-4",
+            "living.kitchen-spot-1",
+            "living.kitchen-spot-2",
+            "living.kitchen-spot-3",
+            "living.track-light",
+            "living.track-light-dining",
+            "living.sideboard",
+            "living.tv",
+            "living.tv-gear",
+            "living.sofa",
+            "living.sofa-console",
+            "living.rug",
+            "living.cushions",
+            "living.coffee-table",
+            "living.floor-lamp",
+            "living.corner-shelves",
+            "living.shelf-plant-1",
+            "living.shelf-plant-2",
+            "living.art",
+            "living.coffee-bowl",
+            "living.fig",
+            "living.clock",
+            "living.display-column",
+            "living.divider",
+            "living.eucalyptus",
+            "living.passage-mirror",
+            "living.shoe-kallax",
+            "living.shoe-kallax-2",
+            "living.entry-rack",
+            "living.stool-1",
+            "living.stool-2",
+            "living.herbs",
+            "living.kitchen-shelf",
+            "living.kitchen-shelf-2",
+            "living.dining-table",
+            "living.chair-1",
+            "living.chair-4",
+            "living.chair-2",
+            "living.chair-5",
+            "living.chair-3",
+            "living.chair-6",
+            "living.pendant",
+            "living.pendant-2",
+            "living.flowers",
+            "living.fridge",
+            "living.tami4",
+            "living.pillar-cladding",
+            "living.pouf",
+            "living.curtain-balcony"
           ]
         }
       ],
