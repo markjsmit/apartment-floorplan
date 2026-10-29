@@ -11,7 +11,8 @@
     "createdAt": "2026-10-28T22:15:48.000Z",
     "rooms": [
       "living"
-    ]
+    ],
+    "archived": true
   },
   "assumptions": [
     {

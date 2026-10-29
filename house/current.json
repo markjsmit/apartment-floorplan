@@ -768,6 +768,1061 @@
             "spots": 3
           },
           "builtIn": true
+        },
+        {
+          "id": "living.sideboard",
+          "asset": "media-unit",
+          "name": "Walnut sideboard on black steel legs: open ends (vinyl, books), 2 fluted drawers, black pulls (TV on top)",
+          "tags": [
+            "sideboard",
+            "tv unit"
+          ],
+          "params": {
+            "width": 180,
+            "depth": 40,
+            "height": 55,
+            "legHeight": 16,
+            "modules": "open,drawer,drawer,open",
+            "fluted": true,
+            "material": "walnut",
+            "legMaterial": "metal-black",
+            "pullColor": "#1d1d1f"
+          },
+          "against": {
+            "wall": "living.wall-1",
+            "offset": 55,
+            "elevation": 0,
+            "gap": 0
+          }
+        },
+        {
+          "id": "living.tv",
+          "asset": "old-house-tv",
+          "name": "Our 65\" TV on the walnut sideboard (~3.6 m)",
+          "tags": [
+            "tv"
+          ],
+          "params": {},
+          "against": {
+            "wall": "living.wall-1",
+            "offset": 62,
+            "elevation": 55,
+            "gap": 4
+          },
+          "allowOverlap": [
+            "living.sideboard"
+          ]
+        },
+        {
+          "id": "living.tv-gear",
+          "asset": "tv-gear",
+          "name": "Our TV gear like now: 2 compact black speakers at the ends of the TV unit, media box, smart display",
+          "tags": [
+            "tv",
+            "speakers",
+            "ours"
+          ],
+          "params": {
+            "width": 180,
+            "depth": 40,
+            "gap": 4,
+            "display": "left"
+          },
+          "against": {
+            "wall": "living.wall-1",
+            "offset": 55,
+            "elevation": 55,
+            "gap": 0
+          },
+          "allowOverlap": [
+            "living.tv-unit",
+            "living.sideboard",
+            "living.tv",
+            "living.olive",
+            "living.broom-closet",
+            "living.corner-board"
+          ]
+        },
+        {
+          "id": "living.sofa",
+          "asset": "old-house-sofa-l",
+          "name": "Our grey L-sofa (265), floating, facing the sofa wall",
+          "tags": [
+            "sofa",
+            "couch"
+          ],
+          "params": {},
+          "position": [
+            135,
+            0,
+            172
+          ],
+          "rotation": 90,
+          "state": "covers"
+        },
+        {
+          "id": "living.sofa-console",
+          "asset": "sofa-console",
+          "name": "Walnut + black steel sofa console 200 x 25 x 85 right behind the sofa: plant, books, a game on top, books + a box below",
+          "tags": [
+            "console",
+            "sofa table"
+          ],
+          "params": {
+            "width": 200,
+            "depth": 25,
+            "height": 85,
+            "material": "walnut",
+            "legMaterial": "metal-black",
+            "top": "plant books bowls -",
+            "shelf": "books",
+            "colors": "#d8d2c6,#8c877c,#3f3f3d",
+            "seed": "mid-console"
+          },
+          "position": [
+            134,
+            0,
+            172
+          ],
+          "rotation": -90,
+          "allowOverlap": [
+            "living.sofa"
+          ]
+        },
+        {
+          "id": "living.rug",
+          "asset": "rug",
+          "name": "Plain wool rug 250 x 360, sand with a thin border (under the couch front + the sideboard front legs)",
+          "tags": [
+            "rug"
+          ],
+          "params": {
+            "width": 360,
+            "depth": 250,
+            "color": "#e6dfd2",
+            "material": "wool-woven",
+            "pattern": "",
+            "colors": "#d9a43a,#2c6b6b,#b8613f",
+            "seed": "mcm-rug",
+            "borderColor": "#b9ae9a",
+            "border": 5
+          },
+          "position": [
+            375,
+            0,
+            45
+          ],
+          "rotation": 0
+        },
+        {
+          "id": "living.cushions",
+          "asset": "cushions",
+          "name": "Linen cushion covers: stone, warm grey, sand",
+          "tags": [
+            "cushions"
+          ],
+          "params": {
+            "colors": "#d8d1c4,#8f8d84,#b8a991",
+            "size": 43,
+            "positions": [
+              [
+                -108.84,
+                70,
+                40
+              ],
+              [
+                -66.25,
+                70,
+                40
+              ],
+              [
+                85.18,
+                70,
+                40
+              ]
+            ],
+            "material": "linen-white"
+          },
+          "position": [
+            135,
+            0,
+            172
+          ],
+          "rotation": 90,
+          "allowOverlap": [
+            "living.sofa"
+          ]
+        },
+        {
+          "id": "living.coffee-table",
+          "asset": "coffee-table-drawers",
+          "name": "Walnut coffee table on a black steel frame: remote drawers, open shelf, deep drawer",
+          "tags": [
+            "coffee table",
+            "drawers"
+          ],
+          "params": {
+            "width": 120,
+            "depth": 60,
+            "height": 45,
+            "drawers": 2,
+            "base": "metal-frame",
+            "material": "walnut",
+            "legMaterial": "metal-black",
+            "pullColor": "#1d1d1f"
+          },
+          "position": [
+            330,
+            0,
+            125
+          ],
+          "rotation": -90,
+          "allowOverlap": [
+            "living.sofa"
+          ]
+        },
+        {
+          "id": "living.floor-lamp",
+          "asset": "floor-lamp",
+          "name": "Vintage globe floor lamp, black (מנורת עמידה שחור דגם וינטג') — Betili (ביתילי) ₪763 (at the big window, TV-point outlet)",
+          "tags": [
+            "lamp"
+          ],
+          "params": {
+            "height": 165,
+            "shade": "globe",
+            "shadeColor": "#f6f2ea",
+            "baseColor": "#1d1d1f"
+          },
+          "position": [
+            22,
+            0,
+            175
+          ],
+          "rotation": 90
+        },
+        {
+          "id": "living.corner-shelves",
+          "asset": "corner-cabinet",
+          "name": "Open walnut corner shelves on slim black steel posts, no backs (seen from the room and the hallway), rounded at the back: our whisky + board games on show",
+          "tags": [
+            "shelves",
+            "whisky",
+            "games",
+            "display"
+          ],
+          "params": {
+            "open": true,
+            "backs": false,
+            "round": 35,
+            "postColor": "#1d1d1f",
+            "legX": 75,
+            "legZ": 76,
+            "height": 200,
+            "shelves": 6,
+            "material": "white-laminate",
+            "shelfMaterial": "walnut",
+            "contents": "books books whisky whisky books"
+          },
+          "position": [
+            585,
+            0,
+            356
+          ],
+          "rotation": 0,
+          "allowOverlap": [
+            "living.pillar"
+          ]
+        },
+        {
+          "id": "living.shelf-plant-1",
+          "asset": "plant",
+          "name": "Pothos on top of the corner shelves, trailing over the back towards the hallway",
+          "tags": [
+            "plant"
+          ],
+          "params": {
+            "kind": "trailing",
+            "height": 70,
+            "spread": 18,
+            "potDiameter": 18,
+            "potColor": "#1d1d1f",
+            "drop": 18,
+            "seed": "mid-pothos-0"
+          },
+          "position": [
+            545.6,
+            198.5,
+            331.8
+          ],
+          "rotation": 50,
+          "allowOverlap": [
+            "living.corner-shelves",
+            "living.shelf-plant-1",
+            "living.shelf-plant-2"
+          ]
+        },
+        {
+          "id": "living.shelf-plant-2",
+          "asset": "plant",
+          "name": "Pothos on top of the corner shelves, trailing over the back towards the hallway",
+          "tags": [
+            "plant"
+          ],
+          "params": {
+            "kind": "trailing",
+            "height": 90,
+            "spread": 18,
+            "potDiameter": 18,
+            "potColor": "#1d1d1f",
+            "drop": 18,
+            "seed": "mid-pothos-1"
+          },
+          "position": [
+            555.5,
+            198.5,
+            315
+          ],
+          "rotation": 20,
+          "allowOverlap": [
+            "living.corner-shelves",
+            "living.shelf-plant-1",
+            "living.shelf-plant-2"
+          ]
+        },
+        {
+          "id": "living.art",
+          "asset": "wall-art",
+          "name": "Calm print (stone, grey, charcoal) behind the sofa",
+          "tags": [
+            "art"
+          ],
+          "params": {
+            "width": 100,
+            "height": 70,
+            "frameColor": "#1d1d1f",
+            "art": "#e3ddd2,#8c877c,#3f3f3d",
+            "seed": "mcm"
+          },
+          "against": {
+            "wall": "living.wall-5",
+            "offset": 385,
+            "elevation": 105,
+            "gap": 0
+          }
+        },
+        {
+          "id": "living.coffee-bowl",
+          "asset": "table-decor",
+          "name": "Mustard ceramic bowl on the coffee table",
+          "tags": [
+            "decor"
+          ],
+          "params": {
+            "kind": "bowl",
+            "color": "#d8d2c6",
+            "diameter": 24
+          },
+          "position": [
+            300,
+            45,
+            110
+          ],
+          "rotation": 0,
+          "allowOverlap": [
+            "living.coffee-table",
+            "living.sofa"
+          ]
+        },
+        {
+          "id": "living.fig",
+          "asset": "plant",
+          "name": "Fiddle-leaf fig (פיקוס כינורי) XXL, min. 160 cm — Plant It (online nursery) ₪360",
+          "tags": [
+            "plant"
+          ],
+          "params": {
+            "kind": "fig",
+            "height": 160,
+            "seed": "fig",
+            "spread": 60,
+            "potDiameter": 32,
+            "potColor": "#ffffff",
+            "potMaterial": "concrete-light"
+          },
+          "position": [
+            38,
+            0,
+            10
+          ],
+          "rotation": 0
+        },
+        {
+          "id": "living.pillar-cladding",
+          "asset": "slat-panel",
+          "name": "Walnut slat cladding on the pillar (idea, ~2 cm)",
+          "tags": [
+            "pillar"
+          ],
+          "params": {
+            "width": 116,
+            "height": 277,
+            "depth": 2,
+            "material": "walnut"
+          },
+          "position": [
+            452,
+            0,
+            339
+          ],
+          "rotation": 180,
+          "allowOverlap": [
+            "living.pillar"
+          ]
+        },
+        {
+          "id": "living.clock",
+          "asset": "old-house-wall-clock",
+          "name": "Our big wall clock (on the pillar)",
+          "tags": [
+            "clock",
+            "ours"
+          ],
+          "params": {},
+          "position": [
+            440,
+            150,
+            337
+          ],
+          "rotation": 180,
+          "allowOverlap": [
+            "living.pillar",
+            "living.pillar-cladding"
+          ]
+        },
+        {
+          "id": "living.display-column",
+          "asset": "ikea-kallax",
+          "name": "KALLAX-style column 1x5 on an underframe (~200, as tall as the hall stand, white) next to the hall stand on the wall side, facing the living room: our whisky, games + books on show",
+          "tags": [
+            "kallax",
+            "display",
+            "whisky",
+            "games"
+          ],
+          "params": {
+            "cols": 1,
+            "rows": 5,
+            "underframe": true,
+            "color": "white",
+            "contents": [
+              "books",
+              "whisky",
+              "games",
+              "whisky",
+              "games"
+            ],
+            "seed": "ind-1x5"
+          },
+          "position": [
+            21,
+            0,
+            603
+          ],
+          "rotation": 180,
+          "allowOverlap": [
+            "living.divider"
+          ]
+        },
+        {
+          "id": "living.divider",
+          "asset": "hall-stand",
+          "name": "Cream-white entry hall stand 100x30x200 with a shoe bench (AliExpress, https://www.aliexpress.com/item/1005010339751353.html): door + drawer + lit key niche + gold-framed glass display on the left; bench with double doors, 4 slats + hooks for a bag and umbrella on the right",
+          "tags": [
+            "entry",
+            "shoe cabinet",
+            "bench",
+            "hooks",
+            "drop zone",
+            "divider"
+          ],
+          "params": {
+            "width": 100,
+            "depth": 30,
+            "height": 200,
+            "niche": "keys",
+            "display": "books"
+          },
+          "position": [
+            92,
+            0,
+            573
+          ],
+          "rotation": 0
+        },
+        {
+          "id": "living.eucalyptus",
+          "asset": "plant",
+          "name": "Ours: trailing eucalyptus (gold pot) on top of the hall stand",
+          "tags": [
+            "plant"
+          ],
+          "params": {
+            "kind": "trailing",
+            "height": 35,
+            "seed": "eucalyptus",
+            "spread": 26,
+            "potDiameter": 14,
+            "potColor": "#c9a227"
+          },
+          "position": [
+            62,
+            200,
+            577
+          ],
+          "rotation": 0,
+          "allowOverlap": [
+            "living.divider"
+          ]
+        },
+        {
+          "id": "living.passage-mirror",
+          "asset": "wall-art",
+          "name": "Organic (amorphic) frameless mirror ~64 x 160 on the passage wall",
+          "tags": [
+            "mirror",
+            "entry"
+          ],
+          "params": {
+            "organic": true,
+            "width": 64,
+            "height": 160,
+            "seed": "amorph"
+          },
+          "against": {
+            "wall": "living.wall-5",
+            "offset": 45,
+            "elevation": 22,
+            "gap": 0
+          }
+        },
+        {
+          "id": "living.shoe-kallax",
+          "asset": "ikea-kallax",
+          "name": "KALLAX 2x2 under the jackets, shoes (a shelf in each cube: 8 pairs) — IKEA",
+          "tags": [
+            "kallax",
+            "shoes",
+            "entry"
+          ],
+          "params": {
+            "cols": 2,
+            "rows": 2,
+            "color": "white",
+            "contents": "shoes",
+            "seed": "ind-shoe-a"
+          },
+          "against": {
+            "wall": "living.wall-4",
+            "offset": 430,
+            "elevation": 0,
+            "gap": 4
+          },
+          "allowOverlap": [
+            "living.entry-rack"
+          ]
+        },
+        {
+          "id": "living.shoe-kallax-2",
+          "asset": "ikea-kallax",
+          "name": "KALLAX 1x2 next to it, shoes (4 pairs) — IKEA",
+          "tags": [
+            "kallax",
+            "shoes",
+            "entry"
+          ],
+          "params": {
+            "cols": 1,
+            "rows": 2,
+            "color": "white",
+            "contents": "shoes",
+            "seed": "ind-shoe-b"
+          },
+          "against": {
+            "wall": "living.wall-4",
+            "offset": 508,
+            "elevation": 0,
+            "gap": 4
+          },
+          "allowOverlap": [
+            "living.entry-rack"
+          ]
+        },
+        {
+          "id": "living.entry-rack",
+          "asset": "closet-system",
+          "name": "Black clamp-post coat rack the full width from the side wall to the front door (138, floor-to-soffit, no drilling): our coats on hangers",
+          "tags": [
+            "entry",
+            "coats"
+          ],
+          "params": {
+            "height": 215,
+            "depth": 40,
+            "postMaterial": "metal-black",
+            "shelfMaterial": "wood-oak-light",
+            "sections": [
+              {
+                "w": 64,
+                "kind": "hang",
+                "coats": 3
+              },
+              {
+                "w": 65,
+                "kind": "hang",
+                "coats": 3
+              }
+            ]
+          },
+          "against": {
+            "wall": "living.wall-4",
+            "offset": 430,
+            "elevation": 0,
+            "gap": 0
+          },
+          "allowOverlap": [
+            "living.shoe-kallax",
+            "living.shoe-kallax-2"
+          ]
+        },
+        {
+          "id": "living.stool-1",
+          "asset": "counter-stool",
+          "name": "Rattan-seat backless counter stool (tucked under the island)",
+          "tags": [
+            "bar stool"
+          ],
+          "params": {
+            "seatSize": 36,
+            "seatHeight": 65,
+            "base": "four",
+            "seatColor": "#ffffff",
+            "seatMaterial": "rattan-weave",
+            "legMaterial": "wood-oak-light",
+            "back": 0
+          },
+          "position": [
+            275,
+            0,
+            448
+          ],
+          "rotation": 0,
+          "allowOverlap": [
+            "living.island"
+          ]
+        },
+        {
+          "id": "living.stool-2",
+          "asset": "counter-stool",
+          "name": "Rattan-seat backless counter stool (tucked under the island)",
+          "tags": [
+            "bar stool"
+          ],
+          "params": {
+            "seatSize": 36,
+            "seatHeight": 65,
+            "base": "four",
+            "seatColor": "#ffffff",
+            "seatMaterial": "rattan-weave",
+            "legMaterial": "wood-oak-light",
+            "back": 0
+          },
+          "position": [
+            355,
+            0,
+            448
+          ],
+          "rotation": 0,
+          "allowOverlap": [
+            "living.island"
+          ]
+        },
+        {
+          "id": "living.herbs",
+          "asset": "plant",
+          "name": "Succulent on the island",
+          "tags": [
+            "plant"
+          ],
+          "params": {
+            "kind": "bush",
+            "height": 22,
+            "seed": "herbs",
+            "spread": 15,
+            "model": "succulent"
+          },
+          "position": [
+            385,
+            90,
+            462.5
+          ],
+          "rotation": 0,
+          "allowOverlap": [
+            "living.island"
+          ]
+        },
+        {
+          "id": "living.kitchen-shelf",
+          "asset": "kitchen-shelf",
+          "name": "Oak kitchen shelf 100 (IKEA BERGSHULT-style, black brackets): pothos, pantry jars, herbs",
+          "tags": [
+            "kitchen",
+            "wall shelf"
+          ],
+          "params": {
+            "width": 100,
+            "contents": "plant jars herbs",
+            "colors": "#efe6d4",
+            "seed": "jun-k1"
+          },
+          "against": {
+            "wall": "living.wall-4",
+            "offset": 88,
+            "elevation": 148,
+            "gap": 0
+          },
+          "allowOverlap": [
+            "living.counter"
+          ]
+        },
+        {
+          "id": "living.kitchen-shelf-2",
+          "asset": "kitchen-shelf",
+          "name": "Oak kitchen shelf 70, higher: cups + a trailing plant",
+          "tags": [
+            "kitchen",
+            "wall shelf"
+          ],
+          "params": {
+            "width": 70,
+            "contents": "cups plant",
+            "colors": "#efe6d4,#8fa37e,#f2efe8",
+            "seed": "jun-k2"
+          },
+          "against": {
+            "wall": "living.wall-4",
+            "offset": 198,
+            "elevation": 185,
+            "gap": 0
+          },
+          "allowOverlap": [
+            "living.counter"
+          ]
+        },
+        {
+          "id": "living.dining-table",
+          "asset": "design-table",
+          "name": "Extendable table 180 (230 with the leaf) x 80, white top + oak legs, running north-south, its end against the back of the hall stand",
+          "tags": [
+            "dining table",
+            "extendable"
+          ],
+          "params": {
+            "width": 180,
+            "depth": 80,
+            "base": "legs",
+            "material": "white-laminate",
+            "legMaterial": "wood-oak-light"
+          },
+          "position": [
+            45,
+            0,
+            483
+          ],
+          "rotation": 90,
+          "allowOverlap": [
+            "living.divider"
+          ]
+        },
+        {
+          "id": "living.chair-1",
+          "asset": "design-chair",
+          "name": "Rattan dining chair (pushed in)",
+          "tags": [
+            "dining chair"
+          ],
+          "params": {
+            "style": "rattan",
+            "seatColor": "#ffffff",
+            "backColor": "#ffffff",
+            "legColor": "#c49c68",
+            "seatMaterial": "rattan-weave",
+            "backMaterial": "rattan-weave",
+            "legMaterial": "wood-oak-light",
+            "width": 44
+          },
+          "position": [
+            25,
+            0,
+            427
+          ],
+          "rotation": 90,
+          "allowOverlap": [
+            "living.dining-table",
+            "living.banquette"
+          ]
+        },
+        {
+          "id": "living.chair-4",
+          "asset": "design-chair",
+          "name": "Rattan dining chair (pushed in)",
+          "tags": [
+            "dining chair"
+          ],
+          "params": {
+            "style": "rattan",
+            "seatColor": "#ffffff",
+            "backColor": "#ffffff",
+            "legColor": "#c49c68",
+            "seatMaterial": "rattan-weave",
+            "backMaterial": "rattan-weave",
+            "legMaterial": "wood-oak-light",
+            "width": 44
+          },
+          "position": [
+            145,
+            0,
+            427
+          ],
+          "rotation": -90,
+          "allowOverlap": [
+            "living.dining-table",
+            "living.banquette"
+          ]
+        },
+        {
+          "id": "living.chair-2",
+          "asset": "design-chair",
+          "name": "Rattan dining chair (pushed in)",
+          "tags": [
+            "dining chair"
+          ],
+          "params": {
+            "style": "rattan",
+            "seatColor": "#ffffff",
+            "backColor": "#ffffff",
+            "legColor": "#c49c68",
+            "seatMaterial": "rattan-weave",
+            "backMaterial": "rattan-weave",
+            "legMaterial": "wood-oak-light",
+            "width": 44
+          },
+          "position": [
+            25,
+            0,
+            485
+          ],
+          "rotation": 90,
+          "allowOverlap": [
+            "living.dining-table",
+            "living.banquette"
+          ]
+        },
+        {
+          "id": "living.chair-5",
+          "asset": "design-chair",
+          "name": "Rattan dining chair (pushed in)",
+          "tags": [
+            "dining chair"
+          ],
+          "params": {
+            "style": "rattan",
+            "seatColor": "#ffffff",
+            "backColor": "#ffffff",
+            "legColor": "#c49c68",
+            "seatMaterial": "rattan-weave",
+            "backMaterial": "rattan-weave",
+            "legMaterial": "wood-oak-light",
+            "width": 44
+          },
+          "position": [
+            145,
+            0,
+            485
+          ],
+          "rotation": -90,
+          "allowOverlap": [
+            "living.dining-table",
+            "living.banquette"
+          ]
+        },
+        {
+          "id": "living.chair-3",
+          "asset": "design-chair",
+          "name": "Rattan dining chair (pushed in)",
+          "tags": [
+            "dining chair"
+          ],
+          "params": {
+            "style": "rattan",
+            "seatColor": "#ffffff",
+            "backColor": "#ffffff",
+            "legColor": "#c49c68",
+            "seatMaterial": "rattan-weave",
+            "backMaterial": "rattan-weave",
+            "legMaterial": "wood-oak-light",
+            "width": 44
+          },
+          "position": [
+            25,
+            0,
+            543
+          ],
+          "rotation": 90,
+          "allowOverlap": [
+            "living.dining-table",
+            "living.banquette"
+          ]
+        },
+        {
+          "id": "living.chair-6",
+          "asset": "design-chair",
+          "name": "Rattan dining chair (pushed in)",
+          "tags": [
+            "dining chair"
+          ],
+          "params": {
+            "style": "rattan",
+            "seatColor": "#ffffff",
+            "backColor": "#ffffff",
+            "legColor": "#c49c68",
+            "seatMaterial": "rattan-weave",
+            "backMaterial": "rattan-weave",
+            "legMaterial": "wood-oak-light",
+            "width": 44
+          },
+          "position": [
+            145,
+            0,
+            543
+          ],
+          "rotation": -90,
+          "allowOverlap": [
+            "living.dining-table",
+            "living.banquette"
+          ]
+        },
+        {
+          "id": "living.pendant",
+          "asset": "pendant-lamp",
+          "name": "Rattan pendant ø39",
+          "tags": [
+            "lamp"
+          ],
+          "params": {
+            "ceiling": 277,
+            "bottom": 150,
+            "shape": "dome",
+            "diameter": 39,
+            "color": "#ffffff",
+            "shadeMaterial": "rattan-weave"
+          },
+          "position": [
+            85,
+            0,
+            443
+          ],
+          "rotation": 0
+        },
+        {
+          "id": "living.pendant-2",
+          "asset": "pendant-lamp",
+          "name": "Rattan pendant ø39",
+          "tags": [
+            "lamp"
+          ],
+          "params": {
+            "ceiling": 277,
+            "bottom": 150,
+            "shape": "dome",
+            "diameter": 39,
+            "color": "#ffffff",
+            "shadeMaterial": "rattan-weave"
+          },
+          "position": [
+            85,
+            0,
+            523
+          ],
+          "rotation": 0
+        },
+        {
+          "id": "living.flowers",
+          "asset": "table-decor",
+          "name": "Our flower bouquet in the green vase",
+          "tags": [
+            "decor",
+            "ours"
+          ],
+          "params": {
+            "kind": "vase",
+            "color": "#4d5a3f",
+            "height": 22,
+            "diameter": 16,
+            "flowers": "#efe6d6"
+          },
+          "position": [
+            85,
+            75,
+            474
+          ],
+          "rotation": 0,
+          "allowOverlap": [
+            "living.dining-table",
+            "living.chair-1",
+            "living.chair-2",
+            "living.chair-3",
+            "living.chair-4",
+            "living.chair-5",
+            "living.chair-6"
+          ]
+        },
+        {
+          "id": "living.fridge",
+          "asset": "old-house-fridge",
+          "name": "Our French-door fridge in the fridge niche (sticks out ~12 cm)",
+          "tags": [
+            "fridge",
+            "ours"
+          ],
+          "params": {},
+          "against": {
+            "wall": "living.wall-3",
+            "offset": 28
+          },
+          "allowOverlap": [
+            "living.fridge-niche"
+          ]
+        },
+        {
+          "id": "living.tami4",
+          "asset": "water-bar",
+          "name": "Our Tami4 water bar, on the counter corner by the front door (its water point)",
+          "tags": [
+            "tami4",
+            "ours",
+            "kitchen"
+          ],
+          "params": {},
+          "position": [
+            276,
+            90,
+            719
+          ],
+          "rotation": 180,
+          "allowOverlap": [
+            "living.counter"
+          ]
         }
       ],
       "assumptions": [
@@ -818,6 +1873,10 @@
         {
           "path": "ceiling.lowered[living.ceiling-kitchen]",
           "note": "lowered ceiling at 238 (notes) over the tall units and the hallway mouth; extent from the photos"
+        },
+        {
+          "path": "items",
+          "note": "Design idea for inspiration: furniture at the product sizes found (item names say shop + price each); stand-in geometry, first-try positions."
         }
       ]
     },
