@@ -378,6 +378,7 @@ function sections(raw: unknown): Section[] {
  * mop + ironing board below). Width = sections + posts.
  */
 export function closetSystem(params: Record<string, unknown>): Part[] {
+  if (params.style === 'stolmen') return stolmen(params);
   const H = num(params.height, 270);
   const D = num(params.depth, 40);
   const postMat = str(params.postMaterial, 'white-laminate');
@@ -445,3 +446,97 @@ export function closetSystem(params: Record<string, unknown>): Part[] {
   });
   return parts;
 }
+
+/**
+ * IKEA STOLMEN-style closet (what the walk-in closet has, photos 160841-50): round white posts clamped floor to ceiling
+ * near the FRONT (feet + ceiling pads, the telescopic joint near the top), everything hung on them: top shelves that run
+ * back to the wall, clothes rails between the posts (clothes hang across, centred on the rail), 2-drawer units on
+ * little feet standing between the posts. `depth` = wall to the front of the shelves (clothes on hangers need ~50).
+ * Same sections as closetSystem: hang | hang2 | drawers (rail + shelf above the unit) | shelves | broom.
+ */
+function stolmen(params: Record<string, unknown>): Part[] {
+  const H = num(params.height, 270);
+  const D = num(params.depth, 52);
+  const list = sections(params.sections);
+  const R = 2.2; // post radius
+  const POST = 2 * R;
+  const PZ = D - 22; // the post line (and the rails): clothes hang centred on it
+  const TOP = Math.min(H - 60, 200);
+  const white = { material: 'white-laminate' };
+  const steel = { color: '#f2f2f0' };
+  const total = list.reduce((sum, x) => sum + x.w, 0) + (list.length + 1) * POST;
+  const parts: Part[] = [];
+  const post = (i: number, x: number) => parts.push(
+    cyl(`post-${i}`, ['post', 'upright'], R, H - 2.4, [x, H / 2, PZ], steel),
+    cyl(`post-${i}-foot`, ['post', 'foot'], 4, 1.2, [x, 0.6, PZ], steel),
+    cyl(`post-${i}-pad`, ['post', 'pad'], 4, 1.2, [x, H - 0.6, PZ], steel),
+    cyl(`post-${i}-joint`, ['post', 'joint'], R + 0.4, 6, [x, H - 40, PZ], steel),
+  );
+  let x = -total / 2;
+  post(0, x + R);
+  list.forEach((sec, i) => {
+    const p = `s${i + 1}`;
+    const x0 = x + POST;
+    const xc = x0 + sec.w / 2;
+    const clamps = (id: string, y: number) => {
+      for (const [k, px] of [['l', x0 - R], ['r', x0 + sec.w + R]] as [string, number][]) parts.push(cyl(`${id}-clamp-${k}`, ['clamp'], R + 0.8, 3.5, [px, y, PZ], steel));
+    };
+    // a shelf rests on the brackets round the two posts and runs back to the wall
+    const shelf = (id: string, y: number) => {
+      parts.push(box(id, ['shelf'], [sec.w + POST - 0.4, 1.8, D - 1], [xc, y - 0.9, (D - 1) / 2 + 0.5], white));
+      clamps(id, y - 3.5);
+    };
+    const rail = (id: string, y: number) => {
+      parts.push({ ...cyl(id, ['rail', 'clothes rail'], 1.3, sec.w + POST, [xc, y, PZ], steel), rotation: [0, 0, 90] as Vec3 });
+      clamps(id, y);
+    };
+    const coats = (y: number, n: number, len: number) => {
+      for (let k = 0; k < n; k++) parts.push(...coat(`${p}-coat-${k + 1}-${Math.round(y)}`, x0 + 6 + ((k + 0.5) * (sec.w - 12)) / n, y, PZ, COAT_COLORS[(k * 2 + i) % COAT_COLORS.length], true, len));
+    };
+    if (sec.kind === 'shelves') {
+      const ys = Array.from({ length: 5 }, (_, k) => 30 + (k * (TOP - 30)) / 4);
+      ys.forEach((y, k) => shelf(`${p}-shelf-${k + 1}`, y));
+      sec.shelfContents.split(/\s+/).forEach((c, k) => {
+        const kind = stuffKind(c);
+        if (!kind || k >= ys.length) return;
+        const room = (k + 1 < ys.length ? ys[k + 1] - 1.8 : H - 3) - ys[k];
+        parts.push(...placeStuff(stuffParts(kind, `${p}-c${k}`, sec.w - 2, D - 3, Math.min(room, 35)), 0, [xc, ys[k], 1]));
+      });
+    } else if (sec.kind === 'broom') {
+      shelf(`${p}-shelf`, TOP);
+      parts.push(...placeStuff(cleaningRow(`${p}-clean`, 0, 0, 0, sec.w - 2, D - 3, TOP - 2), 0, [xc, 0, 1]));
+    } else {
+      shelf(`${p}-shelf`, TOP);
+      rail(`${p}-rail`, TOP - 10);
+      if (sec.kind === 'hang2') rail(`${p}-rail-low`, Math.round(TOP / 2));
+      if (sec.kind === 'drawers') {
+        // STOLMEN-style 2 / 3-drawer unit on little feet, against the wall between the posts; shorter clothes above it
+        const n = sec.drawers;
+        const uw = Math.min(sec.w - 2, 56);
+        const ud = Math.min(D - 4, 50);
+        const fh = 19;
+        const feet = 9;
+        const uh = n * fh + 2;
+        parts.push(box(`${p}-unit`, ['drawer unit', 'cabinet'], [uw, uh, ud - 1.6], [xc, feet + uh / 2, 1 + (ud - 1.6) / 2], white));
+        for (const [fx, fz] of [[-1, 0], [1, 0], [-1, 1], [1, 1]]) parts.push(cyl(`${p}-foot-${fx}-${fz}`, ['foot'], 1.4, feet, [xc + fx * (uw / 2 - 4), feet / 2, 4 + fz * (ud - 8)], steel));
+        for (let k = 0; k < n; k++) {
+          const top = feet + uh - 1 - k * fh;
+          parts.push(
+            box(`${p}-drawer-${k + 1}`, ['drawer', 'front'], [uw - 0.6, fh - 0.8, 1.6], [xc, top - fh / 2, 1 + ud - 0.8], { material: 'white-gloss' }),
+            // the cut-out grip in the top edge of the front
+            box(`${p}-drawer-${k + 1}-grip`, ['drawer', 'handle'], [14, 2.2, 0.4], [xc, top - 2.4, 1 + ud + 0.05], { color: '#3a3a3a' }),
+          );
+        }
+        if (sec.coats) coats(TOP - 10, sec.coats, Math.min(70, TOP - 10 - (feet + uh) - 10));
+      } else if (sec.coats) {
+        coats(TOP - 10, sec.coats, 90);
+        if (sec.kind === 'hang2') coats(Math.round(TOP / 2), Math.max(2, Math.floor(sec.w / 12)), 60);
+      }
+      if (sec.shoes) parts.push(...shoeRow(`${p}-shoes`, xc, 0, D, sec.w, `${p}-shoes`, sec.shoes));
+    }
+    x = x0 + sec.w;
+    post(i + 1, x + R);
+  });
+  return parts;
+}
+

@@ -49,6 +49,10 @@
     "shelfMaterial": {
       "default": "white-laminate",
       "description": "texture id"
+    },
+    "style": {
+      "default": "elvarli",
+      "description": "elvarli (square clamp posts at the back, brackets) | stolmen (round posts near the front, shelves back to the wall, rails between posts, drawer units on feet)"
     }
   }
 }

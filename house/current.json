@@ -2727,16 +2727,8 @@
           545
         ],
         [
-          870,
-          545
-        ],
-        [
-          870,
-          524
-        ],
-        [
           833,
-          524
+          545
         ],
         [
           833,
@@ -2805,28 +2797,13 @@
           "edge": 4,
           "tags": [
             "bathroom door wall",
-            "en-suite wall"
+            "en-suite wall",
+            "switch wall"
           ]
         },
         {
           "id": "bedroom.wall-5",
           "edge": 5,
-          "tags": [
-            "little wall",
-            "switch wall"
-          ]
-        },
-        {
-          "id": "bedroom.wall-6",
-          "edge": 6,
-          "tags": [
-            "little wall",
-            "switch wall"
-          ]
-        },
-        {
-          "id": "bedroom.wall-7",
-          "edge": 7,
           "tags": [
             "hallway wall",
             "door wall",
@@ -2835,8 +2812,8 @@
           ]
         },
         {
-          "id": "bedroom.wall-8",
-          "edge": 8,
+          "id": "bedroom.wall-6",
+          "edge": 6,
           "tags": [
             "shoe rack wall",
             "recess",
@@ -2844,8 +2821,8 @@
           ]
         },
         {
-          "id": "bedroom.wall-9",
-          "edge": 9,
+          "id": "bedroom.wall-7",
+          "edge": 7,
           "tags": [
             "recess",
             "pier",
@@ -2853,15 +2830,15 @@
           ]
         },
         {
-          "id": "bedroom.wall-10",
-          "edge": 10,
+          "id": "bedroom.wall-8",
+          "edge": 8,
           "tags": [
             "pier"
           ]
         },
         {
-          "id": "bedroom.wall-11",
-          "edge": 11,
+          "id": "bedroom.wall-9",
+          "edge": 9,
           "tags": [
             "storage room wall",
             "west wall"
@@ -2873,8 +2850,8 @@
         {
           "id": "bedroom.door",
           "type": "door",
-          "wall": "bedroom.wall-7",
-          "offset": 63.5,
+          "wall": "bedroom.wall-5",
+          "offset": 84.5,
           "width": 80,
           "height": 211,
           "tags": [
@@ -2986,18 +2963,22 @@
         {
           "id": "bedroom.vanity",
           "asset": "bathroom-vanity",
-          "name": "Vanity with mirror (entry)",
+          "name": "Vanity with mirror (entry corner, 2 doors)",
           "tags": [
             "vanity",
             "sink",
             "mirror"
           ],
           "against": {
-            "wall": "bedroom.wall-7",
+            "wall": "bedroom.wall-5",
             "offset": 0
           },
           "params": {
-            "width": 50
+            "width": 77,
+            "depth": 46,
+            "mirrorWidth": 72,
+            "mirrorHeight": 88,
+            "mirrorBottom": 110
           },
           "builtIn": true
         },
@@ -3012,7 +2993,7 @@
           "position": [
             841,
             228,
-            499
+            507
           ],
           "params": {
             "diameter": 10,
@@ -3025,15 +3006,15 @@
       "assumptions": [
         {
           "path": "items[bedroom.vanity]",
-          "note": "the en-suite's vanity + mirror stand in the entry, on the door wall between the bedroom door and a little wall with the light switches (Mark; video 57-59 s, photos 160859(0), 160900); ~50 wide, little wall ~48 x 21 not measured"
+          "note": "the en-suite's vanity (2 doors, integrated basin, ~77 x 46) + mirror (~72 x 88, bottom ~110) stand in the entry's south-west corner, back on the door wall, its south end at the en-suite wall; the 2 switch plates are on the en-suite wall beside it; the 'wall' next to it is the open bedroom door leaf (video 57-60 s, photos 160859(0), 160900; scale from Mark's reflection). Sizes estimated, not measured"
         },
         {
           "path": "footprint",
           "note": "bedroom measured 3.08 x 4.06 (notes); the entry (door from the hallway, shoe-rack recess, closet and en-suite doors) is from the photos/video, not measured"
         },
         {
-          "path": "walls[bedroom.wall-8]",
-          "note": "shoe-rack recess right inside the door, ~80 wide (notes 'bedroom side cabin 80 x …', depth not written; ~48 here) — photos 160820-23, 160857-58"
+          "path": "walls[bedroom.wall-6]",
+          "note": "shoe-rack recess right inside the door, ~80 wide (notes 'bedroom side cabin 80 x ...'); its depth (pier end z ~390-405) not measured, ~48 here - measure it"
         },
         {
           "path": "openings[bedroom.window]",
@@ -3181,7 +3162,7 @@
         {
           "id": "closet.system-east",
           "asset": "closet-system",
-          "name": "Closet system (long wall)",
+          "name": "IKEA STOLMEN closet (long wall): rail over a 2-drawer unit, then 2 drawer units under a long rail",
           "tags": [
             "closet system",
             "shelves",
@@ -3194,24 +3175,24 @@
             "offset": 0
           },
           "params": {
+            "style": "stolmen",
             "height": 277,
-            "depth": 40,
+            "depth": 48,
             "sections": [
               {
-                "w": 64,
-                "kind": "drawers"
+                "w": 75,
+                "kind": "drawers",
+                "drawers": 2
               },
               {
-                "w": 64,
-                "kind": "drawers"
+                "w": 58,
+                "kind": "drawers",
+                "drawers": 2
               },
               {
-                "w": 64,
-                "kind": "drawers"
-              },
-              {
-                "w": 64,
-                "kind": "hang"
+                "w": 58,
+                "kind": "drawers",
+                "drawers": 2
               }
             ]
           },
@@ -3220,7 +3201,7 @@
         {
           "id": "closet.system-west",
           "asset": "closet-system",
-          "name": "Closet system (door wall)",
+          "name": "IKEA STOLMEN closet (door wall): long rail, a 2-drawer unit under the part by the door",
           "tags": [
             "closet system",
             "rails",
@@ -3231,20 +3212,41 @@
             "offset": 0
           },
           "params": {
+            "style": "stolmen",
             "height": 277,
-            "depth": 40,
+            "depth": 42,
             "sections": [
               {
                 "w": 95,
                 "kind": "hang"
               },
               {
-                "w": 86,
-                "kind": "hang"
+                "w": 82,
+                "kind": "drawers",
+                "drawers": 2
               }
             ]
           },
           "builtIn": true
+        },
+        {
+          "id": "closet.mirror",
+          "asset": "wall-art",
+          "name": "Full-length mirror on the end wall",
+          "tags": [
+            "mirror"
+          ],
+          "against": {
+            "wall": "closet.wall-2",
+            "offset": 28,
+            "elevation": 25
+          },
+          "params": {
+            "width": 70,
+            "height": 160,
+            "mirror": true,
+            "frameColor": "#f2f0ec"
+          }
         }
       ],
       "assumptions": [
@@ -3254,7 +3256,7 @@
         },
         {
           "path": "items",
-          "note": "closet system stays (Mark): east wall = top shelf + rail over 2-drawer units, door wall = top shelf + one long rail (photos 160841-50); widths not measured"
+          "note": "IKEA STOLMEN system (round floor-to-ceiling posts near the front, shelves back to the wall, rails between the posts, 2-drawer units on feet) on both long walls (photos 160841-50, video 80-87 s; Mark: drawers on both sides). Section widths and depths estimated from the photos, the clothes on their hangers and Mark (200 cm) in the end-wall mirror (video 85.5 s): east ~48 deep, door wall ~42, aisle ~53; not measured. The mirror (~70 wide) is the one Mark sees himself in"
         }
       ]
     },
