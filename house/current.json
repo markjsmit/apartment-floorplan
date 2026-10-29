@@ -1158,29 +1158,6 @@
           "rotation": 0
         },
         {
-          "id": "living.pillar-cladding",
-          "asset": "slat-panel",
-          "name": "Walnut slat cladding on the pillar (idea, ~2 cm)",
-          "tags": [
-            "pillar"
-          ],
-          "params": {
-            "width": 116,
-            "height": 277,
-            "depth": 2,
-            "material": "walnut"
-          },
-          "position": [
-            452,
-            0,
-            339
-          ],
-          "rotation": 180,
-          "allowOverlap": [
-            "living.pillar"
-          ]
-        },
-        {
           "id": "living.clock",
           "asset": "old-house-wall-clock",
           "name": "Our big wall clock (on the pillar)",
@@ -1192,12 +1169,11 @@
           "position": [
             440,
             150,
-            337
+            339
           ],
           "rotation": 180,
           "allowOverlap": [
-            "living.pillar",
-            "living.pillar-cladding"
+            "living.pillar"
           ]
         },
         {
