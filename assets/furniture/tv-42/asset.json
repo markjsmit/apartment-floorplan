@@ -1,0 +1,136 @@
+{
+  "id": "tv-42",
+  "name": "Our Samsung 42\" TV (wall-mounted)",
+  "tags": [
+    "ours",
+    "tv",
+    "television",
+    "screen",
+    "bedroom"
+  ],
+  "description": "Our Samsung 42\" TV (Mark; photo sources/old house/20261029_204032.jpg): black bezel with a thin silver edge, 94 x 55 panel (16:9, diagonal 107 cm) on a flat wall bracket, its own pedestal stand left off. Origin back-centre at the bottom of the panel: elevation = height of the panel's bottom edge.",
+  "source": {
+    "kind": "parts",
+    "notes": "42\" from Mark, look from photo 20261029_204032.jpg; panel size from the 16:9 diagonal + thin bezel.",
+    "license": "self-made"
+  },
+  "parts": [
+    {
+      "id": "bracket",
+      "tags": [
+        "tv",
+        "bracket"
+      ],
+      "geometry": {
+        "type": "box",
+        "size": [
+          30,
+          20,
+          2
+        ],
+        "radius": 0.3
+      },
+      "position": [
+        0,
+        27.5,
+        1
+      ],
+      "material": "metal-black"
+    },
+    {
+      "id": "rim",
+      "tags": [
+        "tv"
+      ],
+      "geometry": {
+        "type": "box",
+        "size": [
+          94,
+          55,
+          2.6
+        ],
+        "radius": 0.5
+      },
+      "position": [
+        0,
+        27.5,
+        3.3
+      ],
+      "material": "aluminium-grey"
+    },
+    {
+      "id": "panel",
+      "tags": [
+        "tv"
+      ],
+      "geometry": {
+        "type": "box",
+        "size": [
+          93.2,
+          54.2,
+          3
+        ],
+        "radius": 0.4
+      },
+      "position": [
+        0,
+        27.5,
+        3.6
+      ],
+      "color": "#141416"
+    },
+    {
+      "id": "screen",
+      "tags": [
+        "tv",
+        "screen"
+      ],
+      "geometry": {
+        "type": "box",
+        "size": [
+          90,
+          50.6,
+          0.2
+        ]
+      },
+      "position": [
+        0,
+        28.6,
+        5.2
+      ],
+      "color": "#0a0d14",
+      "castShadow": false
+    },
+    {
+      "id": "logo",
+      "tags": [
+        "tv"
+      ],
+      "geometry": {
+        "type": "box",
+        "size": [
+          10,
+          1.4,
+          0.1
+        ]
+      },
+      "position": [
+        0,
+        1.6,
+        5.15
+      ],
+      "color": "#141416",
+      "castShadow": false,
+      "label": {
+        "text": "SAMSUNG",
+        "size": 0.9,
+        "offset": [
+          0,
+          0
+        ],
+        "color": "#d8d8d8",
+        "bg": "none"
+      }
+    }
+  ]
+}

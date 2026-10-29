@@ -20,7 +20,8 @@
       "default": 40
     },
     "speakers": {
-      "default": true
+      "default": true,
+      "description": "true (standing, turned in) | flat (lying on their side, on a shelf under a wall TV) | false"
     },
     "box": {
       "default": true

@@ -1418,7 +1418,22 @@ export function tvGear(p: Record<string, unknown>): Part[] {
   const D = num(p.depth, 40);
   const black = { color: '#1d1d1f' };
   const parts: Part[] = [];
-  if (p.speakers !== false) {
+  if (p.speakers === 'flat') {
+    // our Edifier bookshelf speakers lying on their side (photo 20261029_204032): black box, full black grille cloth on
+    // the front with the woofer just showing through, 3 knobs on top of the active (left) one
+    const [sw, sh, sd] = [40, 22, 28];
+    for (const sx of [-1, 1]) {
+      const x = sx * (W / 2 - sw / 2);
+      const z = D - sd / 2 - 1;
+      const k = sx > 0 ? 'r' : 'l';
+      parts.push(box(`speaker-${k}`, ['speaker'], [sw, sh, sd], [x, sh / 2, z], { color: '#141415', radius: 0.5 }));
+      parts.push({ ...box(`speaker-${k}-grille`, ['speaker'], [sw - 1.6, sh - 1.6, 0.4], [x, sh / 2, z + sd / 2 + 0.1], { color: '#232325', radius: 0.3 }), castShadow: false });
+      parts.push({ ...cyl(`speaker-${k}-woofer`, ['speaker'], 7.5, 0.2, [x + sx * 4, sh / 2, z + sd / 2 + 0.35], { color: '#1a1a1b' }), rotation: [90, 0, 0], castShadow: false });
+      if (sx < 0) {
+        for (const kx of [-6, 0, 6]) parts.push(cyl(`speaker-${k}-knob${kx + 6}`, ['speaker', 'knob'], 1.4, 1.2, [x + 6 + kx, sh + 0.6, z - 6], { color: '#2a2a2c' }));
+      }
+    }
+    } else if (p.speakers !== false) {
     const [sw, sh, sd] = [22, 40, 28]; // standard bookshelf speakers (Mark: 40 x 28 x 22)
     for (const sx of [-1, 1]) {
       const x = sx * (W / 2 - sw / 2 - 3); // turned in, its back corners stay on the unit
@@ -1441,8 +1456,9 @@ export function tvGear(p: Record<string, unknown>): Part[] {
   }
   if (p.box !== false) {
     const bz = Math.min(D - 8, num(p.gap, 6) + 30);
-    parts.push(box('media-box', ['electronics'], [24, 4.5, 15], [0, 2.25, bz], { ...black, radius: 0.8 }));
-    parts.push({ ...box('media-box-led', ['electronics'], [0.8, 0.4, 0.2], [9, 2.5, bz + 7.6], { color: '#7fd1ff' }), castShadow: false });
+    // our small square streaming box (photo 20261029_204032), red LED at the front
+    parts.push(box('media-box', ['electronics'], [11, 2.5, 11], [0, 1.25, bz], { ...black, radius: 1.2 }));
+    parts.push({ ...box('media-box-led', ['electronics'], [0.6, 0.3, 0.2], [3.5, 1.4, bz + 5.6], { color: '#ff3b30' }), castShadow: false });
   }
   const disp = str(p.display, 'right');
   if (disp !== 'none') {
