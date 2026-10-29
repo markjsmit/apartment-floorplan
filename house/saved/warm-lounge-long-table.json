@@ -2,7 +2,7 @@
   "meta": {
     "name": "Warm lounge + long table",
     "kind": "saved",
-    "note": "Mixed · living-room side of the pillar = mid-century (floating sofa facing the walnut sideboard + TV, coffee table, globe lamp, open round-back corner shelves, walnut slats + our clock on the pillar); entrance like the loft (cream hall stand with a shoe bench, white KALLAX column facing the room with whisky + games, white KALLAX along the passage, full-width coat rack); an extendable table for 6 north-south against the back of the hall stand like the urban jungle, rattan chairs + stools, oak kitchen shelves with plants.",
+    "note": "Mixed · living-room side of the pillar = mid-century (floating sofa facing the walnut sideboard + TV, coffee table, globe lamp, open round-back corner shelves, walnut slats + our clock on the pillar); entrance like the loft (cream hall stand with a shoe bench, white KALLAX column facing the room with whisky + games, a white closet with a full mirror door along the passage, full-width coat rack); an extendable table for 6 north-south against the back of the hall stand like the urban jungle, rattan chairs + stools, oak kitchen shelves with plants.",
     "location": {
       "lat": 32.0853,
       "lon": 34.7818,
@@ -1236,63 +1236,6 @@
           ]
         },
         {
-          "id": "living.passage-kallax",
-          "asset": "ikea-kallax",
-          "name": "KALLAX 2x4 upright against the side wall along the passage (white): bags, boxes, 2 rows of shoes — IKEA",
-          "tags": [
-            "kallax",
-            "shoes",
-            "bags",
-            "entry"
-          ],
-          "params": {
-            "cols": 2,
-            "rows": 4,
-            "color": "white",
-            "contents": [
-              "bags bags",
-              "boxes boxes",
-              "shoes shoes",
-              "shoes shoes"
-            ],
-            "seed": "ind-passage"
-          },
-          "against": {
-            "wall": "living.wall-5",
-            "offset": 40,
-            "elevation": 0,
-            "gap": 0
-          }
-        },
-        {
-          "id": "living.passage-kallax-top",
-          "asset": "ikea-kallax",
-          "name": "KALLAX 2x2 on top of it (screw both to the wall): boxes + bins — IKEA",
-          "tags": [
-            "kallax",
-            "entry"
-          ],
-          "params": {
-            "cols": 2,
-            "rows": 2,
-            "color": "white",
-            "contents": [
-              "boxes boxes",
-              "bins bins"
-            ],
-            "seed": "ind-passage-top"
-          },
-          "against": {
-            "wall": "living.wall-5",
-            "offset": 40,
-            "elevation": 147,
-            "gap": 0
-          },
-          "allowOverlap": [
-            "living.passage-kallax"
-          ]
-        },
-        {
           "id": "living.entry-rack",
           "asset": "closet-system",
           "name": "Black clamp-post coat rack the full width from the side wall to the front door (138, floor-to-soffit, no drilling): our coats on hangers",
@@ -1326,8 +1269,46 @@
           },
           "allowOverlap": [
             "living.passage-kallax",
-            "living.passage-kallax-top"
+            "living.passage-kallax-top",
+            "living.passage-closet"
           ]
+        },
+        {
+          "id": "living.passage-closet",
+          "asset": "tall-cabinet",
+          "name": "White closet 77 x 40 x 200 along the passage (as tall as the hall stand) with a full-length mirror door, push to open: shoe shelves inside",
+          "tags": [
+            "closet",
+            "mirror",
+            "shoes",
+            "entry"
+          ],
+          "params": {
+            "width": 77,
+            "depth": 40,
+            "height": 200,
+            "plinth": 6,
+            "handles": "none",
+            "material": "white-laminate",
+            "frontMaterial": "white-laminate",
+            "columns": [
+              {
+                "stack": [
+                  {
+                    "kind": "door",
+                    "mirror": true,
+                    "content": "shoes"
+                  }
+                ]
+              }
+            ]
+          },
+          "against": {
+            "wall": "living.wall-5",
+            "offset": 40,
+            "elevation": 0,
+            "gap": 0
+          }
         },
         {
           "id": "living.stool-1",

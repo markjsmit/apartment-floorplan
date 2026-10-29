@@ -1138,7 +1138,8 @@ export function tallCabinet(p: Record<string, unknown>): WithStates {
           const r = (cw - 2) / n / 2;
           for (let q = 0; q < n; q++) parts.push({ ...cyl(`${id}-rib-${q}`, ['front', 'rib'], r, fh - 3, [cx - (cw - 2) / 2 + (q + 0.5) * 2 * r, y + fh / 2, fz + T / 2 - r * 0.4], fl), section: id });
         }
-        if (f.mirror) parts.push({ ...box(`${id}-mirror`, ['mirror'], [cw - 10, fh - 14, 0.4], [cx, y + fh / 2, fz + T / 2 + 0.2], { material: 'mirror' }), section: id });
+        // mirror door: the glass over nearly the whole door (a slim edge of the door shows round it)
+        if (f.mirror) parts.push({ ...box(`${id}-mirror`, ['mirror'], [cw - 3, fh - 3, 0.4], [cx, y + fh / 2, fz + T / 2 + 0.2], { material: 'mirror' }), section: id });
         if (handles !== 'none') {
           const z = fz + T / 2 + 1 + (p.fluted ? 1.5 : 0);
           if (kind === 'door') {
