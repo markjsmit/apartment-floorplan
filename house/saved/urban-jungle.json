@@ -798,42 +798,99 @@
           ]
         },
         {
-          "id": "living.tv-stand",
-          "asset": "tv-stand",
-          "name": "Slim black swivel TV floor stand, in the corner at 45°",
+          "id": "living.tv-unit",
+          "asset": "media-unit",
+          "name": "Low TV cabinet 90x55 square to the corner, oak + rattan doors (router, console, cables)",
           "tags": [
-            "tv stand"
+            "tv unit"
           ],
           "params": {
-            "width": 89,
-            "depth": 52,
-            "height": 135,
-            "shelf": 0
+            "width": 90,
+            "depth": 55,
+            "height": 50,
+            "legHeight": 8,
+            "modules": "door,door",
+            "material": "wood-oak-light",
+            "frontMaterial": "rattan-weave",
+            "frontColor": "#efe3cc"
           },
           "position": [
-            542.7,
+            545.8,
             0,
-            286.6
+            310.5
           ],
-          "rotation": -120.0
+          "rotation": -145.3,
+          "allowOverlap": [
+            "living.corner-board"
+          ]
+        },
+        {
+          "id": "living.tv-arm",
+          "asset": "box",
+          "name": "Extending TV wall arm (black), screwed to the oak board",
+          "tags": [
+            "tv arm"
+          ],
+          "params": {
+            "width": 12,
+            "height": 10,
+            "depth": 25,
+            "color": "#1d1d1f"
+          },
+          "position": [
+            541.7,
+            95,
+            313.4
+          ],
+          "rotation": -145.3,
+          "allowOverlap": [
+            "living.corner-board",
+            "living.tv"
+          ]
         },
         {
           "id": "living.tv",
           "asset": "old-house-tv",
-          "name": "Our 65\" TV at 45° in the pillar corner (~2.5 m from the armchair, 2.3-3 m from the sofa)",
+          "name": "Our 65\" TV on a wall arm on the oak board, square to the corner (~2.5 m from the armchair, 2.3-3 m from the sofa)",
           "tags": [
             "tv"
           ],
           "params": {},
           "position": [
-            529.7,
-            62,
-            279.1
+            523.3,
+            58,
+            295.7
           ],
-          "rotation": -120.0,
+          "rotation": -145.3,
           "state": "wall",
           "allowOverlap": [
-            "living.tv-stand"
+            "living.tv-unit"
+          ]
+        },
+        {
+          "id": "living.broom-closet-door",
+          "asset": "box",
+          "name": "Door to a small broom closet behind the board, opening to the hallway side (vacuum, mop, ironing board)",
+          "tags": [
+            "closet",
+            "storage",
+            "idea"
+          ],
+          "params": {
+            "width": 73,
+            "height": 213,
+            "depth": 2,
+            "material": "wood-oak-light"
+          },
+          "position": [
+            547.5,
+            0,
+            339
+          ],
+          "rotation": 0,
+          "allowOverlap": [
+            "living.pillar",
+            "living.corner-board"
           ]
         },
         {
@@ -943,17 +1000,17 @@
         {
           "id": "living.armchair",
           "asset": "old-house-armchair",
-          "name": "Our grey armchair in the middle of the room: the best TV seat",
+          "name": "Our grey armchair in the middle of the room, turned to the TV",
           "tags": [
             "armchair"
           ],
           "params": {},
           "position": [
-            244.7,
+            245.0,
             0,
-            181.5
+            180.8
           ],
-          "rotation": 71.5,
+          "rotation": 70.4,
           "allowOverlap": [
             "living.sofa"
           ]
@@ -1662,8 +1719,10 @@
           },
           "allowOverlap": [
             "living.corner-board",
-            "living.tv-stand",
+            "living.tv-unit",
+            "living.tv-arm",
             "living.tv",
+            "living.broom-closet-door",
             "living.sofa",
             "living.cushions",
             "living.coffee-table",
@@ -1721,8 +1780,10 @@
           },
           "allowOverlap": [
             "living.corner-board",
-            "living.tv-stand",
+            "living.tv-unit",
+            "living.tv-arm",
             "living.tv",
+            "living.broom-closet-door",
             "living.sofa",
             "living.cushions",
             "living.coffee-table",
