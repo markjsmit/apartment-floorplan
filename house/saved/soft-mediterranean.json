@@ -2,7 +2,7 @@
   "meta": {
     "name": "Soft Mediterranean",
     "kind": "saved",
-    "note": "Soft Mediterranean · sofa in front of the big window straight across from the TV (~4.9 m), armchair by the kitchen island, angled to the sofa; bouclé banquette + round table; door corner = closet fully behind a linen curtain with a closed side (coats, shoes, devices, broom corner); arched mirror on the kitchen side of the pillar.",
+    "note": "Soft Mediterranean · sofa in front of the big window straight across from the TV (~4.9 m), armchair by the balcony door angled to the sofa, bird of paradise in the corner; bouclé banquette + round table; door corner = closet fully behind a linen curtain with a closed side (coats, shoes, devices, broom corner); arched mirror on the kitchen side of the pillar.",
     "location": {
       "lat": 32.0853,
       "lon": 34.7818,
@@ -809,7 +809,7 @@
           },
           "against": {
             "wall": "living.wall-1",
-            "offset": 60,
+            "offset": 105,
             "elevation": 0,
             "gap": 0
           }
@@ -817,14 +817,14 @@
         {
           "id": "living.tv",
           "asset": "old-house-tv",
-          "name": "Our 65\" TV (~4.9 m from the sofa, straight across)",
+          "name": "Our 65\" TV (~4.9 m from the sofa; a bit towards the hallway so the armchair in the corner is out of the way)",
           "tags": [
             "tv"
           ],
           "params": {},
           "against": {
             "wall": "living.wall-1",
-            "offset": 90.5,
+            "offset": 135.5,
             "elevation": 50,
             "gap": 6
           },
@@ -922,17 +922,17 @@
         {
           "id": "living.armchair",
           "asset": "old-house-armchair",
-          "name": "Our grey armchair near the kitchen island, back towards the sofa, angled to the sofa (a chat corner)",
+          "name": "Our grey armchair by the balcony door (where the bird of paradise was), angled to the sofa",
           "tags": [
             "armchair"
           ],
           "params": {},
           "position": [
-            259.2,
+            431.4,
             0,
-            367.7
+            40.1
           ],
-          "rotation": -140.3,
+          "rotation": -68.0,
           "allowOverlap": [
             "living.sofa"
           ]
@@ -1286,16 +1286,16 @@
             "model": "leafy-tree"
           },
           "position": [
-            500,
+            45,
             0,
-            8.0
+            355.0
           ],
           "rotation": 0
         },
         {
           "id": "living.strelitzia",
           "asset": "plant",
-          "name": "Bird of paradise 'Nicolai' (white Strelitzia), 15 L, ~140 cm — Plants4U – Galilot nursery ₪440",
+          "name": "Bird of paradise 'Nicolai' (white Strelitzia), 15 L, ~140 cm — Plants4U – Galilot nursery ₪440 (in the corner by the small window)",
           "tags": [
             "plant"
           ],
@@ -1308,9 +1308,9 @@
             "potColor": "#c8a77a"
           },
           "position": [
-            375,
+            545,
             0,
-            5.0
+            20.0
           ],
           "rotation": 0
         },
@@ -1332,7 +1332,7 @@
           "position": [
             563,
             50,
-            63.0
+            110.0
           ],
           "rotation": 0,
           "allowOverlap": [

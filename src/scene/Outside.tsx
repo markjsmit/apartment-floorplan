@@ -12,7 +12,7 @@ import atlasUrl from '../../assets/outside/facade-atlas.jpg?url';
 import atlasAlphaUrl from '../../assets/outside/facade-atlas-alpha.jpg?url';
 import groundCityUrl from '../../assets/outside/ground-city.jpg?url';
 import groundParkUrl from '../../assets/outside/ground-park.jpg?url';
-import { buildCity, grid, GROUND_HALF, GROUND_Y, groundCanvas, windowCanvas } from './outsideCity';
+import { buildCity, grid, GROUND_HALF, GROUND_Y, groundCanvas, PAN_TURN, windowCanvas } from './outsideCity';
 
 // The view from the 27th floor (assets/outside/source.json). Far away: a panorama stitched from Mark's balcony pan
 // video, drawn behind everything as a background that moves with the camera (no parallax, like the real horizon):
@@ -129,8 +129,8 @@ export function Outside({ northAngle, daylight }: { northAngle: number; daylight
     g.setIndex([0, 1, 2, 0, 2, 3]);
     return {
       ...c, groundGeo: g, ground,
-      pano: band(PANO_FROM, PANO_TO, 96),
-      fill: band(PANO_TO, PANO_FROM + 360, 64),
+      pano: band(PANO_FROM + PAN_TURN, PANO_TO + PAN_TURN, 96),
+      fill: band(PANO_TO + PAN_TURN, PANO_FROM + 360 + PAN_TURN, 64),
     };
   }, [seam]);
   useEffect(() => () => {

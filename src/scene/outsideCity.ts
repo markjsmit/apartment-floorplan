@@ -27,6 +27,13 @@ const EYE_Y = 160;
 const TOWER: { x: [number, number]; z: [number, number] } = { x: [-25, 2575], z: [-15, 2385] };
 const O: [number, number] = [(TOWER.x[0] + TOWER.x[1]) / 2, (TOWER.z[0] + TOWER.z[1]) / 2];
 const DEG = Math.PI / 180;
+/**
+ * Everything read off Mark's balcony pan (the panorama, the neighbour tower, the bases of the panorama towers, the long
+ * low building) turned by this many degrees (clockwise from above). The pan's bearings were 40 deg too far west: the
+ * house video (27 Oct, walking from the living room to the balcony door) shows the neighbour tower straight ahead,
+ * filling the whole door, its face square to us, and the city only opening up to the north-east.
+ */
+export const PAN_TURN = 40;
 /** Compass direction in house (x, z): bearing 0 = north = -z, 90 = east. */
 const dir = (b: number): [number, number] => [Math.sin(b * DEG), -Math.cos(b * DEG)];
 const DU = dir(0);
@@ -177,8 +184,8 @@ const FLOOR = F.floorPx * F.cmPerPx; // 310 cm
 
 /** Point on a face plane seen from the eye: bearing m, distance d, s along it, `back` behind it (cm). */
 function facePoint(m: number, d: number, s: number, back = 0): [number, number] {
-  const n = dir(m);
-  const t = dir(m + 90);
+  const n = dir(m + PAN_TURN);
+  const t = dir(m + 90 + PAN_TURN);
   return [EYE[0] + n[0] * (d + back) + t[0] * s, EYE[1] + n[1] * (d + back) + t[1] * s];
 }
 
@@ -190,7 +197,7 @@ function neighbour(m: Mesh) {
   const hOf = (row: number) => F.h1 - row * F.cmPerPx;
   const cutH = hOf(F.cutRow);
   const lobbyTop = GROUND_Y - EYE_Y + 600;
-  const n = dir(mb);
+  const n = dir(mb + PAN_TURN);
   for (const p of PARTS) {
     const s0 = sOf(p.x0);
     const s1 = sOf(p.x1);
@@ -220,8 +227,8 @@ function neighbour(m: Mesh) {
     const [cx, cz] = facePoint(mb, d, s1, p.depth);
     const [ex, ez] = facePoint(mb, d, s0, p.depth);
     const side = rect('side');
-    const kL = shade(-dir(mb + 90)[0], -dir(mb + 90)[1]);
-    const kR = shade(dir(mb + 90)[0], dir(mb + 90)[1]);
+    const kL = shade(-dir(mb + 90 + PAN_TURN)[0], -dir(mb + 90 + PAN_TURN)[1]);
+    const kR = shade(dir(mb + 90 + PAN_TURN)[0], dir(mb + 90 + PAN_TURN)[1]);
     const kB = shade(n[0], n[1]);
     tiledFace(m, bx, bz, cx, cz, GROUND_Y, yT, side, 680, 930, kR);
     tiledFace(m, cx, cz, ex, ez, GROUND_Y, yT, side, 680, 930, kB);
@@ -322,7 +329,11 @@ function panoTowers(m: Mesh, ghost: Mesh) {
 
 /** Eye-relative metres (x east, z south) of the ends of its long axis, from projecting frames 0-0.8 s onto a plane
  * 70 m under the eye (its roof). */
-const LONG = { n: [-77, 30], f: [-113, 128], half: 15, length: 100, height: 1660 };
+const turnEye = ([x, z]: number[]): [number, number] => {
+  const a = PAN_TURN * DEG;
+  return [x * Math.cos(a) - z * Math.sin(a), x * Math.sin(a) + z * Math.cos(a)];
+};
+const LONG = { n: turnEye([-77, 30]), f: turnEye([-113, 128]), half: 15, length: 100, height: 1660 };
 
 function longBuilding(atlas: Mesh, city: Mesh) {
   const [nx, nz] = LONG.n;

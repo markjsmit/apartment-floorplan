@@ -854,17 +854,17 @@
         {
           "id": "living.armchair",
           "asset": "old-house-armchair",
-          "name": "Our grey armchair (TV seat by the window)",
+          "name": "Our grey armchair parked in the corner of the KALLAX divider and the wall, 90 deg to the TV (drag it in when we need it)",
           "tags": [
             "armchair"
           ],
           "params": {},
           "position": [
-            194.4,
+            44.0,
             0,
-            107.5
+            527.5
           ],
-          "rotation": -49.7,
+          "rotation": 180.0,
           "allowOverlap": [
             "living.sofa"
           ]
@@ -1146,12 +1146,10 @@
         {
           "id": "living.entry-rack",
           "asset": "closet-system",
-          "name": "Black clamp-post rack (floor-to-soffit, no drilling): coats on hangers, bags + shoes on the shelves",
+          "name": "Black clamp-post coat rack 52 wide (floor-to-soffit, no drilling): just our coats on hangers (bags live in the KALLAX); leaves room for the locker door",
           "tags": [
             "entry",
-            "coats",
-            "shoes",
-            "drop zone"
+            "coats"
           ],
           "params": {
             "height": 215,
@@ -1160,15 +1158,9 @@
             "shelfMaterial": "wood-oak-light",
             "sections": [
               {
-                "w": 34,
-                "kind": "shelves",
-                "contents": "shoes bags bags"
-              },
-              {
-                "w": 34,
+                "w": 46,
                 "kind": "hang",
-                "coats": 2,
-                "shoes": 1
+                "coats": 3
               }
             ]
           },
@@ -1182,7 +1174,7 @@
         {
           "id": "living.broom-closet",
           "asset": "tall-cabinet",
-          "name": "Black steel locker 45x40x190 in the door corner = broom closet: vacuum, mop, broom, ironing board",
+          "name": "Black steel locker 45x40x190 in the door corner, turned to face the room so its door opens = broom closet: vacuum, mop, broom, ironing board",
           "tags": [
             "broom closet",
             "locker",
@@ -1209,8 +1201,8 @@
             ]
           },
           "against": {
-            "wall": "living.wall-4",
-            "offset": 523,
+            "wall": "living.wall-5",
+            "offset": 0,
             "elevation": 0,
             "gap": 0
           }
