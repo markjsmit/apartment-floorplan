@@ -1,6 +1,6 @@
 {
   "id": "old-house-bed-black",
-  "name": "Black upholstered bed 160x200 (old house)",
+  "name": "Black velvet bed, mattress 180 x 220 (old house)",
   "tags": [
     "old house",
     "bedroom",
@@ -9,131 +9,225 @@
     "black",
     "headboard"
   ],
-  "description": "Black upholstered bed with a tall tufted headboard and thin metal hairpin legs, mattress 160 x 200 (could be 180 — check). Outside 178 x 215, headboard 118 high. Sizes estimated from photos of the old apartment — measure before relying on them.",
+  "description": "Our black velvet bed: rounded ruched base on thin black hairpin legs, padded headboard with a rolled top, grey duvet. Mattress 180 x 220 (Mark, measured). Outside ~200 wide x 240 long, headboard ~107 high, mattress top ~58 — frame sizes estimated from the photos around the mattress.",
   "source": {
     "kind": "parts",
-    "notes": "Modelled from Mark's photos in sources/old house/ (bedroom photos 05, 21, 24, 25).",
+    "notes": "Modelled from Mark's photos in sources/old house/ (d4e54038…, 346198ec…, eea82bf0…). Mattress 180 x 220 from Mark; frame estimated.",
     "license": "self-made"
   },
   "parts": [
     {
-      "id": "leg-1",
+      "id": "leg-1a",
       "tags": [
-        "leg"
+        "leg",
+        "hairpin leg"
       ],
       "geometry": {
         "type": "cylinder",
-        "radius": 0.9,
-        "height": 14,
+        "radius": 0.6,
+        "height": 12.367363552198777,
         "segments": 8
       },
       "position": [
-        -80,
-        7,
-        20
+        -85.5,
+        6.0,
+        31.5
       ],
       "rotation": [
+        11.0,
         0,
-        0,
-        0
+        14
       ],
-      "material": "metal-black",
-      "castShadow": true,
-      "glass": false
+      "material": "metal-black"
     },
     {
-      "id": "leg-2",
+      "id": "leg-1b",
       "tags": [
-        "leg"
+        "leg",
+        "hairpin leg"
       ],
       "geometry": {
         "type": "cylinder",
-        "radius": 0.9,
-        "height": 14,
+        "radius": 0.6,
+        "height": 12.367363552198777,
         "segments": 8
       },
       "position": [
-        80,
-        7,
-        20
+        -85.5,
+        6.0,
+        36.5
       ],
       "rotation": [
+        -11.0,
         0,
-        0,
-        0
+        14
       ],
-      "material": "metal-black",
-      "castShadow": true,
-      "glass": false
+      "material": "metal-black"
     },
     {
-      "id": "leg-3",
+      "id": "leg-2a",
       "tags": [
-        "leg"
+        "leg",
+        "hairpin leg"
       ],
       "geometry": {
         "type": "cylinder",
-        "radius": 0.9,
-        "height": 14,
+        "radius": 0.6,
+        "height": 12.367363552198777,
         "segments": 8
       },
       "position": [
-        -80,
-        7,
-        205
+        85.5,
+        6.0,
+        31.5
       ],
       "rotation": [
+        11.0,
         0,
-        0,
-        0
+        -14
       ],
-      "material": "metal-black",
-      "castShadow": true,
-      "glass": false
+      "material": "metal-black"
     },
     {
-      "id": "leg-4",
+      "id": "leg-2b",
       "tags": [
-        "leg"
+        "leg",
+        "hairpin leg"
       ],
       "geometry": {
         "type": "cylinder",
-        "radius": 0.9,
-        "height": 14,
+        "radius": 0.6,
+        "height": 12.367363552198777,
         "segments": 8
       },
       "position": [
-        80,
-        7,
-        205
+        85.5,
+        6.0,
+        36.5
       ],
       "rotation": [
+        -11.0,
         0,
-        0,
-        0
+        -14
       ],
-      "material": "metal-black",
-      "castShadow": true,
-      "glass": false
+      "material": "metal-black"
     },
     {
-      "id": "frame",
+      "id": "leg-3a",
       "tags": [
-        "bed",
-        "frame"
+        "leg",
+        "hairpin leg"
+      ],
+      "geometry": {
+        "type": "cylinder",
+        "radius": 0.6,
+        "height": 12.367363552198777,
+        "segments": 8
+      },
+      "position": [
+        -85.5,
+        6.0,
+        219.5
+      ],
+      "rotation": [
+        11.0,
+        0,
+        14
+      ],
+      "material": "metal-black"
+    },
+    {
+      "id": "leg-3b",
+      "tags": [
+        "leg",
+        "hairpin leg"
+      ],
+      "geometry": {
+        "type": "cylinder",
+        "radius": 0.6,
+        "height": 12.367363552198777,
+        "segments": 8
+      },
+      "position": [
+        -85.5,
+        6.0,
+        224.5
+      ],
+      "rotation": [
+        -11.0,
+        0,
+        14
+      ],
+      "material": "metal-black"
+    },
+    {
+      "id": "leg-4a",
+      "tags": [
+        "leg",
+        "hairpin leg"
+      ],
+      "geometry": {
+        "type": "cylinder",
+        "radius": 0.6,
+        "height": 12.367363552198777,
+        "segments": 8
+      },
+      "position": [
+        85.5,
+        6.0,
+        219.5
+      ],
+      "rotation": [
+        11.0,
+        0,
+        -14
+      ],
+      "material": "metal-black"
+    },
+    {
+      "id": "leg-4b",
+      "tags": [
+        "leg",
+        "hairpin leg"
+      ],
+      "geometry": {
+        "type": "cylinder",
+        "radius": 0.6,
+        "height": 12.367363552198777,
+        "segments": 8
+      },
+      "position": [
+        85.5,
+        6.0,
+        224.5
+      ],
+      "rotation": [
+        -11.0,
+        0,
+        -14
+      ],
+      "material": "metal-black"
+    },
+    {
+      "id": "base",
+      "tags": [
+        "base",
+        "frame",
+        "ruched base"
       ],
       "geometry": {
         "type": "box",
         "size": [
-          178,
-          26,
-          203
-        ]
+          196,
+          28,
+          226
+        ],
+        "radius": 11
       },
       "position": [
         0,
-        27,
-        113.5
+        26.0,
+        127
       ],
       "rotation": [
         0,
@@ -141,28 +235,54 @@
         0
       ],
       "material": "fabric-grey",
-      "color": "#3a3a3e",
-      "castShadow": true,
-      "glass": false
+      "color": "#2a2a2d"
+    },
+    {
+      "id": "base-seam",
+      "tags": [
+        "base",
+        "seam"
+      ],
+      "geometry": {
+        "type": "box",
+        "size": [
+          197,
+          1.2,
+          227
+        ],
+        "radius": 0.6
+      },
+      "position": [
+        0,
+        26.0,
+        127
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "material": "fabric-grey",
+      "color": "#1c1c1e"
     },
     {
       "id": "headboard",
       "tags": [
-        "bed",
         "headboard"
       ],
       "geometry": {
         "type": "box",
         "size": [
-          182,
-          104,
-          12
-        ]
+          200,
+          82,
+          16
+        ],
+        "radius": 6
       },
       "position": [
         0,
-        66,
-        6
+        56,
+        8
       ],
       "rotation": [
         0,
@@ -170,56 +290,81 @@
         0
       ],
       "material": "fabric-grey",
-      "color": "#3a3a3e",
-      "castShadow": true,
-      "glass": false
+      "color": "#2a2a2d"
+    },
+    {
+      "id": "headboard-roll",
+      "tags": [
+        "headboard",
+        "headboard cushion"
+      ],
+      "geometry": {
+        "type": "box",
+        "size": [
+          204,
+          26,
+          19
+        ],
+        "radius": 10
+      },
+      "position": [
+        0,
+        94,
+        8.5
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "material": "fabric-grey",
+      "color": "#2a2a2d"
     },
     {
       "id": "mattress",
       "tags": [
-        "bed",
         "mattress"
       ],
       "geometry": {
         "type": "box",
         "size": [
-          160,
-          20,
-          198
-        ]
+          180,
+          22,
+          220
+        ],
+        "radius": 5
       },
       "position": [
         0,
-        50,
-        112
+        47,
+        128
       ],
       "rotation": [
         0,
         0,
         0
       ],
-      "material": "linen-white",
-      "castShadow": true,
-      "glass": false
+      "material": "linen-white"
     },
     {
       "id": "duvet",
       "tags": [
-        "bed",
-        "duvet"
+        "duvet",
+        "bedding"
       ],
       "geometry": {
         "type": "box",
         "size": [
-          168,
-          6,
-          160
-        ]
+          186,
+          5,
+          168
+        ],
+        "radius": 2.5
       },
       "position": [
         0,
-        63,
-        135
+        60.5,
+        152
       ],
       "rotation": [
         0,
@@ -227,28 +372,111 @@
         0
       ],
       "material": "linen-white",
-      "color": "#9c9fa5",
-      "castShadow": true,
-      "glass": false
+      "color": "#8e9096"
+    },
+    {
+      "id": "duvet-side-l",
+      "tags": [
+        "duvet",
+        "bedding"
+      ],
+      "geometry": {
+        "type": "box",
+        "size": [
+          3,
+          26,
+          168
+        ],
+        "radius": 1.5
+      },
+      "position": [
+        -94.5,
+        50,
+        152
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "material": "linen-white",
+      "color": "#8e9096"
+    },
+    {
+      "id": "duvet-side-r",
+      "tags": [
+        "duvet",
+        "bedding"
+      ],
+      "geometry": {
+        "type": "box",
+        "size": [
+          3,
+          26,
+          168
+        ],
+        "radius": 1.5
+      },
+      "position": [
+        94.5,
+        50,
+        152
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "material": "linen-white",
+      "color": "#8e9096"
+    },
+    {
+      "id": "duvet-foot",
+      "tags": [
+        "duvet",
+        "bedding"
+      ],
+      "geometry": {
+        "type": "box",
+        "size": [
+          192,
+          26,
+          3
+        ],
+        "radius": 1.5
+      },
+      "position": [
+        0,
+        50,
+        237.5
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "material": "linen-white",
+      "color": "#8e9096"
     },
     {
       "id": "pillow-1",
       "tags": [
-        "bed",
-        "pillow"
+        "pillow",
+        "bedding"
       ],
       "geometry": {
         "type": "box",
         "size": [
-          62,
-          12,
-          40
-        ]
+          72,
+          14,
+          46
+        ],
+        "radius": 6.5
       },
       "position": [
-        -40,
-        66,
-        36
+        -42,
+        65,
+        48
       ],
       "rotation": [
         0,
@@ -256,28 +484,27 @@
         0
       ],
       "material": "linen-white",
-      "color": "#74777c",
-      "castShadow": true,
-      "glass": false
+      "color": "#6f7177"
     },
     {
       "id": "pillow-2",
       "tags": [
-        "bed",
-        "pillow"
+        "pillow",
+        "bedding"
       ],
       "geometry": {
         "type": "box",
         "size": [
-          62,
-          12,
-          40
-        ]
+          72,
+          14,
+          46
+        ],
+        "radius": 6.5
       },
       "position": [
-        40,
-        66,
-        36
+        42,
+        65,
+        48
       ],
       "rotation": [
         0,
@@ -285,9 +512,7 @@
         0
       ],
       "material": "linen-white",
-      "color": "#74777c",
-      "castShadow": true,
-      "glass": false
+      "color": "#6f7177"
     }
   ]
 }

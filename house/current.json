@@ -4124,6 +4124,46 @@
             "intensity": 8000
           },
           "builtIn": true
+        },
+        {
+          "id": "bedroom.nightstand-1",
+          "asset": "old-house-nightstand",
+          "name": "Our grey nightstand (west side)",
+          "tags": [
+            "nightstand",
+            "ours"
+          ],
+          "against": {
+            "wall": "bedroom.wall-0",
+            "offset": 4
+          }
+        },
+        {
+          "id": "bedroom.bed",
+          "asset": "old-house-bed-black",
+          "name": "Our black velvet bed (mattress 180 x 220), headboard under the window",
+          "tags": [
+            "bed",
+            "our bed",
+            "ours"
+          ],
+          "against": {
+            "wall": "bedroom.wall-0",
+            "offset": 51
+          }
+        },
+        {
+          "id": "bedroom.nightstand-2",
+          "asset": "old-house-nightstand",
+          "name": "Our grey nightstand (east side)",
+          "tags": [
+            "nightstand",
+            "ours"
+          ],
+          "against": {
+            "wall": "bedroom.wall-0",
+            "offset": 255
+          }
         }
       ],
       "assumptions": [

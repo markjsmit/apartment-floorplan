@@ -1419,9 +1419,9 @@ export function tvGear(p: Record<string, unknown>): Part[] {
   const black = { color: '#1d1d1f' };
   const parts: Part[] = [];
   if (p.speakers !== false) {
-    const [sw, sh, sd] = [16, 24, 20];
+    const [sw, sh, sd] = [22, 40, 28]; // standard bookshelf speakers (Mark: 40 x 28 x 22)
     for (const sx of [-1, 1]) {
-      const x = sx * (W / 2 - sw / 2 - 1);
+      const x = sx * (W / 2 - sw / 2 - 3); // turned in, its back corners stay on the unit
       const z = D - sd / 2 - 2;
       const yaw = -sx * 10; // turned in towards the middle of the room
       const k = sx > 0 ? 'r' : 'l';
@@ -1433,9 +1433,9 @@ export function tvGear(p: Record<string, unknown>): Part[] {
       };
       [
         box(`speaker-${k}`, ['speaker'], [sw, sh, sd], [x, sh / 2, z], { ...black, radius: 0.6 }),
-        { ...cyl(`speaker-${k}-woofer`, ['speaker'], 5.2, 0.8, [x, 8.5, z + sd / 2 + 0.2], { color: '#2e2e30' }), rotation: [90, 0, 0] as Vec3 },
-        { ...cyl(`speaker-${k}-cone`, ['speaker'], 2, 0.9, [x, 8.5, z + sd / 2 + 0.4], { color: '#4a4a4c' }), rotation: [90, 0, 0] as Vec3 },
-        { ...cyl(`speaker-${k}-tweeter`, ['speaker'], 1.7, 0.8, [x, 18.5, z + sd / 2 + 0.2], { color: '#3a3a3c' }), rotation: [90, 0, 0] as Vec3 },
+        { ...cyl(`speaker-${k}-woofer`, ['speaker'], 8, 0.8, [x, 14, z + sd / 2 + 0.2], { color: '#2e2e30' }), rotation: [90, 0, 0] as Vec3 },
+        { ...cyl(`speaker-${k}-cone`, ['speaker'], 3, 0.9, [x, 14, z + sd / 2 + 0.4], { color: '#4a4a4c' }), rotation: [90, 0, 0] as Vec3 },
+        { ...cyl(`speaker-${k}-tweeter`, ['speaker'], 2.6, 0.8, [x, 31, z + sd / 2 + 0.2], { color: '#3a3a3c' }), rotation: [90, 0, 0] as Vec3 },
       ].forEach((pt) => parts.push(turn(pt)));
     }
   }

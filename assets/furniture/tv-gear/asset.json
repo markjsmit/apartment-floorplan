@@ -5,7 +5,7 @@
     "ours",
     "design"
   ],
-  "description": "A pair of compact black speakers at the two ends of the TV unit, a flat media box in front of the TV feet and a small smart display, like our setup now. Put it on the TV unit (elevation = its height).",
+  "description": "A pair of black bookshelf speakers (22 wide x 40 high x 28 deep, Mark) at the two ends of the TV unit, a flat media box in front of the TV feet and a small smart display, like our setup now. Put it on the TV unit (elevation = its height).",
   "source": {
     "kind": "procedural",
     "generator": "tv-gear",
