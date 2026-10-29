@@ -2,7 +2,7 @@
   "meta": {
     "name": "Urban jungle",
     "kind": "saved",
-    "note": "Urban jungle · separator closet: sofa in the balcony/sofa-wall corner, TV on the west wall (~5.3 m); a tall rattan-door closet splits the entrance from the sitting area: doors to the entrance (coats, shoes, keys, devices), art + the table against its back; KALLAX with 8 pairs of shoes by the door.",
+    "note": "Urban jungle · sitting corner: TV at 45° in front of an oak board closing the pillar corner, sofa against the balcony wall in the corner, armchair mid-room = best TV seat; a tall rattan-door closet splits the entrance from the sitting area: doors to the entrance (coats, shoes, keys, devices), art + the table against its back; KALLAX with 8 pairs of shoes by the door.",
     "location": {
       "lat": 32.0853,
       "lon": 34.7818,
@@ -774,20 +774,83 @@
           "builtIn": true
         },
         {
+          "id": "living.corner-board",
+          "asset": "box",
+          "name": "Oak board closing the pillar corner (idea): hides the TV cable from the sofa-wall outlet",
+          "tags": [
+            "board",
+            "idea"
+          ],
+          "params": {
+            "width": 91.3,
+            "height": 238,
+            "depth": 3,
+            "material": "wood-oak-light"
+          },
+          "position": [
+            547.5,
+            0,
+            313.0
+          ],
+          "rotation": -145.3,
+          "allowOverlap": [
+            "living.pillar"
+          ]
+        },
+        {
+          "id": "living.tv-stand",
+          "asset": "tv-stand",
+          "name": "Slim black swivel TV floor stand, in the corner at 45°",
+          "tags": [
+            "tv stand"
+          ],
+          "params": {
+            "width": 89,
+            "depth": 52,
+            "height": 135,
+            "shelf": 0
+          },
+          "position": [
+            542.7,
+            0,
+            286.6
+          ],
+          "rotation": -120.0
+        },
+        {
+          "id": "living.tv",
+          "asset": "old-house-tv",
+          "name": "Our 65\" TV at 45° in the pillar corner (~2.5 m from the armchair, 2.3-3 m from the sofa)",
+          "tags": [
+            "tv"
+          ],
+          "params": {},
+          "position": [
+            529.7,
+            62,
+            279.1
+          ],
+          "rotation": -120.0,
+          "state": "wall",
+          "allowOverlap": [
+            "living.tv-stand"
+          ]
+        },
+        {
           "id": "living.sofa",
           "asset": "old-house-sofa-l",
-          "name": "Our grey L-sofa (265), in the corner of the balcony wall and the sofa wall",
+          "name": "Our grey L-sofa (265), against the balcony wall in the corner (covers 30 cm of the sliding door's fixed end)",
           "tags": [
             "sofa",
             "couch"
           ],
           "params": {},
           "position": [
-            585,
+            452.5,
             0,
-            132.5
+            0
           ],
-          "rotation": -90,
+          "rotation": 0,
           "state": "covers"
         },
         {
@@ -820,46 +883,13 @@
             "material": "linen-sage"
           },
           "position": [
-            585,
+            452.5,
             0,
-            132.5
+            0
           ],
-          "rotation": -90,
+          "rotation": 0,
           "allowOverlap": [
             "living.sofa"
-          ]
-        },
-        {
-          "id": "living.tv-unit",
-          "asset": "old-house-tv-bench",
-          "name": "Our grey-oak TV bench",
-          "tags": [
-            "tv unit"
-          ],
-          "params": {},
-          "against": {
-            "wall": "living.wall-5",
-            "offset": 380,
-            "elevation": 0,
-            "gap": 0
-          }
-        },
-        {
-          "id": "living.tv",
-          "asset": "old-house-tv",
-          "name": "Our 65\" TV (~5.3 m from the sofa)",
-          "tags": [
-            "tv"
-          ],
-          "params": {},
-          "against": {
-            "wall": "living.wall-5",
-            "offset": 397.5,
-            "elevation": 50,
-            "gap": 6
-          },
-          "allowOverlap": [
-            "living.tv-unit"
           ]
         },
         {
@@ -881,11 +911,11 @@
             "frontColor": "#ffffff"
           },
           "position": [
-            378.0,
+            480,
             0,
-            178
+            200.0
           ],
-          "rotation": 90,
+          "rotation": 180,
           "allowOverlap": [
             "living.sofa"
           ]
@@ -904,26 +934,26 @@
             "material": "jute"
           },
           "position": [
-            345.0,
+            390.0,
             0,
-            78
+            100
           ],
           "rotation": 0
         },
         {
           "id": "living.armchair",
           "asset": "old-house-armchair",
-          "name": "Our grey armchair (in front of the pillar, ~4.4 m to the TV)",
+          "name": "Our grey armchair in the middle of the room: the best TV seat",
           "tags": [
             "armchair"
           ],
           "params": {},
           "position": [
-            494.3,
+            244.7,
             0,
-            296.0
+            181.5
           ],
-          "rotation": -95.5,
+          "rotation": 71.5,
           "allowOverlap": [
             "living.sofa"
           ]
@@ -931,7 +961,7 @@
         {
           "id": "living.entry-closet",
           "asset": "tall-cabinet",
-          "name": "Tall closet as a room divider, 150x50x210, oak body + rattan doors: kitchen devices | shoes, key niche, coats (doors face the entrance; closed back to the living room)",
+          "name": "Tall closet as a room divider, 140x50x210 (close to the front door, clear of its swing), oak body + rattan doors: kitchen devices | shoes, key niche, coats (doors face the entrance; closed back to the dining)",
           "tags": [
             "closet",
             "divider",
@@ -942,7 +972,7 @@
             "kitchen devices"
           ],
           "params": {
-            "width": 150,
+            "width": 140,
             "depth": 50,
             "height": 210,
             "plinth": 8,
@@ -954,7 +984,7 @@
             "frontColor": "#efe3cc",
             "columns": [
               {
-                "w": 50,
+                "w": 45,
                 "stack": [
                   {
                     "kind": "door",
@@ -968,7 +998,7 @@
                 ]
               },
               {
-                "w": 50,
+                "w": 47.5,
                 "stack": [
                   {
                     "kind": "door",
@@ -987,7 +1017,7 @@
                 ]
               },
               {
-                "w": 50,
+                "w": 47.5,
                 "stack": [
                   {
                     "kind": "door",
@@ -1008,9 +1038,9 @@
             ]
           },
           "position": [
-            75,
+            70,
             0,
-            560
+            600
           ],
           "rotation": 0
         },
@@ -1028,9 +1058,9 @@
             "art": "#8fa37e,#efe8dc,#5f7a52"
           },
           "position": [
-            85,
-            108,
-            559
+            70,
+            110,
+            599
           ],
           "rotation": 180,
           "allowOverlap": [
@@ -1040,26 +1070,23 @@
         {
           "id": "living.dining-table",
           "asset": "design-table",
-          "name": "Table 110x70, white top + wood legs, pushed against the closet",
+          "name": "Table for 6, 180x90, white top + oak legs, running north-south",
           "tags": [
             "dining table"
           ],
           "params": {
-            "width": 110,
-            "depth": 70,
+            "width": 180,
+            "depth": 90,
             "base": "legs",
             "material": "white-laminate",
             "legMaterial": "wood-oak-light"
           },
           "position": [
-            85,
+            55,
             0,
-            560
+            340
           ],
-          "rotation": 180,
-          "allowOverlap": [
-            "living.entry-closet"
-          ]
+          "rotation": 90
         },
         {
           "id": "living.chair-1",
@@ -1079,11 +1106,39 @@
             "width": 44
           },
           "position": [
-            58.0,
+            6.0,
             0,
-            444.0
+            285.0
           ],
-          "rotation": 0,
+          "rotation": 90,
+          "allowOverlap": [
+            "living.dining-table",
+            "living.banquette"
+          ]
+        },
+        {
+          "id": "living.chair-4",
+          "asset": "design-chair",
+          "name": "Rattan dining chair, woven rattan back + seat (natural wood colour) — Bar Chairs (barchairs.co.il) — same chair is \"Samoa\" at Million Kisot ₪140",
+          "tags": [
+            "dining chair"
+          ],
+          "params": {
+            "style": "rattan",
+            "seatColor": "#ffffff",
+            "backColor": "#ffffff",
+            "legColor": "#c49c68",
+            "seatMaterial": "rattan-weave",
+            "backMaterial": "rattan-weave",
+            "legMaterial": "wood-oak-light",
+            "width": 44
+          },
+          "position": [
+            194.0,
+            0,
+            285.0
+          ],
+          "rotation": -90,
           "allowOverlap": [
             "living.dining-table",
             "living.banquette"
@@ -1107,11 +1162,39 @@
             "width": 44
           },
           "position": [
-            114.0,
+            6.0,
             0,
-            444.0
+            340.0
           ],
-          "rotation": 0,
+          "rotation": 90,
+          "allowOverlap": [
+            "living.dining-table",
+            "living.banquette"
+          ]
+        },
+        {
+          "id": "living.chair-5",
+          "asset": "design-chair",
+          "name": "Rattan dining chair, woven rattan back + seat (natural wood colour) — Bar Chairs (barchairs.co.il) — same chair is \"Samoa\" at Million Kisot ₪140",
+          "tags": [
+            "dining chair"
+          ],
+          "params": {
+            "style": "rattan",
+            "seatColor": "#ffffff",
+            "backColor": "#ffffff",
+            "legColor": "#c49c68",
+            "seatMaterial": "rattan-weave",
+            "backMaterial": "rattan-weave",
+            "legMaterial": "wood-oak-light",
+            "width": 44
+          },
+          "position": [
+            194.0,
+            0,
+            340.0
+          ],
+          "rotation": -90,
           "allowOverlap": [
             "living.dining-table",
             "living.banquette"
@@ -1135,11 +1218,39 @@
             "width": 44
           },
           "position": [
-            0.0,
+            6.0,
             0,
-            525.0
+            395.0
           ],
           "rotation": 90,
+          "allowOverlap": [
+            "living.dining-table",
+            "living.banquette"
+          ]
+        },
+        {
+          "id": "living.chair-6",
+          "asset": "design-chair",
+          "name": "Rattan dining chair, woven rattan back + seat (natural wood colour) — Bar Chairs (barchairs.co.il) — same chair is \"Samoa\" at Million Kisot ₪140",
+          "tags": [
+            "dining chair"
+          ],
+          "params": {
+            "style": "rattan",
+            "seatColor": "#ffffff",
+            "backColor": "#ffffff",
+            "legColor": "#c49c68",
+            "seatMaterial": "rattan-weave",
+            "backMaterial": "rattan-weave",
+            "legMaterial": "wood-oak-light",
+            "width": 44
+          },
+          "position": [
+            194.0,
+            0,
+            395.0
+          ],
+          "rotation": -90,
           "allowOverlap": [
             "living.dining-table",
             "living.banquette"
@@ -1161,9 +1272,31 @@
             "shadeMaterial": "rattan-weave"
           },
           "position": [
-            85,
+            100,
             0,
-            520
+            300
+          ],
+          "rotation": 0
+        },
+        {
+          "id": "living.pendant-2",
+          "asset": "pendant-lamp",
+          "name": "Rattan pendant \"קש רחב\" ø39 — Orban Light (orbanlight.co.il) ₪340",
+          "tags": [
+            "lamp"
+          ],
+          "params": {
+            "ceiling": 277,
+            "bottom": 150,
+            "shape": "dome",
+            "diameter": 39,
+            "color": "#ffffff",
+            "shadeMaterial": "rattan-weave"
+          },
+          "position": [
+            100,
+            0,
+            380
           ],
           "rotation": 0
         },
@@ -1183,9 +1316,9 @@
             "flowers": "#efe6d6"
           },
           "position": [
-            70,
+            100,
             75,
-            520
+            335
           ],
           "rotation": 0,
           "allowOverlap": [
@@ -1211,7 +1344,7 @@
           "position": [
             22,
             210,
-            576.0
+            616.0
           ],
           "rotation": 0,
           "allowOverlap": [
@@ -1234,9 +1367,9 @@
             "potColor": "#efe6d4"
           },
           "position": [
-            75,
+            70,
             210,
-            576.0
+            616.0
           ],
           "rotation": 0,
           "allowOverlap": [
@@ -1260,83 +1393,14 @@
             "model": "syngonium"
           },
           "position": [
-            128,
+            118,
             210,
-            576.0
+            616.0
           ],
           "rotation": 0,
           "allowOverlap": [
             "living.entry-closet"
           ]
-        },
-        {
-          "id": "living.shoe-cubes",
-          "asset": "ikea-kallax-77x77",
-          "name": "KALLAX 2x2 by the door, open cubes with a shelf in each = 8 pairs of shoes; keys in the bowl on top — IKEA",
-          "tags": [
-            "shoes",
-            "kallax",
-            "drop zone"
-          ],
-          "params": {
-            "cols": 2,
-            "rows": 2,
-            "color": "white",
-            "contents": "shoes",
-            "seed": "urban-jungle"
-          },
-          "against": {
-            "wall": "living.wall-4",
-            "offset": 431,
-            "elevation": 0,
-            "gap": 0
-          }
-        },
-        {
-          "id": "living.key-bowl",
-          "asset": "table-decor",
-          "name": "Key + wallet bowl",
-          "tags": [
-            "drop zone"
-          ],
-          "params": {
-            "kind": "bowl",
-            "color": "#d9cfbf",
-            "diameter": 18
-          },
-          "position": [
-            112,
-            77,
-            688
-          ],
-          "rotation": 0,
-          "allowOverlap": [
-            "living.shoe-cubes"
-          ]
-        },
-        {
-          "id": "living.shoe-bench",
-          "asset": "bench",
-          "name": "Small rattan-top bench to sit on for shoes (56x35)",
-          "tags": [
-            "bench",
-            "entry"
-          ],
-          "params": {
-            "width": 56,
-            "depth": 35,
-            "height": 46,
-            "legs": "legs",
-            "material": "wood-oak-light",
-            "cushionColor": "#e9dcc4",
-            "cushionMaterial": "rattan-weave"
-          },
-          "against": {
-            "wall": "living.wall-4",
-            "offset": 510,
-            "elevation": 0,
-            "gap": 0
-          }
         },
         {
           "id": "living.stool-1",
@@ -1429,9 +1493,9 @@
             "potMaterial": "plaster-grey"
           },
           "position": [
-            382,
+            30,
             0,
-            7.0
+            165.0
           ],
           "rotation": 0
         },
@@ -1451,9 +1515,9 @@
             "potColor": "#efe6d4"
           },
           "position": [
-            28,
+            428,
             0,
-            344.5
+            280.5
           ],
           "rotation": 0
         },
@@ -1482,50 +1546,6 @@
           ]
         },
         {
-          "id": "living.hanging-1",
-          "asset": "plant",
-          "name": "Macramé plant hangers, set of 2, 35\" (89 cm), no tassels + 4 hooks — Amazon.com ₪25",
-          "tags": [
-            "plant"
-          ],
-          "params": {
-            "kind": "trailing",
-            "height": 55,
-            "seed": "hanging-1",
-            "spread": 30,
-            "potDiameter": 18,
-            "potColor": "#efe6d4"
-          },
-          "position": [
-            130,
-            180,
-            15.0
-          ],
-          "rotation": 0
-        },
-        {
-          "id": "living.hanging-2",
-          "asset": "plant",
-          "name": "Macramé plant hangers, set of 2, 35\" (89 cm), no tassels + 4 hooks — Amazon.com ₪25",
-          "tags": [
-            "plant"
-          ],
-          "params": {
-            "kind": "trailing",
-            "height": 55,
-            "seed": "hanging-2",
-            "spread": 30,
-            "potDiameter": 18,
-            "potColor": "#efe6d4"
-          },
-          "position": [
-            175,
-            180,
-            15.0
-          ],
-          "rotation": 0
-        },
-        {
           "id": "living.curtain-balcony",
           "asset": "curtain",
           "name": "Sheer linen curtains (balcony door)",
@@ -1545,10 +1565,11 @@
             "gap": 4
           },
           "allowOverlap": [
+            "living.corner-board",
+            "living.tv-stand",
+            "living.tv",
             "living.sofa",
             "living.cushions",
-            "living.tv-unit",
-            "living.tv",
             "living.coffee-table",
             "living.rug",
             "living.armchair",
@@ -1556,24 +1577,23 @@
             "living.art",
             "living.dining-table",
             "living.chair-1",
+            "living.chair-4",
             "living.chair-2",
+            "living.chair-5",
             "living.chair-3",
+            "living.chair-6",
             "living.pendant",
+            "living.pendant-2",
             "living.flowers",
             "living.closet-plant-1",
             "living.closet-plant-2",
             "living.closet-plant-3",
-            "living.shoe-cubes",
-            "living.key-bowl",
-            "living.shoe-bench",
             "living.stool-1",
             "living.stool-2",
             "living.strelitzia",
             "living.fig",
             "living.monstera",
             "living.herbs",
-            "living.hanging-1",
-            "living.hanging-2",
             "living.curtain-window"
           ]
         },
@@ -1598,10 +1618,11 @@
             "gap": 4
           },
           "allowOverlap": [
+            "living.corner-board",
+            "living.tv-stand",
+            "living.tv",
             "living.sofa",
             "living.cushions",
-            "living.tv-unit",
-            "living.tv",
             "living.coffee-table",
             "living.rug",
             "living.armchair",
@@ -1609,24 +1630,23 @@
             "living.art",
             "living.dining-table",
             "living.chair-1",
+            "living.chair-4",
             "living.chair-2",
+            "living.chair-5",
             "living.chair-3",
+            "living.chair-6",
             "living.pendant",
+            "living.pendant-2",
             "living.flowers",
             "living.closet-plant-1",
             "living.closet-plant-2",
             "living.closet-plant-3",
-            "living.shoe-cubes",
-            "living.key-bowl",
-            "living.shoe-bench",
             "living.stool-1",
             "living.stool-2",
             "living.strelitzia",
             "living.fig",
             "living.monstera",
             "living.herbs",
-            "living.hanging-1",
-            "living.hanging-2",
             "living.curtain-balcony"
           ]
         }

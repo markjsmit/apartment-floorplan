@@ -2,7 +2,7 @@
   "meta": {
     "name": "Soft Mediterranean",
     "kind": "saved",
-    "note": "Soft Mediterranean · mirrored: sofa on the west wall, TV on the sofa wall (~5.2 m), armchair beside the sofa; bouclé banquette + round table; door corner = open closet behind a linen curtain (behind you when you sit); arched mirror on the pillar.",
+    "note": "Soft Mediterranean · mirrored: sofa on the west wall, TV on the sofa wall (~5.2 m), armchair beside the sofa; bouclé banquette + round table; door corner = closet fully behind a linen curtain with a closed side (behind you when you sit); arched mirror on the pillar.",
     "location": {
       "lat": 32.0853,
       "lon": 34.7818,
@@ -1142,22 +1142,46 @@
           }
         },
         {
+          "id": "living.closet-side",
+          "asset": "box",
+          "name": "Closed side panel on the door end of the closet (white, 40 x 215)",
+          "tags": [
+            "closet",
+            "entry"
+          ],
+          "params": {
+            "width": 1.8,
+            "height": 215,
+            "depth": 40,
+            "material": "white-laminate"
+          },
+          "position": [
+            135.5,
+            0,
+            680
+          ],
+          "rotation": 0,
+          "allowOverlap": [
+            "living.entry-closet"
+          ]
+        },
+        {
           "id": "living.closet-curtain",
           "asset": "curtain",
-          "name": "Linen curtain on a ceiling track in front of the coats (shown half open)",
+          "name": "Linen curtain on a ceiling track across the whole closet: closes fully (shown pulled aside to the door end)",
           "tags": [
             "curtain",
             "entry"
           ],
           "params": {
-            "width": 84,
+            "width": 126,
             "height": 213,
             "panels": 1,
-            "open": 0.45,
+            "open": 0.35,
             "color": "#efe6d6"
           },
           "position": [
-            52,
+            69.5,
             0,
             684
           ],
@@ -1178,6 +1202,7 @@
             "living.pendant",
             "living.vase",
             "living.entry-closet",
+            "living.closet-side",
             "living.stool-1",
             "living.stool-2",
             "living.olive",
@@ -1385,6 +1410,7 @@
             "living.pendant",
             "living.vase",
             "living.entry-closet",
+            "living.closet-side",
             "living.closet-curtain",
             "living.stool-1",
             "living.stool-2",
@@ -1432,6 +1458,7 @@
             "living.pendant",
             "living.vase",
             "living.entry-closet",
+            "living.closet-side",
             "living.closet-curtain",
             "living.stool-1",
             "living.stool-2",

@@ -2,7 +2,7 @@
   "meta": {
     "name": "Light industrial loft",
     "kind": "saved",
-    "note": "Light industrial · floating sofa: wall-mounted TV (~3.55 m); dining behind the sofa (bench against the sofa back, our chairs on the wall side), open black KALLAX under the sofa window; door corner hidden behind 2 stacked KALLAX as a divider (shoes + devices below behind a steel magnet board with our photos, whisky + games + keys on top), shoe bench on the side wall, black clamp-post coat rack, our mirror. No rug, no curtains.",
+    "note": "Light industrial · floating sofa: wall-mounted TV (~3.55 m); dining behind the sofa (bench against the sofa back, our chairs on the wall side), open black KALLAX under the sofa window; door corner hidden behind 2 stacked KALLAX 4x3 (147x224) as a divider (shoes + devices below behind a steel magnet board with our photos, whisky + games + keys on top), shoe bench on the side wall, black clamp-post coat rack, our mirror. No rug, no curtains.",
     "location": {
       "lat": 32.0853,
       "lon": 34.7818,
@@ -1031,7 +1031,7 @@
         {
           "id": "living.divider-low",
           "asset": "ikea-kallax",
-          "name": "KALLAX 4x2 (bottom of the divider): 2 rows of shoes, a shelf in each cube (16 pairs), open to the door — IKEA",
+          "name": "KALLAX 4x3 (bottom of the divider, 147x112): 2 rows of shoes with a shelf in each cube (16 pairs), a row of kitchen appliances; open to the door — IKEA",
           "tags": [
             "kallax",
             "divider",
@@ -1040,9 +1040,13 @@
           ],
           "params": {
             "cols": 4,
-            "rows": 2,
+            "rows": 3,
             "color": "black-brown",
-            "contents": "shoes",
+            "contents": [
+              "devices devices devices devices",
+              "shoes shoes shoes shoes",
+              "shoes shoes shoes shoes"
+            ],
             "seed": "ind-low"
           },
           "position": [
@@ -1055,7 +1059,7 @@
         {
           "id": "living.divider-board",
           "asset": "wall-art",
-          "name": "Black steel sheet on the living-room side of the bottom KALLAX (hides the shoes): magnet board with our photos",
+          "name": "Black steel sheet on the living-room side over the first 4 rows (hides shoes, keys, bags): magnet board with our photos; only the top 2 rows are open both ways",
           "tags": [
             "divider",
             "board",
@@ -1064,8 +1068,8 @@
           ],
           "params": {
             "width": 147,
-            "height": 77,
-            "photos": 16,
+            "height": 149,
+            "photos": 26,
             "frameColor": "#2b2b2d",
             "seed": "fridge"
           },
@@ -1082,7 +1086,7 @@
         {
           "id": "living.divider-top",
           "asset": "ikea-kallax",
-          "name": "KALLAX 4x2 on top (open both ways): keys + bags at hand height, our games, whisky + books on show on the top row — IKEA",
+          "name": "KALLAX 4x3 on top (open both ways; screw the stack to the wall): a key cube each for Mark + Heli, everyday bags, then 2 rows of our games, whisky + books on show — IKEA",
           "tags": [
             "kallax",
             "divider",
@@ -1093,17 +1097,18 @@
           ],
           "params": {
             "cols": 4,
-            "rows": 2,
+            "rows": 3,
             "color": "black-brown",
             "contents": [
-              "games whisky books whisky",
+              "whisky games books whisky",
+              "games books whisky games",
               "keys keys bags bags"
             ],
             "seed": "ind-top"
           },
           "position": [
             73.5,
-            77,
+            112,
             530
           ],
           "rotation": 0,
@@ -1140,7 +1145,7 @@
         {
           "id": "living.entry-rack",
           "asset": "closet-system",
-          "name": "Black clamp-post rack (floor-to-soffit, no drilling): kitchen devices on the shelves, coats on hangers",
+          "name": "Black clamp-post rack (floor-to-soffit, no drilling): coats on hangers, bags + shoes on the shelves",
           "tags": [
             "entry",
             "coats",
@@ -1156,7 +1161,7 @@
               {
                 "w": 34,
                 "kind": "shelves",
-                "contents": "devices devices boxes boxes"
+                "contents": "shoes bags bags"
               },
               {
                 "w": 34,
@@ -1306,7 +1311,7 @@
           },
           "position": [
             20,
-            154,
+            225,
             535.0
           ],
           "rotation": 0,
