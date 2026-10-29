@@ -1,0 +1,38 @@
+{
+  "id": "corner-closet",
+  "name": "Corner broom closet behind a board (design)",
+  "tags": [
+    "closet",
+    "broom closet",
+    "cleaning",
+    "storage",
+    "design"
+  ],
+  "description": "Triangle closet closed off by a board on the room side (e.g. pillar end → wall behind a TV board): white door on one leg, fixed white panel on the other, lid. Inside: stick vacuum, flat mop, folded ironing board, sprays on a little corner shelf. Double-click the door to open it.",
+  "source": {
+    "kind": "procedural",
+    "generator": "corner-closet",
+    "license": "self-made",
+    "notes": "src/model/generators/decor.ts"
+  },
+  "params": {
+    "legX": {
+      "default": 75
+    },
+    "legZ": {
+      "default": 52
+    },
+    "height": {
+      "default": 238
+    },
+    "doorHeight": {
+      "default": 210
+    },
+    "material": {
+      "default": "white-laminate"
+    },
+    "handleColor": {
+      "default": "#2a2a2a"
+    }
+  }
+}

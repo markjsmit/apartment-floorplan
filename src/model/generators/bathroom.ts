@@ -1,7 +1,7 @@
 import type { AssetState, Part, PartOverride, Vec3 } from '../schema';
 import { box, cyl, FRONT_T, GAP, HANDLE, num, PLINTH, str, type WithStates } from './builtins';
 import { placeStuff, stuffKind, stuffParts } from './stuff';
-import { COAT_COLORS, coat, shoeRow } from './wear';
+import { cleaningRow, COAT_COLORS, coat, shoeRow } from './wear';
 
 // Bathroom + walk-in closet fixtures that come with the apartment: vanity with basin, wall-hung toilet, built-in bath,
 // walk-in shower, washer/dryer column, BOAXEL/ELVARLI-style closet system.
@@ -358,7 +358,7 @@ export function washerDryerColumn(params: Record<string, unknown>): WithStates {
   };
 }
 
-export const CLOSET_KINDS = ['hang', 'hang2', 'shelves', 'drawers'];
+export const CLOSET_KINDS = ['hang', 'hang2', 'shelves', 'drawers', 'broom'];
 type Section = { w: number; kind: string; drawers: number; coats: number; shoes: number; shelfContents: string };
 
 function sections(raw: unknown): Section[] {
@@ -374,7 +374,8 @@ function sections(raw: unknown): Section[] {
  * Walk-in closet system like IKEA BOAXEL/ELVARLI: white floor-to-ceiling posts (clamped, no drilling) with sections
  * between them, left→right. params: height (270 = ceiling), depth (40), postMaterial (texture id),
  * sections [{w, kind, drawers?}] kind: hang (top shelf + rail) | hang2 (shelf + upper and lower rail) | shelves (5) |
- * drawers (white 80 cm drawer unit, `drawers` 2 or 3 (default), + rail above + top shelf). Width = sections + posts.
+ * drawers (white 80 cm drawer unit, `drawers` 2 or 3 (default), + rail above + top shelf) | broom (top shelf, vacuum,
+ * mop + ironing board below). Width = sections + posts.
  */
 export function closetSystem(params: Record<string, unknown>): Part[] {
   const H = num(params.height, 270);
@@ -413,6 +414,10 @@ export function closetSystem(params: Record<string, unknown>): Part[] {
         parts.push(...placeStuff(stuffParts(kind, `${p}-c${k}`, sec.w - 2, D - 3, Math.min(room, 35)), 0, [xc, ys[k], 1]));
       });
       if (sec.shoes) parts.push(...shoeRow(`${p}-shoes`, xc, 0, D, sec.w, `${p}-shoes`, sec.shoes));
+    } else if (sec.kind === 'broom') {
+      // broom section: a top shelf, below it the vacuum, mop, ironing board ... standing on the floor
+      shelf(`${p}-shelf`, TOP);
+      parts.push(...placeStuff(cleaningRow(`${p}-clean`, 0, 0, 0, sec.w - 2, D - 3, TOP - 2), 0, [xc, 0, 1]));
     } else {
       shelf(`${p}-shelf`, TOP);
       rail(`${p}-rail`, TOP - 8);

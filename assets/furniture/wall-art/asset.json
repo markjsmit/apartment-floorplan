@@ -22,6 +22,14 @@
     },
     "height": {
       "default": 80
+    },
+    "round": {
+      "default": false,
+      "description": "round mirror (width = diameter), metal ring frame"
+    },
+    "strap": {
+      "default": false,
+      "description": "round mirror hung on a leather strap from a hook"
     }
   }
 }

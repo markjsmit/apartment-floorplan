@@ -2,7 +2,7 @@
   "meta": {
     "name": "Light industrial loft",
     "kind": "saved",
-    "note": "Light industrial · floating sofa: wall-mounted TV (~3.55 m); dining behind the sofa (bench against the sofa back, our chairs on the wall side), open black KALLAX under the sofa window; door corner hidden behind 2 stacked KALLAX 4x3 (147x224) as a divider (shoes + devices below behind a steel magnet board with our photos, whisky + games + keys on top), shoe bench on the side wall, black clamp-post coat rack, our mirror. No rug, no curtains.",
+    "note": "Light industrial · floating sofa: wall-mounted TV (~3.55 m); dining behind the sofa (bench against the sofa back, our chairs on the wall side), open black KALLAX under the sofa window; door corner hidden behind 2 stacked KALLAX 4x3 (147x224) as a divider (shoes + devices below behind a steel magnet board with our photos, whisky + games + keys on top), shoe bench on the side wall, black clamp-post coat rack, black steel locker as broom closet, round mirror over the bench. No rug, no curtains.",
     "location": {
       "lat": 32.0853,
       "lon": 34.7818,
@@ -1137,7 +1137,7 @@
           },
           "against": {
             "wall": "living.wall-5",
-            "offset": 42,
+            "offset": 46,
             "elevation": 0,
             "gap": 0
           }
@@ -1179,18 +1179,60 @@
           }
         },
         {
-          "id": "living.mirror",
-          "asset": "old-house-floor-mirror",
-          "name": "Our black floor mirror (leaning in the corner by the door)",
+          "id": "living.broom-closet",
+          "asset": "tall-cabinet",
+          "name": "Black steel locker 45x40x190 in the door corner = broom closet: vacuum, mop, broom, ironing board",
           "tags": [
-            "mirror",
-            "ours"
+            "broom closet",
+            "locker",
+            "entry"
           ],
-          "params": {},
+          "params": {
+            "width": 45,
+            "depth": 40,
+            "height": 190,
+            "plinth": 6,
+            "handles": "bar",
+            "handleColor": "#8a8c8e",
+            "material": "metal-black",
+            "frontMaterial": "metal-black",
+            "columns": [
+              {
+                "stack": [
+                  {
+                    "kind": "door",
+                    "content": "cleaning"
+                  }
+                ]
+              }
+            ]
+          },
           "against": {
             "wall": "living.wall-4",
-            "offset": 516,
+            "offset": 523,
             "elevation": 0,
+            "gap": 0
+          }
+        },
+        {
+          "id": "living.mirror",
+          "asset": "wall-art",
+          "name": "Round black-rim mirror ø60 on a leather strap, over the shoe bench",
+          "tags": [
+            "mirror",
+            "entry"
+          ],
+          "params": {
+            "round": true,
+            "strap": true,
+            "width": 60,
+            "height": 60,
+            "frameColor": "#1d1d1f"
+          },
+          "against": {
+            "wall": "living.wall-5",
+            "offset": 62,
+            "elevation": 120,
             "gap": 0
           }
         },

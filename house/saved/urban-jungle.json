@@ -2,7 +2,7 @@
   "meta": {
     "name": "Urban jungle",
     "kind": "saved",
-    "note": "Urban jungle · sitting corner: TV at 45° in front of an oak board closing the pillar corner, sofa against the balcony wall in the corner, armchair mid-room = best TV seat; table for 6 north-south against a divider of 2 stacked KALLAX 4x3 (shoes, appliances, keys, bags behind an oak board with art; plants, games, whisky, books on top); bench + coat hooks by the door.",
+    "note": "Urban jungle · sitting corner: TV square to the corner on an oak board closing the pillar corner (white broom closet behind it, door on the hallway side), sofa against the balcony wall in the corner, armchair mid-room = best TV seat; table for 6 north-south against a divider of 2 stacked KALLAX 4x3 (shoes, appliances, keys, bags behind an oak board with art; plants, games, whisky, books on top); bench + coat hooks by the door.",
     "location": {
       "lat": 32.0853,
       "lon": 34.7818,
@@ -798,6 +798,34 @@
           ]
         },
         {
+          "id": "living.broom-closet",
+          "asset": "corner-closet",
+          "name": "Broom closet behind the oak board (white, like the walls): door on the hallway side, vacuum, mop, ironing board inside",
+          "tags": [
+            "closet",
+            "broom closet",
+            "storage"
+          ],
+          "params": {
+            "legX": 75,
+            "legZ": 52,
+            "height": 238
+          },
+          "position": [
+            585,
+            0,
+            339
+          ],
+          "rotation": 0,
+          "allowOverlap": [
+            "living.corner-board",
+            "living.pillar",
+            "living.tv-unit",
+            "living.tv-arm",
+            "living.tv"
+          ]
+        },
+        {
           "id": "living.tv-unit",
           "asset": "media-unit",
           "name": "Low TV cabinet 90x55 square to the corner, oak + rattan doors (router, console, cables)",
@@ -826,26 +854,25 @@
         },
         {
           "id": "living.tv-arm",
-          "asset": "box",
-          "name": "Extending TV wall arm (black), screwed to the oak board",
+          "asset": "tv-arm",
+          "name": "Full-motion TV wall arm (black), screwed to the oak board",
           "tags": [
             "tv arm"
           ],
           "params": {
-            "width": 12,
-            "height": 10,
-            "depth": 25,
-            "color": "#1d1d1f"
+            "reach": 25,
+            "shift": 10
           },
           "position": [
-            541.7,
-            95,
-            313.4
+            545.8,
+            85,
+            310.5
           ],
           "rotation": -145.3,
           "allowOverlap": [
             "living.corner-board",
-            "living.tv"
+            "living.tv",
+            "living.tv-unit"
           ]
         },
         {
@@ -1693,6 +1720,7 @@
           },
           "allowOverlap": [
             "living.corner-board",
+            "living.broom-closet",
             "living.tv-unit",
             "living.tv-arm",
             "living.tv",
@@ -1753,6 +1781,7 @@
           },
           "allowOverlap": [
             "living.corner-board",
+            "living.broom-closet",
             "living.tv-unit",
             "living.tv-arm",
             "living.tv",

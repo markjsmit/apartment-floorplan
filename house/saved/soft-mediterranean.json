@@ -2,7 +2,7 @@
   "meta": {
     "name": "Soft Mediterranean",
     "kind": "saved",
-    "note": "Soft Mediterranean · mirrored: sofa on the west wall, TV on the sofa wall (~5.2 m), armchair beside the sofa; bouclé banquette + round table; door corner = closet fully behind a linen curtain with a closed side (behind you when you sit); arched mirror on the pillar.",
+    "note": "Soft Mediterranean · sofa in front of the big window straight across from the TV (~4.9 m), armchair in front of the pillar; bouclé banquette + round table; door corner = closet fully behind a linen curtain with a closed side (coats, shoes, devices, broom corner); arched mirror on the kitchen side of the pillar.",
     "location": {
       "lat": 32.0853,
       "lon": 34.7818,
@@ -776,7 +776,7 @@
         {
           "id": "living.sofa",
           "asset": "old-house-sofa-l",
-          "name": "Our grey L-sofa (265), on the west wall",
+          "name": "Our grey L-sofa (265), in front of the big window, straight across from the TV (its end is 12 cm off the west 25 cm of the balcony door)",
           "tags": [
             "sofa",
             "couch"
@@ -785,7 +785,7 @@
           "position": [
             0,
             0,
-            292.5
+            150
           ],
           "rotation": 90,
           "state": "covers"
@@ -809,7 +809,7 @@
           },
           "against": {
             "wall": "living.wall-1",
-            "offset": 97,
+            "offset": 60,
             "elevation": 0,
             "gap": 0
           }
@@ -817,14 +817,14 @@
         {
           "id": "living.tv",
           "asset": "old-house-tv",
-          "name": "Our 65\" TV (~5.2 m from the sofa)",
+          "name": "Our 65\" TV (~4.9 m from the sofa, straight across)",
           "tags": [
             "tv"
           ],
           "params": {},
           "against": {
             "wall": "living.wall-1",
-            "offset": 127.5,
+            "offset": 90.5,
             "elevation": 50,
             "gap": 6
           },
@@ -850,9 +850,9 @@
             "shape": "oval"
           },
           "position": [
-            197.0,
+            200.0,
             0,
-            248
+            130
           ],
           "rotation": -90,
           "allowOverlap": [
@@ -874,9 +874,9 @@
             "material": "boucle"
           },
           "position": [
-            190,
+            200,
             0,
-            148
+            40
           ],
           "rotation": 0
         },
@@ -912,7 +912,7 @@
           "position": [
             0,
             0,
-            292.5
+            150
           ],
           "rotation": 90,
           "allowOverlap": [
@@ -922,17 +922,17 @@
         {
           "id": "living.armchair",
           "asset": "old-house-armchair",
-          "name": "Our grey armchair (beside the sofa, ~4.4 m to the TV)",
+          "name": "Our grey armchair in front of the pillar (~2 m to the TV)",
           "tags": [
             "armchair"
           ],
           "params": {},
           "position": [
-            108.1,
+            407.5,
             0,
-            121.1
+            299.4
           ],
-          "rotation": 80.6,
+          "rotation": 130.1,
           "allowOverlap": [
             "living.sofa"
           ]
@@ -940,7 +940,7 @@
         {
           "id": "living.floor-lamp",
           "asset": "floor-lamp",
-          "name": "AKTERSPRING floor lamp, 2 opal glass globes — IKEA Israel ₪245 (window corner, TV-point outlet)",
+          "name": "AKTERSPRING floor lamp, 2 opal glass globes — IKEA Israel ₪245 (at the sofa end, TV-point outlet by the window)",
           "tags": [
             "lamp"
           ],
@@ -952,11 +952,11 @@
             "baseMaterial": "wood-oak-light"
           },
           "position": [
-            20,
+            22,
             0,
-            158
+            312
           ],
-          "rotation": 180
+          "rotation": 90
         },
         {
           "id": "living.banquette",
@@ -1108,29 +1108,34 @@
         {
           "id": "living.entry-closet",
           "asset": "closet-system",
-          "name": "Open closet in the door corner (ELVARLI/BOAXEL-style, 40 deep): shelves by the door (shoes, keys, devices) + coat rail with shoes below",
+          "name": "Open closet in the door corner (ELVARLI/BOAXEL-style, 40 deep): shelves by the door (shoes, keys, devices), coat rail with shoes below, broom corner (vacuum, mop, ironing board)",
           "tags": [
             "entry",
             "closet",
             "coats",
             "shoes",
             "drop zone",
-            "kitchen devices"
+            "kitchen devices",
+            "broom closet"
           ],
           "params": {
             "height": 215,
             "depth": 40,
             "sections": [
               {
-                "w": 40,
+                "w": 36,
                 "kind": "shelves",
                 "contents": "shoes shoes stuff devices devices"
               },
               {
-                "w": 80,
+                "w": 50,
                 "kind": "hang",
-                "coats": 4,
-                "shoes": 3
+                "coats": 3,
+                "shoes": 2
+              },
+              {
+                "w": 33,
+                "kind": "broom"
               }
             ]
           },
@@ -1174,14 +1179,14 @@
             "entry"
           ],
           "params": {
-            "width": 126,
+            "width": 120,
             "height": 213,
             "panels": 1,
-            "open": 0.35,
+            "open": 0.75,
             "color": "#efe6d6"
           },
           "position": [
-            69.5,
+            68.5,
             0,
             684
           ],
@@ -1275,13 +1280,13 @@
             "kind": "tree",
             "height": 150,
             "seed": "olive",
-            "spread": 66,
+            "spread": 60,
             "model": "leafy-tree"
           },
           "position": [
-            38,
+            500,
             0,
-            7.0
+            8.0
           ],
           "rotation": 0
         },
@@ -1325,7 +1330,7 @@
           "position": [
             563,
             50,
-            100.0
+            63.0
           ],
           "rotation": 0,
           "allowOverlap": [
@@ -1335,9 +1340,10 @@
         {
           "id": "living.mirror",
           "asset": "wall-art",
-          "name": "Giant half-oval (arched) floor mirror 180×80, white frame — Urban ₪555",
+          "name": "Giant half-oval (arched) floor mirror 180×80, white frame — Urban ₪555 (on the pillar, kitchen side)",
           "tags": [
-            "pillar"
+            "pillar",
+            "mirror"
           ],
           "params": {
             "width": 80,
@@ -1348,9 +1354,9 @@
           "position": [
             452,
             0,
-            339
+            356
           ],
-          "rotation": 180,
+          "rotation": 0,
           "allowOverlap": [
             "living.pillar"
           ]
@@ -1370,8 +1376,8 @@
           },
           "against": {
             "wall": "living.wall-5",
-            "offset": 402,
-            "elevation": 110,
+            "offset": 422,
+            "elevation": 115,
             "gap": 0
           }
         },

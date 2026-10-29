@@ -2,7 +2,7 @@
   "meta": {
     "name": "Mid-century warm",
     "kind": "saved",
-    "note": "Mid-century · floating sofa facing the sofa wall: TV on a long walnut sideboard (~3.6 m); no armchair; open corner shelves at the pillar with the whisky + games; tulip table + our chairs; door corner = walnut 3-door wardrobe (coats, shoes, devices) + tilt-out shoe cabinet. No rug, no curtains.",
+    "note": "Mid-century · floating sofa facing the sofa wall: TV on a long walnut sideboard (~3.6 m); no armchair; open round-back corner shelves on brass posts at the pillar (seen from room + hallway) with the whisky + games; tulip table + our chairs; door corner = walnut 3-door wardrobe (coats, shoes, broom closet, devices) + tilt-out shoe cabinet. No rug, no curtains.",
     "location": {
       "lat": 32.0853,
       "lon": 34.7818,
@@ -922,7 +922,7 @@
         {
           "id": "living.corner-shelves",
           "asset": "corner-cabinet",
-          "name": "Open triangular corner shelves (no door): our whisky + board games on show; the TV cable can run up its back",
+          "name": "Open walnut corner shelves on slim brass posts, no backs (seen from the room and the hallway), rounded at the back: our whisky + board games on show",
           "tags": [
             "shelves",
             "whisky",
@@ -931,6 +931,9 @@
           ],
           "params": {
             "open": true,
+            "backs": false,
+            "round": 35,
+            "postColor": "#b08d3c",
             "legX": 75,
             "legZ": 76,
             "height": 200,
@@ -1091,13 +1094,14 @@
         {
           "id": "living.wardrobe",
           "asset": "tall-cabinet",
-          "name": "Walnut 3-door wardrobe on legs, 150x55x195: coats, shoes, kitchen devices",
+          "name": "Walnut 3-door wardrobe on legs, 150x55x195: coats, shoes, broom closet (vacuum, mop, ironing board) with kitchen devices above",
           "tags": [
             "wardrobe",
             "coats",
             "shoes",
             "kitchen devices",
-            "entry"
+            "entry",
+            "broom closet"
           ],
           "params": {
             "width": 150,
@@ -1134,8 +1138,8 @@
                 "stack": [
                   {
                     "kind": "door",
-                    "h": 90,
-                    "content": "devices"
+                    "h": 130,
+                    "content": "cleaning"
                   },
                   {
                     "kind": "door",
@@ -1337,7 +1341,7 @@
         },
         {
           "id": "living.pillar-cladding",
-          "asset": "box",
+          "asset": "slat-panel",
           "name": "Walnut slat cladding on the pillar (idea, ~2 cm)",
           "tags": [
             "pillar"

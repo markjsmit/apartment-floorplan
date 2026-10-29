@@ -1,7 +1,7 @@
 import type { Part, Vec3 } from '../schema';
 import { box as sharpBox, cyl, num, str, type Extra, type WithStates } from './builtins';
 import { placeStuff, stuffKind, stuffParts } from './stuff';
-import { COAT_COLORS, coat, shoeRow } from './wear';
+import { COAT_COLORS, cleaningSprays, coat, flatMop, ironingBoard, shoeRow, stickVacuum } from './wear';
 import { rng } from './stuff';
 
 // Simple design furniture for trying out room styles: tables, stools, chairs, benches, media units, shelves, rugs,
@@ -610,6 +610,16 @@ export function wallArt(p: Record<string, unknown>): Part[] {
     }
     return parts;
   }
+  if (p.round) {
+    // round mirror: a thin metal ring with the glass inside, hung on a leather strap or straight on the wall
+    parts.push({ ...cyl('frame', ['frame'], W / 2, t, [0, W / 2, t / 2], { color: fc, material: str(p.frameMaterial, 'metal-black') }), rotation: [90, 0, 0] });
+    parts.push({ ...cyl('mirror', ['mirror'], W / 2 - 2, 0.5, [0, W / 2, t + 0.25], { material: 'mirror' }), rotation: [90, 0, 0], castShadow: false });
+    if (p.strap) {
+      parts.push({ ...box('strap', ['strap'], [3.5, 26, 0.5], [0, W + 10, 0.4], { material: 'leather-cognac', radius: 0.2 }) });
+      parts.push(cyl('hook', ['hook'], 1, 2.5, [0, W + 22, 1.2], { color: fc }));
+    }
+    return parts;
+  }
   parts.push(box('frame', ['frame'], [W, H, t], [0, H / 2, t / 2], { color: fc }));
   if (p.mirror) {
     parts.push({ ...box('mirror', ['mirror'], [W - 5, H - 5, 0.5], [0, H / 2, t + 0.25], { material: 'mirror' }), castShadow: false });
@@ -698,21 +708,38 @@ function turned(parts: Part[], yaw: number, x: number, z: number): Part[] {
 }
 
 /**
- * Open corner shelves (no door): back panels on both walls, triangular shelves, and on each shelf (bottom → top,
- * `contents` space separated) whisky | games | books | stuff | ... in a row along the open front.
+ * Open corner shelves (no door): back panels on both walls (or `backs: false` = free-standing on slim posts, seen from
+ * both sides, best with `round`), triangular shelves, and on each shelf (bottom → top, `contents` space separated)
+ * whisky | games | books | stuff | ... in a row along the open front.
  */
 function openCorner(p: Record<string, unknown>, a: number, b: number, H: number, body: Extra): Part[] {
   const shelfLook = lookOf(p, 'shelf', typeof p.material === 'string' ? p.material : 'white-laminate');
   const n = Math.max(2, Math.round(num(p.shelves, 5)));
   const T = 2.5;
+  // `round` = radius of the corner at the back (no backs: it is open both ways and nobody bumps into a point)
+  const R = Math.min(num(p.round, 0), a - 5, b - 5);
+  // outline space: x → item x, y → item z (+a/2, +b/2 = the corner); the arc replaces the corner
+  const outline: [number, number][] = [[-a / 2, b / 2]];
+  if (R > 0) {
+    for (let i = 0; i <= 12; i++) {
+      const t = (Math.PI / 2) * (1 - i / 12);
+      outline.push([a / 2 - R + Math.cos(t) * R, b / 2 - R + Math.sin(t) * R]);
+    }
+  } else outline.push([a / 2, b / 2]);
+  outline.push([a / 2, -b / 2]);
   const tri = (id: string, y: number): Part => ({
-    id, tags: ['shelf'], geometry: { type: 'prism', points: [[a / 2, b / 2], [-a / 2, b / 2], [a / 2, -b / 2]], depth: T, bevel: 0.4 },
+    id, tags: ['shelf'], geometry: { type: 'prism', points: outline, depth: T, bevel: 0.6 },
     position: [-a / 2, y, -b / 2], rotation: [90, 0, 0], castShadow: true, glass: false, ...shelfLook,
   });
-  const parts: Part[] = [
-    box('back-x', ['body', 'back'], [a, H, 1.6], [-a / 2, H / 2, -0.8], body),
-    box('back-z', ['body', 'back'], [1.6, H, b], [-0.8, H / 2, -b / 2], body),
-  ];
+  const parts: Part[] = [];
+  if (p.backs !== false) {
+    parts.push(box('back-x', ['body', 'back'], [a, H, 1.6], [-a / 2, H / 2, -0.8], body), box('back-z', ['body', 'back'], [1.6, H, b], [-0.8, H / 2, -b / 2], body));
+  } else {
+    // free-standing: slim posts at the two front ends and on the rounded back, floor to top shelf
+    const postLook = { color: str(p.postColor, '#1d1d1f') };
+    const back: [number, number] = R > 0 ? [-R + R * Math.SQRT1_2 - 2, -R + R * Math.SQRT1_2 - 2] : [-3, -3];
+    for (const [i, [px, pz]] of ([[-a + 5, -2.5], [-2.5, -b + 5], back] as [number, number][]).entries()) parts.push(cyl(`post-${i + 1}`, ['post'], 1.3, H, [px, H / 2, pz], postLook));
+  }
   const len = Math.hypot(a, b);
   const h = (a * b) / len; // corner → front edge
   const yaw = (Math.atan2(-b, -a) * 180) / Math.PI; // the row's +z (its front) points out of the corner
@@ -757,6 +784,48 @@ export function cornerCabinet(p: Record<string, unknown>): Part[] {
   parts.push({ ...box('door', ['door', 'front'], [len - 4, H - 4, 1.8], [cx, H / 2, cz], door), rotation: [0, yaw, 0], section: 'door' });
   parts.push({ ...box('handle', ['handle'], [1.5, 20, 1.5], [cx + nx * 1.6 + (a / len) * (len / 2 - 8), H / 2, cz + nz * 1.6 - (b / len) * (len / 2 - 8)], { color: str(p.handleColor, '#2a2a2a') }), rotation: [0, yaw, 0], section: 'door' });
   return parts;
+}
+
+/**
+ * Small closet in a corner closed off by a board (e.g. the triangle between a pillar end and a wall behind a TV board):
+ * origin = the right-angle corner on the floor, the triangle runs `legX` along -x and `legZ` along -z (its diagonal is
+ * the board, not part of this item). A door on the x leg (facing +z, hinge at the corner end), a fixed panel on the z
+ * leg (facing +x), a lid. Inside: a broom closet (stick vacuum, mop, ironing board, sprays on a small shelf).
+ * params: legX, legZ, height, doorHeight, material/color (white), handleColor.
+ */
+export function cornerCloset(p: Record<string, unknown>): WithStates {
+  const a = num(p.legX, 75);
+  const b = num(p.legZ, 52);
+  const H = num(p.height, 238);
+  const dh = Math.min(H - 2, num(p.doorHeight, 210));
+  const T = 1.8;
+  const body = look(p, '', 'white-laminate');
+  const hc = { color: str(p.handleColor, '#2a2a2a') };
+  const parts: Part[] = [
+    { id: 'lid', tags: ['body', 'lid'], geometry: { type: 'prism', points: [[a / 2, b / 2], [-a / 2, b / 2], [a / 2, -b / 2]], depth: T, bevel: 0 }, position: [-a / 2, H - T / 2, -b / 2], rotation: [90, 0, 0], castShadow: true, glass: false, ...body },
+    box('panel', ['body', 'panel'], [T, H, b], [-T / 2, H / 2, -b / 2], body),
+    box('lintel', ['body', 'frame'], [a - T, H - dh, T], [-(a + T) / 2, (H + dh) / 2, -T / 2], body),
+  ];
+  const dw = a - T - 0.6;
+  const dx = -T - 0.3 - dw / 2;
+  const pivot: Vec3 = [-T - 0.3, dh / 2, 0];
+  const door: Part[] = [
+    box('door', ['door', 'front'], [dw, dh - 0.6, T], [dx, dh / 2, -T / 2], body),
+    box('handle', ['handle'], [1.2, 24, 1.6], [-a + 5, 105, 1], hc),
+  ].map((pt) => ({ ...pt, section: 'door', pivot }));
+  parts.push(...door);
+  // inside, kept clear of the diagonal (x/a + z/b > -1): ironing board flat on the panel, the vacuum behind the door
+  // (head along the panel), the mop further along, sprays + kitchen paper on a little corner shelf
+  parts.push(...ironingBoard('iron', -T - 2.5, 0, -b * 0.47, Math.min(120, H - 10), Math.min(34, b * 0.62), true));
+  parts.push(...stickVacuum('vac', -T - 14, 0, -b * 0.27, 112, true));
+  parts.push(...flatMop('mop', -a * 0.48, 0, -T - 7, 130));
+  const sa = Math.min(32, a * 0.45);
+  const sb = Math.min(24, b * 0.45);
+  parts.push({ id: 'shelf', tags: ['shelf'], geometry: { type: 'prism', points: [[sa / 2, sb / 2], [-sa / 2, sb / 2], [sa / 2, -sb / 2]], depth: 1.6, bevel: 0.3 }, position: [-T - sa / 2, 160, -T - sb / 2], rotation: [90, 0, 0], castShadow: true, glass: false, ...body });
+  parts.push(...cleaningSprays('sprays', -T - 10, 160.8, -T - 6).slice(0, 4));
+  const opened: Record<string, { rotation: Vec3 }> = {};
+  for (const pt of door) opened[pt.id] = { rotation: [pt.rotation[0], pt.rotation[1] + 95, pt.rotation[2]] }; // swings out (+z)
+  return { parts, states: [{ id: 'closed', name: 'Closed', parts: {} }, { id: 'open', name: 'Open', parts: opened }], interactions: [{ part: 'door', action: 'cycleStates' }, { part: 'handle', action: 'cycleStates' }] };
 }
 
 type Front = { kind?: string; h?: number; fill?: string; content?: string; mirror?: boolean; material?: string; color?: string };
@@ -884,6 +953,54 @@ export function tallCabinet(p: Record<string, unknown>): WithStates {
     states: [{ id: 'closed', name: 'Closed', parts: {} }, { id: 'open', name: 'Open', parts: opened }],
     interactions: fronts.map((part) => ({ part, action: 'cycleStates' as const })),
   };
+}
+
+/**
+ * Wood slat wall cladding (acoustic-panel style): vertical slats with shadow gaps on a dark felt backing.
+ * params: width, height, depth (total, ~2), slat (slat width, 2.7), gap (1.3), material/color, backColor.
+ */
+export function slatPanel(p: Record<string, unknown>): Part[] {
+  const W = num(p.width, 60);
+  const H = num(p.height, 240);
+  const D = Math.max(1.2, num(p.depth, 2));
+  const sw = num(p.slat, 2.7);
+  const gap = num(p.gap, 1.3);
+  const wood = look(p, '', 'wood-oak-light');
+  const back = 0.8;
+  const parts: Part[] = [box('backing', ['backing', 'felt'], [W, H, back], [0, H / 2, back / 2], { color: str(p.backColor, '#1d1d1f'), radius: 0.2 })];
+  const n = Math.max(1, Math.floor((W + gap) / (sw + gap)));
+  const x0 = -((n * sw + (n - 1) * gap) / 2) + sw / 2;
+  for (let i = 0; i < n; i++) parts.push(box(`slat-${i + 1}`, ['slat'], [sw, H, D - back], [x0 + i * (sw + gap), H / 2, back + (D - back) / 2], { ...wood, radius: 0.4 }));
+  return parts;
+}
+
+/**
+ * Full-motion TV wall arm: wall plate, two arm links with joints, tilt head + VESA plate. Origin = the wall plate
+ * (back-centre, bottom at y 0); the TV's back sits `reach` cm out, its centre `shift` cm to the side (+x).
+ * params: reach (25), shift (0), color.
+ */
+export function tvArm(p: Record<string, unknown>): Part[] {
+  const reach = Math.max(8, num(p.reach, 25));
+  const shift = num(p.shift, 0);
+  const c = { color: str(p.color, '#1d1d1f') };
+  const y = 15; // arm height over the bottom of the wall plate
+  const head: [number, number] = [shift, reach - 4];
+  const elbow: [number, number] = [shift / 2 - 9, (reach - 4) / 2];
+  const link = (id: string, [ax, az]: [number, number], [bx, bz]: [number, number], yy: number): Part => {
+    const len = Math.hypot(bx - ax, bz - az);
+    const yaw = (Math.atan2(-(bz - az), bx - ax) * 180) / Math.PI;
+    return { ...box(id, ['arm'], [len, 3, 3.5], [(ax + bx) / 2, yy, (az + bz) / 2], { ...c, radius: 1 }), rotation: [0, yaw, 0] };
+  };
+  return [
+    box('wall-plate', ['plate'], [8, 30, 1.4], [0, 15, 0.7], { ...c, radius: 0.5 }),
+    box('wall-mount', ['plate'], [5, 10, 3], [0, y, 2.5], { ...c, radius: 0.8 }),
+    link('arm-1', [0, 3], elbow, y),
+    cyl('joint-1', ['joint'], 2.3, 5, [elbow[0], y, elbow[1]], c),
+    link('arm-2', elbow, head, y + 0.5),
+    cyl('joint-2', ['joint'], 2.3, 5, [head[0], y, head[1]], c),
+    box('tilt-head', ['head'], [5, 12, 3], [head[0], y, reach - 2.2], { ...c, radius: 0.8 }),
+    box('vesa-plate', ['head', 'vesa'], [22, 22, 0.8], [head[0], y, reach - 0.4], { ...c, radius: 0.3 }),
+  ];
 }
 
 /** Swivel TV floor stand (e.g. 89 x 52 base, column up to the bracket, small shelf). Put the TV on it with state "wall". params: width, depth, height (bracket top), shelf (height, 0 = none), color. */

@@ -2,7 +2,7 @@
   "meta": {
     "name": "Japandi calm",
     "kind": "saved",
-    "note": "Japandi · wall-to-wall: sofa on the sofa wall, TV by the big window (~5.3 m), armchair in front of the pillar, big open middle; round oak table + our 4 chairs; door corner = one handleless oak closet (shoes, lit key niche, coats, kitchen devices).",
+    "note": "Japandi · wall-to-wall: sofa on the sofa wall, TV by the big window (~5.3 m), armchair in front of the pillar, big open middle; round oak table + our 4 chairs; door corner = one handleless oak closet (shoes, lit key niche, coats, broom closet + kitchen devices).",
     "location": {
       "lat": 32.0853,
       "lon": 34.7818,
@@ -1095,14 +1095,15 @@
         {
           "id": "living.entry-closet",
           "asset": "tall-cabinet",
-          "name": "Oak entry closet wall (IKEA PAX 75 + 50, 58 deep, oak-effect doors, push-openers; ~₪2,600 estimate): shoes · lit key niche · coats | kitchen devices",
+          "name": "Oak entry closet wall (IKEA PAX 75 + 50, 58 deep, oak-effect doors, push-openers; ~₪2,600 estimate): shoes · lit key niche · coats | broom closet (vacuum, mop, ironing board) with kitchen devices above",
           "tags": [
             "entry",
             "closet",
             "shoes",
             "coats",
             "drop zone",
-            "kitchen devices"
+            "kitchen devices",
+            "broom closet"
           ],
           "params": {
             "width": 134,
@@ -1157,8 +1158,8 @@
                 "stack": [
                   {
                     "kind": "door",
-                    "h": 100,
-                    "content": "devices"
+                    "h": 150,
+                    "content": "cleaning"
                   },
                   {
                     "kind": "door",
@@ -1270,7 +1271,7 @@
         },
         {
           "id": "living.pillar-cladding",
-          "asset": "box",
+          "asset": "slat-panel",
           "name": "Oak slat cladding on the pillar (idea, ~2 cm, no floor space)",
           "tags": [
             "pillar"

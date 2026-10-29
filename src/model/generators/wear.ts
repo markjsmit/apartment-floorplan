@@ -191,3 +191,93 @@ export function bagsSpot(prefix: string, x: number, y: number, z0: number, width
     slab(`${prefix}-pocket`, [10, h * 0.35, 3], [x + width / 4, y + h * 0.3, tz + 6.5], c2, 1.2),
   ];
 }
+
+/** Cordless stick vacuum standing on y, floor head to +z (or along x with `turned`). ~112 high. */
+export function stickVacuum(prefix: string, x: number, y: number, z: number, h = 112, turned = false): Part[] {
+  const tags = ['cleaning', 'vacuum', 'contents'];
+  const head: Vec3 = turned ? [9, 5, 25] : [25, 5, 9];
+  const wand = h - 34;
+  return [
+    { ...box(`${prefix}-head`, tags, head, [x, y + 2.5, z], { color: '#3a3a3c' }), geometry: { type: 'box', size: head, radius: 2 } },
+    { ...box(`${prefix}-brush`, tags, turned ? [7.6, 1.2, 23] : [23, 1.2, 7.6], [x, y + 0.6, z], { color: '#c9a227' }), geometry: { type: 'box', size: turned ? [7.6, 1.2, 23] : [23, 1.2, 7.6], radius: 0.5 } },
+    cyl(`${prefix}-wand`, tags, 1.6, wand, [x, y + 5 + wand / 2, z], { material: 'aluminium-grey' }),
+    cyl(`${prefix}-bin`, tags, 4.8, 13, [x, y + h - 25, z + 2], { color: '#cfd6dc', glass: true }),
+    cyl(`${prefix}-motor`, tags, 4.2, 9, [x, y + h - 14, z + 2], { color: '#7b4fb0' }),
+    { ...box(`${prefix}-battery`, tags, [5, 8, 6], [x, y + h - 21, z - 4], { color: '#2a2a2c' }), geometry: { type: 'box', size: [5, 8, 6], radius: 1.2 } },
+    { ...box(`${prefix}-handle`, tags, [3, 13, 3.5], [x, y + h - 6.5, z - 4], { color: '#2a2a2c' }), geometry: { type: 'box', size: [3, 13, 3.5], radius: 1.2 } },
+  ];
+}
+
+/** Flat mop standing on its head (on y): handle up, head across x (or along z with `turned`). */
+export function flatMop(prefix: string, x: number, y: number, z: number, h = 130, turned = false): Part[] {
+  const tags = ['cleaning', 'mop', 'contents'];
+  const pad: Vec3 = turned ? [12, 2.5, 32] : [32, 2.5, 12];
+  return [
+    { ...box(`${prefix}-pad`, tags, pad, [x, y + 1.25, z], { color: '#d8dde2', material: 'linen-white' }), geometry: { type: 'box', size: pad, radius: 1 } },
+    { ...box(`${prefix}-plate`, tags, turned ? [10, 1.2, 30] : [30, 1.2, 10], [x, y + 3.1, z], { color: '#4f7fa8' }), geometry: { type: 'box', size: turned ? [10, 1.2, 30] : [30, 1.2, 10], radius: 0.5 } },
+    cyl(`${prefix}-joint`, tags, 1.6, 4, [x, y + 5.5, z], { color: '#2a2a2c' }),
+    cyl(`${prefix}-handle`, tags, 1.1, h - 7, [x, y + 7 + (h - 7) / 2, z], { color: '#4f7fa8' }),
+    cyl(`${prefix}-grip`, tags, 1.4, 14, [x, y + h - 8, z], { color: '#2a2a2c' }),
+  ];
+}
+
+/** Broom with the head on the floor (on y) and a dustpan leaning against it. */
+export function broom(prefix: string, x: number, y: number, z: number, h = 125): Part[] {
+  const tags = ['cleaning', 'broom', 'contents'];
+  return [
+    { ...box(`${prefix}-bristles`, tags, [24, 7, 4.5], [x, y + 3.5, z], { color: '#c9b27a' }), geometry: { type: 'box', size: [24, 7, 4.5], radius: 0.8 } },
+    { ...box(`${prefix}-block`, tags, [26, 3.5, 5.5], [x, y + 8.5, z], { color: '#3d6b4a' }), geometry: { type: 'box', size: [26, 3.5, 5.5], radius: 1.2 } },
+    cyl(`${prefix}-handle`, tags, 1.1, h - 10, [x, y + 10 + (h - 10) / 2, z], { color: '#3d6b4a' }),
+    { ...box(`${prefix}-pan`, tags, [24, 22, 1.2], [x, y + 11, z + 4], { color: '#3d6b4a' }), geometry: { type: 'box', size: [24, 22, 1.2], radius: 0.5 }, rotation: [-12, 0, 0] as Vec3 },
+  ];
+}
+
+/** Folded ironing board standing on its end on y, flat side to +z (turned: flat side to +x). */
+export function ironingBoard(prefix: string, x: number, y: number, z: number, len = 120, w = 34, turned = false): Part[] {
+  const tags = ['cleaning', 'ironing board', 'contents'];
+  const nose = Math.min(32, len * 0.3);
+  const pts: [number, number][] = [[-w / 2, -len / 2], [w / 2, -len / 2], [w / 2, len / 2 - nose]];
+  for (let i = 1; i < 10; i++) {
+    const a = (i / 10) * Math.PI;
+    pts.push([(Math.cos(a) * w) / 2, len / 2 - nose + Math.sin(a) * nose]);
+  }
+  pts.push([-w / 2, len / 2 - nose]);
+  const yaw = turned ? 90 : 0;
+  const along = (d: number): [number, number] => (turned ? [x + d, z] : [x, z + d]);
+  const [bx, bz] = along(-2.2);
+  return [
+    { id: `${prefix}-top`, tags, geometry: { type: 'prism', points: pts, depth: 3, bevel: 0.8 }, position: [x, y + len / 2 + 0.8, z], rotation: [0, yaw, 0], color: '#9fb3c8', material: 'linen-white', castShadow: true, glass: false },
+    { ...box(`${prefix}-legs`, tags, [w * 0.7, len * 0.8, 1.6], [bx, y + len * 0.45, bz], { material: 'aluminium-grey' }), geometry: { type: 'box', size: [w * 0.7, len * 0.8, 1.6], radius: 0.6 }, rotation: [0, yaw, 0] as Vec3 },
+  ];
+}
+
+/** Two spray bottles + a roll of kitchen paper (stand on y). */
+export function cleaningSprays(prefix: string, x: number, y: number, z: number): Part[] {
+  const tags = ['cleaning', 'contents'];
+  return [
+    cyl(`${prefix}-spray-1`, tags, 3.2, 17, [x - 7, y + 8.5, z], { color: '#5aa0c8' }),
+    { ...box(`${prefix}-spray-1-head`, tags, [3, 4, 6], [x - 7, y + 19, z + 1], { color: '#f2f0ec' }), geometry: { type: 'box', size: [3, 4, 6], radius: 0.8 } },
+    cyl(`${prefix}-spray-2`, tags, 3, 15, [x, y + 7.5, z + 1], { color: '#e9a23b' }),
+    { ...box(`${prefix}-spray-2-head`, tags, [3, 4, 6], [x, y + 16.5, z + 2], { color: '#2a2a2c' }), geometry: { type: 'box', size: [3, 4, 6], radius: 0.8 } },
+    cyl(`${prefix}-paper`, tags, 5.5, 22, [x + 9, y + 11, z], { color: '#f4f1ea' }),
+  ];
+}
+
+/** A broom-closet compartment `width` x `depth` x `height` (back at z0): ironing board at the back, vacuum, mop, broom, sprays on a shelf. */
+export function cleaningRow(prefix: string, x: number, y: number, z0: number, width: number, depth: number, height: number): Part[] {
+  const out: Part[] = [];
+  const tall = Math.min(height - 4, 130);
+  if (width >= 38) out.push(...ironingBoard(`${prefix}-iron`, x, y, z0 + 2.5, Math.min(tall, 120), Math.min(34, width - 4)));
+  else if (depth >= 36) out.push(...ironingBoard(`${prefix}-iron`, x + width / 2 - 3, y, z0 + depth / 2, Math.min(tall, 120), Math.min(34, depth - 4), true));
+  const front = z0 + Math.min(depth - 8, 30);
+  const narrow = width < 45;
+  out.push(...stickVacuum(`${prefix}-vac`, x - width / 2 + (narrow ? 7 : 15), y, front - (narrow ? 4 : 0), Math.min(tall, 112), narrow));
+  out.push(...flatMop(`${prefix}-mop`, x + width / 2 - (narrow ? 14 : 18), y, front, tall, narrow));
+  if (width >= 55) out.push(...broom(`${prefix}-broom`, x + 2, y, front - 2, Math.min(tall, 125)));
+  if (height >= 160) {
+    const sy = y + height - 26;
+    out.push({ ...box(`${prefix}-shelf`, ['shelf', 'cleaning'], [width - 1, 1.6, Math.min(depth - 2, 30)], [x, sy - 0.8, z0 + Math.min(depth - 2, 30) / 2], { color: '#f2f0ec' }), geometry: { type: 'box', size: [width - 1, 1.6, Math.min(depth - 2, 30)], radius: 0.4 } });
+    out.push(...cleaningSprays(`${prefix}-sprays`, x, sy, z0 + 12));
+  }
+  return out;
+}

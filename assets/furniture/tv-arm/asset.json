@@ -1,0 +1,25 @@
+{
+  "id": "tv-arm",
+  "name": "Full-motion TV wall arm (design)",
+  "tags": [
+    "design"
+  ],
+  "description": "Wall plate, two arm links with joints, tilt head + VESA plate. Origin = the wall plate; the TV back sits `reach` out, shifted `shift` sideways. Put the TV on it with state \"wall\".",
+  "source": {
+    "kind": "procedural",
+    "generator": "tv-arm",
+    "license": "self-made",
+    "notes": "src/model/generators/decor.ts"
+  },
+  "params": {
+    "reach": {
+      "default": 25
+    },
+    "shift": {
+      "default": 0
+    },
+    "color": {
+      "default": "#1d1d1f"
+    }
+  }
+}

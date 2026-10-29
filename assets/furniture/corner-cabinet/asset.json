@@ -24,6 +24,17 @@
     },
     "height": {
       "default": 200
+    },
+    "backs": {
+      "default": true,
+      "description": "false = free-standing on slim posts, open both ways (open: true only)"
+    },
+    "round": {
+      "default": 0,
+      "description": "radius of the back corner (open shelves without backs: nobody bumps into a point)"
+    },
+    "postColor": {
+      "default": "#1d1d1f"
     }
   }
 }

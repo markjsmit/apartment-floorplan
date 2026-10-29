@@ -4,8 +4,9 @@ import { RoomSchema } from '../src/model/schema';
 import { resolveWalls } from '../src/model/geometry';
 import { buildColliders, isFree } from '../src/model/collision';
 import {
-  coffeeTable, cornerCabinet, cushions, floorLamp, MODELS, pendant, plant, rug, stool, tallCabinet, wallArt,
+  coffeeTable, cornerCabinet, cornerCloset, cushions, floorLamp, MODELS, pendant, plant, rug, slatPanel, stool, tallCabinet, tvArm, wallArt,
 } from '../src/model/generators/decor';
+import { closetSystem } from '../src/model/generators/bathroom';
 import { stuffParts } from '../src/model/generators/stuff';
 
 const size = (parts: ReturnType<typeof plant>) => assetSize(parts, undefined);
@@ -132,5 +133,64 @@ describe('entry + display furniture', () => {
     const s = size(parts);
     expect(s.w).toBeLessThan(147 + 6);
     expect(s.max[1]).toBeLessThan(77 + 6);
+  });
+
+  it('a corner broom closet keeps the vacuum, mop + ironing board inside its triangle and its door swings out', () => {
+    const { parts, states } = cornerCloset({ legX: 75, legZ: 52, height: 238 });
+    const inside = parts.filter((p) => p.tags.includes('cleaning'));
+    for (const tag of ['vacuum', 'mop', 'ironing board']) expect(inside.some((p) => p.tags.includes(tag))).toBe(true);
+    for (const p of inside) {
+      const [x, , z] = p.position;
+      expect(x).toBeLessThan(0);
+      expect(z).toBeLessThan(0);
+      expect(x / 75 + z / 52).toBeGreaterThan(-1);
+    }
+    const s = size(parts);
+    expect(s.min[0]).toBeGreaterThan(-77);
+    expect(s.max[2]).toBeLessThan(3);
+    expect(s.h).toBeCloseTo(238, 0);
+    const door = parts.find((p) => p.id === 'door')!;
+    expect(door.pivot).toBeDefined();
+    expect(states.find((st) => st.id === 'open')!.parts.door.rotation![1]).toBeGreaterThan(0);
+  });
+
+  it('a tall cabinet and a closet section can be a broom closet', () => {
+    const { parts } = tallCabinet({ width: 45, depth: 40, height: 190, columns: [{ stack: [{ kind: 'door', content: 'cleaning' }] }] });
+    const vac = parts.filter((p) => p.tags.includes('vacuum'));
+    expect(vac.length).toBeGreaterThan(0);
+    for (const p of vac) expect(Math.abs(p.position[0])).toBeLessThan(22.5);
+    const closet = closetSystem({ height: 215, depth: 40, sections: [{ w: 33, kind: 'broom' }] });
+    expect(closet.some((p) => p.tags.includes('mop'))).toBe(true);
+  });
+
+  it('free-standing open corner shelves have posts, no backs, and a rounded back corner', () => {
+    const parts = cornerCabinet({ open: true, backs: false, round: 35, legX: 75, legZ: 76, height: 200, contents: 'games whisky' });
+    expect(parts.some((p) => p.tags.includes('back'))).toBe(false);
+    expect(parts.filter((p) => p.tags.includes('post'))).toHaveLength(3);
+    const shelf = parts.find((p) => p.id === 'shelf-1')!;
+    const g = shelf.geometry;
+    const pts: [number, number][] = g?.type === 'prism' ? g.points : [];
+    // nothing left at the sharp corner (outline +a/2, +b/2)
+    expect(pts.some(([x, y]) => Math.abs(x - 37.5) < 0.5 && Math.abs(y - 38) < 0.5)).toBe(false);
+    expect(pts.length).toBeGreaterThan(10);
+  });
+
+  it('slat cladding is slats with gaps on a backing, within its width', () => {
+    const parts = slatPanel({ width: 116, height: 277, depth: 2 });
+    expect(parts.filter((p) => p.tags.includes('slat')).length).toBeGreaterThan(25);
+    expect(size(parts).w).toBeLessThanOrEqual(116.01);
+  });
+
+  it('a TV arm holds the VESA plate `reach` out and `shift` to the side', () => {
+    const vesa = tvArm({ reach: 25, shift: 10 }).find((p) => p.id === 'vesa-plate')!;
+    expect(vesa.position[0]).toBeCloseTo(10, 5);
+    expect(vesa.position[2]).toBeGreaterThan(23);
+    expect(vesa.position[2]).toBeLessThan(25);
+  });
+
+  it('a round mirror is a ring with glass, as wide as asked', () => {
+    const parts = wallArt({ round: true, width: 60, height: 60 });
+    expect(parts.some((p) => p.material === 'mirror')).toBe(true);
+    expect(size(parts).w).toBeCloseTo(60, 0);
   });
 });
