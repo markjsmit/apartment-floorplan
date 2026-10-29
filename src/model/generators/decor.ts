@@ -236,6 +236,11 @@ export function bench(p: Record<string, unknown>): Part[] {
     const c = str(p.cushionColor, '#e9e2d4');
     parts.push(box('cushion', ['cushion'], [W - 2, 6, D - 2], [0, H - 3, D / 2], { material: str(p.cushionMaterial, 'linen-white'), color: c, radius: SOFT }));
   }
+  // shoe bench: a slatted shelf low between the legs with pairs on it
+  if (num(p.shoes, 0) > 0 && legs !== 'box') {
+    parts.push(box('shoe-shelf', ['shelf'], [W - 10, 2, D - 6], [0, 9, D / 2], legLook));
+    parts.push(...shoeRow('shoes', 0, 10, D - 1, W - 12, String(p.seed ?? 'bench'), num(p.shoes, 0)));
+  }
   const back = num(p.backrest, 0);
   if (back > 0) parts.push(box('backrest', ['back'], [W, back, 8], [0, H + back / 2, 4], { material: str(p.cushionMaterial, 'linen-white'), color: str(p.cushionColor, '#e9e2d4'), radius: SOFT }));
   return parts;

@@ -160,3 +160,34 @@ export function gameStack(prefix: string, x: number, y: number, z0: number, widt
   }
   return out;
 }
+
+/** Key drop: a wooden tray with keys, a small bowl, sunglasses (stand on y, back at z0). */
+export function keysSpot(prefix: string, x: number, y: number, z0: number, width: number, depth: number): Part[] {
+  const rand = rng(prefix);
+  const tz = z0 + Math.min(depth, 30) / 2;
+  const tw = Math.min(width - 4, 26);
+  const out: Part[] = [
+    { ...box(`${prefix}-tray`, ['tray', 'contents'], [tw, 2, 16], [x, y + 1, tz], { material: 'wood-oak-light' }), geometry: { type: 'box', size: [tw, 2, 16], radius: 0.8 } },
+    ell(`${prefix}-bowl`, ['bowl', 'contents'], [11, 4, 11], [x + tw / 2 - 6, y + 3.5, tz - 2], { color: ['#c9a227', '#d9cfbf', '#3a3a3a'][Math.floor(rand() * 3)] }),
+    box(`${prefix}-key-1`, ['keys', 'contents'], [5, 0.6, 2], [x - 4, y + 2.4, tz + 2], { color: '#b8b8b8' }),
+    box(`${prefix}-key-2`, ['keys', 'contents'], [4, 0.6, 2.2], [x - 2, y + 2.4, tz - 1], { color: '#c9a227' }),
+    { ...box(`${prefix}-fob`, ['keys', 'contents'], [3, 1.2, 4], [x - 7, y + 2.6, tz - 3], { color: '#2a2a2a' }), geometry: { type: 'box', size: [3, 1.2, 4], radius: 0.5 } },
+  ];
+  if (rand() < 0.6) out.push({ ...box(`${prefix}-glasses`, ['contents'], [14, 3, 5], [x + 1, y + 4, tz + 5], { color: '#1f1f22' }), geometry: { type: 'box', size: [14, 3, 5], radius: 1.4 } });
+  return out;
+}
+
+/** Everyday bags: a canvas tote and a small backpack (stand on y, back at z0). */
+export function bagsSpot(prefix: string, x: number, y: number, z0: number, width: number, depth: number, height: number): Part[] {
+  const rand = rng(prefix);
+  const h = Math.min(height - 3, 28);
+  const tz = z0 + Math.min(depth, 32) / 2;
+  const c1 = ['#d9cdb8', '#5e6b52', '#2e3a52'][Math.floor(rand() * 3)];
+  const c2 = ['#1f1f22', '#7a6a58', '#a8763e'][Math.floor(rand() * 3)];
+  const slab = (id: string, size: Vec3, pos: Vec3, color: string, r: number): Part => ({ ...box(id, ['bag', 'contents'], size, pos, { color, material: 'nylon-fabric' }), geometry: { type: 'box', size, radius: r } });
+  return [
+    { ...slab(`${prefix}-tote`, [Math.min(width / 2 - 1, 15), h * 0.85, 8], [x - width / 4, y + (h * 0.85) / 2, tz], c1, 2.5), rotation: [0, 0, -4] as Vec3 },
+    slab(`${prefix}-pack`, [Math.min(width / 2 - 2, 14), h, 12], [x + width / 4, y + h / 2, tz], c2, 4),
+    slab(`${prefix}-pocket`, [10, h * 0.35, 3], [x + width / 4, y + h * 0.3, tz + 6.5], c2, 1.2),
+  ];
+}

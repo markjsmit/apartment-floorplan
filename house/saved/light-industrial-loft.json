@@ -2,7 +2,7 @@
   "meta": {
     "name": "Light industrial loft",
     "kind": "saved",
-    "note": "Light industrial · floating sofa: wall-mounted TV (~3.55 m); dining behind the sofa (bench against the sofa back, our chairs on the wall side), open black KALLAX under the sofa window; door corner hidden behind 2 stacked KALLAX as a divider (shoes + devices below behind an oak board, whisky + games + keys on top), little chair, black clamp-post coat rack, our mirror. No rug, no curtains.",
+    "note": "Light industrial · floating sofa: wall-mounted TV (~3.55 m); dining behind the sofa (bench against the sofa back, our chairs on the wall side), open black KALLAX under the sofa window; door corner hidden behind 2 stacked KALLAX as a divider (shoes + devices below behind a steel magnet board with our photos, whisky + games + keys on top), shoe bench on the side wall, black clamp-post coat rack, our mirror. No rug, no curtains.",
     "location": {
       "lat": 32.0853,
       "lon": 34.7818,
@@ -1031,7 +1031,7 @@
         {
           "id": "living.divider-low",
           "asset": "ikea-kallax",
-          "name": "KALLAX 4x2 (bottom of the divider): shoes + kitchen devices, open to the door — IKEA",
+          "name": "KALLAX 4x2 (bottom of the divider): 2 rows of shoes, a shelf in each cube (16 pairs), open to the door — IKEA",
           "tags": [
             "kallax",
             "divider",
@@ -1042,16 +1042,13 @@
             "cols": 4,
             "rows": 2,
             "color": "black-brown",
-            "contents": [
-              "shoes shoes shoes shoes",
-              "devices devices shoes shoes"
-            ],
+            "contents": "shoes",
             "seed": "ind-low"
           },
           "position": [
             73.5,
             0,
-            560
+            530
           ],
           "rotation": 0
         },
@@ -1075,7 +1072,7 @@
           "position": [
             73.5,
             0,
-            560
+            530
           ],
           "rotation": 180,
           "allowOverlap": [
@@ -1085,7 +1082,7 @@
         {
           "id": "living.divider-top",
           "asset": "ikea-kallax",
-          "name": "KALLAX 4x2 on top (open both ways): our whisky + games on show, key bowl at hand height — IKEA",
+          "name": "KALLAX 4x2 on top (open both ways): keys + bags at hand height, our games, whisky + books on show on the top row — IKEA",
           "tags": [
             "kallax",
             "divider",
@@ -1099,15 +1096,15 @@
             "rows": 2,
             "color": "black-brown",
             "contents": [
-              "whisky games whisky games",
-              "games stuff - stuff"
+              "games whisky books whisky",
+              "keys keys bags bags"
             ],
             "seed": "ind-top"
           },
           "position": [
             73.5,
             77,
-            560
+            530
           ],
           "rotation": 0,
           "allowOverlap": [
@@ -1115,57 +1112,35 @@
           ]
         },
         {
-          "id": "living.key-bowl",
-          "asset": "table-decor",
-          "name": "Key + wallet bowl",
+          "id": "living.shoe-bench",
+          "asset": "bench",
+          "name": "Oak + black steel shoe bench 100x35 on the side wall (keeps the KALLAX free): sit to put shoes on, everyday pairs below",
           "tags": [
-            "drop zone"
+            "bench",
+            "shoes",
+            "entry"
           ],
           "params": {
-            "kind": "bowl",
-            "color": "#c9a227",
-            "diameter": 18
-          },
-          "position": [
-            92,
-            78.5,
-            568
-          ],
-          "rotation": 0,
-          "allowOverlap": [
-            "living.divider-top"
-          ]
-        },
-        {
-          "id": "living.entry-chair",
-          "asset": "design-chair",
-          "name": "Little oak + black chair to sit on for shoes",
-          "tags": [
-            "dining chair"
-          ],
-          "params": {
-            "style": "wood",
-            "width": 42,
-            "depth": 45,
-            "seatMaterial": "wood-oak-light",
+            "width": 100,
+            "depth": 35,
+            "height": 45,
+            "legs": "metal",
+            "material": "wood-oak-light",
             "legMaterial": "metal-black",
-            "legColor": "#1d1d1f",
-            "backHeight": 78
+            "shoes": 4,
+            "seed": "ind-bench"
           },
-          "position": [
-            5.5,
-            0,
-            640.0
-          ],
-          "rotation": 90,
-          "allowOverlap": [
-            "living.banquette"
-          ]
+          "against": {
+            "wall": "living.wall-5",
+            "offset": 42,
+            "elevation": 0,
+            "gap": 0
+          }
         },
         {
           "id": "living.entry-rack",
           "asset": "closet-system",
-          "name": "Black clamp-post entry rack (floor-to-soffit, no drilling): shoe shelves + key shelf by the door, coats on hangers",
+          "name": "Black clamp-post rack (floor-to-soffit, no drilling): kitchen devices on the shelves, coats on hangers",
           "tags": [
             "entry",
             "coats",
@@ -1181,7 +1156,7 @@
               {
                 "w": 34,
                 "kind": "shelves",
-                "contents": "shoes shoes stuff boxes"
+                "contents": "devices devices boxes boxes"
               },
               {
                 "w": 34,
@@ -1332,7 +1307,7 @@
           "position": [
             20,
             154,
-            565.0
+            535.0
           ],
           "rotation": 0,
           "allowOverlap": [

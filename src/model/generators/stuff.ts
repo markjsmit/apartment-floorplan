@@ -1,14 +1,15 @@
 import type { Part, Vec3 } from '../schema';
-import { devicesRow, gameStack, shoeRow, whiskyRow } from './wear';
+import { bagsSpot, devicesRow, gameStack, keysSpot, shoeRow, whiskyRow } from './wear';
 
 // Random things to make shelves look used: books, cardboard boxes, plastic bins, odds and ends.
 // Deterministic per seed, so the same shelf always shows the same stuff.
 // Local space: origin back-centre on the surface, x across (-width/2..width/2), z from the back (0) to the front (depth).
 
-export type StuffKind = 'books' | 'boxes' | 'bins' | 'stuff' | 'shoes' | 'whisky' | 'games' | 'devices';
+export type StuffKind = 'books' | 'boxes' | 'bins' | 'stuff' | 'shoes' | 'whisky' | 'games' | 'devices' | 'keys' | 'bags';
 export const STUFF_KINDS: StuffKind[] = ['books', 'boxes', 'bins', 'stuff'];
-// never picked by `random`: shoes (a pair per level; a cube > 26 high gets a shelf insert and 2 levels), whisky, games
-const SHOW_KINDS: StuffKind[] = ['shoes', 'whisky', 'games', 'devices'];
+// never picked by `random`: shoes (a pair per level; a cube > 26 high gets a shelf insert and 2 levels), whisky,
+// games, devices, keys (tray + bowl), bags (tote + backpack)
+const SHOW_KINDS: StuffKind[] = ['shoes', 'whisky', 'games', 'devices', 'keys', 'bags'];
 
 const BOOK_COLORS = ['#7a2e2e', '#2e4a7a', '#3d6b4a', '#c9a227', '#ece6d6', '#3a3a3a', '#8a5a9e', '#d06a3a', '#5a8fa8'];
 const CARDBOARD = ['#b48a5a', '#c49a68', '#a87d50'];
@@ -30,7 +31,7 @@ export function rng(seed: string) {
 export function stuffKind(v: unknown): StuffKind | 'random' | null {
   const k = String(v ?? '').trim().toLowerCase();
   if (k === '' || k === '-' || k === 'none') return null;
-  if (k !== 'random' && !STUFF_KINDS.includes(k as StuffKind) && !SHOW_KINDS.includes(k as StuffKind)) throw new Error(`unknown contents "${k}" (use books, boxes, bins, stuff, shoes, whisky, games, devices, random or "")`);
+  if (k !== 'random' && !STUFF_KINDS.includes(k as StuffKind) && !SHOW_KINDS.includes(k as StuffKind)) throw new Error(`unknown contents "${k}" (use books, boxes, bins, stuff, shoes, whisky, games, devices, keys, bags, random or "")`);
   return k as StuffKind | 'random';
 }
 
@@ -50,6 +51,8 @@ export function stuffParts(kind: StuffKind | 'random', prefix: string, width: nu
     return out;
   }
   if (kind === 'whisky') return whiskyRow(prefix, 0, 0, Math.max(0, depth - 30), width, Math.min(depth, 30), height);
+  if (kind === 'keys') return keysSpot(prefix, 0, 0, Math.max(0, depth - 30), width, Math.min(depth, 30));
+  if (kind === 'bags') return bagsSpot(prefix, 0, 0, Math.max(0, depth - 32), width, Math.min(depth, 32), height);
   if (kind === 'devices') return devicesRow(prefix, 0, 0, Math.max(0, depth - 34), width, Math.min(depth, 34), height);
   if (kind === 'games') return gameStack(prefix, 0, 0, Math.max(0, depth - 32), width, Math.min(depth, 32), height);
   const rand = rng(prefix);
