@@ -1478,6 +1478,27 @@
           }
         },
         {
+          "id": "living.entry-mirror",
+          "asset": "wall-art",
+          "name": "Big rattan-framed floor mirror 90x180 on the wall by the front door (check yourself on the way out; doubles the light)",
+          "tags": [
+            "mirror",
+            "entry"
+          ],
+          "params": {
+            "width": 90,
+            "height": 180,
+            "mirror": true,
+            "frameColor": "#c49c68"
+          },
+          "against": {
+            "wall": "living.wall-4",
+            "offset": 438,
+            "elevation": 0,
+            "gap": 1
+          }
+        },
+        {
           "id": "living.stool-1",
           "asset": "counter-stool",
           "name": "Rattan-seat backless counter stool (tucked under the island)",
@@ -1668,6 +1689,7 @@
             "living.flowers",
             "living.shoe-bench",
             "living.coat-hooks",
+            "living.entry-mirror",
             "living.stool-1",
             "living.stool-2",
             "living.strelitzia",
@@ -1726,6 +1748,7 @@
             "living.flowers",
             "living.shoe-bench",
             "living.coat-hooks",
+            "living.entry-mirror",
             "living.stool-1",
             "living.stool-2",
             "living.strelitzia",
