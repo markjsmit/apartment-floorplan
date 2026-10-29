@@ -5,7 +5,8 @@
     "hooks",
     "hook rail",
     "coat rack",
-    "skate bags"
+    "skate bags",
+    "coats"
   ],
   "description": "Oak rail with black hooks, screwed to the wall with plugs (a skate bag with skates is ~4-5 kg). Optional triangular skate bags (~40 long x 34 high at the peak x 22 wide, like Decathlon Fit 26 L / Graf) hang by their top handle from the end hooks. Origin: back-centre at the bottom of the rail (use against.elevation). Double-click a bag to take them off.",
   "source": {
@@ -34,6 +35,18 @@
     "seed": {
       "default": "hook-rail",
       "description": "varies how the bags hang"
+    },
+    "coats": {
+      "default": 0,
+      "description": "jackets hanging on the free hooks"
+    },
+    "coatColors": {
+      "default": "",
+      "description": "#hex, comma separated"
+    },
+    "coatLength": {
+      "default": 72,
+      "description": "cm"
     }
   }
 }

@@ -2,7 +2,7 @@
   "meta": {
     "name": "Japandi calm",
     "kind": "saved",
-    "note": "Japandi · wall-to-wall: sofa on the sofa wall, TV by the big window (~5.3 m), big open middle (easy extra chairs for guests); round oak table + our 4 chairs by the front door; drop station + device cabinet at the door; oak-clad pillar.",
+    "note": "Japandi · wall-to-wall: sofa on the sofa wall, TV by the big window (~5.3 m), armchair in front of the pillar, big open middle; round oak table + our 4 chairs; door corner = one handleless oak closet (shoes, lit key niche, coats, kitchen devices).",
     "location": {
       "lat": 32.0853,
       "lon": 34.7818,
@@ -920,17 +920,17 @@
         {
           "id": "living.armchair",
           "asset": "old-house-armchair",
-          "name": "Our grey armchair (TV seat beside the coffee table, ~3.4 m)",
+          "name": "Our grey armchair (in front of the pillar, ~4.4 m to the TV)",
           "tags": [
             "armchair"
           ],
           "params": {},
           "position": [
-            383.2,
+            494.3,
             0,
-            340.6
+            296.5
           ],
-          "rotation": -104.4,
+          "rotation": -96.1,
           "allowOverlap": [
             "living.sofa"
           ]
@@ -938,7 +938,7 @@
         {
           "id": "living.floor-lamp",
           "asset": "floor-lamp",
-          "name": "STRANDAD floor lamp, rice-paper shade, black base — IKEA Israel ₪69 (reading light by the armchair)",
+          "name": "STRANDAD floor lamp, rice-paper shade, black base — IKEA Israel ₪69 (by the TV unit, on the TV outlet)",
           "tags": [
             "lamp"
           ],
@@ -950,9 +950,9 @@
             "baseColor": "#1d1d1f"
           },
           "position": [
-            290,
+            24,
             0,
-            372
+            356
           ],
           "rotation": 0
         },
@@ -972,7 +972,7 @@
           "position": [
             85,
             0,
-            465.0
+            460.0
           ],
           "rotation": 0
         },
@@ -987,7 +987,7 @@
           "position": [
             22.6,
             0,
-            457.6
+            452.6
           ],
           "rotation": 45.0,
           "allowOverlap": [
@@ -1005,7 +1005,7 @@
           "position": [
             147.4,
             0,
-            457.6
+            452.6
           ],
           "rotation": -45.0,
           "allowOverlap": [
@@ -1023,7 +1023,7 @@
           "position": [
             22.6,
             0,
-            582.4
+            577.4
           ],
           "rotation": 135.0,
           "allowOverlap": [
@@ -1041,7 +1041,7 @@
           "position": [
             147.4,
             0,
-            582.4
+            577.4
           ],
           "rotation": -135.0,
           "allowOverlap": [
@@ -1066,7 +1066,7 @@
           "position": [
             85,
             0,
-            520
+            515
           ],
           "rotation": 0
         },
@@ -1085,7 +1085,7 @@
           "position": [
             85,
             78,
-            512
+            507
           ],
           "rotation": 0,
           "allowOverlap": [
@@ -1093,89 +1093,84 @@
           ]
         },
         {
-          "id": "living.drop-station",
-          "asset": "ikea-kallax-77x77",
-          "name": "KALLAX 2x2 drop station at the front door: baskets for keys/phones/wallets, 2 drawers — IKEA",
+          "id": "living.entry-closet",
+          "asset": "tall-cabinet",
+          "name": "Oak entry closet wall (IKEA PAX 75 + 50, 58 deep, oak-effect doors, push-openers; ~₪2,600 estimate): shoes · lit key niche · coats | kitchen devices",
           "tags": [
+            "entry",
+            "closet",
+            "shoes",
+            "coats",
             "drop zone",
-            "kallax",
-            "storage"
+            "kitchen devices"
           ],
           "params": {
-            "cols": 2,
-            "rows": 2,
-            "color": "white-oak",
-            "inserts": [
-              [
-                "box",
-                "box"
-              ],
-              [
-                "drawers",
-                "drawers"
-              ]
+            "width": 134,
+            "depth": 58,
+            "height": 213,
+            "plinth": 8,
+            "handles": "none",
+            "light": true,
+            "material": "white-laminate",
+            "frontMaterial": "wood-oak-light",
+            "columns": [
+              {
+                "w": 37.5,
+                "stack": [
+                  {
+                    "kind": "door",
+                    "h": 70,
+                    "content": "shoes"
+                  },
+                  {
+                    "kind": "open",
+                    "h": 30,
+                    "fill": "baskets"
+                  },
+                  {
+                    "kind": "door",
+                    "content": "coats"
+                  }
+                ]
+              },
+              {
+                "w": 37.5,
+                "stack": [
+                  {
+                    "kind": "door",
+                    "h": 70,
+                    "content": "shoes"
+                  },
+                  {
+                    "kind": "open",
+                    "h": 30,
+                    "fill": "tray"
+                  },
+                  {
+                    "kind": "door",
+                    "content": "coats"
+                  }
+                ]
+              },
+              {
+                "w": 59,
+                "stack": [
+                  {
+                    "kind": "door",
+                    "h": 100,
+                    "content": "devices"
+                  },
+                  {
+                    "kind": "door",
+                    "content": "devices"
+                  }
+                ]
+              }
             ]
           },
           "against": {
             "wall": "living.wall-4",
-            "offset": 488,
-            "elevation": 0,
-            "gap": 0
-          }
-        },
-        {
-          "id": "living.key-hooks",
-          "asset": "hook-rail",
-          "name": "Key + bag hooks above the drop station",
-          "tags": [
-            "hooks",
-            "drop zone"
-          ],
-          "params": {
-            "width": 70,
-            "hooks": 4,
-            "bags": 0
-          },
-          "against": {
-            "wall": "living.wall-4",
-            "offset": 492,
-            "elevation": 140,
-            "gap": 0
-          }
-        },
-        {
-          "id": "living.key-bowl",
-          "asset": "table-decor",
-          "name": "Key bowl on the drop station",
-          "tags": [
-            "drop zone"
-          ],
-          "params": {
-            "kind": "bowl",
-            "color": "#d9cfbf"
-          },
-          "position": [
-            25,
-            77,
-            690
-          ],
-          "rotation": 0,
-          "allowOverlap": [
-            "living.drop-station"
-          ]
-        },
-        {
-          "id": "living.device-cabinet",
-          "asset": "old-house-tall-cabinet",
-          "name": "Our tall cabinet: kitchen devices (air fryer, mixer, ...)",
-          "tags": [
-            "storage",
-            "kitchen devices"
-          ],
-          "params": {},
-          "against": {
-            "wall": "living.wall-4",
-            "offset": 428,
+            "offset": 432,
             "elevation": 0,
             "gap": 0
           }
@@ -1274,52 +1269,6 @@
           "rotation": 0
         },
         {
-          "id": "living.snake",
-          "asset": "plant",
-          "name": "Snake plant (Sansevieria) XL 50–65 cm in natural straw basket — סנסיווריה ירוקה — Neta Plants (נטע) ₪234",
-          "tags": [
-            "plant"
-          ],
-          "params": {
-            "kind": "snake",
-            "height": 60,
-            "seed": "snake",
-            "spread": 25,
-            "potDiameter": 22,
-            "potColor": "#c8b08a"
-          },
-          "position": [
-            18,
-            0,
-            339.5
-          ],
-          "rotation": 0
-        },
-        {
-          "id": "living.fatsia",
-          "asset": "plant",
-          "name": "Japanese aralia (Fatsia japonica 'Spider Web') XL 40–50 cm in straw basket — פטסיה יפנית — Neta Plants (נטע) ₪274",
-          "tags": [
-            "plant"
-          ],
-          "params": {
-            "kind": "bush",
-            "height": 40,
-            "seed": "fatsia",
-            "spread": 33,
-            "model": "syngonium"
-          },
-          "position": [
-            60,
-            77,
-            688.5
-          ],
-          "rotation": 0,
-          "allowOverlap": [
-            "living.drop-station"
-          ]
-        },
-        {
           "id": "living.pillar-cladding",
           "asset": "box",
           "name": "Oak slat cladding on the pillar (idea, ~2 cm, no floor space)",
@@ -1397,16 +1346,11 @@
             "living.chair-4",
             "living.pendant",
             "living.vase-table",
-            "living.drop-station",
-            "living.key-hooks",
-            "living.key-bowl",
-            "living.device-cabinet",
+            "living.entry-closet",
             "living.stool-1",
             "living.stool-2",
             "living.olive",
             "living.fig",
-            "living.snake",
-            "living.fatsia",
             "living.pillar-cladding",
             "living.art",
             "living.curtain-window"
@@ -1448,16 +1392,11 @@
             "living.chair-4",
             "living.pendant",
             "living.vase-table",
-            "living.drop-station",
-            "living.key-hooks",
-            "living.key-bowl",
-            "living.device-cabinet",
+            "living.entry-closet",
             "living.stool-1",
             "living.stool-2",
             "living.olive",
             "living.fig",
-            "living.snake",
-            "living.fatsia",
             "living.pillar-cladding",
             "living.art",
             "living.curtain-balcony"

@@ -1,4 +1,5 @@
 import { BoxGeometry, BufferGeometry, CylinderGeometry, ExtrudeGeometry, PlaneGeometry, Shape, ShapeGeometry, SphereGeometry } from 'three';
+import { RoundedBoxGeometry } from 'three/examples/jsm/geometries/RoundedBoxGeometry.js';
 import type { Geometry, Vec2 } from '../model/schema';
 
 // All geometry gets UVs in centimetres, so a texture's repeat = 1 / tileSize gives true real-world scale.
@@ -34,8 +35,27 @@ export function boxWithCmUV(w: number, h: number, d: number, uvOffset: Vec2 = [0
   });
 }
 
+/** Box with rounded edges; cm UVs projected along each vertex's main normal axis. */
+function roundedBox(w: number, h: number, d: number, r: number): BufferGeometry {
+  return cached(`rbox:${w}:${h}:${d}:${r}`, () => {
+    const g = new RoundedBoxGeometry(w, h, d, 3, Math.min(r, w / 2, h / 2, d / 2) * 0.999);
+    const pos = g.getAttribute('position');
+    const nor = g.getAttribute('normal');
+    const uv = g.getAttribute('uv');
+    for (let i = 0; i < pos.count; i++) {
+      const [x, y, z] = [pos.getX(i), pos.getY(i), pos.getZ(i)];
+      const [ax, ay, az] = [Math.abs(nor.getX(i)), Math.abs(nor.getY(i)), Math.abs(nor.getZ(i))];
+      if (ax >= ay && ax >= az) uv.setXY(i, z + d / 2, y + h / 2);
+      else if (ay >= az) uv.setXY(i, x + w / 2, z + d / 2);
+      else uv.setXY(i, x + w / 2, y + h / 2);
+    }
+    uv.needsUpdate = true;
+    return g;
+  });
+}
+
 export function partGeometry(g: Geometry): BufferGeometry {
-  if (g.type === 'box') return boxWithCmUV(g.size[0], g.size[1], g.size[2]);
+  if (g.type === 'box') return g.radius ? roundedBox(g.size[0], g.size[1], g.size[2], g.radius) : boxWithCmUV(g.size[0], g.size[1], g.size[2]);
   if (g.type === 'cylinder') {
     return cached(`cyl:${g.radius}:${g.height}:${g.segments}`, () => {
       const geo = new CylinderGeometry(g.radius, g.radius, g.height, g.segments);

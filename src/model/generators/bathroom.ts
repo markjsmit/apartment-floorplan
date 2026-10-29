@@ -1,5 +1,7 @@
 import type { AssetState, Part, PartOverride, Vec3 } from '../schema';
 import { box, cyl, FRONT_T, GAP, HANDLE, num, PLINTH, str, type WithStates } from './builtins';
+import { placeStuff, stuffKind, stuffParts } from './stuff';
+import { COAT_COLORS, coat, shoeRow } from './wear';
 
 // Bathroom + walk-in closet fixtures that come with the apartment: vanity with basin, wall-hung toilet, built-in bath,
 // walk-in shower, washer/dryer column, BOAXEL/ELVARLI-style closet system.
@@ -357,14 +359,14 @@ export function washerDryerColumn(params: Record<string, unknown>): WithStates {
 }
 
 export const CLOSET_KINDS = ['hang', 'hang2', 'shelves', 'drawers'];
-type Section = { w: number; kind: string; drawers: number };
+type Section = { w: number; kind: string; drawers: number; coats: number; shoes: number; shelfContents: string };
 
 function sections(raw: unknown): Section[] {
   const list = Array.isArray(raw) && raw.length ? (raw as Record<string, unknown>[]) : [{ w: 80, kind: 'hang' }, { w: 80, kind: 'drawers' }, { w: 80, kind: 'shelves' }];
   return list.map((s) => {
     const kind = str(s.kind, 'hang');
     if (!CLOSET_KINDS.includes(kind)) throw new Error(`unknown closet section kind "${kind}" (use ${CLOSET_KINDS.join(', ')})`);
-    return { w: num(s.w, 80), kind, drawers: num(s.drawers, 3) === 2 ? 2 : 3 };
+    return { w: num(s.w, 80), kind, drawers: num(s.drawers, 3) === 2 ? 2 : 3, coats: num(s.coats, 0), shoes: num(s.shoes, 0), shelfContents: str(s.contents, '') };
   });
 }
 
@@ -395,17 +397,29 @@ export function closetSystem(params: Record<string, unknown>): Part[] {
     const x0 = x + POST;
     const xc = x0 + sec.w / 2;
     const shelf = (id: string, y: number) => parts.push(
-      box(id, ['shelf'], [sec.w - 0.4, 1.8, D - 2], [xc, y - 0.9, 1 + D / 2], { material: 'white-laminate' }),
+      box(id, ['shelf'], [sec.w - 0.4, 1.8, D - 2], [xc, y - 0.9, 1 + D / 2], { material: str(params.shelfMaterial, 'white-laminate') }),
       box(`${id}-bracket-l`, ['shelf', 'bracket'], [1, 3, D - 6], [x0 + 0.5, y - 3.3, 3.5 + (D - 6) / 2], { material: postMat }),
       box(`${id}-bracket-r`, ['shelf', 'bracket'], [1, 3, D - 6], [x0 + sec.w - 0.5, y - 3.3, 3.5 + (D - 6) / 2], { material: postMat }),
     );
     const rail = (id: string, y: number) => parts.push(cyl(id, ['rail', 'clothes rail'], 1.25, sec.w - 1, [xc, y, D * 0.55], { material: 'aluminium-grey', rotation: [0, 0, 90] }));
     if (sec.kind === 'shelves') {
-      for (let k = 0; k < 5; k++) shelf(`${p}-shelf-${k + 1}`, 30 + (k * (TOP - 30)) / 4);
+      const ys = Array.from({ length: 5 }, (_, k) => 30 + (k * (TOP - 30)) / 4);
+      ys.forEach((y, k) => shelf(`${p}-shelf-${k + 1}`, y));
+      // contents per shelf, bottom → top, space separated (shoes | whisky | games | books | boxes | bins | stuff)
+      sec.shelfContents.split(/\s+/).forEach((c, k) => {
+        const kind = stuffKind(c);
+        if (!kind || k >= ys.length) return;
+        const room = (k + 1 < ys.length ? ys[k + 1] - 1.8 : H - 3) - ys[k];
+        parts.push(...placeStuff(stuffParts(kind, `${p}-c${k}`, sec.w - 2, D - 3, Math.min(room, 35)), 0, [xc, ys[k], 1]));
+      });
+      if (sec.shoes) parts.push(...shoeRow(`${p}-shoes`, xc, 0, D, sec.w, `${p}-shoes`, sec.shoes));
     } else {
       shelf(`${p}-shelf`, TOP);
       rail(`${p}-rail`, TOP - 8);
       if (sec.kind === 'hang2') rail(`${p}-rail-low`, Math.round(TOP / 2) - 4);
+      // jackets on hangers (side on, like in any closet) and shoe pairs on the floor below them
+      for (let k = 0; k < sec.coats; k++) parts.push(...coat(`${p}-coat-${k + 1}`, x0 + 8 + ((k + 0.5) * (sec.w - 16)) / sec.coats, TOP - 8, D * 0.55, COAT_COLORS[(k * 2 + i) % COAT_COLORS.length], true, 80));
+      if (sec.shoes && sec.kind !== 'drawers') parts.push(...shoeRow(`${p}-shoes`, xc, 0, D, sec.w, `${p}-shoes`, sec.shoes));
       if (sec.kind === 'drawers') {
         const uh = 80;
         const ud = D - 4;

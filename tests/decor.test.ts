@@ -4,8 +4,9 @@ import { RoomSchema } from '../src/model/schema';
 import { resolveWalls } from '../src/model/geometry';
 import { buildColliders, isFree } from '../src/model/collision';
 import {
-  coffeeTable, cornerCabinet, cushions, floorLamp, MODELS, pendant, plant, rug, stool,
+  coffeeTable, cornerCabinet, cushions, floorLamp, MODELS, pendant, plant, rug, stool, tallCabinet,
 } from '../src/model/generators/decor';
+import { stuffParts } from '../src/model/generators/stuff';
 
 const size = (parts: ReturnType<typeof plant>) => assetSize(parts, undefined);
 
@@ -83,5 +84,44 @@ describe('rugs are walked on', () => {
     const s = size(rug({ width: 200, depth: 200 }));
     const item = { position: [150, 0, 50] as [number, number, number], rotationDeg: 0, min: s.min, max: s.max };
     expect(isFree([150, 150], 20, buildColliders(resolveWalls(room), [item]))).toBe(true);
+  });
+});
+
+describe('entry + display furniture', () => {
+  it('a tall cabinet opens its doors on the hinge and keeps coats + shoes inside', () => {
+    const { parts, states } = tallCabinet({ width: 80, depth: 58, height: 200, columns: [{ stack: [{ kind: 'door', h: 60, content: 'shoes' }, { kind: 'open', h: 30, fill: 'baskets' }, { kind: 'door', content: 'coats' }] }] });
+    const s = size(parts);
+    expect(s.max[2]).toBeLessThan(58 + 6);
+    expect(s.min[2]).toBeGreaterThanOrEqual(-0.01);
+    expect(parts.some((p) => p.tags.includes('coat'))).toBe(true);
+    expect(parts.some((p) => p.tags.includes('shoes'))).toBe(true);
+    const open = states.find((st) => st.id === 'open')!;
+    const door = parts.find((p) => p.id === 'c1-1-front')!;
+    expect(door.pivot).toBeDefined();
+    expect(Math.abs(open.parts['c1-1-front'].rotation![1])).toBeCloseTo(100);
+  });
+
+  it('shoes fill a KALLAX-size cube on 2 levels (a shelf insert): 2 pairs per cube', () => {
+    const parts = stuffParts('shoes', 'cube', 33, 37, 33);
+    expect(new Set(parts.filter((p) => p.tags.includes('shoes')).map((p) => p.id.replace(/-[lr]-.*$/, ''))).size).toBe(2);
+    expect(parts.some((p) => p.tags.includes('shelf'))).toBe(true);
+  });
+
+  it('open corner shelves show their contents inside the triangle', () => {
+    const parts = cornerCabinet({ open: true, legX: 75, legZ: 76, height: 200, contents: 'games whisky' });
+    const s = size(parts);
+    expect(s.min[0]).toBeGreaterThan(-77);
+    expect(s.max[0]).toBeLessThan(1);
+    expect(s.min[2]).toBeGreaterThan(-78);
+    expect(s.max[2]).toBeLessThan(1);
+    expect(parts.some((p) => p.tags.includes('whisky'))).toBe(true);
+    expect(parts.some((p) => p.tags.includes('game'))).toBe(true);
+    expect(parts.some((p) => p.tags.includes('door'))).toBe(false);
+  });
+
+  it('design furniture has eased edges, not perfect 90° corners', () => {
+    const top = coffeeTable({ width: 120, depth: 60 }).find((p) => p.id === 'top')!;
+    expect(top.geometry).toMatchObject({ type: 'box' });
+    expect((top.geometry as { radius?: number }).radius).toBeGreaterThan(0);
   });
 });

@@ -2,7 +2,7 @@
   "meta": {
     "name": "Soft Mediterranean",
     "kind": "saved",
-    "note": "Soft Mediterranean · mirrored: sofa on the west wall below the big window, TV on the sofa wall (~5.2 m), armchair beside the sofa; bouclé banquette + round table + 2 rounded chairs; arched mirror on the pillar.",
+    "note": "Soft Mediterranean · mirrored: sofa on the west wall, TV on the sofa wall (~5.2 m), armchair beside the sofa; bouclé banquette + round table; door corner = open closet behind a linen curtain (behind you when you sit); arched mirror on the pillar.",
     "location": {
       "lat": 32.0853,
       "lon": 34.7818,
@@ -846,7 +846,8 @@
             "height": 40,
             "drawers": 2,
             "base": "legs",
-            "material": "wood-oak-light"
+            "material": "wood-oak-light",
+            "shape": "oval"
           },
           "position": [
             197.0,
@@ -866,13 +867,14 @@
             "rug"
           ],
           "params": {
-            "width": 300,
+            "shape": "round",
+            "width": 200,
             "depth": 200,
             "color": "#ffffff",
             "material": "boucle"
           },
           "position": [
-            260.0,
+            190,
             0,
             148
           ],
@@ -938,7 +940,7 @@
         {
           "id": "living.floor-lamp",
           "asset": "floor-lamp",
-          "name": "AKTERSPRING floor lamp, 2 opal glass globes — IKEA Israel ₪245",
+          "name": "AKTERSPRING floor lamp, 2 opal glass globes — IKEA Israel ₪245 (window corner, TV-point outlet)",
           "tags": [
             "lamp"
           ],
@@ -1036,7 +1038,7 @@
         {
           "id": "living.chair-s",
           "asset": "design-chair",
-          "name": "NOMA dining chair: round bouclé seat, rounded back, natural wood legs — Floralis ₪330",
+          "name": "NOMA dining chair: round bouclé seat, rounded back, natural wood legs — Floralis ₪330 (pushed in: the curtain closet is behind it)",
           "tags": [
             "dining chair"
           ],
@@ -1052,7 +1054,7 @@
           "position": [
             102.0,
             0,
-            639.0
+            627.0
           ],
           "rotation": 180,
           "allowOverlap": [
@@ -1104,92 +1106,88 @@
           ]
         },
         {
-          "id": "living.drop-station",
-          "asset": "ikea-kallax-77x77",
-          "name": "KALLAX 2x2 drop station at the front door: baskets for keys/phones/wallets, 2 drawers — IKEA",
+          "id": "living.entry-closet",
+          "asset": "closet-system",
+          "name": "Open closet in the door corner (ELVARLI/BOAXEL-style, 40 deep): shelves by the door (shoes, keys, devices) + coat rail with shoes below",
           "tags": [
+            "entry",
+            "closet",
+            "coats",
+            "shoes",
             "drop zone",
-            "kallax",
-            "storage"
+            "kitchen devices"
           ],
           "params": {
-            "cols": 2,
-            "rows": 2,
-            "color": "white",
-            "inserts": [
-              [
-                "box",
-                "box"
-              ],
-              [
-                "drawers",
-                "drawers"
-              ]
+            "height": 215,
+            "depth": 40,
+            "sections": [
+              {
+                "w": 40,
+                "kind": "shelves",
+                "contents": "shoes shoes stuff devices devices"
+              },
+              {
+                "w": 80,
+                "kind": "hang",
+                "coats": 4,
+                "shoes": 3
+              }
             ]
           },
           "against": {
             "wall": "living.wall-4",
-            "offset": 488,
+            "offset": 434,
             "elevation": 0,
             "gap": 0
           }
         },
         {
-          "id": "living.key-hooks",
-          "asset": "hook-rail",
-          "name": "Key + bag hooks above the drop station",
+          "id": "living.closet-curtain",
+          "asset": "curtain",
+          "name": "Linen curtain on a ceiling track in front of the coats (shown half open)",
           "tags": [
-            "hooks",
-            "drop zone"
+            "curtain",
+            "entry"
           ],
           "params": {
-            "width": 70,
-            "hooks": 4,
-            "bags": 0
-          },
-          "against": {
-            "wall": "living.wall-4",
-            "offset": 492,
-            "elevation": 140,
-            "gap": 0
-          }
-        },
-        {
-          "id": "living.key-bowl",
-          "asset": "table-decor",
-          "name": "Key bowl on the drop station",
-          "tags": [
-            "drop zone"
-          ],
-          "params": {
-            "kind": "bowl",
-            "color": "#d9cfbf"
+            "width": 84,
+            "height": 213,
+            "panels": 1,
+            "open": 0.45,
+            "color": "#efe6d6"
           },
           "position": [
-            25,
-            77,
-            690
+            52,
+            0,
+            684
           ],
-          "rotation": 0,
+          "rotation": 180,
           "allowOverlap": [
-            "living.drop-station"
+            "living.sofa",
+            "living.tv-unit",
+            "living.tv",
+            "living.coffee-table",
+            "living.rug",
+            "living.cushions",
+            "living.armchair",
+            "living.floor-lamp",
+            "living.banquette",
+            "living.dining-table",
+            "living.chair-n",
+            "living.chair-s",
+            "living.pendant",
+            "living.vase",
+            "living.entry-closet",
+            "living.stool-1",
+            "living.stool-2",
+            "living.olive",
+            "living.strelitzia",
+            "living.palm-1",
+            "living.mirror",
+            "living.art",
+            "living.curtain-balcony",
+            "living.curtain-window"
           ]
-        },
-        {
-          "id": "living.device-cabinet",
-          "asset": "old-house-tall-cabinet",
-          "name": "Our tall cabinet: kitchen devices (air fryer, mixer, ...)",
-          "tags": [
-            "storage",
-            "kitchen devices"
-          ],
-          "params": {},
-          "against": {
-            "wall": "living.wall-4",
-            "offset": 428,
-            "elevation": 0,
-            "gap": 0
-          }
         },
         {
           "id": "living.stool-1",
@@ -1310,31 +1308,6 @@
           ]
         },
         {
-          "id": "living.palm-2",
-          "asset": "plant",
-          "name": "Areca palm 'S' in white ceramic pot ø12 (plant + pot 21–32 cm) — Plants4U – Galilot nursery ₪26",
-          "tags": [
-            "plant"
-          ],
-          "params": {
-            "kind": "palm",
-            "height": 30,
-            "seed": "palm-2",
-            "spread": 20,
-            "potDiameter": 12,
-            "potColor": "#f3eee4"
-          },
-          "position": [
-            68,
-            77,
-            693.0
-          ],
-          "rotation": 0,
-          "allowOverlap": [
-            "living.drop-station"
-          ]
-        },
-        {
           "id": "living.mirror",
           "asset": "wall-art",
           "name": "Giant half-oval (arched) floor mirror 180×80, white frame — Urban ₪555",
@@ -1411,16 +1384,13 @@
             "living.chair-s",
             "living.pendant",
             "living.vase",
-            "living.drop-station",
-            "living.key-hooks",
-            "living.key-bowl",
-            "living.device-cabinet",
+            "living.entry-closet",
+            "living.closet-curtain",
             "living.stool-1",
             "living.stool-2",
             "living.olive",
             "living.strelitzia",
             "living.palm-1",
-            "living.palm-2",
             "living.mirror",
             "living.art",
             "living.curtain-window"
@@ -1461,16 +1431,13 @@
             "living.chair-s",
             "living.pendant",
             "living.vase",
-            "living.drop-station",
-            "living.key-hooks",
-            "living.key-bowl",
-            "living.device-cabinet",
+            "living.entry-closet",
+            "living.closet-curtain",
             "living.stool-1",
             "living.stool-2",
             "living.olive",
             "living.strelitzia",
             "living.palm-1",
-            "living.palm-2",
             "living.mirror",
             "living.art",
             "living.curtain-balcony"

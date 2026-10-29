@@ -1,16 +1,54 @@
 {
   "id": "closet-system",
   "name": "Walk-in closet system",
-  "tags": ["closet", "walk-in closet", "wardrobe", "clothes rail", "shelves", "drawers", "boaxel", "elvarli"],
+  "tags": [
+    "closet",
+    "walk-in closet",
+    "wardrobe",
+    "clothes rail",
+    "shelves",
+    "drawers",
+    "boaxel",
+    "elvarli"
+  ],
   "description": "Open closet system in the style of IKEA BOAXEL/ELVARLI: white floor-to-ceiling posts (clamped between floor and ceiling, no drilling), 40 cm deep shelves, aluminium clothes rails, white drawer units ~80 high. Sections are usually 40 or 80 wide.",
-  "source": { "kind": "procedural", "generator": "closet-system", "license": "self-made" },
+  "source": {
+    "kind": "procedural",
+    "generator": "closet-system",
+    "license": "self-made"
+  },
   "params": {
-    "height": { "default": 270, "description": "= ceiling height (posts are clamped floor to ceiling)" },
-    "depth": { "default": 40 },
-    "sections": {
-      "default": [{ "w": 80, "kind": "hang" }, { "w": 80, "kind": "drawers" }, { "w": 80, "kind": "shelves" }],
-      "description": "left→right: [{w, kind, drawers?}] kind = hang (top shelf + rail) | hang2 (shelf + upper and lower rail) | shelves (5) | drawers (2/3-drawer unit, drawers: 2 | 3, + rail above + top shelf); width = sections + 3 cm posts"
+    "height": {
+      "default": 270,
+      "description": "= ceiling height (posts are clamped floor to ceiling)"
     },
-    "postMaterial": { "default": "white-laminate", "description": "texture id" }
+    "depth": {
+      "default": 40
+    },
+    "sections": {
+      "default": [
+        {
+          "w": 80,
+          "kind": "hang"
+        },
+        {
+          "w": 80,
+          "kind": "drawers"
+        },
+        {
+          "w": 80,
+          "kind": "shelves"
+        }
+      ],
+      "description": "left→right: [{w, kind, drawers?}] kind = hang (top shelf + rail) | hang2 (shelf + upper and lower rail) | shelves (5) | drawers (2/3-drawer unit, drawers: 2 | 3, + rail above + top shelf); width = sections + 3 cm posts; coats (jackets on hangers) and shoes (pairs on the floor) per section; shelves sections: contents = per shelf bottom→top, space separated (shoes | whisky | games | books | boxes | bins | stuff)"
+    },
+    "postMaterial": {
+      "default": "white-laminate",
+      "description": "texture id"
+    },
+    "shelfMaterial": {
+      "default": "white-laminate",
+      "description": "texture id"
+    }
   }
 }

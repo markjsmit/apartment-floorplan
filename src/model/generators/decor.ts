@@ -1,11 +1,25 @@
 import type { Part, Vec3 } from '../schema';
-import { box, cyl, num, str, type Extra } from './builtins';
+import { box as sharpBox, cyl, num, str, type Extra, type WithStates } from './builtins';
+import { placeStuff, stuffKind, stuffParts } from './stuff';
+import { COAT_COLORS, coat, shoeRow } from './wear';
 import { rng } from './stuff';
 
 // Simple design furniture for trying out room styles: tables, stools, chairs, benches, media units, shelves, rugs,
 // lamps, plants, curtains, wall art, cushions. Low detail on purpose (see the realism memory: furniture stays simple
 // until Mark asks). Item convention: origin back-centre on the floor, +z out of the front.
 // Look params: `material` (texture id) and/or `color` (hex; tints the material, or is the plain colour on its own).
+
+/**
+ * Every box here gets eased edges: nothing real has a perfect 90° edge (wood is sanded to ~1 cm, fronts ~3 mm,
+ * upholstery is padded — pass a bigger `radius` for that). Pass radius 0 for a truly sharp box.
+ */
+function box(id: string, tags: string[], size: Vec3, position: Vec3, extra: Extra & { radius?: number } = {}): Part {
+  const { radius, ...rest } = extra;
+  const r = radius ?? Math.min(1, Math.min(...size) * 0.3);
+  const b = sharpBox(id, tags, size, position, rest);
+  return r > 0.05 && b.geometry?.type === 'box' ? { ...b, geometry: { ...b.geometry, radius: r } } : b;
+}
+const SOFT = 3; // padded seats, cushions
 
 const look = (p: Record<string, unknown>, prefix: string, material: string, color?: string): Extra => {
   const m = p[`${prefix}Material`] ?? (prefix === '' ? p.material : undefined);
@@ -185,10 +199,10 @@ export function designChair(p: Record<string, unknown>): Part[] {
     parts.push(ell('seat', ['seat'], [W, 10, D - 4], [0, SH - 5, D / 2 + 2], seatLook));
     parts.push(ell('back', ['back'], [W + 2, BH - SH + 8, 16], [0, (SH + BH) / 2 - 2, 9], backLook));
   } else {
-    parts.push(box('seat', ['seat'], [W, 5, D - 4], [0, SH - 2.5, D / 2 + 2], seatLook));
+    parts.push(box('seat', ['seat'], [W, 5, D - 4], [0, SH - 2.5, D / 2 + 2], { ...seatLook, radius: style === 'rattan' ? 1.5 : 2 }));
     if (style === 'rattan') {
-      parts.push(box('back', ['back', 'cane'], [W - 4, BH - SH - 10, 2.5], [0, SH + (BH - SH) / 2 + 3, 4], backLook));
-      parts.push(box('back-rail', ['back'], [W, 4, 3], [0, BH - 2, 4], legLook));
+      parts.push(box('back', ['back', 'cane'], [W - 4, BH - SH - 10, 2.5], [0, SH + (BH - SH) / 2 + 3, 4], { ...backLook, radius: 1 }));
+      parts.push(box('back-rail', ['back'], [W, 4, 3], [0, BH - 2, 4], { ...legLook, radius: 1.4 }));
     } else {
       parts.push(box('back', ['back'], [W - 2, (BH - SH) * 0.45, 2.5], [0, BH - (BH - SH) * 0.25, 4], backLook));
     }
@@ -220,10 +234,10 @@ export function bench(p: Record<string, unknown>): Part[] {
   }
   if (legs === 'box' || p.cushionColor) {
     const c = str(p.cushionColor, '#e9e2d4');
-    parts.push(box('cushion', ['cushion'], [W - 2, 6, D - 2], [0, H - 3 + (legs === 'box' ? 0 : 0), D / 2], { material: str(p.cushionMaterial, 'linen-white'), color: c }));
+    parts.push(box('cushion', ['cushion'], [W - 2, 6, D - 2], [0, H - 3, D / 2], { material: str(p.cushionMaterial, 'linen-white'), color: c, radius: SOFT }));
   }
   const back = num(p.backrest, 0);
-  if (back > 0) parts.push(box('backrest', ['back'], [W, back, 8], [0, H + back / 2, 4], { material: str(p.cushionMaterial, 'linen-white'), color: str(p.cushionColor, '#e9e2d4') }));
+  if (back > 0) parts.push(box('backrest', ['back'], [W, back, 8], [0, H + back / 2, 4], { material: str(p.cushionMaterial, 'linen-white'), color: str(p.cushionColor, '#e9e2d4'), radius: SOFT }));
   return parts;
 }
 
@@ -625,7 +639,10 @@ export function tableDecor(p: Record<string, unknown>): Part[] {
     }
     return parts;
   }
-  if (kind === 'bowl') parts.push(ell('bowl', ['bowl'], [30, 10, 30], [0, 4, 15], { color }));
+  if (kind === 'bowl') {
+    const dia = num(p.diameter, 30);
+    parts.push(ell('bowl', ['bowl'], [dia, dia / 3, dia], [0, dia / 7.5, dia / 2], { color }));
+  }
   else if (kind === 'candles') {
     parts.push(box('tray', ['tray'], [34, 2, 20], [0, 1, 10], { material: str(p.trayMaterial, 'wood-oak-light') }));
     [[-9, 10, 3.5], [0, 14, 3], [9, 8, 3.5]].forEach(([x, h, r], i) => parts.push(cyl(`candle-${i}`, ['candle'], r, h, [x, 2 + h / 2, 10], { color: '#f4efe4' })));
@@ -645,11 +662,61 @@ export function tableDecor(p: Record<string, unknown>): Part[] {
  * Triangular corner cabinet (fills a corner, door on the diagonal). Origin = the right-angle corner on the floor;
  * the triangle runs `legX` along -x and `legZ` along -z. params: legX, legZ, height, material/color, doorMaterial/doorColor.
  */
+/** Parts built in a row frame turned by `yaw` degrees about y and moved to (x, z). */
+function turned(parts: Part[], yaw: number, x: number, z: number): Part[] {
+  const r = (yaw * Math.PI) / 180;
+  const [c, s] = [Math.cos(r), Math.sin(r)];
+  return parts.map((pt) => {
+    const [px, py, pz] = pt.position;
+    return { ...pt, position: [x + px * c + pz * s, py, z - px * s + pz * c], rotation: [pt.rotation[0], pt.rotation[1] + yaw, pt.rotation[2]] };
+  });
+}
+
+/**
+ * Open corner shelves (no door): back panels on both walls, triangular shelves, and on each shelf (bottom → top,
+ * `contents` space separated) whisky | games | books | stuff | ... in a row along the open front.
+ */
+function openCorner(p: Record<string, unknown>, a: number, b: number, H: number, body: Extra): Part[] {
+  const shelfLook = lookOf(p, 'shelf', typeof p.material === 'string' ? p.material : 'white-laminate');
+  const n = Math.max(2, Math.round(num(p.shelves, 5)));
+  const T = 2.5;
+  const tri = (id: string, y: number): Part => ({
+    id, tags: ['shelf'], geometry: { type: 'prism', points: [[a / 2, b / 2], [-a / 2, b / 2], [a / 2, -b / 2]], depth: T, bevel: 0.4 },
+    position: [-a / 2, y, -b / 2], rotation: [90, 0, 0], castShadow: true, glass: false, ...shelfLook,
+  });
+  const parts: Part[] = [
+    box('back-x', ['body', 'back'], [a, H, 1.6], [-a / 2, H / 2, -0.8], body),
+    box('back-z', ['body', 'back'], [1.6, H, b], [-0.8, H / 2, -b / 2], body),
+  ];
+  const len = Math.hypot(a, b);
+  const h = (a * b) / len; // corner → front edge
+  const yaw = (Math.atan2(-b, -a) * 180) / Math.PI; // the row's +z (its front) points out of the corner
+  const contents = str(p.contents, '').split(/\s+/);
+  const ys = Array.from({ length: n }, (_, i) => 4 + (i * (H - 8)) / (n - 1));
+  ys.forEach((y, i) => {
+    parts.push(tri(`shelf-${i + 1}`, y));
+    const kind = stuffKind(contents[i]);
+    if (!kind || i === n - 1) return;
+    const room = Math.min(ys[i + 1] - y - T, 34);
+    const depth = 22;
+    const inset = 3 + depth;
+    const width = len * (1 - inset / h) - 6;
+    if (width < 15) return;
+    // row back-centre: from the middle of the open front, `inset` back towards the corner
+    const ox = -a / 2 + (b / len) * inset;
+    const oz = -b / 2 + (a / len) * inset;
+    const row = stuffParts(kind, `shelf-${i + 1}-${kind}`, width, depth, room).map((pt) => ({ ...pt, position: [pt.position[0], pt.position[1] + y + T / 2, pt.position[2]] as Vec3 }));
+    parts.push(...turned(row, yaw, ox, oz));
+  });
+  return parts;
+}
+
 export function cornerCabinet(p: Record<string, unknown>): Part[] {
   const a = num(p.legX, 75);
   const b = num(p.legZ, 75);
   const H = num(p.height, 200);
   const body = look(p, '', 'white-laminate');
+  if (p.open) return openCorner(p, a, b, H, body);
   const door = lookOf(p, 'door', typeof p.material === 'string' ? p.material : 'white-laminate', typeof p.color === 'string' ? p.color : undefined);
   // outline in x/y, turned so y becomes z (rotation 90 about x) and extruded upwards
   const parts: Part[] = [
@@ -665,6 +732,133 @@ export function cornerCabinet(p: Record<string, unknown>): Part[] {
   parts.push({ ...box('door', ['door', 'front'], [len - 4, H - 4, 1.8], [cx, H / 2, cz], door), rotation: [0, yaw, 0], section: 'door' });
   parts.push({ ...box('handle', ['handle'], [1.5, 20, 1.5], [cx + nx * 1.6 + (a / len) * (len / 2 - 8), H / 2, cz + nz * 1.6 - (b / len) * (len / 2 - 8)], { color: str(p.handleColor, '#2a2a2a') }), rotation: [0, yaw, 0], section: 'door' });
   return parts;
+}
+
+type Front = { kind?: string; h?: number; fill?: string; content?: string; mirror?: boolean; material?: string; color?: string };
+
+/**
+ * Tall cabinet: wardrobe, entry closet, shoe cabinet, locker. Columns side by side (left → right seen from the front),
+ * each a stack of fronts from the bottom up: door | drawer | tilt (shoe flap, pull on top) | open (niche; fill =
+ * baskets | tray | shoes | whisky | games | books ...) — fronts without `h` share what is left; behind a door / tilt `content` =
+ * coats (on a rail) | shoes (shelves of pairs) | any shelf contents kind, seen when it is opened (state "open"). params: width, depth, height, plinth (recessed base, 0 =
+ * none) or legHeight (tapered legs instead), columns [{w, stack}], handles (bar | knob | none = push-to-open),
+ * materials, light (LED strip under the top of each niche).
+ */
+export function tallCabinet(p: Record<string, unknown>): WithStates {
+  const W = num(p.width, 100);
+  const D = num(p.depth, 58);
+  const H = num(p.height, 200);
+  const legH = num(p.legHeight, 0);
+  const base = legH > 0 ? legH : num(p.plinth, 8);
+  const T = 1.8;
+  const body = look(p, '', 'white-laminate');
+  const front = lookOf(p, 'front', typeof p.material === 'string' ? p.material : 'white-laminate', typeof p.color === 'string' ? p.color : undefined);
+  const handles = str(p.handles, 'bar');
+  const hc = { color: str(p.handleColor, '#2a2a2a') };
+  const cols = (Array.isArray(p.columns) && p.columns.length ? p.columns : [{}, {}]) as { w?: number; stack?: Front[] }[];
+  const fixedW = cols.reduce((s, c) => s + (c.w ?? 0), 0);
+  const widths = cols.map((c) => c.w ?? (W - fixedW) / Math.max(cols.filter((k) => !k.w).length, 1));
+  const bodyH = H - base;
+  const parts: Part[] = [
+    box('back', ['body'], [W, bodyH, T], [0, base + bodyH / 2, T / 2], body),
+    box('side-l', ['body'], [T, bodyH, D], [-W / 2 + T / 2, base + bodyH / 2, D / 2], body),
+    box('side-r', ['body'], [T, bodyH, D], [W / 2 - T / 2, base + bodyH / 2, D / 2], body),
+    box('top', ['body'], [W, T, D], [0, H - T / 2, D / 2], body),
+    box('bottom', ['body'], [W, T, D], [0, base + T / 2, D / 2], body),
+  ];
+  if (legH > 0) {
+    const legLook = lookOf(p, 'leg', typeof p.material === 'string' ? p.material : 'wood-oak-light');
+    for (const [x, z] of [[-W / 2 + 5, 5], [W / 2 - 5, 5], [-W / 2 + 5, D - 5], [W / 2 - 5, D - 5]]) parts.push(cyl(`leg-${x}-${z}`, ['leg'], 1.8, legH, [x, legH / 2, z], legLook));
+  } else if (base > 0) parts.push(box('plinth', ['plinth'], [W - 2, base, D - 6], [0, base / 2, (D - 6) / 2], body));
+  const opened: Record<string, { rotation?: Vec3; position?: Vec3 }> = {};
+  const fronts: string[] = [];
+  /** What sits inside a compartment (x centre, width, floor y, height). */
+  const inside = (id: string, kind: string, cx: number, cw: number, y: number, h: number) => {
+    if (kind === 'coats') {
+      parts.push(cyl(`${id}-rail`, ['rail'], 1.25, cw - 2, [cx, y + h - 8, D / 2], { material: 'aluminium-grey', rotation: [0, 0, 90] }));
+      const n = Math.max(1, Math.floor((cw - 6) / 11));
+      for (let k = 0; k < n; k++) parts.push(...coat(`${id}-coat-${k + 1}`, cx - cw / 2 + 6 + ((k + 0.5) * (cw - 12)) / n, y + h - 8, D / 2, COAT_COLORS[(k + ci0) % COAT_COLORS.length], true, Math.min(85, h - 20)));
+    } else if (kind === 'shoes') {
+      const levels = Math.max(1, Math.floor(h / 22));
+      for (let l = 0; l < levels; l++) {
+        const ly = y + (l * h) / levels;
+        if (l > 0) parts.push(box(`${id}-shelf-${l}`, ['shelf'], [cw - T, T, D - 4], [cx, ly - T / 2, D / 2], body));
+        parts.push(...shoeRow(`${id}-shoes-${l}`, cx, ly, D - 2, cw, `${id}-${l}`));
+      }
+    } else {
+      const k = stuffKind(kind);
+      if (k) parts.push(...placeStuff(stuffParts(k, id, cw - 3, D - 3, h - 3), 0, [cx, y, 1]));
+    }
+  };
+  let ci0 = 0;
+  let x0 = -W / 2;
+  widths.forEach((cw, ci) => {
+    ci0 = ci;
+    const cx = x0 + cw / 2;
+    if (ci > 0) parts.push(box(`divider-${ci}`, ['body'], [T, bodyH, D - 1], [x0, base + bodyH / 2, D / 2], body));
+    const stack: Front[] = cols[ci].stack?.length ? cols[ci].stack! : [{ kind: 'door' }];
+    const fixedH = stack.reduce((s, f) => s + (f.h ?? 0), 0);
+    const restH = (bodyH - fixedH) / Math.max(stack.filter((f) => !f.h).length, 1);
+    // door handles sit on the edge away from the hinge: towards the middle of the cabinet
+    const hx = cols.length === 1 ? cw / 2 - 4 : ci < cols.length / 2 ? cw / 2 - 4 : -cw / 2 + 4;
+    let y = base;
+    stack.forEach((f, k) => {
+      const fh = f.h ?? restH;
+      const id = `c${ci + 1}-${k + 1}`;
+      const kind = f.kind ?? 'door';
+      if (kind === 'open') {
+        parts.push(box(`${id}-floor`, ['shelf', 'niche'], [cw - T, T, D - 2], [cx, y + T / 2, D / 2], body));
+        parts.push(box(`${id}-ceil`, ['shelf', 'niche'], [cw - T, T, D - 2], [cx, y + fh - T / 2, D / 2], body));
+        if (p.light) parts.push({ ...box(`${id}-led`, ['light', 'led'], [cw - 8, 0.5, 1.2], [cx, y + fh - T - 0.3, D - 5], { color: '#fff4e0' }), castShadow: false, emit: { color: '#ffd9a8', intensity: 4, kind: 'area' } });
+        const bh = Math.min(fh - 10, 16);
+        if (f.fill && !['baskets', 'tray'].includes(f.fill)) inside(id, f.fill, cx, cw, y + T, fh - 2 * T);
+        if (f.fill === 'baskets') {
+          for (const sx of [-1, 1]) parts.push(box(`${id}-basket-${sx > 0 ? 'r' : 'l'}`, ['basket'], [cw / 2 - 5, bh, D - 14], [cx + (sx * cw) / 4, y + T + bh / 2, D / 2], { material: 'rattan-weave', color: '#e9dcc4' }));
+        } else if (f.fill === 'tray') {
+          parts.push(box(`${id}-tray`, ['tray'], [Math.min(cw - 12, 30), 2, 18], [cx - cw / 6, y + T + 1, D - 14], { material: 'wood-oak-light' }));
+          parts.push(cyl(`${id}-bowl`, ['bowl'], 7, 5, [cx + cw / 4, y + T + 2.5, D - 14], { color: '#d9cfbf' }));
+        }
+      } else {
+        const fl = { ...front, ...(f.material ? { material: f.material } : {}), ...(f.color ? { color: f.color } : {}) };
+        const fz = D + T / 2;
+        if (f.content) inside(id, f.content, cx, cw, y + T, fh - T);
+        const before = parts.length;
+        parts.push({ ...box(`${id}-front`, ['front', kind], [cw - 0.6, fh - 0.6, T], [cx, y + fh / 2, fz], fl), section: id });
+        if (f.mirror) parts.push({ ...box(`${id}-mirror`, ['mirror'], [cw - 10, fh - 14, 0.4], [cx, y + fh / 2, fz + T / 2 + 0.2], { material: 'mirror' }), section: id });
+        if (handles !== 'none') {
+          const z = fz + T / 2 + 1;
+          if (kind === 'door') {
+            const len = Math.min(fh * 0.3, 30);
+            const hy = Math.min(Math.max(105, y + 6 + len / 2), y + fh - 6 - len / 2);
+            parts.push({ ...(handles === 'knob' ? { ...cyl(`${id}-handle`, ['handle'], 1.4, 2.2, [cx + hx, hy, z], hc), rotation: [90, 0, 0] as Vec3 } : box(`${id}-handle`, ['handle'], [1.2, len, 1.6], [cx + hx, hy, z], hc)), section: id });
+          } else {
+            const hy = kind === 'tilt' ? y + fh - 5 : y + fh / 2;
+            parts.push({ ...(handles === 'knob' ? { ...cyl(`${id}-handle`, ['handle'], 1.4, 2.2, [cx, hy, z], hc), rotation: [90, 0, 0] as Vec3 } : box(`${id}-handle`, ['handle'], [Math.min(cw * 0.4, 20), 1.2, 1.6], [cx, hy, z], hc)), section: id });
+          }
+        }
+        // opening: doors swing on the hinge (the edge away from the handle), tilt flaps fold out, drawers slide out
+        fronts.push(`${id}-front`);
+        for (let q = before; q < parts.length; q++) {
+          const pt = parts[q];
+          if (kind === 'door') {
+            const left = hx > 0; // handle right → hinge left
+            parts[q] = { ...pt, pivot: [cx + (left ? -cw / 2 : cw / 2), y + fh / 2, fz + T / 2] };
+            opened[pt.id] = { rotation: [pt.rotation[0], pt.rotation[1] + (left ? -100 : 100), pt.rotation[2]] };
+          } else if (kind === 'tilt') {
+            parts[q] = { ...pt, pivot: [cx, y, fz + T / 2] };
+            opened[pt.id] = { rotation: [pt.rotation[0] + 40, pt.rotation[1], pt.rotation[2]] };
+          } else opened[pt.id] = { position: [pt.position[0], pt.position[1], pt.position[2] + Math.min(D - 10, 40)] };
+        }
+      }
+      y += fh;
+    });
+    x0 += cw;
+  });
+  return {
+    parts,
+    states: [{ id: 'closed', name: 'Closed', parts: {} }, { id: 'open', name: 'Open', parts: opened }],
+    interactions: fronts.map((part) => ({ part, action: 'cycleStates' as const })),
+  };
 }
 
 /** Swivel TV floor stand (e.g. 89 x 52 base, column up to the bracket, small shelf). Put the TV on it with state "wall". params: width, depth, height (bracket top), shelf (height, 0 = none), color. */

@@ -1,6 +1,7 @@
 import { Euler, Quaternion, Vector3 } from 'three';
 import type { Geometry, Part, Vec2, Vec3 } from '../schema';
 import { rng } from './stuff';
+import { COAT_COLORS, coat } from './wear';
 
 // Sports gear for the skating corner: soft backpacks, triangular skate bags on a hook rail, figure / hockey skates.
 // Fabric is built from ellipsoids (soft, a bit lumpy, varied by `seed`) instead of boxes.
@@ -184,6 +185,10 @@ export function hookRail(params: Record<string, unknown>) {
   const onHooks = [xs[0], xs[n - 1], ...xs.slice(1, -1)].slice(0, bagCount);
   const bagParts = onHooks.flatMap((x, i) => skateBag(`bag-${i + 1}`, x, 7, 7.4, bagColor));
   parts.push(...bagParts);
+  // jackets on the hooks the bags leave free
+  const coatColors = String(params.coatColors ?? '').split(',').map((c) => c.trim()).filter(Boolean);
+  xs.filter((x) => !onHooks.includes(x)).slice(0, Math.round(num(params.coats, 0))).forEach((x, i) =>
+    parts.push(...coat(`coat-${i + 1}`, x, 7, 9, coatColors[i % Math.max(coatColors.length, 1)] ?? COAT_COLORS[i % COAT_COLORS.length], false, num(params.coatLength, 72))));
   const hidden = Object.fromEntries(bagParts.map((p) => [p.id, { visible: false }]));
   return {
     parts,

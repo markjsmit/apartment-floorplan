@@ -2,7 +2,7 @@
   "meta": {
     "name": "Light industrial loft",
     "kind": "saved",
-    "note": "Light industrial · floating sofa: sofa mid-room facing a wall-mounted TV (~3.55 m); dining corner behind the sofa under the sofa window (bench on the wall); the old dining corner becomes a KALLAX storage wall; hook rail on the pillar.",
+    "note": "Light industrial · floating sofa: wall-mounted TV (~3.55 m); dining behind the sofa (bench against the sofa back, our chairs on the wall side), open black KALLAX with whisky + games under the sofa window; door corner = open black clamp-post rack + our mirror. No rug, no curtains.",
     "location": {
       "lat": 32.0853,
       "lon": 34.7818,
@@ -852,65 +852,6 @@
           ]
         },
         {
-          "id": "living.rug",
-          "asset": "rug",
-          "name": "IKEA LOKALTÅG rug, low pile, beige-grey — IKEA Israel ₪595",
-          "tags": [
-            "rug"
-          ],
-          "params": {
-            "width": 200,
-            "depth": 300,
-            "color": "#dcd6cc",
-            "material": "wool-woven"
-          },
-          "position": [
-            230.0,
-            0,
-            118
-          ],
-          "rotation": 0
-        },
-        {
-          "id": "living.cushions",
-          "asset": "cushions",
-          "name": "Cognac faux-leather + bouclé + olive velvet cushion covers (Amazon)",
-          "tags": [
-            "cushions"
-          ],
-          "params": {
-            "colors": "#ffffff,#ffffff,#ffffff",
-            "size": 43,
-            "positions": [
-              [
-                -108.84,
-                70,
-                40
-              ],
-              [
-                -66.25,
-                70,
-                40
-              ],
-              [
-                85.18,
-                70,
-                40
-              ]
-            ],
-            "material": "leather-cognac"
-          },
-          "position": [
-            392,
-            0,
-            222.5
-          ],
-          "rotation": -90,
-          "allowOverlap": [
-            "living.sofa"
-          ]
-        },
-        {
           "id": "living.armchair",
           "asset": "old-house-armchair",
           "name": "Our grey armchair (TV seat by the window)",
@@ -919,34 +860,39 @@
           ],
           "params": {},
           "position": [
-            194.9,
+            194.4,
             0,
-            113.1
+            107.5
           ],
-          "rotation": -50.8,
+          "rotation": -49.7,
           "allowOverlap": [
             "living.sofa"
           ]
         },
         {
-          "id": "living.floor-lamp",
-          "asset": "floor-lamp",
-          "name": "IKEA HÅRSLINGA / MOLNART floor lamp with Edison-style bulb — IKEA Israel ₪174",
+          "id": "living.bench",
+          "asset": "bench",
+          "name": "Gur bench (גור) — natural wood seat, black metal frame, made in Israel — Million Kisot (מיליון כסאות) ₪1,496 (against the back of the sofa)",
           "tags": [
-            "lamp"
+            "bench"
           ],
           "params": {
-            "height": 150,
-            "shade": "dome",
-            "shadeColor": "#2a2a2a",
-            "baseColor": "#1d1d1f"
+            "width": 120,
+            "depth": 38,
+            "height": 45,
+            "legs": "metal",
+            "material": "wood-oak-light",
+            "legMaterial": "metal-black"
           },
           "position": [
-            85,
+            396,
             0,
-            95
+            178
           ],
-          "rotation": 0
+          "rotation": 90,
+          "allowOverlap": [
+            "living.sofa"
+          ]
         },
         {
           "id": "living.dining-table",
@@ -963,35 +909,13 @@
             "legMaterial": "metal-black"
           },
           "position": [
-            455,
+            440,
             0,
-            140
+            178
           ],
-          "rotation": 90
-        },
-        {
-          "id": "living.bench",
-          "asset": "bench",
-          "name": "Gur bench (גור) — natural wood seat, black metal frame, made in Israel — Million Kisot (מיליון כסאות) ₪1,496 (on the sofa wall)",
-          "tags": [
-            "bench"
-          ],
-          "params": {
-            "width": 120,
-            "depth": 40,
-            "height": 45,
-            "legs": "metal",
-            "material": "wood-oak-light",
-            "legMaterial": "metal-black"
-          },
-          "against": {
-            "wall": "living.wall-1",
-            "offset": 80,
-            "elevation": 0,
-            "gap": 0
-          },
+          "rotation": 90,
           "allowOverlap": [
-            "living.dining-table"
+            "living.bench"
           ]
         },
         {
@@ -1003,11 +927,11 @@
           ],
           "params": {},
           "position": [
-            495.0,
+            572.5,
             0,
-            20.5
+            145.0
           ],
-          "rotation": 0,
+          "rotation": -90,
           "allowOverlap": [
             "living.dining-table"
           ]
@@ -1021,11 +945,11 @@
           ],
           "params": {},
           "position": [
-            495.0,
+            572.5,
             0,
-            259.5
+            212.0
           ],
-          "rotation": 180,
+          "rotation": -90,
           "allowOverlap": [
             "living.dining-table"
           ]
@@ -1048,9 +972,9 @@
             "lightColor": "#ffcf8a"
           },
           "position": [
-            495,
+            480,
             0,
-            140
+            178
           ],
           "rotation": 90
         },
@@ -1070,9 +994,9 @@
             "flowers": "#efe6d6"
           },
           "position": [
-            495,
+            480,
             75,
-            132
+            172
           ],
           "rotation": 0,
           "allowOverlap": [
@@ -1080,9 +1004,34 @@
           ]
         },
         {
+          "id": "living.display",
+          "asset": "ikea-kallax",
+          "name": "KALLAX 4x2 under the sofa window, open: our whisky + board games on show — IKEA",
+          "tags": [
+            "kallax",
+            "display",
+            "whisky",
+            "games"
+          ],
+          "params": {
+            "cols": 4,
+            "rows": 2,
+            "color": "black-brown",
+            "contents": [
+              "whisky games whisky games",
+              "games books games boxes"
+            ],
+            "seed": "ind"
+          },
+          "against": {
+            "wall": "living.wall-0",
+            "offset": 437
+          }
+        },
+        {
           "id": "living.storage-wall",
           "asset": "ikea-kallax",
-          "name": "KALLAX 4x4 storage wall: board games, books, baskets — IKEA (or move our white KALLAX here)",
+          "name": "KALLAX 4x4 storage wall: baskets + drawers — IKEA (or move our white KALLAX here)",
           "tags": [
             "storage",
             "kallax"
@@ -1152,76 +1101,56 @@
           }
         },
         {
-          "id": "living.drop-station",
-          "asset": "ikea-kallax-77x77",
-          "name": "KALLAX 2x2 drop station at the front door: baskets for keys/phones/wallets, 2 drawers — IKEA",
+          "id": "living.entry-rack",
+          "asset": "closet-system",
+          "name": "Black clamp-post entry rack (floor-to-soffit, no drilling): shoe shelves + key shelf by the door, coats on hangers",
           "tags": [
-            "drop zone",
-            "kallax",
-            "storage"
+            "entry",
+            "coats",
+            "shoes",
+            "drop zone"
           ],
           "params": {
-            "cols": 2,
-            "rows": 2,
-            "color": "white",
-            "inserts": [
-              [
-                "box",
-                "box"
-              ],
-              [
-                "drawers",
-                "drawers"
-              ]
+            "height": 215,
+            "depth": 40,
+            "postMaterial": "metal-black",
+            "shelfMaterial": "wood-oak-light",
+            "sections": [
+              {
+                "w": 34,
+                "kind": "shelves",
+                "contents": "shoes shoes stuff boxes"
+              },
+              {
+                "w": 34,
+                "kind": "hang",
+                "coats": 2,
+                "shoes": 1
+              }
             ]
           },
           "against": {
             "wall": "living.wall-4",
-            "offset": 488,
+            "offset": 430,
             "elevation": 0,
             "gap": 0
           }
         },
         {
-          "id": "living.key-hooks",
-          "asset": "hook-rail",
-          "name": "Key + bag hooks above the drop station",
+          "id": "living.mirror",
+          "asset": "old-house-floor-mirror",
+          "name": "Our black floor mirror (leaning, by the door)",
           "tags": [
-            "hooks",
-            "drop zone"
+            "mirror",
+            "ours"
           ],
-          "params": {
-            "width": 70,
-            "hooks": 4,
-            "bags": 0
-          },
+          "params": {},
           "against": {
-            "wall": "living.wall-4",
-            "offset": 492,
-            "elevation": 140,
+            "wall": "living.wall-5",
+            "offset": 50,
+            "elevation": 0,
             "gap": 0
           }
-        },
-        {
-          "id": "living.key-bowl",
-          "asset": "table-decor",
-          "name": "Key bowl on the drop station",
-          "tags": [
-            "drop zone"
-          ],
-          "params": {
-            "kind": "bowl",
-            "color": "#d9cfbf"
-          },
-          "position": [
-            25,
-            77,
-            690
-          ],
-          "rotation": 0,
-          "allowOverlap": [
-            "living.drop-station"
-          ]
         },
         {
           "id": "living.device-cabinet",
@@ -1234,7 +1163,7 @@
           "params": {},
           "against": {
             "wall": "living.wall-4",
-            "offset": 428,
+            "offset": 508,
             "elevation": 0,
             "gap": 0
           }
@@ -1314,29 +1243,6 @@
           "rotation": 0
         },
         {
-          "id": "living.snake",
-          "asset": "plant",
-          "name": "Sansevieria (snake plant, סנסיווריה ירוקה) XL, 65–90 cm — Plant It (plantit.co.il) ₪155",
-          "tags": [
-            "plant"
-          ],
-          "params": {
-            "kind": "snake",
-            "height": 80,
-            "seed": "snake",
-            "spread": 28,
-            "potDiameter": 28,
-            "potColor": "#8a8680",
-            "potMaterial": "concrete-light"
-          },
-          "position": [
-            375,
-            0,
-            16.0
-          ],
-          "rotation": 0
-        },
-        {
           "id": "living.snake-small",
           "asset": "plant",
           "name": "Sansevieria 'Moonshine' (silvery snake plant) L, 40–50 cm — Plant It (plantit.co.il) ₪120",
@@ -1388,31 +1294,9 @@
           ]
         },
         {
-          "id": "living.pillar-hooks",
-          "asset": "hook-rail",
-          "name": "Black hook rail on the pillar (jackets, bags)",
-          "tags": [
-            "pillar"
-          ],
-          "params": {
-            "width": 100,
-            "hooks": 5,
-            "bags": 0
-          },
-          "position": [
-            452,
-            165,
-            339
-          ],
-          "rotation": 180,
-          "allowOverlap": [
-            "living.pillar"
-          ]
-        },
-        {
           "id": "living.picture",
           "asset": "old-house-picture-city",
-          "name": "Our city-at-night print (over the bench)",
+          "name": "Our city-at-night print (over the chairs)",
           "tags": [
             "art",
             "ours"
@@ -1421,110 +1305,9 @@
           "against": {
             "wall": "living.wall-1",
             "offset": 110,
-            "elevation": 100,
+            "elevation": 125,
             "gap": 0
           }
-        },
-        {
-          "id": "living.curtain-balcony",
-          "asset": "curtain",
-          "name": "Sheer linen curtains (balcony door)",
-          "tags": [
-            "curtain"
-          ],
-          "params": {
-            "width": 330,
-            "height": 268,
-            "panels": 2,
-            "open": 0.75,
-            "color": "#e7e3dc"
-          },
-          "against": {
-            "wall": "living.wall-0",
-            "offset": 40,
-            "gap": 4
-          },
-          "allowOverlap": [
-            "living.sofa",
-            "living.tv-unit",
-            "living.tv",
-            "living.coffee-table",
-            "living.rug",
-            "living.cushions",
-            "living.armchair",
-            "living.floor-lamp",
-            "living.dining-table",
-            "living.bench",
-            "living.chair-1",
-            "living.chair-2",
-            "living.pendant",
-            "living.flowers",
-            "living.storage-wall",
-            "living.drop-station",
-            "living.key-hooks",
-            "living.key-bowl",
-            "living.device-cabinet",
-            "living.stool-1",
-            "living.stool-2",
-            "living.rubber",
-            "living.snake",
-            "living.snake-small",
-            "living.eucalyptus",
-            "living.pillar-hooks",
-            "living.picture",
-            "living.curtain-window"
-          ]
-        },
-        {
-          "id": "living.curtain-window",
-          "asset": "curtain",
-          "name": "Sheer linen curtains (big window)",
-          "tags": [
-            "curtain"
-          ],
-          "params": {
-            "width": 150,
-            "height": 268,
-            "panels": 2,
-            "open": 0.8,
-            "color": "#e7e3dc"
-          },
-          "against": {
-            "wall": "living.wall-5",
-            "offset": 552,
-            "elevation": 0,
-            "gap": 4
-          },
-          "allowOverlap": [
-            "living.sofa",
-            "living.tv-unit",
-            "living.tv",
-            "living.coffee-table",
-            "living.rug",
-            "living.cushions",
-            "living.armchair",
-            "living.floor-lamp",
-            "living.dining-table",
-            "living.bench",
-            "living.chair-1",
-            "living.chair-2",
-            "living.pendant",
-            "living.flowers",
-            "living.storage-wall",
-            "living.drop-station",
-            "living.key-hooks",
-            "living.key-bowl",
-            "living.device-cabinet",
-            "living.stool-1",
-            "living.stool-2",
-            "living.rubber",
-            "living.snake",
-            "living.snake-small",
-            "living.eucalyptus",
-            "living.pillar-hooks",
-            "living.picture",
-            "living.curtain-balcony"
-          ]
         }
       ],
       "assumptions": [

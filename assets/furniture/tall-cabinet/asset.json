@@ -1,0 +1,54 @@
+{
+  "id": "tall-cabinet",
+  "name": "Tall cabinet / wardrobe / shoe cabinet (design)",
+  "tags": [
+    "cabinet",
+    "wardrobe",
+    "closet",
+    "shoe cabinet",
+    "entry",
+    "storage",
+    "design"
+  ],
+  "description": "Columns of fronts stacked bottom-up: door | drawer | tilt (shoe flap) | open niche (baskets, tray, shoes, whisky, games ...). Behind doors `content` = coats | shoes | shelf contents, seen when opened (double-click a front, or state \"open\"). Eased edges like real furniture.",
+  "source": {
+    "kind": "procedural",
+    "generator": "tall-cabinet",
+    "license": "self-made",
+    "notes": "src/model/generators/decor.ts; the real product + link is in the item name."
+  },
+  "params": {
+    "width": {
+      "default": 100
+    },
+    "depth": {
+      "default": 58
+    },
+    "height": {
+      "default": 200
+    },
+    "plinth": {
+      "default": 8,
+      "description": "recessed base; 0 = none"
+    },
+    "legHeight": {
+      "default": 0,
+      "description": "> 0: tapered legs instead of a plinth"
+    },
+    "columns": {
+      "default": [
+        {},
+        {}
+      ],
+      "description": "left\u2192right [{w, stack: [{kind, h, fill, content, mirror, material, color}]}]"
+    },
+    "handles": {
+      "default": "bar",
+      "description": "bar | knob | none (push-to-open)"
+    },
+    "light": {
+      "default": false,
+      "description": "LED strip in open niches"
+    }
+  }
+}

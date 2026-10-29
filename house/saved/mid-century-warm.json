@@ -2,7 +2,7 @@
   "meta": {
     "name": "Mid-century warm",
     "kind": "saved",
-    "note": "Mid-century · TV mid-room: the TV stands on a swivel stand in front of a walnut console that splits the room (~3.6 m); reading nook by the window behind it; a triangular corner closet fills the pillar gap (storage + cable route); tulip table + our chairs.",
+    "note": "Mid-century · floating sofa facing the sofa wall: TV on a long walnut sideboard (~3.6 m); armchair by the window; open corner shelves at the pillar with the whisky + games; tulip table + our chairs; door corner = walnut wardrobe + tilt-out shoe cabinet. No rug, no curtains.",
     "location": {
       "lat": 32.0853,
       "lon": 34.7818,
@@ -774,60 +774,17 @@
           "builtIn": true
         },
         {
-          "id": "living.sofa",
-          "asset": "old-house-sofa-l",
-          "name": "Our grey L-sofa (265)",
-          "tags": [
-            "sofa",
-            "couch"
-          ],
-          "params": {},
-          "position": [
-            585,
-            0,
-            132.5
-          ],
-          "rotation": -90,
-          "state": "covers"
-        },
-        {
-          "id": "living.corner-closet",
-          "asset": "corner-cabinet",
-          "name": "Triangular corner closet (idea): closes the gap pillar <-> sofa wall; coats/vacuum inside; cable route to the pillar",
-          "tags": [
-            "closet",
-            "storage",
-            "idea"
-          ],
-          "params": {
-            "legX": 75,
-            "legZ": 76,
-            "height": 238,
-            "material": "white-laminate",
-            "doorMaterial": "walnut"
-          },
-          "position": [
-            585,
-            0,
-            356
-          ],
-          "rotation": 0,
-          "allowOverlap": [
-            "living.pillar"
-          ]
-        },
-        {
-          "id": "living.console",
+          "id": "living.sideboard",
           "asset": "media-unit",
-          "name": "Napoli TV console 180 cm, walnut, fluted doors on splayed legs (מזנון מודרני דגם נאפולי – אגוז) — Razco (רזקו), also on Rahiti ₪699 (faces the reading nook)",
+          "name": "Napoli TV console 180 cm, walnut, fluted doors on splayed legs (מזנון מודרני דגם נאפולי – אגוז) — Razco (רזקו), also on Rahiti ₪699 (TV on top)",
           "tags": [
-            "console",
-            "room divider"
+            "sideboard",
+            "tv unit"
           ],
           "params": {
             "width": 180,
             "depth": 40,
-            "height": 49,
+            "height": 55,
             "legHeight": 16,
             "modules": "door,drawer,drawer,door",
             "fluted": true,
@@ -835,99 +792,47 @@
             "legMaterial": "walnut",
             "pullColor": "#c9a227"
           },
-          "position": [
-            160,
-            0,
-            178
-          ],
-          "rotation": -90
-        },
-        {
-          "id": "living.tv-stand",
-          "asset": "tv-stand",
-          "name": "EAZO FS888B swivel TV floor stand up to 65\" with hidden shelf — CityDeal ₪699",
-          "tags": [
-            "tv stand"
-          ],
-          "params": {
-            "width": 89,
-            "depth": 52,
-            "height": 135
-          },
-          "position": [
-            165,
-            0,
-            178
-          ],
-          "rotation": 90
+          "against": {
+            "wall": "living.wall-1",
+            "offset": 55,
+            "elevation": 0,
+            "gap": 0
+          }
         },
         {
           "id": "living.tv",
           "asset": "old-house-tv",
-          "name": "Our 65\" TV on the swivel stand (~3.6 m from the sofa; can turn to the nook)",
+          "name": "Our 65\" TV on the walnut sideboard (~3.6 m)",
           "tags": [
             "tv"
           ],
           "params": {},
-          "position": [
-            180,
-            62,
-            178
-          ],
-          "rotation": 90,
-          "state": "wall",
+          "against": {
+            "wall": "living.wall-1",
+            "offset": 62,
+            "elevation": 55,
+            "gap": 4
+          },
           "allowOverlap": [
-            "living.tv-stand"
+            "living.sideboard"
           ]
         },
         {
-          "id": "living.coffee-table",
-          "asset": "coffee-table-drawers",
-          "name": "Oslo coffee table with drawer, walnut (שולחן סלון מודרני דגם אוסלו – אגוז) — Razco (רזקו), also on Rahiti ₪499",
+          "id": "living.sofa",
+          "asset": "old-house-sofa-l",
+          "name": "Our grey L-sofa (265), floating, facing the sofa wall",
           "tags": [
-            "coffee table",
-            "drawers"
+            "sofa",
+            "couch"
           ],
-          "params": {
-            "width": 120,
-            "depth": 60,
-            "height": 45,
-            "drawers": 2,
-            "base": "tapered",
-            "material": "walnut"
-          },
+          "params": {},
           "position": [
-            390.0,
+            135,
             0,
-            166
+            172
           ],
           "rotation": 90,
-          "allowOverlap": [
-            "living.sofa"
-          ]
-        },
-        {
-          "id": "living.rug",
-          "asset": "rug",
-          "name": "Paris rug 9199/01, cream with black graphic diamond lines, 160x230 (שטיח פריז דגם 9199/01) — Betili (ביתילי) ₪1,667 (the cable runs under it)",
-          "tags": [
-            "rug"
-          ],
-          "params": {
-            "width": 230,
-            "depth": 160,
-            "color": "#f4efe6",
-            "material": "wool-woven",
-            "borderColor": "#2a2a2a",
-            "pattern": "stripes",
-            "border": 3
-          },
-          "position": [
-            360.0,
-            0,
-            98
-          ],
-          "rotation": 0
+          "state": "covers"
         },
         {
           "id": "living.cushions",
@@ -959,9 +864,35 @@
             "material": "knit-terracotta"
           },
           "position": [
-            585,
+            135,
             0,
-            132.5
+            172
+          ],
+          "rotation": 90,
+          "allowOverlap": [
+            "living.sofa"
+          ]
+        },
+        {
+          "id": "living.coffee-table",
+          "asset": "coffee-table-drawers",
+          "name": "Oslo coffee table with drawer, walnut (שולחן סלון מודרני דגם אוסלו – אגוז) — Razco (רזקו), also on Rahiti ₪499",
+          "tags": [
+            "coffee table",
+            "drawers"
+          ],
+          "params": {
+            "width": 120,
+            "depth": 60,
+            "height": 45,
+            "drawers": 2,
+            "base": "tapered",
+            "material": "walnut"
+          },
+          "position": [
+            330.0,
+            0,
+            125
           ],
           "rotation": -90,
           "allowOverlap": [
@@ -971,17 +902,17 @@
         {
           "id": "living.armchair",
           "asset": "old-house-armchair",
-          "name": "Our grey armchair (TV seat by the pillar, ~2.6 m)",
+          "name": "Our grey armchair (behind the chaise, by the window, ~5.3 m to the TV)",
           "tags": [
             "armchair"
           ],
           "params": {},
           "position": [
-            458.7,
+            18.6,
             0,
-            302.6
+            271.7
           ],
-          "rotation": -114.5,
+          "rotation": 103.2,
           "allowOverlap": [
             "living.sofa"
           ]
@@ -989,7 +920,7 @@
         {
           "id": "living.floor-lamp",
           "asset": "floor-lamp",
-          "name": "Vintage globe floor lamp, black (מנורת עמידה שחור דגם וינטג') — Betili (ביתילי) ₪763",
+          "name": "Vintage globe floor lamp, black (מנורת עמידה שחור דגם וינטג') — Betili (ביתילי) ₪763 (at the big window, TV-point outlet)",
           "tags": [
             "lamp"
           ],
@@ -1000,33 +931,40 @@
             "baseColor": "#1d1d1f"
           },
           "position": [
-            25,
+            22,
             0,
-            300
+            175
           ],
           "rotation": 90
         },
         {
-          "id": "living.mushroom-lamp",
-          "asset": "floor-lamp",
-          "name": "Gozar glass mushroom table lamp, ochre/mustard (Leitmotiv) — Betili (ביתילי) ₪314",
+          "id": "living.corner-shelves",
+          "asset": "corner-cabinet",
+          "name": "Open triangular corner shelves (no door): our whisky + board games on show; the TV cable can run up its back",
           "tags": [
-            "lamp"
+            "shelves",
+            "whisky",
+            "games",
+            "display"
           ],
           "params": {
-            "height": 27,
-            "shade": "dome",
-            "shadeColor": "#c9a227",
-            "baseColor": "#c9a227"
+            "open": true,
+            "legX": 75,
+            "legZ": 76,
+            "height": 200,
+            "shelves": 6,
+            "material": "white-laminate",
+            "shelfMaterial": "walnut",
+            "contents": "games games whisky whisky games"
           },
           "position": [
-            140,
-            49,
-            110
+            585,
+            0,
+            356
           ],
-          "rotation": -90,
+          "rotation": 0,
           "allowOverlap": [
-            "living.console"
+            "living.pillar"
           ]
         },
         {
@@ -1046,7 +984,7 @@
           "position": [
             82,
             0,
-            460.0
+            410.0
           ],
           "rotation": 0
         },
@@ -1061,7 +999,7 @@
           "position": [
             16.6,
             0,
-            454.6
+            404.6
           ],
           "rotation": 45.0,
           "allowOverlap": [
@@ -1079,7 +1017,7 @@
           "position": [
             147.4,
             0,
-            454.6
+            404.6
           ],
           "rotation": -45.0,
           "allowOverlap": [
@@ -1097,7 +1035,7 @@
           "position": [
             16.6,
             0,
-            585.4
+            535.4
           ],
           "rotation": 135.0,
           "allowOverlap": [
@@ -1115,7 +1053,7 @@
           "position": [
             147.4,
             0,
-            585.4
+            535.4
           ],
           "rotation": -135.0,
           "allowOverlap": [
@@ -1139,7 +1077,7 @@
           "position": [
             82,
             0,
-            520
+            470
           ],
           "rotation": 0
         },
@@ -1161,7 +1099,7 @@
           "position": [
             82,
             75,
-            512
+            462
           ],
           "rotation": 0,
           "allowOverlap": [
@@ -1169,75 +1107,115 @@
           ]
         },
         {
-          "id": "living.drop-station",
-          "asset": "ikea-kallax-77x77",
-          "name": "KALLAX 2x2 drop station at the front door: baskets for keys/phones/wallets, 2 drawers — IKEA",
+          "id": "living.wardrobe",
+          "asset": "tall-cabinet",
+          "name": "Walnut 2-door wardrobe on legs, 100x55x195 (coats on a rail, shoes below)",
           "tags": [
-            "drop zone",
-            "kallax",
-            "storage"
+            "wardrobe",
+            "coats",
+            "shoes",
+            "entry"
           ],
           "params": {
-            "cols": 2,
-            "rows": 2,
-            "color": "black-brown",
-            "inserts": [
-              [
-                "box",
-                "box"
-              ],
-              [
-                "drawers",
-                "drawers"
-              ]
+            "width": 100,
+            "depth": 55,
+            "height": 195,
+            "legHeight": 14,
+            "handles": "knob",
+            "handleColor": "#c9a227",
+            "material": "walnut",
+            "frontMaterial": "walnut",
+            "columns": [
+              {
+                "stack": [
+                  {
+                    "kind": "door",
+                    "content": "coats"
+                  }
+                ]
+              },
+              {
+                "stack": [
+                  {
+                    "kind": "door",
+                    "h": 60,
+                    "content": "shoes"
+                  },
+                  {
+                    "kind": "door",
+                    "content": "coats"
+                  }
+                ]
+              }
             ]
           },
           "against": {
-            "wall": "living.wall-4",
-            "offset": 488,
+            "wall": "living.wall-5",
+            "offset": 44,
             "elevation": 0,
             "gap": 0
           }
         },
         {
-          "id": "living.key-hooks",
-          "asset": "hook-rail",
-          "name": "Key + bag hooks above the drop station",
+          "id": "living.shoe-cabinet",
+          "asset": "tall-cabinet",
+          "name": "Walnut tilt-out shoe cabinet 75x30x100 (2 flaps, ~8 pairs); top = keys + wallet",
           "tags": [
-            "hooks",
-            "drop zone"
+            "shoes",
+            "drop zone",
+            "entry"
           ],
           "params": {
-            "width": 70,
-            "hooks": 4,
-            "bags": 0
+            "width": 75,
+            "depth": 30,
+            "height": 100,
+            "legHeight": 14,
+            "handles": "bar",
+            "handleColor": "#c9a227",
+            "material": "walnut",
+            "frontMaterial": "walnut",
+            "columns": [
+              {
+                "stack": [
+                  {
+                    "kind": "tilt",
+                    "content": "shoes"
+                  },
+                  {
+                    "kind": "tilt",
+                    "content": "shoes"
+                  }
+                ]
+              }
+            ]
           },
           "against": {
             "wall": "living.wall-4",
-            "offset": 492,
-            "elevation": 140,
+            "offset": 431,
+            "elevation": 0,
             "gap": 0
           }
         },
         {
           "id": "living.key-bowl",
           "asset": "table-decor",
-          "name": "Key bowl on the drop station",
+          "name": "Brass key bowl",
           "tags": [
             "drop zone"
           ],
           "params": {
             "kind": "bowl",
-            "color": "#d9cfbf"
+            "color": "#c9a227",
+            "diameter": 18
           },
           "position": [
-            25,
-            77,
-            690
+            112,
+            100,
+            686
           ],
           "rotation": 0,
           "allowOverlap": [
-            "living.drop-station"
+            "living.shoe-cabinet"
           ]
         },
         {
@@ -1251,7 +1229,7 @@
           "params": {},
           "against": {
             "wall": "living.wall-4",
-            "offset": 428,
+            "offset": 508,
             "elevation": 0,
             "gap": 0
           }
@@ -1332,29 +1310,6 @@
           "rotation": 0
         },
         {
-          "id": "living.snake",
-          "asset": "plant",
-          "name": "Snake plant / Sansevieria (סנסיווריה ירוקה) L — Plant It ₪110",
-          "tags": [
-            "plant"
-          ],
-          "params": {
-            "kind": "snake",
-            "height": 55,
-            "seed": "snake",
-            "spread": 25,
-            "potDiameter": 19,
-            "potColor": "#e9dcc8",
-            "stand": 28
-          },
-          "position": [
-            375,
-            0,
-            17.5
-          ],
-          "rotation": 0
-        },
-        {
           "id": "living.pothos",
           "asset": "plant",
           "name": "Variegated pothos (פוטוס מגוון) M — Plant It ₪48",
@@ -1369,13 +1324,13 @@
             "model": "syngonium"
           },
           "position": [
-            140,
-            49,
-            232.0
+            565,
+            55,
+            210.0
           ],
           "rotation": 0,
           "allowOverlap": [
-            "living.console"
+            "living.sideboard"
           ]
         },
         {
@@ -1411,7 +1366,7 @@
           ],
           "params": {},
           "position": [
-            452,
+            440,
             150,
             337
           ],
@@ -1419,133 +1374,6 @@
           "allowOverlap": [
             "living.pillar",
             "living.pillar-cladding"
-          ]
-        },
-        {
-          "id": "living.art",
-          "asset": "wall-art",
-          "name": "3-piece framed mid-century abstract prints (terracotta, sage, cream), 30x40 each — Amazon.com ₪124",
-          "tags": [
-            "art"
-          ],
-          "params": {
-            "width": 40,
-            "height": 50,
-            "frameColor": "#6b4a33",
-            "art": "#c9a227,#b4532a,#8a9a78"
-          },
-          "against": {
-            "wall": "living.wall-1",
-            "offset": 158,
-            "elevation": 110,
-            "gap": 0
-          }
-        },
-        {
-          "id": "living.curtain-balcony",
-          "asset": "curtain",
-          "name": "Sheer linen curtains (balcony door)",
-          "tags": [
-            "curtain"
-          ],
-          "params": {
-            "width": 330,
-            "height": 268,
-            "panels": 2,
-            "open": 0.75,
-            "color": "#efe6d4"
-          },
-          "against": {
-            "wall": "living.wall-0",
-            "offset": 40,
-            "gap": 4
-          },
-          "allowOverlap": [
-            "living.sofa",
-            "living.corner-closet",
-            "living.console",
-            "living.tv-stand",
-            "living.tv",
-            "living.coffee-table",
-            "living.rug",
-            "living.cushions",
-            "living.armchair",
-            "living.floor-lamp",
-            "living.mushroom-lamp",
-            "living.dining-table",
-            "living.chair-1",
-            "living.chair-2",
-            "living.chair-3",
-            "living.chair-4",
-            "living.pendant",
-            "living.flowers",
-            "living.drop-station",
-            "living.key-hooks",
-            "living.key-bowl",
-            "living.device-cabinet",
-            "living.stool-1",
-            "living.stool-2",
-            "living.fig",
-            "living.snake",
-            "living.pothos",
-            "living.pillar-cladding",
-            "living.clock",
-            "living.art",
-            "living.curtain-window"
-          ]
-        },
-        {
-          "id": "living.curtain-window",
-          "asset": "curtain",
-          "name": "Sheer linen curtains (big window)",
-          "tags": [
-            "curtain"
-          ],
-          "params": {
-            "width": 150,
-            "height": 268,
-            "panels": 2,
-            "open": 0.8,
-            "color": "#efe6d4"
-          },
-          "against": {
-            "wall": "living.wall-5",
-            "offset": 552,
-            "elevation": 0,
-            "gap": 4
-          },
-          "allowOverlap": [
-            "living.sofa",
-            "living.corner-closet",
-            "living.console",
-            "living.tv-stand",
-            "living.tv",
-            "living.coffee-table",
-            "living.rug",
-            "living.cushions",
-            "living.armchair",
-            "living.floor-lamp",
-            "living.mushroom-lamp",
-            "living.dining-table",
-            "living.chair-1",
-            "living.chair-2",
-            "living.chair-3",
-            "living.chair-4",
-            "living.pendant",
-            "living.flowers",
-            "living.drop-station",
-            "living.key-hooks",
-            "living.key-bowl",
-            "living.device-cabinet",
-            "living.stool-1",
-            "living.stool-2",
-            "living.fig",
-            "living.snake",
-            "living.pothos",
-            "living.pillar-cladding",
-            "living.clock",
-            "living.art",
-            "living.curtain-balcony"
           ]
         }
       ],

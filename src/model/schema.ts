@@ -135,7 +135,8 @@ export type House = z.infer<typeof HouseSchema>;
 // ---------- Assets ----------
 
 export const GeometrySchema = z.discriminatedUnion('type', [
-  z.object({ type: z.literal('box'), size: Vec3Schema }),
+  // radius: rounded edges + corners (cm), for furniture that should not look like sharp blocks
+  z.object({ type: z.literal('box'), size: Vec3Schema, radius: z.number().min(0).optional() }),
   z.object({
     type: z.literal('cylinder'),
     radius: z.number().positive(),
