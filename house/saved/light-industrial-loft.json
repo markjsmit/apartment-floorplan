@@ -1203,7 +1203,7 @@
         {
           "id": "living.entry-rack",
           "asset": "closet-system",
-          "name": "Black clamp-post coat rack 52 wide (floor-to-soffit, no drilling): just our coats on hangers (bags live in the KALLAX); leaves room for the locker door",
+          "name": "Black clamp-post coat rack the full width from the side wall to the front door (138, floor-to-soffit, no drilling): our coats on hangers",
           "tags": [
             "entry",
             "coats"
@@ -1215,7 +1215,12 @@
             "shelfMaterial": "wood-oak-light",
             "sections": [
               {
-                "w": 46,
+                "w": 64,
+                "kind": "hang",
+                "coats": 3
+              },
+              {
+                "w": 65,
                 "kind": "hang",
                 "coats": 3
               }
@@ -1226,7 +1231,11 @@
             "offset": 430,
             "elevation": 0,
             "gap": 0
-          }
+          },
+          "allowOverlap": [
+            "living.passage-kallax",
+            "living.passage-kallax-top"
+          ]
         },
         {
           "id": "living.stool-1",
