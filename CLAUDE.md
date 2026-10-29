@@ -21,8 +21,12 @@ Spec: `docs/superpowers/specs/2026-10-23-apartment-designer-design.md`.
    looking at the AI suggestion, or the other way round.
 4. If `house/current.json` still has the placeholder `meta.location` (assumed), ask Mark which city — it drives sun angles.
 
-Mark can paste `<version>:<id>` (e.g. `current:living.passage-mirror`, `saved/urban-jungle:living.divider`): Cmd+C in
-the viewer with no text selected copies that for the selection (or what's under the crosshair). It names exactly what he means.
+**References Mark pastes: `<version>:<room>:<id>`** (e.g. `current:living:passage-mirror`, `saved/urban-jungle:living:divider`,
+`current:hallway:bedroom-door`). Cmd+C in the viewer with no text selected copies one for the selection (else what's under
+the crosshair). Read it as: version = the file (`current` → `house/current.json`, `saved/<slug>` → `house/saved/<slug>.json`,
+`suggestion`, `empty` = Current's built-ins), room = the room id in it, id = the item / opening / wall id without the room
+prefix, so the full id is `<room>.<id>` (`living.passage-mirror`; walls `living.wall-4`). It names exactly what he means:
+edit that object in that version (and say so if it's not the version he has open).
 
 ## Talking back through the UI
 

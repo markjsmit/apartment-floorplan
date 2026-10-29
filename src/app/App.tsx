@@ -46,8 +46,9 @@ export function App() {
       .catch((e) => useStore.getState().setLoadError(e.message));
   }, []);
 
-  // Cmd/Ctrl+C with no text selected copies an id for what's selected (else what's under the crosshair): "<version>:<id>",
-  // e.g. "current:living.passage-mirror" - so Mark can paste exactly what he means into the chat
+  // Cmd/Ctrl+C with no text selected copies a reference for what's selected (else what's under the crosshair):
+  // "<version>:<room>:<id>" - the object's own room, the version that room shows, the id without the room prefix
+  // (e.g. "current:living:passage-mirror", "saved/urban-jungle:living:divider") - so Mark can paste exactly what he means
   useEffect(() => {
     const onCopy = (e: ClipboardEvent) => {
       const text = window.getSelection()?.toString().trim();
@@ -56,7 +57,9 @@ export function App() {
       const s = useStore.getState();
       const id = s.selection?.id ?? s.lookingAt?.id;
       if (!id || !e.clipboardData) return;
-      const ref = `${s.versionId}:${id}`;
+      const dot = id.indexOf('.');
+      const room = dot > 0 ? id.slice(0, dot) : (s.roomId ?? '');
+      const ref = `${s.roomVersions[room] ?? 'current'}:${room}:${dot > 0 ? id.slice(dot + 1) : id}`;
       e.clipboardData.setData('text/plain', ref);
       e.preventDefault();
       s.toast(`Copied ${ref}`);
