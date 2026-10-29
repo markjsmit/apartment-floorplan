@@ -853,7 +853,7 @@
           ],
           "params": {},
           "position": [
-            135,
+            175,
             0,
             172
           ],
@@ -880,7 +880,7 @@
             "seed": "mid-console"
           },
           "position": [
-            134,
+            174,
             0,
             172
           ],
@@ -944,7 +944,7 @@
             "material": "linen-white"
           },
           "position": [
-            135,
+            175,
             0,
             172
           ],
@@ -972,7 +972,7 @@
             "pullColor": "#1d1d1f"
           },
           "position": [
-            330,
+            370,
             0,
             125
           ],
@@ -1124,7 +1124,7 @@
             "diameter": 24
           },
           "position": [
-            300,
+            340,
             45,
             110
           ],
@@ -1227,7 +1227,7 @@
           "position": [
             21,
             0,
-            603
+            587
           ],
           "rotation": 180,
           "allowOverlap": [
@@ -1256,7 +1256,7 @@
           "position": [
             92,
             0,
-            573
+            557
           ],
           "rotation": 0
         },
@@ -1278,7 +1278,7 @@
           "position": [
             62,
             200,
-            577
+            561
           ],
           "rotation": 0,
           "allowOverlap": [
@@ -1537,7 +1537,7 @@
           "position": [
             45,
             0,
-            483
+            467
           ],
           "rotation": 90,
           "allowOverlap": [
@@ -1564,7 +1564,7 @@
           "position": [
             25,
             0,
-            427
+            411
           ],
           "rotation": 90,
           "allowOverlap": [
@@ -1592,7 +1592,7 @@
           "position": [
             145,
             0,
-            427
+            411
           ],
           "rotation": -90,
           "allowOverlap": [
@@ -1620,7 +1620,7 @@
           "position": [
             25,
             0,
-            485
+            469
           ],
           "rotation": 90,
           "allowOverlap": [
@@ -1648,7 +1648,7 @@
           "position": [
             145,
             0,
-            485
+            469
           ],
           "rotation": -90,
           "allowOverlap": [
@@ -1676,7 +1676,7 @@
           "position": [
             25,
             0,
-            543
+            527
           ],
           "rotation": 90,
           "allowOverlap": [
@@ -1704,7 +1704,7 @@
           "position": [
             145,
             0,
-            543
+            527
           ],
           "rotation": -90,
           "allowOverlap": [
@@ -1730,7 +1730,7 @@
           "position": [
             85,
             0,
-            443
+            427
           ],
           "rotation": 0
         },
@@ -1752,7 +1752,7 @@
           "position": [
             85,
             0,
-            523
+            507
           ],
           "rotation": 0
         },
@@ -1774,7 +1774,7 @@
           "position": [
             85,
             75,
-            474
+            458
           ],
           "rotation": 0,
           "allowOverlap": [
