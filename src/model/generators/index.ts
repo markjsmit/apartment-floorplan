@@ -10,7 +10,7 @@ import { stuff } from './stuff';
 import { ledStrip, surfaceLight } from './lights';
 import { door, doorOpenAngle, doorStates, windowParts } from './openings';
 import { kitchenCounter, kitchenIsland, kitchenTall, kitchenWallCabinet, plainBox, slidingDoor, trackLight } from './builtins';
-import { bench, cleaningCorner, sofaConsole, hallStand, tvGear, waterBar, kitchenRail, kitchenShelf, coffeeTable, cornerCabinet, cornerCloset, curtain, cushions, designChair, designTable, floorLamp, mediaUnit, pendant, plant, rug, shelfUnit, slatPanel, stool, tableDecor, tallCabinet, tvArm, tvStand, wallArt } from './decor';
+import { bench, cleaningCorner, sofaConsole, hallStand, tvGear, wallSpeakers, waterBar, kitchenRail, kitchenShelf, coffeeTable, cornerCabinet, cornerCloset, curtain, cushions, designChair, designTable, floorLamp, mediaUnit, pendant, plant, rug, shelfUnit, slatPanel, stool, tableDecor, tallCabinet, tvArm, tvStand, wallArt } from './decor';
 import { bathroomVanity, bathtub, closetSystem, showerEnclosure, toiletWallHung, washerDryerColumn } from './bathroom';
 
 // Procedural furniture referenced from asset.json as { "source": { "kind": "procedural", "generator": "<name>" } }.
@@ -81,6 +81,7 @@ export const generators: Record<string, Generator> = {
   'sofa-console': sofaConsole,
   'hall-stand': hallStand,
   'tv-gear': tvGear,
+  'wall-speakers': wallSpeakers,
   'water-bar': waterBar,
   'kitchen-shelf': kitchenShelf,
   'kitchen-rail': kitchenRail,

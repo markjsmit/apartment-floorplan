@@ -1471,6 +1471,77 @@ export function tvGear(p: Record<string, unknown>): Part[] {
   return parts;
 }
 
+/**
+ * Our Edifier bookshelf speakers (22 wide x 40 high x 28 deep, standing up) on swivel wall arms either side of a
+ * wall-mounted TV, `gap` cm out from its sides, toed in and tilted down at the bed; nothing lower than `bottom` (Mark is
+ * 2 m: 217 so he never ducks). Draws the cables you'd really see: each speaker's leads drop from its arm and run along
+ * the wall to behind the TV (the passive one's speaker wire, the active (left) one's power + audio + that wire), then
+ * the bundle from under the TV down to a triple outlet (TV power, speaker power, the media box stuck behind the TV).
+ * Origin back-centre on the floor under the TV's centre.
+ */
+export function wallSpeakers(p: Record<string, unknown>): Part[] {
+  const W = num(p.width, 94);
+  const tvBottom = num(p.tvBottom, 110);
+  const tvTop = tvBottom + num(p.tvHeight, 55);
+  const gap = num(p.gap, 25);
+  const tilt = num(p.tilt, 25); // degrees, front down
+  const toe = num(p.toe, 20); // degrees, turned in towards the middle
+  const outlet = num(p.outletHeight, 30);
+  const [sw, sh, sd] = [22, 40, 28];
+  const rad = (d: number) => (d * Math.PI) / 180;
+  const reach = 19; // the arm holds the speaker's bottom centre this far off the wall, so it can turn freely
+  // hinge height so the lowest point (the tilted front-bottom edge + the tray under it) stays at `bottom`
+  const H = num(p.bottom, 217) + (sd / 2) * Math.sin(rad(tilt)) + 1.5;
+  const cable = { color: '#111112' };
+  const parts: Part[] = [];
+  for (const sx of [-1, 1]) {
+    const x0 = sx * (W / 2 + gap + sw / 2);
+    const k = sx > 0 ? 'r' : 'l';
+    const yaw = -sx * toe;
+    // turn around the hinge (the speaker's bottom centre): first the toe-in (y), then the tilt (x), like Euler XYZ
+    const place = (pt: Part, disc = false): Part => {
+      let [dx, dy, dz] = [pt.position[0] - x0, pt.position[1] - H, pt.position[2] - reach];
+      [dx, dz] = [dx * Math.cos(rad(yaw)) + dz * Math.sin(rad(yaw)), -dx * Math.sin(rad(yaw)) + dz * Math.cos(rad(yaw))];
+      [dy, dz] = [dy * Math.cos(rad(tilt)) - dz * Math.sin(rad(tilt)), dy * Math.sin(rad(tilt)) + dz * Math.cos(rad(tilt))];
+      // a disc (cylinder axis y, stood up with x 90) needs [90 + tilt, 0, -yaw] to face the same way as the boxes
+      const rotation: Vec3 = disc ? [90 + tilt, 0, -yaw] : [tilt, yaw, 0];
+      return { ...pt, position: [x0 + dx, H + dy, reach + dz], rotation };
+    };
+    const yc = H + sh / 2;
+    const front = reach + sd / 2;
+    parts.push(box(`arm-${k}-plate`, ['speaker', 'bracket'], [8, 12, 1.5], [x0, H - 2, 0.75], { material: 'metal-black', radius: 0.3 }));
+    parts.push(box(`arm-${k}`, ['speaker', 'bracket'], [3, 3, reach - 1.5], [x0, H - 2, 1.5 + (reach - 1.5) / 2], { material: 'metal-black', radius: 0.4 }));
+    parts.push(place(box(`arm-${k}-tray`, ['speaker', 'bracket'], [18, 1, 22], [x0, H - 0.5, reach], { material: 'metal-black', radius: 0.2 })));
+    parts.push(place(box(`speaker-${k}`, ['speaker'], [sw, sh, sd], [x0, yc, reach], { color: '#141415', radius: 0.5 })));
+    parts.push({ ...place(box(`speaker-${k}-grille`, ['speaker'], [sw - 1.6, sh - 1.6, 0.4], [x0, yc, front + 0.1], { color: '#232325', radius: 0.3 })), castShadow: false });
+    parts.push({ ...place(cyl(`speaker-${k}-woofer`, ['speaker'], 7.5, 0.2, [x0, yc - 6, front + 0.35], { color: '#1a1a1b' }), true), castShadow: false });
+    parts.push({ ...place(cyl(`speaker-${k}-tweeter`, ['speaker'], 2.4, 0.2, [x0, yc + 12, front + 0.35], { color: '#1a1a1b' }), true), castShadow: false });
+    // leads: from the arm's wall plate straight down, then along the wall to behind the TV (1 on the passive side, 3 on the active)
+    const n = sx < 0 ? 3 : 1;
+    for (let i = 0; i < n; i++) {
+      const xi = x0 - sx * (1 + i * 1.1);
+      const yRun = tvTop - 8 - i * 1.6;
+      const top = H - 8;
+      parts.push(cyl(`cable-${k}-drop-${i + 1}`, ['cable'], 0.3, top - yRun, [xi, (top + yRun) / 2, 0.4], cable));
+      const tvEdge = (sx * W) / 2 - sx * 10; // ends 10 cm behind the TV
+      const len = Math.abs(xi - tvEdge);
+      parts.push({ ...cyl(`cable-${k}-run-${i + 1}`, ['cable'], 0.3, len, [(xi + tvEdge) / 2, yRun, 0.4], cable), rotation: [0, 0, 90] });
+    }
+  }
+  // under the TV: TV power, the speakers' power and the media box hang down to a triple outlet
+  const ox = -W / 2 + 22;
+  for (const [i, dx, sag] of [[1, -1.4, 0.6], [2, 0, 1.4], [3, 1.4, 0.9]] as const) {
+    const top = tvBottom + 6;
+    const end = outlet + 3;
+    parts.push({ ...cyl(`cable-down-${i}`, ['cable'], 0.3, top - end, [ox + dx, (top + end) / 2, 0.4 + sag], cable), rotation: [sag * 0.5, 0, dx * 0.6] });
+  }
+  parts.push(box('outlet', ['outlet', 'socket'], [22, 8, 1.2], [ox, outlet, 0.6], { color: '#f4f4f2', radius: 0.4 }));
+  for (const dx of [-7, 0, 7]) {
+    parts.push(box(`outlet-plug-${dx + 7}`, ['outlet', 'plug'], [3.5, 4.5, 3], [ox + dx * 0.9, outlet, 2.6], { color: '#1b1b1c', radius: 0.6 }));
+  }
+  return parts;
+}
+
 /** Tami4-style water bar on the counter (~21 x 39 x 45 estimate): white body, black glass panel, nozzle, drip tray. Origin back-centre. */
 export function waterBar(p: Record<string, unknown>): Part[] {
   const W = num(p.width, 21);

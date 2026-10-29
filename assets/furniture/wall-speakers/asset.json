@@ -1,0 +1,47 @@
+{
+  "id": "wall-speakers",
+  "name": "Our speakers on wall brackets above the TV (with the cables)",
+  "tags": [
+    "ours",
+    "speakers",
+    "tv"
+  ],
+  "description": "Our 2 Edifier bookshelf speakers (22 wide x 40 high x 28 deep, Mark) standing up on swivel wall arms either side of a wall-mounted TV, toed in and tilted down at the bed, nothing lower than `bottom` (Mark is 2 m tall: 217); draws the real cables: each speaker's leads down and along the wall to behind the TV, and the bundle from under the TV to a triple outlet. Origin back-centre on the floor under the TV's centre.",
+  "source": {
+    "kind": "procedural",
+    "generator": "wall-speakers",
+    "license": "self-made",
+    "notes": "src/model/generators/decor.ts; look from sources/old house/20261029_204032.jpg"
+  },
+  "params": {
+    "width": {
+      "default": 94,
+      "description": "TV width"
+    },
+    "tvBottom": {
+      "default": 110
+    },
+    "tvHeight": {
+      "default": 55
+    },
+    "gap": {
+      "default": 25,
+      "description": "from the TV's side to the speaker (cm)"
+    },
+    "bottom": {
+      "default": 217,
+      "description": "lowest point of speakers + arms (cm)"
+    },
+    "tilt": {
+      "default": 25,
+      "description": "degrees, front down"
+    },
+    "toe": {
+      "default": 20,
+      "description": "degrees, turned in"
+    },
+    "outletHeight": {
+      "default": 30
+    }
+  }
+}
