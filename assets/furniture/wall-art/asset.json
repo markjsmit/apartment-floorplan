@@ -30,6 +30,10 @@
     "strap": {
       "default": false,
       "description": "round mirror hung on a leather strap from a hook"
+    },
+    "organic": {
+      "default": false,
+      "description": "organic / amorphic mirror: a soft uneven outline, frameless glass on a pale backing"
     }
   }
 }

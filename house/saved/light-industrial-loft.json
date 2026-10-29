@@ -1144,41 +1144,77 @@
           ]
         },
         {
-          "id": "living.passage-closet",
-          "asset": "tall-cabinet",
-          "name": "White closet 77 x 40 x 200 along the passage (as tall as the hall stand) with a full-length mirror door, push to open: shoe shelves inside",
+          "id": "living.passage-mirror",
+          "asset": "wall-art",
+          "name": "Organic (amorphic) frameless mirror ~64 x 160 on the passage wall",
           "tags": [
-            "closet",
             "mirror",
+            "entry"
+          ],
+          "params": {
+            "organic": true,
+            "width": 64,
+            "height": 160,
+            "seed": "amorph"
+          },
+          "against": {
+            "wall": "living.wall-5",
+            "offset": 45,
+            "elevation": 22,
+            "gap": 0
+          }
+        },
+        {
+          "id": "living.shoe-kallax",
+          "asset": "ikea-kallax",
+          "name": "KALLAX 2x2 under the jackets, shoes (a shelf in each cube: 8 pairs) — IKEA",
+          "tags": [
+            "kallax",
             "shoes",
             "entry"
           ],
           "params": {
-            "width": 77,
-            "depth": 40,
-            "height": 200,
-            "plinth": 6,
-            "handles": "none",
-            "material": "white-laminate",
-            "frontMaterial": "white-laminate",
-            "columns": [
-              {
-                "stack": [
-                  {
-                    "kind": "door",
-                    "mirror": true,
-                    "content": "shoes"
-                  }
-                ]
-              }
-            ]
+            "cols": 2,
+            "rows": 2,
+            "color": "white",
+            "contents": "shoes",
+            "seed": "ind-shoe-a"
           },
           "against": {
-            "wall": "living.wall-5",
-            "offset": 40,
+            "wall": "living.wall-4",
+            "offset": 430,
             "elevation": 0,
-            "gap": 0
-          }
+            "gap": 4
+          },
+          "allowOverlap": [
+            "living.entry-rack"
+          ]
+        },
+        {
+          "id": "living.shoe-kallax-2",
+          "asset": "ikea-kallax",
+          "name": "KALLAX 1x2 next to it, shoes (4 pairs) — IKEA",
+          "tags": [
+            "kallax",
+            "shoes",
+            "entry"
+          ],
+          "params": {
+            "cols": 1,
+            "rows": 2,
+            "color": "white",
+            "contents": "shoes",
+            "seed": "ind-shoe-b"
+          },
+          "against": {
+            "wall": "living.wall-4",
+            "offset": 508,
+            "elevation": 0,
+            "gap": 4
+          },
+          "allowOverlap": [
+            "living.entry-rack"
+          ]
         },
         {
           "id": "living.entry-rack",
@@ -1213,7 +1249,8 @@
             "gap": 0
           },
           "allowOverlap": [
-            "living.passage-closet"
+            "living.shoe-kallax",
+            "living.shoe-kallax-2"
           ]
         },
         {

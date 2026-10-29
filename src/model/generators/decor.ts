@@ -779,6 +779,26 @@ export function wallArt(p: Record<string, unknown>): Part[] {
     }
     return parts;
   }
+  if (p.organic) {
+    // organic ("amorphic") mirror: a soft, uneven blob outline, frameless glass on a slightly larger pale backing
+    const rand = rng(String(p.seed ?? 'organic'));
+    const [p1, p2, p3] = [rand() * 6, rand() * 6, rand() * 6];
+    const outline = (sx: number, sy: number): [number, number][] => {
+      const pts: [number, number][] = [];
+      for (let k = 0; k < 48; k++) {
+        const a = (k / 48) * Math.PI * 2;
+        const r = 1 + 0.07 * Math.sin(2 * a + p1) + 0.05 * Math.sin(3 * a + p2) + 0.03 * Math.sin(5 * a + p3);
+        // a rounded-rectangle-ish base (superellipse) so it stays tall, then wobbled
+        const c = Math.cos(a);
+        const sn = Math.sin(a);
+        pts.push([Math.sign(c) * Math.abs(c) ** 0.8 * (sx / 2) * r, Math.sign(sn) * Math.abs(sn) ** 0.8 * (sy / 2) * r]);
+      }
+      return pts;
+    };
+    parts.push({ id: 'backing', tags: ['frame'], geometry: { type: 'prism', points: outline(W * 0.94, H * 0.94), depth: 1, bevel: 0.3 }, position: [0, H / 2, 0.5], rotation: [0, 0, 0], color: str(p.frameColor, '#e6e0d6'), castShadow: true, glass: false });
+    parts.push({ id: 'mirror', tags: ['mirror'], geometry: { type: 'prism', points: outline(W * 0.9, H * 0.9), depth: 0.5, bevel: 0 }, position: [0, H / 2, 1.3], rotation: [0, 0, 0], material: 'mirror', castShadow: false, glass: false });
+    return parts;
+  }
   if (p.round) {
     // round mirror: a thin metal ring with the glass inside, hung on a leather strap or straight on the wall
     parts.push({ ...cyl('frame', ['frame'], W / 2, t, [0, W / 2, t / 2], { color: fc, material: str(p.frameMaterial, 'metal-black') }), rotation: [90, 0, 0] });
