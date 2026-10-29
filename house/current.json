@@ -2761,6 +2761,10 @@
         [
           918,
           380.5
+        ],
+        [
+          918,
+          342.5
         ]
       ],
       "ceilingHeight": 277,
@@ -2855,43 +2859,55 @@
           "id": "bedroom.wall-9",
           "edge": 9,
           "tags": [
-            "west wall"
+            "hallway wall",
+            "door wall",
+            "entry wall"
           ]
         },
         {
           "id": "bedroom.wall-10",
           "edge": 10,
           "tags": [
-            "fin",
-            "vanity side",
-            "little wall"
+            "shoe rack wall",
+            "recess",
+            "bedroom side cabin"
           ]
         },
         {
           "id": "bedroom.wall-11",
           "edge": 11,
           "tags": [
-            "fin",
-            "fin end"
-          ]
+            "recess",
+            "pier",
+            "switch wall"
+          ],
+          "thickness": 6
         },
         {
           "id": "bedroom.wall-12",
           "edge": 12,
           "tags": [
-            "fin",
-            "door side",
-            "little wall"
+            "pier"
           ]
         },
         {
           "id": "bedroom.wall-13",
           "edge": 13,
           "tags": [
-            "hallway wall",
-            "door wall",
-            "entry wall"
-          ]
+            "pier",
+            "switch wall",
+            "pier east face"
+          ],
+          "thickness": 6
+        },
+        {
+          "id": "bedroom.wall-14",
+          "edge": 14,
+          "tags": [
+            "storage room wall",
+            "west wall"
+          ],
+          "thickness": 20
         }
       ],
       "openings": [
