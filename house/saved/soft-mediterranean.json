@@ -817,7 +817,7 @@
         {
           "id": "living.tv",
           "asset": "old-house-tv",
-          "name": "Our 65\" TV (~4.9 m from the sofa; a bit towards the hallway so the armchair in the corner is out of the way)",
+          "name": "Our 65\" TV (~4.9 m from the sofa; a bit towards the hallway)",
           "tags": [
             "tv"
           ],
@@ -830,6 +830,36 @@
           },
           "allowOverlap": [
             "living.tv-unit"
+          ]
+        },
+        {
+          "id": "living.tv-gear",
+          "asset": "tv-gear",
+          "name": "Our TV gear like now: 2 compact black speakers at the ends of the TV unit, media box, smart display",
+          "tags": [
+            "tv",
+            "speakers",
+            "ours"
+          ],
+          "params": {
+            "width": 180,
+            "depth": 40,
+            "gap": 6,
+            "display": "right"
+          },
+          "against": {
+            "wall": "living.wall-1",
+            "offset": 105,
+            "elevation": 50,
+            "gap": 0
+          },
+          "allowOverlap": [
+            "living.tv-unit",
+            "living.sideboard",
+            "living.tv",
+            "living.olive",
+            "living.broom-closet",
+            "living.corner-board"
           ]
         },
         {
@@ -1195,6 +1225,7 @@
             "living.sofa",
             "living.tv-unit",
             "living.tv",
+            "living.tv-gear",
             "living.coffee-table",
             "living.rug",
             "living.cushions",
@@ -1212,13 +1243,14 @@
             "living.stool-2",
             "living.olive",
             "living.strelitzia",
-            "living.palm-1",
             "living.mirror",
             "living.art",
             "living.kitchen-shelf",
             "living.kitchen-shelf-2",
             "living.curtain-balcony",
-            "living.curtain-window"
+            "living.curtain-window",
+            "living.fridge",
+            "living.tami4"
           ]
         },
         {
@@ -1313,31 +1345,6 @@
             20.0
           ],
           "rotation": 0
-        },
-        {
-          "id": "living.palm-1",
-          "asset": "plant",
-          "name": "Areca palm 'S' in white ceramic pot ø12 (plant + pot 21–32 cm) — Plants4U – Galilot nursery ₪26",
-          "tags": [
-            "plant"
-          ],
-          "params": {
-            "kind": "palm",
-            "height": 30,
-            "seed": "palm-1",
-            "spread": 20,
-            "potDiameter": 12,
-            "potColor": "#f3eee4"
-          },
-          "position": [
-            563,
-            50,
-            110.0
-          ],
-          "rotation": 0,
-          "allowOverlap": [
-            "living.tv-unit"
-          ]
         },
         {
           "id": "living.mirror",
@@ -1461,6 +1468,7 @@
             "living.sofa",
             "living.tv-unit",
             "living.tv",
+            "living.tv-gear",
             "living.coffee-table",
             "living.rug",
             "living.cushions",
@@ -1479,12 +1487,13 @@
             "living.stool-2",
             "living.olive",
             "living.strelitzia",
-            "living.palm-1",
             "living.mirror",
             "living.art",
             "living.kitchen-shelf",
             "living.kitchen-shelf-2",
-            "living.curtain-window"
+            "living.curtain-window",
+            "living.fridge",
+            "living.tami4"
           ]
         },
         {
@@ -1511,6 +1520,7 @@
             "living.sofa",
             "living.tv-unit",
             "living.tv",
+            "living.tv-gear",
             "living.coffee-table",
             "living.rug",
             "living.cushions",
@@ -1529,12 +1539,50 @@
             "living.stool-2",
             "living.olive",
             "living.strelitzia",
-            "living.palm-1",
             "living.mirror",
             "living.art",
             "living.kitchen-shelf",
             "living.kitchen-shelf-2",
-            "living.curtain-balcony"
+            "living.curtain-balcony",
+            "living.fridge",
+            "living.tami4"
+          ]
+        },
+        {
+          "id": "living.fridge",
+          "asset": "old-house-fridge",
+          "name": "Our French-door fridge in the fridge niche (sticks out ~12 cm)",
+          "tags": [
+            "fridge",
+            "ours"
+          ],
+          "params": {},
+          "against": {
+            "wall": "living.wall-3",
+            "offset": 28
+          },
+          "allowOverlap": [
+            "living.fridge-niche"
+          ]
+        },
+        {
+          "id": "living.tami4",
+          "asset": "water-bar",
+          "name": "Our Tami4 water bar, on the counter corner by the front door (its water point)",
+          "tags": [
+            "tami4",
+            "ours",
+            "kitchen"
+          ],
+          "params": {},
+          "position": [
+            276,
+            90,
+            719
+          ],
+          "rotation": 180,
+          "allowOverlap": [
+            "living.counter"
           ]
         }
       ],

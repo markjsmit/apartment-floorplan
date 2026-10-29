@@ -1,0 +1,36 @@
+{
+  "id": "tv-gear",
+  "name": "TV gear: our speakers, media box, smart display",
+  "tags": [
+    "ours",
+    "design"
+  ],
+  "description": "A pair of compact black speakers at the two ends of the TV unit, a flat media box in front of the TV feet and a small smart display, like our setup now. Put it on the TV unit (elevation = its height).",
+  "source": {
+    "kind": "procedural",
+    "generator": "tv-gear",
+    "license": "self-made",
+    "notes": "src/model/generators/decor.ts; sizes estimated"
+  },
+  "params": {
+    "width": {
+      "default": 180
+    },
+    "depth": {
+      "default": 40
+    },
+    "speakers": {
+      "default": true
+    },
+    "box": {
+      "default": true
+    },
+    "display": {
+      "default": "right",
+      "description": "left | right | none"
+    },
+    "gap": {
+      "default": 6
+    }
+  }
+}

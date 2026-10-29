@@ -866,7 +866,7 @@
           },
           "position": [
             545.8,
-            85,
+            105,
             310.5
           ],
           "rotation": -145.3,
@@ -886,13 +886,43 @@
           "params": {},
           "position": [
             523.3,
-            58,
+            80,
             295.7
           ],
           "rotation": -145.3,
           "state": "wall",
           "allowOverlap": [
             "living.tv-unit"
+          ]
+        },
+        {
+          "id": "living.tv-gear",
+          "asset": "tv-gear",
+          "name": "Our TV gear like now: 2 compact black speakers at the ends of the TV unit, media box, smart display",
+          "tags": [
+            "tv",
+            "speakers",
+            "ours"
+          ],
+          "params": {
+            "width": 90,
+            "depth": 55,
+            "gap": 25,
+            "display": "left"
+          },
+          "position": [
+            545.8,
+            50,
+            310.5
+          ],
+          "rotation": -145.3,
+          "allowOverlap": [
+            "living.tv-unit",
+            "living.sideboard",
+            "living.tv",
+            "living.olive",
+            "living.broom-closet",
+            "living.corner-board"
           ]
         },
         {
@@ -1773,6 +1803,7 @@
             "living.tv-unit",
             "living.tv-arm",
             "living.tv",
+            "living.tv-gear",
             "living.sofa",
             "living.cushions",
             "living.coffee-table",
@@ -1807,7 +1838,9 @@
             "living.herbs",
             "living.kitchen-shelf",
             "living.kitchen-shelf-2",
-            "living.curtain-window"
+            "living.curtain-window",
+            "living.fridge",
+            "living.tami4"
           ]
         },
         {
@@ -1836,6 +1869,7 @@
             "living.tv-unit",
             "living.tv-arm",
             "living.tv",
+            "living.tv-gear",
             "living.sofa",
             "living.cushions",
             "living.coffee-table",
@@ -1870,7 +1904,46 @@
             "living.herbs",
             "living.kitchen-shelf",
             "living.kitchen-shelf-2",
-            "living.curtain-balcony"
+            "living.curtain-balcony",
+            "living.fridge",
+            "living.tami4"
+          ]
+        },
+        {
+          "id": "living.fridge",
+          "asset": "old-house-fridge",
+          "name": "Our French-door fridge in the fridge niche (sticks out ~12 cm)",
+          "tags": [
+            "fridge",
+            "ours"
+          ],
+          "params": {},
+          "against": {
+            "wall": "living.wall-3",
+            "offset": 28
+          },
+          "allowOverlap": [
+            "living.fridge-niche"
+          ]
+        },
+        {
+          "id": "living.tami4",
+          "asset": "water-bar",
+          "name": "Our Tami4 water bar, on the counter corner by the front door (its water point)",
+          "tags": [
+            "tami4",
+            "ours",
+            "kitchen"
+          ],
+          "params": {},
+          "position": [
+            276,
+            90,
+            719
+          ],
+          "rotation": 180,
+          "allowOverlap": [
+            "living.counter"
           ]
         }
       ],

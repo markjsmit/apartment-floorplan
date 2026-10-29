@@ -818,6 +818,36 @@
           ]
         },
         {
+          "id": "living.tv-gear",
+          "asset": "tv-gear",
+          "name": "Our TV gear like now: 2 compact black speakers at the ends of the TV unit, media box, smart display",
+          "tags": [
+            "tv",
+            "speakers",
+            "ours"
+          ],
+          "params": {
+            "width": 180,
+            "depth": 40,
+            "gap": 4,
+            "display": "left"
+          },
+          "against": {
+            "wall": "living.wall-1",
+            "offset": 55,
+            "elevation": 55,
+            "gap": 0
+          },
+          "allowOverlap": [
+            "living.tv-unit",
+            "living.sideboard",
+            "living.tv",
+            "living.olive",
+            "living.broom-closet",
+            "living.corner-board"
+          ]
+        },
+        {
           "id": "living.sofa",
           "asset": "old-house-sofa-l",
           "name": "Our grey L-sofa (265), floating, facing the sofa wall",
@@ -1456,30 +1486,6 @@
           "rotation": 0
         },
         {
-          "id": "living.pothos",
-          "asset": "plant",
-          "name": "Variegated pothos (פוטוס מגוון) M — Plant It ₪48",
-          "tags": [
-            "plant"
-          ],
-          "params": {
-            "kind": "trailing",
-            "height": 32,
-            "seed": "pothos",
-            "spread": 26,
-            "model": "syngonium"
-          },
-          "position": [
-            565,
-            55,
-            210.0
-          ],
-          "rotation": 0,
-          "allowOverlap": [
-            "living.sideboard"
-          ]
-        },
-        {
           "id": "living.pillar-cladding",
           "asset": "slat-panel",
           "name": "Walnut slat cladding on the pillar (idea, ~2 cm)",
@@ -1568,6 +1574,43 @@
             "elevation": 135,
             "gap": 0
           },
+          "allowOverlap": [
+            "living.counter"
+          ]
+        },
+        {
+          "id": "living.fridge",
+          "asset": "old-house-fridge",
+          "name": "Our French-door fridge in the fridge niche (sticks out ~12 cm)",
+          "tags": [
+            "fridge",
+            "ours"
+          ],
+          "params": {},
+          "against": {
+            "wall": "living.wall-3",
+            "offset": 28
+          },
+          "allowOverlap": [
+            "living.fridge-niche"
+          ]
+        },
+        {
+          "id": "living.tami4",
+          "asset": "water-bar",
+          "name": "Our Tami4 water bar, on the counter corner by the front door (its water point)",
+          "tags": [
+            "tami4",
+            "ours",
+            "kitchen"
+          ],
+          "params": {},
+          "position": [
+            276,
+            90,
+            719
+          ],
+          "rotation": 180,
           "allowOverlap": [
             "living.counter"
           ]

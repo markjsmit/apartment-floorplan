@@ -4,7 +4,7 @@ import { RoomSchema } from '../src/model/schema';
 import { resolveWalls } from '../src/model/geometry';
 import { buildColliders, isFree } from '../src/model/collision';
 import {
-  coffeeTable, cornerCabinet, cornerCloset, cushions, floorLamp, kitchenRail, kitchenShelf, MODELS, pendant, plant, rug, slatPanel, stool, tallCabinet, tvArm, wallArt,
+  coffeeTable, cornerCabinet, cornerCloset, cushions, floorLamp, kitchenRail, kitchenShelf, MODELS, tvGear, waterBar, pendant, plant, rug, slatPanel, stool, tallCabinet, tvArm, wallArt,
 } from '../src/model/generators/decor';
 import { closetSystem } from '../src/model/generators/bathroom';
 import { stuffParts } from '../src/model/generators/stuff';
@@ -217,5 +217,30 @@ describe('entry + display furniture', () => {
     expect(hung.length).toBeGreaterThan(3);
     for (const p of hung) expect(p.position[1]).toBeLessThan(0);
     expect(size(parts).max[2]).toBeLessThan(12);
+  });
+
+  it('TV gear keeps the speakers on the unit ends, outside a 145 cm TV', () => {
+    const parts = tvGear({ width: 180, depth: 40 });
+    const speakers = parts.filter((p) => p.id === 'speaker-l' || p.id === 'speaker-r');
+    expect(speakers).toHaveLength(2);
+    for (const sp of speakers) {
+      expect(Math.abs(sp.position[0])).toBeGreaterThan(72.5 + 7);
+      expect(Math.abs(sp.position[0])).toBeLessThan(90);
+    }
+    expect(size(parts).w).toBeLessThanOrEqual(182);
+  });
+
+  it('the water bar stands on its base, about Tami4 size', () => {
+    const s = size(waterBar({}));
+    expect(s.h).toBeCloseTo(45, 0);
+    expect(s.w).toBeLessThan(23);
+  });
+
+  it('scattered magnets stay on the board', () => {
+    const parts = wallArt({ width: 147, height: 149, photos: 46, scatter: true, seed: 's' });
+    expect(parts.filter((p) => p.tags.includes('magnet')).length).toBeGreaterThan(30);
+    const s = size(parts);
+    expect(s.w).toBeLessThan(147 + 4);
+    expect(s.max[1]).toBeLessThan(149 + 4);
   });
 });

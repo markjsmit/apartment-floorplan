@@ -833,6 +833,36 @@
           ]
         },
         {
+          "id": "living.tv-gear",
+          "asset": "tv-gear",
+          "name": "Our TV gear like now: 2 compact black speakers at the ends of the TV unit, media box, smart display",
+          "tags": [
+            "tv",
+            "speakers",
+            "ours"
+          ],
+          "params": {
+            "width": 180,
+            "depth": 40,
+            "gap": 6,
+            "display": "right"
+          },
+          "against": {
+            "wall": "living.wall-5",
+            "offset": 465,
+            "elevation": 46,
+            "gap": 30
+          },
+          "allowOverlap": [
+            "living.tv-unit",
+            "living.sideboard",
+            "living.tv",
+            "living.olive",
+            "living.broom-closet",
+            "living.corner-board"
+          ]
+        },
+        {
           "id": "living.coffee-table",
           "asset": "coffee-table-drawers",
           "name": "MOKI coffee table with 2 hidden drawers, 120 cm, oak — שולחן סלון MOKI — ZVZ Style ₪3,200",
@@ -1485,6 +1515,7 @@
             "living.sofa",
             "living.tv-unit",
             "living.tv",
+            "living.tv-gear",
             "living.coffee-table",
             "living.rug",
             "living.cushions",
@@ -1509,7 +1540,9 @@
             "living.pillar-plant-2",
             "living.pillar-plant-3",
             "living.art",
-            "living.curtain-window"
+            "living.curtain-window",
+            "living.fridge",
+            "living.tami4"
           ]
         },
         {
@@ -1537,6 +1570,7 @@
             "living.sofa",
             "living.tv-unit",
             "living.tv",
+            "living.tv-gear",
             "living.coffee-table",
             "living.rug",
             "living.cushions",
@@ -1561,7 +1595,46 @@
             "living.pillar-plant-2",
             "living.pillar-plant-3",
             "living.art",
-            "living.curtain-balcony"
+            "living.curtain-balcony",
+            "living.fridge",
+            "living.tami4"
+          ]
+        },
+        {
+          "id": "living.fridge",
+          "asset": "old-house-fridge",
+          "name": "Our French-door fridge in the fridge niche (sticks out ~12 cm)",
+          "tags": [
+            "fridge",
+            "ours"
+          ],
+          "params": {},
+          "against": {
+            "wall": "living.wall-3",
+            "offset": 28
+          },
+          "allowOverlap": [
+            "living.fridge-niche"
+          ]
+        },
+        {
+          "id": "living.tami4",
+          "asset": "water-bar",
+          "name": "Our Tami4 water bar, on the counter corner by the front door (its water point)",
+          "tags": [
+            "tami4",
+            "ours",
+            "kitchen"
+          ],
+          "params": {},
+          "position": [
+            276,
+            90,
+            719
+          ],
+          "rotation": 180,
+          "allowOverlap": [
+            "living.counter"
           ]
         }
       ],

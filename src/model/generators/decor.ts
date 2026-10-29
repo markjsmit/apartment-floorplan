@@ -713,35 +713,53 @@ export function wallArt(p: Record<string, unknown>): Part[] {
     const strips = ['#c8452c', '#2e5a8a', '#d9a43a', '#6a4a8a', '#1f1f22', '#3d6b4a', '#b0466a'];
     const names = ['Noa & Itay', 'Shira & Tal', 'Bar Mitzvah Yoav', 'Maya & Omer', 'Lior 40', 'Dana & Roy', 'Bat Mitzvah Gali', 'Yael & Ben'];
     const max = Math.round(num(p.photos, 40));
+    const real = num(p.photoTextures, 0);
+    /** One magnet: a white-bordered print (+ a name strip), all its pieces turned together by `tilt` about its middle. */
+    const magnet = (i: number, cx: number, cy: number, pw: number, ph: number, z: number, tilt: number) => {
+      const rot: Vec3 = [0, 0, tilt];
+      const a = (tilt * Math.PI) / 180;
+      const at = (dx: number, dy: number, dz: number): Vec3 => [cx + dx * Math.cos(a) - dy * Math.sin(a), cy + dx * Math.sin(a) + dy * Math.cos(a), z + dz];
+      const strip = real > 0 || rand() < 0.65;
+      const sh = strip ? 2.2 : 0;
+      const id = `photo-${i}`;
+      parts.push({ ...box(id, ['photo', 'magnet'], [pw, ph, 0.3], at(0, 0, 0), { color: '#f4f1ea', radius: 0 }), rotation: rot, castShadow: false });
+      // the picture: one of our real photos, or a dark venue with a row of people across the lower half
+      const iw = pw - 1.2;
+      const ih = ph - 1.2 - sh;
+      if (real > 0) parts.push({ ...box(`${id}-print`, ['photo'], [iw, ih, 0.1], at(0, sh / 2, 0.2), { material: `photo-magnet-${1 + Math.floor(rand() * real)}`, radius: 0 }), rotation: rot, castShadow: false });
+      else {
+        parts.push({ ...box(`${id}-print`, ['photo'], [iw, ih, 0.1], at(0, sh / 2, 0.2), { color: venues[Math.floor(rand() * venues.length)], radius: 0 }), rotation: rot, castShadow: false });
+        parts.push({ ...box(`${id}-people`, ['photo'], [iw * (0.6 + rand() * 0.35), ih * 0.45, 0.1], at((rand() - 0.5) * 2, sh / 2 - ih * 0.2, 0.26), { color: crowd[Math.floor(rand() * crowd.length)], radius: 0 }), rotation: rot, castShadow: false });
+      }
+      if (strip) {
+        const name = names[Math.floor(rand() * names.length)];
+        parts.push({ ...box(`${id}-strip`, ['photo'], [pw - 1.2, sh - 0.4, 0.1], at(0, -ph / 2 + 0.6 + (sh - 0.4) / 2, 0.2), { color: strips[Math.floor(rand() * strips.length)], radius: 0 }), rotation: rot, castShadow: false, label: { text: name, size: 0.75, offset: [0, 0], color: '#f4f1ea', bg: 'none' } });
+      }
+    };
+    if (p.scatter) {
+      // scattered playfully: random spots, more crooked, a few overlapping (later ones on top), the board showing between
+      const placed: [number, number][] = [];
+      for (let i = 0, tries = 0; i < max && tries < max * 60; tries++) {
+        const [pw, ph] = [15, 10];
+        const tilt = (rand() - 0.5) * 24;
+        const cx = -W / 2 + 10 + rand() * (W - 20);
+        const cy = 9 + rand() * (H - 18);
+        if (placed.some(([x, y]) => Math.abs(x - cx) < pw * 0.75 && Math.abs(y - cy) < ph * 0.75)) continue;
+        placed.push([cx, cy]);
+        magnet(i, cx, cy, pw, ph, 0.85 + i * 0.012, tilt);
+        i++;
+      }
+      return parts;
+    }
     const rowH = 10.4;
     let i = 0;
     for (let ry = H - 1 - rowH / 2; ry - rowH / 2 > 0.5 && i < max; ry -= rowH - 0.4) {
       let x = -W / 2 + 0.5 + rand() * 2;
       while (i < max) {
-        const real = num(p.photoTextures, 0);
         const pw = real > 0 || rand() < 0.8 ? 15 : 10; // mostly landscape 15x10, sometimes a square-ish 10x10
         if (x + pw > W / 2 - 0.3) break;
-        const ph = 10;
-        const cx = x + pw / 2 + (rand() - 0.5) * 0.8;
-        const cy = ry + (rand() - 0.5) * 0.8;
-        const z = 0.85 + (i % 3) * 0.06; // neighbours overlap a little: keep them on slightly different layers
-        const tilt = (rand() - 0.5) * 4;
-        const rot: Vec3 = [0, 0, tilt];
-        const strip = real > 0 || rand() < 0.65;
-        const sh = strip ? 2.2 : 0;
-        const id = `photo-${i}`;
-        parts.push({ ...box(id, ['photo', 'magnet'], [pw, ph, 0.3], [cx, cy, z], { color: '#f4f1ea', radius: 0 }), rotation: rot, castShadow: false });
-        // the picture: a dark venue with a row of people across the lower half
-        const iw = pw - 1.2;
-        const ih = ph - 1.2 - sh;
-        const iy = cy + sh / 2;
-        if (real > 0) parts.push({ ...box(`${id}-print`, ['photo'], [iw, ih, 0.1], [cx, iy, z + 0.2], { material: `photo-magnet-${1 + Math.floor(rand() * real)}`, radius: 0 }), rotation: rot, castShadow: false });
-        else parts.push({ ...box(`${id}-print`, ['photo'], [iw, ih, 0.1], [cx, iy, z + 0.2], { color: venues[Math.floor(rand() * venues.length)], radius: 0 }), rotation: rot, castShadow: false });
-        if (!real) parts.push({ ...box(`${id}-people`, ['photo'], [iw * (0.6 + rand() * 0.35), ih * 0.45, 0.1], [cx + (rand() - 0.5) * 2, iy - ih * 0.2, z + 0.26], { color: crowd[Math.floor(rand() * crowd.length)], radius: 0 }), rotation: rot, castShadow: false });
-        if (strip) {
-          const name = names[Math.floor(rand() * names.length)];
-          parts.push({ ...box(`${id}-strip`, ['photo'], [pw - 1.2, sh - 0.4, 0.1], [cx, cy - ph / 2 + 0.6 + (sh - 0.4) / 2, z + 0.2], { color: strips[Math.floor(rand() * strips.length)], radius: 0 }), rotation: rot, castShadow: false, label: { text: name, size: 0.75, offset: [0, 0], color: '#f4f1ea', bg: 'none' } });
-        }
+        // neighbours overlap a little: keep them on slightly different layers
+        magnet(i, x + pw / 2 + (rand() - 0.5) * 0.8, ry + (rand() - 0.5) * 0.8, pw, 10, 0.85 + (i % 3) * 0.06, (rand() - 0.5) * 4);
         x += pw - 0.3;
         i++;
       }
@@ -1315,6 +1333,71 @@ export function kitchenRail(p: Record<string, unknown>): Part[] {
     }
   });
   return parts;
+}
+
+/**
+ * What stands with the TV, like our setup now: a pair of compact black speakers at the two ends of the TV unit (turned
+ * in a little), a flat media box in front of the TV feet and a small smart display at one end. Origin = back-centre
+ * of the unit's top. params: width (the unit), depth, speakers (true), box (true), display (left | right | none), gap
+ * (where the TV's feet start, from the wall: the box stands in front of them).
+ */
+export function tvGear(p: Record<string, unknown>): Part[] {
+  const W = num(p.width, 180);
+  const D = num(p.depth, 40);
+  const black = { color: '#1d1d1f' };
+  const parts: Part[] = [];
+  if (p.speakers !== false) {
+    const [sw, sh, sd] = [16, 24, 20];
+    for (const sx of [-1, 1]) {
+      const x = sx * (W / 2 - sw / 2 - 1);
+      const z = D - sd / 2 - 2;
+      const yaw = -sx * 10; // turned in towards the middle of the room
+      const k = sx > 0 ? 'r' : 'l';
+      const turn = (pt: Part): Part => {
+        const dx = pt.position[0] - x;
+        const dz = pt.position[2] - z;
+        const r = (yaw * Math.PI) / 180;
+        return { ...pt, position: [x + dx * Math.cos(r) + dz * Math.sin(r), pt.position[1], z - dx * Math.sin(r) + dz * Math.cos(r)], rotation: [pt.rotation[0], pt.rotation[1] + yaw, pt.rotation[2]] };
+      };
+      [
+        box(`speaker-${k}`, ['speaker'], [sw, sh, sd], [x, sh / 2, z], { ...black, radius: 0.6 }),
+        { ...cyl(`speaker-${k}-woofer`, ['speaker'], 5.2, 0.8, [x, 8.5, z + sd / 2 + 0.2], { color: '#2e2e30' }), rotation: [90, 0, 0] as Vec3 },
+        { ...cyl(`speaker-${k}-cone`, ['speaker'], 2, 0.9, [x, 8.5, z + sd / 2 + 0.4], { color: '#4a4a4c' }), rotation: [90, 0, 0] as Vec3 },
+        { ...cyl(`speaker-${k}-tweeter`, ['speaker'], 1.7, 0.8, [x, 18.5, z + sd / 2 + 0.2], { color: '#3a3a3c' }), rotation: [90, 0, 0] as Vec3 },
+      ].forEach((pt) => parts.push(turn(pt)));
+    }
+  }
+  if (p.box !== false) {
+    const bz = Math.min(D - 8, num(p.gap, 6) + 30);
+    parts.push(box('media-box', ['electronics'], [24, 4.5, 15], [0, 2.25, bz], { ...black, radius: 0.8 }));
+    parts.push({ ...box('media-box-led', ['electronics'], [0.8, 0.4, 0.2], [9, 2.5, bz + 7.6], { color: '#7fd1ff' }), castShadow: false });
+  }
+  const disp = str(p.display, 'right');
+  if (disp !== 'none') {
+    const sx = disp === 'left' ? -1 : 1;
+    const x = sx * (W / 2 - 30);
+    const z = D - 8;
+    parts.push({ ...box('display', ['electronics', 'smart display'], [15, 9.5, 6], [x, 4.75, z], { ...black, radius: 1.5 }), rotation: [-12, -sx * 15, 0] });
+    parts.push({ ...box('display-screen', ['electronics', 'smart display'], [12, 6.5, 0.2], [x - sx * 0.8, 5.6, z + 3.1], { color: '#16324a' }), rotation: [-12, -sx * 15, 0], castShadow: false, label: { text: '20:15', size: 1.6, offset: [0, 0], color: '#e8f1ff', bg: 'none' } });
+  }
+  return parts;
+}
+
+/** Tami4-style water bar on the counter (~21 x 39 x 45 estimate): white body, black glass panel, nozzle, drip tray. Origin back-centre. */
+export function waterBar(p: Record<string, unknown>): Part[] {
+  const W = num(p.width, 21);
+  const D = num(p.depth, 39);
+  const H = num(p.height, 45);
+  const white = { color: str(p.color, '#f2f0ec') };
+  return [
+    box('base', ['body'], [W - 1, 2.5, D - 2], [0, 1.25, D / 2], { color: '#3a3a3c', radius: 0.8 }),
+    box('body', ['body'], [W, H - 2.5, D - 12], [0, 2.5 + (H - 2.5) / 2, (D - 12) / 2], { ...white, radius: 3 }),
+    box('head', ['body'], [W, 14, 12], [0, H - 7, D - 6], { ...white, radius: 3 }),
+    { ...box('panel', ['panel'], [W - 3, 11, 0.6], [0, H - 7.5, D + 0.1], { color: '#141416', radius: 0.4 }), label: { text: '22°', size: 2.2, offset: [0, 1], color: '#6fc3ff', bg: 'none' } },
+    cyl('nozzle', ['nozzle'], 1.1, 3, [0, H - 15.5, D - 4], { color: '#9a9c9e' }),
+    box('tray', ['tray'], [W - 4, 1.6, 11], [0, 3.3, D - 6.5], { color: '#5a5c5e', radius: 0.4 }),
+    cyl('glass', ['glass'], 3.4, 10, [0, 9.1, D - 5.5], { material: 'glass', glass: true }),
+  ];
 }
 
 /** Swivel TV floor stand (e.g. 89 x 52 base, column up to the bracket, small shelf). Put the TV on it with state "wall". params: width, depth, height (bracket top), shelf (height, 0 = none), color. */

@@ -1,0 +1,29 @@
+{
+  "id": "water-bar",
+  "name": "Tami4 water bar (ours)",
+  "tags": [
+    "ours",
+    "design"
+  ],
+  "description": "Our Tami4 water bar (~21 x 39 x 45, estimate): it needs the water point, so it stands at the counter corner by the front door.",
+  "source": {
+    "kind": "procedural",
+    "generator": "water-bar",
+    "license": "self-made",
+    "notes": "src/model/generators/decor.ts; sizes estimated"
+  },
+  "params": {
+    "width": {
+      "default": 21
+    },
+    "depth": {
+      "default": 39
+    },
+    "height": {
+      "default": 45
+    },
+    "color": {
+      "default": "#f2f0ec"
+    }
+  }
+}

@@ -825,6 +825,36 @@
           ]
         },
         {
+          "id": "living.tv-gear",
+          "asset": "tv-gear",
+          "name": "Our TV gear like now: 2 compact black speakers at the ends of the TV unit, media box, smart display",
+          "tags": [
+            "tv",
+            "speakers",
+            "ours"
+          ],
+          "params": {
+            "width": 180,
+            "depth": 45,
+            "gap": 0,
+            "display": "left"
+          },
+          "against": {
+            "wall": "living.wall-5",
+            "offset": 362,
+            "elevation": 50,
+            "gap": 0
+          },
+          "allowOverlap": [
+            "living.tv-unit",
+            "living.sideboard",
+            "living.tv",
+            "living.olive",
+            "living.broom-closet",
+            "living.corner-board"
+          ]
+        },
+        {
           "id": "living.coffee-table",
           "asset": "coffee-table-drawers",
           "name": "Retro coffee table (שולחן סלון דגם רטרו) — 2 wide drawers — Shomrat HaZorea (שמרת הזורע) ₪990",
@@ -854,17 +884,17 @@
         {
           "id": "living.armchair",
           "asset": "old-house-armchair",
-          "name": "Our grey armchair parked in the corner of the KALLAX divider and the wall, 90 deg to the TV (drag it in when we need it)",
+          "name": "Our grey armchair parked diagonally in the corner of the KALLAX divider and the wall (drag it in when we need it)",
           "tags": [
             "armchair"
           ],
           "params": {},
           "position": [
-            44.0,
+            30.9,
             0,
-            527.5
+            498.0
           ],
-          "rotation": 180.0,
+          "rotation": 134.9,
           "allowOverlap": [
             "living.sofa"
           ]
@@ -1059,7 +1089,7 @@
         {
           "id": "living.divider-board",
           "asset": "wall-art",
-          "name": "Black steel sheet on the living-room side over the first 4 rows (hides shoes, keys, bags): covered in our event photo magnets like our fridge now; only the top 2 rows are open both ways",
+          "name": "Black steel sheet on the living-room side over the first 4 rows (hides shoes, keys, bags): with our event photo magnets scattered playfully over it; only the top 2 rows are open both ways",
           "tags": [
             "divider",
             "board",
@@ -1069,7 +1099,8 @@
           "params": {
             "width": 147,
             "height": 149,
-            "photos": 200,
+            "photos": 46,
+            "scatter": true,
             "photoTextures": 8,
             "frameColor": "#2b2b2d",
             "seed": "fridge"
@@ -1304,32 +1335,6 @@
           "rotation": 0
         },
         {
-          "id": "living.snake-small",
-          "asset": "plant",
-          "name": "Sansevieria 'Moonshine' (silvery snake plant) L, 40–50 cm — Plant It (plantit.co.il) ₪120",
-          "tags": [
-            "plant"
-          ],
-          "params": {
-            "kind": "snake",
-            "height": 45,
-            "seed": "snake-small",
-            "spread": 20,
-            "potDiameter": 23,
-            "potColor": "#2a2a2a",
-            "leafColor": "#8fa38e"
-          },
-          "position": [
-            22,
-            50,
-            193.5
-          ],
-          "rotation": 0,
-          "allowOverlap": [
-            "living.tv-unit"
-          ]
-        },
-        {
           "id": "living.eucalyptus",
           "asset": "plant",
           "name": "Ours: trailing eucalyptus (gold pot) on the KALLAX divider",
@@ -1416,6 +1421,43 @@
             "elevation": 172,
             "gap": 0
           },
+          "allowOverlap": [
+            "living.counter"
+          ]
+        },
+        {
+          "id": "living.fridge",
+          "asset": "old-house-fridge",
+          "name": "Our French-door fridge in the fridge niche (sticks out ~12 cm)",
+          "tags": [
+            "fridge",
+            "ours"
+          ],
+          "params": {},
+          "against": {
+            "wall": "living.wall-3",
+            "offset": 28
+          },
+          "allowOverlap": [
+            "living.fridge-niche"
+          ]
+        },
+        {
+          "id": "living.tami4",
+          "asset": "water-bar",
+          "name": "Our Tami4 water bar, on the counter corner by the front door (its water point)",
+          "tags": [
+            "tami4",
+            "ours",
+            "kitchen"
+          ],
+          "params": {},
+          "position": [
+            276,
+            90,
+            719
+          ],
+          "rotation": 180,
           "allowOverlap": [
             "living.counter"
           ]
