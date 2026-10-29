@@ -2,7 +2,7 @@
   "meta": {
     "name": "Light industrial loft",
     "kind": "saved",
-    "note": "Light industrial · floating sofa: wall-mounted TV (~3.55 m); dining behind the sofa (bench against the sofa back, our chairs on the wall side), open black KALLAX under the sofa window; door corner: a cream-white AliExpress hall stand (100x30x200) with a shoe bench, hooks, a lit key niche + gold-framed glass display, whisky + games in the KALLAX under the sofa window, shoe bench on the side wall, black clamp-post coat rack, black steel locker as broom closet, round mirror over the bench. No rug, no curtains.",
+    "note": "Light industrial · floating sofa: wall-mounted TV (~3.55 m); dining behind the sofa (bench against the sofa back, our chairs on the wall side), open black KALLAX under the sofa window; door corner: a cream-white AliExpress hall stand (100x30x200) with a shoe bench, hooks, a lit key niche + gold-framed glass display, whisky + games in the KALLAX under the sofa window, shoe bench on the side wall, black clamp-post coat rack. No rug, no curtains.",
     "location": {
       "lat": 32.0853,
       "lon": 34.7818,
@@ -882,19 +882,53 @@
           ]
         },
         {
+          "id": "living.display-column",
+          "asset": "ikea-kallax",
+          "name": "KALLAX-style column 1x5 on an underframe (~200, as tall as the hall stand, white) next to the hall stand on the wall side, facing the living room: our whisky, games + books on show",
+          "tags": [
+            "kallax",
+            "display",
+            "whisky",
+            "games"
+          ],
+          "params": {
+            "cols": 1,
+            "rows": 5,
+            "underframe": true,
+            "color": "white",
+            "contents": [
+              "books",
+              "whisky",
+              "games",
+              "whisky",
+              "games"
+            ],
+            "seed": "ind-1x5"
+          },
+          "position": [
+            21,
+            0,
+            603
+          ],
+          "rotation": 180,
+          "allowOverlap": [
+            "living.divider"
+          ]
+        },
+        {
           "id": "living.armchair",
           "asset": "old-house-armchair",
-          "name": "Our grey armchair parked diagonally in the corner of the entry cabinet and the wall (drag it in when we need it)",
+          "name": "Our grey armchair parked in front of the back of the hall stand (drag it in when we need it)",
           "tags": [
             "armchair"
           ],
           "params": {},
           "position": [
-            30.9,
+            80.6,
             0,
-            498.0
+            542.8
           ],
-          "rotation": 134.9,
+          "rotation": 145.0,
           "allowOverlap": [
             "living.sofa"
           ]
@@ -1078,9 +1112,9 @@
             "display": "books"
           },
           "position": [
-            50,
+            92,
             0,
-            530
+            573
           ],
           "rotation": 0
         },
@@ -1100,9 +1134,9 @@
             "potColor": "#c9a227"
           },
           "position": [
-            20,
+            62,
             200,
-            532.0
+            577.0
           ],
           "rotation": 0,
           "allowOverlap": [
@@ -1110,30 +1144,61 @@
           ]
         },
         {
-          "id": "living.shoe-bench",
-          "asset": "bench",
-          "name": "Oak + black steel shoe bench 100x35 on the side wall (keeps the KALLAX free): sit to put shoes on, everyday pairs below",
+          "id": "living.passage-kallax",
+          "asset": "ikea-kallax",
+          "name": "KALLAX 2x4 upright against the side wall along the passage (white): bags, boxes, 2 rows of shoes — IKEA",
           "tags": [
-            "bench",
+            "kallax",
             "shoes",
+            "bags",
             "entry"
           ],
           "params": {
-            "width": 100,
-            "depth": 35,
-            "height": 45,
-            "legs": "metal",
-            "material": "wood-oak-light",
-            "legMaterial": "metal-black",
-            "shoes": 4,
-            "seed": "ind-bench"
+            "cols": 2,
+            "rows": 4,
+            "color": "white",
+            "contents": [
+              "bags bags",
+              "boxes boxes",
+              "shoes shoes",
+              "shoes shoes"
+            ],
+            "seed": "ind-passage"
           },
           "against": {
             "wall": "living.wall-5",
-            "offset": 46,
+            "offset": 40,
             "elevation": 0,
             "gap": 0
           }
+        },
+        {
+          "id": "living.passage-kallax-top",
+          "asset": "ikea-kallax",
+          "name": "KALLAX 2x2 on top of it (screw both to the wall): boxes + bins — IKEA",
+          "tags": [
+            "kallax",
+            "entry"
+          ],
+          "params": {
+            "cols": 2,
+            "rows": 2,
+            "color": "white",
+            "contents": [
+              "boxes boxes",
+              "bins bins"
+            ],
+            "seed": "ind-passage-top"
+          },
+          "against": {
+            "wall": "living.wall-5",
+            "offset": 40,
+            "elevation": 147,
+            "gap": 0
+          },
+          "allowOverlap": [
+            "living.passage-kallax"
+          ]
         },
         {
           "id": "living.entry-rack",
@@ -1160,64 +1225,6 @@
             "wall": "living.wall-4",
             "offset": 430,
             "elevation": 0,
-            "gap": 0
-          }
-        },
-        {
-          "id": "living.broom-closet",
-          "asset": "tall-cabinet",
-          "name": "Black steel locker 45x40x190 in the door corner, turned to face the room so its door opens = broom closet: vacuum, mop, broom, ironing board",
-          "tags": [
-            "broom closet",
-            "locker",
-            "entry"
-          ],
-          "params": {
-            "width": 45,
-            "depth": 40,
-            "height": 190,
-            "plinth": 6,
-            "handles": "bar",
-            "handleColor": "#8a8c8e",
-            "material": "metal-black",
-            "frontMaterial": "metal-black",
-            "columns": [
-              {
-                "stack": [
-                  {
-                    "kind": "door",
-                    "content": "cleaning"
-                  }
-                ]
-              }
-            ]
-          },
-          "against": {
-            "wall": "living.wall-5",
-            "offset": 0,
-            "elevation": 0,
-            "gap": 0
-          }
-        },
-        {
-          "id": "living.mirror",
-          "asset": "wall-art",
-          "name": "Round black-rim mirror ø60 on a leather strap, over the shoe bench",
-          "tags": [
-            "mirror",
-            "entry"
-          ],
-          "params": {
-            "round": true,
-            "strap": true,
-            "width": 60,
-            "height": 60,
-            "frameColor": "#1d1d1f"
-          },
-          "against": {
-            "wall": "living.wall-5",
-            "offset": 62,
-            "elevation": 120,
             "gap": 0
           }
         },
