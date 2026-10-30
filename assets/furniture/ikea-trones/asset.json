@@ -1,0 +1,593 @@
+{
+  "id": "ikea-trones",
+  "name": "IKEA TRONES shoe cabinet/storage, white",
+  "tags": [
+    "trones",
+    "ikea",
+    "shoe cabinet",
+    "shoes",
+    "wall cabinet",
+    "white"
+  ],
+  "description": "52 x 39 x 18 cm (W x H x D), white plastic. Wall-mounted or stacked; the front tilts out on its bottom edge with the shoes standing in it (about 2 pairs) - ours hold bottles, creatine, vitamins etc. Double-click the front to tilt it out. Origin: back-centre, bottom of the cabinet.",
+  "product": {
+    "vendor": "IKEA",
+    "name": "TRONES shoe cabinet/storage, white, 52x39 cm (depth 18)"
+  },
+  "source": {
+    "kind": "parts",
+    "license": "self-made",
+    "notes": "Outer size from IKEA (52 x 39, depth 18). Wall thicknesses and the tilt angle estimated."
+  },
+  "parts": [
+    {
+      "id": "back",
+      "tags": [
+        "body"
+      ],
+      "geometry": {
+        "type": "box",
+        "size": [
+          52,
+          39,
+          1
+        ]
+      },
+      "position": [
+        0,
+        19.5,
+        0.5
+      ],
+      "color": "#f1f1ee"
+    },
+    {
+      "id": "top",
+      "tags": [
+        "body",
+        "top"
+      ],
+      "geometry": {
+        "type": "box",
+        "size": [
+          52,
+          1.5,
+          17
+        ]
+      },
+      "position": [
+        0,
+        38.25,
+        9.5
+      ],
+      "color": "#f1f1ee"
+    },
+    {
+      "id": "bottom",
+      "tags": [
+        "body"
+      ],
+      "geometry": {
+        "type": "box",
+        "size": [
+          52,
+          1.5,
+          15.5
+        ]
+      },
+      "position": [
+        0,
+        0.75,
+        8.75
+      ],
+      "color": "#f1f1ee"
+    },
+    {
+      "id": "side-left",
+      "tags": [
+        "body"
+      ],
+      "geometry": {
+        "type": "box",
+        "size": [
+          1.5,
+          36,
+          15.5
+        ]
+      },
+      "position": [
+        -25.25,
+        19.5,
+        8.75
+      ],
+      "color": "#f1f1ee"
+    },
+    {
+      "id": "side-right",
+      "tags": [
+        "body"
+      ],
+      "geometry": {
+        "type": "box",
+        "size": [
+          1.5,
+          36,
+          15.5
+        ]
+      },
+      "position": [
+        25.25,
+        19.5,
+        8.75
+      ],
+      "color": "#f1f1ee"
+    },
+    {
+      "id": "front",
+      "tags": [
+        "front",
+        "door"
+      ],
+      "geometry": {
+        "type": "box",
+        "size": [
+          52,
+          37.2,
+          1.4
+        ]
+      },
+      "position": [
+        0,
+        18.6,
+        17.3
+      ],
+      "pivot": [
+        0,
+        0,
+        18
+      ],
+      "color": "#f4f4f1"
+    },
+    {
+      "id": "grip",
+      "tags": [
+        "front",
+        "grip"
+      ],
+      "geometry": {
+        "type": "box",
+        "size": [
+          12,
+          1.2,
+          0.6
+        ]
+      },
+      "position": [
+        0,
+        35.8,
+        18.1
+      ],
+      "pivot": [
+        0,
+        0,
+        18
+      ],
+      "color": "#d9d9d5"
+    },
+    {
+      "id": "tray",
+      "tags": [
+        "front",
+        "tray"
+      ],
+      "geometry": {
+        "type": "box",
+        "size": [
+          48,
+          0.8,
+          8
+        ]
+      },
+      "position": [
+        0,
+        2,
+        12.4
+      ],
+      "pivot": [
+        0,
+        0,
+        18
+      ],
+      "color": "#e8e8e4"
+    },
+    {
+      "id": "tray-left",
+      "tags": [
+        "front",
+        "tray"
+      ],
+      "geometry": {
+        "type": "box",
+        "size": [
+          0.8,
+          28,
+          7
+        ]
+      },
+      "position": [
+        -24,
+        15,
+        13
+      ],
+      "pivot": [
+        0,
+        0,
+        18
+      ],
+      "color": "#e8e8e4"
+    },
+    {
+      "id": "tray-right",
+      "tags": [
+        "front",
+        "tray"
+      ],
+      "geometry": {
+        "type": "box",
+        "size": [
+          0.8,
+          28,
+          7
+        ]
+      },
+      "position": [
+        24,
+        15,
+        13
+      ],
+      "pivot": [
+        0,
+        0,
+        18
+      ],
+      "color": "#e8e8e4"
+    },
+    {
+      "id": "creatine",
+      "tags": [
+        "contents",
+        "creatine",
+        "tub"
+      ],
+      "geometry": {
+        "type": "cylinder",
+        "radius": 3.8,
+        "height": 13,
+        "segments": 16
+      },
+      "position": [
+        -17,
+        8.9,
+        12.4
+      ],
+      "pivot": [
+        0,
+        0,
+        18
+      ],
+      "color": "#f4f4f2"
+    },
+    {
+      "id": "creatine-lid",
+      "tags": [
+        "contents"
+      ],
+      "geometry": {
+        "type": "cylinder",
+        "radius": 3.9,
+        "height": 2,
+        "segments": 16
+      },
+      "position": [
+        -17,
+        16.4,
+        12.4
+      ],
+      "pivot": [
+        0,
+        0,
+        18
+      ],
+      "color": "#1d1d1f"
+    },
+    {
+      "id": "shaker",
+      "tags": [
+        "contents",
+        "shaker",
+        "bottle"
+      ],
+      "geometry": {
+        "type": "cylinder",
+        "radius": 3.6,
+        "height": 19,
+        "segments": 16
+      },
+      "position": [
+        -7,
+        11.9,
+        12.4
+      ],
+      "pivot": [
+        0,
+        0,
+        18
+      ],
+      "color": "#2c3e57"
+    },
+    {
+      "id": "shaker-cap",
+      "tags": [
+        "contents"
+      ],
+      "geometry": {
+        "type": "cylinder",
+        "radius": 3.7,
+        "height": 3,
+        "segments": 16
+      },
+      "position": [
+        -7,
+        22.9,
+        12.4
+      ],
+      "pivot": [
+        0,
+        0,
+        18
+      ],
+      "color": "#1d1d1f"
+    },
+    {
+      "id": "vitamins",
+      "tags": [
+        "contents",
+        "vitamins",
+        "bottle"
+      ],
+      "geometry": {
+        "type": "cylinder",
+        "radius": 2.6,
+        "height": 10,
+        "segments": 16
+      },
+      "position": [
+        2,
+        7.4,
+        12.4
+      ],
+      "pivot": [
+        0,
+        0,
+        18
+      ],
+      "color": "#e0892e"
+    },
+    {
+      "id": "vitamins-cap",
+      "tags": [
+        "contents"
+      ],
+      "geometry": {
+        "type": "cylinder",
+        "radius": 2.7,
+        "height": 1.6,
+        "segments": 16
+      },
+      "position": [
+        2,
+        13.200000000000001,
+        12.4
+      ],
+      "pivot": [
+        0,
+        0,
+        18
+      ],
+      "color": "#f4f4f2"
+    },
+    {
+      "id": "bottle",
+      "tags": [
+        "contents",
+        "bottle",
+        "water bottle"
+      ],
+      "geometry": {
+        "type": "cylinder",
+        "radius": 3.2,
+        "height": 24,
+        "segments": 16
+      },
+      "position": [
+        11,
+        14.4,
+        12.4
+      ],
+      "pivot": [
+        0,
+        0,
+        18
+      ],
+      "color": "#7fb3c8"
+    },
+    {
+      "id": "bottle-cap",
+      "tags": [
+        "contents"
+      ],
+      "geometry": {
+        "type": "cylinder",
+        "radius": 2,
+        "height": 2.5,
+        "segments": 16
+      },
+      "position": [
+        11,
+        27.65,
+        12.4
+      ],
+      "pivot": [
+        0,
+        0,
+        18
+      ],
+      "color": "#1d1d1f"
+    },
+    {
+      "id": "bottle-2",
+      "tags": [
+        "contents",
+        "bottle"
+      ],
+      "geometry": {
+        "type": "cylinder",
+        "radius": 2.4,
+        "height": 17,
+        "segments": 16
+      },
+      "position": [
+        19,
+        10.9,
+        12.4
+      ],
+      "pivot": [
+        0,
+        0,
+        18
+      ],
+      "color": "#a33b3b"
+    }
+  ],
+  "states": [
+    {
+      "id": "closed",
+      "name": "Closed",
+      "parts": {}
+    },
+    {
+      "id": "open",
+      "name": "Tilted out",
+      "parts": {
+        "front": {
+          "rotation": [
+            32,
+            0,
+            0
+          ]
+        },
+        "grip": {
+          "rotation": [
+            32,
+            0,
+            0
+          ]
+        },
+        "tray": {
+          "rotation": [
+            32,
+            0,
+            0
+          ]
+        },
+        "tray-left": {
+          "rotation": [
+            32,
+            0,
+            0
+          ]
+        },
+        "tray-right": {
+          "rotation": [
+            32,
+            0,
+            0
+          ]
+        },
+        "creatine": {
+          "rotation": [
+            32,
+            0,
+            0
+          ]
+        },
+        "creatine-lid": {
+          "rotation": [
+            32,
+            0,
+            0
+          ]
+        },
+        "shaker": {
+          "rotation": [
+            32,
+            0,
+            0
+          ]
+        },
+        "shaker-cap": {
+          "rotation": [
+            32,
+            0,
+            0
+          ]
+        },
+        "vitamins": {
+          "rotation": [
+            32,
+            0,
+            0
+          ]
+        },
+        "vitamins-cap": {
+          "rotation": [
+            32,
+            0,
+            0
+          ]
+        },
+        "bottle": {
+          "rotation": [
+            32,
+            0,
+            0
+          ]
+        },
+        "bottle-cap": {
+          "rotation": [
+            32,
+            0,
+            0
+          ]
+        },
+        "bottle-2": {
+          "rotation": [
+            32,
+            0,
+            0
+          ]
+        }
+      }
+    }
+  ],
+  "defaultState": "closed",
+  "interactions": [
+    {
+      "part": "front",
+      "action": "cycleStates"
+    },
+    {
+      "part": "grip",
+      "action": "cycleStates"
+    }
+  ]
+}

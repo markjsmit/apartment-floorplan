@@ -2455,6 +2455,196 @@
             "intensity": 12000
           },
           "builtIn": true
+        },
+        {
+          "id": "hallway.niche-low",
+          "asset": "tall-cabinet",
+          "name": "Low wall-hung cabinet in the niche (games + small living-room things)",
+          "tags": [
+            "niche cabinet",
+            "games",
+            "sideboard",
+            "dresser"
+          ],
+          "description": "NEW: buy/build - wall-hung so the floor runs under it (feels lighter)",
+          "params": {
+            "width": 122,
+            "depth": 38,
+            "height": 60,
+            "plinth": 0,
+            "handles": "none",
+            "columns": [
+              {
+                "stack": [
+                  {
+                    "kind": "drawer",
+                    "h": 16
+                  },
+                  {
+                    "kind": "door",
+                    "content": "games"
+                  }
+                ]
+              },
+              {
+                "stack": [
+                  {
+                    "kind": "drawer",
+                    "h": 16
+                  },
+                  {
+                    "kind": "door",
+                    "content": "boxes"
+                  }
+                ]
+              },
+              {
+                "stack": [
+                  {
+                    "kind": "drawer",
+                    "h": 16
+                  },
+                  {
+                    "kind": "door",
+                    "content": "games"
+                  }
+                ]
+              }
+            ]
+          },
+          "against": {
+            "wall": "hallway.wall-4",
+            "offset": 0.5,
+            "elevation": 18
+          },
+          "assumptions": [
+            {
+              "path": "params",
+              "note": "designed to fit the niche (123 wide, 38 deep from the footprint, not measured on site)"
+            }
+          ]
+        },
+        {
+          "id": "hallway.niche-high",
+          "asset": "tall-cabinet",
+          "name": "Top cabinet in the niche, up to the ceiling (things you need less often)",
+          "tags": [
+            "niche cabinet",
+            "top cabinet"
+          ],
+          "description": "NEW: buy/build - push-to-open, no handles",
+          "params": {
+            "width": 122,
+            "depth": 35,
+            "height": 42,
+            "plinth": 0,
+            "handles": "none",
+            "columns": [
+              {
+                "stack": [
+                  {
+                    "kind": "door",
+                    "content": "boxes"
+                  }
+                ]
+              },
+              {
+                "stack": [
+                  {
+                    "kind": "door",
+                    "content": "games"
+                  }
+                ]
+              },
+              {
+                "stack": [
+                  {
+                    "kind": "door",
+                    "content": "boxes"
+                  }
+                ]
+              }
+            ]
+          },
+          "against": {
+            "wall": "hallway.wall-4",
+            "offset": 0.5,
+            "elevation": 196
+          },
+          "assumptions": [
+            {
+              "path": "params",
+              "note": "designed to fit the niche (123 wide, 38 deep from the footprint, not measured on site)"
+            }
+          ]
+        },
+        {
+          "id": "hallway.niche-art",
+          "asset": "wall-art",
+          "name": "Warm print between the cabinets",
+          "tags": [
+            "art",
+            "painting"
+          ],
+          "params": {
+            "width": 70,
+            "height": 60,
+            "frameColor": "#c9b18f",
+            "art": "#e6dccb,#b07a5a,#4e5a4f",
+            "seed": "hall-niche"
+          },
+          "against": {
+            "wall": "hallway.wall-4",
+            "offset": 26.5,
+            "elevation": 107,
+            "gap": 0
+          }
+        },
+        {
+          "id": "hallway.niche-vase",
+          "asset": "table-decor",
+          "name": "Vase with branches on the low cabinet",
+          "tags": [
+            "decor",
+            "vase"
+          ],
+          "params": {
+            "kind": "branches",
+            "color": "#d9d1c4",
+            "seed": "hall-vase"
+          },
+          "against": {
+            "wall": "hallway.wall-4",
+            "offset": 8,
+            "elevation": 78,
+            "gap": 8
+          },
+          "allowOverlap": [
+            "hallway.niche-low"
+          ]
+        },
+        {
+          "id": "hallway.niche-candles",
+          "asset": "table-decor",
+          "name": "Candles on the low cabinet",
+          "tags": [
+            "decor",
+            "candles"
+          ],
+          "params": {
+            "kind": "candles",
+            "color": "#efe9df",
+            "seed": "hall-candles"
+          },
+          "against": {
+            "wall": "hallway.wall-4",
+            "offset": 80,
+            "elevation": 78,
+            "gap": 12
+          },
+          "allowOverlap": [
+            "hallway.niche-low"
+          ]
         }
       ],
       "assumptions": [
@@ -2723,12 +2913,38 @@
                 "white",
                 "black"
               ]
+            ],
+            "labels": [
+              [
+                "sport::skate-laces / sport::blade-guards",
+                "sport::tape / sport::wax",
+                "cleaning::sponges / cleaning::cloths",
+                "laundry::pegs / laundry::stains"
+              ],
+              [
+                "linen::guest-sheets",
+                "linen::pillowcases",
+                "linen::towels",
+                "linen::blankets"
+              ],
+              [
+                "camping::lights",
+                "camping::cooking",
+                "sport::gym",
+                "sport::hockey"
+              ]
             ]
           },
           "against": {
             "wall": "storage.wall-1",
             "offset": 114.5
-          }
+          },
+          "assumptions": [
+            {
+              "path": "params.labels",
+              "note": "demo labels (group::item): tools + hardware on the aisle side, living-room grabs (games, batteries, chargers, candles) on the door side - the real ones are up to Mark"
+            }
+          ]
         },
         {
           "id": "storage.kallax-east-high",
@@ -2782,13 +2998,29 @@
                 "",
                 ""
               ]
+            ],
+            "labels": [
+              [],
+              [],
+              [
+                "cleaning::sprays / cleaning::refills",
+                "laundry::bags / laundry::nets",
+                "sport::gloves / sport::hats",
+                "sport::first-aid / sport::ice-packs"
+              ]
             ]
           },
           "against": {
             "wall": "storage.wall-1",
             "offset": 114.5,
             "elevation": 112
-          }
+          },
+          "assumptions": [
+            {
+              "path": "params.labels",
+              "note": "demo labels (group::item): tools + hardware on the aisle side, living-room grabs (games, batteries, chargers, candles) on the door side - the real ones are up to Mark"
+            }
+          ]
         },
         {
           "id": "storage.kallax-mid-east-low",
@@ -2836,6 +3068,26 @@
                 "white",
                 "black"
               ]
+            ],
+            "labels": [
+              [
+                "tools::screwdrivers / tools::bits",
+                "tools::pliers / tools::measuring",
+                "tools::drill / tools::sanding",
+                "tools::glue / tools::tape"
+              ],
+              [
+                "hardware::screws",
+                "hardware::nails",
+                "hardware::wall-plugs",
+                "hardware::hooks"
+              ],
+              [
+                "paint::brushes",
+                "paint::rollers",
+                "paint::touch-up",
+                "paint::filler"
+              ]
             ]
           },
           "position": [
@@ -2843,7 +3095,13 @@
             0,
             203.5
           ],
-          "rotation": 90
+          "rotation": 90,
+          "assumptions": [
+            {
+              "path": "params.labels",
+              "note": "demo labels (group::item): tools + hardware on the aisle side, living-room grabs (games, batteries, chargers, candles) on the door side - the real ones are up to Mark"
+            }
+          ]
         },
         {
           "id": "storage.kallax-mid-east-high",
@@ -2897,6 +3155,16 @@
                 "",
                 ""
               ]
+            ],
+            "labels": [
+              [],
+              [],
+              [
+                "electronics::cables / electronics::hdmi",
+                "electronics::adapters / electronics::usb",
+                "tools::electrical / tools::soldering",
+                "tools::spare-parts / tools::bike"
+              ]
             ]
           },
           "position": [
@@ -2904,7 +3172,13 @@
             112,
             203.5
           ],
-          "rotation": 90
+          "rotation": 90,
+          "assumptions": [
+            {
+              "path": "params.labels",
+              "note": "demo labels (group::item): tools + hardware on the aisle side, living-room grabs (games, batteries, chargers, candles) on the door side - the real ones are up to Mark"
+            }
+          ]
         },
         {
           "id": "storage.kallax-mid-west-low",
@@ -2952,6 +3226,26 @@
                 "white",
                 "black"
               ]
+            ],
+            "labels": [
+              [
+                "electronics::batteries / electronics::bulbs",
+                "electronics::chargers / electronics::remotes",
+                "home::candles / home::matches",
+                "office::pens / office::paper"
+              ],
+              [
+                "games::board-games",
+                "games::cards-dice",
+                "games::puzzles",
+                "games::controllers"
+              ],
+              [
+                "home::gift-wrap",
+                "home::cards-ribbons",
+                "seasonal::hanukkah",
+                "seasonal::birthdays"
+              ]
             ]
           },
           "position": [
@@ -2959,7 +3253,13 @@
             0,
             203.5
           ],
-          "rotation": -90
+          "rotation": -90,
+          "assumptions": [
+            {
+              "path": "params.labels",
+              "note": "demo labels (group::item): tools + hardware on the aisle side, living-room grabs (games, batteries, chargers, candles) on the door side - the real ones are up to Mark"
+            }
+          ]
         },
         {
           "id": "storage.kallax-mid-west-high",
@@ -3013,6 +3313,16 @@
                 "",
                 ""
               ]
+            ],
+            "labels": [
+              [],
+              [],
+              [
+                "office::envelopes / office::stamps",
+                "home::spare-keys / home::manuals",
+                "home::sewing / home::buttons",
+                "first-aid::plasters / first-aid::meds"
+              ]
             ]
           },
           "position": [
@@ -3020,7 +3330,13 @@
             112,
             203.5
           ],
-          "rotation": -90
+          "rotation": -90,
+          "assumptions": [
+            {
+              "path": "params.labels",
+              "note": "demo labels (group::item): tools + hardware on the aisle side, living-room grabs (games, batteries, chargers, candles) on the door side - the real ones are up to Mark"
+            }
+          ]
         },
         {
           "id": "storage.kallax-divider",
@@ -3045,7 +3361,7 @@
         {
           "id": "storage.drying-racks",
           "asset": "diy-drying-rack",
-          "name": "Drying racks (hip height + 175, fold out together)",
+          "name": "Drying racks (bottom one just under the top one, fold out together)",
           "tags": [
             "drying rack",
             "laundry"
@@ -3060,7 +3376,7 @@
             "width": 74,
             "levels": [
               {
-                "elevation": 90,
+                "elevation": 107,
                 "length": 65,
                 "standoff": 2.5
               },
@@ -3308,17 +3624,19 @@
         },
         {
           "id": "storage.ironing-board",
-          "asset": "ironing-board",
-          "name": "Ironing board",
+          "asset": "wall-ironing-board",
+          "name": "Small fold-up ironing board (one leg, under the drying racks)",
           "tags": [
-            "ironing board"
+            "ironing board",
+            "laundry"
           ],
+          "description": "NEW: buy (small wall-mounted ironing board with one leg, ~80x30)",
           "position": [
-            878,
+            739.75,
             0,
-            115.5
+            130
           ],
-          "rotation": 0
+          "rotation": 180
         },
         {
           "id": "storage.ceiling-light",
@@ -3367,6 +3685,142 @@
                 "tools": false
               }
             ]
+          }
+        },
+        {
+          "id": "storage.trones-1-1",
+          "asset": "ikea-trones",
+          "name": "TRONES 1.1 (column next to the pegboard, level 1 from the floor)",
+          "tags": [
+            "trones",
+            "shoe cabinet",
+            "bottles",
+            "supplements"
+          ],
+          "description": "NEW: buy (IKEA TRONES 52x39, depth 18) - bottles, creatine, vitamins",
+          "against": {
+            "wall": "storage.wall-5",
+            "offset": 128.5,
+            "elevation": 0
+          }
+        },
+        {
+          "id": "storage.trones-1-2",
+          "asset": "ikea-trones",
+          "name": "TRONES 1.2 (column next to the pegboard, level 2 from the floor)",
+          "tags": [
+            "trones",
+            "shoe cabinet",
+            "bottles",
+            "supplements"
+          ],
+          "description": "NEW: buy (IKEA TRONES 52x39, depth 18) - bottles, creatine, vitamins",
+          "against": {
+            "wall": "storage.wall-5",
+            "offset": 128.5,
+            "elevation": 39
+          }
+        },
+        {
+          "id": "storage.trones-1-3",
+          "asset": "ikea-trones",
+          "name": "TRONES 1.3 (column next to the pegboard, level 3 from the floor)",
+          "tags": [
+            "trones",
+            "shoe cabinet",
+            "bottles",
+            "supplements"
+          ],
+          "description": "NEW: buy (IKEA TRONES 52x39, depth 18) - bottles, creatine, vitamins",
+          "against": {
+            "wall": "storage.wall-5",
+            "offset": 128.5,
+            "elevation": 78
+          }
+        },
+        {
+          "id": "storage.trones-1-4",
+          "asset": "ikea-trones",
+          "name": "TRONES 1.4 (column next to the pegboard, level 4 from the floor)",
+          "tags": [
+            "trones",
+            "shoe cabinet",
+            "bottles",
+            "supplements"
+          ],
+          "description": "NEW: buy (IKEA TRONES 52x39, depth 18) - bottles, creatine, vitamins",
+          "against": {
+            "wall": "storage.wall-5",
+            "offset": 128.5,
+            "elevation": 117
+          }
+        },
+        {
+          "id": "storage.trones-2-1",
+          "asset": "ikea-trones",
+          "name": "TRONES 2.1 (column towards the door, level 1 from the floor)",
+          "tags": [
+            "trones",
+            "shoe cabinet",
+            "bottles",
+            "supplements"
+          ],
+          "description": "NEW: buy (IKEA TRONES 52x39, depth 18) - bottles, creatine, vitamins",
+          "against": {
+            "wall": "storage.wall-5",
+            "offset": 76.5,
+            "elevation": 0
+          }
+        },
+        {
+          "id": "storage.trones-2-2",
+          "asset": "ikea-trones",
+          "name": "TRONES 2.2 (column towards the door, level 2 from the floor)",
+          "tags": [
+            "trones",
+            "shoe cabinet",
+            "bottles",
+            "supplements"
+          ],
+          "description": "NEW: buy (IKEA TRONES 52x39, depth 18) - bottles, creatine, vitamins",
+          "against": {
+            "wall": "storage.wall-5",
+            "offset": 76.5,
+            "elevation": 39
+          }
+        },
+        {
+          "id": "storage.trones-2-3",
+          "asset": "ikea-trones",
+          "name": "TRONES 2.3 (column towards the door, level 3 from the floor)",
+          "tags": [
+            "trones",
+            "shoe cabinet",
+            "bottles",
+            "supplements"
+          ],
+          "description": "NEW: buy (IKEA TRONES 52x39, depth 18) - bottles, creatine, vitamins",
+          "against": {
+            "wall": "storage.wall-5",
+            "offset": 76.5,
+            "elevation": 78
+          }
+        },
+        {
+          "id": "storage.trones-2-4",
+          "asset": "ikea-trones",
+          "name": "TRONES 2.4 (column towards the door, level 4 from the floor)",
+          "tags": [
+            "trones",
+            "shoe cabinet",
+            "bottles",
+            "supplements"
+          ],
+          "description": "NEW: buy (IKEA TRONES 52x39, depth 18) - bottles, creatine, vitamins",
+          "against": {
+            "wall": "storage.wall-5",
+            "offset": 76.5,
+            "elevation": 117
           }
         },
         {

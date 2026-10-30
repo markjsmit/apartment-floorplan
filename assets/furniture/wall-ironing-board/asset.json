@@ -1,0 +1,23 @@
+{
+  "id": "wall-ironing-board",
+  "name": "Small wall-mounted ironing board (flips up, one leg)",
+  "tags": ["ironing board", "laundry", "fold-up", "wall mounted"],
+  "description": "Small ironing board (80 x 30 cm) on a hinge rail: stored hanging down flat against the panel (~5 cm deep), flipped up it is horizontal at 90 cm with one folding leg near the nose. Generic, not a specific product. Double-click to flip up / down. Origin: back-centre on the floor.",
+  "source": { "kind": "parts", "license": "self-made", "notes": "Generic size for a small single-leg wall ironing board; surface height 90 (between Heli and Mark). The leg folds in two behind the board when stored (not modelled in detail)." },
+  "parts": [
+    { "id": "rail", "tags": ["rail", "hinge"], "geometry": { "type": "box", "size": [34, 4, 3] }, "position": [0, 86, 1.5], "material": "metal-black" },
+    { "id": "board", "tags": ["board"], "geometry": { "type": "box", "size": [30, 65, 2] }, "position": [0, 55.5, 4], "pivot": [0, 88, 3], "color": "#c8d3dc", "section": "board" },
+    { "id": "nose", "tags": ["board"], "geometry": { "type": "cylinder", "radius": 15, "height": 2, "segments": 24 }, "position": [0, 23, 4], "rotation": [90, 0, 0], "pivot": [0, 88, 3], "color": "#c8d3dc", "section": "board" },
+    { "id": "leg-folded", "tags": ["leg"], "geometry": { "type": "box", "size": [2.5, 58, 2] }, "position": [0, 50, 1.6], "material": "metal-black", "section": "board" },
+    { "id": "leg", "tags": ["leg"], "geometry": { "type": "box", "size": [2.5, 87, 2.5] }, "position": [0, 44.5, 68], "material": "metal-black", "section": "board", "hidden": true },
+    { "id": "foot", "tags": ["leg"], "geometry": { "type": "box", "size": [26, 2, 3] }, "position": [0, 1, 68], "material": "metal-black", "section": "board", "hidden": true }
+  ],
+  "states": [
+    { "id": "folded", "name": "Folded down (stored)", "parts": {} },
+    { "id": "open", "name": "Flipped up", "parts": {
+      "board": { "rotation": [-90, 0, 0] }, "nose": { "rotation": [0, 0, 0] },
+      "leg-folded": { "visible": false }, "leg": { "visible": true }, "foot": { "visible": true } } }
+  ],
+  "defaultState": "folded",
+  "interactions": [ { "part": "board", "action": "cycleStates" }, { "part": "nose", "action": "cycleStates" } ]
+}
