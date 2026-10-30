@@ -1,0 +1,43 @@
+{
+  "id": "table-lamp",
+  "name": "Table lamp (cozy)",
+  "tags": [
+    "lamp",
+    "table lamp",
+    "decorative light",
+    "cozy light",
+    "light"
+  ],
+  "description": "Small warm table lamp: mushroom (like IKEA LAMPAN / Panthella mini, ~32 cm), globe or fabric drum. Decorative: on in 🕯️ Cozy and 💡 Work. Origin = bottom-centre on the surface it stands on.",
+  "source": {
+    "kind": "procedural",
+    "generator": "table-lamp",
+    "license": "self-made",
+    "notes": "src/model/generators/lights.ts - simple stand-in geometry; needs an outlet nearby."
+  },
+  "params": {
+    "shape": {
+      "default": "mushroom",
+      "description": "mushroom | globe | drum"
+    },
+    "height": {
+      "default": 32,
+      "description": "cm"
+    },
+    "diameter": {
+      "default": 24,
+      "description": "shade, cm"
+    },
+    "color": {
+      "default": "#f3ebdc",
+      "description": "shade"
+    },
+    "baseColor": {
+      "default": "#c49c68"
+    },
+    "intensity": {
+      "default": 2500,
+      "description": "point light"
+    }
+  }
+}

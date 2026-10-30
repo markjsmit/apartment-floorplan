@@ -59,6 +59,8 @@ export const ItemSchema = z
     allowOverlap: z.array(z.string()).default([]),
     // installed and stays when the flat is handed over (kitchen, bathroom fixtures, closets): kept in the Empty version
     builtIn: z.boolean().default(false),
+    // the role of all its glowing parts (overrides the asset's): functional = on in 💡 Work, decorative = 🕯️ Cozy + Work
+    light: z.enum(['functional', 'decorative']).optional(),
     assumptions,
   })
   .refine((i) => (i.position === undefined) !== (i.against === undefined), {
@@ -183,10 +185,17 @@ export const PartSchema = z.object({
       bg: z.string().optional(), angle: z.number().optional(),
     })
     .optional(),
-  // glowing part (lamp diffuser, LED strip): emissive when the room light is on, plus a light out of its bottom (-y) face:
-  // area = soft rect light the size of the face (strips), point = a lamp (intensity like the ceiling lamp's ~30000)
+  // glowing part (lamp diffuser, LED strip): emissive when it's on, plus a light out of its bottom (-y) face:
+  // area = soft rect light the size of the face (strips), point = a lamp (intensity like the ceiling lamp's ~30000),
+  // glow = only glows, no light of its own (string-light bulbs: one point part per string does the lighting).
+  // role: functional (ceiling, task, reading lights) is on in 💡 Work mode; decorative (table/floor lamps, display
+  // LEDs) in 🕯 Cozy and Work
   emit: z
-    .object({ color: z.string().default('#fff1dc'), intensity: z.number().default(6), kind: z.enum(['area', 'point']).default('area') })
+    .object({
+      color: z.string().default('#fff1dc'), intensity: z.number().default(6), kind: z.enum(['area', 'point', 'glow']).default('area'),
+      // unset = functional
+      role: z.enum(['functional', 'decorative']).optional(),
+    })
     .optional(),
 });
 export type Part = z.infer<typeof PartSchema>;

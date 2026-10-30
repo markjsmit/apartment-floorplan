@@ -1,6 +1,7 @@
 // URL query <-> view state, so links (and Claude's screenshots) open a specific room/version/spot.
 
 import { isMood, type Mood } from '../scene/sun';
+import { isLightMode, type LightMode } from '../model/lights';
 
 export type CameraPose = { x: number; z: number; yaw: number; pitch: number };
 export type View = 'first-person' | 'top-down';
@@ -17,6 +18,8 @@ export type UrlState = {
   person?: Person;
   /** `mood=afternoon|golden|night` */
   mood?: Mood;
+  /** `lights=off|cozy|work` */
+  lights?: LightMode;
   /** opening to start at (the house's entry door) */
   spawnAt?: string;
   noreport: boolean;
@@ -67,9 +70,11 @@ export function parseUrlState(search: string, bundle: BundleLike): UrlState {
   const person = p === 'mark' || p === 'heli' ? p : undefined;
   const m = q.get('mood');
   const mood = isMood(m) ? m : undefined;
+  const l = q.get('lights');
+  const lights = isLightMode(l) ? l : undefined;
   const states = Object.fromEntries((q.get('states') ?? '').split(',').map((s) => s.split(':')).filter((p) => p.length === 2 && p[0] && p[1]));
   const itemStates = Object.keys(states).length ? states : undefined;
-  return { roomId, versionId, roomVersions, camera, view, person, mood, spawnAt, noreport: q.get('noreport') === '1', itemStates };
+  return { roomId, versionId, roomVersions, camera, view, person, mood, lights, spawnAt, noreport: q.get('noreport') === '1', itemStates };
 }
 
 const round1 = (n: number) => Math.round(n * 10) / 10;

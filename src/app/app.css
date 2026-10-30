@@ -105,6 +105,7 @@ button { font: inherit; color: inherit; }
 .time-switch { position: absolute; top: 62px; left: 10px; background: var(--panel); border-radius: 10px; padding: 4px; backdrop-filter: blur(8px); }
 .time-switch button { background: rgba(255, 255, 255, 0.06); border: 1px solid var(--line); padding: 8px 14px; font-size: 16px; }
 .time-switch button.on { background: var(--text); }
+.time-switch.lamps { top: 114px; }
 .menu-button { position: absolute; top: 10px; right: 10px; width: 46px; height: 46px; font-size: 22px; background: var(--panel);
   border: 1px solid var(--line); border-radius: 10px; backdrop-filter: blur(8px); cursor: pointer; z-index: 3; }
 .menu-button.on { background: var(--text); color: #111; }

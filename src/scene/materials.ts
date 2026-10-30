@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 import {
-  Color, DataTexture, MeshPhysicalMaterial, MeshStandardMaterial, RepeatWrapping, SRGBColorSpace, TextureLoader, type Material, type Texture,
+  Color, MeshPhysicalMaterial, MeshStandardMaterial, RepeatWrapping, SRGBColorSpace, TextureLoader, type Material, type Texture,
 } from 'three';
 import type { Bundle, LoadedTexture } from '../model/bundle';
 import { libUrl } from '../data/client';
@@ -26,26 +26,13 @@ function loadMap(t: LoadedTexture, file: string, color: boolean): Texture {
 
 const FALLBACK = '#cccccc';
 
-const dimTextures = new Map<number, Texture>();
-/** 1x1 "ambient occlusion" of a constant value: scales only the sky/bounce/environment light, not the sun or lamps. */
-function dimTexture(k: number): Texture {
-  let t = dimTextures.get(k);
-  if (!t) {
-    const v = Math.round(k * 255);
-    t = new DataTexture(new Uint8Array([v, v, v, 255]), 1, 1);
-    t.needsUpdate = true;
-    dimTextures.set(k, t);
-  }
-  return t;
-}
 
 /**
  * Material for a texture id (+ optional tint). Unknown ids get a neutral grey so mistakes stay visible but harmless.
- * `daylight` (0..1, see roomDaylight) dims the indirect light for rooms with little or no window.
  */
-export function getMaterial(bundle: Bundle | null, textureId: string | undefined, tint?: string, glass = false, daylight = 1): Material {
+export function getMaterial(bundle: Bundle | null, textureId: string | undefined, tint?: string, glass = false): Material {
   const t = textureId ? bundle?.textures[textureId] : undefined;
-  const key = `${textureId}|${tint}|${glass}|${daylight}|${t ? JSON.stringify(t) : ''}`;
+  const key = `${textureId}|${tint}|${glass}|${t ? JSON.stringify(t) : ''}`;
   let m = materialCache.get(key);
   if (m) return m;
   if (glass) {
@@ -65,16 +52,12 @@ export function getMaterial(bundle: Bundle | null, textureId: string | undefined
     if (t?.maps.normal) mat.normalMap = loadMap(t, t.maps.normal, false);
     if (t?.maps.roughness) mat.roughnessMap = loadMap(t, t.maps.roughness, false);
     if (t?.maps.ao) mat.aoMap = loadMap(t, t.maps.ao, false);
-    if (daylight < 1) {
-      if (mat.aoMap) mat.aoMapIntensity = 1 + (1 - daylight);
-      else mat.aoMap = dimTexture(daylight);
-    }
     m = mat;
   }
   materialCache.set(key, m);
   return m;
 }
 
-export function useMaterial(bundle: Bundle | null, textureId: string | undefined, tint?: string, glass = false, daylight = 1): Material {
-  return useMemo(() => getMaterial(bundle, textureId, tint, glass, daylight), [bundle, textureId, tint, glass, daylight]);
+export function useMaterial(bundle: Bundle | null, textureId: string | undefined, tint?: string, glass = false): Material {
+  return useMemo(() => getMaterial(bundle, textureId, tint, glass), [bundle, textureId, tint, glass]);
 }

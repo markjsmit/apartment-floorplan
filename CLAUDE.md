@@ -13,7 +13,7 @@ Spec: `docs/superpowers/specs/2026-10-23-apartment-designer-design.md`.
 2. **Read `.ui-state/ui-state.json`** (`npm run -s ui -- state`) before answering anything about "this", "that",
    "it", "here". It has the open room + version, the selection (id, kind, part, name, tags), camera (position cm,
    yaw/pitch, `facing` compass), **`lookingAt`** (what's under the crosshair: id, kind, part, name, hit `point`,
-   `distance` cm), person, `mood` (light: afternoon / golden / night) and the view-only furniture states. "What I'm looking at" = `lookingAt`;
+   `distance` cm), person, `mood` (daylight: afternoon / golden / night), `lightMode` (lamps, whole house: off / cozy / work) and the view-only furniture states. "What I'm looking at" = `lookingAt`;
    "this" = `selection` if set, else `lookingAt`. **`measurement`** (when Mark uses 📏 Measure): `from`/`to` surfaces
    (id, name), `axis` (x, y = height, z) and `distanceCm`, measured straight out from the first surface along one
    axis — or `axis: "free"` = straight line between the two clicked spots (Angled mode — F key or button — or two spots on one wall/floor). `.ui-state/events.log` has recent clicks/tab switches.
@@ -40,7 +40,7 @@ Ids: items/openings by id, walls `<room>.wall-<n>` (or their stored id), `<room>
 
 ## Seeing what he sees
 
-`npm run -s snap -- <room> [version] [--cam x,z,yaw,pitch] [--top] [--person heli] [--mood golden] [--states storage.door:open]` → prints a PNG
+`npm run -s snap -- <room> [version] [--cam x,z,yaw,pitch] [--top] [--person heli] [--mood golden] [--lights cozy] [--states storage.door:open]` → prints a PNG
 path; read it. Use it to check your own edits and to brainstorm ("from the door it looks like…").
 `--cam` is in that room's own coordinates (like ui-state): yaw 0 looks towards the room's -z, positive yaw turns
 left. Doesn't touch Mark's ui-state.
@@ -116,6 +116,9 @@ Ids are globally unique and room-prefixed: `bedroom.kallax-1`, `storage.door`.
 
 ## Assets
 
+- Lamps: parts with `emit` (`point` = a lamp, `area` = LED strip, `glow` = glows only) have a `role`: `functional`
+  (ceiling, task, reading; on in 💡 Work) or `decorative` (🕯️ Cozy + Work). An item's `light: "decorative"` overrides it
+  (the arc floor lamp). Cozy lights so far: `table-lamp`, `string-lights`, `led-strip` with `role`; `candles` never light.
 - Furniture: `assets/furniture/<id>/asset.json` — `parts` (box/cylinder/plane, position = geometry centre in item
   space, optional `pivot` hinge), `states` (per-part rotation/position/visible/material overrides), `defaultState`,
   `interactions` (`{part, action: "cycleStates"}` — double-clicking that part cycles states; other parts don't),

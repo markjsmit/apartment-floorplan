@@ -1,0 +1,43 @@
+{
+  "id": "string-lights",
+  "name": "String lights",
+  "tags": [
+    "string lights",
+    "fairy lights",
+    "festoon lights",
+    "decorative light",
+    "cozy light",
+    "light"
+  ],
+  "description": "Warm festoon string lights hanging in a shallow sag between two points (origin = left end, runs along +x). Bulbs glow; one light in the middle lights the space. Decorative.",
+  "source": {
+    "kind": "procedural",
+    "generator": "string-lights",
+    "license": "self-made",
+    "notes": "src/model/generators/lights.ts - outdoor festoon string (e.g. IKEA SOLVINDEN-style), plugged into an outdoor socket."
+  },
+  "params": {
+    "length": {
+      "default": 300,
+      "description": "cm"
+    },
+    "sag": {
+      "default": 15,
+      "description": "cm in the middle"
+    },
+    "bulbs": {
+      "default": 10
+    },
+    "bulbSize": {
+      "default": 3,
+      "description": "bulb radius, cm"
+    },
+    "color": {
+      "default": "#ffc98a",
+      "description": "light colour"
+    },
+    "intensity": {
+      "default": 6000
+    }
+  }
+}

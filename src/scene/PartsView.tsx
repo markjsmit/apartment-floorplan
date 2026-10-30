@@ -10,6 +10,7 @@ import { partGeometry } from './cmGeometry';
 import { getMaterial } from './materials';
 import { registerObject } from './registry';
 import { clickAction, isPhone } from './clickAction';
+import { lampOn, type LightMode } from '../model/lights';
 import { libUrl } from '../data/client';
 import labelFont from '../../assets/fonts/inter-latin-600-normal.woff?url';
 import { RectAreaLightUniformsLib } from 'three/examples/jsm/lights/RectAreaLightUniformsLib.js';
@@ -29,33 +30,26 @@ type Props = {
   position: Vec3;
   rotationDeg: number;
   selectWhole: boolean;
-  /** the lights of the room it stands in: lamp parts glow, and double-clicking one switches the room's lights */
-  roomId: string;
-  lightsOn: boolean;
-  /** daylight reaching the room (see roomDaylight) */
-  daylight: number;
+  /** the house's light mode: lamp parts glow when their role is on (lampOn) */
+  lightMode: LightMode;
 };
 
 /** A placed asset (furniture item or door/window): parts animate between states. Click selects (a big piece's section
  *  first, a second click the whole), double-click changes the state the clicked part belongs to. */
-export function PartsView({ id, kind, asset, parts, stateId, position, rotationDeg, selectWhole, roomId, lightsOn, daylight }: Props) {
+export function PartsView({ id, kind, asset, parts, stateId, position, rotationDeg, selectWhole, lightMode }: Props) {
   const select = useStore((s) => s.select);
   const cycleState = useStore((s) => s.cycleState);
-  const toggleRoomLights = useStore((s) => s.toggleRoomLights);
   const toggleSection = useStore((s) => s.toggleSection);
   const itemStates = useStore((s) => s.itemStates);
   const state = findState(asset, stateId);
   const sectionOpen = (p: Part) => !!p.section && itemStates[`${id}#${p.section}`] === 'open';
-  const lamp = (part: string) => !!parts.find((p) => p.id === part)?.emit;
-  // a lamp's glowing part is a light switch; anything else with an interaction changes state
   const opensAlone = (part: string) => parts.find((p) => p.id === part)?.open && sectionOf(part);
   const act = (part: string) => {
-    if (lamp(part)) return toggleRoomLights(lightsOn, roomId);
     const alone = opensAlone(part);
     if (alone) return toggleSection(id, alone);
     cycleState(id, part);
   };
-  const interactive = (part: string) => interactivePart(asset, part) || lamp(part) || !!opensAlone(part);
+  const interactive = (part: string) => interactivePart(asset, part) || !!opensAlone(part);
   const sectionOf = (part: string) => parts.find((p) => p.id === part)?.section ?? null;
 
   const onClick = (part: string) => (e: ThreeEvent<MouseEvent>) => {
@@ -89,8 +83,7 @@ export function PartsView({ id, kind, asset, parts, stateId, position, rotationD
           part={p}
           pose={partTransform(p, state?.parts[p.id] ?? (sectionOpen(p) ? p.open : undefined))}
           interactive={interactive(p.id)}
-          lightsOn={lightsOn}
-          daylight={daylight}
+          lightMode={lightMode}
           registerAsPart={!selectWhole}
           onClick={onClick(p.id)}
           onDoubleClick={onDoubleClick(p.id)}
@@ -100,10 +93,9 @@ export function PartsView({ id, kind, asset, parts, stateId, position, rotationD
   );
 }
 
-function PartMesh({ ownerId, kind, part, pose, interactive, lightsOn, daylight, registerAsPart, onClick, onDoubleClick }: {
+function PartMesh({ ownerId, kind, part, pose, interactive, lightMode, registerAsPart, onClick, onDoubleClick }: {
   ownerId: string;
-  lightsOn: boolean;
-  daylight: number;
+  lightMode: LightMode;
   kind: SelectionKind;
   part: Part;
   pose: ReturnType<typeof partTransform>;
@@ -155,8 +147,9 @@ function PartMesh({ ownerId, kind, part, pose, interactive, lightsOn, daylight, 
       </group>
     );
   }
-  const base = getMaterial(bundle, part.material ?? (part.glass ? 'glass' : undefined), part.color, part.glass, daylight);
-  const material = part.emit ? emissive(base, part.emit.color, lightsOn) : base;
+  const base = getMaterial(bundle, part.material ?? (part.glass ? 'glass' : undefined), part.color, part.glass);
+  const lit = !!part.emit && lampOn(part.emit.role, lightMode);
+  const material = part.emit ? emissive(base, part.emit.color, lit) : base;
   return (
     <mesh
       ref={(m) => {
@@ -181,7 +174,7 @@ function PartMesh({ ownerId, kind, part, pose, interactive, lightsOn, daylight, 
         // always mounted, dark when off: a changing number of lights would recompile every shader
         <rectAreaLight
           args={[part.emit.color, 0, part.geometry.size[0], part.geometry.size[2]]}
-          intensity={lightsOn ? part.emit.intensity : 0}
+          intensity={lit ? part.emit.intensity : 0}
           position={[0, -part.geometry.size[1] / 2 - 0.05, 0]}
           rotation={[-Math.PI / 2, 0, 0]}
         />

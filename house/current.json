@@ -1002,7 +1002,8 @@
             0,
             175
           ],
-          "rotation": 90
+          "rotation": 90,
+          "light": "decorative"
         },
         {
           "id": "living.corner-shelves",
@@ -2033,6 +2034,63 @@
             "living.pillar-print",
             "living.curtain-balcony"
           ]
+        },
+        {
+          "id": "living.console-led",
+          "asset": "led-strip",
+          "params": {
+            "length": 190,
+            "axis": "x",
+            "role": "decorative",
+            "intensity": 5,
+            "color": "#ffd2a0"
+          },
+          "position": [
+            161.5,
+            82.5,
+            172
+          ],
+          "rotation": -90,
+          "allowOverlap": [
+            "living.sofa-console"
+          ],
+          "name": "Warm LED strip under the sofa console top, lighting the books on the lower shelf (cozy light, plugs in behind the sofa)"
+        },
+        {
+          "id": "living.corner-globe",
+          "asset": "table-lamp",
+          "params": {
+            "shape": "globe",
+            "diameter": 35,
+            "color": "#f6efe4",
+            "baseColor": "#c49c68",
+            "intensity": 3500
+          },
+          "position": [
+            560,
+            0,
+            26
+          ],
+          "rotation": 0,
+          "name": "Opal glass globe lamp on the floor in the TV corner (cozy light, TV-wall outlet)"
+        },
+        {
+          "id": "living.coffee-candles",
+          "asset": "candles",
+          "params": {
+            "count": 3,
+            "tray": true
+          },
+          "position": [
+            388,
+            45,
+            108
+          ],
+          "rotation": 0,
+          "allowOverlap": [
+            "living.coffee-table"
+          ],
+          "name": "Three cream pillar candles on an oak tray (decoration, never lit)"
         }
       ],
       "assumptions": [
@@ -2557,6 +2615,33 @@
             "cushionColor": "#a65a3d",
             "pillows": "#7d8450"
           }
+        },
+        {
+          "id": "balcony.wall-light",
+          "asset": "wall-lantern",
+          "params": {},
+          "against": {
+            "wall": "balcony.wall-2",
+            "offset": 145,
+            "elevation": 200
+          },
+          "name": "Black outdoor wall light between the window and the balcony door"
+        },
+        {
+          "id": "balcony.string-lights",
+          "asset": "string-lights",
+          "params": {
+            "length": 505,
+            "sag": 25,
+            "bulbs": 14
+          },
+          "position": [
+            15,
+            255,
+            -195
+          ],
+          "rotation": 0,
+          "name": "Warm festoon string lights along the front edge of the balcony ceiling (cozy light, outdoor socket)"
         }
       ],
       "assumptions": [
@@ -3054,6 +3139,27 @@
           "allowOverlap": [
             "hallway.niche-low"
           ]
+        },
+        {
+          "id": "hallway.niche-led",
+          "asset": "led-strip",
+          "params": {
+            "length": 72,
+            "axis": "x",
+            "role": "decorative",
+            "intensity": 4,
+            "color": "#ffd2a0"
+          },
+          "against": {
+            "wall": "hallway.wall-4",
+            "offset": 5,
+            "elevation": 196,
+            "gap": 28
+          },
+          "allowOverlap": [
+            "hallway.niche-high"
+          ],
+          "name": "Warm LED strip under the niche's top cabinet, lighting the print and the vase (cozy light)"
         }
       ],
       "assumptions": [
@@ -4349,6 +4455,27 @@
             "color": "#3f4a3c",
             "seed": "bp2"
           }
+        },
+        {
+          "id": "storage.bed-frame-led",
+          "asset": "led-strip",
+          "params": {
+            "length": 84,
+            "axis": "x",
+            "role": "decorative",
+            "intensity": 5,
+            "color": "#ffd2a0"
+          },
+          "against": {
+            "wall": "storage.wall-1",
+            "offset": 5,
+            "elevation": 224,
+            "gap": 33
+          },
+          "allowOverlap": [
+            "storage.wall-bed"
+          ],
+          "name": "Warm LED strip under the top of the wall-bed frame, a cozy light over the guest bed"
         }
       ],
       "assumptions": [
@@ -4631,6 +4758,45 @@
             "mixerSide": "right"
           },
           "builtIn": true
+        },
+        {
+          "id": "bathroom.mirror-led",
+          "asset": "led-strip",
+          "params": {
+            "length": 70,
+            "axis": "x",
+            "role": "decorative",
+            "intensity": 4,
+            "color": "#ffd2a0"
+          },
+          "against": {
+            "wall": "bathroom.wall-1",
+            "offset": 5,
+            "elevation": 122,
+            "gap": 12
+          },
+          "allowOverlap": [
+            "bathroom.mirror-cabinet"
+          ],
+          "name": "Warm LED strip under the mirror cabinet, a soft glow over the basin (cozy light, wired with the mirror cabinet)"
+        },
+        {
+          "id": "bathroom.ledge-candles",
+          "asset": "candles",
+          "params": {
+            "count": 2,
+            "tray": false
+          },
+          "against": {
+            "wall": "bathroom.wall-6",
+            "offset": 178,
+            "elevation": 115,
+            "gap": 4
+          },
+          "allowOverlap": [
+            "bathroom.ledge"
+          ],
+          "name": "Two pillar candles on the ledge by the bath (decoration, never lit)"
         }
       ],
       "assumptions": [
@@ -5483,6 +5649,47 @@
             "elevation": 60,
             "gap": 6
           }
+        },
+        {
+          "id": "bedroom.ceiling-light",
+          "asset": "surface-light",
+          "params": {
+            "diameter": 40,
+            "intensity": 20000
+          },
+          "position": [
+            1072,
+            277,
+            200
+          ],
+          "rotation": 0,
+          "name": "Ceiling light (flush LED, Ø40) in the middle of the bedroom",
+          "assumptions": [
+            {
+              "path": "position",
+              "note": "Light point not surveyed: assumed in the middle of the room."
+            }
+          ]
+        },
+        {
+          "id": "bedroom.nightstand-lamp",
+          "asset": "table-lamp",
+          "params": {
+            "shape": "mushroom",
+            "height": 32,
+            "diameter": 24,
+            "color": "#f3ebdc"
+          },
+          "against": {
+            "wall": "bedroom.wall-14",
+            "offset": 19,
+            "elevation": 60,
+            "gap": 10
+          },
+          "allowOverlap": [
+            "bedroom.nightstand-2"
+          ],
+          "name": "Mushroom table lamp on the nightstand (cozy light, bedside outlet)"
         }
       ],
       "assumptions": [

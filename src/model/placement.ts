@@ -18,7 +18,9 @@ const DEG = Math.PI / 180;
 
 export function placeItem(item: Item, rawAsset: FurnitureAsset, walls: WallInfo[], uiState?: string): PlacedItem {
   const asset = resolveAsset(rawAsset, resolveParams(rawAsset, item));
-  const parts = asset.parts;
+  // the item says what kind of light its lamps are (a floor lamp as cozy decoration, say)
+  const light = item.light;
+  const parts = light ? asset.parts.map((p) => (p.emit ? { ...p, emit: { ...p.emit, role: light } } : p)) : asset.parts;
   const stateId = initialState(asset, item, uiState);
   const size = assetSize(parts, findState(asset, stateId));
   // `against` placement uses the item's default-state width so toggling states doesn't slide it along the wall

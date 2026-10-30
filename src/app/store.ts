@@ -8,6 +8,7 @@ import { initialState, nextState, openingParams, resolveAsset, resolveParams } f
 import { baseVersionId, composeHouse } from '../model/roomVersions';
 import type { CameraPose, Person, View } from './url';
 import type { Mood } from '../scene/sun';
+import type { LightMode } from '../model/lights';
 
 export const EYE_HEIGHT: Record<Person, number> = { mark: 188, heli: 151 };
 
@@ -28,7 +29,8 @@ type State = {
   /** View-only furniture states (bed up/down) toggled by double-click; keyed by item/opening id. */
   itemStates: Record<string, string>;
   /** View-only room lights switched by hand (💡, double-click a lamp); rooms not listed follow the sun (on after dark). */
-  roomLights: Record<string, boolean>;
+  /** One switch for the whole house (Mark: opens in work mode). */
+  lightMode: LightMode;
   person: Person;
   view: View;
   /** Phone ☰ menu "Select" switch: a tap selects + shows the info panel instead of opening/closing. */
@@ -63,7 +65,7 @@ type Actions = {
   /** next state of an item/door; `part` = the double-clicked part (its interaction may limit the states) */
   cycleState: (id: string, part?: string) => void;
   /** switch a room's lights (default: the open room) to the opposite of `currentlyOn` */
-  toggleRoomLights: (currentlyOn: boolean, roomId?: string) => void;
+  setLightMode: (m: LightMode) => void;
   setPerson: (p: Person) => void;
   setView: (v: View) => void;
   setTapSelects: (on: boolean) => void;
@@ -101,7 +103,7 @@ export const useStore = create<State & Actions>((set, get) => ({
   house: null,
   selection: null,
   itemStates: {},
-  roomLights: {},
+  lightMode: 'work',
   person: 'mark',
   view: 'first-person',
   tapSelects: false,
@@ -194,10 +196,7 @@ export const useStore = create<State & Actions>((set, get) => ({
     const current = initialState(asset, ref, itemStates[id]);
     set({ itemStates: { ...itemStates, [id]: nextState(asset, current, part) } });
   },
-  toggleRoomLights: (currentlyOn, roomId) => {
-    const room = roomId ?? get().roomId;
-    if (room) set({ roomLights: { ...get().roomLights, [room]: !currentlyOn } });
-  },
+  setLightMode: (lightMode) => set({ lightMode }),
   setPerson: (person) => set({ person }),
   setView: (view) => set({ view }),
   setTapSelects: (tapSelects) => set(tapSelects ? { tapSelects } : { tapSelects, selection: null }),

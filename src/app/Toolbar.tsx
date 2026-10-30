@@ -3,8 +3,8 @@ import { shareUrl } from './url';
 import { ignoresKeys } from '../scene/input';
 import { useStore } from './store';
 import { useMeasure } from './measureStore';
-import { useRoomLightsOn } from '../scene/useLightsOn';
-import { MoodSwitch } from './MoodSwitch';
+import { LightModeSwitch, MoodSwitch } from './LightSwitches';
+import { LIGHT_MODES } from '../model/lights';
 
 /** Copies a link to the open room + version (and the other rooms' choices). */
 export async function share() {
@@ -26,16 +26,17 @@ export function Toolbar() {
   const s = useStore();
   const measuring = useMeasure((m) => m.active);
   const toggleMeasure = useMeasure((m) => m.toggle);
-  const lightsOn = useRoomLightsOn(s.roomId);
-  // L switches the open room's lights
+  // L steps through the light modes: off → cozy → work
   useEffect(() => {
     const key = (e: KeyboardEvent) => {
       if (ignoresKeys(e.target as HTMLInputElement) || e.metaKey || e.ctrlKey || e.code !== 'KeyL') return;
-      useStore.getState().toggleRoomLights(lightsOn);
+      const st = useStore.getState();
+      const i = LIGHT_MODES.findIndex((m) => m.id === st.lightMode);
+      st.setLightMode(LIGHT_MODES[(i + 1) % LIGHT_MODES.length].id);
     };
     window.addEventListener('keydown', key);
     return () => window.removeEventListener('keydown', key);
-  }, [lightsOn]);
+  }, []);
   return (
     <div className="toolbar">
       <div className="seg">
@@ -46,7 +47,7 @@ export function Toolbar() {
         {s.view === 'top-down' ? '👁 Walk' : '🗺 Top'}
       </button>
       <MoodSwitch labels />
-      <button className={lightsOn ? 'on' : ''} onClick={() => s.toggleRoomLights(lightsOn)} title="This room's lights on/off (L) — or double-click a lamp">💡 Lights</button>
+      <LightModeSwitch labels />
       <button className={measuring ? 'on' : ''} onClick={toggleMeasure} title="Measure between two surfaces (M)">📏 Measure</button>
       <button onClick={share}>🔗 Share</button>
     </div>

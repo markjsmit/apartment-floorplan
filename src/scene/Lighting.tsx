@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef } from 'react';
+import { useCallback, useEffect, useMemo, useRef } from 'react';
 import { useFrame, useThree } from '@react-three/fiber';
 import { Environment, Lightformer, Sky } from '@react-three/drei';
 import { Color, type DirectionalLight, type Material } from 'three';
@@ -8,12 +8,12 @@ import { polygonCentroid, roomBounds } from '../model/geometry';
 import { currentHouse, currentLayout, useStore } from '../app/store';
 import { resolveWalls } from '../model/geometry';
 import { placeRoomItems } from '../model/placement';
-import { assignLampSlots, roomLamps, roomLightOn } from '../model/lights';
+import { assignLampSlots, lampOn, roomLamps, type Lamp, type LightMode } from '../model/lights';
 import { sunForMood } from './sun';
 import { Outside } from './Outside';
 
 
-/** Sun through the windows (fixed per mood: afternoon / golden hour / night), soft fill for bounced light, the room lights (💡). */
+/** Sun through the windows (fixed per mood: afternoon / golden hour / night), soft fill for bounced light, the lamps (light mode). */
 /** `room` is the whole house frame (bounds, tallest ceiling, north, one lamp per room). */
 export function Lighting({ room, mobile }: { room: HouseFrame; mobile: boolean }) {
   const mood = useStore((s) => s.mood);
@@ -37,7 +37,12 @@ export function Lighting({ room, mobile }: { room: HouseFrame; mobile: boolean }
   // warmer and weaker near the horizon
   const sunColor = useMemo(() => new Color().setHSL(0.09, 0.9, 0.55 + 0.4 * Math.min(1, elevation / 0.6)), [elevation]);
   const sunIntensity = dir ? 2.2 + 3.5 * Math.min(1, elevation / 0.5) : 0;
-  const daylight = dir ? Math.min(1, 0.25 + elevation * 1.5) : 0.04;
+  // sky + bounce fill; at night (no sun) nothing
+  const daylight = dir ? Math.min(1, 0.25 + elevation * 1.5) : 0;
+  // the lamps' bounce, faked: the same everywhere in the house (no seams at doorways), warm in cozy, bright in work -
+  // the lamps themselves only add pools of light (Mark: a tool, not a render; work mode should really light the house)
+  const mode = useStore((s) => s.lightMode);
+  const lampFill = LAMP_FILL[mode];
 
   const dist = radius * 3;
   const sunPos: [number, number, number] = dir ? [cx + dir[0] * dist, dir[1] * dist, cz + dir[2] * dist] : [cx, -dist, cz];
@@ -64,10 +69,11 @@ export function Lighting({ room, mobile }: { room: HouseFrame; mobile: boolean }
   const itemStates = useStore((s) => s.itemStates);
   const view = useStore((s) => s.view);
   const shadowFrames = useRef(0);
+  // a few frames: parts ease into a new state over ~0.3 s and textures/meshes mount a moment after a reload
+  const redrawShadows = useCallback(() => { shadowFrames.current = 45; }, []);
   useEffect(() => {
     gl.shadowMap.autoUpdate = false;
-    // a few frames: parts ease into a new state over ~0.3 s and textures/meshes mount a moment after a reload
-    shadowFrames.current = 45;
+    redrawShadows();
   }, [gl, house, itemStates, view, sunPos[0], sunPos[1], sunPos[2]]);
   useFrame(() => {
     if (shadowFrames.current <= 0) return;
@@ -89,10 +95,11 @@ export function Lighting({ room, mobile }: { room: HouseFrame; mobile: boolean }
         shadow-normalBias={1.5}
       />
       {/* bounced daylight; rooms are closed boxes so this stands in for light coming off the floor and walls */}
-      <hemisphereLight args={['#f3f6fa', '#e6e3dc', 1.7 * daylight + 0.45 * Math.min(1, daylight * 4) + 0.1]} />
-      <ambientLight intensity={0.3 * daylight + 0.04} />
-      <RoomLamps slots={mobile ? 2 : 6} />
-      <Environment resolution={64} environmentIntensity={0.45 * daylight + 0.06}>
+      <hemisphereLight args={['#f3f6fa', '#e6e3dc', 1.7 * daylight + 0.45 * Math.min(1, daylight * 4) + 0.1 * Math.min(1, daylight * 10) + 0.015]} />
+      <ambientLight intensity={0.3 * daylight + 0.005} />
+      <hemisphereLight args={[lampFill.sky, lampFill.ground, lampFill.intensity]} />
+      <RoomLamps slots={mobile ? 2 : 6} shadows={!mobile} onChange={redrawShadows} />
+      <Environment resolution={64} environmentIntensity={0.45 * daylight + 0.06 * Math.min(1, daylight * 10) + 0.25 * lampFill.intensity + 0.01}>
         <Lightformer form="rect" intensity={2} position={[0, 5, 0]} scale={[10, 10, 1]} rotation={[Math.PI / 2, 0, 0]} />
         <Lightformer form="rect" intensity={0.6} position={[5, 1, 0]} scale={[10, 3, 1]} rotation={[0, -Math.PI / 2, 0]} color="#ffeedd" />
         <Lightformer form="rect" intensity={0.4} position={[-5, 1, 0]} scale={[10, 3, 1]} rotation={[0, Math.PI / 2, 0]} />
@@ -105,16 +112,28 @@ export function Lighting({ room, mobile }: { room: HouseFrame; mobile: boolean }
 
 const IDENTITY = { x: 0, z: 0, rotationDeg: 0 };
 
+const LAMP_FILL: Record<LightMode, { sky: string; ground: string; intensity: number }> = {
+  off: { sky: '#000000', ground: '#000000', intensity: 0 },
+  cozy: { sky: '#ffd9ae', ground: '#e8c49a', intensity: 0.9 },
+  work: { sky: '#fff3e2', ground: '#efe6d8', intensity: 1.7 },
+};
+
 /**
  * The room lights: a fixed pool of point lights (dark when unused) given to the lit lamps of the open room first,
  * then the nearest. Fixed, because adding or removing a light makes three.js recompile every shader (a stutter).
+ * Only the nearest casts shadows (point-light shadows are 6 renders each and slow every frame - Mark saw the frame
+ * rate drop with all of them); the rest fade out after ~8 m so they don't light rooms far behind walls. Like the
+ * sun's, the shadow map is only redrawn when something changes (`onChange`).
  */
-function RoomLamps({ slots }: { slots: number }) {
+function RoomLamps({ slots, shadows, onChange }: { slots: number; shadows: boolean; onChange: () => void }) {
   const house = useStore(currentHouse);
   const layout = useStore(currentLayout);
   const bundle = useStore((s) => s.bundle);
-  const roomId = useStore((s) => s.roomId);
-  const overrides = useStore((s) => s.roomLights);
+  const mode = useStore((s) => s.lightMode);
+  // where you stand, to the metre (re-picking the lights every frame would redraw their shadows all the time)
+  const fx = useStore((s) => Math.round(s.camera.x / 100));
+  const fz = useStore((s) => Math.round(s.camera.z / 100));
+  const prev = useRef<(Lamp | undefined)[]>([]);
   const lamps = useMemo(
     () => (house && layout && bundle
       ? house.rooms.flatMap((r) => roomLamps(r, placeRoomItems(r, bundle.furniture, resolveWalls(r)), layout.placements[r.id] ?? IDENTITY))
@@ -122,10 +141,11 @@ function RoomLamps({ slots }: { slots: number }) {
     [house, layout, bundle],
   );
   const lit = useMemo(() => {
-    const own = lamps.filter((l) => l.room === roomId);
-    const from: [number, number] = own.length ? [own[0].position[0], own[0].position[2]] : [0, 0];
-    return assignLampSlots(lamps, (r) => roomLightOn(overrides, r), roomId, from, slots);
-  }, [lamps, overrides, roomId, slots]);
+    const next = assignLampSlots(lamps, (l) => lampOn(l.role, mode), [fx * 100, fz * 100], slots, prev.current);
+    prev.current = next;
+    return next;
+  }, [lamps, mode, fx, fz, slots]);
+  useEffect(onChange, [lit, onChange]);
   return (
     <>
       {Array.from({ length: slots }, (_, i) => {
@@ -136,8 +156,14 @@ function RoomLamps({ slots }: { slots: number }) {
             position={l?.position ?? [0, -1000, 0]}
             intensity={l?.intensity ?? 0}
             color={l?.color ?? '#ffffff'}
-            distance={0}
+            distance={800}
             decay={2}
+            castShadow={shadows && i === 0}
+            shadow-mapSize={[512, 512]}
+            shadow-bias={-0.002}
+            shadow-normalBias={1}
+            shadow-camera-near={3}
+            shadow-camera-far={2000}
           />
         );
       })}

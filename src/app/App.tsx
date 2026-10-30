@@ -9,7 +9,7 @@ import { Tabs } from './Tabs';
 import { Toolbar } from './Toolbar';
 import { PersonSwitch, TouchControls } from './TouchControls';
 import { PhoneMenu } from './PhoneMenu';
-import { MoodSwitch } from './MoodSwitch';
+import { LightModeSwitch, MoodSwitch } from './LightSwitches';
 import { useDevLink } from './useDevLink';
 import { useIsMobile, useIsTouch } from './useIsMobile';
 import { composeHouse } from '../model/roomVersions';
@@ -38,6 +38,7 @@ export function App() {
           ...(u.view ? { view: u.view } : {}),
           ...(u.person ? { person: u.person } : {}),
           ...(u.mood ? { mood: u.mood } : {}),
+          ...(u.lights ? { lightMode: u.lights } : {}),
           ...(u.itemStates ? { itemStates: u.itemStates } : {}),
           // cam= in a link is in the room's own coordinates
           ...(u.camera ? { camera: poseFromRoom({ house: composeHouse(b, u.roomVersions) }, u.roomId, u.camera) } : {}),
@@ -87,6 +88,7 @@ export function App() {
       {!mobile && <Tabs showVersions />}
       {mobile && <PersonSwitch />}
       {mobile && <MoodSwitch className="time-switch" labels={false} />}
+      {mobile && <LightModeSwitch className="time-switch lamps" labels={false} />}
       {mobile && <PhoneMenu />}
       {!mobile && <Toolbar />}
       {!mobile && <Hud />}
@@ -96,7 +98,7 @@ export function App() {
       <Banner />
       {touch && <TouchControls />}
       {!mobile && !touch && (
-        <div className="help">↑↓ walk · ←→ turn · W A S D walk + step sideways · two-finger swipe / E C look · middle-click mouse look ·click select · double-click change state · M measure (F angled) · L lights · Esc deselect</div>
+        <div className="help">↑↓ walk · ←→ turn · W A S D walk + step sideways · two-finger swipe / E C look · middle-click mouse look ·click select · double-click change state · M measure (F angled) · L light mode · Esc deselect</div>
       )}
       {!bundle && <div className="loading">Loading…</div>}
     </div>

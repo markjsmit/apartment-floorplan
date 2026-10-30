@@ -13,8 +13,6 @@ import { registerObject } from './registry';
 import { PartsView } from './PartsView';
 import { clickAction, isPhone } from './clickAction';
 import { RoomTrim } from './Trim';
-import { useRoomLightsOn } from './useLightsOn';
-import { roomDaylight } from '../model/lights';
 
 const CLICK_SLOP = 6;
 
@@ -31,8 +29,7 @@ export function RoomView({ room, placement, hiddenAssets, showCeiling, shade }: 
   const bundle = useStore((s) => s.bundle);
   const itemStates = useStore((s) => s.itemStates);
   const select = useStore((s) => s.select);
-  const lightsOn = useRoomLightsOn(room.id);
-  const daylight = useMemo(() => roomDaylight(room), [room]);
+  const lightMode = useStore((s) => s.lightMode);
   const walls = useMemo(() => resolveWalls(room), [room]);
   const bounds = roomBounds(room);
   const placed = useMemo(() => (bundle ? placeRoomItems(room, bundle.furniture, walls, itemStates) : []), [room, bundle, walls, itemStates]);
@@ -49,7 +46,7 @@ export function RoomView({ room, placement, hiddenAssets, showCeiling, shade }: 
         ref={registerObject(`${room.id}.floor`)}
         geometry={footprintGeometry(room.footprint, true)}
         rotation={[-Math.PI / 2, 0, 0]}
-        material={getMaterial(bundle, room.floor.material, undefined, false, daylight)}
+        material={getMaterial(bundle, room.floor.material)}
         receiveShadow
         userData={{ selectable: { kind: 'floor', id: `${room.id}.floor`, part: null } }}
         onClick={pick({ kind: 'floor', id: `${room.id}.floor`, part: null })}
@@ -59,7 +56,7 @@ export function RoomView({ room, placement, hiddenAssets, showCeiling, shade }: 
         geometry={footprintGeometry(room.footprint, false)}
         rotation={[Math.PI / 2, 0, 0]}
         position={[0, room.ceilingHeight, 0]}
-        material={getMaterial(bundle, room.ceiling.material, undefined, false, daylight)}
+        material={getMaterial(bundle, room.ceiling.material)}
         visible={showCeiling}
         castShadow
         receiveShadow
@@ -73,7 +70,7 @@ export function RoomView({ room, placement, hiddenAssets, showCeiling, shade }: 
           geometry={prismGeometry(z.footprint, room.ceilingHeight - z.height + 1)}
           rotation={[Math.PI / 2, 0, 0]}
           position={[0, room.ceilingHeight + 1, 0]}
-          material={getMaterial(bundle, room.ceiling.material, undefined, false, daylight)}
+          material={getMaterial(bundle, room.ceiling.material)}
           visible={showCeiling}
           castShadow
           receiveShadow
@@ -114,7 +111,7 @@ export function RoomView({ room, placement, hiddenAssets, showCeiling, shade }: 
                 <mesh
                   key={`${r.u0}-${r.y0}`}
                   geometry={boxWithCmUV(r.u1 - r.u0, r.y1 - r.y0, tb, [r.u0, r.y0])}
-                  material={getMaterial(bundle, w.material, undefined, false, daylight)}
+                  material={getMaterial(bundle, w.material)}
                   position={[x, (r.y0 + r.y1) / 2, z]}
                   rotation={[0, yaw, 0]}
                   castShadow
@@ -126,7 +123,7 @@ export function RoomView({ room, placement, hiddenAssets, showCeiling, shade }: 
         );
       })}
 
-      <RoomTrim room={room} walls={walls} bundle={bundle} showCeiling={showCeiling} shade={shade} daylight={daylight} />
+      <RoomTrim room={room} walls={walls} bundle={bundle} showCeiling={showCeiling} shade={shade} />
 
       {/* floor through doorways: each room covers its half of the wall's thickness (the whole of it when nothing's
           on the other side), so you never look down through the gap between two rooms */}
@@ -139,7 +136,7 @@ export function RoomView({ room, placement, hiddenAssets, showCeiling, shade }: 
           <mesh
             key={`${o.id}-threshold`}
             geometry={boxWithCmUV(o.width, 0.2, depth)}
-            material={getMaterial(bundle, room.floor.material, undefined, false, daylight)}
+            material={getMaterial(bundle, room.floor.material)}
             position={[w.start[0] + w.dir[0] * u - w.inward[0] * (depth / 2), -0.1, w.start[1] + w.dir[1] * u - w.inward[1] * (depth / 2)]}
             rotation={[0, Math.atan2(-w.dir[1], w.dir[0]), 0]}
             receiveShadow
@@ -165,9 +162,7 @@ export function RoomView({ room, placement, hiddenAssets, showCeiling, shade }: 
             position={[w.start[0] + w.dir[0] * u, o.sill, w.start[1] + w.dir[1] * u]}
             rotationDeg={(Math.atan2(w.inward[0], w.inward[1]) * 180) / Math.PI}
             selectWhole
-            roomId={room.id}
-            lightsOn={lightsOn}
-            daylight={daylight}
+            lightMode={lightMode}
           />
         );
       })}
@@ -183,9 +178,7 @@ export function RoomView({ room, placement, hiddenAssets, showCeiling, shade }: 
           position={p.position}
           rotationDeg={p.rotationDeg}
           selectWhole={p.item.selectWhole}
-          roomId={room.id}
-          lightsOn={lightsOn}
-          daylight={daylight}
+          lightMode={lightMode}
         />
       ))}
     </group>

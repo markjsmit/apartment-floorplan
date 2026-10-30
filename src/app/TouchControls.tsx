@@ -1,6 +1,5 @@
 import { held, type MoveKey } from '../scene/input';
 import { useStore } from './store';
-import { useRoomLightsOn } from '../scene/useLightsOn';
 
 function HoldButton({ k, className, label }: { k: MoveKey; className: string; label: string }) {
   const on = (e: React.PointerEvent) => {
@@ -38,14 +37,10 @@ export function TouchControls() {
 export function PersonSwitch() {
   const person = useStore((s) => s.person);
   const setPerson = useStore((s) => s.setPerson);
-  const toggleRoomLights = useStore((s) => s.toggleRoomLights);
-  const lightsOn = useRoomLightsOn();
   return (
     <div className="seg person-switch">
       <button className={person === 'mark' ? 'on' : ''} onClick={() => setPerson('mark')}>Mark</button>
       <button className={person === 'heli' ? 'on' : ''} onClick={() => setPerson('heli')}>Heli</button>
-      {/* the lights of the room you're standing in */}
-      <button className={lightsOn ? 'on' : ''} onClick={() => toggleRoomLights(lightsOn)} aria-label="Room lights">💡</button>
     </div>
   );
 }

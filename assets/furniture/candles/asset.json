@@ -1,0 +1,28 @@
+{
+  "id": "candles",
+  "name": "Pillar candles",
+  "tags": [
+    "candles",
+    "candle",
+    "decor"
+  ],
+  "description": "1-3 cream pillar candles, optionally on a round oak tray. Decoration only (never lit). Origin = bottom-centre on the surface.",
+  "source": {
+    "kind": "procedural",
+    "generator": "candles",
+    "license": "self-made",
+    "notes": "src/model/generators/lights.ts"
+  },
+  "params": {
+    "count": {
+      "default": 3,
+      "description": "1-3"
+    },
+    "color": {
+      "default": "#f4eee2"
+    },
+    "tray": {
+      "default": true
+    }
+  }
+}

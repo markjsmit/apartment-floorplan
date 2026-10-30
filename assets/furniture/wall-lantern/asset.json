@@ -1,0 +1,27 @@
+{
+  "id": "wall-lantern",
+  "name": "Outdoor wall light",
+  "tags": [
+    "wall light",
+    "outdoor light",
+    "balcony light",
+    "lamp",
+    "light"
+  ],
+  "description": "Black IP44 cylinder wall light, lights downwards. Functional (on in 💡 Work). Origin = back-centre on the wall at the fixture's bottom.",
+  "source": {
+    "kind": "procedural",
+    "generator": "wall-lantern",
+    "license": "self-made",
+    "notes": "src/model/generators/lights.ts - typical balcony wall fitting, wired from the balcony light point."
+  },
+  "params": {
+    "color": {
+      "default": "#2b2b2b",
+      "description": "body"
+    },
+    "intensity": {
+      "default": 9000
+    }
+  }
+}
