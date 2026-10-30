@@ -9,16 +9,14 @@ import { currentHouse, currentLayout, useStore } from '../app/store';
 import { resolveWalls } from '../model/geometry';
 import { placeRoomItems } from '../model/placement';
 import { assignLampSlots, roomLamps, roomLightOn } from '../model/lights';
-import { DEFAULT_LOCATION, sunDirection } from './sun';
+import { sunForMood } from './sun';
 import { Outside } from './Outside';
 
 
-/** Sun through the windows (real solar position), soft fill for bounced light, the room lights (💡). */
+/** Sun through the windows (fixed per mood: afternoon / golden hour / night), soft fill for bounced light, the room lights (💡). */
 /** `room` is the whole house frame (bounds, tallest ceiling, north, one lamp per room). */
 export function Lighting({ room, mobile }: { room: HouseFrame; mobile: boolean }) {
-  const timeOfDay = useStore((s) => s.timeOfDay);
-  const dayOfYear = useStore((s) => s.dayOfYear);
-  const geo = useStore((s) => currentHouse(s)?.meta.location) ?? DEFAULT_LOCATION;
+  const mood = useStore((s) => s.mood);
   const sunRef = useRef<DirectionalLight>(null);
   const skyRef = useRef<SkyMesh>(null);
   // the sky is the very back of the background (before the city panorama), never hiding anything
@@ -34,10 +32,7 @@ export function Lighting({ room, mobile }: { room: HouseFrame; mobile: boolean }
   const [cx, cz] = polygonCentroid(room.footprint);
   const radius = Math.hypot(b.maxX - b.minX, b.maxZ - b.minZ) / 2 + room.ceilingHeight;
 
-  const dir = useMemo(
-    () => sunDirection({ lat: geo.lat, lon: geo.lon, year: new Date().getFullYear(), dayOfYear, hours: timeOfDay, northAngle: room.northAngle }),
-    [geo.lat, geo.lon, dayOfYear, timeOfDay, room.northAngle],
-  );
+  const dir = useMemo(() => sunForMood(mood, room.northAngle), [mood, room.northAngle]);
   const elevation = dir ? Math.asin(dir[1]) : 0;
   // warmer and weaker near the horizon
   const sunColor = useMemo(() => new Color().setHSL(0.09, 0.9, 0.55 + 0.4 * Math.min(1, elevation / 0.6)), [elevation]);

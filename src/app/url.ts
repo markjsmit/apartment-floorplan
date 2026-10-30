@@ -1,5 +1,7 @@
 // URL query <-> view state, so links (and Claude's screenshots) open a specific room/version/spot.
 
+import { isMood, type Mood } from '../scene/sun';
+
 export type CameraPose = { x: number; z: number; yaw: number; pitch: number };
 export type View = 'first-person' | 'top-down';
 export type Person = 'mark' | 'heli';
@@ -13,7 +15,8 @@ export type UrlState = {
   camera?: CameraPose;
   view?: View;
   person?: Person;
-  time?: number;
+  /** `mood=afternoon|golden|night` */
+  mood?: Mood;
   /** opening to start at (the house's entry door) */
   spawnAt?: string;
   noreport: boolean;
@@ -51,8 +54,6 @@ export function parseUrlState(search: string, bundle: BundleLike): UrlState {
     const [room, vid] = [pair.slice(0, i), pair.slice(i + 1)];
     if (i > 0 && vid !== baseId && hasRoom(bundle, vid, room)) roomVersions[room] = vid;
   }
-  // version=empty (the house as it's handed over) applies to every room, not just the linked one
-  if (v === 'empty' && bundle.versions.empty) for (const r of rooms) if (!(r.id in roomVersions)) roomVersions[r.id] = 'empty';
   if (roomId && v && v !== baseId && hasRoom(bundle, v, roomId)) roomVersions[roomId] = v;
   else if (roomId && v === baseId) delete roomVersions[roomId];
   const versionId = (roomId && roomVersions[roomId]) || baseId;
@@ -64,11 +65,11 @@ export function parseUrlState(search: string, bundle: BundleLike): UrlState {
   const view = q.get('view') === 'top' ? 'top-down' : q.get('view') === 'fp' ? 'first-person' : undefined;
   const p = q.get('person');
   const person = p === 'mark' || p === 'heli' ? p : undefined;
-  const t = Number(q.get('time'));
-  const time = q.has('time') && Number.isFinite(t) ? t : undefined;
+  const m = q.get('mood');
+  const mood = isMood(m) ? m : undefined;
   const states = Object.fromEntries((q.get('states') ?? '').split(',').map((s) => s.split(':')).filter((p) => p.length === 2 && p[0] && p[1]));
   const itemStates = Object.keys(states).length ? states : undefined;
-  return { roomId, versionId, roomVersions, camera, view, person, time, spawnAt, noreport: q.get('noreport') === '1', itemStates };
+  return { roomId, versionId, roomVersions, camera, view, person, mood, spawnAt, noreport: q.get('noreport') === '1', itemStates };
 }
 
 const round1 = (n: number) => Math.round(n * 10) / 10;

@@ -13,13 +13,12 @@ Spec: `docs/superpowers/specs/2026-10-23-apartment-designer-design.md`.
 2. **Read `.ui-state/ui-state.json`** (`npm run -s ui -- state`) before answering anything about "this", "that",
    "it", "here". It has the open room + version, the selection (id, kind, part, name, tags), camera (position cm,
    yaw/pitch, `facing` compass), **`lookingAt`** (what's under the crosshair: id, kind, part, name, hit `point`,
-   `distance` cm), person, time of day and the view-only furniture states. "What I'm looking at" = `lookingAt`;
+   `distance` cm), person, `mood` (light: afternoon / golden / night) and the view-only furniture states. "What I'm looking at" = `lookingAt`;
    "this" = `selection` if set, else `lookingAt`. **`measurement`** (when Mark uses 📏 Measure): `from`/`to` surfaces
    (id, name), `axis` (x, y = height, z) and `distanceCm`, measured straight out from the first surface along one
    axis — or `axis: "free"` = straight line between the two clicked spots (Angled mode — F key or button — or two spots on one wall/floor). `.ui-state/events.log` has recent clicks/tab switches.
 3. **Edit the version Mark has open** (`version` in ui-state → file in `house/`). Never edit Current while he's
    looking at the AI suggestion, or the other way round.
-4. If `house/current.json` still has the placeholder `meta.location` (assumed), ask Mark which city — it drives sun angles.
 
 **References Mark pastes: `<version>:<room>:<id>`** (e.g. `current:living:passage-mirror`, `saved/urban-jungle:living:divider`,
 `current:hallway:bedroom-door`). Cmd+C in the viewer with no text selected copies one for the selection (else what's under
@@ -41,7 +40,7 @@ Ids: items/openings by id, walls `<room>.wall-<n>` (or their stored id), `<room>
 
 ## Seeing what he sees
 
-`npm run -s snap -- <room> [version] [--cam x,z,yaw,pitch] [--top] [--person heli] [--time 9.5] [--states storage.door:open]` → prints a PNG
+`npm run -s snap -- <room> [version] [--cam x,z,yaw,pitch] [--top] [--person heli] [--mood golden] [--states storage.door:open]` → prints a PNG
 path; read it. Use it to check your own edits and to brainstorm ("from the door it looks like…").
 `--cam` is in that room's own coordinates (like ui-state): yaw 0 looks towards the room's -z, positive yaw turns
 left. Doesn't touch Mark's ui-state.

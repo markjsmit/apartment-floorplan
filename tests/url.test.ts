@@ -41,10 +41,10 @@ describe('parseUrlState', () => {
     expect(s.roomVersions).toEqual({ bedroom: 'suggestion' });
   });
 
-  it('version=empty empties every room (a link to the bare flat)', () => {
+  it('version=empty empties only the linked room, the others show Current (Mark: rooms default to Current)', () => {
     const b = { ...bundle, versions: { ...bundle.versions, empty: { rooms: [{ id: 'bedroom' }, { id: 'storage' }] } } };
-    const s = parseUrlState('?version=empty', b);
-    expect(s.roomVersions).toEqual({ bedroom: 'empty', storage: 'empty' });
+    const s = parseUrlState('?room=storage&version=empty', b);
+    expect(s.roomVersions).toEqual({ storage: 'empty' });
   });
 
   it('accepts a room only the linked version has', () => {

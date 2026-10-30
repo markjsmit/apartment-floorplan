@@ -7,6 +7,7 @@ import { findById } from '../model/lookup';
 import { initialState, nextState, openingParams, resolveAsset, resolveParams } from '../model/assets';
 import { baseVersionId, composeHouse } from '../model/roomVersions';
 import type { CameraPose, Person, View } from './url';
+import type { Mood } from '../scene/sun';
 
 export const EYE_HEIGHT: Record<Person, number> = { mark: 188, heli: 151 };
 
@@ -32,8 +33,8 @@ type State = {
   view: View;
   /** Phone ☰ menu "Select" switch: a tap selects + shows the info panel instead of opening/closing. */
   tapSelects: boolean;
-  timeOfDay: number;
-  dayOfYear: number;
+  /** The light: ☀️ afternoon, 🌇 golden hour, 🌙 night. */
+  mood: Mood;
   camera: CameraPose;
   /** What's under the crosshair in first-person view (point in room cm, distance in cm). */
   lookingAt: LookingAt | null;
@@ -66,18 +67,12 @@ type Actions = {
   setPerson: (p: Person) => void;
   setView: (v: View) => void;
   setTapSelects: (on: boolean) => void;
-  setTime: (h: number) => void;
-  setDay: (d: number) => void;
+  setMood: (m: Mood) => void;
   setCamera: (c: CameraPose) => void;
   setLookingAt: (l: LookingAt | null) => void;
   lookAt: (id: string) => void;
   toast: (text: string) => void;
 };
-
-function todayOfYear(): number {
-  const now = new Date();
-  return Math.floor((now.getTime() - new Date(now.getFullYear(), 0, 0).getTime()) / 86400000);
-}
 
 let toastId = 0;
 
@@ -110,8 +105,7 @@ export const useStore = create<State & Actions>((set, get) => ({
   person: 'mark',
   view: 'first-person',
   tapSelects: false,
-  timeOfDay: 14,
-  dayOfYear: todayOfYear(),
+  mood: 'afternoon',
   camera: { x: 0, z: 0, yaw: 0, pitch: 0 },
   lookingAt: null,
   spawnTick: 0,
@@ -207,8 +201,7 @@ export const useStore = create<State & Actions>((set, get) => ({
   setPerson: (person) => set({ person }),
   setView: (view) => set({ view }),
   setTapSelects: (tapSelects) => set(tapSelects ? { tapSelects } : { tapSelects, selection: null }),
-  setTime: (timeOfDay) => set({ timeOfDay }),
-  setDay: (dayOfYear) => set({ dayOfYear }),
+  setMood: (mood) => set({ mood }),
   setCamera: (camera) => set({ camera }),
   setLookingAt: (lookingAt) => set({ lookingAt }),
   lookAt: (id) => {

@@ -8,7 +8,8 @@ import { MeasurePanel } from './MeasurePanel';
 import { Tabs } from './Tabs';
 import { Toolbar } from './Toolbar';
 import { PersonSwitch, TouchControls } from './TouchControls';
-import { PhoneMenu, PhoneTimeButtons } from './PhoneMenu';
+import { PhoneMenu } from './PhoneMenu';
+import { MoodSwitch } from './MoodSwitch';
 import { useDevLink } from './useDevLink';
 import { useIsMobile, useIsTouch } from './useIsMobile';
 import { composeHouse } from '../model/roomVersions';
@@ -36,7 +37,7 @@ export function App() {
           noreport: u.noreport,
           ...(u.view ? { view: u.view } : {}),
           ...(u.person ? { person: u.person } : {}),
-          ...(u.time !== undefined ? { timeOfDay: u.time } : {}),
+          ...(u.mood ? { mood: u.mood } : {}),
           ...(u.itemStates ? { itemStates: u.itemStates } : {}),
           // cam= in a link is in the room's own coordinates
           ...(u.camera ? { camera: poseFromRoom({ house: composeHouse(b, u.roomVersions) }, u.roomId, u.camera) } : {}),
@@ -85,7 +86,7 @@ export function App() {
       {/* phone: rooms, versions and tools live in the ☰ menu; a clean screen otherwise */}
       {!mobile && <Tabs showVersions />}
       {mobile && <PersonSwitch />}
-      {mobile && <PhoneTimeButtons />}
+      {mobile && <MoodSwitch className="time-switch" labels={false} />}
       {mobile && <PhoneMenu />}
       {!mobile && <Toolbar />}
       {!mobile && <Hud />}

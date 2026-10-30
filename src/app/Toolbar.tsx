@@ -4,19 +4,7 @@ import { ignoresKeys } from '../scene/input';
 import { useStore } from './store';
 import { useMeasure } from './measureStore';
 import { useRoomLightsOn } from '../scene/useLightsOn';
-
-const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-
-function dayLabel(day: number): string {
-  const d = new Date(2026, 0, day);
-  return `${d.getDate()} ${MONTHS[d.getMonth()]}`;
-}
-
-function timeLabel(h: number): string {
-  const hh = Math.floor(h);
-  const mm = Math.round((h - hh) * 60);
-  return `${String(hh).padStart(2, '0')}:${String(mm).padStart(2, '0')}`;
-}
+import { MoodSwitch } from './MoodSwitch';
 
 /** Copies a link to the open room + version (and the other rooms' choices). */
 export async function share() {
@@ -57,14 +45,7 @@ export function Toolbar() {
       <button className={s.view === 'top-down' ? 'on' : ''} onClick={() => s.setView(s.view === 'top-down' ? 'first-person' : 'top-down')}>
         {s.view === 'top-down' ? '👁 Walk' : '🗺 Top'}
       </button>
-      <label className="slider" title="Time of day">
-        ☀️ {timeLabel(s.timeOfDay)}
-        <input type="range" min={5} max={22} step={0.25} value={s.timeOfDay} onChange={(e) => s.setTime(Number(e.target.value))} />
-      </label>
-      <label className="slider" title="Date (sun angle)">
-        📅 {dayLabel(s.dayOfYear)}
-        <input type="range" min={1} max={365} step={1} value={s.dayOfYear} onChange={(e) => s.setDay(Number(e.target.value))} />
-      </label>
+      <MoodSwitch labels />
       <button className={lightsOn ? 'on' : ''} onClick={() => s.toggleRoomLights(lightsOn)} title="This room's lights on/off (L) — or double-click a lamp">💡 Lights</button>
       <button className={measuring ? 'on' : ''} onClick={toggleMeasure} title="Measure between two surfaces (M)">📏 Measure</button>
       <button onClick={share}>🔗 Share</button>

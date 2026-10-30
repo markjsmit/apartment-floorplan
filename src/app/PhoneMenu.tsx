@@ -1,32 +1,8 @@
 import { useState } from 'react';
 import { Tabs } from './Tabs';
 import { share } from './Toolbar';
-import { currentHouse, useStore } from './store';
-import { DEFAULT_LOCATION, goldenHour } from '../scene/sun';
+import { useStore } from './store';
 import { useMeasure } from './measureStore';
-
-/** Phone: rough times of day instead of the desktop's time + date sliders (today's date, golden hour follows the season). */
-export function PhoneTimeButtons() {
-  const timeOfDay = useStore((s) => s.timeOfDay);
-  const dayOfYear = useStore((s) => s.dayOfYear);
-  const setTime = useStore((s) => s.setTime);
-  const geo = useStore((s) => currentHouse(s)?.meta.location) ?? DEFAULT_LOCATION;
-  const golden = goldenHour({ lat: geo.lat, lon: geo.lon, year: new Date().getFullYear(), dayOfYear });
-  const times = [
-    { label: '☀️', name: 'Afternoon', h: 14 },
-    { label: '🌇', name: 'Golden hour', h: golden },
-    { label: '🌙', name: 'Night', h: 21.5 },
-  ];
-  return (
-    <div className="seg time-switch">
-      {times.map((t) => (
-        <button key={t.name} className={Math.abs(timeOfDay - t.h) < 0.01 ? 'on' : ''} onClick={() => setTime(t.h)} aria-label={t.name}>
-          {t.label}
-        </button>
-      ))}
-    </div>
-  );
-}
 
 /** Phone: everything else the desktop shows (rooms, versions, top view, measure, select, share) behind one ☰ button. */
 export function PhoneMenu() {

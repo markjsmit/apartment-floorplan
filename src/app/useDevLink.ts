@@ -50,10 +50,9 @@ function buildUiState(s: StoreState) {
     lookingAt,
     measurement: measurementState(s),
     person: s.person,
-    timeOfDay: s.timeOfDay,
-    dayOfYear: s.dayOfYear,
+    mood: s.mood,
     itemStates: s.itemStates,
-    // view-only: each room's lights (on after dark unless switched by hand with 💡 / a lamp)
+    // view-only: each room's lights (on unless switched off by hand with 💡 / a lamp)
     roomLights: roomLightsState(s),
   };
 }
