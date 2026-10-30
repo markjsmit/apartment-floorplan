@@ -8,6 +8,7 @@ import { MeasurePanel } from './MeasurePanel';
 import { Tabs } from './Tabs';
 import { Toolbar } from './Toolbar';
 import { PersonSwitch, TouchControls } from './TouchControls';
+import { PhoneMenu, PhoneTimeButtons } from './PhoneMenu';
 import { useDevLink } from './useDevLink';
 import { useIsMobile, useIsTouch } from './useIsMobile';
 import { composeHouse } from '../model/roomVersions';
@@ -81,14 +82,16 @@ export function App() {
   return (
     <div className={mobile ? 'app mobile' : 'app'}>
       <Viewer />
-      {/* rooms are connected, so the phone has no tabs: you walk between rooms */}
+      {/* phone: rooms, versions and tools live in the ☰ menu; a clean screen otherwise */}
       {!mobile && <Tabs showVersions />}
       {mobile && <PersonSwitch />}
+      {mobile && <PhoneTimeButtons />}
+      {mobile && <PhoneMenu />}
       {!mobile && <Toolbar />}
       {!mobile && <Hud />}
-      {/* info panels are a desktop thing; on a phone a tap just opens/closes */}
-      {!mobile && <InfoPanel compact={false} />}
-      {!mobile && <MeasurePanel />}
+      {/* phone: the info panel only shows when Select is on in the ☰ menu (else a tap just opens/closes) */}
+      <InfoPanel compact={mobile} />
+      <MeasurePanel />
       <Banner />
       {touch && <TouchControls />}
       {!mobile && !touch && (

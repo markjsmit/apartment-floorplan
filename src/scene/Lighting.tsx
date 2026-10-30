@@ -9,10 +9,9 @@ import { currentHouse, currentLayout, useStore } from '../app/store';
 import { resolveWalls } from '../model/geometry';
 import { placeRoomItems } from '../model/placement';
 import { assignLampSlots, roomLamps, roomLightOn } from '../model/lights';
-import { sunDirection } from './sun';
+import { DEFAULT_LOCATION, sunDirection } from './sun';
 import { Outside } from './Outside';
 
-const DEFAULT_LOCATION = { lat: 50, lon: 10 };
 
 /** Sun through the windows (real solar position), soft fill for bounced light, the room lights (💡). */
 /** `room` is the whole house frame (bounds, tallest ceiling, north, one lamp per room). */

@@ -30,6 +30,8 @@ type State = {
   roomLights: Record<string, boolean>;
   person: Person;
   view: View;
+  /** Phone ☰ menu "Select" switch: a tap selects + shows the info panel instead of opening/closing. */
+  tapSelects: boolean;
   timeOfDay: number;
   dayOfYear: number;
   camera: CameraPose;
@@ -63,6 +65,7 @@ type Actions = {
   toggleRoomLights: (currentlyOn: boolean, roomId?: string) => void;
   setPerson: (p: Person) => void;
   setView: (v: View) => void;
+  setTapSelects: (on: boolean) => void;
   setTime: (h: number) => void;
   setDay: (d: number) => void;
   setCamera: (c: CameraPose) => void;
@@ -106,6 +109,7 @@ export const useStore = create<State & Actions>((set, get) => ({
   roomLights: {},
   person: 'mark',
   view: 'first-person',
+  tapSelects: false,
   timeOfDay: 14,
   dayOfYear: todayOfYear(),
   camera: { x: 0, z: 0, yaw: 0, pitch: 0 },
@@ -202,6 +206,7 @@ export const useStore = create<State & Actions>((set, get) => ({
   },
   setPerson: (person) => set({ person }),
   setView: (view) => set({ view }),
+  setTapSelects: (tapSelects) => set(tapSelects ? { tapSelects } : { tapSelects, selection: null }),
   setTime: (timeOfDay) => set({ timeOfDay }),
   setDay: (dayOfYear) => set({ dayOfYear }),
   setCamera: (camera) => set({ camera }),

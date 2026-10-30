@@ -40,7 +40,7 @@ export function RoomView({ room, placement, hiddenAssets, showCeiling, shade }: 
   const pick = (sel: Selection) => (e: ThreeEvent<MouseEvent>) => {
     e.stopPropagation();
     if (e.delta > CLICK_SLOP) return;
-    if (clickAction({ phone: isPhone(), interactive: false }) === 'select') select(sel);
+    if (clickAction({ phone: isPhone(), interactive: false, tapSelects: useStore.getState().tapSelects }) === 'select') select(sel);
   };
 
   return (

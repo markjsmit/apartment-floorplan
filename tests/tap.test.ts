@@ -8,6 +8,10 @@ describe('clickAction', () => {
   it('on a phone a tap on anything else does nothing (no info panel)', () => {
     expect(clickAction({ phone: true, interactive: false })).toBe('none');
   });
+  it('on a phone with Select switched on (menu) a tap selects, like a desktop click', () => {
+    expect(clickAction({ phone: true, interactive: true, tapSelects: true })).toBe('select');
+    expect(clickAction({ phone: true, interactive: false, tapSelects: true })).toBe('select');
+  });
   it('on desktop a click selects (double-click changes state)', () => {
     expect(clickAction({ phone: false, interactive: true })).toBe('select');
     expect(clickAction({ phone: false, interactive: false })).toBe('select');

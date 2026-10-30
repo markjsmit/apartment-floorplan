@@ -3,6 +3,9 @@ import type { Vec3 } from '../model/schema';
 
 const DEG = Math.PI / 180;
 
+/** Used when the house has no meta.location. */
+export const DEFAULT_LOCATION = { lat: 50, lon: 10 };
+
 export type SunInput = { lat: number; lon: number; year: number; dayOfYear: number; hours: number; northAngle: number };
 
 /**
@@ -22,4 +25,14 @@ export function sunDirection({ lat, lon, year, dayOfYear, hours, northAngle }: S
   const hz = -Math.cos(azimuth) * north[1] - Math.sin(azimuth) * east[1];
   const c = Math.cos(altitude);
   return [hx * c, Math.sin(altitude), hz * c];
+}
+
+/**
+ * Local solar time (same clock as `sunDirection`'s `hours`) halfway through golden hour: between the sun dropping
+ * to 6° and sunset.
+ */
+export function goldenHour({ lat, lon, year, dayOfYear }: Omit<SunInput, 'hours' | 'northAngle'>): number {
+  const { goldenHour: start, sunset } = SunCalc.getTimes(new Date(Date.UTC(year, 0, dayOfYear, 12 - lon / 15)), lat, lon);
+  const utcMs = (start.getTime() + sunset.getTime()) / 2 - Date.UTC(year, 0, dayOfYear);
+  return utcMs / 3600_000 + lon / 15;
 }

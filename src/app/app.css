@@ -102,3 +102,21 @@ button { font: inherit; color: inherit; }
 .person-switch { position: absolute; top: 10px; left: 10px; background: var(--panel); border-radius: 10px; padding: 4px; backdrop-filter: blur(8px); }
 .person-switch button { background: rgba(255, 255, 255, 0.06); border: 1px solid var(--line); padding: 8px 14px; font-size: 14px; }
 .person-switch button.on { background: var(--text); color: #111; }
+
+/* phone: times of day under Mark/Heli, ☰ top-right opens a sheet with everything else */
+.time-switch { position: absolute; top: 62px; left: 10px; background: var(--panel); border-radius: 10px; padding: 4px; backdrop-filter: blur(8px); }
+.time-switch button { background: rgba(255, 255, 255, 0.06); border: 1px solid var(--line); padding: 8px 14px; font-size: 16px; }
+.time-switch button.on { background: var(--text); }
+.menu-button { position: absolute; top: 10px; right: 10px; width: 46px; height: 46px; font-size: 22px; background: var(--panel);
+  border: 1px solid var(--line); border-radius: 10px; backdrop-filter: blur(8px); cursor: pointer; z-index: 3; }
+.menu-button.on { background: var(--text); color: #111; }
+.phone-menu-backdrop { position: absolute; inset: 0; background: rgba(0, 0, 0, 0.35); z-index: 2; }
+.phone-menu { position: absolute; top: 64px; right: 10px; left: 10px; max-height: calc(100% - 80px); overflow: auto;
+  background: var(--panel-solid); border: 1px solid var(--line); border-radius: 12px; padding: 4px 12px 12px; }
+.phone-menu h3 { font-size: 11.5px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); margin: 12px 0 6px; }
+.phone-menu .tabs { position: static; pointer-events: auto; }
+.menu-row { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 8px; }
+.menu-row button { background: rgba(255, 255, 255, 0.06); border: 1px solid var(--line); border-radius: 8px; padding: 10px 14px; font-size: 14px; cursor: pointer; }
+.menu-row button.on { background: var(--text); color: #111; }
+.app.mobile .info.compact { bottom: 150px; }
+.app.mobile .measure-panel { top: 116px; left: 10px; right: 10px; transform: none; white-space: normal; flex-wrap: wrap; }

@@ -61,7 +61,7 @@ export function PartsView({ id, kind, asset, parts, stateId, position, rotationD
   const onClick = (part: string) => (e: ThreeEvent<MouseEvent>) => {
     e.stopPropagation();
     if (e.delta > CLICK_SLOP) return;
-    const action = clickAction({ phone: isPhone(), interactive: interactive(part) });
+    const action = clickAction({ phone: isPhone(), interactive: interactive(part), tapSelects: useStore.getState().tapSelects });
     if (action === 'select') {
       const section = sectionOf(part);
       const sel = useStore.getState().selection;
@@ -73,8 +73,8 @@ export function PartsView({ id, kind, asset, parts, stateId, position, rotationD
   };
   const onDoubleClick = (part: string) => (e: ThreeEvent<MouseEvent>) => {
     e.stopPropagation();
-    // phones already changed state on the first tap
-    if (isPhone()) return;
+    // phones already changed state on the first tap (unless the first tap selected)
+    if (isPhone() && !useStore.getState().tapSelects) return;
     if (sectionOf(part)) select({ kind, id, part: sectionOf(part) });
     if (interactive(part)) act(part);
   };

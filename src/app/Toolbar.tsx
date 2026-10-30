@@ -18,6 +18,22 @@ function timeLabel(h: number): string {
   return `${String(hh).padStart(2, '0')}:${String(mm).padStart(2, '0')}`;
 }
 
+/** Copies a link to the open room + version (and the other rooms' choices). */
+export async function share() {
+  const s = useStore.getState();
+  const url = shareUrl({ roomId: s.roomId, versionId: s.versionId, roomVersions: s.roomVersions }, s.bundle?.site.publicUrl ?? '', `${location.origin}${import.meta.env.BASE_URL}`);
+  try {
+    await navigator.clipboard.writeText(url);
+    s.toast('Link copied.');
+  } catch {
+    window.prompt('Copy this link', url);
+  }
+  if (s.versionId === 'current' || s.versionId === 'suggestion') {
+    s.toast('Tip: ask Claude to save this as a version, so the link keeps showing exactly this.');
+  }
+  if (import.meta.env.DEV) s.toast('The link works once the site is released (npm run release).');
+}
+
 export function Toolbar() {
   const s = useStore();
   const measuring = useMeasure((m) => m.active);
@@ -32,20 +48,6 @@ export function Toolbar() {
     window.addEventListener('keydown', key);
     return () => window.removeEventListener('keydown', key);
   }, [lightsOn]);
-  const share = async () => {
-    const url = shareUrl({ roomId: s.roomId, versionId: s.versionId, roomVersions: s.roomVersions }, s.bundle?.site.publicUrl ?? '', `${location.origin}${import.meta.env.BASE_URL}`);
-    try {
-      await navigator.clipboard.writeText(url);
-      s.toast('Link copied.');
-    } catch {
-      window.prompt('Copy this link', url);
-    }
-    if (s.versionId === 'current' || s.versionId === 'suggestion') {
-      s.toast('Tip: ask Claude to save this as a version, so the link keeps showing exactly this.');
-    }
-    if (import.meta.env.DEV) s.toast('The link works once the site is released (npm run release).');
-  };
-
   return (
     <div className="toolbar">
       <div className="seg">
