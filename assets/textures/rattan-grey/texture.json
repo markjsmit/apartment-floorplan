@@ -1,0 +1,16 @@
+{
+  "id": "rattan-grey",
+  "name": "Grey resin rattan weave",
+  "tags": ["rattan", "wicker", "woven", "grey", "outdoor"],
+  "maps": {
+    "color": "color.jpg",
+    "normal": "normal.jpg",
+    "roughness": "roughness.jpg",
+    "ao": "ao.jpg"
+  },
+  "tileSize": [20, 20],
+  "fallbackColor": "#9a9b9d",
+  "roughness": 0.65,
+  "source": "ambientCG Wicker005 (https://ambientcg.com/a/Wicker005), colour map turned grey + brightened (our outdoor set's grey resin wicker)",
+  "license": "CC0"
+}

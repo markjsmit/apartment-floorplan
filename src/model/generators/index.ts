@@ -12,6 +12,7 @@ import { door, doorOpenAngle, doorStates, windowParts } from './openings';
 import { kitchenCounter, kitchenIsland, kitchenTall, kitchenWallCabinet, plainBox, slidingDoor, trackLight } from './builtins';
 import { bench, cleaningCorner, sofaConsole, hallStand, tvGear, wallSpeakers, waterBar, kitchenRail, kitchenShelf, coffeeTable, cornerCabinet, cornerCloset, curtain, cushions, designChair, designTable, floorLamp, mediaUnit, pendant, plant, rug, shelfUnit, slatPanel, stool, tableDecor, tallCabinet, tvArm, tvStand, wallArt } from './decor';
 import { bedShelf, mirrorCabinet, paxOpen } from './bedroom';
+import { railingBar, rattanSeat, rattanTable } from './outdoor';
 import { bathroomVanity, bathtub, closetSystem, showerEnclosure, toiletWallHung, washerDryerColumn } from './bathroom';
 
 // Procedural furniture referenced from asset.json as { "source": { "kind": "procedural", "generator": "<name>" } }.
@@ -94,4 +95,7 @@ export const generators: Record<string, Generator> = {
   'tv-arm': tvArm,
   'tall-cabinet': tallCabinet,
   'tv-stand': tvStand,
+  'rattan-seat': rattanSeat,
+  'rattan-table': rattanTable,
+  'railing-bar': railingBar,
 };

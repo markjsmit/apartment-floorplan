@@ -1,0 +1,16 @@
+{
+  "id": "railing-bar",
+  "name": "Railing bar counter",
+  "tags": ["bar", "bar table", "floating bar", "counter", "balcony", "railing"],
+  "description": "Floating bar counter: rests on the balcony handrail and sticks out into the balcony on black steel brackets clamped to the rail (no legs). Outdoor top (HPL / teak).",
+  "source": { "kind": "procedural", "generator": "railing-bar", "license": "self-made", "notes": "src/model/generators/outdoor.ts" },
+  "params": {
+    "length": { "default": 300 },
+    "depth": { "default": 40 },
+    "height": { "default": 113, "description": "counter top surface (cm)" },
+    "thickness": { "default": 3 },
+    "railHeight": { "default": 110, "description": "top of the handrail it rests on" },
+    "material": { "default": "wood-oak-light" },
+    "color": { "default": "" }
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "id": "old-house-rattan-coffee-table",
+  "name": "Grey rattan coffee table with glass top (our outdoor set)",
+  "tags": ["old house", "balcony", "outdoor", "rattan", "wicker", "coffee table", "table"],
+  "description": "The low table of our outdoor set (photo 20261030_152611): ~82 x 44 x 40 cm, dark glass inset, splayed legs. Sizes estimated from the photo.",
+  "source": { "kind": "procedural", "generator": "rattan-table", "license": "self-made", "notes": "src/model/generators/outdoor.ts, from sources/old house/20261030_152611.jpg" },
+  "params": {
+    "width": { "default": 82 },
+    "depth": { "default": 44 },
+    "height": { "default": 40 }
+  }
+}

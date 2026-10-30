@@ -2378,6 +2378,189 @@
             "balcony.rail-glass-north"
           ],
           "builtIn": true
+        },
+        {
+          "id": "balcony.bar-counter",
+          "asset": "railing-bar",
+          "name": "Floating bar counter on the railing (oak-look outdoor top, black steel brackets)",
+          "tags": [
+            "bar",
+            "bar table",
+            "floating bar",
+            "bar counter"
+          ],
+          "against": {
+            "wall": "balcony.wall-0",
+            "offset": 5
+          },
+          "params": {
+            "length": 335,
+            "depth": 40,
+            "height": 113
+          },
+          "allowOverlap": [
+            "balcony.rail-north",
+            "balcony.rail-glass-north"
+          ],
+          "assumptions": [
+            {
+              "path": "params",
+              "note": "Design idea: 335 x 40, top at 113 resting on the handrail (handrail top 110 is itself not measured). Check the building rules + that the handrail takes the load before buying; a version with 2 slim legs on the railing side is the fallback."
+            }
+          ]
+        },
+        {
+          "id": "balcony.bar-stool-1",
+          "asset": "counter-stool",
+          "name": "Backless outdoor bar stool (oak-look seat, black steel, seat 78) - to buy, a heavy one (wind on the 27th floor)",
+          "tags": [
+            "bar stool",
+            "stool",
+            "bar"
+          ],
+          "position": [
+            47,
+            0,
+            -135
+          ],
+          "rotation": 180,
+          "params": {
+            "seatHeight": 78,
+            "seat": "round",
+            "seatSize": 38,
+            "base": "four",
+            "seatMaterial": "wood-oak-light",
+            "legMaterial": "metal-black"
+          }
+        },
+        {
+          "id": "balcony.bar-stool-2",
+          "asset": "counter-stool",
+          "name": "Backless outdoor bar stool (oak-look seat, black steel, seat 78) - to buy, a heavy one (wind on the 27th floor)",
+          "tags": [
+            "bar stool",
+            "stool",
+            "bar"
+          ],
+          "position": [
+            131,
+            0,
+            -135
+          ],
+          "rotation": 180,
+          "params": {
+            "seatHeight": 78,
+            "seat": "round",
+            "seatSize": 38,
+            "base": "four",
+            "seatMaterial": "wood-oak-light",
+            "legMaterial": "metal-black"
+          }
+        },
+        {
+          "id": "balcony.bar-stool-3",
+          "asset": "counter-stool",
+          "name": "Backless outdoor bar stool (oak-look seat, black steel, seat 78) - to buy, a heavy one (wind on the 27th floor)",
+          "tags": [
+            "bar stool",
+            "stool",
+            "bar"
+          ],
+          "position": [
+            215,
+            0,
+            -135
+          ],
+          "rotation": 180,
+          "params": {
+            "seatHeight": 78,
+            "seat": "round",
+            "seatSize": 38,
+            "base": "four",
+            "seatMaterial": "wood-oak-light",
+            "legMaterial": "metal-black"
+          }
+        },
+        {
+          "id": "balcony.bar-stool-4",
+          "asset": "counter-stool",
+          "name": "Backless outdoor bar stool (oak-look seat, black steel, seat 78) - to buy, a heavy one (wind on the 27th floor)",
+          "tags": [
+            "bar stool",
+            "stool",
+            "bar"
+          ],
+          "position": [
+            299,
+            0,
+            -135
+          ],
+          "rotation": 180,
+          "params": {
+            "seatHeight": 78,
+            "seat": "round",
+            "seatSize": 38,
+            "base": "four",
+            "seatMaterial": "wood-oak-light",
+            "legMaterial": "metal-black"
+          }
+        },
+        {
+          "id": "balcony.lounge-loveseat",
+          "asset": "old-house-rattan-loveseat",
+          "name": "Our rattan loveseat, back against the facade (new terracotta cushion, cream + olive pillows)",
+          "tags": [
+            "loveseat",
+            "bench",
+            "rattan",
+            "lounge",
+            "sofa"
+          ],
+          "against": {
+            "wall": "balcony.wall-2",
+            "offset": 63
+          },
+          "params": {
+            "cushionColor": "#a65a3d",
+            "pillows": "#ece4d2,#7d8450"
+          }
+        },
+        {
+          "id": "balcony.lounge-chair",
+          "asset": "old-house-rattan-armchair",
+          "name": "Our rattan armchair, damaged back against the east railing (new terracotta cushion)",
+          "tags": [
+            "armchair",
+            "chair",
+            "rattan",
+            "lounge"
+          ],
+          "against": {
+            "wall": "balcony.wall-1",
+            "offset": 43,
+            "gap": 2
+          },
+          "params": {
+            "cushionColor": "#a65a3d",
+            "pillows": "#ece4d2"
+          }
+        },
+        {
+          "id": "balcony.lounge-table",
+          "asset": "old-house-rattan-coffee-table",
+          "name": "Our rattan coffee table (glass top)",
+          "tags": [
+            "coffee table",
+            "table",
+            "rattan",
+            "lounge"
+          ],
+          "position": [
+            416,
+            0,
+            -142
+          ],
+          "rotation": 0
         }
       ],
       "assumptions": [

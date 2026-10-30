@@ -1,0 +1,16 @@
+{
+  "id": "old-house-rattan-armchair",
+  "name": "Grey rattan armchair (our outdoor set)",
+  "tags": ["old house", "balcony", "outdoor", "rattan", "wicker", "armchair", "chair"],
+  "description": "One of the 2 grey resin-wicker armchairs from the old house (photo 20261030_152611): ~62 x 64 x 84 cm, seat ~44 with the cushion. The backs are damaged, so they stand with the back to a wall or railing. Sizes estimated from the photo.",
+  "source": { "kind": "procedural", "generator": "rattan-seat", "license": "self-made", "notes": "src/model/generators/outdoor.ts, from sources/old house/20261030_152611.jpg" },
+  "params": {
+    "width": { "default": 62 },
+    "depth": { "default": 64 },
+    "seatHeight": { "default": 44 },
+    "backHeight": { "default": 84 },
+    "armHeight": { "default": 64 },
+    "cushionColor": { "default": "#e8e2d6" },
+    "pillows": { "default": "" }
+  }
+}
