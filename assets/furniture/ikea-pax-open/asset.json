@@ -1,0 +1,15 @@
+{
+  "id": "ikea-pax-open",
+  "name": "IKEA PAX open wardrobe frame with KOMPLEMENT fittings (no doors)",
+  "tags": ["pax", "komplement", "ikea", "wardrobe", "open closet", "closet", "drawers", "jewellery tray", "shoes", "white"],
+  "description": "White PAX frame without doors, fitted like the IKEA showroom one (sources/furniture ideas/opencloset.jpg), bottom to top: KOMPLEMENT pull-out shoe shelf, wire basket, drawer, drawer with framed glass front, pull-out tray with glass top + felt jewellery insert, a shelf, clothes rail with clothes on hangers. Double-click a pull-out to slide it out.",
+  "product": { "vendor": "IKEA", "name": "PAX wardrobe frame, white (75 or 100 x 58 x 236 / 201) + KOMPLEMENT pull-out shoe shelf, wire basket, drawer, drawer with framed glass front, pull-out tray, insert with compartments, glass top for pull-out tray, shelf, clothes rail (all for 75x58)" },
+  "source": { "kind": "procedural", "generator": "pax-open", "license": "self-made", "notes": "PAX frame sizes from IKEA (widths 50/75/100, depth 58 or 35, height 201 or 236); KOMPLEMENT drawers ~16 high. Heights of the fittings estimated from the showroom photo." },
+  "params": {
+    "width": { "default": 75, "description": "cm: 50 | 75 | 100 (PAX frame widths)" },
+    "depth": { "default": 58, "description": "cm: 58 | 35" },
+    "height": { "default": 236, "description": "cm: 236 | 201" },
+    "shelfY": { "default": 122, "description": "cm, top of the shelf" },
+    "railY": { "default": 224, "description": "cm, clothes rail height" }
+  }
+}

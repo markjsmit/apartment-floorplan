@@ -98,6 +98,9 @@ export function roomStorage(room: Room, furniture: Record<string, FurnitureAsset
         const free = Math.min(room.ceilingHeight - Number(params.housingHeight) - 1.8, MAX_SHELF_H);
         if (free >= 15) out.tops += ((bw + 3.6 + Number(params.topExtend ?? 0)) * Number(params.topDepth) * free) / 1000;
       }
+    } else if (p.item.asset === 'ikea-pax-open') {
+      // open PAX frame: the inside of the frame (fittings + hanging space), like the plywood shelving
+      out.other += ((p.size.max[0] - p.size.min[0] - 3.6) * (p.size.max[2] - p.size.min[2] - 2) * (p.size.max[1] - p.size.min[1] - 8.6) * 0.85) / 1000;
     } else if (p.item.asset === 'diy-plywood-shelving') {
       out.other += ((p.size.max[0] - p.size.min[0]) * (p.size.max[2] - p.size.min[2]) * (p.size.max[1] - p.size.min[1]) * 0.85) / 1000;
     }

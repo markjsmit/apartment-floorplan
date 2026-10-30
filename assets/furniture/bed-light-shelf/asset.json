@@ -1,0 +1,18 @@
+{
+  "id": "bed-light-shelf",
+  "name": "Floating shelf over the bed with 2 split reading lights",
+  "tags": ["shelf", "floating shelf", "bed shelf", "reading light", "lights", "decor", "headboard"],
+  "description": "Oak floating shelf (decorations on top) with a divider fin hanging under its middle; a warm LED spot on each face of the fin, tilted out to its own side of the bed and a bit into the room, so each side's light stays on that side (each its own switch). Cable through the fin to the wall, in a white cover down to behind the headboard. Origin: back-centre at the bottom of the shelf board (hang with elevation).",
+  "source": { "kind": "procedural", "generator": "bed-shelf", "license": "self-made", "notes": "Self-built / generic floating shelf + 2 small LED spots; not a specific product." },
+  "params": {
+    "width": { "default": 200 },
+    "depth": { "default": 22 },
+    "thickness": { "default": 3.5 },
+    "divider": { "default": 14, "description": "cm the divider fin hangs below the shelf" },
+    "tilt": { "default": 25, "description": "degrees each light turns out to its side" },
+    "lean": { "default": 15, "description": "degrees each light turns into the room" },
+    "intensity": { "default": 12 },
+    "material": { "default": "wood-oak-light" },
+    "cableDrop": { "default": 50, "description": "cm of cable cover down the wall" }
+  }
+}

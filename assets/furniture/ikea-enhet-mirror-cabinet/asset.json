@@ -1,0 +1,17 @@
+{
+  "id": "ikea-enhet-mirror-cabinet",
+  "name": "IKEA ENHET mirror cabinet with 2 doors, white (+ open shelf column)",
+  "tags": ["enhet", "ikea", "mirror cabinet", "mirror", "bathroom cabinet", "vanity", "white"],
+  "description": "ENHET mirror cabinet 60 x 17 x 75 with 2 mirror doors over the whole front and glass shelves inside (toiletries), like sources/furniture ideas/vanitycabinet.jpg; optional slim open white shelf column beside it (vanityccabinet2.jpg shows open ENHET shelves next to the mirror). Double-click a door to open. Hang it with elevation = bottom of the cabinet.",
+  "product": { "vendor": "IKEA", "name": "ENHET mirror cabinet with 2 doors, white, 60x17x75 cm" },
+  "source": { "kind": "procedural", "generator": "mirror-cabinet", "license": "self-made", "notes": "60 x 17 x 75 from the IKEA price tag in the photo (ENHET 60x17x75). Inside shelves + the open column are estimates." },
+  "params": {
+    "width": { "default": 60 },
+    "depth": { "default": 17 },
+    "height": { "default": 75 },
+    "column": { "default": 0, "description": "cm, open shelf column beside the cabinet (0 = none)" },
+    "columnSide": { "default": "left", "description": "left | right (seen from the front)" },
+    "shelves": { "default": 2 }
+  },
+  "defaultState": "closed"
+}
