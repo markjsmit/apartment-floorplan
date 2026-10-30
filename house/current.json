@@ -4744,7 +4744,7 @@
         {
           "id": "bedroom.vanity",
           "asset": "bathroom-vanity",
-          "name": "Vanity with mirror (alcove between the fin and the en-suite wall, 2 doors)",
+          "name": "Vanity (alcove between the fin and the en-suite wall, 2 doors) - the mirror is replaced by the ENHET mirror cabinet",
           "tags": [
             "vanity",
             "sink",
@@ -4759,9 +4759,34 @@
             "depth": 46,
             "mirrorWidth": 72,
             "mirrorHeight": 88,
-            "mirrorBottom": 110
+            "mirrorBottom": 110,
+            "mirror": false
           },
           "builtIn": true
+        },
+        {
+          "id": "bedroom.mirror-cabinet",
+          "asset": "ikea-enhet-mirror-cabinet",
+          "name": "ENHET mirror cabinet 60x17x75 (2 mirror doors) + slim open shelf column, over the vanity",
+          "tags": [
+            "mirror cabinet",
+            "enhet",
+            "mirror",
+            "vanity"
+          ],
+          "description": "NEW: buy (IKEA ENHET mirror cabinet with 2 doors, white, 60x17x75); the 15 cm open column is a white shelf unit cut/bought to fit the rest of the 76 cm alcove. Replaces the old mirror (renovation).",
+          "params": {
+            "width": 60,
+            "depth": 17,
+            "height": 75,
+            "column": 15,
+            "columnSide": "left"
+          },
+          "against": {
+            "wall": "bedroom.wall-5",
+            "offset": 0.5,
+            "elevation": 122
+          }
         },
         {
           "id": "bedroom.mirror-light",
@@ -4782,6 +4807,453 @@
             "intensity": 8000
           },
           "builtIn": true
+        },
+        {
+          "id": "bedroom.nightstand-1",
+          "asset": "old-house-nightstand",
+          "name": "Our grey nightstand (north side, by the window wall)",
+          "tags": [
+            "nightstand",
+            "ours"
+          ],
+          "against": {
+            "wall": "bedroom.wall-14",
+            "offset": 283.5
+          }
+        },
+        {
+          "id": "bedroom.bed",
+          "asset": "old-house-bed-black",
+          "name": "Our black velvet bed, headboard on the west wall (storage-room wall)",
+          "tags": [
+            "bed",
+            "our bed",
+            "ours"
+          ],
+          "against": {
+            "wall": "bedroom.wall-14",
+            "offset": 68.5
+          }
+        },
+        {
+          "id": "bedroom.bed-shelf",
+          "asset": "bed-light-shelf",
+          "name": "Oak shelf over the bed (bottom 160 = ~100 above the mattress): decorations on top, 2 reading lights under the middle split by a divider - each shines on its own side",
+          "tags": [
+            "bed shelf",
+            "shelf",
+            "reading light",
+            "lights",
+            "decor"
+          ],
+          "description": "NEW: self-built oak floating shelf 200x22 + 2 small warm LED spots on a centre divider fin, each with its own switch",
+          "params": {
+            "width": 200,
+            "depth": 22,
+            "cableDrop": 52
+          },
+          "against": {
+            "wall": "bedroom.wall-14",
+            "offset": 70.5,
+            "elevation": 160
+          },
+          "assumptions": [
+            {
+              "path": "params",
+              "note": "power for the 2 reading lights: assumed from an outlet behind the headboard / nightstand (bedroom outlets not surveyed); cable through the divider fin, then in a white cover down behind the headboard"
+            }
+          ]
+        },
+        {
+          "id": "bedroom.bed-shelf-print",
+          "asset": "wall-art",
+          "name": "Small print standing on the bed shelf",
+          "tags": [
+            "art",
+            "decor",
+            "bed shelf"
+          ],
+          "params": {
+            "width": 34,
+            "height": 44,
+            "frameColor": "#c9b79c",
+            "art": "#efe9df,#b56a4a,#2f3d50",
+            "matColor": "#f6f3ee",
+            "seed": "bed-shelf-print"
+          },
+          "against": {
+            "wall": "bedroom.wall-14",
+            "offset": 92,
+            "elevation": 163.5,
+            "gap": 1
+          }
+        },
+        {
+          "id": "bedroom.bed-shelf-vase",
+          "asset": "table-decor",
+          "name": "Vase with dried branches on the bed shelf",
+          "tags": [
+            "decor",
+            "vase",
+            "bed shelf"
+          ],
+          "params": {
+            "kind": "branches",
+            "height": 22,
+            "diameter": 10,
+            "color": "#d8cbb8",
+            "leafColor": "#b9a27a"
+          },
+          "against": {
+            "wall": "bedroom.wall-14",
+            "offset": 140,
+            "elevation": 163.5,
+            "gap": 2
+          }
+        },
+        {
+          "id": "bedroom.bed-shelf-books",
+          "asset": "table-decor",
+          "name": "Books on the bed shelf",
+          "tags": [
+            "decor",
+            "books",
+            "bed shelf"
+          ],
+          "params": {
+            "kind": "books"
+          },
+          "against": {
+            "wall": "bedroom.wall-14",
+            "offset": 205,
+            "elevation": 163.5,
+            "gap": 0
+          }
+        },
+        {
+          "id": "bedroom.bed-shelf-plant",
+          "asset": "plant",
+          "name": "Small trailing plant on the bed shelf",
+          "tags": [
+            "plant",
+            "decor",
+            "bed shelf"
+          ],
+          "params": {
+            "kind": "trailing",
+            "height": 22
+          },
+          "against": {
+            "wall": "bedroom.wall-14",
+            "offset": 245,
+            "elevation": 163.5,
+            "gap": 1
+          }
+        },
+        {
+          "id": "bedroom.nightstand-2",
+          "asset": "old-house-nightstand",
+          "name": "Our grey nightstand (south side)",
+          "tags": [
+            "nightstand",
+            "ours"
+          ],
+          "against": {
+            "wall": "bedroom.wall-14",
+            "offset": 8.5
+          }
+        },
+        {
+          "id": "bedroom.pax-closet",
+          "asset": "ikea-pax-open",
+          "name": "Open PAX closet left of the closet window (no doors): shoe pull-out, wire basket, drawer, glass drawer, jewellery tray, shelf, clothes rail",
+          "tags": [
+            "pax",
+            "open closet",
+            "closet",
+            "wardrobe",
+            "jewellery tray",
+            "drawers"
+          ],
+          "description": "NEW: buy (IKEA PAX frame 75x58x236 white + KOMPLEMENT fittings for 75x58), like sources/furniture ideas/opencloset.jpg",
+          "params": {
+            "width": 75,
+            "depth": 58,
+            "height": 236
+          },
+          "against": {
+            "wall": "bedroom.wall-2",
+            "offset": 92
+          }
+        },
+        {
+          "id": "bedroom.makeup-desk",
+          "asset": "heli-makeup-desk",
+          "name": "Heli's makeup corner: L-shaped corner desk like hers - you sit straight facing the tri-fold mirror on the east wall, drawers under the return wing, a strong LED vanity light",
+          "tags": [
+            "makeup desk",
+            "makeup corner",
+            "corner desk",
+            "desk",
+            "vanity",
+            "heli"
+          ],
+          "against": {
+            "wall": "bedroom.wall-2",
+            "offset": 0
+          },
+          "assumptions": [
+            {
+              "path": "asset",
+              "note": "sizes estimated from the old-house video (Heli's real desk not measured); the outlet under it for the vanity light is assumed - bedroom outlets not surveyed"
+            }
+          ]
+        },
+        {
+          "id": "bedroom.makeup-stool",
+          "asset": "bench",
+          "name": "Stool at the makeup desk (you sit facing the mirror on the east wall)",
+          "tags": [
+            "stool",
+            "makeup corner"
+          ],
+          "params": {
+            "width": 40,
+            "depth": 35,
+            "height": 45,
+            "legs": "legs"
+          },
+          "against": {
+            "wall": "bedroom.wall-1",
+            "offset": 319,
+            "gap": 14
+          },
+          "allowOverlap": [
+            "bedroom.makeup-desk"
+          ]
+        },
+        {
+          "id": "bedroom.tv",
+          "asset": "tv-42",
+          "name": "Our Samsung 42\" TV on the east wall, facing the bed",
+          "tags": [
+            "tv",
+            "bedroom tv"
+          ],
+          "against": {
+            "wall": "bedroom.wall-1",
+            "offset": 113,
+            "elevation": 110
+          }
+        },
+        {
+          "id": "bedroom.wall-speakers",
+          "asset": "wall-speakers",
+          "name": "Our Edifier speakers upright on swivel wall arms either side of the TV (~19 cm off it: as far as the 6 ft speaker wire reaches), bottom at 205 (Heli reaches the button), aimed down at the bed; cables in white covers",
+          "tags": [
+            "speakers",
+            "tv",
+            "cables",
+            "cable cover"
+          ],
+          "params": {
+            "width": 94,
+            "tvBottom": 110,
+            "tvHeight": 55,
+            "gap": 25,
+            "bottom": 205,
+            "tilt": 25,
+            "toe": 20,
+            "outletHeight": 30,
+            "wireLength": 183
+          },
+          "against": {
+            "wall": "bedroom.wall-1",
+            "offset": 68.1
+          },
+          "allowOverlap": [
+            "bedroom.tv"
+          ]
+        },
+        {
+          "id": "bedroom.laundry-closet",
+          "asset": "tall-cabinet",
+          "name": "Laundry closet in the recess, up to the ceiling: 2 dirty-clothes baskets behind doors, an open shelf with a hole over each to throw clothes in, clothes shelves behind doors above + a top cupboard",
+          "tags": [
+            "laundry closet",
+            "laundry",
+            "dirty clothes",
+            "baskets",
+            "clothes shelves",
+            "closet"
+          ],
+          "params": {
+            "width": 78,
+            "depth": 38,
+            "height": 276,
+            "plinth": 6,
+            "columns": [
+              {
+                "stack": [
+                  {
+                    "kind": "door",
+                    "h": 66,
+                    "content": "laundry"
+                  },
+                  {
+                    "kind": "open",
+                    "h": 34,
+                    "fill": "chute"
+                  },
+                  {
+                    "kind": "door",
+                    "content": "folded"
+                  },
+                  {
+                    "kind": "door",
+                    "h": 54,
+                    "content": "folded"
+                  }
+                ]
+              },
+              {
+                "stack": [
+                  {
+                    "kind": "door",
+                    "h": 66,
+                    "content": "laundry"
+                  },
+                  {
+                    "kind": "open",
+                    "h": 34,
+                    "fill": "chute"
+                  },
+                  {
+                    "kind": "door",
+                    "content": "folded"
+                  },
+                  {
+                    "kind": "door",
+                    "h": 54,
+                    "content": "folded"
+                  }
+                ]
+              }
+            ]
+          },
+          "against": {
+            "wall": "bedroom.wall-10",
+            "offset": 0.5
+          },
+          "assumptions": [
+            {
+              "path": "params.depth",
+              "note": "38 deep = flush with the pier (recess depth from the footprint, not measured)"
+            }
+          ]
+        },
+        {
+          "id": "bedroom.art-window-wall",
+          "asset": "wall-art",
+          "name": "Large calm print on the window wall, right of the window (seen from the bed)",
+          "tags": [
+            "art",
+            "painting"
+          ],
+          "params": {
+            "width": 90,
+            "height": 65,
+            "frameColor": "#1d1d1f",
+            "art": "#e3ddd2,#a8b59a,#3f3f3d",
+            "seed": "bedroom-big"
+          },
+          "against": {
+            "wall": "bedroom.wall-0",
+            "offset": 175,
+            "elevation": 115
+          }
+        },
+        {
+          "id": "bedroom.art-north-nightstand",
+          "asset": "wall-art",
+          "name": "Small print over the north nightstand",
+          "tags": [
+            "art",
+            "painting"
+          ],
+          "params": {
+            "width": 30,
+            "height": 40,
+            "frameColor": "#c9b79c",
+            "art": "#efe9df,#c9b79c,#7f8f63",
+            "seed": "ns-n"
+          },
+          "against": {
+            "wall": "bedroom.wall-14",
+            "offset": 291,
+            "elevation": 100
+          }
+        },
+        {
+          "id": "bedroom.art-south-nightstand",
+          "asset": "wall-art",
+          "name": "Small print over the south nightstand",
+          "tags": [
+            "art",
+            "painting"
+          ],
+          "params": {
+            "width": 30,
+            "height": 40,
+            "frameColor": "#c9b79c",
+            "art": "#efe9df,#b56a4a,#d8cbb8",
+            "seed": "ns-s"
+          },
+          "against": {
+            "wall": "bedroom.wall-14",
+            "offset": 16,
+            "elevation": 100
+          }
+        },
+        {
+          "id": "bedroom.corner-plant",
+          "asset": "plant",
+          "name": "Snake plant in the window corner by the TV wall",
+          "tags": [
+            "plant",
+            "decor"
+          ],
+          "params": {
+            "kind": "snake",
+            "height": 85
+          },
+          "against": {
+            "wall": "bedroom.wall-0",
+            "offset": 270,
+            "gap": 3
+          }
+        },
+        {
+          "id": "bedroom.nightstand-decor-n",
+          "asset": "table-decor",
+          "name": "Small vase on the north nightstand",
+          "tags": [
+            "decor",
+            "vase"
+          ],
+          "params": {
+            "kind": "vase",
+            "height": 16,
+            "diameter": 9,
+            "color": "#efe9df",
+            "flowers": "#e8d8c0"
+          },
+          "against": {
+            "wall": "bedroom.wall-14",
+            "offset": 290,
+            "elevation": 60,
+            "gap": 6
+          }
         }
       ],
       "assumptions": [
@@ -4808,6 +5280,14 @@
         {
           "path": "items",
           "note": "the white wardrobe, bed, crib and nightstands are the owner's (they stand on the floor) — none of it stays"
+        },
+        {
+          "path": "items[bedroom.wall-speakers]",
+          "note": "outlet under the TV on the east wall (~30 cm high) is assumed - the bedroom outlets were not surveyed"
+        },
+        {
+          "path": "items[bedroom.wall-speakers].params.wireLength",
+          "note": "speaker wire 6 ft (183) from Mark's memory, maybe a bit less - it sets how far apart the speakers can go"
         }
       ]
     },
