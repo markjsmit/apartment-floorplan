@@ -1,4 +1,4 @@
-// npm run snap -- <room> [version] [--cam x,z,yaw,pitch] [--top] [--person heli] [--mood afternoon|golden|night] [--lights off|cozy|work] [--size 1280x800] [--states id:state,...] [--out file.png]
+// npm run snap -- <room> [version] [--cam x,z,yaw,pitch] [--top] [--person heli] [--mood day|golden|night] [--lights off|cozy|work] [--size 1280x800] [--states id:state,...] [--out file.png]
 // Renders the viewer headless and saves a PNG Claude can look at. Uses the running dev server on :5180,
 // or starts a temporary one on :5181. Never reports UI state (noreport=1), so Mark's selection stays untouched.
 import fs from 'node:fs';
@@ -16,7 +16,7 @@ const flag = (n: string) => {
 const positional = args.filter((a, i) => !a.startsWith('--') && !VALUE_FLAGS.includes(args[i - 1]));
 const [room, version = 'current'] = positional;
 if (!room) {
-  console.log('usage: npm run snap -- <room> [version] [--cam x,z,yaw,pitch] [--top] [--person heli] [--mood afternoon|golden|night] [--lights off|cozy|work] [--size 1280x800] [--states id:state,...] [--out file.png]');
+  console.log('usage: npm run snap -- <room> [version] [--cam x,z,yaw,pitch] [--top] [--person heli] [--mood day|golden|night] [--lights off|cozy|work] [--size 1280x800] [--states id:state,...] [--out file.png]');
   process.exit(1);
 }
 

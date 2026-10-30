@@ -1,12 +1,12 @@
 import { describe, expect, it } from 'vitest';
-import { MOODS, sunForMood } from '../src/scene/sun';
+import { moonForMood, MOODS, sunForMood } from '../src/scene/sun';
 
 const DEG = Math.PI / 180;
 const elevation = (d: number[]) => Math.asin(d[1]) / DEG;
 
 describe('sunForMood', () => {
-  it('afternoon: sun fairly high in the south-west', () => {
-    const d = sunForMood('afternoon', 0)!;
+  it('day: sun fairly high in the south-west', () => {
+    const d = sunForMood('day', 0)!;
     expect(elevation(d)).toBeGreaterThan(35);
     expect(elevation(d)).toBeLessThan(55);
     // north is -z, east +x: south-west is -x, +z
@@ -21,8 +21,11 @@ describe('sunForMood', () => {
     expect(d[0]).toBeLessThan(-0.9);
   });
 
-  it('night: no sun', () => {
+  it('night: no sun, a faint moon instead (through the windows only)', () => {
     expect(sunForMood('night', 0)).toBeNull();
+    expect(moonForMood('day', 0)).toBeNull();
+    const m = moonForMood('night', 0)!;
+    expect(elevation(m)).toBeGreaterThan(25);
   });
 
   it('turns with the room northAngle', () => {
@@ -31,7 +34,7 @@ describe('sunForMood', () => {
     expect(d[2]).toBeLessThan(-0.9);
   });
 
-  it('has the three moods, afternoon first', () => {
-    expect(MOODS.map((m) => m.id)).toEqual(['afternoon', 'golden', 'night']);
+  it('has the three moods, day first', () => {
+    expect(MOODS.map((m) => m.id)).toEqual(['day', 'golden', 'night']);
   });
 });

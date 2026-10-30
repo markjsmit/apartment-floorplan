@@ -35,7 +35,7 @@ type State = {
   view: View;
   /** Phone ☰ menu "Select" switch: a tap selects + shows the info panel instead of opening/closing. */
   tapSelects: boolean;
-  /** The light: ☀️ afternoon, 🌇 golden hour, 🌙 night. */
+  /** The daylight: ☀️ day, 🌇 golden hour, 🌙 night. */
   mood: Mood;
   camera: CameraPose;
   /** What's under the crosshair in first-person view (point in room cm, distance in cm). */
@@ -107,7 +107,7 @@ export const useStore = create<State & Actions>((set, get) => ({
   person: 'mark',
   view: 'first-person',
   tapSelects: false,
-  mood: 'afternoon',
+  mood: 'day',
   camera: { x: 0, z: 0, yaw: 0, pitch: 0 },
   lookingAt: null,
   spawnTick: 0,

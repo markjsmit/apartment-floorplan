@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { FurnitureAssetSchema, ItemSchema, RoomSchema, type Part } from '../src/model/schema';
 import { placeItem } from '../src/model/placement';
-import { assignLampSlots, DEFAULT_LAMP, lampOn, LIGHT_MODES, roomLamps, type Lamp } from '../src/model/lights';
+import { assignLampSlots, DEFAULT_LAMP, lampOn, LIGHT_MODES, lampScale, roomDaylight, roomLamps, type Lamp } from '../src/model/lights';
 import type { PlacedItem } from '../src/model/placement';
 import { useStore } from '../src/app/store';
 
@@ -74,5 +74,24 @@ describe('item light role', () => {
     const plain = ItemSchema.parse({ id: 'a.lamp', asset: 'lamp', position: [0, 0, 0] });
     expect(placeItem(plain, asset, []).parts[0].emit?.role).toBeUndefined();
     expect(lampOn(undefined, 'cozy')).toBe(false);
+  });
+});
+
+describe('roomDaylight', () => {
+  it('is dim without windows and full with big glazing', () => {
+    expect(roomDaylight(room('bath'))).toBe(0.2);
+    const living = RoomSchema.parse({ ...room('living'), openings: [{ id: 'living.door', type: 'door', wall: 'living.wall-0', offset: 50, width: 280, height: 222, asset: 'sliding-door' }] });
+    expect(roomDaylight(living)).toBe(1);
+    // a small window in a 12 m² room: in between
+    const bed = RoomSchema.parse({ ...room('bed'), openings: [{ id: 'bed.win', type: 'window', wall: 'bed.wall-0', offset: 50, width: 100, height: 120, sill: 90 }] });
+    expect(roomDaylight(bed)).toBeCloseTo(0.6);
+  });
+});
+
+describe('lampScale (eyes adapting)', () => {
+  it('full at night, a quarter in a sunny room, in between in a dim one', () => {
+    expect(lampScale(0)).toBe(1);
+    expect(lampScale(1)).toBe(0.25);
+    expect(lampScale(0.2)).toBeCloseTo(0.625);
   });
 });

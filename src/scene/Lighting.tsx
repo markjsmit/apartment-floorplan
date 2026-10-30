@@ -1,19 +1,19 @@
 import { useCallback, useEffect, useMemo, useRef } from 'react';
 import { useFrame, useThree } from '@react-three/fiber';
 import { Environment, Lightformer, Sky } from '@react-three/drei';
-import { Color, type DirectionalLight, type Material } from 'three';
+import { Color, type DirectionalLight, type HemisphereLight, type Material, type PointLight } from 'three';
 import type { Sky as SkyMesh } from 'three-stdlib';
 import type { HouseFrame } from '../model/layout';
 import { polygonCentroid, roomBounds } from '../model/geometry';
 import { currentHouse, currentLayout, useStore } from '../app/store';
 import { resolveWalls } from '../model/geometry';
 import { placeRoomItems } from '../model/placement';
-import { assignLampSlots, lampOn, roomLamps, type Lamp, type LightMode } from '../model/lights';
-import { sunForMood } from './sun';
+import { assignLampSlots, lampOn, lampScale, roomDaylight, roomLamps, type Lamp, type LightMode } from '../model/lights';
+import { moonForMood, sunForMood } from './sun';
 import { Outside } from './Outside';
 
 
-/** Sun through the windows (fixed per mood: afternoon / golden hour / night), soft fill for bounced light, the lamps (light mode). */
+/** Sun (or a faint moon) through the windows (fixed per mood: day / golden hour / night), soft fill for bounced light, the lamps (light mode). */
 /** `room` is the whole house frame (bounds, tallest ceiling, north, one lamp per room). */
 export function Lighting({ room, mobile }: { room: HouseFrame; mobile: boolean }) {
   const mood = useStore((s) => s.mood);
@@ -33,19 +33,36 @@ export function Lighting({ room, mobile }: { room: HouseFrame; mobile: boolean }
   const radius = Math.hypot(b.maxX - b.minX, b.maxZ - b.minZ) / 2 + room.ceilingHeight;
 
   const dir = useMemo(() => sunForMood(mood, room.northAngle), [mood, room.northAngle]);
+  // at night the same light is a faint blue moon: only what comes in through the windows (rooms with windows keep a
+  // very low base light, windowless ones go dark - Mark)
+  const moon = useMemo(() => moonForMood(mood, room.northAngle), [mood, room.northAngle]);
+  const beam = dir ?? moon;
   const elevation = dir ? Math.asin(dir[1]) : 0;
   // warmer and weaker near the horizon
-  const sunColor = useMemo(() => new Color().setHSL(0.09, 0.9, 0.55 + 0.4 * Math.min(1, elevation / 0.6)), [elevation]);
-  const sunIntensity = dir ? 2.2 + 3.5 * Math.min(1, elevation / 0.5) : 0;
+  const sunColor = useMemo(() => (dir ? new Color().setHSL(0.09, 0.9, 0.55 + 0.4 * Math.min(1, elevation / 0.6)) : new Color('#9fb3d6')), [dir, elevation]);
+  const sunIntensity = dir ? 2.2 + 3.5 * Math.min(1, elevation / 0.5) : moon ? 0.8 : 0;
   // sky + bounce fill; at night (no sun) nothing
   const daylight = dir ? Math.min(1, 0.25 + elevation * 1.5) : 0;
   // the lamps' bounce, faked: the same everywhere in the house (no seams at doorways), warm in cozy, bright in work -
   // the lamps themselves only add pools of light (Mark: a tool, not a render; work mode should really light the house)
   const mode = useStore((s) => s.lightMode);
   const lampFill = LAMP_FILL[mode];
+  // eyes adapting: the brighter the room you stand in is by day, the less the lamps add (Mark); eased over ~1 s so
+  // walking from the sunny living room into the dim hallway doesn't pop
+  const here = useStore((s) => currentHouse(s)?.rooms.find((r) => r.id === s.roomId));
+  const target = lampScale(daylight * (here ? roomDaylight(here) : 1));
+  const scale = useRef(target);
+  const lampFillRef = useRef<HemisphereLight>(null);
+  const lampRefs = useRef<(PointLight | null)[]>([]);
+  const litRef = useRef<(Lamp | undefined)[]>([]);
+  useFrame((_, dt) => {
+    scale.current += (target - scale.current) * Math.min(1, dt * 2.5);
+    if (lampFillRef.current) lampFillRef.current.intensity = lampFill.intensity * scale.current;
+    lampRefs.current.forEach((l, i) => { if (l) l.intensity = (litRef.current[i]?.intensity ?? 0) * scale.current; });
+  });
 
   const dist = radius * 3;
-  const sunPos: [number, number, number] = dir ? [cx + dir[0] * dist, dir[1] * dist, cz + dir[2] * dist] : [cx, -dist, cz];
+  const sunPos: [number, number, number] = beam ? [cx + beam[0] * dist, beam[1] * dist, cz + beam[2] * dist] : [cx, -dist, cz];
 
   useEffect(() => {
     const l = sunRef.current;
@@ -97,9 +114,9 @@ export function Lighting({ room, mobile }: { room: HouseFrame; mobile: boolean }
       {/* bounced daylight; rooms are closed boxes so this stands in for light coming off the floor and walls */}
       <hemisphereLight args={['#f3f6fa', '#e6e3dc', 1.7 * daylight + 0.45 * Math.min(1, daylight * 4) + 0.1 * Math.min(1, daylight * 10) + 0.015]} />
       <ambientLight intensity={0.3 * daylight + 0.005} />
-      <hemisphereLight args={[lampFill.sky, lampFill.ground, lampFill.intensity]} />
-      <RoomLamps slots={mobile ? 2 : 6} shadows={!mobile} onChange={redrawShadows} />
-      <Environment resolution={64} environmentIntensity={0.45 * daylight + 0.06 * Math.min(1, daylight * 10) + 0.25 * lampFill.intensity + 0.01}>
+      <hemisphereLight ref={lampFillRef} args={[lampFill.sky, lampFill.ground, lampFill.intensity * scale.current]} />
+      <RoomLamps slots={mobile ? 2 : 6} shadows={!mobile} onChange={redrawShadows} lights={lampRefs} litOut={litRef} />
+      <Environment resolution={64} environmentIntensity={0.45 * daylight + 0.06 * Math.min(1, daylight * 10) + 0.25 * lampFill.intensity * target + 0.01}>
         <Lightformer form="rect" intensity={2} position={[0, 5, 0]} scale={[10, 10, 1]} rotation={[Math.PI / 2, 0, 0]} />
         <Lightformer form="rect" intensity={0.6} position={[5, 1, 0]} scale={[10, 3, 1]} rotation={[0, -Math.PI / 2, 0]} color="#ffeedd" />
         <Lightformer form="rect" intensity={0.4} position={[-5, 1, 0]} scale={[10, 3, 1]} rotation={[0, Math.PI / 2, 0]} />
@@ -125,7 +142,11 @@ const LAMP_FILL: Record<LightMode, { sky: string; ground: string; intensity: num
  * rate drop with all of them); the rest fade out after ~8 m so they don't light rooms far behind walls. Like the
  * sun's, the shadow map is only redrawn when something changes (`onChange`).
  */
-function RoomLamps({ slots, shadows, onChange }: { slots: number; shadows: boolean; onChange: () => void }) {
+function RoomLamps({ slots, shadows, onChange, lights, litOut }: {
+  slots: number; shadows: boolean; onChange: () => void;
+  /** the point lights + the lamps they show, for Lighting to scale their intensity every frame (eyes adapting) */
+  lights: React.MutableRefObject<(PointLight | null)[]>; litOut: React.MutableRefObject<(Lamp | undefined)[]>;
+}) {
   const house = useStore(currentHouse);
   const layout = useStore(currentLayout);
   const bundle = useStore((s) => s.bundle);
@@ -146,6 +167,7 @@ function RoomLamps({ slots, shadows, onChange }: { slots: number; shadows: boole
     return next;
   }, [lamps, mode, fx, fz, slots]);
   useEffect(onChange, [lit, onChange]);
+  litOut.current = lit;
   return (
     <>
       {Array.from({ length: slots }, (_, i) => {
@@ -153,8 +175,8 @@ function RoomLamps({ slots, shadows, onChange }: { slots: number; shadows: boole
         return (
           <pointLight
             key={i}
+            ref={(p) => { lights.current[i] = p; }}
             position={l?.position ?? [0, -1000, 0]}
-            intensity={l?.intensity ?? 0}
             color={l?.color ?? '#ffffff'}
             distance={800}
             decay={2}

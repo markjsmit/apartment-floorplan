@@ -16,7 +16,7 @@ export type UrlState = {
   camera?: CameraPose;
   view?: View;
   person?: Person;
-  /** `mood=afternoon|golden|night` */
+  /** `mood=day|golden|night` */
   mood?: Mood;
   /** `lights=off|cozy|work` */
   lights?: LightMode;

@@ -13,7 +13,7 @@ Spec: `docs/superpowers/specs/2026-10-23-apartment-designer-design.md`.
 2. **Read `.ui-state/ui-state.json`** (`npm run -s ui -- state`) before answering anything about "this", "that",
    "it", "here". It has the open room + version, the selection (id, kind, part, name, tags), camera (position cm,
    yaw/pitch, `facing` compass), **`lookingAt`** (what's under the crosshair: id, kind, part, name, hit `point`,
-   `distance` cm), person, `mood` (daylight: afternoon / golden / night), `lightMode` (lamps, whole house: off / cozy / work) and the view-only furniture states. "What I'm looking at" = `lookingAt`;
+   `distance` cm), person, `mood` (daylight: day / golden / night), `lightMode` (lamps, whole house: off / cozy / work) and the view-only furniture states. "What I'm looking at" = `lookingAt`;
    "this" = `selection` if set, else `lookingAt`. **`measurement`** (when Mark uses 📏 Measure): `from`/`to` surfaces
    (id, name), `axis` (x, y = height, z) and `distanceCm`, measured straight out from the first surface along one
    axis — or `axis: "free"` = straight line between the two clicked spots (Angled mode — F key or button — or two spots on one wall/floor). `.ui-state/events.log` has recent clicks/tab switches.
