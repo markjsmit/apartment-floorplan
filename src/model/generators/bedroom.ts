@@ -199,7 +199,7 @@ export function mirrorCabinet(p: Record<string, unknown>): WithStates {
     parts.push(cyl('column-jar', ['jar', 'decor'], Math.min(iw / 2, 4), 11, [ox, T + 5.5, D / 2], { material: 'glass', glass: true }));
     parts.push(cyl('column-cotton', ['jar', 'decor'], Math.min(iw / 2, 4) - 0.6, 5, [ox, T + 3, D / 2], { color: '#f6f3ee' }));
     parts.push(cyl('column-pot', ['plant', 'pot'], Math.min(iw / 2, 4.5), 9, [ox, (2 * H) / 3 + T + 4.5, D / 2], { color: '#f4f4f2' }));
-    parts.push({ id: 'column-plant', tags: ['plant'], geometry: { type: 'ellipsoid', size: [Math.min(iw, 12), 14, 12] }, position: [ox, (2 * H) / 3 + T + 15, D / 2], rotation: [0, 0, 0], color: '#5e7d4a', castShadow: true, glass: false });
+    parts.push({ id: 'column-plant', tags: ['plant'], geometry: { type: 'ellipsoid', size: [Math.min(iw, 12), 14, 12], segments: 16 }, position: [ox, (2 * H) / 3 + T + 15, D / 2], rotation: [0, 0, 0], color: '#5e7d4a', castShadow: true, glass: false });
     parts.push(box('column-towel', ['towel'], [iw - 1, 6, D - 5], [ox, H / 3 + T + 3, D / 2], { material: 'fabric-grey', color: '#e9e6df' }));
   }
   return {

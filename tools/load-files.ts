@@ -2,6 +2,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { buildBundle, type Bundle, type RawFile, type SiteConfig } from '../src/model/bundle';
+import { GALLERY_FILE, thumbFile } from '../src/model/gallery';
 
 export const ROOT = fileURLToPath(new URL('..', import.meta.url));
 
@@ -19,6 +20,7 @@ export function readRawFiles(root = ROOT): RawFile[] {
     ...walk(path.join(root, 'house')).filter((p) => p.endsWith('.json')),
     ...walk(path.join(root, 'assets/furniture')).filter((p) => p.endsWith('/asset.json')),
     ...walk(path.join(root, 'assets/textures')).filter((p) => p.endsWith('/texture.json')),
+    ...[path.join(root, GALLERY_FILE)].filter((p) => fs.existsSync(p)),
   ];
   return paths.map((p) => {
     const text = fs.readFileSync(p, 'utf8');
@@ -51,6 +53,15 @@ export function loadBundleFromDisk(root = ROOT): Bundle {
   for (const f of Object.values(bundle.furniture)) {
     if (f.source.file && !fs.existsSync(path.join(root, 'assets/furniture', f.id, f.source.file))) {
       bundle.errors.push({ file: `assets/furniture/${f.id}/asset.json`, kind: 'furniture', key: f.id, message: `missing model file "${f.source.file}"` });
+    }
+  }
+  for (const r of bundle.gallery?.rooms ?? []) {
+    for (const p of r.pictures) {
+      for (const file of [p.file, thumbFile(p.file)]) {
+        if (!fs.existsSync(path.join(root, 'assets/renders', file))) {
+          bundle.errors.push({ file: GALLERY_FILE, kind: 'gallery', key: 'gallery', message: `missing picture "${file}" (npm run gallery makes thumbs)` });
+        }
+      }
     }
   }
   return bundle;

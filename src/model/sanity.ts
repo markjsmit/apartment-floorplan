@@ -37,6 +37,12 @@ export function sanityCheck(bundle: Bundle): Issue[] {
     }
   }
 
+  const currentRooms = new Set(bundle.versions.current?.rooms.map((r) => r.id) ?? []);
+  for (const r of bundle.gallery?.rooms ?? []) {
+    if (!currentRooms.has(r.room)) error(`gallery: unknown room "${r.room}" (not in Current)`);
+    for (const p of r.pictures) if (!p.file.startsWith(`${r.room}/`)) warn(`gallery: ${p.file} is listed under room "${r.room}"`);
+  }
+
   for (const vid of bundle.versionOrder) {
     const house = bundle.versions[vid];
     // how the rooms fit together as one house (doors lining up, north, walls between rooms)

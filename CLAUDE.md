@@ -135,6 +135,10 @@ Ids are globally unique and room-prefixed: `bedroom.kallax-1`, `storage.door`.
   Kallax cubes, reachable shelf space + the floor under the lowest shelf, tops up to the ceiling, bed base). `--names`
   writes "(… L)" behind the names of the saved versions about that room; rerun it after changing one.
 
+- **🖼️ Gallery** (`src/app/Gallery.tsx`, `src/model/gallery.ts`): AI photo renders of the plan per room, in the app
+  (desktop toolbar, phone ☰ menu; link `?gallery=1` or `?gallery=<room>`, 🔗 Short link = is.gd). Pictures in
+  `assets/renders/<room>/<name>.jpg`, listed with captions in `assets/renders/gallery.json`; `npm run gallery` makes the
+  thumbs. How to make renders: `sources/HOW-TO-RENDER.md` (local). A new render of the same view replaces the old file.
 - `npx vitest run` — tests (model: schema, geometry, assets/states, collision, versions, bundle/sanity, url, sun).
 - `npm run build` — static site into `dist/`. `npm run release` — check + test + build + publish to `gh-pages`
   (needs a clean git tree; **only when Mark asks** — it publishes). Public URL is in `site.config.json`.

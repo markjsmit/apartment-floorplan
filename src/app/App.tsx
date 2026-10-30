@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { fetchBundle } from '../data/client';
 import { Viewer } from '../scene/Viewer';
 import { Banner } from './Banner';
@@ -9,6 +9,9 @@ import { Tabs } from './Tabs';
 import { Toolbar } from './Toolbar';
 import { PersonSwitch, TouchControls } from './TouchControls';
 import { PhoneMenu } from './PhoneMenu';
+import { Gallery } from './Gallery';
+import { useGallery } from './galleryStore';
+import { parseGalleryParam } from '../model/gallery';
 import { LightModeSwitch, MoodSwitch } from './LightSwitches';
 import { useDevLink } from './useDevLink';
 import { useIsMobile, useIsTouch } from './useIsMobile';
@@ -23,12 +26,22 @@ export function App() {
   const roomVersions = useStore((s) => s.roomVersions);
   const mobile = useIsMobile();
   const touch = useIsTouch();
+  const galleryOpen = useGallery((g) => g.open);
+  // a gallery link (family on a phone) shows the pictures without loading the 3D house behind them;
+  // it's started the first time they close the gallery
+  const [linkedToGallery] = useState(() => new URLSearchParams(location.search).has('gallery'));
+  const [viewerOn, setViewerOn] = useState(!linkedToGallery);
+  useEffect(() => {
+    if (!galleryOpen && bundle) setViewerOn(true);
+  }, [galleryOpen, bundle]);
   useDevLink();
 
   useEffect(() => {
     fetchBundle()
       .then((b) => {
         const u = parseUrlState(location.search, b);
+        const g = parseGalleryParam(location.search, b.gallery?.rooms.map((r) => r.room) ?? []);
+        if (g) useGallery.getState().show(g.room);
         useStore.setState({
           // version= applies to the linked room only (setBundle derives versionId from roomVersions)
           roomVersions: u.roomVersions,
@@ -77,13 +90,14 @@ export function App() {
     // keep any other params (noreport, view, debug flags...) as they were
     const q = new URLSearchParams(location.search);
     ['room', 'version', 'rv', 'cam'].forEach((k) => q.delete(k));
+    // gallery= is kept as it is (the gallery keeps it up to date itself)
     const rest = q.toString();
     history.replaceState(null, '', `${serializeUrlState({ roomId, versionId, roomVersions })}${rest ? `&${rest}` : ''}`);
   }, [bundle, roomId, versionId, roomVersions]);
 
   return (
     <div className={mobile ? 'app mobile' : 'app'}>
-      <Viewer />
+      {viewerOn && <Viewer />}
       {/* phone: rooms, versions and tools live in the ☰ menu; a clean screen otherwise */}
       {!mobile && <Tabs showVersions />}
       {mobile && <PersonSwitch />}
@@ -100,6 +114,7 @@ export function App() {
       {!mobile && !touch && (
         <div className="help">↑↓ walk · ←→ turn · W A S D walk + step sideways · two-finger swipe / E C look · middle-click mouse look ·click select · double-click change state · M measure (F angled) · L light mode · Esc deselect</div>
       )}
+      <Gallery />
       {!bundle && <div className="loading">Loading…</div>}
     </div>
   );

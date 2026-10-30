@@ -1,0 +1,76 @@
+{
+  "intro": "Our plan for the new apartment, room by room. These are AI photo renders of the 3D model: the layout and furniture are the plan, small details (books, plants, the view) are the AI's impression.",
+  "rooms": [
+    {
+      "room": "living",
+      "pictures": [
+        { "file": "living/entrance.jpg", "caption": "From the front door: dining table, sofa, TV corner and the balcony" },
+        { "file": "living/sofa.jpg", "caption": "The sofa corner by the big window" },
+        { "file": "living/tv-wall.jpg", "caption": "From the sofa: TV wall, the pillar with the clock, balcony and city view" },
+        { "file": "living/kitchen-view.jpg", "caption": "From the balcony door towards the kitchen and dining table" },
+        { "file": "living/kitchen.jpg", "caption": "The kitchen: island with stools, fridge niche, coats and shoes by the door" },
+        { "file": "living/dining.jpg", "caption": "The dining table, with the coat rack and shoe shelves behind it" },
+        { "file": "living/hall-stand-open.jpg", "caption": "The hall stand opened: shoe bench, key niche and the drawer column" },
+        { "file": "living/evening.jpg", "caption": "The same view in the evening, with only the cozy lamps on" }
+      ]
+    },
+    {
+      "room": "balcony",
+      "pictures": [
+        { "file": "balcony/lounge.jpg", "caption": "Rattan lounge corner, looking into the living room" },
+        { "file": "balcony/bar.jpg", "caption": "The bar counter along the railing" },
+        { "file": "balcony/view.jpg", "caption": "The view from the bar stools" }
+      ]
+    },
+    {
+      "room": "hallway",
+      "pictures": [
+        { "file": "hallway/to-living.jpg", "caption": "Down the hallway towards the living room" },
+        { "file": "hallway/from-living.jpg", "caption": "From the living room: built-in cabinets and the bedroom door" },
+        { "file": "hallway/niche-open.jpg", "caption": "The niche cabinets opened: board games, boxes and the broom cupboard" }
+      ]
+    },
+    {
+      "room": "storage",
+      "pictures": [
+        { "file": "storage/desk.jpg", "caption": "The wall bed with its desk folded down, by the big window" },
+        { "file": "storage/guest-bed.jpg", "caption": "The same wall bed folded down as a guest bed" },
+        { "file": "storage/aisle.jpg", "caption": "The storage aisle: Kallax shelves with books and labelled boxes" },
+        { "file": "storage/from-door.jpg", "caption": "From the door: shelves, shoe bench and skate bags" },
+        { "file": "storage/drying-racks.jpg", "caption": "Drying racks folded out, with the small ironing board under them" },
+        { "file": "storage/shoe-bench.jpg", "caption": "Tilt-out shoe cabinets and the tool pegboard" }
+      ]
+    },
+    {
+      "room": "bathroom",
+      "pictures": [
+        { "file": "bathroom/from-door.jpg", "caption": "The bathroom: vanity with mirror cabinet, toilet and the bath" },
+        { "file": "bathroom/vanity.jpg", "caption": "The vanity and the laundry closet doors" },
+        { "file": "bathroom/laundry-open.jpg", "caption": "The laundry closet opened: washing machine and towel shelves" }
+      ]
+    },
+    {
+      "room": "bedroom",
+      "pictures": [
+        { "file": "bedroom/headboard.jpg", "caption": "The bed with its oak shelf, open wardrobe on the left" },
+        { "file": "bedroom/bed.jpg", "caption": "The bed and nightstands from the makeup corner" },
+        { "file": "bedroom/tv-wall.jpg", "caption": "From the bed: window, TV with speakers and the makeup desk" },
+        { "file": "bedroom/makeup.jpg", "caption": "TV wall, makeup desk, open wardrobe and the en-suite door" },
+        { "file": "bedroom/from-window.jpg", "caption": "From the window towards the wardrobe and en-suite" },
+        { "file": "bedroom/laundry-open.jpg", "caption": "The vanity and the laundry closet opened (baskets + shelves)" }
+      ]
+    },
+    {
+      "room": "closet",
+      "pictures": [
+        { "file": "closet/from-door.jpg", "caption": "The walk-in closet: rails both sides, mirror at the end" }
+      ]
+    },
+    {
+      "room": "ensuite",
+      "pictures": [
+        { "file": "ensuite/from-door.jpg", "caption": "The en-suite shower" }
+      ]
+    }
+  ]
+}

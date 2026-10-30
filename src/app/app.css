@@ -119,3 +119,38 @@ button { font: inherit; color: inherit; }
 .menu-row button.on { background: var(--text); color: #111; }
 .app.mobile .info.compact { bottom: 150px; }
 .app.mobile .measure-panel { top: 116px; left: 10px; right: 10px; transform: none; white-space: normal; flex-wrap: wrap; }
+
+/* 🖼️ gallery: a full-screen sheet over the 3D view (rooms → pictures → one picture big) */
+.gallery { position: absolute; inset: 0; z-index: 10; background: var(--bg); display: flex; flex-direction: column; }
+.gallery-bar { display: flex; align-items: center; gap: 8px; padding: 10px 12px; border-bottom: 1px solid var(--line);
+  padding-top: max(10px, env(safe-area-inset-top)); }
+.gallery-bar h2 { flex: 1; margin: 0; font-size: 17px; font-weight: 600; text-align: center; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.gallery-bar button { background: rgba(255, 255, 255, 0.06); border: 1px solid var(--line); border-radius: 8px; padding: 8px 12px;
+  font-size: 14px; cursor: pointer; white-space: nowrap; }
+.gallery-scroll { flex: 1; overflow-y: auto; padding: 14px; padding-bottom: max(14px, env(safe-area-inset-bottom)); }
+.gallery-intro { color: var(--muted); margin: 0 0 14px; font-size: 14px; line-height: 1.45; max-width: 70ch; }
+.gallery-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 12px; }
+.gallery-card { display: flex; flex-direction: column; text-align: left; padding: 0; overflow: hidden; cursor: pointer;
+  background: var(--panel-solid); border: 1px solid var(--line); border-radius: 10px; }
+.gallery-card:hover { border-color: rgba(255, 255, 255, 0.35); }
+.gallery-card img { width: 100%; aspect-ratio: 12 / 5; object-fit: cover; display: block; background: #222; }
+.gallery-grid.rooms .gallery-card img { aspect-ratio: 16 / 9; }
+.gallery-card-title { font-size: 16px; font-weight: 600; padding: 10px 12px 2px; }
+.gallery-card-count { font-size: 13px; color: var(--muted); padding: 0 12px 10px; }
+.gallery-card-caption { font-size: 13.5px; line-height: 1.35; padding: 8px 10px 10px; }
+.gallery-big { position: absolute; inset: 0; z-index: 11; background: rgba(0, 0, 0, 0.94); display: flex; flex-direction: column;
+  align-items: center; justify-content: center; touch-action: pan-y; user-select: none; }
+.gallery-big img { max-width: 100%; max-height: calc(100% - 90px); object-fit: contain; }
+.gallery-big-caption { display: flex; align-items: center; gap: 12px; padding: 12px; max-width: 900px; width: 100%;
+  padding-bottom: max(12px, env(safe-area-inset-bottom)); }
+.gallery-big-caption span { flex: 1; text-align: center; font-size: 14.5px; line-height: 1.4; }
+.gallery-big-caption em { color: var(--muted); font-style: normal; margin-left: 6px; white-space: nowrap; }
+.gallery-big-caption button, .gallery-big-close { background: rgba(255, 255, 255, 0.1); border: 1px solid var(--line); border-radius: 50%;
+  width: 44px; height: 44px; font-size: 22px; cursor: pointer; flex: none; }
+.gallery-big-close { position: absolute; top: max(12px, env(safe-area-inset-top)); right: 12px; font-size: 18px; }
+.app.mobile .gallery-grid { grid-template-columns: 1fr; }
+.app.mobile .gallery-grid:not(.rooms) { grid-template-columns: 1fr 1fr; gap: 8px; }
+.app.mobile .gallery-grid:not(.rooms) .gallery-card-caption { font-size: 12px; padding: 6px 8px 8px; }
+.menu-row .menu-gallery { width: 100%; text-align: left; font-size: 15px; padding: 12px 14px; }
+/* toasts ("Link copied") show over the gallery too */
+.banners { z-index: 12; }

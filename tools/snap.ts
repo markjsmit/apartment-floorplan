@@ -1,4 +1,5 @@
-// npm run snap -- <room> [version] [--cam x,z,yaw,pitch] [--top] [--person heli] [--mood day|golden|night] [--lights off|cozy|work] [--size 1280x800] [--states id:state,...] [--out file.png]
+// npm run snap -- <room> [version] [--cam x,z,yaw,pitch] [--top] [--person heli] [--mood day|golden|night] [--lights off|cozy|work] [--size 1280x800] [--states id:state,...] [--clean] [--out file.png]
+// --clean hides the app's buttons and labels (render inputs).
 // Renders the viewer headless and saves a PNG Claude can look at. Uses the running dev server on :5180,
 // or starts a temporary one on :5181. Never reports UI state (noreport=1), so Mark's selection stays untouched.
 import fs from 'node:fs';
@@ -16,7 +17,7 @@ const flag = (n: string) => {
 const positional = args.filter((a, i) => !a.startsWith('--') && !VALUE_FLAGS.includes(args[i - 1]));
 const [room, version = 'current'] = positional;
 if (!room) {
-  console.log('usage: npm run snap -- <room> [version] [--cam x,z,yaw,pitch] [--top] [--person heli] [--mood day|golden|night] [--lights off|cozy|work] [--size 1280x800] [--states id:state,...] [--out file.png]');
+  console.log('usage: npm run snap -- <room> [version] [--cam x,z,yaw,pitch] [--top] [--person heli] [--mood day|golden|night] [--lights off|cozy|work] [--size 1280x800] [--states id:state,...] [--clean] [--out file.png]');
   process.exit(1);
 }
 
@@ -72,6 +73,9 @@ try {
   await page.waitForFunction(() => !(window as { __loading?: boolean }).__loading, null, { timeout: 60000 });
   // a live dev-server stream (another session editing) can keep the network busy: don't wait forever
   await page.waitForLoadState('networkidle', { timeout: 10000 }).catch(() => {});
+  if (args.includes('--clean')) {
+    await page.addStyleTag({ content: '.app > *:not(.viewer) { display: none !important; }' });
+  }
   await page.waitForTimeout(800);
   const outDir = path.join(ROOT, '.snaps');
   fs.mkdirSync(outDir, { recursive: true });

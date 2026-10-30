@@ -3,11 +3,12 @@ import {
   FurnitureAssetSchema, HouseSchema, TextureAssetSchema,
   type FurnitureAsset, type House, type TextureAsset,
 } from './schema';
+import { GALLERY_FILE, GallerySchema, type Gallery } from './gallery';
 import { EMPTY_ID, emptyVersion, versionIdFromPath } from './versions';
 
 // Everything the viewer needs, as one JSON document: served by the dev server, emitted as bundle.json for the static site.
 
-export type FileKind = 'version' | 'furniture' | 'texture';
+export type FileKind = 'version' | 'furniture' | 'texture' | 'gallery';
 export type FileError = { file: string; kind: FileKind; key: string; message: string };
 export type LoadedFurniture = FurnitureAsset & { baseUrl: string };
 export type LoadedTexture = TextureAsset & { baseUrl: string };
@@ -19,12 +20,15 @@ export type Bundle = {
   furniture: Record<string, LoadedFurniture>;
   textures: Record<string, LoadedTexture>;
   site: SiteConfig;
+  /** the render gallery (null = no assets/renders/gallery.json yet) */
+  gallery: Gallery | null;
   errors: FileError[];
 };
 
 export type RawFile = { path: string; json?: unknown; parseError?: string };
 
 function classify(path: string): { kind: FileKind; key: string } | null {
+  if (path === GALLERY_FILE) return { kind: 'gallery', key: 'gallery' };
   let m = /^house\/(.+)\.json$/.exec(path);
   if (m) return { kind: 'version', key: versionIdFromPath(path) };
   m = /^assets\/furniture\/([^/]+)\/asset\.json$/.exec(path);
@@ -46,7 +50,7 @@ function versionRank(id: string, archived = false): string {
 }
 
 export function buildBundle(files: RawFile[], site: SiteConfig): Bundle {
-  const b: Bundle = { versions: {}, versionOrder: [], furniture: {}, textures: {}, site, errors: [] };
+  const b: Bundle = { versions: {}, versionOrder: [], furniture: {}, textures: {}, site, gallery: null, errors: [] };
   for (const f of files) {
     const c = classify(f.path);
     if (!c) continue;
@@ -64,6 +68,10 @@ export function buildBundle(files: RawFile[], site: SiteConfig): Bundle {
       if (!r.success) fail(formatZod(r.error));
       else if (r.data.id !== c.key) fail(`id "${r.data.id}" must match its folder name "${c.key}"`);
       else b.furniture[c.key] = { ...r.data, baseUrl: `lib/furniture/${c.key}/` };
+    } else if (c.kind === 'gallery') {
+      const r = GallerySchema.safeParse(f.json);
+      if (r.success) b.gallery = r.data;
+      else fail(formatZod(r.error));
     } else {
       const r = TextureAssetSchema.safeParse(f.json);
       if (!r.success) fail(formatZod(r.error));
@@ -100,6 +108,7 @@ export function mergeBundle(prev: Bundle | null, next: Bundle): Bundle {
     if (e.kind === 'version' && prev.versions[e.key]) merged.versions[e.key] = prev.versions[e.key];
     if (e.kind === 'furniture' && prev.furniture[e.key]) merged.furniture[e.key] = prev.furniture[e.key];
     if (e.kind === 'texture' && prev.textures[e.key]) merged.textures[e.key] = prev.textures[e.key];
+    if (e.kind === 'gallery') merged.gallery = prev.gallery;
   }
   return withEmpty(merged);
 }

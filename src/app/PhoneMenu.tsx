@@ -3,6 +3,7 @@ import { Tabs } from './Tabs';
 import { share } from './Toolbar';
 import { useStore } from './store';
 import { useMeasure } from './measureStore';
+import { useGallery } from './galleryStore';
 
 /** Phone: everything else the desktop shows (rooms, versions, top view, measure, select, share) behind one ☰ button. */
 export function PhoneMenu() {
@@ -25,6 +26,11 @@ export function PhoneMenu() {
               if ((e.target as HTMLElement).closest('.tab')) close();
             }}
           >
+            {s.bundle?.gallery && (
+              <div className="menu-row">
+                <button className="menu-gallery" onClick={() => { useGallery.getState().show(); close(); }}>🖼️ Gallery: photos of every room</button>
+              </div>
+            )}
             <h3>Rooms &amp; versions</h3>
             <Tabs showVersions />
             <h3>View</h3>

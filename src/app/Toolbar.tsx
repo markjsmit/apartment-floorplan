@@ -5,6 +5,7 @@ import { useStore } from './store';
 import { useMeasure } from './measureStore';
 import { LightModeSwitch, MoodSwitch } from './LightSwitches';
 import { LIGHT_MODES } from '../model/lights';
+import { useGallery } from './galleryStore';
 
 /** Copies a link to the open room + version (and the other rooms' choices). */
 export async function share() {
@@ -50,6 +51,7 @@ export function Toolbar() {
       <LightModeSwitch labels />
       <button className={measuring ? 'on' : ''} onClick={toggleMeasure} title="Measure between two surfaces (M)">📏 Measure</button>
       <button onClick={share}>🔗 Share</button>
+      {s.bundle?.gallery && <button onClick={() => useGallery.getState().show()} title="Photo renders of the plan, per room">🖼️ Gallery</button>}
     </div>
   );
 }
