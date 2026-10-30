@@ -53,7 +53,7 @@ entry are therefore up to ~1 m off in x. Everything west of the hallway end is u
 - **"hallway cabin 123 × 38"** (notes) is the glossy, handleless block on the hallway's south wall next to the fridge.
 - **"bedroom side cabin 80 × ?"** (notes) is the shoe-rack recess just inside the bedroom door.
 - **Living room:**
-  - The 238 lowered ceiling covers the whole east side, with the AC grille on its west face.
+  - The lowered ceiling (231; the notes say 238, but the main ceiling is 270 not 277 — Mark, 30 Oct — so the same 7 cm offset is assumed) covers the whole east side, with the AC grille on its west face.
   - There is a bulkhead (~215) over the front door and counter.
   - The sofa window is ~120 × 125.
   - Window tops are 55 below the ceiling ("גובה מעל חלון 55").

@@ -57,7 +57,7 @@
           720
         ]
       ],
-      "ceilingHeight": 277,
+      "ceilingHeight": 270,
       "northAngle": 0,
       "floor": {
         "material": "tiles-porcelain-60"
@@ -93,7 +93,7 @@
                 720
               ]
             ],
-            "height": 238,
+            "height": 231,
             "tags": [
               "lowered ceiling",
               "soffit",
@@ -120,7 +120,7 @@
                 720
               ]
             ],
-            "height": 215,
+            "height": 210,
             "tags": [
               "lowered ceiling",
               "bulkhead",
@@ -194,7 +194,7 @@
           "wall": "living.wall-0",
           "offset": 70,
           "width": 280,
-          "height": 222,
+          "height": 215,
           "asset": "sliding-door",
           "name": "Balcony door",
           "tags": [
@@ -214,7 +214,7 @@
           "offset": 415,
           "width": 120,
           "height": 125,
-          "sill": 97,
+          "sill": 90,
           "asset": "window-basic",
           "params": {
             "frameMaterial": "aluminium-grey",
@@ -232,7 +232,7 @@
           "wall": "living.wall-1",
           "offset": 287,
           "width": 158,
-          "height": 238,
+          "height": 231,
           "name": "Opening to the hallway",
           "tags": [
             "hallway",
@@ -250,7 +250,7 @@
           "wall": "living.wall-4",
           "offset": 328,
           "width": 100,
-          "height": 213,
+          "height": 208,
           "asset": "door-basic",
           "name": "Front door",
           "tags": [
@@ -265,7 +265,7 @@
           "wall": "living.wall-5",
           "offset": 565,
           "width": 150,
-          "height": 167,
+          "height": 160,
           "sill": 55,
           "asset": "window-basic",
           "params": {
@@ -404,7 +404,7 @@
           },
           "params": {
             "width": 123,
-            "height": 53,
+            "height": 46,
             "depth": 59.5,
             "lift": "tilt",
             "tiltDeg": 88
@@ -426,7 +426,7 @@
           },
           "params": {
             "width": 152,
-            "height": 53,
+            "height": 46,
             "depth": 59.5,
             "lift": "tilt",
             "tiltDeg": 88
@@ -531,7 +531,7 @@
           ],
           "params": {
             "width": 116,
-            "height": 277,
+            "height": 270,
             "depth": 17,
             "material": "white-paint"
           },
@@ -548,7 +548,7 @@
           ],
           "position": [
             414.4,
-            245,
+            238,
             680
           ],
           "params": {
@@ -571,7 +571,7 @@
           ],
           "position": [
             415,
-            245,
+            238,
             165
           ],
           "params": {
@@ -594,7 +594,7 @@
           ],
           "position": [
             492,
-            238,
+            231,
             140
           ],
           "params": {
@@ -615,7 +615,7 @@
           ],
           "position": [
             492,
-            238,
+            231,
             172
           ],
           "params": {
@@ -636,7 +636,7 @@
           ],
           "position": [
             495,
-            238,
+            231,
             234
           ],
           "params": {
@@ -657,7 +657,7 @@
           ],
           "position": [
             495,
-            238,
+            231,
             264
           ],
           "params": {
@@ -678,7 +678,7 @@
           ],
           "position": [
             445,
-            238,
+            231,
             600
           ],
           "params": {
@@ -699,7 +699,7 @@
           ],
           "position": [
             445,
-            238,
+            231,
             633
           ],
           "params": {
@@ -720,7 +720,7 @@
           ],
           "position": [
             445,
-            238,
+            231,
             663
           ],
           "params": {
@@ -741,7 +741,7 @@
           ],
           "position": [
             215,
-            255,
+            248,
             270
           ],
           "rotation": 270,
@@ -763,7 +763,7 @@
           ],
           "position": [
             150,
-            255,
+            248,
             580
           ],
           "rotation": 270,
@@ -781,7 +781,7 @@
         },
         {
           "path": "openings[living.hallway-opening]",
-          "note": "the hallway mouth from the storage room wall's end (sofa wall 277 + 10) to the glossy block (158 wide = the notes' 1.68 m from the sofa wall's end at 277 to the glossy column at 445), split by the pillar; top = the lowered ceiling (238)"
+          "note": "the hallway mouth from the storage room wall's end (sofa wall 277 + 10) to the glossy block (158 wide = the notes' 1.68 m from the sofa wall's end at 277 to the glossy column at 445), split by the pillar; top = the lowered ceiling (231)"
         },
         {
           "path": "openings[living.tall-window]",
@@ -797,11 +797,11 @@
         },
         {
           "path": "ceiling.lowered[living.ceiling-entrance]",
-          "note": "bulkhead over the front door and the whole counter up to the tall units, underside ~215 (door head), ~40 deep: from the photos, not measured"
+          "note": "bulkhead over the front door and the whole counter up to the tall units, underside ~210 (door head), ~40 deep: from the photos, not measured"
         },
         {
           "path": "openings[living.front-door]",
-          "note": "140 from the dining corner (notes, the label is upside down; photo 160730 agrees); width 100 / height 213 assumed"
+          "note": "140 from the dining corner (notes, the label is upside down; photo 160730 agrees); width 100 / height 208 assumed"
         },
         {
           "path": "items[living.fridge-niche]",
@@ -821,7 +821,7 @@
         },
         {
           "path": "ceiling.lowered[living.ceiling-kitchen]",
-          "note": "lowered ceiling at 238 (notes) over the tall units and the hallway mouth; extent from the photos"
+          "note": "lowered ceiling at 231: the notes say 238, but Mark (30 Oct) says the highest ceiling is 270, not the 277 on the notes, so the same 7 cm offset is assumed for the lowered parts (drop 39 kept) over the tall units and the hallway mouth; extent from the photos"
         }
       ]
     },
@@ -852,7 +852,7 @@
           -20
         ]
       ],
-      "ceilingHeight": 277,
+      "ceilingHeight": 270,
       "northAngle": 0,
       "floor": {
         "material": "tiles-porcelain-60"
@@ -905,7 +905,7 @@
           "wall": "balcony.wall-0",
           "offset": 0,
           "width": 410,
-          "height": 270,
+          "height": 263,
           "name": "Open side (railing)",
           "tags": [
             "railing",
@@ -918,7 +918,7 @@
           "wall": "balcony.wall-3",
           "offset": 0,
           "width": 245,
-          "height": 270,
+          "height": 263,
           "name": "Open end (railing)",
           "tags": [
             "railing"
@@ -930,7 +930,7 @@
           "wall": "balcony.wall-2",
           "offset": 60,
           "width": 280,
-          "height": 222,
+          "height": 215,
           "name": "Balcony door",
           "tags": [
             "balcony door",
@@ -1086,7 +1086,7 @@
           486
         ]
       ],
-      "ceilingHeight": 238,
+      "ceilingHeight": 231,
       "northAngle": 0,
       "floor": {
         "material": "laminate-oak"
@@ -1233,7 +1233,7 @@
           "wall": "hallway.wall-7",
           "offset": 41,
           "width": 158,
-          "height": 238,
+          "height": 231,
           "name": "Opening to the living room",
           "tags": [
             "living room",
@@ -1261,9 +1261,9 @@
             "offset": 201
           },
           "params": {
-            "height": 238,
+            "height": 231,
             "depth": 38,
-            "topDoors": 238,
+            "topDoors": 231,
             "columns": [
               {
                 "w": 36,
@@ -1289,7 +1289,7 @@
             "offset": 173
           },
           "params": {
-            "height": 238,
+            "height": 231,
             "depth": 38,
             "topDoors": 55,
             "columns": [
@@ -1312,7 +1312,7 @@
           ],
           "position": [
             700,
-            238,
+            231,
             430
           ],
           "params": {
@@ -1330,7 +1330,7 @@
         },
         {
           "path": "ceilingHeight",
-          "note": "the lowered ceiling (238, notes) assumed for the whole hallway"
+          "note": "the lowered ceiling (231) assumed for the whole hallway"
         },
         {
           "path": "openings[hallway.bedroom-door]",
@@ -1384,7 +1384,7 @@
           277
         ]
       ],
-      "ceilingHeight": 277,
+      "ceilingHeight": 270,
       "northAngle": 0,
       "floor": {
         "material": "laminate-oak"
@@ -1472,7 +1472,7 @@
           "offset": 85,
           "width": 120,
           "height": 110,
-          "sill": 112,
+          "sill": 105,
           "asset": "window-basic",
           "params": {
             "frameMaterial": "aluminium-grey",
@@ -1961,7 +1961,7 @@
           },
           "params": {
             "width": 42,
-            "ceiling": 277,
+            "ceiling": 270,
             "boards": [
               {
                 "elevation": 40,
@@ -2027,7 +2027,7 @@
           ],
           "position": [
             747,
-            277,
+            270,
             165.5
           ],
           "params": {
@@ -2081,7 +2081,7 @@
           684
         ]
       ],
-      "ceilingHeight": 238,
+      "ceilingHeight": 231,
       "northAngle": 0,
       "floor": {
         "material": "tiles-dark-grey"
@@ -2183,7 +2183,7 @@
           },
           "params": {
             "width": 65,
-            "height": 236,
+            "height": 229,
             "doors": "pair"
           },
           "builtIn": true
@@ -2273,7 +2273,7 @@
           "against": {
             "wall": "bathroom.wall-2",
             "offset": 0,
-            "elevation": 178
+            "elevation": 171
           },
           "builtIn": true
         },
@@ -2325,7 +2325,7 @@
         },
         {
           "path": "ceilingHeight",
-          "note": "lowered ceiling (238) assumed"
+          "note": "lowered ceiling (231) assumed"
         },
         {
           "path": "items[bathroom.bathtub]",
@@ -2404,7 +2404,7 @@
           390
         ]
       ],
-      "ceilingHeight": 277,
+      "ceilingHeight": 270,
       "northAngle": 0,
       "floor": {
         "material": "laminate-oak"
@@ -2541,7 +2541,7 @@
           "offset": 42,
           "width": 105,
           "height": 125,
-          "sill": 97,
+          "sill": 90,
           "asset": "window-basic",
           "params": {
             "frameMaterial": "aluminium-grey",
@@ -2579,7 +2579,7 @@
           "wall": "bedroom.wall-4",
           "offset": 80,
           "width": 60,
-          "height": 238,
+          "height": 231,
           "name": "Frosted glass panel (en-suite)",
           "tags": [
             "glass panel",
@@ -2728,7 +2728,7 @@
           720
         ]
       ],
-      "ceilingHeight": 277,
+      "ceilingHeight": 270,
       "northAngle": 0,
       "floor": {
         "material": "laminate-oak"
@@ -2818,7 +2818,7 @@
           ],
           "position": [
             1155,
-            277,
+            270,
             560
           ],
           "params": {
@@ -2843,7 +2843,7 @@
             "offset": 0
           },
           "params": {
-            "height": 277,
+            "height": 270,
             "depth": 40,
             "sections": [
               {
@@ -2880,7 +2880,7 @@
             "offset": 0
           },
           "params": {
-            "height": 277,
+            "height": 270,
             "depth": 40,
             "sections": [
               {
@@ -2935,7 +2935,7 @@
           720
         ]
       ],
-      "ceilingHeight": 238,
+      "ceilingHeight": 231,
       "northAngle": 0,
       "floor": {
         "material": "tiles-dark-grey"
@@ -2987,7 +2987,7 @@
           "wall": "ensuite.wall-0",
           "offset": 0,
           "width": 60,
-          "height": 238,
+          "height": 231,
           "sill": 0,
           "asset": "window-basic",
           "params": {
@@ -3076,7 +3076,7 @@
           ],
           "position": [
             960,
-            238,
+            231,
             610
           ],
           "params": {
@@ -3118,7 +3118,7 @@
         },
         {
           "path": "ceilingHeight",
-          "note": "lowered ceiling (238) assumed"
+          "note": "lowered ceiling (231) assumed"
         }
       ]
     }
