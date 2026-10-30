@@ -1,27 +1,17 @@
 {
   "meta": {
-    "name": "AI suggestion",
-    "kind": "suggestion",
-    "note": "Bed turned 90°: headboard on the west wall (storage-room wall), TV facing it on the east wall",
+    "name": "2 · Bed under the window (680 L)",
+    "kind": "saved",
+    "note": "Bed under the window, TV on the closet wall next to the closet window with the speakers lying on a low shelf, Kallax on the pier by the door, small makeup desk in the east corner, laundry closet in the recess by the door",
     "location": {
       "lat": 32.0853,
       "lon": 34.7818,
       "label": "Tel Aviv"
     },
-    "createdAt": "2026-10-29T18:55:10.462Z",
+    "createdAt": "2026-10-30T07:45:41.603Z",
     "rooms": [
       "bedroom"
-    ],
-    "baseRoomHashes": {
-      "living": "6527c9f40290753a",
-      "balcony": "8338f11c83603b0e",
-      "hallway": "e01578f811a3e464",
-      "storage": "7b3bf26252567e54",
-      "bathroom": "a5d8eff2dfa0a754",
-      "bedroom": "c25e456e0aa10e46",
-      "closet": "33db4b2080f862b2",
-      "ensuite": "febd24ca0f6b67c4"
-    }
+    ]
   },
   "assumptions": [
     {
@@ -4142,54 +4132,54 @@
         {
           "id": "bedroom.nightstand-1",
           "asset": "old-house-nightstand",
-          "name": "Our grey nightstand (north side, by the window wall)",
+          "name": "Our grey nightstand (west side)",
           "tags": [
             "nightstand",
             "ours"
           ],
           "against": {
-            "wall": "bedroom.wall-14",
-            "offset": 283.5
+            "wall": "bedroom.wall-0",
+            "offset": 4
           }
         },
         {
           "id": "bedroom.bed",
           "asset": "old-house-bed-black",
-          "name": "Our black velvet bed, headboard on the west wall (storage-room wall)",
+          "name": "Our black velvet bed (mattress 180 x 220), headboard under the window",
           "tags": [
             "bed",
             "our bed",
             "ours"
           ],
           "against": {
-            "wall": "bedroom.wall-14",
-            "offset": 68.5
+            "wall": "bedroom.wall-0",
+            "offset": 51
           }
         },
         {
           "id": "bedroom.nightstand-2",
           "asset": "old-house-nightstand",
-          "name": "Our grey nightstand (south side)",
+          "name": "Our grey nightstand (east side)",
           "tags": [
             "nightstand",
             "ours"
           ],
           "against": {
-            "wall": "bedroom.wall-14",
-            "offset": 8.5
+            "wall": "bedroom.wall-0",
+            "offset": 255
           }
         },
         {
           "id": "bedroom.kallax-low",
           "asset": "ikea-kallax-77x147-4-drona",
-          "name": "Kallax 2x4 (bottom), closet wall left of the closet window",
+          "name": "Kallax 2x4 (bottom), against the pier by the door",
           "tags": [
             "kallax",
             "kallax closet"
           ],
           "against": {
-            "wall": "bedroom.wall-2",
-            "offset": 91
+            "wall": "bedroom.wall-13",
+            "offset": 0
           }
         },
         {
@@ -4201,8 +4191,8 @@
             "kallax closet"
           ],
           "against": {
-            "wall": "bedroom.wall-2",
-            "offset": 91,
+            "wall": "bedroom.wall-13",
+            "offset": 0,
             "elevation": 147
           },
           "allowOverlap": [
@@ -4211,26 +4201,24 @@
         },
         {
           "id": "bedroom.makeup-desk",
-          "asset": "heli-makeup-desk",
-          "name": "Heli's makeup corner: L-shaped corner desk like hers (drawers under the side wing, tri-fold mirror) + a strong LED vanity light",
+          "asset": "design-table",
+          "name": "Little makeup desk in the corner (under the closet window)",
           "tags": [
             "makeup desk",
             "makeup corner",
-            "corner desk",
-            "desk",
-            "vanity",
-            "heli"
+            "desk"
           ],
+          "params": {
+            "shape": "rect",
+            "width": 70,
+            "depth": 40,
+            "height": 75,
+            "base": "legs"
+          },
           "against": {
             "wall": "bedroom.wall-2",
             "offset": 0
-          },
-          "assumptions": [
-            {
-              "path": "asset",
-              "note": "sizes estimated from the old-house video (Heli's real desk not measured); the outlet under it for the vanity light is assumed - bedroom outlets not surveyed"
-            }
-          ]
+          }
         },
         {
           "id": "bedroom.makeup-stool",
@@ -4248,7 +4236,7 @@
           },
           "against": {
             "wall": "bedroom.wall-2",
-            "offset": 46,
+            "offset": 15,
             "gap": 12
           },
           "allowOverlap": [
@@ -4256,47 +4244,62 @@
           ]
         },
         {
+          "id": "bedroom.tv-shelf",
+          "asset": "kitchen-shelf",
+          "name": "Low shelf under the TV, below the closet window sill (speakers lying flat on it)",
+          "tags": [
+            "tv shelf",
+            "speaker shelf"
+          ],
+          "params": {
+            "width": 96,
+            "depth": 28,
+            "brackets": "hidden",
+            "contents": "-"
+          },
+          "against": {
+            "wall": "bedroom.wall-2",
+            "offset": 72,
+            "elevation": 85
+          }
+        },
+        {
+          "id": "bedroom.tv-gear",
+          "asset": "tv-gear",
+          "name": "Our bookshelf speakers lying flat on the shelf + media box",
+          "tags": [
+            "speakers",
+            "tv"
+          ],
+          "params": {
+            "width": 96,
+            "depth": 28,
+            "speakers": "flat",
+            "display": "none",
+            "gap": 2
+          },
+          "against": {
+            "wall": "bedroom.wall-2",
+            "offset": 72,
+            "elevation": 87.5
+          },
+          "allowOverlap": [
+            "bedroom.tv-shelf"
+          ]
+        },
+        {
           "id": "bedroom.tv",
           "asset": "tv-42",
-          "name": "Our Samsung 42\" TV on the east wall, facing the bed",
+          "name": "Our Samsung 42\" TV on the wall at the foot of the bed",
           "tags": [
             "tv",
             "bedroom tv"
           ],
           "against": {
-            "wall": "bedroom.wall-1",
-            "offset": 113,
-            "elevation": 110
+            "wall": "bedroom.wall-2",
+            "offset": 74,
+            "elevation": 113
           }
-        },
-        {
-          "id": "bedroom.wall-speakers",
-          "asset": "wall-speakers",
-          "name": "Our Edifier speakers upright on swivel wall arms either side of the TV (~19 cm off it: as far as the 6 ft speaker wire reaches), bottom at 205 (Heli reaches the button), aimed down at the bed; cables in white covers",
-          "tags": [
-            "speakers",
-            "tv",
-            "cables",
-            "cable cover"
-          ],
-          "params": {
-            "width": 94,
-            "tvBottom": 110,
-            "tvHeight": 55,
-            "gap": 25,
-            "bottom": 205,
-            "tilt": 25,
-            "toe": 20,
-            "outletHeight": 30,
-            "wireLength": 183
-          },
-          "against": {
-            "wall": "bedroom.wall-1",
-            "offset": 68.1
-          },
-          "allowOverlap": [
-            "bedroom.tv"
-          ]
         },
         {
           "id": "bedroom.laundry-closet",
@@ -4400,14 +4403,6 @@
         {
           "path": "items",
           "note": "the white wardrobe, bed, crib and nightstands are the owner's (they stand on the floor) — none of it stays"
-        },
-        {
-          "path": "items[bedroom.wall-speakers]",
-          "note": "outlet under the TV on the east wall (~30 cm high) is assumed - the bedroom outlets were not surveyed"
-        },
-        {
-          "path": "items[bedroom.wall-speakers].params.wireLength",
-          "note": "speaker wire 6 ft (183) from Mark's memory, maybe a bit less - it sets how far apart the speakers can go"
         }
       ]
     },

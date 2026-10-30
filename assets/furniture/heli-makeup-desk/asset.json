@@ -11,7 +11,7 @@
     "mirror",
     "bedroom"
   ],
-  "description": "Lightly based on Heli's makeup corner in the old house (video sources/old house/20261028_235945.mp4, ~18-19 s): an L-shaped white corner desk - one wing along the back wall (thin legs at its end, her lamp + round mirror) and one along the side wall with a 5-drawer tower under it facing the room and a white tri-fold mirror on it. Added for Mark: a strong LED vanity light bar on the side wall over the mirror, its cord in a white cover down to an outlet under the desk, so she doesn't need the room light. Origin back-centre of the back wing; the side wing runs along the item's -x side (put the item in a corner with offset 0). Back wing 88 x 42, side wing 40 deep x 82 long, 75 high - estimated, not measured.",
+  "description": "Lightly based on Heli's makeup corner in the old house (video sources/old house/20261028_235945.mp4, ~18-19 s): an L-shaped white corner desk. Main wing (45 deep, 96 long) along the side wall: you sit straight at it facing the wall, knee space between its 2 thin legs and the drawer tower, the white tri-fold mirror right in front of you, her little lamp at the far end. Return wing (38 deep) along the back wall with a 5-drawer tower under it facing the room and her round mirror on it. A strong LED vanity light bar over the mirror (Mark: so she doesn't need the room light), its cord in a white cover to an outlet just above the desk. Put the item in a corner with offset 0: the main wing runs along its -x side. 88 wide x 96 deep x 75 high - estimated, not measured.",
   "source": {
     "kind": "parts",
     "notes": "Look from the old-house video frames at ~18-19 s; sizes estimated from the floor tiles, not measured. Light bar = a typical 60 cm LED vanity/mirror light (~10 W, ~900 lm).",
@@ -19,44 +19,44 @@
   },
   "parts": [
     {
-      "id": "top-back-wing",
+      "id": "top-main",
       "tags": [
         "makeup desk"
       ],
       "geometry": {
         "type": "box",
         "size": [
-          88,
+          45,
           2.5,
-          42
+          96
         ],
         "radius": 0.4
       },
       "position": [
-        0,
+        -21.5,
         73.75,
-        21.0
+        48.0
       ],
       "material": "white-laminate"
     },
     {
-      "id": "top-side-wing",
+      "id": "top-return",
       "tags": [
         "makeup desk"
       ],
       "geometry": {
         "type": "box",
         "size": [
-          40,
+          43,
           2.5,
-          40
+          38
         ],
         "radius": 0.4
       },
       "position": [
-        -24.0,
+        22.5,
         73.75,
-        62.0
+        19.0
       ],
       "material": "white-laminate"
     },
@@ -68,16 +68,16 @@
       "geometry": {
         "type": "box",
         "size": [
-          37,
+          41.0,
           72.5,
-          38
+          36
         ],
         "radius": 0.3
       },
       "position": [
-        -25.5,
+        22.5,
         36.25,
-        62.0
+        18.0
       ],
       "material": "white-laminate"
     },
@@ -89,16 +89,16 @@
       "geometry": {
         "type": "box",
         "size": [
-          1.6,
+          39.8,
           13.38,
-          36.8
+          1.6
         ],
         "radius": 0.3
       },
       "position": [
-        -6.2,
+        22.5,
         8.29,
-        62.0
+        36.8
       ],
       "material": "white-laminate"
     },
@@ -110,15 +110,15 @@
       "geometry": {
         "type": "box",
         "size": [
-          0.6,
+          9,
           0.8,
-          9
+          0.6
         ]
       },
       "position": [
-        -5.1,
+        22.5,
         12.78,
-        62.0
+        37.9
       ],
       "color": "#b9b9b9"
     },
@@ -130,16 +130,16 @@
       "geometry": {
         "type": "box",
         "size": [
-          1.6,
+          39.8,
           13.38,
-          36.8
+          1.6
         ],
         "radius": 0.3
       },
       "position": [
-        -6.2,
+        22.5,
         22.27,
-        62.0
+        36.8
       ],
       "material": "white-laminate"
     },
@@ -151,15 +151,15 @@
       "geometry": {
         "type": "box",
         "size": [
-          0.6,
+          9,
           0.8,
-          9
+          0.6
         ]
       },
       "position": [
-        -5.1,
+        22.5,
         26.76,
-        62.0
+        37.9
       ],
       "color": "#b9b9b9"
     },
@@ -171,16 +171,16 @@
       "geometry": {
         "type": "box",
         "size": [
-          1.6,
+          39.8,
           13.38,
-          36.8
+          1.6
         ],
         "radius": 0.3
       },
       "position": [
-        -6.2,
+        22.5,
         36.25,
-        62.0
+        36.8
       ],
       "material": "white-laminate"
     },
@@ -192,15 +192,15 @@
       "geometry": {
         "type": "box",
         "size": [
-          0.6,
+          9,
           0.8,
-          9
+          0.6
         ]
       },
       "position": [
-        -5.1,
+        22.5,
         40.74,
-        62.0
+        37.9
       ],
       "color": "#b9b9b9"
     },
@@ -212,16 +212,16 @@
       "geometry": {
         "type": "box",
         "size": [
-          1.6,
+          39.8,
           13.38,
-          36.8
+          1.6
         ],
         "radius": 0.3
       },
       "position": [
-        -6.2,
+        22.5,
         50.23,
-        62.0
+        36.8
       ],
       "material": "white-laminate"
     },
@@ -233,15 +233,15 @@
       "geometry": {
         "type": "box",
         "size": [
-          0.6,
+          9,
           0.8,
-          9
+          0.6
         ]
       },
       "position": [
-        -5.1,
+        22.5,
         54.72,
-        62.0
+        37.9
       ],
       "color": "#b9b9b9"
     },
@@ -253,16 +253,16 @@
       "geometry": {
         "type": "box",
         "size": [
-          1.6,
+          39.8,
           13.38,
-          36.8
+          1.6
         ],
         "radius": 0.3
       },
       "position": [
-        -6.2,
+        22.5,
         64.21,
-        62.0
+        36.8
       ],
       "material": "white-laminate"
     },
@@ -274,74 +274,40 @@
       "geometry": {
         "type": "box",
         "size": [
-          0.6,
+          9,
           0.8,
-          9
+          0.6
         ]
       },
       "position": [
-        -5.1,
+        22.5,
         68.7,
-        62.0
+        37.9
       ],
       "color": "#b9b9b9"
     },
     {
-      "id": "leg-back",
-      "tags": [
-        "makeup desk"
-      ],
-      "geometry": {
-        "type": "cylinder",
-        "radius": 1.3,
-        "height": 72.5
-      },
-      "position": [
-        41.5,
-        36.25,
-        2.5
-      ],
-      "color": "#f2f2f0"
-    },
-    {
-      "id": "leg-front",
-      "tags": [
-        "makeup desk"
-      ],
-      "geometry": {
-        "type": "cylinder",
-        "radius": 1.3,
-        "height": 72.5
-      },
-      "position": [
-        41.5,
-        36.25,
-        39.5
-      ],
-      "color": "#f2f2f0"
-    },
-    {
-      "id": "rail",
+      "id": "cleat",
       "tags": [
         "makeup desk"
       ],
       "geometry": {
         "type": "box",
         "size": [
-          45,
+          1.5,
           4,
-          1.5
+          55
         ]
       },
       "position": [
-        18.5,
+        -43.25,
         70.5,
-        1.5
+        67.0
       ],
       "material": "white-laminate"
     },
     {
-      "id": "leg-corner",
+      "id": "leg-wall",
       "tags": [
         "makeup desk"
       ],
@@ -351,9 +317,26 @@
         "height": 72.5
       },
       "position": [
-        -6.5,
+        -41.5,
         36.25,
-        39.5
+        93.5
+      ],
+      "color": "#f2f2f0"
+    },
+    {
+      "id": "leg-room",
+      "tags": [
+        "makeup desk"
+      ],
+      "geometry": {
+        "type": "cylinder",
+        "radius": 1.3,
+        "height": 72.5
+      },
+      "position": [
+        -1.5,
+        36.25,
+        93.5
       ],
       "color": "#f2f2f0"
     },
@@ -366,16 +349,16 @@
       "geometry": {
         "type": "box",
         "size": [
-          30,
+          34,
           45,
           1.2
         ],
         "radius": 0.4
       },
       "position": [
-        -39.5,
+        -40.0,
         97.9,
-        26
+        67.0
       ],
       "rotation": [
         0,
@@ -393,15 +376,15 @@
       "geometry": {
         "type": "box",
         "size": [
-          28.2,
+          32.2,
           43,
           0.2
         ]
       },
       "position": [
-        -38.8,
+        -39.3,
         97.9,
-        26.0
+        67.0
       ],
       "rotation": [
         0,
@@ -420,20 +403,20 @@
       "geometry": {
         "type": "box",
         "size": [
-          15,
+          17,
           45,
           1.2
         ],
         "radius": 0.4
       },
       "position": [
-        -35.2,
+        -35.75,
         97.9,
-        47.14
+        42.64
       ],
       "rotation": [
         0,
-        125,
+        60,
         0
       ],
       "color": "#f4f4f2"
@@ -447,19 +430,19 @@
       "geometry": {
         "type": "box",
         "size": [
-          13.2,
+          15.2,
           43,
           0.2
         ]
       },
       "position": [
-        -34.62,
+        -35.14,
         97.9,
-        46.74
+        42.99
       ],
       "rotation": [
         0,
-        125,
+        60,
         0
       ],
       "material": "mirror",
@@ -474,20 +457,20 @@
       "geometry": {
         "type": "box",
         "size": [
-          15,
+          17,
           45,
           1.2
         ],
         "radius": 0.4
       },
       "position": [
-        -35.2,
+        -35.75,
         97.9,
-        4.86
+        91.36
       ],
       "rotation": [
         0,
-        55,
+        120,
         0
       ],
       "color": "#f4f4f2"
@@ -501,19 +484,19 @@
       "geometry": {
         "type": "box",
         "size": [
-          13.2,
+          15.2,
           43,
           0.2
         ]
       },
       "position": [
-        -34.62,
+        -35.14,
         97.9,
-        5.26
+        91.01
       ],
       "rotation": [
         0,
-        55,
+        120,
         0
       ],
       "material": "mirror",
@@ -531,14 +514,14 @@
         "size": [
           4,
           6,
-          50
+          44
         ],
         "radius": 0.4
       },
       "position": [
         -42.0,
-        142,
-        26
+        139.5,
+        67.0
       ],
       "color": "#e8e8e6"
     },
@@ -554,14 +537,14 @@
         "size": [
           6,
           2.2,
-          60
+          58
         ],
         "radius": 0.8
       },
       "position": [
         -38.0,
-        138.5,
-        26
+        136,
+        67.0
       ],
       "color": "#f4f4f2"
     },
@@ -578,13 +561,13 @@
         "size": [
           4.5,
           0.4,
-          57
+          55
         ]
       },
       "position": [
         -37.6,
-        137.3,
-        26
+        134.8,
+        67.0
       ],
       "color": "#fffdf8",
       "castShadow": false,
@@ -595,7 +578,7 @@
       }
     },
     {
-      "id": "vanity-light-cover",
+      "id": "vanity-light-cover-run",
       "tags": [
         "makeup desk",
         "cable",
@@ -605,15 +588,38 @@
         "type": "box",
         "size": [
           1.6,
-          102.5,
-          2.5
+          2,
+          15.0
         ],
         "radius": 0.4
       },
       "position": [
         -43.2,
-        87.25,
-        -1
+        139.5,
+        31.0
+      ],
+      "color": "#f4f4f2"
+    },
+    {
+      "id": "vanity-light-cover-down",
+      "tags": [
+        "makeup desk",
+        "cable",
+        "cable cover"
+      ],
+      "geometry": {
+        "type": "box",
+        "size": [
+          1.6,
+          46.5,
+          2
+        ],
+        "radius": 0.4
+      },
+      "position": [
+        -43.2,
+        116.25,
+        24
       ],
       "color": "#f4f4f2"
     },
@@ -628,14 +634,14 @@
         "size": [
           1.2,
           8,
-          22
+          8
         ],
         "radius": 0.4
       },
       "position": [
         -43.4,
-        30,
-        14
+        89,
+        24
       ],
       "color": "#f4f4f2"
     },
@@ -649,15 +655,15 @@
         "type": "box",
         "size": [
           3,
-          4.5,
+          3.5,
           3.5
         ],
         "radius": 0.6
       },
       "position": [
-        -41.5,
-        30,
-        9
+        -41.7,
+        89,
+        24
       ],
       "color": "#f4f4f2"
     },
@@ -673,9 +679,9 @@
         "height": 1
       },
       "position": [
-        8,
+        13.0,
         75.5,
-        20
+        16
       ],
       "color": "#f4f4f2"
     },
@@ -691,9 +697,9 @@
         "height": 13
       },
       "position": [
-        8,
+        13.0,
         82.5,
-        20
+        16
       ],
       "color": "#f4f4f2"
     },
@@ -709,9 +715,9 @@
         "height": 1.4
       },
       "position": [
-        8,
+        13.0,
         98,
-        20
+        16
       ],
       "rotation": [
         90,
@@ -732,9 +738,9 @@
         "height": 0.2
       },
       "position": [
-        8,
+        13.0,
         98,
-        20.75
+        16.75
       ],
       "rotation": [
         90,
@@ -756,9 +762,9 @@
         "height": 12
       },
       "position": [
-        34,
+        -32.0,
         81,
-        9
+        86
       ],
       "color": "#e9e6df"
     },
@@ -775,9 +781,9 @@
         "segments": 16
       },
       "position": [
-        34,
+        -32.0,
         91.5,
-        9
+        86
       ],
       "material": "linen-white"
     },
@@ -794,9 +800,9 @@
         "segments": 12
       },
       "position": [
-        -28.0,
+        -30.0,
         81.5,
-        8
+        53.0
       ],
       "color": "#e9c9a8"
     },
@@ -813,9 +819,9 @@
         "segments": 12
       },
       "position": [
-        -24.0,
+        -32.0,
         79.5,
-        6
+        58.0
       ],
       "color": "#c23a4a"
     },
@@ -832,9 +838,9 @@
         "segments": 12
       },
       "position": [
-        -20.0,
+        -29.0,
         82.5,
-        10
+        79.0
       ],
       "color": "#f0f0f0"
     },
@@ -851,9 +857,9 @@
         "segments": 12
       },
       "position": [
-        -14.0,
+        -25.0,
         78.5,
-        38
+        49.0
       ],
       "color": "#2b2b2b"
     },
@@ -870,9 +876,9 @@
         "segments": 12
       },
       "position": [
-        20,
+        -31.0,
         80.5,
-        7
+        84.0
       ],
       "color": "#d9a0b0"
     },
@@ -889,9 +895,9 @@
         "segments": 12
       },
       "position": [
-        23,
+        -27.0,
         79.0,
-        11
+        87.0
       ],
       "color": "#d6b48a"
     },
@@ -908,9 +914,9 @@
         "segments": 12
       },
       "position": [
-        -6,
+        -33.0,
         82.0,
-        8
+        74.0
       ],
       "color": "#6c4a8a"
     },
@@ -927,9 +933,9 @@
         "segments": 12
       },
       "position": [
-        -16.0,
+        5.0,
         79.0,
-        52
+        10
       ],
       "color": "#b88a6a"
     },
@@ -946,9 +952,9 @@
         "segments": 12
       },
       "position": [
-        -13.0,
+        28.0,
         80.0,
-        60
+        9
       ],
       "color": "#efe6dc"
     },
@@ -964,9 +970,9 @@
         "height": 9
       },
       "position": [
-        -16.0,
+        -35.0,
         79.5,
-        46
+        43
       ],
       "color": "#e3e3e3"
     },
@@ -983,9 +989,9 @@
         "segments": 8
       },
       "position": [
-        -17.0,
+        -36.0,
         87,
-        46
+        43
       ],
       "rotation": [
         0,
@@ -1007,9 +1013,9 @@
         "segments": 8
       },
       "position": [
-        -15.0,
+        -34.0,
         87,
-        46.8
+        43.8
       ],
       "rotation": [
         4.8,
@@ -1031,9 +1037,9 @@
         "segments": 8
       },
       "position": [
-        -16.0,
+        -35.0,
         87,
-        45
+        42
       ],
       "rotation": [
         -6,
@@ -1058,9 +1064,9 @@
         "radius": 0.6
       },
       "position": [
-        -2,
+        31.0,
         77.5,
-        30
+        24
       ],
       "color": "#e7a6b4"
     }
