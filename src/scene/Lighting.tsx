@@ -8,7 +8,9 @@ import { polygonCentroid, roomBounds } from '../model/geometry';
 import { currentHouse, currentLayout, useStore } from '../app/store';
 import { resolveWalls } from '../model/geometry';
 import { placeRoomItems } from '../model/placement';
-import { assignLampSlots, lampOn, lampScale, roomDaylight, roomLamps, type Lamp, type LightMode } from '../model/lights';
+import { assignLampSlots, lampOn, lampScale, roomLamps, type Lamp, type LightMode } from '../model/lights';
+import { roomLightAccess } from '../model/roomLight';
+import { setRoomFill } from './materials';
 import { moonForMood, sunForMood } from './sun';
 import { Outside } from './Outside';
 
@@ -47,19 +49,6 @@ export function Lighting({ room, mobile }: { room: HouseFrame; mobile: boolean }
   // the lamps themselves only add pools of light (Mark: a tool, not a render; work mode should really light the house)
   const mode = useStore((s) => s.lightMode);
   const lampFill = LAMP_FILL[mode];
-  // eyes adapting: the brighter the room you stand in is by day, the less the lamps add (Mark); eased over ~1 s so
-  // walking from the sunny living room into the dim hallway doesn't pop
-  const here = useStore((s) => currentHouse(s)?.rooms.find((r) => r.id === s.roomId));
-  const target = lampScale(daylight * (here ? roomDaylight(here) : 1));
-  const scale = useRef(target);
-  const lampFillRef = useRef<HemisphereLight>(null);
-  const lampRefs = useRef<(PointLight | null)[]>([]);
-  const litRef = useRef<(Lamp | undefined)[]>([]);
-  useFrame((_, dt) => {
-    scale.current += (target - scale.current) * Math.min(1, dt * 2.5);
-    if (lampFillRef.current) lampFillRef.current.intensity = lampFill.intensity * scale.current;
-    lampRefs.current.forEach((l, i) => { if (l) l.intensity = (litRef.current[i]?.intensity ?? 0) * scale.current; });
-  });
 
   const dist = radius * 3;
   const sunPos: [number, number, number] = beam ? [cx + beam[0] * dist, beam[1] * dist, cz + beam[2] * dist] : [cx, -dist, cz];
@@ -85,6 +74,40 @@ export function Lighting({ room, mobile }: { room: HouseFrame; mobile: boolean }
   const house = useStore(currentHouse);
   const itemStates = useStore((s) => s.itemStates);
   const view = useStore((s) => s.view);
+
+  // Each room's base light: how easily daylight gets in (its windows, open doorways - roomLightAccess) x the mood;
+  // at night a faint glow in rooms with windows. A light map on the room's materials, eased when a door opens.
+  const layout = useStore(currentLayout);
+  const furniture = useStore((s) => s.bundle?.furniture);
+  const access = useMemo(
+    () => (house && layout && furniture ? roomLightAccess(house, layout, furniture, itemStates) : {}),
+    [house, layout, furniture, itemStates],
+  );
+  const fills = useRef(new Map<string, number>());
+  // eyes adapting: the brighter the room you stand in is by day, the less the lamps add (Mark); eased over ~1 s so
+  // walking from the sunny living room into the dim hallway doesn't pop
+  const roomId = useStore((s) => s.roomId);
+  const target = lampScale(daylight * (roomId ? (access[roomId] ?? 1) : 1));
+  const scale = useRef(target);
+  const lampFillRef = useRef<HemisphereLight>(null);
+  const lampRefs = useRef<(PointLight | null)[]>([]);
+  const litRef = useRef<(Lamp | undefined)[]>([]);
+  useFrame((_, dt) => {
+    const k = Math.min(1, dt * 2.5);
+    for (const [id, a] of Object.entries(access)) {
+      const goal = BASE_FILL * a * (dir ? daylight : NIGHT_FILL);
+      const cur = fills.current.get(id);
+      const next = cur === undefined ? goal : cur + (goal - cur) * k;
+      if (cur === undefined || Math.abs(next - cur) > 1e-4) {
+        fills.current.set(id, next);
+        setRoomFill(id, next);
+      }
+    }
+    scale.current += (target - scale.current) * k;
+    if (lampFillRef.current) lampFillRef.current.intensity = lampFill.intensity * scale.current;
+    lampRefs.current.forEach((l, i) => { if (l) l.intensity = (litRef.current[i]?.intensity ?? 0) * scale.current; });
+  });
+
   const shadowFrames = useRef(0);
   // a few frames: parts ease into a new state over ~0.3 s and textures/meshes mount a moment after a reload
   const redrawShadows = useCallback(() => { shadowFrames.current = 45; }, []);
@@ -111,12 +134,12 @@ export function Lighting({ room, mobile }: { room: HouseFrame; mobile: boolean }
         shadow-bias={-0.0004}
         shadow-normalBias={1.5}
       />
-      {/* bounced daylight; rooms are closed boxes so this stands in for light coming off the floor and walls */}
-      <hemisphereLight args={['#f3f6fa', '#e6e3dc', 1.7 * daylight + 0.45 * Math.min(1, daylight * 4) + 0.1 * Math.min(1, daylight * 10) + 0.015]} />
-      <ambientLight intensity={0.3 * daylight + 0.005} />
+      {/* a little daylight everywhere (the room's own base light is its light map, see setRoomFill) */}
+      <hemisphereLight args={['#f3f6fa', '#e6e3dc', 0.25 * daylight + 0.015]} />
+      <ambientLight intensity={0.05 * daylight + 0.005} />
       <hemisphereLight ref={lampFillRef} args={[lampFill.sky, lampFill.ground, lampFill.intensity * scale.current]} />
-      <RoomLamps slots={mobile ? 2 : 6} shadows={!mobile} onChange={redrawShadows} lights={lampRefs} litOut={litRef} />
-      <Environment resolution={64} environmentIntensity={0.45 * daylight + 0.06 * Math.min(1, daylight * 10) + 0.25 * lampFill.intensity * target + 0.01}>
+      <RoomLamps slots={mobile ? 1 : 2} shadows={!mobile} onChange={redrawShadows} lights={lampRefs} litOut={litRef} />
+      <Environment resolution={64} environmentIntensity={0.2 * daylight + 0.03 * Math.min(1, daylight * 10) + 0.15 * lampFill.intensity * target + 0.01}>
         <Lightformer form="rect" intensity={2} position={[0, 5, 0]} scale={[10, 10, 1]} rotation={[Math.PI / 2, 0, 0]} />
         <Lightformer form="rect" intensity={0.6} position={[5, 1, 0]} scale={[10, 3, 1]} rotation={[0, -Math.PI / 2, 0]} color="#ffeedd" />
         <Lightformer form="rect" intensity={0.4} position={[-5, 1, 0]} scale={[10, 3, 1]} rotation={[0, Math.PI / 2, 0]} />
@@ -128,6 +151,10 @@ export function Lighting({ room, mobile }: { room: HouseFrame; mobile: boolean }
 }
 
 const IDENTITY = { x: 0, z: 0, rotationDeg: 0 };
+
+/** Base light of a fully daylit room (light map intensity), and the share of it left at night (moon, city glow). */
+const BASE_FILL = 2.2;
+const NIGHT_FILL = 0.05;
 
 const LAMP_FILL: Record<LightMode, { sky: string; ground: string; intensity: number }> = {
   off: { sky: '#000000', ground: '#000000', intensity: 0 },
@@ -163,6 +190,8 @@ function RoomLamps({ slots, shadows, onChange, lights, litOut }: {
   );
   const lit = useMemo(() => {
     const next = assignLampSlots(lamps, (l) => lampOn(l.role, mode), [fx * 100, fz * 100], slots, prev.current);
+    // the same lamps in the same slots: keep the old array, so the shadows aren't redrawn for nothing while walking
+    if (next.length === prev.current.length && next.every((l, i) => l === prev.current[i])) return prev.current;
     prev.current = next;
     return next;
   }, [lamps, mode, fx, fz, slots]);

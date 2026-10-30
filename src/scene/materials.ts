@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 import {
-  Color, MeshPhysicalMaterial, MeshStandardMaterial, RepeatWrapping, SRGBColorSpace, TextureLoader, type Material, type Texture,
+  Color, DataTexture, MeshPhysicalMaterial, MeshStandardMaterial, RepeatWrapping, SRGBColorSpace, TextureLoader, type Material, type Texture,
 } from 'three';
 import type { Bundle, LoadedTexture } from '../model/bundle';
 import { libUrl } from '../data/client';
@@ -8,6 +8,34 @@ import { libUrl } from '../data/client';
 const loader = new TextureLoader();
 const textureCache = new Map<string, Texture>();
 const materialCache = new Map<string, Material>();
+
+// Each room's base light (how much daylight gets in, see roomLightAccess) is a constant "light map" on that room's
+// materials: a 1x1 white texture whose intensity Lighting eases per room. Cheap - no extra lights, no extra passes.
+const WHITE = new DataTexture(new Uint8Array([255, 255, 255, 255]), 1, 1);
+WHITE.needsUpdate = true;
+const roomMaterials = new Map<string, Set<MeshStandardMaterial>>();
+const roomFill = new Map<string, number>();
+const roomOf = new WeakMap<Material, string>();
+
+function addToRoom(roomId: string, m: MeshStandardMaterial) {
+  if (!roomMaterials.has(roomId)) roomMaterials.set(roomId, new Set());
+  roomMaterials.get(roomId)!.add(m);
+  roomOf.set(m, roomId);
+  m.lightMap = WHITE;
+  m.lightMapIntensity = roomFill.get(roomId) ?? 0;
+}
+
+/** Set a room's base light (every material in it, now and later). */
+export function setRoomFill(roomId: string, intensity: number) {
+  roomFill.set(roomId, intensity);
+  for (const m of roomMaterials.get(roomId) ?? []) m.lightMapIntensity = intensity;
+}
+
+/** A copy of a room material (a glowing lamp shade) follows that room's base light too. */
+export function sameRoom(base: Material, copy: Material) {
+  const r = roomOf.get(base);
+  if (r && copy instanceof MeshStandardMaterial) addToRoom(r, copy);
+}
 
 function loadMap(t: LoadedTexture, file: string, color: boolean): Texture {
   const url = libUrl(t.baseUrl, file);
@@ -29,10 +57,11 @@ const FALLBACK = '#cccccc';
 
 /**
  * Material for a texture id (+ optional tint). Unknown ids get a neutral grey so mistakes stay visible but harmless.
+ * `roomId`: the room it's in, for that room's base light (setRoomFill).
  */
-export function getMaterial(bundle: Bundle | null, textureId: string | undefined, tint?: string, glass = false): Material {
+export function getMaterial(bundle: Bundle | null, textureId: string | undefined, tint?: string, glass = false, roomId?: string): Material {
   const t = textureId ? bundle?.textures[textureId] : undefined;
-  const key = `${textureId}|${tint}|${glass}|${t ? JSON.stringify(t) : ''}`;
+  const key = `${textureId}|${tint}|${glass}|${glass ? '' : (roomId ?? '')}|${t ? JSON.stringify(t) : ''}`;
   let m = materialCache.get(key);
   if (m) return m;
   if (glass) {
@@ -52,6 +81,7 @@ export function getMaterial(bundle: Bundle | null, textureId: string | undefined
     if (t?.maps.normal) mat.normalMap = loadMap(t, t.maps.normal, false);
     if (t?.maps.roughness) mat.roughnessMap = loadMap(t, t.maps.roughness, false);
     if (t?.maps.ao) mat.aoMap = loadMap(t, t.maps.ao, false);
+    if (roomId) addToRoom(roomId, mat);
     m = mat;
   }
   materialCache.set(key, m);

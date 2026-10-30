@@ -7,15 +7,12 @@ import { findState, interactivePart, partTransform } from '../model/assets';
 import { useStore } from '../app/store';
 import type { SelectionKind } from '../model/lookup';
 import { partGeometry } from './cmGeometry';
-import { getMaterial } from './materials';
+import { getMaterial, sameRoom } from './materials';
 import { registerObject } from './registry';
 import { clickAction, isPhone } from './clickAction';
 import { lampOn, type LightMode } from '../model/lights';
 import { libUrl } from '../data/client';
 import labelFont from '../../assets/fonts/inter-latin-600-normal.woff?url';
-import { RectAreaLightUniformsLib } from 'three/examples/jsm/lights/RectAreaLightUniformsLib.js';
-
-RectAreaLightUniformsLib.init();
 
 const DEG = Math.PI / 180;
 // Pointer moves bigger than this (px) between down and up are drags (looking around), not clicks.
@@ -32,11 +29,13 @@ type Props = {
   selectWhole: boolean;
   /** the house's light mode: lamp parts glow when their role is on (lampOn) */
   lightMode: LightMode;
+  /** the room it stands in, for that room's base light (setRoomFill) */
+  roomId: string;
 };
 
 /** A placed asset (furniture item or door/window): parts animate between states. Click selects (a big piece's section
  *  first, a second click the whole), double-click changes the state the clicked part belongs to. */
-export function PartsView({ id, kind, asset, parts, stateId, position, rotationDeg, selectWhole, lightMode }: Props) {
+export function PartsView({ id, kind, asset, parts, stateId, position, rotationDeg, selectWhole, lightMode, roomId }: Props) {
   const select = useStore((s) => s.select);
   const cycleState = useStore((s) => s.cycleState);
   const toggleSection = useStore((s) => s.toggleSection);
@@ -84,6 +83,7 @@ export function PartsView({ id, kind, asset, parts, stateId, position, rotationD
           pose={partTransform(p, state?.parts[p.id] ?? (sectionOpen(p) ? p.open : undefined))}
           interactive={interactive(p.id)}
           lightMode={lightMode}
+          roomId={roomId}
           registerAsPart={!selectWhole}
           onClick={onClick(p.id)}
           onDoubleClick={onDoubleClick(p.id)}
@@ -93,9 +93,10 @@ export function PartsView({ id, kind, asset, parts, stateId, position, rotationD
   );
 }
 
-function PartMesh({ ownerId, kind, part, pose, interactive, lightMode, registerAsPart, onClick, onDoubleClick }: {
+function PartMesh({ ownerId, kind, part, pose, interactive, lightMode, roomId, registerAsPart, onClick, onDoubleClick }: {
   ownerId: string;
   lightMode: LightMode;
+  roomId: string;
   kind: SelectionKind;
   part: Part;
   pose: ReturnType<typeof partTransform>;
@@ -147,7 +148,7 @@ function PartMesh({ ownerId, kind, part, pose, interactive, lightMode, registerA
       </group>
     );
   }
-  const base = getMaterial(bundle, part.material ?? (part.glass ? 'glass' : undefined), part.color, part.glass);
+  const base = getMaterial(bundle, part.material ?? (part.glass ? 'glass' : undefined), part.color, part.glass, roomId);
   const lit = !!part.emit && lampOn(part.emit.role, lightMode);
   const material = part.emit ? emissive(base, part.emit.color, lit) : base;
   return (
@@ -168,17 +169,8 @@ function PartMesh({ ownerId, kind, part, pose, interactive, lightMode, registerA
       userData={selectable}
     >
       {part.label && <Label label={part.label} faceZ={faceDepth(part) / 2} />}
-      {/* point lamps are lit by the room's light pool (Lighting / RoomLamps), not here */}
-      {part.emit && part.emit.kind === 'area' && part.geometry.type === 'box' && (
-        // soft light out of the bottom face (a rect area light shines along its -z; -90° about x points that down);
-        // always mounted, dark when off: a changing number of lights would recompile every shader
-        <rectAreaLight
-          args={[part.emit.color, 0, part.geometry.size[0], part.geometry.size[2]]}
-          intensity={lit ? part.emit.intensity : 0}
-          position={[0, -part.geometry.size[1] / 2 - 0.05, 0]}
-          rotation={[-Math.PI / 2, 0, 0]}
-        />
-      )}
+      {/* point lamps are lit by the house's light pool (Lighting / RoomLamps); LED strips (area) only glow: a real
+          area light costs every pixel on screen, even when it's off (Mark: performance over realism) */}
     </mesh>
   );
 }
@@ -217,6 +209,7 @@ function emissive(base: Material, color: string, on: boolean): Material {
   let m = emissiveCache.get(key);
   if (!m) {
     const glow = (base as MeshStandardMaterial).clone();
+    sameRoom(base, glow);
     glow.emissive = new Color(on ? color : '#000000');
     // a textured shade (rice paper, rattan) glows through its texture instead of turning into a flat disc
     glow.emissiveMap = glow.map ?? null;
