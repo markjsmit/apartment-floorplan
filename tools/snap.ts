@@ -69,7 +69,8 @@ try {
   await page.waitForFunction(() => window.__sceneReady === true, null, { timeout: 60000 });
   // models and textures that are still downloading
   await page.waitForFunction(() => !(window as { __loading?: boolean }).__loading, null, { timeout: 60000 });
-  await page.waitForLoadState('networkidle');
+  // a live dev-server stream (another session editing) can keep the network busy: don't wait forever
+  await page.waitForLoadState('networkidle', { timeout: 10000 }).catch(() => {});
   await page.waitForTimeout(800);
   const outDir = path.join(ROOT, '.snaps');
   fs.mkdirSync(outDir, { recursive: true });

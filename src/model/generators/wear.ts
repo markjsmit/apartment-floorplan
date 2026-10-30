@@ -204,6 +204,23 @@ export function keysSpot(prefix: string, x: number, y: number, z0: number, width
   return out;
 }
 
+/** A closed laptop lying flat with its charger next to it, sometimes a notebook under it (stand on y, back at z0). */
+export function laptopSpot(prefix: string, x: number, y: number, z0: number, width: number, depth: number): Part[] {
+  const rand = rng(prefix);
+  const lw = Math.min(width - 2, 31);
+  const ld = Math.min(depth - 2, 22);
+  const lz = z0 + Math.min(depth, 34) / 2;
+  const out: Part[] = [];
+  let top = y;
+  if (rand() < 0.5) {
+    out.push(box(`${prefix}-notebook`, ['contents'], [Math.min(lw, 21), 1.2, Math.min(ld, 28)], [x, y + 0.6, lz], { color: ['#2e3a52', '#d9cdb8', '#5e6b52'][Math.floor(rand() * 3)] }));
+    top += 1.2;
+  }
+  out.push(box(`${prefix}-laptop`, ['laptop', 'contents'], [lw, 1.6, ld], [x, top + 0.8, lz], { color: rand() < 0.5 ? '#c8c9cc' : '#3a3b3e', radius: 0.6 }));
+  if (width - lw > 0) out.push(box(`${prefix}-charger`, ['contents'], [6, 2.4, 6], [x + lw / 2 - 4, top + 2.8, lz + ld / 2 - 4], { color: '#efefef', radius: 0.8 }));
+  return out;
+}
+
 /** Everyday bags: a canvas tote and a small backpack (stand on y, back at z0). */
 export function bagsSpot(prefix: string, x: number, y: number, z0: number, width: number, depth: number, height: number): Part[] {
   const rand = rng(prefix);
