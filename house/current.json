@@ -2561,6 +2561,26 @@
             -142
           ],
           "rotation": 0
+        },
+        {
+          "id": "balcony.lounge-chair-2",
+          "asset": "old-house-rattan-armchair",
+          "name": "Our second rattan armchair, alone in the west corner past the door, damaged back against the facade (new terracotta cushion)",
+          "tags": [
+            "armchair",
+            "chair",
+            "rattan",
+            "west corner"
+          ],
+          "against": {
+            "wall": "balcony.wall-2",
+            "offset": 469,
+            "gap": 1
+          },
+          "params": {
+            "cushionColor": "#a65a3d",
+            "pillows": "#7d8450"
+          }
         }
       ],
       "assumptions": [
