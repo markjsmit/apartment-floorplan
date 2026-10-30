@@ -1,0 +1,16 @@
+{
+  "id": "folding-chair-folded",
+  "name": "Folding chair (folded, standing)",
+  "tags": ["folding chair", "chair", "guest chair", "flat storage"],
+  "description": "Folding chair folded flat, standing on its feet: 45 wide x 77 high x ~5 thick (IKEA GUNDE: 45 x 47 x 77 cm open, seat height 45; white plastic seat + back on a galvanised steel frame). Item space: x = width, z = folded thickness (back at z 0), y = height.",
+  "source": { "kind": "parts", "license": "self-made", "notes": "Open sizes from ikea.com (GUNDE). The folded thickness (~5 cm) is not listed by IKEA: check it on the real chair." },
+  "parts": [
+    { "id": "leg-left", "tags": ["leg", "frame"], "geometry": { "type": "box", "size": [2.4, 77, 1.6], "radius": 0.6 }, "position": [-21, 38.5, 1], "material": "stainless" },
+    { "id": "leg-right", "tags": ["leg", "frame"], "geometry": { "type": "box", "size": [2.4, 77, 1.6], "radius": 0.6 }, "position": [21, 38.5, 1], "material": "stainless" },
+    { "id": "rear-leg-left", "tags": ["leg", "frame"], "geometry": { "type": "box", "size": [2, 64, 1.4], "radius": 0.5 }, "position": [-17, 32, 4.2], "material": "stainless" },
+    { "id": "rear-leg-right", "tags": ["leg", "frame"], "geometry": { "type": "box", "size": [2, 64, 1.4], "radius": 0.5 }, "position": [17, 32, 4.2], "material": "stainless" },
+    { "id": "foot-rail", "tags": ["frame"], "geometry": { "type": "box", "size": [40, 1.6, 1.4], "radius": 0.5 }, "position": [0, 4, 1], "material": "stainless" },
+    { "id": "back", "tags": ["back"], "geometry": { "type": "box", "size": [40, 22, 1.6], "radius": 0.8 }, "position": [0, 64, 2.2], "color": "#f3f2ee" },
+    { "id": "seat", "tags": ["seat"], "geometry": { "type": "box", "size": [37, 36, 1.6], "radius": 0.8 }, "position": [0, 34, 3.4], "color": "#f3f2ee" }
+  ]
+}

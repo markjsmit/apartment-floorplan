@@ -307,12 +307,13 @@ export function cleaningSprays(prefix: string, x: number, y: number, z: number):
   ];
 }
 
-/** A broom-closet compartment `width` x `depth` x `height` (back at z0): ironing board at the back, vacuum, mop, broom, sprays on a shelf. */
+/**
+ * A broom-closet compartment `width` x `depth` x `height` (back at z0): vacuum, mop, broom, sprays on a shelf.
+ * No ironing board: the house has one, folding off the storage-room wall (Mark).
+ */
 export function cleaningRow(prefix: string, x: number, y: number, z0: number, width: number, depth: number, height: number): Part[] {
   const out: Part[] = [];
   const tall = Math.min(height - 4, 130);
-  if (width >= 38) out.push(...ironingBoard(`${prefix}-iron`, x, y, z0 + 2.5, Math.min(tall, 120), Math.min(34, width - 4)));
-  else if (depth >= 36) out.push(...ironingBoard(`${prefix}-iron`, x + width / 2 - 3, y, z0 + depth / 2, Math.min(tall, 120), Math.min(34, depth - 4), true));
   const front = z0 + Math.min(depth - 8, 30);
   const narrow = width < 45;
   out.push(...stickVacuum(`${prefix}-vac`, x - width / 2 + (narrow ? 7 : 15), y, front - (narrow ? 4 : 0), Math.min(tall, 112), narrow));

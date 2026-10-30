@@ -1534,7 +1534,7 @@
         {
           "id": "living.chair-1",
           "asset": "design-chair",
-          "name": "Round dining chair, shallow seat (46 deep): cream bouclé seat, rattan back, oak legs (pushed all the way under)",
+          "name": "Round dining chair, shallow seat (46 deep): cream bouclé seat, rattan back, oak legs (pushed in until the back touches the table edge)",
           "tags": [
             "dining chair"
           ],
@@ -1550,7 +1550,7 @@
             "depth": 46
           },
           "position": [
-            53,
+            43,
             0,
             411
           ],
@@ -1563,7 +1563,7 @@
         {
           "id": "living.chair-4",
           "asset": "design-chair",
-          "name": "Round dining chair, shallow seat (46 deep): cream bouclé seat, rattan back, oak legs (pushed all the way under)",
+          "name": "Round dining chair, shallow seat (46 deep): cream bouclé seat, rattan back, oak legs (pushed in until the back touches the table edge)",
           "tags": [
             "dining chair"
           ],
@@ -1579,7 +1579,7 @@
             "depth": 46
           },
           "position": [
-            147,
+            157,
             0,
             411
           ],
@@ -1592,7 +1592,7 @@
         {
           "id": "living.chair-2",
           "asset": "design-chair",
-          "name": "Round dining chair, shallow seat (46 deep): cream bouclé seat, rattan back, oak legs (pushed all the way under)",
+          "name": "Round dining chair, shallow seat (46 deep): cream bouclé seat, rattan back, oak legs (pushed in until the back touches the table edge)",
           "tags": [
             "dining chair"
           ],
@@ -1608,7 +1608,7 @@
             "depth": 46
           },
           "position": [
-            53,
+            43,
             0,
             469
           ],
@@ -1621,7 +1621,7 @@
         {
           "id": "living.chair-5",
           "asset": "design-chair",
-          "name": "Round dining chair, shallow seat (46 deep): cream bouclé seat, rattan back, oak legs (pushed all the way under)",
+          "name": "Round dining chair, shallow seat (46 deep): cream bouclé seat, rattan back, oak legs (pushed in until the back touches the table edge)",
           "tags": [
             "dining chair"
           ],
@@ -1637,7 +1637,7 @@
             "depth": 46
           },
           "position": [
-            147,
+            157,
             0,
             469
           ],
@@ -1650,7 +1650,7 @@
         {
           "id": "living.chair-3",
           "asset": "design-chair",
-          "name": "Round dining chair, shallow seat (46 deep): cream bouclé seat, rattan back, oak legs (pushed all the way under)",
+          "name": "Round dining chair, shallow seat (46 deep): cream bouclé seat, rattan back, oak legs (pushed in until the back touches the table edge)",
           "tags": [
             "dining chair"
           ],
@@ -1666,7 +1666,7 @@
             "depth": 46
           },
           "position": [
-            53,
+            43,
             0,
             527
           ],
@@ -1679,7 +1679,7 @@
         {
           "id": "living.chair-6",
           "asset": "design-chair",
-          "name": "Round dining chair, shallow seat (46 deep): cream bouclé seat, rattan back, oak legs (pushed all the way under)",
+          "name": "Round dining chair, shallow seat (46 deep): cream bouclé seat, rattan back, oak legs (pushed in until the back touches the table edge)",
           "tags": [
             "dining chair"
           ],
@@ -1695,7 +1695,7 @@
             "depth": 46
           },
           "position": [
-            147,
+            157,
             0,
             527
           ],
@@ -2962,7 +2962,7 @@
             "mop",
             "broom"
           ],
-          "description": "NEW: buy/build - one tall door; vacuum on its dock, mop, broom, ironing board standing up, sprays on the top shelf",
+          "description": "NEW: buy/build - one tall door; vacuum on its dock, mop, broom, sprays on the top shelf",
           "params": {
             "width": 41,
             "depth": 38,
@@ -3279,6 +3279,48 @@
             "offset": 3.8,
             "elevation": 225.8
           }
+        },
+        {
+          "id": "storage.folding-chair-1",
+          "asset": "folding-chair-folded",
+          "name": "Folding chair 1 (IKEA GUNDE, folded) in the gap between the wall bed and the Kallax",
+          "tags": [
+            "folding chair",
+            "guest chair"
+          ],
+          "position": [
+            875,
+            0,
+            112.5
+          ],
+          "rotation": 0,
+          "assumptions": [
+            {
+              "path": "params",
+              "note": "Folded thickness ~5 cm is a guess (IKEA does not list it); the 19 cm gap fits 3 at 5 cm, 2 at up to ~9 cm. 45 wide: sticks out ~6 cm past the bed + Kallax fronts."
+            }
+          ]
+        },
+        {
+          "id": "storage.folding-chair-2",
+          "asset": "folding-chair-folded",
+          "name": "Folding chair 2 (IKEA GUNDE, folded) in the gap between the wall bed and the Kallax",
+          "tags": [
+            "folding chair",
+            "guest chair"
+          ],
+          "position": [
+            875,
+            0,
+            118.5
+          ],
+          "rotation": 0,
+          "assumptions": [
+            {
+              "path": "params",
+              "note": "Folded thickness ~5 cm is a guess (IKEA does not list it); the 19 cm gap fits 3 at 5 cm, 2 at up to ~9 cm. 45 wide: sticks out ~6 cm past the bed + Kallax fronts."
+            }
+          ]
         },
         {
           "id": "storage.kallax-east-low",
