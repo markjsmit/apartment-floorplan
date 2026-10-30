@@ -43,6 +43,12 @@ describe('roomLightAccess', () => {
     expect(a.bath).toBeLessThan(a.hall);
   });
 
+  it('a closed glass door lets light through (the frosted en-suite door)', () => {
+    const glass = HouseSchema.parse({ ...house, rooms: house.rooms.map((r) => ({ ...r, openings: r.openings.map((o) => (o.id === 'hall.d' ? { ...o, params: { leaf: 'frosted-glass' } } : o)) })) });
+    const a = roomLightAccess(glass, computeLayout(glass), { 'door-basic': doorAsset }, {});
+    expect(a.bath).toBeGreaterThan(0.05);
+  });
+
   it('outdoors is fully lit', () => {
     expect(ownLight(HouseSchema.parse({ meta: { name: 'x', kind: 'current' }, rooms: [room('b', 300, 200, { tags: ['outside'] })] }).rooms[0])).toBe(1);
   });

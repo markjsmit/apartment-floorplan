@@ -12,6 +12,9 @@ const area = (o: Pick<Opening, 'width' | 'height'>) => (o.width * o.height) / 10
 /** A glazed door (balcony slider) lets light through even when it's shut. An interior glass panel isn't daylight. */
 const glazed = (o: Opening) => (o.type === 'window' && !o.tags.includes('glass panel')) || o.asset === 'sliding-door';
 
+/** Light passes it shut or open: glazing, or a door with a glass leaf (the frosted en-suite door - Mark). */
+const seeThrough = (o: Opening) => glazed(o) || String(o.params?.leaf ?? '').includes('glass') || o.tags.includes('glass door');
+
 /** Is the door in this opening open right now (the generated door's states, not the bare asset.json's). */
 function doorOpen(o: Opening, furniture: Record<string, FurnitureAsset>, itemStates: Record<string, string>): boolean {
   const raw = o.asset ? furniture[o.asset] : undefined;
@@ -45,7 +48,7 @@ export function roomLightAccess(
     const [oa, ob] = [openings.get(d.a), openings.get(d.b)];
     if (!oa || !ob) continue;
     const door = d.door ? openings.get(d.door) : undefined;
-    const pass = !door || doorOpen(door, furniture, itemStates) || glazed(oa) || glazed(ob) ? 1 : 0;
+    const pass = !door || doorOpen(door, furniture, itemStates) || seeThrough(oa) || seeThrough(ob) ? 1 : 0;
     if (!pass) continue;
     const a = Math.min(area(oa), area(ob));
     const [ra, rb] = [roomOf(oa.id), roomOf(ob.id)];
