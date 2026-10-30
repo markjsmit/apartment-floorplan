@@ -2672,7 +2672,7 @@
           ],
           "description": "NEW: buy/build - wall-hung so the floor runs under it (feels lighter)",
           "params": {
-            "width": 122,
+            "width": 81,
             "depth": 38,
             "height": 60,
             "plinth": 0,
@@ -2701,18 +2701,6 @@
                     "content": "boxes"
                   }
                 ]
-              },
-              {
-                "stack": [
-                  {
-                    "kind": "drawer",
-                    "h": 16
-                  },
-                  {
-                    "kind": "door",
-                    "content": "games"
-                  }
-                ]
               }
             ]
           },
@@ -2738,7 +2726,7 @@
           ],
           "description": "NEW: buy/build - push-to-open, no handles",
           "params": {
-            "width": 122,
+            "width": 81,
             "depth": 35,
             "height": 42,
             "plinth": 0,
@@ -2759,14 +2747,6 @@
                     "content": "games"
                   }
                 ]
-              },
-              {
-                "stack": [
-                  {
-                    "kind": "door",
-                    "content": "boxes"
-                  }
-                ]
               }
             ]
           },
@@ -2783,6 +2763,46 @@
           ]
         },
         {
+          "id": "hallway.broom-cabinet",
+          "asset": "tall-cabinet",
+          "name": "Broom cabinet (right third of the niche, floor to ceiling)",
+          "tags": [
+            "broom cabinet",
+            "cleaning",
+            "vacuum",
+            "mop",
+            "broom"
+          ],
+          "description": "NEW: buy/build - one tall door; vacuum on its dock, mop, broom, ironing board standing up, sprays on the top shelf",
+          "params": {
+            "width": 41,
+            "depth": 38,
+            "height": 237.5,
+            "plinth": 6,
+            "handles": "none",
+            "columns": [
+              {
+                "stack": [
+                  {
+                    "kind": "door",
+                    "content": "cleaning"
+                  }
+                ]
+              }
+            ]
+          },
+          "against": {
+            "wall": "hallway.wall-4",
+            "offset": 82
+          },
+          "assumptions": [
+            {
+              "path": "params",
+              "note": "niche 123 x 38 from the footprint (not measured); an outlet for the vacuum dock in the niche is assumed - hallway outlets not surveyed"
+            }
+          ]
+        },
+        {
           "id": "hallway.niche-art",
           "asset": "wall-art",
           "name": "Warm print between the cabinets",
@@ -2791,15 +2811,15 @@
             "painting"
           ],
           "params": {
-            "width": 70,
-            "height": 60,
+            "width": 56,
+            "height": 56,
             "frameColor": "#c9b18f",
             "art": "#e6dccb,#b07a5a,#4e5a4f",
             "seed": "hall-niche"
           },
           "against": {
             "wall": "hallway.wall-4",
-            "offset": 26.5,
+            "offset": 13,
             "elevation": 107,
             "gap": 0
           }
@@ -2842,7 +2862,7 @@
           },
           "against": {
             "wall": "hallway.wall-4",
-            "offset": 80,
+            "offset": 48,
             "elevation": 78,
             "gap": 12
           },
@@ -5213,24 +5233,6 @@
             "wall": "bedroom.wall-14",
             "offset": 16,
             "elevation": 100
-          }
-        },
-        {
-          "id": "bedroom.corner-plant",
-          "asset": "plant",
-          "name": "Snake plant in the window corner by the TV wall",
-          "tags": [
-            "plant",
-            "decor"
-          ],
-          "params": {
-            "kind": "snake",
-            "height": 85
-          },
-          "against": {
-            "wall": "bedroom.wall-0",
-            "offset": 270,
-            "gap": 3
           }
         },
         {

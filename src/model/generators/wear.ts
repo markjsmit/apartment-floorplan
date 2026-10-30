@@ -318,6 +318,8 @@ export function cleaningRow(prefix: string, x: number, y: number, z0: number, wi
   out.push(...stickVacuum(`${prefix}-vac`, x - width / 2 + (narrow ? 7 : 15), y, front - (narrow ? 4 : 0), Math.min(tall, 112), narrow));
   out.push(...flatMop(`${prefix}-mop`, x + width / 2 - (narrow ? 14 : 18), y, front, tall, narrow));
   if (width >= 55) out.push(...broom(`${prefix}-broom`, x + 2, y, front - 2, Math.min(tall, 125)));
+  // narrow broom cabinet: the broom stands between the vacuum and the mop, a bit further back
+  else if (depth >= 34) out.push(...broom(`${prefix}-broom`, x + 1, y, front - 12, Math.min(tall, 125)));
   if (height >= 160) {
     const sy = y + height - 26;
     out.push({ ...box(`${prefix}-shelf`, ['shelf', 'cleaning'], [width - 1, 1.6, Math.min(depth - 2, 30)], [x, sy - 0.8, z0 + Math.min(depth - 2, 30) / 2], { color: '#f2f0ec' }), geometry: { type: 'box', size: [width - 1, 1.6, Math.min(depth - 2, 30)], radius: 0.4 } });
