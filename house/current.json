@@ -2394,7 +2394,7 @@
             "offset": 5
           },
           "params": {
-            "length": 335,
+            "length": 255,
             "depth": 40,
             "height": 113
           },
@@ -2405,7 +2405,7 @@
           "assumptions": [
             {
               "path": "params",
-              "note": "Design idea: 335 x 40, top at 113 resting on the handrail (handrail top 110 is itself not measured). Check the building rules + that the handrail takes the load before buying; a version with 2 slim legs on the railing side is the fallback."
+              "note": "Design idea: 255 x 40 (3 stools, leaves room to drag the 2nd armchair to the lounge), top at 113 resting on the handrail (handrail top 110 is itself not measured). Check the building rules + that the handrail takes the load before buying; a version with 2 slim legs on the railing side is the fallback."
             }
           ]
         },
@@ -2482,30 +2482,6 @@
           }
         },
         {
-          "id": "balcony.bar-stool-4",
-          "asset": "counter-stool",
-          "name": "Backless outdoor bar stool (oak-look seat, black steel, seat 78) - to buy, a heavy one (wind on the 27th floor)",
-          "tags": [
-            "bar stool",
-            "stool",
-            "bar"
-          ],
-          "position": [
-            299,
-            0,
-            -135
-          ],
-          "rotation": 180,
-          "params": {
-            "seatHeight": 78,
-            "seat": "round",
-            "seatSize": 38,
-            "base": "four",
-            "seatMaterial": "wood-oak-light",
-            "legMaterial": "metal-black"
-          }
-        },
-        {
           "id": "balcony.lounge-loveseat",
           "asset": "old-house-rattan-loveseat",
           "name": "Our rattan loveseat, back against the facade (new terracotta cushion, cream + olive pillows)",
@@ -2518,7 +2494,7 @@
           ],
           "against": {
             "wall": "balcony.wall-2",
-            "offset": 63
+            "offset": 78
           },
           "params": {
             "cushionColor": "#a65a3d",
@@ -2556,9 +2532,9 @@
             "lounge"
           ],
           "position": [
-            416,
+            401,
             0,
-            -142
+            -152
           ],
           "rotation": 0
         },
