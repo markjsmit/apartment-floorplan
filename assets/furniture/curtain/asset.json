@@ -26,6 +26,10 @@
     },
     "open": {
       "default": 0.7
+    },
+    "bottom": {
+      "default": 1,
+      "description": "cm above the floor where the fabric ends (e.g. inside a bath for a shower curtain)"
     }
   }
 }

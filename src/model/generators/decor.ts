@@ -671,12 +671,13 @@ export function plant(p: Record<string, unknown>): Part[] {
   return parts;
 }
 
-/** Curtain panels on a rail. Origin back-centre at the floor; params: width (rail), height (top of the rail above the floor), panels, color, open (0..1, how far pushed to the sides). */
+/** Curtain panels on a rail. Origin back-centre at the floor; params: width (rail), height (top of the rail above the floor), bottom (hem above the floor), panels, color, open (0..1, how far pushed to the sides). */
 export function curtain(p: Record<string, unknown>): Part[] {
   const W = num(p.width, 300);
   const H = num(p.height, 260);
   const panels = num(p.panels, 2);
   const open = num(p.open, 0.7);
+  const bottom = num(p.bottom, 1);
   const color = str(p.color, '#f2eee6');
   const fab: Extra = { material: str(p.material, 'linen-white'), color };
   const parts: Part[] = [{ ...box('rail', ['rail'], [W + 10, 2.5, 2.5], [0, H - 1, 6], { color: str(p.railColor, '#2a2a2a') }), castShadow: false }];
@@ -686,7 +687,7 @@ export function curtain(p: Record<string, unknown>): Part[] {
     const x = side * (W / 2 - pw / 2 + 5);
     const folds = Math.max(3, Math.round(pw / 9));
     for (let f = 0; f < folds; f++) {
-      parts.push({ ...cyl(`panel-${i}-${f}`, ['curtain'], pw / folds / 1.6, H - 4, [x - pw / 2 + ((f + 0.5) * pw) / folds, (H - 4) / 2 + 1, 6 + (f % 2) * 1.5], fab), castShadow: false });
+      parts.push({ ...cyl(`panel-${i}-${f}`, ['curtain'], pw / folds / 1.6, H - 3 - bottom, [x - pw / 2 + ((f + 0.5) * pw) / folds, (H - 3 + bottom) / 2, 6 + (f % 2) * 1.5], fab), castShadow: false });
     }
   }
   return parts;

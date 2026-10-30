@@ -296,20 +296,20 @@ export function showerEnclosure(params: Record<string, unknown>): WithStates {
   };
 }
 
-/** Front-loading machine (washer or dryer) standing at y0, back at z0, front facing +z. */
-function machine(prefix: string, w: number, d: number, y0: number, z0: number, dryer: boolean): Part[] {
+/** Front-loading machine (washer or dryer) standing at y0, back at z0, front facing +z, centred on x. */
+function machine(prefix: string, w: number, d: number, y0: number, z0: number, dryer: boolean, x = 0): Part[] {
   const h = 85;
   const zf = z0 + d;
   const tags = dryer ? ['dryer', 'tumble dryer', 'appliance'] : ['washing machine', 'washer', 'appliance'];
   const out: Part[] = [
-    box(`${prefix}`, tags, [w, h, d], [0, y0 + h / 2, z0 + d / 2], { color: '#f2f2f0' }),
-    box(`${prefix}-panel`, [...tags, 'control panel'], [w - 1, 11, 0.6], [0, y0 + h - 7, zf + 0.3], { color: '#e4e5e6', castShadow: false }),
-    box(`${prefix}-display`, [...tags, 'display'], [10, 4, 0.4], [w / 2 - 22, y0 + h - 7, zf + 0.8], { material: 'glass-black', castShadow: false }),
-    cyl(`${prefix}-knob`, [...tags, 'knob'], 3, 1.6, [w / 2 - 8, y0 + h - 7, zf + 1.4], { material: CHROME, rotation: [90, 0, 0] }),
-    cyl(`${prefix}-door-ring`, [...tags, 'door'], 16, 3, [0, y0 + 40, zf + 1.5], { color: dryer ? '#f4f4f2' : '#b9bcbf', rotation: [90, 0, 0] }),
-    cyl(`${prefix}-door-glass`, [...tags, 'door', 'porthole'], 12, 0.6, [0, y0 + 40, zf + 3.2], { material: 'glass-black', rotation: [90, 0, 0], castShadow: false }),
+    box(`${prefix}`, tags, [w, h, d], [x, y0 + h / 2, z0 + d / 2], { color: '#f2f2f0' }),
+    box(`${prefix}-panel`, [...tags, 'control panel'], [w - 1, 11, 0.6], [x, y0 + h - 7, zf + 0.3], { color: '#e4e5e6', castShadow: false }),
+    box(`${prefix}-display`, [...tags, 'display'], [10, 4, 0.4], [x + w / 2 - 22, y0 + h - 7, zf + 0.8], { material: 'glass-black', castShadow: false }),
+    cyl(`${prefix}-knob`, [...tags, 'knob'], 3, 1.6, [x + w / 2 - 8, y0 + h - 7, zf + 1.4], { material: CHROME, rotation: [90, 0, 0] }),
+    cyl(`${prefix}-door-ring`, [...tags, 'door'], 16, 3, [x, y0 + 40, zf + 1.5], { color: dryer ? '#f4f4f2' : '#b9bcbf', rotation: [90, 0, 0] }),
+    cyl(`${prefix}-door-glass`, [...tags, 'door', 'porthole'], 12, 0.6, [x, y0 + 40, zf + 3.2], { material: 'glass-black', rotation: [90, 0, 0], castShadow: false }),
   ];
-  if (!dryer) out.push(box(`${prefix}-drawer`, [...tags, 'detergent drawer'], [18, 8, 0.6], [-w / 2 + 12, y0 + h - 7, zf + 0.8], { color: '#e9eaeb' }));
+  if (!dryer) out.push(box(`${prefix}-drawer`, [...tags, 'detergent drawer'], [18, 8, 0.6], [x - w / 2 + 12, y0 + h - 7, zf + 0.8], { color: '#e9eaeb' }));
   return out;
 }
 
@@ -317,8 +317,9 @@ function machine(prefix: string, w: number, d: number, y0: number, z0: number, d
  * Tall built-in white cabinet with a stacked washing machine (floor) and tumble dryer (on a shelf on top of it), two
  * tall doors in front of them and a storage door above. params: width (65), depth (62), height (220),
  * doors: pair (default) | stacked (one full-width door over the washer and one from the dryer up to the top, both
- * hinged on the `hinge` side: left | right, seen from the front; lowOpen = how far the lower door opens, degrees).
- * Double-click a door to open all doors (the round machine doors show behind them).
+ * hinged on the `hinge` side: left | right, seen from the front; lowOpen = how far the lower door opens, degrees),
+ * machines: center (default) | left | right, seen from the front: in a wider column the machines stand at that side with
+ * a divider and shelves beside them. Double-click a door to open all doors (the round machine doors show behind them).
  */
 export function washerDryerColumn(params: Record<string, unknown>): WithStates {
   const W = num(params.width, 65);
@@ -329,14 +330,25 @@ export function washerDryerColumn(params: Record<string, unknown>): WithStates {
   const x1 = W / 2;
   const mw = Math.min(60, W - 4.6);
   const md = Math.min(57, carcD - 5); // room for the round doors behind the cabinet doors
+  const mSide = params.machines === 'left' || params.machines === 'right' ? params.machines : 'center';
+  const mx = mSide === 'left' ? x0 + 2.3 + mw / 2 : mSide === 'right' ? x1 - 2.3 - mw / 2 : 0;
+  const spare = mSide === 'center' ? 0 : W - 3.6 - mw - 3.2; // shelf space beside the machines
   const topY = 176; // storage section starts here (machines 0-85, shelf, 88-173)
   const storage = H - topY >= 15;
   const parts: Part[] = [
     ...shell('carcass', x0, x1, 0, H, carcD, true, false),
     box('dryer-shelf', ['shelf'], [W - 3.6, 3, carcD - 1], [0, 86.5, (carcD - 1) / 2 + 0.8], { material: 'white-laminate' }),
-    ...machine('washer', mw, md, 0, 1, false),
-    ...machine('dryer', mw, md, 88, 1, true),
+    ...machine('washer', mw, md, 0, 1, false, mx),
+    ...machine('dryer', mw, md, 88, 1, true, mx),
   ];
+  if (spare >= 15) {
+    // divider next to the machines + shelves for detergent, cleaning things, towels in the rest of the width
+    const dx = mSide === 'left' ? mx + mw / 2 + 1.4 : mx - mw / 2 - 1.4;
+    const s0 = mSide === 'left' ? dx + 0.9 : x0 + 1.8;
+    const s1 = mSide === 'left' ? x1 - 1.8 : dx - 0.9;
+    parts.push(box('divider', ['divider'], [1.8, topY - 1, carcD - 1], [dx, (topY - 1) / 2, (carcD - 1) / 2 + 0.8], { material: 'white-laminate' }));
+    for (const y of [30, 58, 116, 146]) parts.push(box(`side-shelf-${y}`, ['shelf'], [s1 - s0, 1.8, carcD - 1], [(s0 + s1) / 2, y, (carcD - 1) / 2 + 0.8], { material: 'white-laminate' }));
+  }
   if (storage) parts.push(box('storage-shelf', ['shelf'], [W - 3.6, 1.8, carcD - 1], [0, topY + 0.9, (carcD - 1) / 2 + 0.8], { material: 'white-laminate' }));
   const tallTop = storage ? topY + 1.8 - GAP / 2 : H - GAP;
   const side = params.hinge === 'right' ? 'right' : 'left';

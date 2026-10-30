@@ -37,6 +37,10 @@
     "lowOpen": {
       "default": 100,
       "description": "stacked doors: degrees the lower door opens (less when something is in the way)"
+    },
+    "machines": {
+      "default": "center",
+      "description": "center | left | right (seen from the front): in a wider column the machines stand at that side, with a divider and shelves beside them"
     }
   }
 }

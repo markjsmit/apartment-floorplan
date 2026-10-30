@@ -4516,6 +4516,22 @@
         ],
         [
           802,
+          576
+        ],
+        [
+          864,
+          576
+        ],
+        [
+          864,
+          666
+        ],
+        [
+          802,
+          666
+        ],
+        [
+          802,
           684
         ],
         [
@@ -4548,13 +4564,27 @@
           "edge": 1,
           "tags": [
             "vanity wall",
-            "washer wall",
             "mirror wall"
           ]
         },
         {
-          "id": "bathroom.wall-2",
-          "edge": 2,
+          "id": "bathroom.wall-3",
+          "edge": 3,
+          "tags": [
+            "washer niche",
+            "laundry niche"
+          ]
+        },
+        {
+          "id": "bathroom.wall-5",
+          "edge": 5,
+          "tags": [
+            "washer wall"
+          ]
+        },
+        {
+          "id": "bathroom.wall-6",
+          "edge": 6,
           "tags": [
             "toilet wall",
             "far wall",
@@ -4563,8 +4593,8 @@
           "material": "plaster-grey"
         },
         {
-          "id": "bathroom.wall-3",
-          "edge": 3,
+          "id": "bathroom.wall-7",
+          "edge": 7,
           "tags": [
             "bath wall",
             "shower wall",
@@ -4606,29 +4636,60 @@
           },
           "params": {
             "width": 80,
-            "mirrorBottom": 98
+            "mirrorBottom": 98,
+            "mirror": false
           },
           "builtIn": true
         },
         {
+          "id": "bathroom.mirror-cabinet",
+          "asset": "ikea-enhet-mirror-cabinet",
+          "name": "ENHET mirror cabinet 80x17x75 (2 mirror doors) over the vanity",
+          "tags": [
+            "mirror cabinet",
+            "enhet",
+            "mirror",
+            "vanity",
+            "storage"
+          ],
+          "description": "NEW: buy (IKEA ENHET mirror cabinet with 2 doors, white, 80x17x75), same as in the bedroom en-suite but as wide as the 80 cm vanity; replaces the plain mirror.",
+          "params": {
+            "width": 80,
+            "depth": 17,
+            "height": 75
+          },
+          "against": {
+            "wall": "bathroom.wall-1",
+            "offset": 0,
+            "elevation": 122
+          }
+        },
+        {
           "id": "bathroom.washer-dryer",
           "asset": "washer-dryer-column",
-          "name": "Washer + dryer cabinet",
+          "name": "Laundry closet: washer + dryer + shelves",
           "tags": [
             "washing machine",
             "dryer",
-            "laundry"
+            "laundry",
+            "laundry closet",
+            "shelves"
           ],
           "against": {
-            "wall": "bathroom.wall-1",
-            "offset": 80
+            "wall": "bathroom.wall-3",
+            "offset": 0
           },
           "params": {
-            "width": 65,
+            "width": 90,
             "height": 236,
-            "doors": "pair"
+            "doors": "pair",
+            "depth": 62,
+            "machines": "left"
           },
-          "builtIn": true
+          "builtIn": true,
+          "allowOverlap": [
+            "bathroom.wall-cabinet"
+          ]
         },
         {
           "id": "bathroom.toilet",
@@ -4639,7 +4700,7 @@
             "wc"
           ],
           "against": {
-            "wall": "bathroom.wall-2",
+            "wall": "bathroom.wall-6",
             "offset": 66
           },
           "params": {
@@ -4668,7 +4729,7 @@
             "material": "tiles-dark-grey"
           },
           "against": {
-            "wall": "bathroom.wall-2",
+            "wall": "bathroom.wall-6",
             "offset": 162
           },
           "allowOverlap": [
@@ -4679,7 +4740,7 @@
         {
           "id": "bathroom.ledge-east",
           "asset": "box",
-          "name": "Tiled ledge (behind the column)",
+          "name": "Tiled ledge (east end, next to the laundry closet)",
           "tags": [
             "ledge",
             "shelf",
@@ -4692,7 +4753,7 @@
             "material": "tiles-dark-grey"
           },
           "against": {
-            "wall": "bathroom.wall-2",
+            "wall": "bathroom.wall-6",
             "offset": 0
           },
           "builtIn": true
@@ -4713,7 +4774,7 @@
             "color": "#3a3b3e"
           },
           "against": {
-            "wall": "bathroom.wall-2",
+            "wall": "bathroom.wall-6",
             "offset": 0,
             "elevation": 178
           },
@@ -4749,7 +4810,7 @@
             "shower"
           ],
           "against": {
-            "wall": "bathroom.wall-3",
+            "wall": "bathroom.wall-7",
             "offset": 18
           },
           "params": {
@@ -4758,6 +4819,37 @@
             "mixerSide": "right"
           },
           "builtIn": true
+        },
+        {
+          "id": "bathroom.shower-curtain",
+          "asset": "curtain",
+          "name": "Shower curtain on a tension rod over the bath",
+          "tags": [
+            "shower curtain",
+            "curtain",
+            "shower",
+            "bath"
+          ],
+          "description": "NEW: buy a white shower curtain (180 wide) + a tension rod from the door wall to the dark wall cabinets; rail at 220 so Mark (2 m) stands under it, hem inside the bath.",
+          "position": [
+            639,
+            0,
+            574
+          ],
+          "rotation": 90,
+          "params": {
+            "width": 146,
+            "height": 220,
+            "bottom": 30,
+            "panels": 1,
+            "open": 0.45,
+            "side": "left",
+            "color": "#eef0f1"
+          },
+          "allowOverlap": [
+            "bathroom.bathtub",
+            "bathroom.toilet"
+          ]
         },
         {
           "id": "bathroom.mirror-led",
@@ -4802,7 +4894,7 @@
       "assumptions": [
         {
           "path": "footprint",
-          "note": "NOT measured: ~224 x 188. Width from the fittings in a row along the far wall (bath 70, ~16 cm, toilet, washer column 62) with the toilet straight ahead through the door; depth = bath 170 + ledge 18 (the bath's end touches the door wall, photo 160816). West wall = the kitchen wall (+10); the door is at x 650-730 in the hallway's south wall, so the bath is just west of it (hidden from the doorway) and the vanity just east of it"
+          "note": "NOT measured: ~224 x 188. Width from the fittings in a row along the far wall (bath 70, ~16 cm, toilet, washer column 62) with the toilet straight ahead through the door; depth = bath 170 + ledge 18 (the bath's end touches the door wall, photo 160816). West wall = the kitchen wall (+10); the door is at x 650-730 in the hallway's south wall, so the bath is just west of it (hidden from the doorway) and the vanity just east of it. Laundry closet niche in the east wall from the vanity's end to the far-wall ledge (z 576-666, 90 wide) x 62 deep, its doors flush with the mirror wall: the hinge of the open upper door lines up with the mirror, and there are shelves with bottles beside the machines (video 40.5-43 s, Mark 30 Oct); depth estimated"
         },
         {
           "path": "ceilingHeight",
@@ -4814,7 +4906,7 @@
         },
         {
           "path": "items[bathroom.washer-dryer]",
-          "note": "on the east wall right after the vanity (which starts at the door wall), facing west, ~25 cm clear of the far-wall ledge so its doors open past the toilet (Mark + video 41-44 s at 6 fps); a pair of doors opening from the centre to both sides (Mark, from the video), with a storage door on top"
+          "note": "in its own niche in the east wall from the vanity to the far-wall ledge, doors flush with the mirror wall (video 40.5-43 s, Mark 30 Oct): washer + dryer stacked on the vanity side, shelves beside them; a pair of doors, the upper one hinged at the mirror's edge; width = what is left of the ~188 room depth, not measured"
         },
         {
           "path": "items[bathroom.ledge]",
@@ -5119,7 +5211,7 @@
           "wall": "bedroom.wall-4",
           "offset": 10,
           "width": 70,
-          "height": 205,
+          "height": 210,
           "asset": "door-basic",
           "name": "En-suite door (frosted glass)",
           "tags": [
@@ -5251,11 +5343,11 @@
         {
           "id": "bedroom.bed-shelf",
           "asset": "bed-light-shelf",
-          "name": "Oak shelf over the bed (bottom 160 = ~100 above the mattress): decorations on top, 2 reading lights under the middle split by a divider - each shines on its own side",
+          "name": "Oak shelf over the bed (bottom 160 = ~100 above the mattress): decorations on top, 2 cozy lights under the middle split by a divider - each shines on its own side",
           "tags": [
             "bed shelf",
             "shelf",
-            "reading light",
+            "cozy light",
             "lights",
             "decor"
           ],
@@ -5273,9 +5365,10 @@
           "assumptions": [
             {
               "path": "params",
-              "note": "power for the 2 reading lights: assumed from an outlet behind the headboard / nightstand (bedroom outlets not surveyed); cable through the divider fin, then in a white cover down behind the headboard"
+              "note": "power for the 2 cozy lights: assumed from an outlet behind the headboard / nightstand (bedroom outlets not surveyed); cable through the divider fin, then in a white cover down behind the headboard"
             }
-          ]
+          ],
+          "light": "decorative"
         },
         {
           "id": "bedroom.bed-shelf-print",
@@ -5629,28 +5722,6 @@
           }
         },
         {
-          "id": "bedroom.nightstand-decor-n",
-          "asset": "table-decor",
-          "name": "Small vase on the north nightstand",
-          "tags": [
-            "decor",
-            "vase"
-          ],
-          "params": {
-            "kind": "vase",
-            "height": 16,
-            "diameter": 9,
-            "color": "#efe9df",
-            "flowers": "#e8d8c0"
-          },
-          "against": {
-            "wall": "bedroom.wall-14",
-            "offset": 290,
-            "elevation": 60,
-            "gap": 6
-          }
-        },
-        {
           "id": "bedroom.ceiling-light",
           "asset": "surface-light",
           "params": {
@@ -5670,26 +5741,6 @@
               "note": "Light point not surveyed: assumed in the middle of the room."
             }
           ]
-        },
-        {
-          "id": "bedroom.nightstand-lamp",
-          "asset": "table-lamp",
-          "params": {
-            "shape": "mushroom",
-            "height": 32,
-            "diameter": 24,
-            "color": "#f3ebdc"
-          },
-          "against": {
-            "wall": "bedroom.wall-14",
-            "offset": 19,
-            "elevation": 60,
-            "gap": 10
-          },
-          "allowOverlap": [
-            "bedroom.nightstand-2"
-          ],
-          "name": "Mushroom table lamp on the nightstand (cozy light, bedside outlet)"
         }
       ],
       "assumptions": [
@@ -6037,11 +6088,11 @@
           "wall": "ensuite.wall-0",
           "offset": 0,
           "width": 60,
-          "height": 238,
+          "height": 210,
           "sill": 0,
           "asset": "window-basic",
           "params": {
-            "frameMaterial": "aluminium-grey",
+            "frameMaterial": "white-paint",
             "sillBoard": false,
             "glass": "frosted"
           },
@@ -6057,7 +6108,7 @@
           "wall": "ensuite.wall-0",
           "offset": 60,
           "width": 70,
-          "height": 205,
+          "height": 210,
           "tags": [
             "en-suite door"
           ],
