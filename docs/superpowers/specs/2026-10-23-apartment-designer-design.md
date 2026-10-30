@@ -74,6 +74,11 @@ so the repo must teach a fresh Claude session how to work it (see §10).
 - **Collision:** you can't walk through walls or furniture (slide along them). Collision uses each item's current state.
 - **Eye height:** Mark ≈ 188 cm, Heli ≈ 151 cm (body height − ~12 cm).
 - **Daylight:** sun direction from a **mood** (☀️ day / 🌇 golden hour / 🌙 night (a faint moon through the windows) — fixed sun positions, no date or city; changed 30 Oct 2026, Mark: "it's about the vibes") + each room's compass orientation; light through window openings; soft shadows; an HDRI/environment for ambient light; ACES tone mapping.
+- **Light (30 Oct 2026, a tool not a render - Mark):** each room's base light = how easily daylight gets in (own
+  windows, the brightest neighbour through open doorways, closed doors block - `src/model/roomLight.ts`) x the mood, as
+  a constant light map on that room's materials, eased when doors open. One house-wide light mode on top
+  (⚫ off / 🕯️ cozy = decorative lamps / 💡 work = all) adds a level + colour; lamps fade with daylight like eyes
+  adapting. Only the 2 nearest lamps are real lights (phone 1), the nearest casts a shadow; LED strips only glow.
 - **Info panel** shows: name, tags, asset, real dimensions (W×D×H cm), current state, and which values are assumed.
 - **Hover** on desktop: subtle highlight; cursor changes over interactive parts.
 - **Public build on desktop** = same viewer minus dev features (no server calls, no Claude commands); state toggles work locally.
