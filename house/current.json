@@ -1534,7 +1534,7 @@
         {
           "id": "living.chair-1",
           "asset": "design-chair",
-          "name": "Round dining chair: cream bouclé seat, rattan back, oak legs (pushed all the way under)",
+          "name": "Round dining chair, shallow seat (46 deep): cream bouclé seat, rattan back, oak legs (pushed all the way under)",
           "tags": [
             "dining chair"
           ],
@@ -1546,10 +1546,11 @@
             "seatMaterial": "boucle",
             "backMaterial": "rattan-weave",
             "legMaterial": "wood-oak-light",
-            "width": 44
+            "width": 44,
+            "depth": 46
           },
           "position": [
-            47,
+            53,
             0,
             411
           ],
@@ -1562,7 +1563,7 @@
         {
           "id": "living.chair-4",
           "asset": "design-chair",
-          "name": "Round dining chair: cream bouclé seat, rattan back, oak legs (pushed all the way under)",
+          "name": "Round dining chair, shallow seat (46 deep): cream bouclé seat, rattan back, oak legs (pushed all the way under)",
           "tags": [
             "dining chair"
           ],
@@ -1574,10 +1575,11 @@
             "seatMaterial": "boucle",
             "backMaterial": "rattan-weave",
             "legMaterial": "wood-oak-light",
-            "width": 44
+            "width": 44,
+            "depth": 46
           },
           "position": [
-            153,
+            147,
             0,
             411
           ],
@@ -1590,7 +1592,7 @@
         {
           "id": "living.chair-2",
           "asset": "design-chair",
-          "name": "Round dining chair: cream bouclé seat, rattan back, oak legs (pushed all the way under)",
+          "name": "Round dining chair, shallow seat (46 deep): cream bouclé seat, rattan back, oak legs (pushed all the way under)",
           "tags": [
             "dining chair"
           ],
@@ -1602,10 +1604,11 @@
             "seatMaterial": "boucle",
             "backMaterial": "rattan-weave",
             "legMaterial": "wood-oak-light",
-            "width": 44
+            "width": 44,
+            "depth": 46
           },
           "position": [
-            47,
+            53,
             0,
             469
           ],
@@ -1618,7 +1621,7 @@
         {
           "id": "living.chair-5",
           "asset": "design-chair",
-          "name": "Round dining chair: cream bouclé seat, rattan back, oak legs (pushed all the way under)",
+          "name": "Round dining chair, shallow seat (46 deep): cream bouclé seat, rattan back, oak legs (pushed all the way under)",
           "tags": [
             "dining chair"
           ],
@@ -1630,10 +1633,11 @@
             "seatMaterial": "boucle",
             "backMaterial": "rattan-weave",
             "legMaterial": "wood-oak-light",
-            "width": 44
+            "width": 44,
+            "depth": 46
           },
           "position": [
-            153,
+            147,
             0,
             469
           ],
@@ -1646,7 +1650,7 @@
         {
           "id": "living.chair-3",
           "asset": "design-chair",
-          "name": "Round dining chair: cream bouclé seat, rattan back, oak legs (pushed all the way under)",
+          "name": "Round dining chair, shallow seat (46 deep): cream bouclé seat, rattan back, oak legs (pushed all the way under)",
           "tags": [
             "dining chair"
           ],
@@ -1658,10 +1662,11 @@
             "seatMaterial": "boucle",
             "backMaterial": "rattan-weave",
             "legMaterial": "wood-oak-light",
-            "width": 44
+            "width": 44,
+            "depth": 46
           },
           "position": [
-            47,
+            53,
             0,
             527
           ],
@@ -1674,7 +1679,7 @@
         {
           "id": "living.chair-6",
           "asset": "design-chair",
-          "name": "Round dining chair: cream bouclé seat, rattan back, oak legs (pushed all the way under)",
+          "name": "Round dining chair, shallow seat (46 deep): cream bouclé seat, rattan back, oak legs (pushed all the way under)",
           "tags": [
             "dining chair"
           ],
@@ -1686,10 +1691,11 @@
             "seatMaterial": "boucle",
             "backMaterial": "rattan-weave",
             "legMaterial": "wood-oak-light",
-            "width": 44
+            "width": 44,
+            "depth": 46
           },
           "position": [
-            153,
+            147,
             0,
             527
           ],
