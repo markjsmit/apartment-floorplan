@@ -14,7 +14,7 @@ if (!gallery) {
   console.log('no assets/renders/gallery.json (or it has errors: npm run check)');
   process.exit(1);
 }
-const listed = new Set(gallery.rooms.flatMap((r) => r.pictures.map((p) => p.file)));
+const listed = new Set([...gallery.rooms, ...(gallery.experiments ?? [])].flatMap((r) => r.pictures.map((p) => p.file)));
 let made = 0;
 for (const file of listed) {
   const src = path.join(DIR, file);
@@ -30,18 +30,20 @@ for (const file of listed) {
 }
 const thumbs = new Set([...listed].map(thumbFile));
 let removed = 0;
-for (const room of fs.readdirSync(DIR, { withFileTypes: true }).filter((e) => e.isDirectory())) {
-  for (const e of fs.readdirSync(path.join(DIR, room.name))) {
-    const rel = `${room.name}/${e}`;
-    if (e.endsWith('.jpg') && !listed.has(rel)) console.log(`NOT IN gallery.json: ${rel}`);
+// walk every folder (rooms, and experiments/<id>/): report unlisted pictures, drop unused thumbs
+const walk = (rel: string) => {
+  for (const e of fs.readdirSync(path.join(DIR, rel), { withFileTypes: true })) {
+    const r = rel ? `${rel}/${e.name}` : e.name;
+    if (e.isDirectory() && e.name === 'thumbs') {
+      for (const t of fs.readdirSync(path.join(DIR, r))) {
+        if (!thumbs.has(`${r}/${t}`)) {
+          fs.rmSync(path.join(DIR, r, t));
+          removed++;
+        }
+      }
+    } else if (e.isDirectory()) walk(r);
+    else if (rel && e.name.endsWith('.jpg') && !listed.has(r)) console.log(`NOT IN gallery.json: ${r}`);
   }
-  const tdir = path.join(DIR, room.name, 'thumbs');
-  if (!fs.existsSync(tdir)) continue;
-  for (const e of fs.readdirSync(tdir)) {
-    if (!thumbs.has(`${room.name}/thumbs/${e}`)) {
-      fs.rmSync(path.join(tdir, e));
-      removed++;
-    }
-  }
-}
+};
+walk('');
 console.log(`✓ ${listed.size} pictures, ${made} thumbs made, ${removed} old thumbs removed`);

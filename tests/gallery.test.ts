@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { buildBundle, mergeBundle, type RawFile } from '../src/model/bundle';
-import { galleryLink, parseGalleryParam, thumbFile } from '../src/model/gallery';
+import { galleryKeys, galleryLink, groupPictures, parentKey, parseGalleryParam, thumbFile } from '../src/model/gallery';
 import { sanityCheck } from '../src/model/sanity';
 
 const room = (id: string) => ({
@@ -45,5 +45,26 @@ describe('gallery', () => {
     const good = buildBundle(files({ rooms: [{ room: 'living', pictures: [{ file: 'living/a.jpg', caption: 'A' }] }] }), { publicUrl: '' });
     const broken = buildBundle(files({ rooms: 'oops' }), { publicUrl: '' });
     expect(mergeBundle(good, broken).gallery?.rooms).toHaveLength(1);
+  });
+
+  it('has experiments above the rooms: links, back steps, groups', () => {
+    const exp = { id: 'dining-tables', title: 'Tables', pictures: [
+      { file: 'experiments/dining-tables/a-1.jpg', caption: '1', group: 'A' },
+      { file: 'experiments/dining-tables/a-2.jpg', caption: '2', group: 'A' },
+      { file: 'experiments/dining-tables/b-1.jpg', caption: '3', group: 'B' },
+    ] };
+    const b = buildBundle(files({ experiments: [exp], rooms: [{ room: 'living', pictures: [{ file: 'living/a.jpg', caption: 'A' }] }] }), { publicUrl: '' });
+    expect(b.errors).toEqual([]);
+    expect(sanityCheck(b).filter((i) => i.message.startsWith('gallery'))).toEqual([]);
+    expect(thumbFile(exp.pictures[0].file)).toBe('experiments/dining-tables/thumbs/a-1.jpg');
+    const keys = galleryKeys(b.gallery);
+    expect(keys).toEqual(['living', 'experiments', 'experiments/dining-tables']);
+    expect(parseGalleryParam('?gallery=experiments%2Fdining-tables', keys)).toEqual({ room: 'experiments/dining-tables' });
+    expect(parentKey('experiments/dining-tables')).toBe('experiments');
+    expect(parentKey('experiments')).toBeNull();
+    expect(parentKey('living')).toBeNull();
+    expect(groupPictures(b.gallery!.experiments![0].pictures).map((g) => [g.group, g.pictures.map((p) => p.i)])).toEqual([['A', [0, 1]], ['B', [2]]]);
+    const wrong = buildBundle(files({ experiments: [{ ...exp, id: 'other' }], rooms: [] }), { publicUrl: '' });
+    expect(sanityCheck(wrong).some((i) => /listed under experiment "other"/.test(i.message))).toBe(true);
   });
 });

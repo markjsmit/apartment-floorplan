@@ -138,6 +138,9 @@ button { font: inherit; color: inherit; }
 .gallery-card-title { font-size: 16px; font-weight: 600; padding: 10px 12px 2px; }
 .gallery-card-count { font-size: 13px; color: var(--muted); padding: 0 12px 10px; }
 .gallery-card-caption { font-size: 13.5px; line-height: 1.35; padding: 8px 10px 10px; }
+.gallery-card.experiments { border-color: rgba(255, 214, 120, 0.45); }
+.gallery-group + .gallery-group { margin-top: 22px; }
+.gallery-group-title { margin: 0 0 10px; font-size: 15px; font-weight: 600; }
 .gallery-big { position: absolute; inset: 0; z-index: 11; background: rgba(0, 0, 0, 0.94); display: flex; flex-direction: column;
   align-items: center; justify-content: center; touch-action: pan-y; user-select: none; }
 .gallery-big img { max-width: 100%; max-height: calc(100% - 90px); object-fit: contain; }

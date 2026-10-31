@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { GALLERY_BASE, galleryLink, thumbFile, type GalleryRoom } from '../model/gallery';
+import { EXPERIMENTS, GALLERY_BASE, experimentKey, galleryLink, groupPictures, thumbFile, type GalleryPicture, type GalleryRoom } from '../model/gallery';
 import { useStore } from './store';
 import { useGallery } from './galleryStore';
 import { shorten } from './shortLink';
@@ -23,7 +23,8 @@ async function copyShortLink(room: string | null) {
   if (import.meta.env.DEV) s.toast('The link works once the site is released (npm run release).');
 }
 
-/** Full-screen photo gallery: rooms → a room's pictures → one picture big (swipe / arrows to the next). */
+/** Full-screen photo gallery: rooms → a room's pictures → one picture big (swipe / arrows to the next).
+ *  Above the rooms: 🧪 Experiments → an experiment's pictures (grouped) → one picture big. */
 export function Gallery() {
   const g = useGallery();
   const gallery = useStore((s) => s.bundle?.gallery ?? null);
@@ -31,7 +32,13 @@ export function Gallery() {
   const titleOf = (r: GalleryRoom) => r.title ?? current?.rooms.find((x) => x.id === r.room)?.name ?? r.room;
   const rooms = (gallery?.rooms ?? []).filter((r) => current?.rooms.some((x) => x.id === r.room));
   const room = rooms.find((r) => r.room === g.room) ?? null;
-  const pictures = room?.pictures ?? [];
+  const experiments = gallery?.experiments ?? [];
+  const onExperiments = g.room === EXPERIMENTS;
+  const experiment = experiments.find((e) => experimentKey(e.id) === g.room) ?? null;
+  const pictures: GalleryPicture[] = room?.pictures ?? experiment?.pictures ?? [];
+  const title = room ? titleOf(room) : experiment ? experiment.title : onExperiments ? '🧪 Experiments' : 'Gallery';
+  const backLabel = experiment ? '‹ Experiments' : room || onExperiments ? '‹ Gallery' : '‹ 3D';
+  const count = (n: number, one: string, many: string) => `${n} ${n === 1 ? one : many}`;
   const pic = g.index !== null ? pictures[g.index] : undefined;
   const step = (d: number) => g.index !== null && pictures.length && g.openPicture((g.index + d + pictures.length) % pictures.length);
 
@@ -62,24 +69,33 @@ export function Gallery() {
 
   const share = async () => {
     setCopying(true);
-    await copyShortLink(room?.room ?? null);
+    await copyShortLink(room || experiment || onExperiments ? g.room : null);
     setCopying(false);
   };
 
   return (
     <div className="gallery">
       <header className="gallery-bar">
-        <button onClick={g.back} aria-label="Back">{room ? '‹ Rooms' : '‹ 3D'}</button>
-        <h2>{room ? titleOf(room) : 'Gallery'}</h2>
+        <button onClick={g.back} aria-label="Back">{backLabel}</button>
+        <h2>{title}</h2>
         <button onClick={share} disabled={copying}>{copying ? '…' : '🔗 Short link'}</button>
         <button onClick={g.close} aria-label="Close gallery">✕</button>
       </header>
 
-      {!room && (
+      {!room && !experiment && !onExperiments && (
         <div className="gallery-scroll">
           {gallery?.intro && <p className="gallery-intro">{gallery.intro}</p>}
-          {!rooms.length && <p className="gallery-intro">No pictures yet.</p>}
+          {!rooms.length && !experiments.length && <p className="gallery-intro">No pictures yet.</p>}
           <div className="gallery-grid rooms">
+            {experiments.length > 0 && (
+              <button className="gallery-card experiments" onClick={() => g.openRoom(EXPERIMENTS)}>
+                <img src={url(thumbFile(experiments[0].pictures[0].file))} alt="" loading="lazy" />
+                <span className="gallery-card-title">🧪 Experiments</span>
+                <span className="gallery-card-count">
+                  {count(experiments.length, 'experiment', 'experiments')}: things we'd like to see for real, not in the 3D plan
+                </span>
+              </button>
+            )}
             {rooms.map((r) => (
               <button key={r.room} className="gallery-card" onClick={() => g.openRoom(r.room)}>
                 <img src={url(thumbFile(r.pictures[0].file))} alt="" loading="lazy" />
@@ -91,16 +107,39 @@ export function Gallery() {
         </div>
       )}
 
-      {room && (
+      {onExperiments && (
         <div className="gallery-scroll">
-          <div className="gallery-grid">
-            {pictures.map((p, i) => (
-              <button key={p.file} className="gallery-card" onClick={() => g.openPicture(i)}>
-                <img src={url(thumbFile(p.file))} alt={p.caption} loading="lazy" />
-                <span className="gallery-card-caption">{p.caption}</span>
+          <p className="gallery-intro">
+            "What if" pictures: other furniture or colours, tried out in a photo of the plan. They're not in the 3D model.
+          </p>
+          <div className="gallery-grid rooms">
+            {experiments.map((e) => (
+              <button key={e.id} className="gallery-card" onClick={() => g.openRoom(experimentKey(e.id))}>
+                <img src={url(thumbFile(e.pictures[0].file))} alt="" loading="lazy" />
+                <span className="gallery-card-title">{e.title}</span>
+                <span className="gallery-card-count">{count(e.pictures.length, 'picture', 'pictures')}</span>
               </button>
             ))}
           </div>
+        </div>
+      )}
+
+      {(room || experiment) && (
+        <div className="gallery-scroll">
+          {experiment?.intro && <p className="gallery-intro">{experiment.intro}</p>}
+          {groupPictures(pictures).map(({ group, pictures: ps }, gi) => (
+            <section key={gi} className="gallery-group">
+              {group && <h3 className="gallery-group-title">{group}</h3>}
+              <div className="gallery-grid">
+                {ps.map(({ p, i }) => (
+                  <button key={p.file} className="gallery-card" onClick={() => g.openPicture(i)}>
+                    <img src={url(thumbFile(p.file))} alt={p.caption} loading="lazy" />
+                    <span className="gallery-card-caption">{p.caption}</span>
+                  </button>
+                ))}
+              </div>
+            </section>
+          ))}
         </div>
       )}
 
@@ -119,7 +158,7 @@ export function Gallery() {
           <img src={url(pic.file)} alt={pic.caption} draggable={false} onClick={(e) => e.stopPropagation()} />
           <div className="gallery-big-caption" onClick={(e) => e.stopPropagation()}>
             <button onClick={() => step(-1)} aria-label="Previous">‹</button>
-            <span>{pic.caption} <em>{g.index! + 1} / {pictures.length}</em></span>
+            <span>{pic.group && <strong>{pic.group}: </strong>}{pic.caption} <em>{g.index! + 1} / {pictures.length}</em></span>
             <button onClick={() => step(1)} aria-label="Next">›</button>
           </div>
           <button className="gallery-big-close" onClick={() => g.openPicture(null)} aria-label="Close picture">✕</button>

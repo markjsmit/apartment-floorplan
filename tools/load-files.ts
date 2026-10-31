@@ -55,7 +55,7 @@ export function loadBundleFromDisk(root = ROOT): Bundle {
       bundle.errors.push({ file: `assets/furniture/${f.id}/asset.json`, kind: 'furniture', key: f.id, message: `missing model file "${f.source.file}"` });
     }
   }
-  for (const r of bundle.gallery?.rooms ?? []) {
+  for (const r of [...(bundle.gallery?.rooms ?? []), ...(bundle.gallery?.experiments ?? [])]) {
     for (const p of r.pictures) {
       for (const file of [p.file, thumbFile(p.file)]) {
         if (!fs.existsSync(path.join(root, 'assets/renders', file))) {

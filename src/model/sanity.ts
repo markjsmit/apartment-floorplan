@@ -42,6 +42,12 @@ export function sanityCheck(bundle: Bundle): Issue[] {
     if (!currentRooms.has(r.room)) error(`gallery: unknown room "${r.room}" (not in Current)`);
     for (const p of r.pictures) if (!p.file.startsWith(`${r.room}/`)) warn(`gallery: ${p.file} is listed under room "${r.room}"`);
   }
+  const seenEx = new Set<string>();
+  for (const e of bundle.gallery?.experiments ?? []) {
+    if (seenEx.has(e.id)) error(`gallery: experiment "${e.id}" is listed twice`);
+    seenEx.add(e.id);
+    for (const p of e.pictures) if (!p.file.startsWith(`experiments/${e.id}/`)) warn(`gallery: ${p.file} is listed under experiment "${e.id}"`);
+  }
 
   for (const vid of bundle.versionOrder) {
     const house = bundle.versions[vid];

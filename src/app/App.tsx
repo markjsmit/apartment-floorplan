@@ -11,7 +11,7 @@ import { PersonSwitch, TouchControls } from './TouchControls';
 import { PhoneMenu } from './PhoneMenu';
 import { Gallery } from './Gallery';
 import { useGallery } from './galleryStore';
-import { parseGalleryParam } from '../model/gallery';
+import { galleryKeys, parseGalleryParam } from '../model/gallery';
 import { LightModeSwitch, MoodSwitch } from './LightSwitches';
 import { useDevLink } from './useDevLink';
 import { useIsMobile, useIsTouch } from './useIsMobile';
@@ -40,7 +40,7 @@ export function App() {
     fetchBundle()
       .then((b) => {
         const u = parseUrlState(location.search, b);
-        const g = parseGalleryParam(location.search, b.gallery?.rooms.map((r) => r.room) ?? []);
+        const g = parseGalleryParam(location.search, galleryKeys(b.gallery));
         if (g) useGallery.getState().show(g.room);
         useStore.setState({
           // version= applies to the linked room only (setBundle derives versionId from roomVersions)
